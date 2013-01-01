@@ -1,5 +1,6 @@
 package com.ynyes.lyz.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 价目表实体类
@@ -53,6 +58,104 @@ public class TdPriceList {
 	// 排序号
 	@Column
 	private Double sortId;
+
+//接口新增数据------------------------------《
+	//价目表ID
+	@Column
+	private Integer listHeaderId;
+	
+	//分公司ID
+	@Column
+	private Integer sobId;
+	
+	// 活动开始时间
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date startDateActive;
+	
+	// 活动开始时间
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date endDateActive;
+	
+	// 是否有效
+	@Column
+	private String activeFlag;
+	
+	// 描述
+	@Column
+	private String description;
+	
+	//价目表类型
+	@Column
+	private String priceType;
+	
+	//价目表类型描述
+	private String priceTypeDesc;
+
+	public String getActiveFlag() {
+		return activeFlag;
+	}
+
+	public void setActiveFlag(String activeFlag) {
+		this.activeFlag = activeFlag;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPriceType() {
+		return priceType;
+	}
+
+	public void setPriceType(String priceType) {
+		this.priceType = priceType;
+	}
+
+	public String getPriceTypeDesc() {
+		return priceTypeDesc;
+	}
+
+	public void setPriceTypeDesc(String priceTypeDesc) {
+		this.priceTypeDesc = priceTypeDesc;
+	}
+
+	public Integer getListHeaderId() {
+		return listHeaderId;
+	}
+
+	public void setListHeaderId(Integer listHeaderId) {
+		this.listHeaderId = listHeaderId;
+	}
+
+	public Integer getSobId() {
+		return sobId;
+	}
+
+	public void setSobId(Integer sobId) {
+		this.sobId = sobId;
+	}
+
+	public Date getStartDateActive() {
+		return startDateActive;
+	}
+
+	public void setStartDateActive(Date startDateActive) {
+		this.startDateActive = startDateActive;
+	}
+
+	public Date getEndDateActive() {
+		return endDateActive;
+	}
+
+	public void setEndDateActive(Date endDateActive) {
+		this.endDateActive = endDateActive;
+	}
 
 	public Long getId() {
 		return id;

@@ -79,7 +79,7 @@ var theForm = document.forms['form1'];
                 </td>
                 <td align="left"><a href="/Verwalter/setting/subdistrict/edit?id=${item.id?c}">${item.name!""}</a></td>
                 <td align="center">${item.districtName!""}</td>
-                <td align="left">${item.deliveryFee?string("0.00")}</td>
+                <td align="left"><#if item.deliveryFee??>${item.deliveryFee?string("0.00")}<#else>0</#if></td>
                 <td align="center">${item.sortId!""}</td>
             </tr>
         </#list>
