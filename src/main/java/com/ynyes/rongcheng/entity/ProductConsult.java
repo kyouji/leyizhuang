@@ -7,39 +7,43 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 /**
- * 价格生命周期表
+ * 商品咨询
  * 
  * @author Sharon
  *
  */
 
 @Entity
-public class PriceLifetime {
+public class ProductConsult {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    // 商品ID
+    // 咨询内容
     @Column
-    private Long pid;
+    private String content;
     
-    // 商品版本ID
-    @Column
-    private Long vid;
-    
-    // 价格
-    @Column(nullable=false, scale=2)
-    private Double price;
-    
-    // 价格开始时间
+    // 咨询时间
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.DATE)
-    private Date priceStartTime;
+    private Date consultTime;
+    
+    // 咨询用户
+    @Column
+    private String username;
+    
+    // 咨询回复
+    @OneToOne
+    private String reply;
+    
+    // 咨询的商品ID
+    @Column
+    private Long pid;
+
 }

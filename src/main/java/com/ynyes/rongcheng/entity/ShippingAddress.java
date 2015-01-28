@@ -71,6 +71,10 @@ public class ShippingAddress {
 	// 是否为默认地址
 	@Column
 	private Boolean isDefaultAddress;
+	
+	// 排序号
+    @Column
+    private Long sortNumber;
 
     public Long getId() {
         return id;
@@ -174,6 +178,14 @@ public class ShippingAddress {
 
     public void setIsDefaultAddress(Boolean isDefaultAddress) {
         this.isDefaultAddress = isDefaultAddress;
+    }
+
+    public Long getSortNumber() {
+        return sortNumber;
+    }
+
+    public void setSortNumber(Long sortNumber) {
+        this.sortNumber = sortNumber;
     }
 
 }

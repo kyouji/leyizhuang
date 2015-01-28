@@ -37,11 +37,11 @@ public class ProductVersion {
     
     // 该版本的市场价
     @Column(nullable=false, scale=2)
-    private Float marketPrice;
+    private Double marketPrice;
     
     // 该版本的价格
     @Column(nullable=false, scale=2)
-    private Float salePrice;
+    private Double salePrice;
 
     // 该版本剩余数量
     @Column
@@ -91,19 +91,19 @@ public class ProductVersion {
         this.picUri = picUri;
     }
 
-    public Float getMarketPrice() {
+    public Double getMarketPrice() {
         return marketPrice;
     }
 
-    public void setMarketPrice(Float marketPrice) {
+    public void setMarketPrice(Double marketPrice) {
         this.marketPrice = marketPrice;
     }
 
-    public Float getSalePrice() {
+    public Double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(Float salePrice) {
+    public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
     }
 

@@ -33,7 +33,7 @@ public class ProductType {
     
     // 排序号
     @Column
-    private Long orderNumber;
+    private Long sortNumber;
     
     // 关联的属性
     @OneToMany(orphanRemoval=true)
@@ -64,12 +64,12 @@ public class ProductType {
         this.parent = parent;
     }
 
-    public Long getOrderNumber() {
-        return orderNumber;
+    public Long getSortNumber() {
+        return sortNumber;
     }
 
-    public void setOrderNumber(Long orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setSortNumber(Long sortNumber) {
+        this.sortNumber = sortNumber;
     }
 
     public List<ProductTypeParameter> getTypeParamList() {

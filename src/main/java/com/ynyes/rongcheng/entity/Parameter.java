@@ -45,7 +45,7 @@ public class Parameter {
     
     // 排序号
     @Column
-    private Long orderNumber;
+    private Long sortNumber;
 
     public Long getId() {
         return id;
@@ -103,11 +103,12 @@ public class Parameter {
         this.valueList = valueList;
     }
 
-    public Long getOrderNumber() {
-        return orderNumber;
+    public Long getSortNumber() {
+        return sortNumber;
     }
 
-    public void setOrderNumber(Long orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setSortNumber(Long sortNumber) {
+        this.sortNumber = sortNumber;
     }
+
 }

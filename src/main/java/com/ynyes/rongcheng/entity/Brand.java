@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -47,9 +45,12 @@ public class Brand {
     // 创建的时间
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
 
+    // 排序号
+    @Column
+    private Long sortNumber;
+    
     public Long getId() {
         return id;
     }
@@ -97,4 +98,13 @@ public class Brand {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    public Long getSortNumber() {
+        return sortNumber;
+    }
+
+    public void setSortNumber(Long sortNumber) {
+        this.sortNumber = sortNumber;
+    }
+    
 }

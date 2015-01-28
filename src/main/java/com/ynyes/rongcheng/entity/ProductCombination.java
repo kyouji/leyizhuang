@@ -29,7 +29,7 @@ public class ProductCombination {
     
     // 组合价
     @Column(nullable=false, scale=2)
-    private Float combinationPrice;
+    private Double combinationPrice;
     
     /*
      * 以下字段由pid取出商品信息后临时填充，不存储到数据库
@@ -73,11 +73,11 @@ public class ProductCombination {
         this.vid = vid;
     }
 
-    public Float getCombinationPrice() {
+    public Double getCombinationPrice() {
         return combinationPrice;
     }
 
-    public void setCombinationPrice(Float combinationPrice) {
+    public void setCombinationPrice(Double combinationPrice) {
         this.combinationPrice = combinationPrice;
     }
 

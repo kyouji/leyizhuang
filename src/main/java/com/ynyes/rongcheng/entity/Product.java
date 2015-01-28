@@ -63,19 +63,19 @@ public class Product {
 
 	// 市场价
     @Column(nullable=false, scale=2)
-    private Float marketPrice;
+    private Double marketPrice;
     
     // 销售价
     @Column(nullable=false, scale=2)
-    private Float salePrice;
+    private Double salePrice;
     
     // 商品最低价，不存在多个版本时和销售价相同，存在多个版本时为版本最低价
     @Column(scale=2)
-    private Float priceMinimum;
+    private Double priceMinimum;
     
     // 包含价值，销售靓号时会包含话费
     @Column(nullable=false, scale=2)
-    private Float includePrice;
+    private Double includePrice;
     
     // 促销
     @Column
@@ -83,7 +83,7 @@ public class Product {
     
     // 评价平均分
     @Column
-    private Float averagePoints;
+    private Double averagePoints;
     
     // 商品配置
     @Column
@@ -158,7 +158,7 @@ public class Product {
     
     // 排序号
     @Column
-    private Long orderNumber;
+    private Long sortNumber;
     
     // 是否支持限时抢购
     @Column
@@ -178,7 +178,7 @@ public class Product {
     
     // 限时抢购价格
     @Column(nullable=false, scale=2)
-    private Float flashSalePrice;
+    private Double flashSalePrice;
     
     // 限时抢购剩余数量
     @Column

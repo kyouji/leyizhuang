@@ -64,4 +64,7 @@ public class Advertisement {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     
+    // 排序号
+    @Column
+    private Long sortNumber;
 }

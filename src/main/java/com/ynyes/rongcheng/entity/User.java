@@ -134,4 +134,11 @@ public class User {
 	@Column
 	private String role;
 
+	// 收藏的商品
+	@Column
+    private String collectedProductIds;
+	
+	// 浏览记录
+    @Column
+    private String recentVisitedProductIds;
 }
