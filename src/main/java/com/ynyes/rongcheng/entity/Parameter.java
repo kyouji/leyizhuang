@@ -110,5 +110,4 @@ public class Parameter {
     public void setSortNumber(Long sortNumber) {
         this.sortNumber = sortNumber;
     }
-
 }

@@ -42,4 +42,44 @@ public class PriceLifetime {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.DATE)
     private Date priceStartTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
+
+    public Long getVid() {
+        return vid;
+    }
+
+    public void setVid(Long vid) {
+        this.vid = vid;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Date getPriceStartTime() {
+        return priceStartTime;
+    }
+
+    public void setPriceStartTime(Date priceStartTime) {
+        this.priceStartTime = priceStartTime;
+    }
 }

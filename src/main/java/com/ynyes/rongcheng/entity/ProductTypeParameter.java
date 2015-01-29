@@ -35,10 +35,6 @@ public class ProductTypeParameter {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getParamId() {
         return paramId;
     }
@@ -61,5 +57,9 @@ public class ProductTypeParameter {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

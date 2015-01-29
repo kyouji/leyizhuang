@@ -31,4 +31,36 @@ public class NaviBarItem {
     // 排序号
     @Column
     private Long sortNumber;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public Long getSortNumber() {
+        return sortNumber;
+    }
+
+    public void setSortNumber(Long sortNumber) {
+        this.sortNumber = sortNumber;
+    }
 }

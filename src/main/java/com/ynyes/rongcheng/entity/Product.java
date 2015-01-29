@@ -101,6 +101,10 @@ public class Product {
     @Column
     private Boolean isOnSale;
     
+    // 库存递减时机 分为下订单递减、支付完成递减、发货递减等
+    @Column
+    private Long numberDecType;
+    
     // 商品剩余数量
     @Column
     private Long leftNumber;
@@ -227,4 +231,396 @@ public class Product {
     // 品牌
     @Column
     private String brandName;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCoverImageUri() {
+        return coverImageUri;
+    }
+
+    public void setCoverImageUri(String coverImageUri) {
+        this.coverImageUri = coverImageUri;
+    }
+
+    public Long getCoverImageWidth() {
+        return coverImageWidth;
+    }
+
+    public void setCoverImageWidth(Long coverImageWidth) {
+        this.coverImageWidth = coverImageWidth;
+    }
+
+    public Long getCoverImageHeight() {
+        return coverImageHeight;
+    }
+
+    public void setCoverImageHeight(Long coverImageHeight) {
+        this.coverImageHeight = coverImageHeight;
+    }
+
+    public String getShowPictures() {
+        return showPictures;
+    }
+
+    public void setShowPictures(String showPictures) {
+        this.showPictures = showPictures;
+    }
+
+    public String getBrief() {
+        return brief;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief;
+    }
+
+    public List<ProductParameter> getParamList() {
+        return paramList;
+    }
+
+    public void setParamList(List<ProductParameter> paramList) {
+        this.paramList = paramList;
+    }
+
+    public Double getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(Double marketPrice) {
+        this.marketPrice = marketPrice;
+    }
+
+    public Double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(Double salePrice) {
+        this.salePrice = salePrice;
+    }
+
+    public Double getPriceMinimum() {
+        return priceMinimum;
+    }
+
+    public void setPriceMinimum(Double priceMinimum) {
+        this.priceMinimum = priceMinimum;
+    }
+
+    public Double getIncludePrice() {
+        return includePrice;
+    }
+
+    public void setIncludePrice(Double includePrice) {
+        this.includePrice = includePrice;
+    }
+
+    public String getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(String promotion) {
+        this.promotion = promotion;
+    }
+
+    public Double getAveragePoints() {
+        return averagePoints;
+    }
+
+    public void setAveragePoints(Double averagePoints) {
+        this.averagePoints = averagePoints;
+    }
+
+    public String getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public Boolean getIsOnSale() {
+        return isOnSale;
+    }
+
+    public void setIsOnSale(Boolean isOnSale) {
+        this.isOnSale = isOnSale;
+    }
+
+    public Long getNumberDecType() {
+        return numberDecType;
+    }
+
+    public void setNumberDecType(Long numberDecType) {
+        this.numberDecType = numberDecType;
+    }
+
+    public Long getLeftNumber() {
+        return leftNumber;
+    }
+
+    public void setLeftNumber(Long leftNumber) {
+        this.leftNumber = leftNumber;
+    }
+
+    public Long getSoldNumber() {
+        return soldNumber;
+    }
+
+    public void setSoldNumber(Long soldNumber) {
+        this.soldNumber = soldNumber;
+    }
+
+    public String getGrandFatherType() {
+        return grandFatherType;
+    }
+
+    public void setGrandFatherType(String grandFatherType) {
+        this.grandFatherType = grandFatherType;
+    }
+
+    public String getFatherType() {
+        return fatherType;
+    }
+
+    public void setFatherType(String fatherType) {
+        this.fatherType = fatherType;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Boolean getIsUseVersionPrice() {
+        return isUseVersionPrice;
+    }
+
+    public void setIsUseVersionPrice(Boolean isUseVersionPrice) {
+        this.isUseVersionPrice = isUseVersionPrice;
+    }
+
+    public String getPriceUnit() {
+        return priceUnit;
+    }
+
+    public void setPriceUnit(String priceUnit) {
+        this.priceUnit = priceUnit;
+    }
+
+    public Date getOnSaleTime() {
+        return onSaleTime;
+    }
+
+    public void setOnSaleTime(Date onSaleTime) {
+        this.onSaleTime = onSaleTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public List<ProductVersion> getVersionList() {
+        return versionList;
+    }
+
+    public void setVersionList(List<ProductVersion> versionList) {
+        this.versionList = versionList;
+    }
+
+    public List<ProductCombination> getCombinationList() {
+        return combinationList;
+    }
+
+    public void setCombinationList(List<ProductCombination> combinationList) {
+        this.combinationList = combinationList;
+    }
+
+    public Long getSortNumber() {
+        return sortNumber;
+    }
+
+    public void setSortNumber(Long sortNumber) {
+        this.sortNumber = sortNumber;
+    }
+
+    public Boolean getIsFlashSale() {
+        return isFlashSale;
+    }
+
+    public void setIsFlashSale(Boolean isFlashSale) {
+        this.isFlashSale = isFlashSale;
+    }
+
+    public Date getFlashSaleStartTime() {
+        return flashSaleStartTime;
+    }
+
+    public void setFlashSaleStartTime(Date flashSaleStartTime) {
+        this.flashSaleStartTime = flashSaleStartTime;
+    }
+
+    public Date getFlashSaleStopTime() {
+        return flashSaleStopTime;
+    }
+
+    public void setFlashSaleStopTime(Date flashSaleStopTime) {
+        this.flashSaleStopTime = flashSaleStopTime;
+    }
+
+    public Double getFlashSalePrice() {
+        return flashSalePrice;
+    }
+
+    public void setFlashSalePrice(Double flashSalePrice) {
+        this.flashSalePrice = flashSalePrice;
+    }
+
+    public Long getFlashSaleLeftNumber() {
+        return flashSaleLeftNumber;
+    }
+
+    public void setFlashSaleLeftNumber(Long flashSaleLeftNumber) {
+        this.flashSaleLeftNumber = flashSaleLeftNumber;
+    }
+
+    public Long getFlashSaleSoldNumber() {
+        return flashSaleSoldNumber;
+    }
+
+    public void setFlashSaleSoldNumber(Long flashSaleSoldNumber) {
+        this.flashSaleSoldNumber = flashSaleSoldNumber;
+    }
+
+    public Boolean getIsStarProduct() {
+        return isStarProduct;
+    }
+
+    public void setIsStarProduct(Boolean isStarProduct) {
+        this.isStarProduct = isStarProduct;
+    }
+
+    public Long getStarProductOrderNumber() {
+        return starProductOrderNumber;
+    }
+
+    public void setStarProductOrderNumber(Long starProductOrderNumber) {
+        this.starProductOrderNumber = starProductOrderNumber;
+    }
+
+    public Long getMondayVisitNumber() {
+        return mondayVisitNumber;
+    }
+
+    public void setMondayVisitNumber(Long mondayVisitNumber) {
+        this.mondayVisitNumber = mondayVisitNumber;
+    }
+
+    public Long getTuesdayVisitNumber() {
+        return tuesdayVisitNumber;
+    }
+
+    public void setTuesdayVisitNumber(Long tuesdayVisitNumber) {
+        this.tuesdayVisitNumber = tuesdayVisitNumber;
+    }
+
+    public Long getWednesdayVisitNumber() {
+        return wednesdayVisitNumber;
+    }
+
+    public void setWednesdayVisitNumber(Long wednesdayVisitNumber) {
+        this.wednesdayVisitNumber = wednesdayVisitNumber;
+    }
+
+    public Long getThursdayVisitNumber() {
+        return thursdayVisitNumber;
+    }
+
+    public void setThursdayVisitNumber(Long thursdayVisitNumber) {
+        this.thursdayVisitNumber = thursdayVisitNumber;
+    }
+
+    public Long getFridayVisitNumber() {
+        return fridayVisitNumber;
+    }
+
+    public void setFridayVisitNumber(Long fridayVisitNumber) {
+        this.fridayVisitNumber = fridayVisitNumber;
+    }
+
+    public Long getSaturdayVisitNumber() {
+        return saturdayVisitNumber;
+    }
+
+    public void setSaturdayVisitNumber(Long saturdayVisitNumber) {
+        this.saturdayVisitNumber = saturdayVisitNumber;
+    }
+
+    public Long getSundayVisitNumber() {
+        return sundayVisitNumber;
+    }
+
+    public void setSundayVisitNumber(Long sundayVisitNumber) {
+        this.sundayVisitNumber = sundayVisitNumber;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
 }

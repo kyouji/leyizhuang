@@ -50,7 +50,7 @@ public class Brand {
     // 排序号
     @Column
     private Long sortNumber;
-    
+
     public Long getId() {
         return id;
     }
@@ -106,5 +106,4 @@ public class Brand {
     public void setSortNumber(Long sortNumber) {
         this.sortNumber = sortNumber;
     }
-    
 }

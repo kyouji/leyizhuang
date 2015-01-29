@@ -74,4 +74,5 @@ public class ProductParameter {
     public void setValue(String value) {
         this.value = value;
     }
+
 }

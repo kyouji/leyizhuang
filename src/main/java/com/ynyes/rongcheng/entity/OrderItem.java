@@ -64,10 +64,113 @@ public class OrderItem {
     
     // 商品数量
     @Column
-    private Integer quantity;
+    private Long quantity;
     
     // 发货数量
     @Column
-    private Integer deliveryQuantity;
-    
+    private Long deliveryQuantity;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductBrief() {
+        return productBrief;
+    }
+
+    public void setProductBrief(String productBrief) {
+        this.productBrief = productBrief;
+    }
+
+    public String getProductCoverImageUri() {
+        return productCoverImageUri;
+    }
+
+    public void setProductCoverImageUri(String productCoverImageUri) {
+        this.productCoverImageUri = productCoverImageUri;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getProductVerColor() {
+        return productVerColor;
+    }
+
+    public void setProductVerColor(String productVerColor) {
+        this.productVerColor = productVerColor;
+    }
+
+    public String getProductVerCap() {
+        return productVerCap;
+    }
+
+    public void setProductVerCap(String productVerCap) {
+        this.productVerCap = productVerCap;
+    }
+
+    public String getProductVerName() {
+        return productVerName;
+    }
+
+    public void setProductVerName(String productVerName) {
+        this.productVerName = productVerName;
+    }
+
+    public Long getProductNumber() {
+        return productNumber;
+    }
+
+    public void setProductNumber(Long productNumber) {
+        this.productNumber = productNumber;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
+    }
+
+    public Long getDeliveryQuantity() {
+        return deliveryQuantity;
+    }
+
+    public void setDeliveryQuantity(Long deliveryQuantity) {
+        this.deliveryQuantity = deliveryQuantity;
+    }
 }

@@ -35,4 +35,44 @@ public class SiteInfo {
     // 是否前台显示
     @Column
     private Boolean isShow;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Long getSortNumber() {
+        return sortNumber;
+    }
+
+    public void setSortNumber(Long sortNumber) {
+        this.sortNumber = sortNumber;
+    }
+
+    public Boolean getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(Boolean isShow) {
+        this.isShow = isShow;
+    }
 }

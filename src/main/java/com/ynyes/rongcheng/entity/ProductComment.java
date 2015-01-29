@@ -36,11 +36,15 @@ public class ProductComment {
     
     // 评论星级
     @Column
-    private Float stars;
+    private Double stars;
     
     // 评论被点击“有用”的数量
     @Column
     private Long positiveNumber;
+    
+    // 评论被点击“无用”的数量
+    @Column
+    private Long negativeNumber;
     
     // 评论时间
     @Column
@@ -58,6 +62,85 @@ public class ProductComment {
     // 发表评论的用户
     @Column
     private String username;
-  
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Double getStars() {
+        return stars;
+    }
+
+    public void setStars(Double stars) {
+        this.stars = stars;
+    }
+
+    public Long getPositiveNumber() {
+        return positiveNumber;
+    }
+
+    public void setPositiveNumber(Long positiveNumber) {
+        this.positiveNumber = positiveNumber;
+    }
+
+    public Long getNegativeNumber() {
+        return negativeNumber;
+    }
+
+    public void setNegativeNumber(Long negativeNumber) {
+        this.negativeNumber = negativeNumber;
+    }
+
+    public Date getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(Date commentTime) {
+        this.commentTime = commentTime;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 }

@@ -36,7 +36,7 @@ public class ShoppingCart {
     
     // 商品数量
     @Column
-    private Integer quantity;
+    private Long quantity;
     
     // 成交价
     @Column
@@ -101,11 +101,11 @@ public class ShoppingCart {
         this.vid = vid;
     }
 
-    public Integer getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
@@ -180,5 +180,4 @@ public class ShoppingCart {
     public void setProductNumber(Long productNumber) {
         this.productNumber = productNumber;
     }
-    
 }

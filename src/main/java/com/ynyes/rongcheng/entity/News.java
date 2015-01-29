@@ -62,5 +62,85 @@ public class News {
     // 是否前台显示
     @Column
     private Boolean isShow;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Long getTypeSortNumber() {
+        return typeSortNumber;
+    }
+
+    public void setTypeSortNumber(Long typeSortNumber) {
+        this.typeSortNumber = typeSortNumber;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCoverImageUri() {
+        return coverImageUri;
+    }
+
+    public void setCoverImageUri(String coverImageUri) {
+        this.coverImageUri = coverImageUri;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Long getClickNumber() {
+        return clickNumber;
+    }
+
+    public void setClickNumber(Long clickNumber) {
+        this.clickNumber = clickNumber;
+    }
+
+    public Boolean getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(Boolean isShow) {
+        this.isShow = isShow;
+    }
     
 }

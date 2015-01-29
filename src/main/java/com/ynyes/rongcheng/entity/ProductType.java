@@ -79,4 +79,5 @@ public class ProductType {
     public void setTypeParamList(List<ProductTypeParameter> typeParamList) {
         this.typeParamList = typeParamList;
     }
+
 }

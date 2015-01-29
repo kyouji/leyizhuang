@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -69,13 +67,11 @@ public class User {
 	// 注册时间
 	@Column
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date registerTime;
 	
 	// 最后登录时间
 	@Column
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastLoginTime;
 	
 	// 身份证号码
@@ -127,8 +123,9 @@ public class User {
 	private Boolean isEnable;
 	
 	// 账户积分
-	@Column
-	private Long points;
+	@OneToMany(orphanRemoval=true)
+	@JoinColumn(name="userId")
+	private List<UserPoint> pointList;
 	
 	// 用户角色
 	@Column
@@ -141,4 +138,220 @@ public class User {
 	// 浏览记录
     @Column
     private String recentVisitedProductIds;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<ShippingAddress> getShippingAddressList() {
+        return shippingAddressList;
+    }
+
+    public void setShippingAddressList(List<ShippingAddress> shippingAddressList) {
+        this.shippingAddressList = shippingAddressList;
+    }
+
+    public String getHeadImageUri() {
+        return headImageUri;
+    }
+
+    public void setHeadImageUri(String headImageUri) {
+        this.headImageUri = headImageUri;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public Boolean getIsMobileValidated() {
+        return isMobileValidated;
+    }
+
+    public void setIsMobileValidated(Boolean isMobileValidated) {
+        this.isMobileValidated = isMobileValidated;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getIsEmailValidated() {
+        return isEmailValidated;
+    }
+
+    public void setIsEmailValidated(Boolean isEmailValidated) {
+        this.isEmailValidated = isEmailValidated;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public Boolean getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(Boolean isEnable) {
+        this.isEnable = isEnable;
+    }
+
+    public List<UserPoint> getPointList() {
+        return pointList;
+    }
+
+    public void setPointList(List<UserPoint> pointList) {
+        this.pointList = pointList;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getCollectedProductIds() {
+        return collectedProductIds;
+    }
+
+    public void setCollectedProductIds(String collectedProductIds) {
+        this.collectedProductIds = collectedProductIds;
+    }
+
+    public String getRecentVisitedProductIds() {
+        return recentVisitedProductIds;
+    }
+
+    public void setRecentVisitedProductIds(String recentVisitedProductIds) {
+        this.recentVisitedProductIds = recentVisitedProductIds;
+    }
 }
