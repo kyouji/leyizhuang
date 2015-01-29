@@ -20,7 +20,7 @@ DD_belatedPNG.fix('.,img,background');
 <body>
 <header>
 <div class="main">
-<div class="fll header_l"><span>您好，欢迎来到荣诚手机超市！<a href="#" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="#">免费注册</a></span></div>
+<div class="fll header_l"><span>您好，欢迎来到荣诚手机超市！<a href="login" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="#">免费注册</a></span></div>
 <div class="flr header_r"><a href="#">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="#">我的订单</a><a href="#">帮助中心</a><a href="#">收藏本站</a></div>
 </div>
 </header>
@@ -47,13 +47,13 @@ DD_belatedPNG.fix('.,img,background');
 </div>
 
 <nav><div class="main">
-<div class="nav_more fll"><div class="nav_more1"><a href="#" title="全部商品分类" class="nav_more15">全部商品分类</a></div>
+<div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15">全部商品分类</a></div>
 
 <!--<ul>
 <li>
 <div class="mbj m1"></div>
 <div class="divshop">
-<h4><a href="#">手机产品</a></h4>
+<h4><a href="/list/2">手机产品</a></h4>
 <p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
 </div>
 <div class="clear"></div>
@@ -90,11 +90,11 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="nav_2 fll ml4">
 <ul>
-<li><a href="#" title="首页">首页</a></li>
-<li><a href="#" title="明星产品">明星产品</a></li>
-<li><a href="#" title="手机产品">手机产品</a></li>
-<li><a href="#" title="手机配件">手机配件</a></li>
-<li><a href="#" title="靓号选择">靓号选择</a></li>
+<li><a href="/" title="首页">首页</a></li>
+<li><a href="/list/1" title="明星产品">明星产品</a></li>
+<li><a href="/list/2" title="手机产品">手机产品</a></li>
+<li><a href="/list/3" title="手机配件">手机配件</a></li>
+<li><a href="/list/4" title="靓号选择">靓号选择</a></li>
 <li><a href="#" title="新闻资讯">新闻资讯</a></li>
 </ul>
 </div>
@@ -119,7 +119,7 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="clear"></div>
 <div class="main">
-<div class="place"> <span>您现在的位置：</span><a href="#">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/1">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
 <div class="w1200 overflow">
   <div class="sub_left">
     <div class="hot_list">

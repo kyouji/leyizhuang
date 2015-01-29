@@ -19,7 +19,7 @@ DD_belatedPNG.fix('.,img,background');
 </head>
 <body style="background:#eee;">
 <div class="logo2">
-  <h1><a href="#" title="荣诚手机超市">荣诚手机超市-登录</a></h1>
+  <h1><a href="login" title="荣诚手机超市">荣诚手机超市-登录</a></h1>
 </div>
 <div class="loginbox"> <img src="images/logingg.png" />
   <div class="login_r"> <span>请输入用户名/邮箱</span>
