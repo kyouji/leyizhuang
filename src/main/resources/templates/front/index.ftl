@@ -89,14 +89,17 @@ DD_belatedPNG.fix('.,img,background');
 </div>
 
 <div class="nav_2 fll ml4">
-<ul>
-<li><a href="#" title="首页">首页</a></li>
-<li><a href="#" title="明星产品">明星产品</a></li>
-<li><a href="#" title="手机产品">手机产品</a></li>
-<li><a href="#" title="手机配件">手机配件</a></li>
-<li><a href="#" title="靓号选择">靓号选择</a></li>
-<li><a href="#" title="新闻资讯">新闻资讯</a></li>
-</ul>
+	<ul>
+		<li><a href="/" title="首页">首页</a></li>
+		<#list type_list as type>
+            <li><a href="/type/type?name=${type.name}">${type.name}</a></li>
+		</#list>
+		<li><a href="#" title="明星产品">明星产品</a></li>
+		<li><a href="#" title="手机产品">手机产品</a></li>
+		<li><a href="#" title="手机配件">手机配件</a></li>
+		<li><a href="#" title="靓号选择">靓号选择</a></li>
+		<li><a href="#" title="新闻资讯">新闻资讯</a></li>
+	</ul>
 </div>
 
 </div></nav>
