@@ -29,7 +29,7 @@ public class HelpController {
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/question-{typeId}")
+    @RequestMapping("/question/{typeId}")
     public String question(@PathVariable Long typeId){
         if(typeId==1){
             return "front/question/question_1";
