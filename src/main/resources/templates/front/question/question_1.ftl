@@ -21,7 +21,7 @@ DD_belatedPNG.fix('.,img,background');
 <body>
 <header>
 <div class="main">
-	<#include "/comment/header.ftl">
+	<#include "/front/comment/header.ftl">
 </div>
 </header>
 
