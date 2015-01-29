@@ -1,5 +1,7 @@
 package com.ynyes.rongcheng.controller.front;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,7 +30,10 @@ public class IndexController {
      * @since  1.0.0
      */
     @RequestMapping
-    public String index(){
+    public String index(HttpServletRequest request){
+        String path = request.getContextPath();
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+        request.getSession().setAttribute("basePath", basePath);
         return "/front/index";
     }
 }

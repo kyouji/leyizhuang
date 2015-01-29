@@ -1,7 +1,12 @@
 package com.ynyes.rongcheng.controller.front;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ynyes.rongcheng.util.StringUtils;
 
 /**
  * 商品类型集合
@@ -13,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-@RequestMapping("/type")
 public class TypelistController {
     /**
      * 
@@ -22,13 +26,29 @@ public class TypelistController {
      * 创建人：guozhengyang <BR>
      * 时间：2015年1月29日-上午10:19:44 <BR>
      * @return String<BR>
-     * @param  [参数1]   [参数1说明]
-     * @param  [参数2]   [参数2说明]
+     * @param typeid=1(代表进入明星产品,2代表进入手机产品，3代表搜集配件，4代表靓号选择)accessories
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/list")
-    public String index(){
-        return "/front/type_list";
+    @RequestMapping("/list/{typeId}")
+    public String index(@PathVariable String typeId){
+        
+        if(StringUtils.isNotEmpty(typeId) && StringUtils.isNumber(typeId)){
+            if(typeId.equals("1")){
+                return "/front/type_list_star";//明星产品
+            }
+            if(typeId.equals("2")){
+                return "/front/type_list_mobile";//手机产品
+            }
+            if(typeId.equals("3")){
+                return "/front/type_list_accessories";//手机配件
+            }
+            if(typeId.equals("4")){
+                return "/front/type_list_number";//靓号选择
+            }
+        }else{
+            return "error404";//错误
+        }
+        return "error404";//错误
     }
 }

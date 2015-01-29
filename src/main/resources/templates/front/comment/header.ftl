@@ -1,0 +1,2 @@
+<div class="fll header_l"><span>您好，欢迎来到荣诚手机超市！<a href="#" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="#">免费注册</a></span></div>
+<div class="flr header_r"><a href="#">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="#">我的订单</a><a href="#">帮助中心</a><a href="#">收藏本站</a></div>
