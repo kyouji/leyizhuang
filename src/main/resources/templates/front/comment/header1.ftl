@@ -1,6 +1,4 @@
-
-<div class="header1 main">
-<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="img/rc_logo.png" width="177" height="69"></a></div>
+<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="${basePath}/img/rc_logo.png" width="177" height="69"></a></div>
 <div class="fll city"><a href="#">城市切换</a><span></span>
 <!--<div class="cityqh"><ul>
 <li><a href="#">昆明市</a></li>
@@ -71,5 +69,3 @@
 <li><a href="#" title="新闻资讯">新闻资讯</a></li>
 </ul>
 </div>
-
-</div></nav>
