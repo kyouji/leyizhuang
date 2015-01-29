@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,7 +38,7 @@ public class ProductConsult {
     private String username;
     
     // 咨询回复
-    @OneToOne
+    @Column
     private String reply;
     
     // 咨询的商品ID
