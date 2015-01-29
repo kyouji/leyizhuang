@@ -44,6 +44,7 @@ DD_belatedPNG.fix('.,img,background');
         <li><a href="#">密码修改</a></li>
         <li><a href="#">收货地址</a></li>
         <li><a href="#">我的收藏</a></li>
+        <li><a href="#" >我的积分</a></li>
       </ul>
       <span class="mt10 sp55">客户服务</span>
       <ul class="haoh pt10 pb10">

@@ -32,7 +32,14 @@ src/main/resources：所有页面相关，
 		/user/updatePassword  ---跳转修改密码
 		/user/address  ---跳转收货地址
 		/user/collect  ---跳转我的收藏
+		/user/integral  ---跳转我的积分
 		
+		订单
+		/order/list --跳转所有订单页面
+		/order/obligation --跳转待付款订单页面
+		/order/startorder --跳转待收货订单页面
+		/order/orderok --跳转已完成订单页面
+		/order/orderno --跳转已关闭订单页面
 		
 		
 			----解说人-:郭正洋

@@ -4,95 +4,95 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 用户处理
+ * 订单处理
  * 
- * UserController<BR>
+ * OrderController<BR>
  * 创建人:guozhengyang <BR>
- * 时间：2015年1月29日-下午4:13:31 <BR>
+ * 时间：2015年1月29日-下午5:02:58 <BR>
  * @version 1.0.0
  *
  */
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/order")
+public class OrderController {
     /**
      * 
-     * 个人信息<BR>
-     * 方法名：info<BR>
+     * 跳转所有订单页面<BR>
+     * 方法名：orderlist<BR>
      * 创建人：guozhengyang <BR>
-     * 时间：2015年1月29日-下午4:30:50 <BR>
+     * 时间：2015年1月29日-下午5:04:57 <BR>
      * @return String<BR>
      * @param  [参数1]   [参数1说明]
      * @param  [参数2]   [参数2说明]
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/info")
-    public String info(){
-        return "/front/user/info";
+    @RequestMapping("/list")
+    public String orderlist(){
+        return "/front/order/orderlist";
     }
     /**
      * 
-     * 密码修改<BR>
-     * 方法名：updatePassword<BR>
+     * 待付款页面<BR>
+     * 方法名：obligation<BR>
      * 创建人：guozhengyang <BR>
-     * 时间：2015年1月29日-下午4:31:06 <BR>
+     * 时间：2015年1月29日-下午5:17:35 <BR>
      * @return String<BR>
      * @param  [参数1]   [参数1说明]
      * @param  [参数2]   [参数2说明]
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/updatePassword")
-    public String updatePassword(){
-        return "/front/user/updatePassword";
+    @RequestMapping("/obligation")
+    public String obligation(){
+        return "/front/order/obligation";
     }
     /**
      * 
-     * 收货地址<BR>
-     * 方法名：address<BR>
+     * 待收货页面<BR>
+     * 方法名：startorder<BR>
      * 创建人：guozhengyang <BR>
-     * 时间：2015年1月29日-下午4:38:14 <BR>
+     * 时间：2015年1月29日-下午5:17:52 <BR>
      * @return String<BR>
      * @param  [参数1]   [参数1说明]
      * @param  [参数2]   [参数2说明]
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/address")
-    public String address(){
-        return "/front/user/address";
+    @RequestMapping("/startorder")
+    public String startorder(){
+        return "/front/order/startorder";
     }
     /**
      * 
-     * 跳转我的收藏<BR>
-     * 方法名：collect<BR>
+     * 已完成订单<BR>
+     * 方法名：orderok<BR>
      * 创建人：guozhengyang <BR>
-     * 时间：2015年1月29日-下午4:44:01 <BR>
+     * 时间：2015年1月29日-下午5:18:43 <BR>
      * @return String<BR>
      * @param  [参数1]   [参数1说明]
      * @param  [参数2]   [参数2说明]
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/collect")
-    public String collect(){
-        return "/front/user/collect";
+    @RequestMapping("/orderok")
+    public String orderok(){
+        return "/front/order/orderok";
     }
     /**
      * 
-     * 我的积分页面跳转<BR>
-     * 方法名：integral<BR>
+     * 已关闭订单<BR>
+     * 方法名：orderno<BR>
      * 创建人：guozhengyang <BR>
-     * 时间：2015年1月29日-下午5:26:40 <BR>
+     * 时间：2015年1月29日-下午5:18:59 <BR>
      * @return String<BR>
      * @param  [参数1]   [参数1说明]
      * @param  [参数2]   [参数2说明]
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/integral")
-    public String integral(){
-        return "/front/user/integral";
+    @RequestMapping("/orderno")
+    public String orderno(){
+        return "/front/order/orderno";
     }
 }
