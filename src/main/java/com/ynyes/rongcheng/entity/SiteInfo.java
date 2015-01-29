@@ -8,27 +8,31 @@ import javax.persistence.Id;
 
 
 /**
- * 帮助中心
+ * 网站资料
  * 
  * @author Sharon
  *
  */
 
 @Entity
-public class HelpCenterType {
+public class SiteInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    // 类型名称
-    @Column(unique=true)
-    private String name;
-    
-    // 父类型
+    // 类型
     @Column
-    private String parent;
+    private String type;
+    
+    // 内容
+    @Column
+    private String content;
     
     // 排序号
     @Column
     private Long sortNumber;
+    
+    // 是否前台显示
+    @Column
+    private Boolean isShow;
 }
