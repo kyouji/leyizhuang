@@ -19,7 +19,7 @@ DD_belatedPNG.fix('.,img,background');
 </head>
 <body style="background:#eee;">
 <div class="logo2">
-  <h1><a href="#" title="荣诚手机超市">荣诚手机超市-登录</a></h1>
+  <h1><a href="login" title="荣诚手机超市">荣诚手机超市-登录</a></h1>
 </div>
 <div class="loginbox"> <img src="images/logingg.png" />
   <div class="login_r"> <span>请输入用户名/邮箱</span>
@@ -35,7 +35,7 @@ DD_belatedPNG.fix('.,img,background');
         <input name="" type="checkbox" value="" />
         &nbsp;自动登录</label>
       &nbsp;&nbsp;<b class="wj"><a href="#">忘记密码？</a></b></p>
-    <p class="mt5">还不是会员？<b class="zc"><a href="#">免费注册</a></b></p>
+    <p class="mt5">还不是会员？<b class="zc"><a href="/reg">免费注册</a></b></p>
     <input type="submit" class="login_btn" value="立即登录"/>
     
     <span class="fll kszc">合作登录：</span> <div class="qq1 fll mt10 ml10"><a href="#" title="QQ"></a></div><div class="xinlang fll mt10 ml10"><a href="#" title="新浪"></a></div><div class="zhifubao fll mt10 ml10"><a href="#" title="支付宝"></a></div>
