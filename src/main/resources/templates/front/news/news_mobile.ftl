@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
-<title>荣诚手机超市--新闻视频</title>
+<title>荣诚手机超市--手机资讯</title>
 <meta name="keywords" content="荣诚手机超市" />
 <meta name="description" content="荣诚手机超市" />
 <meta name="copyright" content="荣诚手机超市 版权所有" />
@@ -110,36 +110,38 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="news_lanmu1">
 <ul>
-<li><a href="#">手机资讯</a></li>
+<li><a href="#" class="news_lanmu1xz">手机资讯</a></li>
 <li><a href="#" >手机发烧友</a></li>
-<li style="border:none;"><a href="#" class="news_lanmu1xz">新闻视频</a></li>
+<li style="border:none;"><a href="#">新闻视频</a></li>
 </ul>
 </div></div>
 
 
 
 <div class="main mt15">
+<div class="news_lanmulist">
+<ul>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPhone如何选择是一个持记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPhone如何选择是一个持续火热的话题，国外科技博客iMore记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安，国外科技博客iMore记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPhone如何选择是一个持续火热的话题，国ore记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPhone如在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPhon题，国外科技博客iMore记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPhon国外科技博客iMore记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPh后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPh外科技博客iMore记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
 
-        <div class="content_page">
-      <h2>英伦金业：黄金价格现警号</h2>
-      <div class="nr_info"> 日期：2012-11-27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者：三亚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;    点击：323 </div>
-      <p>英伦金业是一家专业从事铂金、白银等贵金属现货及提供其电子交易平台、贵金属投资管理及咨询服务等业务的金融机构。公司注册在云南省昆明市国家级经济技术开发区，注册资本1000万元人民币，系昆明贵重金属交易所结算商会员（会员编号102）。总运营中心位于美丽的滨海城市——青岛，现拥有总资产过亿元，营业面积1300多平，从业人员队伍日益壮大。
-        买卖交易机制，同时提供相关咨询服务。</p>
-      <img src="images/banner.jpg" width="788" height="300" />
-      <p>英伦金业是一家专业从事铂金、白银等贵金属现货及提供其电子交易平台、贵金属投资管理及咨询服务等业务的金融机构。公司注册在云南省昆明市国家级经济技术开发区，注册资本1000万元人民币，系昆明贵重金属交易所结算商会员（会员编号102）。总运营中心位于美丽的滨海城市——青岛，现拥有总资产过亿元，营业面积1300多平，从业人员队伍日益壮大。
-        买卖交易机制，同时提供相关咨询服务。</p>
-      <p>英伦金业是一家专业从事铂金、白银等贵金属现货及提供其电子交易平台、贵金属投资管理及咨询服务等业务的金融机构。公司注册在云南省昆明市国家级经济技术开发区，注册资本1000万元人民币，系昆明贵重金属交易所结算商会员（会员编号102）。总运营中心位于美丽的滨海城市——青岛，现拥有总资产过亿元，营业面积1300多平，从业人员队伍日益壮大。
-        买卖交易机制，同时提供相关咨询服务。</p>
-              <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin","tieba","sqq"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","tieba","sqq"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-    </div>
-    <div class="fy_box">
-      <ul>
-        <li class="fll"><span>上一篇：</span><a href="#">这里是标题这里是标题这里是标题</a></li>
-        <li class="flr"><span>下一篇：</span><a href="#">这里是标题这里是标题这里是标题</a></li>
-      </ul>
-    </div>
+</ul>
+
+
+</div>
+        <div class="clear h20"></div>
+        <div class="flr fot_fanye"><ul class="haoh">
+        <li><a href="#" ><<</a></li>
+         <li><a href="#" class="act">1</a></li>
+          <li><a href="#">2</a></li>
+           <li><a href="#">>></a></li>
+        </ul></div>
 
 </div>
 
