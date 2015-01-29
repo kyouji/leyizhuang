@@ -32,10 +32,7 @@ public class IndexController {
      */
     @RequestMapping
     public String index(HttpServletRequest request){
-        ServletContext application = request.getSession().getServletContext();
-        String path = request.getContextPath();
-        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
-        application.setAttribute("basePath", basePath);
+      
         return "/front/index";
     }
 }
