@@ -14,8 +14,9 @@ src/main/resources：所有页面相关，
 前台url:
 		/ ---代表访问主页
 		商品
-		/list/0 --代表访问相关商品类型typeid=1(代表进入明星产品,2代表进入手机产品，3代表搜集配件，4代表靓号选择)
-		/product/0  --代表具体商品详情typeid=1
+
+		/list/0 --代表访问相关商品类型typeid=1(代表进入明星产品,2代表进入手机产品，3代表搜集配件，4代表靓号选择,5代表新闻资讯)
+		/product/0  --代表具体商品详情typeid=1	
 		/ProductContrast --代表访问商品对比
 		
 		登录注册
@@ -32,7 +33,14 @@ src/main/resources：所有页面相关，
 		/user/updatePassword  ---跳转修改密码
 		/user/address  ---跳转收货地址
 		/user/collect  ---跳转我的收藏
+		/user/integral  ---跳转我的积分
 		
+		订单
+		/order/list --跳转所有订单页面
+		/order/obligation --跳转待付款订单页面
+		/order/startorder --跳转待收货订单页面
+		/order/orderok --跳转已完成订单页面
+		/order/orderno --跳转已关闭订单页面
 		
 		
 			----解说人-:郭正洋

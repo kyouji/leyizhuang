@@ -1,7 +1,5 @@
 package com.ynyes.rongcheng.controller.front;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +43,9 @@ public class TypelistController {
             }
             if(typeId.equals("4")){
                 return "/front/type_list_number";//靓号选择
+            }
+            if(typeId.equals("5")){
+                return "/front/news";//新闻资讯
             }
         }else{
             return "error404";//错误
