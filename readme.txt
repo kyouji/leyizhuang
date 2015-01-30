@@ -2,13 +2,13 @@
 包命名：
 src/main/java:核心业务处理
 	controller:--业务处理
-		back:代表后台处理相关：
+		management:代表后台处理相关：
 		front：前台业务处理相关;
 		
 src/main/resources：所有页面相关，
 		static:js/css/images。。。存放目录
 		templates:所有页面存放目录
-			back:代表后台页面相关：
+			management:代表后台页面相关：
 			front：前台页面处理相关;
 				index.ftl:代表首页页面
 				login.ftl:代表登录页面
@@ -49,7 +49,7 @@ src/main/resources：所有页面相关，
 		/user/updatePassword  ---跳转修改密码
 		/user/address  ---跳转收货地址
 		/user/collect  ---跳转我的收藏
-		/user/integral  ---跳转我的积分
+		/user/point  ---跳转我的积分
 		
 		订单
 		/order/list --跳转所有订单页面
