@@ -96,7 +96,7 @@ DD_belatedPNG.fix('.,img,background');
 		<li><a href="/list/2" title="手机产品">手机产品</a></li>
 		<li><a href="/list/3" title="手机配件">手机配件</a></li>
 		<li><a href="/list/4" title="靓号选择">靓号选择</a></li>
-		<li><a href="#" title="新闻资讯">新闻资讯</a></li>
+		<li><a href="/list/5" title="新闻资讯">新闻资讯</a></li>
 	</ul>
 </div>
 
