@@ -1,0 +1,95 @@
+package com.ynyes.rongcheng.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ynyes.rongcheng.entity.Parameter;
+import com.ynyes.rongcheng.repository.ParameterRepo;
+
+/**
+ * 商品参数服务类
+ * 
+ * @author Sharon
+ *
+ */
+
+@Service
+@Transactional
+public class ParameterService {
+    @Autowired
+    ParameterRepo repository;
+    
+    /**
+     * 获取参数类型
+     * 
+     * @return 类型列表
+     */
+    public List<String> findTypes()
+    {
+        List<String> typeList = null;
+        
+        typeList = repository.findTypes();
+        
+        return typeList;
+    }
+    
+    /**
+     * 通过类型获取参数列表
+     * 
+     * @param type 类型
+     * @return 参数列表
+     */
+    public List<Parameter> findByType(String type)
+    {
+        if (null == type)
+        {
+            return null;
+        }
+        
+        return repository.findByType(type);
+    }
+    
+    /**
+     * 查找参数列表并分页
+     * 
+     * @param page 页号，从0开始
+     * @param size 每页大小
+     * @param direction 排序方向，不区分大小写，asc表示升序，desc表示降序，为NULL时不进行排序
+     * @param property 排序的字段名，为NULL时不进行排序
+     * @return 参数分页
+     */
+    public Page<Parameter> findAll(int page, int size, 
+                            String direction, String property)
+    {
+        Page<Parameter> paramPage = null;
+        PageRequest pageRequest = null;
+        
+        if (page < 0 || size < 0)
+        {
+            return null;
+        }
+        
+        if (null == direction || null == property)
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        else
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, 
+                                 property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        
+        paramPage = repository.findAll(pageRequest);
+        
+        return paramPage;
+    }
+    
+}
