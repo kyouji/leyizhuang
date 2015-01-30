@@ -11,12 +11,16 @@
 		<!--css,js-->
 		<style type="text/css">
 			*{margin:0;padding:0}
+			body{background:#111;font-size:12px;font-famyly:微软雅黑;color:#666;}
+			#head{font-size:20px;color:#fff;}
 		</style>
 
 	</head>
 <body>
+<div id="head">
+	出错了???
+</div>
 
-出错了???
 
 
 </body>
