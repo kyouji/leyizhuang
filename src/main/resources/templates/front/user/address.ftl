@@ -34,28 +34,28 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main mt12">
 <div class="member_lef fll"> <span class="sp55">新手入门</span>
       <ul class="haoh pt10">
-        <li><a href="#">购物指南</a></li>
-        <li><a href="#">常见问题</a></li>
-        <li><a href="#">用户协议</a></li>
+        <li><a href="/help/question/1">购物指南</a></li>
+        <li><a href="/help/question/2">常见问题</a></li>
+        <li><a href="/help/question/3">用户协议</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
-      <ul class="haoh pt10">
-        <li><a href="#" >个人信息</a></li>
-        <li><a href="#" >密码修改</a></li>
-        <li><a href="#" class="act">收货地址</a></li>
+      <ul class="haoh pt10">s
+        <li><a href="/user/info" >个人信息</a></li>
+        <li><a href="/user/updatePassword" >密码修改</a></li>
+        <li><a href="/user/address" class="act">收货地址</a></li>
         <li><a href="/user/collect">我的收藏</a></li>
-         <li><a href="#" >我的积分</a></li>
+         <li><a href="/user/point" >我的积分</a></li>
       </ul>
       <span class="mt10 sp55">客户服务</span>
       <ul class="haoh pt10 pb10">
-        <li><a href="#">帮助中心</a></li>
+        <li><a href="/help/question/1">帮助中心</a></li>
   
       </ul>
     </div>
 
 <div class="flr right">
 <div class="list_banner1">
-<div class="place1"> <span>您现在的位置：</span><a href="#">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/2">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
         
         
         
