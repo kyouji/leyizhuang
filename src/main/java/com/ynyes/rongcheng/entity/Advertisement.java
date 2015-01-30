@@ -38,10 +38,6 @@ public class Advertisement {
     @Column
     private String destinationUri;
     
-    // 排序号
-    @Column
-    private Long orderNumber;
-    
     // 点击量
     @Column
     private Long clickNumber;
@@ -98,14 +94,6 @@ public class Advertisement {
 
     public void setDestinationUri(String destinationUri) {
         this.destinationUri = destinationUri;
-    }
-
-    public Long getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(Long orderNumber) {
-        this.orderNumber = orderNumber;
     }
 
     public Long getClickNumber() {

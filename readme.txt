@@ -2,13 +2,13 @@
 包命名：
 src/main/java:核心业务处理
 	controller:--业务处理
-		back:代表后台处理相关：
+		management:代表后台处理相关：
 		front：前台业务处理相关;
 		
 src/main/resources：所有页面相关，
 		static:js/css/images。。。存放目录
 		templates:所有页面存放目录
-			back:代表后台页面相关：
+			management:代表后台页面相关：
 			front：前台页面处理相关;
 				index.ftl:代表首页页面
 				login.ftl:代表登录页面
@@ -40,16 +40,16 @@ src/main/resources：所有页面相关，
 		/reg --代表跳转注册页面
 		
 		帮助中心
-		/help/question/1	--代表跳转帮助中心  -(1代表购物指南)，(2代表常见问题)，(3代表用户协议)															
-		/help/distribution/1	--代表跳转帮助中心  -(1代表支付方式)，(2代表配送方式)，(3代表配送费用)															
-		/help/afshelp/1     --代表跳转帮助中心  -(1代表退货政策)，(2代表退货流程)
+		/help/question/1	--代表跳转帮助中心 新手入门模块 -(1代表购物指南)，(2代表常见问题)，(3代表用户协议)															
+		/help/distribution/1	--代表跳转帮助中心 支付配送模块 -(1代表支付方式)，(2代表配送方式)，(3代表配送费用)															
+		/help/afshelp/1     --代表跳转帮助中心 售后服务模块  -(1代表退货政策)，(2代表退货流程)
 		
 		用户
 		/user/info  ---跳转用户个人信息
 		/user/updatePassword  ---跳转修改密码
 		/user/address  ---跳转收货地址
 		/user/collect  ---跳转我的收藏
-		/user/integral  ---跳转我的积分
+		/user/point  ---跳转我的积分
 		
 		订单
 		/order/list --跳转所有订单页面

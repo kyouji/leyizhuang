@@ -41,7 +41,7 @@ public class PriceLifetime {
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Temporal(TemporalType.DATE)
-    private Date priceStartTime;
+    private Date startTime;
 
     public Long getId() {
         return id;
@@ -75,11 +75,12 @@ public class PriceLifetime {
         this.price = price;
     }
 
-    public Date getPriceStartTime() {
-        return priceStartTime;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setPriceStartTime(Date priceStartTime) {
-        this.priceStartTime = priceStartTime;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
+
 }

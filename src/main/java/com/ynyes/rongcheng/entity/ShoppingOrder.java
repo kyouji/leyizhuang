@@ -84,7 +84,7 @@ public class ShoppingOrder {
     
     // 订单状态
     @Column
-    private Long stateCode;
+    private Long statusCode;
     
     // 订单取消原因
     @Column
@@ -235,12 +235,12 @@ public class ShoppingOrder {
         this.orderTime = orderTime;
     }
 
-    public Long getStateCode() {
-        return stateCode;
+    public Long getStatusCode() {
+        return statusCode;
     }
 
-    public void setStateCode(Long stateCode) {
-        this.stateCode = stateCode;
+    public void setStatusCode(Long statusCode) {
+        this.statusCode = statusCode;
     }
 
     public String getCancelReason() {

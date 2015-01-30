@@ -91,7 +91,7 @@ public class UserController {
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/integral")
+    @RequestMapping("/point")
     public String integral(){
         return "/front/user/integral";
     }
