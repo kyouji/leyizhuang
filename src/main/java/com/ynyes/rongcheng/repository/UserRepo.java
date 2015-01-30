@@ -17,5 +17,6 @@ public interface UserRepo extends
 		JpaSpecificationExecutor<User> 
 {
     // 通过用户名查找
+    User findByUsername(String username);
     User findByUsernameAndRoleAndIsEnableTrue(String username, String role);
 }
