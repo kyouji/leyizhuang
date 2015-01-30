@@ -22,11 +22,7 @@ public class ProductTypeParameter {
     // 参数ID
     @Column
 	private Long paramId;
-	
-	// 参数名称
-    @Column
-	private String paramName;
-	
+
 	// 参数分类
     @Column
 	private String category;
@@ -42,15 +38,7 @@ public class ProductTypeParameter {
     public void setParamId(Long paramId) {
         this.paramId = paramId;
     }
-
-    public String getParamName() {
-        return paramName;
-    }
-
-    public void setParamName(String paramName) {
-        this.paramName = paramName;
-    }
-
+    
     public String getCategory() {
         return category;
     }

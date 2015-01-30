@@ -30,7 +30,7 @@ public class Brand {
     @Column(unique=true)
     private String name;
     
-    // 品牌类型
+    // 品牌类型，可以有多个类型
     @Column
     private String type;
     
