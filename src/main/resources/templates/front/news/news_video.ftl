@@ -174,9 +174,9 @@ DD_belatedPNG.fix('.,img,background');
 <div class="s_footera fll" id="s_footera45">
 <ul>
 <li><div class="zfps fll"></div><span>支付配送</span></li>
-<li><a href="#">支付方式</a></li>
-<li><a href="#">配送方式</a></li>
-<li><a href="#">配送费用</a></li>
+        <li><a href="/help/distribution/1">支付方式</a></li>
+        <li><a href="/help/distribution/2">配送方式</a></li>
+        <li><a href="/help/distribution/3">配送费用</a></li>
 </ul>
 </div>
 
