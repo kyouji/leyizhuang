@@ -54,14 +54,14 @@ public class ProductTypeService {
     }
     
     /**
-     * 通过类型ID查找该类型的参数列表，并进行排序
+     * 通过类型ID查找该类型的参数列表
      * 
      * @param typeId 商品类型ID
      * @param direction 排序方向，asc升序，desc降序，为NULL时不进行排序
      * @param property 排序字段名，为NULL时不进行排序
      * @return 类型属性列表
      */
-    public List<Parameter> findParameterIdsById(Long typeId,
+    public List<Parameter> findParameterById(Long typeId,
                                                 String direction,
                                                 String property)
     {
