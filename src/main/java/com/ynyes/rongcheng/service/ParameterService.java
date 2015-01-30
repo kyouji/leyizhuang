@@ -92,4 +92,37 @@ public class ParameterService {
         return paramPage;
     }
     
+    /**
+     * 新增参数
+     * 
+     * @param param 要保存的参数
+     * @return 返回保存后的参数
+     */
+    public Parameter add(Parameter param)
+    {
+        return repository.save(param);
+    }
+    
+    /**
+     * 按ID删除
+     * 
+     * @param id 要删除的参数ID
+     * @return 无
+     */
+    public void delete(Long id)
+    {
+        repository.delete(id);
+    }
+ 
+    /**
+     * 按实体删除
+     * 
+     * @param param 要删除的参数
+     * @return 无
+     */
+    public void delete(Parameter param)
+    {
+        repository.delete(param);
+    }
+    
 }

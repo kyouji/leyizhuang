@@ -60,22 +60,6 @@ public class Product {
 	@OneToMany(orphanRemoval=true)
 	@JoinColumn(name="productId")
 	private List<ProductParameter> paramList;
-
-	// 市场价
-    @Column(nullable=false, scale=2)
-    private Double marketPrice;
-    
-    // 销售价
-    @Column(nullable=false, scale=2)
-    private Double salePrice;
-    
-    // 商品最低价，不存在多个版本时和销售价相同，存在多个版本时为版本最低价
-    @Column(scale=2)
-    private Double priceMinimum;
-    
-    // 包含价值，销售靓号时会包含话费
-    @Column(nullable=false, scale=2)
-    private Double includePrice;
     
     // 促销
     @Column
@@ -105,14 +89,6 @@ public class Product {
     @Column
     private Long numberDecType;
     
-    // 商品剩余数量
-    @Column
-    private Long leftNumber;
-    
-    // 已售数量
-    @Column
-    private Long soldNumber;
-    
     // 支持类型的3级分类: 父父类型->父类型->类型
     // 商品父父类型
     @Column
@@ -126,9 +102,9 @@ public class Product {
     @Column
     private String type;
     
-    // 是否分版本定价
-    @Column
-    private Boolean isUseVersionPrice;
+    // 价格最小值
+    @Column(nullable=false, scale=2)
+    private Double priceMinimum;
     
     // 商品价格单位
     @Column
@@ -304,22 +280,6 @@ public class Product {
         this.paramList = paramList;
     }
 
-    public Double getMarketPrice() {
-        return marketPrice;
-    }
-
-    public void setMarketPrice(Double marketPrice) {
-        this.marketPrice = marketPrice;
-    }
-
-    public Double getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(Double salePrice) {
-        this.salePrice = salePrice;
-    }
-
     public Double getPriceMinimum() {
         return priceMinimum;
     }
@@ -327,15 +287,7 @@ public class Product {
     public void setPriceMinimum(Double priceMinimum) {
         this.priceMinimum = priceMinimum;
     }
-
-    public Double getIncludePrice() {
-        return includePrice;
-    }
-
-    public void setIncludePrice(Double includePrice) {
-        this.includePrice = includePrice;
-    }
-
+    
     public String getPromotion() {
         return promotion;
     }
@@ -391,23 +343,7 @@ public class Product {
     public void setNumberDecType(Long numberDecType) {
         this.numberDecType = numberDecType;
     }
-
-    public Long getLeftNumber() {
-        return leftNumber;
-    }
-
-    public void setLeftNumber(Long leftNumber) {
-        this.leftNumber = leftNumber;
-    }
-
-    public Long getSoldNumber() {
-        return soldNumber;
-    }
-
-    public void setSoldNumber(Long soldNumber) {
-        this.soldNumber = soldNumber;
-    }
-
+    
     public String getGrandFatherType() {
         return grandFatherType;
     }
@@ -430,14 +366,6 @@ public class Product {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Boolean getIsUseVersionPrice() {
-        return isUseVersionPrice;
-    }
-
-    public void setIsUseVersionPrice(Boolean isUseVersionPrice) {
-        this.isUseVersionPrice = isUseVersionPrice;
     }
 
     public String getPriceUnit() {

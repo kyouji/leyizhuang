@@ -44,7 +44,7 @@ public class ProductCombination {
     private String productType;
     
     // 单卖价
-    private String productPrice;
+    private Double productPrice;
     
     // 封面图片uri
     private String productCoverImageUri;
@@ -105,11 +105,11 @@ public class ProductCombination {
         this.productType = productType;
     }
 
-    public String getProductPrice() {
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(String productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 
