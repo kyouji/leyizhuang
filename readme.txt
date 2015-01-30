@@ -10,7 +10,23 @@ src/main/resources：所有页面相关，
 		templates:所有页面存放目录
 			back:代表后台页面相关：
 			front：前台页面处理相关;
-			
+				index.ftl:代表首页页面
+				login.ftl:代表登录页面
+				news.ftl:代表新闻资讯页面
+				ProductContrast.ftl:代表具体商品详情页面
+				type_list_accessories.ftl:代表手机配件页面
+				type_list_content.ftl:代表商品对比页面
+				type_list_mobile.ftl:代表手机产品页面
+				type_list_number.ftl：代表靓号选择页面
+				type_list_star.ftl：代表明星产品
+				afshelp:代表存放售后服务页面相关
+				cart：	代表存放购物车，下单。。。页面相关
+				comment：引入文件相关
+				distribution：代表存放支付配送页面相关
+				news：代表存放新闻资讯具体页面页面相关
+				order：代表存放订单页面页面相关
+				question：代表存放新手入门页面相关
+				user：代表存放用户中心页面相关
 前台url:
 		/ ---代表访问主页
 		商品
