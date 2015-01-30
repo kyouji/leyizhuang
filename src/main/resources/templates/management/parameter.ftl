@@ -30,9 +30,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">Home</a>
+								<a href="#">商品</a>
 							</li>
-							<li class="active">Dashboard</li>
+							<li class="active">参数</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
@@ -40,7 +40,36 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-                                
+                                <div class="table-header">
+                                    <a id="id-new-paramter" href="javascript:void(0)" class="col-sm-1 btn btn-success btn-sm">添加参数</a> 
+                                    <div class="col-sm-7"></div>
+                                    <label class="col-sm-3">关键字 <input id="keyword" type="text"></label>
+                                    
+                                    <a href="javascript:void(0)" class="btn btn-success btn-sm">检索</a> 
+                                </div>
+
+                                <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%" class="center"></th>  
+                                            <th width="5%" class="center">排序</th>                                                                                                 
+                                            <th width="8%" class="center">id</th>
+                                            <th width="15%" class="center">类型</th>                                            
+                                            <th width="21%" class="center">名称</th>
+                                            <th width="8%" class="center">值输入类型</th>
+                                            <th width="10%" class="center">可检索？</th>
+                                            <th width="10%" class="center">多值？</th>
+                                            <th width="10%" class="center">值列表</th>
+                                            <th width="8%" class="center">编辑</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="id-tbody">
+                                            <#include "/management/parameter/parameter_tbody.ftl">
+                                    </tbody>
+                                </table>
+                                <input type="text" class="hide" /> 
+                                <div id="id-pagination" class="pagination" style="margin-top: 5px;float: right;"></div>
 
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
