@@ -48,6 +48,7 @@ DD_belatedPNG.fix('.,img,background');
       <ul class="haoh pt10 pb10">
         <li><a href="#">退货政策</a></li>
         <li><a href="#">退货流程</a></li>
+        <li><a href="#">三包服务</a></li>
       </ul>
     </div>
 <div class="flr right">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
-<title>荣诚手机-退货政策</title>
+<title>荣诚手机-三包服务</title>
 <meta name="keywords" content="荣诚手机超市" />
 <meta name="description" content="荣诚手机超市" />
 <meta name="copyright" content="荣诚手机超市 版权所有" />
@@ -37,9 +37,9 @@
       </ul>
       <span class="mt10 sp55">售后服务</span>
       <ul class="haoh pt10 pb10">
-        <li><a href="#" class="act">退货政策</a></li>
+        <li><a href="#" >退货政策</a></li>
         <li><a href="#">退货流程</a></li>
-        <li><a href="#">三包服务</a></li>
+        <li><a href="#" class="act">三包服务</a></li>
       </ul>
     </div>
 <div class="flr right">
