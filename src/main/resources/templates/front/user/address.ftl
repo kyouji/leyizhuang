@@ -39,7 +39,7 @@ DD_belatedPNG.fix('.,img,background');
         <li><a href="/help/question/3">用户协议</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
-      <ul class="haoh pt10">
+      <ul class="haoh pt10">s
         <li><a href="/user/info" >个人信息</a></li>
         <li><a href="/user/updatePassword" >密码修改</a></li>
         <li><a href="/user/address" class="act">收货地址</a></li>

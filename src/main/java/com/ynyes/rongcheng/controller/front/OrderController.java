@@ -30,7 +30,7 @@ public class OrderController {
      * @since  1.0.0
      */
     @RequestMapping("/list")
-    public String orderlist(User user,int id){
+    public String orderlist(){
         return "/front/order/orderlist";
     }
     /**
