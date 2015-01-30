@@ -27,9 +27,9 @@ public class Parameter {
 	@Column(nullable=false)
 	private String name;
 	
-	// 属性值输入方式
+	// 选择值或者用户手动输入值
     @Column
-    private String valueInputType;
+    private Boolean isValueInputByChoose;
     
     // 是否可检索
     @Column
@@ -71,12 +71,12 @@ public class Parameter {
         this.name = name;
     }
 
-    public String getValueInputType() {
-        return valueInputType;
+    public Boolean getIsValueInputByChoose() {
+        return isValueInputByChoose;
     }
 
-    public void setValueInputType(String valueInputType) {
-        this.valueInputType = valueInputType;
+    public void setIsValueInputByChoose(Boolean isValueInputByChoose) {
+        this.isValueInputByChoose = isValueInputByChoose;
     }
 
     public Boolean getIsSearchable() {

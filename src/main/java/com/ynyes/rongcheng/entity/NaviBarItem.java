@@ -31,6 +31,10 @@ public class NaviBarItem {
     // 排序号
     @Column
     private Long sortNumber;
+    
+    // 前台是否显示
+    @Column
+    private Boolean isShow;
 
     public Long getId() {
         return id;
@@ -63,4 +67,13 @@ public class NaviBarItem {
     public void setSortNumber(Long sortNumber) {
         this.sortNumber = sortNumber;
     }
+
+    public Boolean getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(Boolean isShow) {
+        this.isShow = isShow;
+    }
+    
 }

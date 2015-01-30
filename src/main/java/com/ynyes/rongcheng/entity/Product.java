@@ -198,7 +198,7 @@ public class Product {
     
     // 明星产品排序号
     @Column
-    private Long starProductOrderNumber;
+    private Long starProductSortNumber;
 
     // 周一关注度
     @Column
@@ -553,11 +553,11 @@ public class Product {
     }
 
     public Long getStarProductOrderNumber() {
-        return starProductOrderNumber;
+        return starProductSortNumber;
     }
 
-    public void setStarProductOrderNumber(Long starProductOrderNumber) {
-        this.starProductOrderNumber = starProductOrderNumber;
+    public void setStarProductOrderNumber(Long starProductSortNumber) {
+        this.starProductSortNumber = starProductSortNumber;
     }
 
     public Long getMondayVisitNumber() {

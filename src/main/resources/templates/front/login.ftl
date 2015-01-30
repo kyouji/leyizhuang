@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
-<title>荣诚手机超市</title>
+<title>荣诚手机超市--登录</title>
 <meta name="keywords" content="荣诚手机超市" />
 <meta name="description" content="荣诚手机超市" />
 <meta name="copyright" content="荣诚手机超市 版权所有" />
@@ -48,19 +48,3 @@ DD_belatedPNG.fix('.,img,background');
 </div>
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

@@ -22,12 +22,13 @@ DD_belatedPNG.fix('.,img,background');
 <body>
 <header>
 <div class="main">
-<#include "/front/comment/header1.ftl">
+<div class="fll header_l"><span>您好，欢迎来到荣诚手机超市！<a href="#" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="#">免费注册</a></span></div>
+<div class="flr header_r"><a href="#">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="#">我的订单</a><a href="#">帮助中心</a><a href="#">收藏本站</a></div>
 </div>
 </header>
 
 <div class="header1 main">
-<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="img/rc_logo.png" width="177" height="69"></a></div>
+<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="/img/rc_logo.png" width="177" height="69"></a></div>
 <div class="fll city"><a href="#">城市切换</a><span></span>
 <!--<div class="cityqh"><ul>
 <li><a href="#">昆明市</a></li>
@@ -110,8 +111,8 @@ DD_belatedPNG.fix('.,img,background');
 <div class="news_lanmu1">
 <ul>
 <li><a href="#">手机资讯</a></li>
-<li><a href="#" class="news_lanmu1xz">手机发烧友</a></li>
-<li style="border:none;"><a href="#">新闻视频</a></li>
+<li><a href="#" >手机发烧友</a></li>
+<li style="border:none;"><a href="#" class="news_lanmu1xz">新闻视频</a></li>
 </ul>
 </div></div>
 
@@ -124,7 +125,7 @@ DD_belatedPNG.fix('.,img,background');
       <div class="nr_info"> 日期：2012-11-27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者：三亚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;    点击：323 </div>
       <p>英伦金业是一家专业从事铂金、白银等贵金属现货及提供其电子交易平台、贵金属投资管理及咨询服务等业务的金融机构。公司注册在云南省昆明市国家级经济技术开发区，注册资本1000万元人民币，系昆明贵重金属交易所结算商会员（会员编号102）。总运营中心位于美丽的滨海城市——青岛，现拥有总资产过亿元，营业面积1300多平，从业人员队伍日益壮大。
         买卖交易机制，同时提供相关咨询服务。</p>
-      <img src="images/banner.jpg" width="788" height="300" />
+      <img src="/images/banner.jpg" width="788" height="300" />
       <p>英伦金业是一家专业从事铂金、白银等贵金属现货及提供其电子交易平台、贵金属投资管理及咨询服务等业务的金融机构。公司注册在云南省昆明市国家级经济技术开发区，注册资本1000万元人民币，系昆明贵重金属交易所结算商会员（会员编号102）。总运营中心位于美丽的滨海城市——青岛，现拥有总资产过亿元，营业面积1300多平，从业人员队伍日益壮大。
         买卖交易机制，同时提供相关咨询服务。</p>
       <p>英伦金业是一家专业从事铂金、白银等贵金属现货及提供其电子交易平台、贵金属投资管理及咨询服务等业务的金融机构。公司注册在云南省昆明市国家级经济技术开发区，注册资本1000万元人民币，系昆明贵重金属交易所结算商会员（会员编号102）。总运营中心位于美丽的滨海城市——青岛，现拥有总资产过亿元，营业面积1300多平，从业人员队伍日益壮大。
@@ -149,11 +150,68 @@ DD_belatedPNG.fix('.,img,background');
 <div class="clear"></div>
 
 <div class="main mt20">
-<#include "/front/comment/top.ftl">
+<div class="floor_n fll"><img src="/img/peisongyuanze.png" width="719" height="44"></div>
+<div class="flr">
+<input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
+<input type="submit" class="search-btn" title="搜索" value="  ">
+</div>
+</div>
+
+<div class="clear"></div>
+
+<div class="footallbg">
+<div class="main mt15">
+<div class="s_footer pt15">
+<div class="s_footera fll">
+<ul>
+<li><div class="bzzx fll"></div><span>帮助中心</span></li>
+<li><a href="#">购物指南</a></li>
+<li><a href="#">常见问题</a></li>
+<li><a href="#">用户协议</a></li>
+</ul>
+</div>
+
+<div class="s_footera fll" id="s_footera45">
+<ul>
+<li><div class="zfps fll"></div><span>支付配送</span></li>
+<li><a href="#">支付方式</a></li>
+<li><a href="#">配送方式</a></li>
+<li><a href="#">配送费用</a></li>
+</ul>
+</div>
+
+<div class="s_footera fll">
+<ul>
+<li><div class="shfw fll"></div><span>售后服务</span></li>
+<li><a href="#">三包服务</a></li>
+<li><a href="#">售后流程</a></li>
+</ul>
+</div>
+
+<div class="s_footera fll" id="s_footera55">
+<ul>
+<li><div class="gyzc fll"></div><span>关于荣诚</span></li>
+<li><a href="#">了解荣诚</a></li>
+<li><a href="#">加入荣诚</a></li>
+<li><a href="#">附近门店</a></li>
+</ul>
+</div>
+
+<div class="s_footerb flr">
+<ul>
+<li><div class="mfrxdh fll"></div><span>免费热线电话</span></li>
+<li class="ml30" id="s_phone">0871-68421560</li>
+<li class="ml30">传真：0871-68421560</li>
+<li class="ml30">周一到周日9:30-18:00</li>
+</ul>
+</div>
+
+</div>
 </div>
 <div class="clear"></div>
 <div class="s_footerc">
-<#include "/front/comment/top1.ftl">
+<p>©2014 荣诚手机超市<a href="#">www.rcsj.com </a>   滇ICP证8888888号  587 号 <a href="http://www.ynyes.com" target="_blank" title="云南网站建设">网站建设</a>技术支持：<a href="http://www.ynyes.com" target="_blank" title="云南网站建设">昆明天度网络公司</a></p>
+</div>
 
 </div>
 

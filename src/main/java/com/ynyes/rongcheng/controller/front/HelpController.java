@@ -29,7 +29,7 @@ public class HelpController {
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/question-{typeId}")
+    @RequestMapping("/question/{typeId}")
     public String question(@PathVariable Long typeId){
         if(typeId==1){
             return "front/question/question_1";
@@ -55,7 +55,7 @@ public class HelpController {
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/distribution-{typeId}")
+    @RequestMapping("/distribution/{typeId}")
     public String distribution(@PathVariable Long typeId){
         if(typeId==1){
             return "front/distribution/distribution_1";
@@ -81,7 +81,7 @@ public class HelpController {
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/afshelp-{typeId}")
+    @RequestMapping("/afshelp/{typeId}")
     public String afshelp(@PathVariable Long typeId){
         if(typeId==1){
             return "front/afshelp/afshelp_1";

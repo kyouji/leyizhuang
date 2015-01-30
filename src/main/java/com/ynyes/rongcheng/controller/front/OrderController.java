@@ -3,6 +3,8 @@ package com.ynyes.rongcheng.controller.front;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ynyes.rongcheng.entity.User;
+
 /**
  * 订单处理
  * 
@@ -28,7 +30,7 @@ public class OrderController {
      * @since  1.0.0
      */
     @RequestMapping("/list")
-    public String orderlist(){
+    public String orderlist(User user,int id){
         return "/front/order/orderlist";
     }
     /**

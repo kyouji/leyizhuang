@@ -5,18 +5,9 @@
 <meta name="keywords" content="荣诚手机超市" />
 <meta name="description" content="荣诚手机超市" />
 <meta name="copyright" content="荣诚手机超市 版权所有" />
-<link href="${basePath}/css/layout.css" rel="stylesheet" type="text/css" />
-<link href="${basePath}/css/rcindex.css" rel="stylesheet" type="text/css" />
-<link href="${basePath}/css/member.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="${basePath}/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="${basePath}/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
+<link href="/css/layout.css" rel="stylesheet" type="text/css" />
+<link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
+<link href="/css/member.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <header>
