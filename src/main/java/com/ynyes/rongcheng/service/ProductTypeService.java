@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
@@ -145,6 +147,42 @@ public class ProductTypeService {
         }
         
         return parameterRepo.findByIdInAndIsSearchableTrue(idList);
+    }
+    
+    /**
+     * 查找类型列表并分页
+     * 
+     * @param page 页号，从0开始
+     * @param size 每页大小
+     * @param direction 排序方向，不区分大小写，asc表示升序，desc表示降序，为NULL时不进行排序
+     * @param property 排序的字段名，为NULL时不进行排序
+     * @return 类型分页
+     */
+    public Page<ProductType> findAll(int page, int size, 
+                            String direction, String property)
+    {
+        Page<ProductType> typePage = null;
+        PageRequest pageRequest = null;
+        
+        if (page < 0 || size < 0)
+        {
+            return null;
+        }
+        
+        if (null == direction || null == property)
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        else
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, 
+                                 property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        
+        typePage = repository.findAll(pageRequest);
+        
+        return typePage;
     }
     
 }

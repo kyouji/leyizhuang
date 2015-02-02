@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.rongcheng.entity.Parameter;
 import com.ynyes.rongcheng.service.ParameterService;
@@ -34,6 +36,15 @@ public class ManagerParameterController {
         }
         
         return "/management/parameter";
+    }
+    
+    @RequestMapping(value="/destroy/{paramId}")
+    @ResponseBody
+    public void destroy(ModelMap map, @PathVariable Long paramId){
+        if (null != paramId)
+        {
+            parameterService.delete(paramId);
+        }
     }
     
 }

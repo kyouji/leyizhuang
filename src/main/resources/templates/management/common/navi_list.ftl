@@ -23,7 +23,7 @@
             </li>
 
             <li>
-                <a href="buttons.html">
+                <a href="/admin/product/type">
                     <i class="icon-double-angle-right"></i>
                     类型
                 </a>
