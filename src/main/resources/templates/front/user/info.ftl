@@ -8,15 +8,6 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
 </head>
 <body>
 <header>
@@ -55,7 +46,7 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="flr right">
 <div class="list_banner1">
-<div class="place1"> <span>您现在的位置：</span><a href="#">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place1"> <span>您现在的位置：</span><a href="#">首页</a>&gt;<a href="#">用户中心</a>&gt;<a href="javascript:void()">个人信息</a>&gt; </div>
         
         
         
@@ -63,12 +54,12 @@ DD_belatedPNG.fix('.,img,background');
       <table width="440" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td class="user_r_tit">*昵称： </td>
-          <td class="user_r_110"><input class="input" type="text"></td>
+          <td class="user_r_110"><input class="input" type="text" value="<#if user.nickname??>${user.nickname}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">真实姓名：</td>
-          <td> <input class="input" type="text"></td>
+          <td> <input class="input" type="text" value="<#if user.realName??>${user.realName}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
@@ -87,22 +78,22 @@ DD_belatedPNG.fix('.,img,background');
         </tr>
         <tr>
           <td class="user_r_tit">详细地址：</td>
-          <td><input class="input" type="text"></td>
+          <td><input class="input" type="text" value="<#if user.detailAddress??>${user.detailAddress}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">电子邮件：</td>
-          <td> <input class="input" type="text"></td>
+          <td> <input class="input" type="text" value="<#if user.email??>${user.email}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td class="user_r_tit">联系电话：</td>
-          <td><input class="input" type="text"></td>
+          <td class="user_r_tit">手机号码：</td>
+          <td><input class="input" type="text" value="<#if user.mobile??>${user.mobile}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">联系QQ：</td>
-          <td><input class="input" type="text"></td>
+          <td><input class="input" type="text" value="<#if user.qq??>${user.qq}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <!--<tr>
@@ -144,27 +135,5 @@ DD_belatedPNG.fix('.,img,background');
 <#include "/front/comment/top1.ftl">
 
 </div>
-
-
-
-
-
-
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

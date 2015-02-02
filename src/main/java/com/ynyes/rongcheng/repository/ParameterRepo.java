@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ynyes.rongcheng.entity.Parameter;
@@ -25,6 +26,10 @@ public interface ParameterRepo extends
     // 通过类型查找
     Page<Parameter> findByType(String type, Pageable page);
     List<Parameter> findByType(String type);
+    
+    // 查找参数类型列表
+    @Query("select distinct p.type from Parameter p")
+    List<String> findTypes();
     
     // 通过ID查找
     List<Parameter> findByIdIn(Collection<Long> ids);

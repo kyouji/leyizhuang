@@ -83,7 +83,7 @@ public class LoginController {
                 if (VERIF.equalsIgnoreCase(msg)) {
                     User user = UserService
                             .findByUsernameAndPasswordAndRoleAndIsEnableTrue(
-                                    username, password, "普通会员");
+                                    username,StringUtils.encryption((password.trim())), "普通会员");
                     if (user != null) {
                         request.getSession().setAttribute("user", user);
                         flag = "success";

@@ -1,4 +1,9 @@
 package com.ynyes.rongcheng.util;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import sun.misc.BASE64Encoder;
 /**
  * 常用字符串工具类
  * （小郭封装）
@@ -8,6 +13,7 @@ package com.ynyes.rongcheng.util;
  * @version 1.0.0
  *
  */
+@SuppressWarnings("restriction")
 public class StringUtils {
 
     /**
@@ -35,7 +41,13 @@ public class StringUtils {
       return false;
      }
     }
-
+    public static String base64Encode(byte[] b) {
+        if (b == null) {
+            return null;
+        }
+        return new BASE64Encoder().encode(b);
+    }
+    
     /**
      * 判断字符串是否是数字
      */
@@ -65,8 +77,42 @@ public class StringUtils {
     public static boolean isNotEmpty(String str) {
         return !isEmpty(str);
     }
-public static void main(String[] args) {
-    String str="1233232";
-    System.out.println(isNumber(str));
+    /**
+    *
+    * @param plainText
+    *            明文
+    * @return 32位密文
+    */
+   public static String encryption(String plainText) {
+       String re_md5 = new String();
+       try {
+           MessageDigest md = MessageDigest.getInstance("MD5");
+           md.update(plainText.getBytes());
+           byte b[] = md.digest();
+
+           int i;
+
+           StringBuffer buf = new StringBuffer("");
+           for (int offset = 0; offset < b.length; offset++) {
+               i = b[offset];
+               if (i < 0)
+                   i += 256;
+               if (i < 16)
+                   buf.append("0");
+               buf.append(Integer.toHexString(i));
+           }
+
+           re_md5 = buf.toString();
+
+       } catch (NoSuchAlgorithmException e) {
+           e.printStackTrace();
+       }
+       return re_md5;
+   }
+   public static void main(String[] args) {
+    String str="123";
+    System.out.println(encryption(str));
 }
-}
+} 
+  
+

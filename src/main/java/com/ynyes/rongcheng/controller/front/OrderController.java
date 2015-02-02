@@ -3,8 +3,6 @@ package com.ynyes.rongcheng.controller.front;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ynyes.rongcheng.entity.User;
-
 /**
  * 订单处理
  * 

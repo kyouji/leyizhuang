@@ -1,5 +1,7 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,9 +75,10 @@ public class RegController {
                         user=new User();
                         user.setUsername(name);
                         user.setMobile(mobile);
-                        user.setPassword(password);
+                        user.setPassword(StringUtils.encryption(password));
                         user.setRole("普通会员");
                         user.setIsEnable(true);
+                        user.setRegisterTime(new Date());
                         UserService.saveUser(user);
                         request.getSession().setAttribute("user", user);
                         flag="success";

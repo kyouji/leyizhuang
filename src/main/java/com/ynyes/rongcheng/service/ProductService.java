@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.rongcheng.entity.Product;
+import com.ynyes.rongcheng.entity.ProductCombination;
+import com.ynyes.rongcheng.entity.ProductVersion;
 import com.ynyes.rongcheng.repository.ProductRepo;
 
 /**
@@ -146,6 +148,58 @@ public class ProductService {
         productPage = repository.findByIsOnSaleTrueAndIsStarProductTrue(pageRequest);
         
         return productPage;
+    }
+    
+    /**
+     * 查找商品
+     * 
+     * @param id 商品ID
+     * @return 找到的商品，未找到时返回NULL
+     */
+    public Product findOne(Long id)
+    {
+        Product p = null;
+        
+        if (null == id)
+        {
+            return null;
+        }
+        
+        p = repository.findOne(id);
+        
+        if (null == p)
+        {
+            return null;
+        }
+        
+        if (null == p.getCombinationList())
+        {
+            return p;
+        }
+        
+        // 重新填充combinationList
+        for (ProductCombination pc : p.getCombinationList())
+        {
+            if (null != pc.getPid() && null != pc.getVid())
+            {
+                Product related = repository.findOne(pc.getPid());
+                
+                // 设置价格
+                for (ProductVersion ver : related.getVersionList())
+                {
+                    if (ver.getId().equals(pc.getVid()))
+                    {
+                        pc.setProductPrice(ver.getSalePrice());
+                        pc.setProductName(related.getName());
+                        pc.setProductCoverImageUri(related.getCoverImageUri());
+                        pc.setProductBrief(related.getBrief());
+                        pc.setProductType(related.getType());
+                    }
+                }
+            }
+        }
+        
+        return null;
     }
     
 }
