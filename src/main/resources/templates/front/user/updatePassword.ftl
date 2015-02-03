@@ -8,6 +8,7 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
 </head>
 <body>
 <header>
@@ -109,12 +110,9 @@
 <#include "/front/comment/top1.ftl">
 
 </div>
-
-
-
-
-
-
+<script type="text/javascript">
+	
+</script>
 </body>
 </html>
 
