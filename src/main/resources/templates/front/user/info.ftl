@@ -8,6 +8,10 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="Tm/css/manhuaTip1.1.0.css" />
+<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
 </head>
 <body>
 <header>
@@ -54,46 +58,46 @@
       <table width="440" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td class="user_r_tit">*昵称： </td>
-          <td class="user_r_110"><input class="input" type="text" value="<#if user.nickname??>${user.nickname}</#if>"></td>
+          <td class="user_r_110"><input class="input" type="text" id="nickname" value="<#if user.nickname??>${user.nickname}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">真实姓名：</td>
-          <td> <input class="input" type="text" value="<#if user.realName??>${user.realName}</#if>"></td>
+          <td> <input class="input" type="text" id="name" value="<#if user.realName??>${user.realName}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td class="user_r_tit">*性别：</td>
-          <td><form id="form1" name="form1" method="post" action="">
+          <td class="user_r_tit" >*性别：</td>
+          <td>
               <p>
-                <label>
-                  <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_0" />
+                <label >
+                <input type="radio" name="sex" value="男" id="RadioGroup1_0" <#if user.sex?? && user.sex=="男">checked</#if>  />
                   男</label>
                 <label>
-                  <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1" />
+                  <input type="radio" name="sex" value="女" id="RadioGroup1_1" <#if user.sex?? && user.sex=="女">checked</#if>/>
                   女</label>
-              </p>
-            </form></td>
+                </p>
+            </td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">详细地址：</td>
-          <td><input class="input" type="text" value="<#if user.detailAddress??>${user.detailAddress}</#if>"></td>
+          <td><input class="input" type="text" id="address" value="<#if user.detailAddress??>${user.detailAddress}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">电子邮件：</td>
-          <td> <input class="input" type="text" value="<#if user.email??>${user.email}</#if>"></td>
+          <td> <input class="input" type="text" id="email" value="<#if user.email??>${user.email}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">手机号码：</td>
-          <td><input class="input" type="text" value="<#if user.mobile??>${user.mobile}</#if>"></td>
+          <td><input class="input" type="text" id="mobile" value="<#if user.mobile??>${user.mobile}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">联系QQ：</td>
-          <td><input class="input" type="text" value="<#if user.qq??>${user.qq}</#if>"></td>
+          <td><input class="input" type="text" id="qq" value="<#if user.qq??>${user.qq}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <!--<tr>
@@ -104,7 +108,7 @@
           </tr>-->
         <tr>
           <td class="user_r_tit"></td>
-          <td><input type="submit" class="user_r_btn" value="确认修改" /></td>
+          <td><input type="button" class="user_r_btn" value="确认修改" onclick="tm_update(this,${user.id})"/></td>
           <td>&nbsp;</td>
         </tr>
       </table>
@@ -135,5 +139,29 @@
 <#include "/front/comment/top1.ftl">
 
 </div>
+<script type="text/javascript">
+	function tm_update(obj,id){
+		var nickname=$("#nickname").val();
+		var name=$("#name").val();
+		var sex=$("input[name='sex']:checked").val();
+		var address=$("#address").val();
+		var email=$("#email").val();
+		var mobile=$("#mobile").val();
+		var qq=$("#qq").val();
+		if(isEmpty(nickname)){
+			 Tmtip({html:"您输入的用户名不能为空!!!",src:"Tm/images/24.PNG"});
+			return;
+		}
+		var fromData={"nickname":nickname,"realName":name,"sex":sex,"detailAddress":address,"email":email,"mobile":mobile,"qq":qq,"id":id};
+		$.ajax({
+			type:"post",
+			url:"/user/update",
+			data:fromData,
+			success:function(data){
+				alert(data);
+			}
+		})
+	}
+</script>
 </body>
 </html>

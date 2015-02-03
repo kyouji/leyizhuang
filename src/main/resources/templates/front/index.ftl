@@ -32,7 +32,7 @@
 <nav><div class="main">
 <div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15">全部商品分类</a></div>
 
-<ul>
+<ul style="display:none">
 <li>
 <div class="mbj m1"></div>
 <div class="divshop">
