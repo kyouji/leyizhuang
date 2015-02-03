@@ -171,7 +171,7 @@ DD_belatedPNG.fix('.,img,background');
       <input type="text" class="select_num"  value="1"/>
       <a href="#" class="fll"><img src="images/jian.jpg" /></a></p>
     <div class="clear"></div>
-    <div class="gm_btn"> <span class="gm_btn1"><a href="#">立即购买</a></span> <span class="gm_btn2"><a href="#">加入购物车</a></span><span class="gm_btn3"><a href="#">对比</a></span></div>
+    <div class="gm_btn"> <span class="gm_btn1"><a href="/cartStep">立即购买</a></span> <span class="gm_btn2"><a href="/cartStep">加入购物车</a></span><span class="gm_btn3"><a href="#">对比</a></span></div>
   </div>
 </div>
 <div class="clear"></div>

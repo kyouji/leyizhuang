@@ -212,97 +212,97 @@ DD_belatedPNG.fix('.,img,background');
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
      <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
         <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b> </a>
           <p>已有54人关注</p>  
-          <p><a href="#" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
         </li>
       </ul>
       <div class="clear"></div>

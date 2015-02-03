@@ -116,97 +116,97 @@ DD_belatedPNG.fix('.,img,background');
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
 <li><a href="#"> <img src="images/spsx.jpg" />
           <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
           <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
           <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="#" class="jiongwc">加入购物车</a></p>
+          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
         </li>
       </ul>
       <div class="clear"></div>
