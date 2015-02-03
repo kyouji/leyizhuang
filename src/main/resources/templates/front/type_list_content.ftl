@@ -502,7 +502,7 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="flr duibi_bottom_b">
 <div class="duibi_bottom_b_gb"><a href="#">隐藏</a></div>
-<div class="duibi_bottom_b_db"><a href="#">对比</a></div>
+<div class="duibi_bottom_b_db"><a href="/ProductContrast">对比</a></div>
 <div class="duibi_bottom_b_qk"><a href="#">清空对比信息</a></div>
 
 </div>
