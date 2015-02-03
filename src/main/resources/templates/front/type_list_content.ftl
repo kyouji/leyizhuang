@@ -43,7 +43,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="rc_newsgg"><span>新闻公告:</span><a href="#">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
 </div>
 <div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="#">购物车（1）</a></div>
+<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
 </div>
 
 <nav><div class="main">
@@ -276,7 +276,7 @@ DD_belatedPNG.fix('.,img,background');
   <div class="sub_right">
     <div class="sx_tit" style="padding:0;">
       <ul>
-        <li><a href="#" class="con">商品详情</a></li>
+        <li><a href="/product/1" class="con">商品详情</a></li>
         <li><a href="#">商品参数</a></li>
         <li><a href="#">商品评价（639）</a></li>
         <li><a href="#">购买咨询</a></li>
@@ -397,7 +397,7 @@ DD_belatedPNG.fix('.,img,background');
     <div class="lr_right_main main_top2 fbpn">
       <h2>提交问答/评论</h2>
       <ul>
-        <li class="pyts">欢迎您<a href="#"><strong>Services</strong></a>发表问答/评论! 欢迎您访客，您在<a href="#">登录</a>后才能发表问答/评论，如果没有帐户请<a href="#">注册</a>！</li>
+        <li class="pyts">欢迎您<a href="#"><strong>Services</strong></a>发表问答/评论! 欢迎您访客，您在<a href="/login">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg">注册</a>！</li>
         <li class="title">内容：</li>
         <li class="texta">
           <label>
@@ -448,9 +448,9 @@ DD_belatedPNG.fix('.,img,background');
 <div class="s_footera fll" id="s_footera45">
 <ul>
 <li><div class="zfps fll"></div><span>支付配送</span></li>
-<li><a href="/help/distribution-1">支付方式</a></li>
-<li><a href="/help/distribution-2">配送方式</a></li>
-<li><a href="/help/distribution-3">配送费用</a></li>
+        <li><a href="/help/distribution/1">支付方式</a></li>
+        <li><a href="/help/distribution/2">配送方式</a></li>
+        <li><a href="/help/distribution/3">配送费用</a></li>
 </ul>
 </div>
 
@@ -502,7 +502,7 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="flr duibi_bottom_b">
 <div class="duibi_bottom_b_gb"><a href="#">隐藏</a></div>
-<div class="duibi_bottom_b_db"><a href="#">对比</a></div>
+<div class="duibi_bottom_b_db"><a href="/ProductContrast">对比</a></div>
 <div class="duibi_bottom_b_qk"><a href="#">清空对比信息</a></div>
 
 </div>

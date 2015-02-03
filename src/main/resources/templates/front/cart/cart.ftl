@@ -43,14 +43,14 @@ DD_belatedPNG.fix('.,img,background');
 <div class="rc_newsgg"><span>新闻公告:</span><a href="#">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
 </div>
 <div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="#">购物车（1）</a></div>
+<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
 </div>
 
 
 
 <div class="gwcbg">
 <div class="main mt10">
-<div class="place"> <span>您现在的位置：</span><a href="#">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/2">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
 <div class="s_gwc1"><span id="colorfff">1、我的购物车</span><span>2、我的订单信息</span><span>3、支付成功</span></div>
 </div>
 
@@ -110,7 +110,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="clear"></div>
 
 <div class="main">
-<div class="s_gwc1zja"><div class="fll s_gwc1zja_1"><a href="#"> << 继续购物 </a></div><div class="flr s_gwc1zja_2"><a href="#" title="去结算">去结算 </a></div></div>
+<div class="s_gwc1zja"><div class="fll s_gwc1zja_1"><a href="#"> << 继续购物 </a></div><div class="flr s_gwc1zja_2"><a href="/cartStep" title="去结算">去结算 </a></div></div>
 </div>
 
 </div>

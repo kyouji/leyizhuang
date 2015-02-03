@@ -30,6 +30,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
+
 								<a href="#">商品</a>
 							</li>
 							<li class="active">参数</li>

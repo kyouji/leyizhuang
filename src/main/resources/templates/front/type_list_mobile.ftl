@@ -43,7 +43,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="rc_newsgg"><span>新闻公告:</span><a href="#">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
 </div>
 <div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="#">购物车（1）</a></div>
+<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
 </div>
 
 <nav><div class="main">
@@ -347,9 +347,9 @@ DD_belatedPNG.fix('.,img,background');
 <div class="s_footera fll" id="s_footera45">
 <ul>
 <li><div class="zfps fll"></div><span>支付配送</span></li>
-<li><a href="/help/distribution-1">支付方式</a></li>
-<li><a href="/help/distribution-2">配送方式</a></li>
-<li><a href="/help/distribution-3">配送费用</a></li>
+        <li><a href="/help/distribution/1">支付方式</a></li>
+        <li><a href="/help/distribution/2">配送方式</a></li>
+        <li><a href="/help/distribution/3">配送费用</a></li>
 </ul>
 </div>
 

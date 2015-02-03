@@ -22,7 +22,7 @@ DD_belatedPNG.fix('.,img,background');
 <body>
 <header>
 <div class="main">
-<div class="fll header_l"><span>您好，欢迎来到荣诚手机超市！<a href="#" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="#">免费注册</a></span></div>
+<div class="fll header_l"><span>您好，欢迎来到荣诚手机超市！<a href="/login" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="/reg">免费注册</a></span></div>
 <div class="flr header_r"><a href="/user/collect">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="/order/list">我的订单</a><a href="#">帮助中心</a><a href="#">收藏本站</a></div>
 </div>
 </header>
@@ -45,7 +45,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="rc_newsgg"><span>新闻公告:</span><a href="#">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
 </div>
 <div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="#">购物车（1）</a></div>
+<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
 </div>
 
 <nav><div class="main">
@@ -92,8 +92,8 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="nav_2 fll ml4">
 <ul>
-<li><a href="#" title="首页">首页</a></li>
-<li><a href="#" title="明星产品">明星产品</a></li>
+<li><a href="/" title="首页">首页</a></li>
+<li><a href="/list/1" title="明星产品">明星产品</a></li>
 <li><a href="#" title="手机产品">手机产品</a></li>
 <li><a href="#" title="手机配件">手机配件</a></li>
 <li><a href="#" title="靓号选择">靓号选择</a></li>
@@ -106,7 +106,7 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="main mt15">
 
-<div class="place"> <span>您现在的位置：</span><a href="#">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
 
 <div class="news_lanmu1">
 <ul>
@@ -176,9 +176,9 @@ DD_belatedPNG.fix('.,img,background');
 <div class="s_footera fll" id="s_footera45">
 <ul>
 <li><div class="zfps fll"></div><span>支付配送</span></li>
-<li><a href="#">支付方式</a></li>
-<li><a href="#">配送方式</a></li>
-<li><a href="#">配送费用</a></li>
+        <li><a href="/help/distribution/1">支付方式</a></li>
+        <li><a href="/help/distribution/2">配送方式</a></li>
+        <li><a href="/help/distribution/3">配送费用</a></li>
 </ul>
 </div>
 

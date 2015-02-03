@@ -15,7 +15,7 @@
 <div class="rc_newsgg"><span>新闻公告:</span><a href="#">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
 </div>
 <div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="#">购物车（1）</a></div>
+<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
 </div>
 
 <nav><div class="main">
@@ -61,8 +61,8 @@
 </div>
 <div class="nav_2 fll ml4">
 <ul>
-<li><a href="#" title="首页">首页</a></li>
-<li><a href="#" title="明星产品">明星产品</a></li>
+<li><a href="/" title="首页">首页</a></li>
+<li><a href="/list/1" title="明星产品">明星产品</a></li>
 <li><a href="#" title="手机产品">手机产品</a></li>
 <li><a href="#" title="手机配件">手机配件</a></li>
 <li><a href="#" title="靓号选择">靓号选择</a></li>
