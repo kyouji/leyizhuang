@@ -21,7 +21,7 @@ DD_belatedPNG.fix('.,img,background');
 <header>
 <div class="main">
 <div class="fll header_l"><#if user??><span>您好，<a href="/user/info" >${user.username}</a>欢迎来到荣诚手机超市！您的身份：${user.role}&nbsp;&nbsp;<a href="/logout" >退出</a></span><#else><span>您好，欢迎来到荣诚手机超市！<a href="/login" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="/reg">免费注册</a></span></#if></div>
-<div class="flr header_r"><a href="/user/collect">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="/order/list">我的订单</a><a href="/help/question-1">帮助中心</a><a href="/help/question-1">收藏本站</a></div>
+<div class="flr header_r"><a href="/user/collect">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="/order/list">我的订单</a><a href="/help/question/1">帮助中心</a><a href="/help/question-1">收藏本站</a></div>
 </div>
 </header>
 
@@ -171,7 +171,7 @@ DD_belatedPNG.fix('.,img,background');
       <input type="text" class="select_num"  value="1"/>
       <a href="#" class="fll"><img src="images/jian.jpg" /></a></p>
     <div class="clear"></div>
-    <div class="gm_btn"> <span class="gm_btn1"><a href="#">立即购买</a></span> <span class="gm_btn2"><a href="#">加入购物车</a></span><span class="gm_btn3"><a href="#">对比</a></span></div>
+    <div class="gm_btn"> <span class="gm_btn1"><a href="/cartStep">立即购买</a></span> <span class="gm_btn2"><a href="/cartStep">加入购物车</a></span><span class="gm_btn3"><a href="#">对比</a></span></div>
   </div>
 </div>
 <div class="clear"></div>

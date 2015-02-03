@@ -50,7 +50,7 @@ DD_belatedPNG.fix('.,img,background');
       </ul>
       <span class="mt10 sp55">客户服务</span>
       <ul class="haoh pt10 pb10">
-        <li><a href="#">帮助中心</a></li>
+        <li><a href="/help/question/1">帮助中心</a></li>
   
       </ul>
     </div>
