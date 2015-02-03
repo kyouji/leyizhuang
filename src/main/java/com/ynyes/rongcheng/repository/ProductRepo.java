@@ -30,6 +30,10 @@ public interface ProductRepo extends
     Page<Product> findByIdIn(Collection<Long> ids, Pageable page);
     List<Product> findByIdIn(Collection<Long> ids);
     
+    // 通过ID查找上架商品
+    Page<Product> findByIsOnSaleTrueAndIdIn(Collection<Long> ids, Pageable page);
+    List<Product> findByIsOnSaleTrueAndIdIn(Collection<Long> ids);
+    
     /*
      * 查找上线的商品
      */
