@@ -8,7 +8,11 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
 <script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/front/uppass.js"></script>
 </head>
 <body>
 <header>
@@ -57,34 +61,26 @@
       <table width="440" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td class="user_r_tit">原密码： </td>
-          <td class="user_r_110"><input class="input" type="text"></td>
+          <td class="user_r_110"><input class="input" id="password" type="password" autofocus="autofocus" maxlength="20" placeholder="请输入密码,8-16位, 允许数字、大小写英文字母、下划线以及常用英文符号"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">新密码：</td>
-          <td> <input class="input" type="text"></td>
+          <td> <input class="input" type="password" id="newpassword"  maxlength="20" placeholder="请输入密码,8-16位, 允许数字、大小写英文字母、下划线以及常用英文符号"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">再次输入：</td>
-          <td> <input class="input" type="text"></td>
+          <td> <input class="input" type="password" id="oncepassword" maxlength="20" placeholder="请输入密码,8-16位, 允许数字、大小写英文字母、下划线以及常用英文符号"></td>
           <td>&nbsp;</td>
         </tr>
-       
-        <tr>
-            <td class="user_r_tit">验证码：</td>
-            <td><input type="text" class="user_r_txt_input2" />
-              <img src="/images/codeImg.jpg" width="100" height="24" /></td>
-            <td>&nbsp;</td>
-          </tr>
         <tr>
           <td class="user_r_tit"></td>
-          <td><input type="submit" class="user_r_btn" value="确认修改" /></td>
-          <td>&nbsp;</td>
+          <td><input type="button" class="user_r_btn" value="确认修改" onclick="tm_update(this)"/></td>
+          <td>&nbsp;<input type="hidden" value="${user.username}" id="hname"></td>
         </tr>
       </table>
     </div>
-        
         
         
     
@@ -110,24 +106,6 @@
 <#include "/front/comment/top1.ftl">
 
 </div>
-<script type="text/javascript">
-	
-</script>
+
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
