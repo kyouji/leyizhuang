@@ -32,9 +32,10 @@ public class UserService {
      * 
      * @param username 用户名
      * @param password 密码
+     * @param mobile 移动电话
      * @return 成功后返回新用户，否则返回NULL
      */
-    public User add(String username, String password)
+    public User add(String username, String password, String mobile)
     {
         if (null == username || "".equals(username)
             || null == password || "".equals(password))
@@ -52,6 +53,8 @@ public class UserService {
         user.setUsername(username);
         
         user.setPassword(MD5.md5(password, 32));
+        
+        user.setMobile(mobile);
         
         user.setRole("USER");
         

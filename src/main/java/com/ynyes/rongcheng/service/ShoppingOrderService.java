@@ -34,7 +34,7 @@ public class ShoppingOrderService {
      * @param direction 排序方向 asc:升序 desc:降序
      * @return 订单分页
      */
-    public Page<ShoppingOrder> findByUsernameAndStatus(String username, 
+    public Page<ShoppingOrder> findByUsernameAndStatusCode(String username, 
                                     Long statusCode,
                                     int page,
                                     int size,
@@ -65,7 +65,54 @@ public class ShoppingOrderService {
             pageRequest = new PageRequest(page, size, sort);
         }
         
+        
+        // 按状态获取订单
         orderPage = repository.findByUsernameAndStatusCode(username, statusCode, pageRequest);
+        
+        return orderPage;
+    }
+    
+    /**
+     * 根据用户名查找订单，并分页
+     * 
+     * @param username 用户名
+     * @param page 页号
+     * @param size 每页大小
+     * @param direction 排序方向 asc:升序 desc:降序
+     * @return 订单分页
+     */
+    public Page<ShoppingOrder> findByUsername(String username, 
+                                    int page,
+                                    int size,
+                                    String direction,
+                                    String property)
+    {
+        Page<ShoppingOrder> orderPage = null;
+        PageRequest pageRequest = null;
+        
+        if (null == username)
+        {
+            return null;
+        }
+        
+        if (page < 0 || size < 0)
+        {
+            return null;
+        }
+        
+        if (null == direction || null == property)
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        else
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, 
+                                 property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        
+        // 全部订单
+        orderPage = repository.findByUsername(username, pageRequest);
         
         return orderPage;
     }
