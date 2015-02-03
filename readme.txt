@@ -31,9 +31,9 @@ src/main/resources：所有页面相关，
 		/ ---代表访问主页
 		商品
 
-		/list/0 --代表访问相关商品类型typeid=1(代表进入明星产品,2代表进入手机产品，3代表搜集配件，4代表靓号选择,5代表新闻资讯)
+		/list/0 --代表访问相关商品类型typeid=1(1代表进入明星产品,2代表进入手机产品，3代表搜集配件，4代表靓号选择,5代表新闻资讯)
 		/product/0  --代表具体商品详情typeid=1	
-		/ProductContrast --代表访问商品对比
+		/ProductContrast --代表访问商品对比                 ？？未找到
 		
 		登录注册
 		/login ----代表跳转登录页面
@@ -69,3 +69,5 @@ src/main/resources：所有页面相关，
 			
 			
 			----解说人-:郭正洋
+			
+			//placeholder     autofocus="autofocus"   maxlength

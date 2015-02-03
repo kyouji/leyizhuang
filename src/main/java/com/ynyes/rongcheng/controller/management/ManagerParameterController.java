@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.rongcheng.entity.Parameter;
@@ -38,7 +39,7 @@ public class ManagerParameterController {
         return "/management/parameter";
     }
     
-    @RequestMapping(value="/destroy/{paramId}")
+    @RequestMapping(value="/destroy/{paramId}",method = RequestMethod.POST)
     @ResponseBody
     public void destroy(ModelMap map, @PathVariable Long paramId){
         if (null != paramId)

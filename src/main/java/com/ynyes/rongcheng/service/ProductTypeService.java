@@ -185,4 +185,13 @@ public class ProductTypeService {
         return typePage;
     }
     
+    /**
+     * 返回所有商品类型
+     * 
+     * @return 所有商品类型
+     */
+    public List<ProductType> findAll() {
+
+        return (List<ProductType>) repository.findAll();
+    }
 }

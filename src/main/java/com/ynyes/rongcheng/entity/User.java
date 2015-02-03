@@ -31,7 +31,7 @@ public class User {
     private Long id;
     
 	// 收货地址
-	@OneToMany(orphanRemoval=true) 
+	@OneToMany
 	@JoinColumn(name="userId")
 	private List<ShippingAddress> shippingAddressList;
 	
@@ -123,7 +123,7 @@ public class User {
 	private Boolean isEnable;
 	
 	// 账户积分
-	@OneToMany(orphanRemoval=true)
+	@OneToMany
 	@JoinColumn(name="userId")
 	private List<UserPoint> pointList;
 	

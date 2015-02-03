@@ -11,6 +11,8 @@
 		<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="/css/select.css"/>
+		<link rel="stylesheet" href="/css/pagination.css"/>
 	</head>
 
 	<body>
@@ -37,12 +39,13 @@
 					</div>
 
 					<div class="page-content">
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-								<input type="text" id="id-total-num" hidden value="<#if type_total??>${type_total}</#if>" />
-                                <div class="table-header">
-                                    <a id="id-new-paramter" href="javascript:void(0)" class="col-sm-1 btn btn-success btn-sm">添加类型</a> 
+					    <input type="text" id="id-total-num" hidden value="<#if type_total??>${type_total}</#if>" />
+                        <div class="row">
+						    <#include "/management/product_type/add.ftl" >
+                            <div id="id-modify"></div>
+							<div id="id-table" class="col-xs-12">
+								<div class="table-header">
+                                    <a id="button-add" href="javascript:void(0)" class="col-sm-1 btn btn-success btn-sm">添加类型</a> 
                                     <div class="col-sm-7"></div>
                                     
                                     <label class="col-sm-3">关键字 <input id="keyword" type="text"></label>
@@ -62,12 +65,10 @@
                                     </thead>
 
                                     <tbody id="id-tbody">
-                                        <#include "/management/product_type/product_type_tbody.ftl">
+                                        <#include "/management/product_type/tbody.ftl">
                                     </tbody>
                                 </table>
                                 <div id="id-pagination" class="pagination" style="margin-top: 5px;float: right;"></div>
-
-								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->

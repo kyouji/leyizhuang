@@ -8,15 +8,10 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
+<link rel="stylesheet" type="text/css" href="Tm/css/manhuaTip1.1.0.css" />
+<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
 </head>
 <body>
 <header>
@@ -34,17 +29,17 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main mt12">
 <div class="member_lef fll"> <span class="sp55">新手入门</span>
       <ul class="haoh pt10">
-        <li><a href="#">购物指南</a></li>
-        <li><a href="#">常见问题</a></li>
-        <li><a href="#">用户协议</a></li>
+       <li><a href="/help/question/1">购物指南</a></li>
+        <li><a href="/help/question/2">常见问题</a></li>
+        <li><a href="/help/question/3">用户协议</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
       <ul class="haoh pt10">
-        <li><a href="#" class="act">个人信息</a></li>
-        <li><a href="#">密码修改</a></li>
-        <li><a href="#">收货地址</a></li>
+        <li><a href="/user/info" class="act">个人信息</a></li>
+        <li><a href="/user/updatePassword">密码修改</a></li>
+        <li><a href="/user/address">收货地址</a></li>
         <li><a href="/user/collect">我的收藏</a></li>
-        <li><a href="#" >我的积分</a></li>
+        <li><a href="/user/point" >我的积分</a></li>
       </ul>
       <span class="mt10 sp55">客户服务</span>
       <ul class="haoh pt10 pb10">
@@ -55,7 +50,8 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="flr right">
 <div class="list_banner1">
-<div class="place1"> <span>您现在的位置：</span><a href="#">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+
+<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="#">用户中心</a>&gt;<a href="javascript:void()">个人信息</a>&gt; </div>
         
         
         
@@ -63,46 +59,46 @@ DD_belatedPNG.fix('.,img,background');
       <table width="440" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td class="user_r_tit">*昵称： </td>
-          <td class="user_r_110"><input class="input" type="text"></td>
+          <td class="user_r_110"><input class="input" type="text" id="nickname" value="<#if user.nickname??>${user.nickname}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">真实姓名：</td>
-          <td> <input class="input" type="text"></td>
+          <td> <input class="input" type="text" id="name" value="<#if user.realName??>${user.realName}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td class="user_r_tit">*性别：</td>
-          <td><form id="form1" name="form1" method="post" action="">
+          <td class="user_r_tit" >*性别：</td>
+          <td>
               <p>
-                <label>
-                  <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_0" />
+                <label >
+                <input type="radio" name="sex" value="男" id="RadioGroup1_0" <#if user.sex?? && user.sex=="男">checked</#if>  />
                   男</label>
                 <label>
-                  <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1" />
+                  <input type="radio" name="sex" value="女" id="RadioGroup1_1" <#if user.sex?? && user.sex=="女">checked</#if>/>
                   女</label>
-              </p>
-            </form></td>
+                </p>
+            </td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">详细地址：</td>
-          <td><input class="input" type="text"></td>
+          <td><input class="input" type="text" id="address" value="<#if user.detailAddress??>${user.detailAddress}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">电子邮件：</td>
-          <td> <input class="input" type="text"></td>
+          <td> <input class="input" type="text" id="email" value="<#if user.email??>${user.email}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
-          <td class="user_r_tit">联系电话：</td>
-          <td><input class="input" type="text"></td>
+          <td class="user_r_tit">手机号码：</td>
+          <td><input class="input" type="text" id="mobile" value="<#if user.mobile??>${user.mobile}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">联系QQ：</td>
-          <td><input class="input" type="text"></td>
+          <td><input class="input" type="text" id="qq" value="<#if user.qq??>${user.qq}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <!--<tr>
@@ -113,7 +109,7 @@ DD_belatedPNG.fix('.,img,background');
           </tr>-->
         <tr>
           <td class="user_r_tit"></td>
-          <td><input type="submit" class="user_r_btn" value="确认修改" /></td>
+          <td><input type="button" class="user_r_btn" value="确认修改" onclick="tm_update(this,${user.id})"/></td>
           <td>&nbsp;</td>
         </tr>
       </table>
@@ -144,27 +140,29 @@ DD_belatedPNG.fix('.,img,background');
 <#include "/front/comment/top1.ftl">
 
 </div>
-
-
-
-
-
-
+<script type="text/javascript">
+	function tm_update(obj,id){
+		var nickname=$("#nickname").val();
+		var name=$("#name").val();
+		var sex=$("input[name='sex']:checked").val();
+		var address=$("#address").val();
+		var email=$("#email").val();
+		var mobile=$("#mobile").val();
+		var qq=$("#qq").val();
+		if(isEmpty(nickname)){
+			 Tmtip({html:"您输入的用户名不能为空!!!",src:"Tm/images/24.PNG"});
+			return;
+		}
+		var fromData={"nickname":nickname,"realName":name,"sex":sex,"detailAddress":address,"email":email,"mobile":mobile,"qq":qq,"id":id};
+		$.ajax({
+			type:"post",
+			url:"/user/update",
+			data:fromData,
+			success:function(data){
+				alert(data);
+			}
+		})
+	}
+</script>
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
