@@ -8,15 +8,7 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
+<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
 </head>
 <body>
 <header>
@@ -82,7 +74,7 @@ DD_belatedPNG.fix('.,img,background');
         <tr>
             <td class="user_r_tit">验证码：</td>
             <td><input type="text" class="user_r_txt_input2" />
-              <img src="images/codeImg.jpg" width="100" height="24" /></td>
+              <img src="/images/codeImg.jpg" width="100" height="24" /></td>
             <td>&nbsp;</td>
           </tr>
         <tr>
@@ -118,12 +110,9 @@ DD_belatedPNG.fix('.,img,background');
 <#include "/front/comment/top1.ftl">
 
 </div>
-
-
-
-
-
-
+<script type="text/javascript">
+	
+</script>
 </body>
 </html>
 
