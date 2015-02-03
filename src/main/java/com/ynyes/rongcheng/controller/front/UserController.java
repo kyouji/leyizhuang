@@ -1,7 +1,12 @@
 package com.ynyes.rongcheng.controller.front;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ynyes.rongcheng.service.UserService;
 
 /**
  * 用户处理
@@ -15,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
+    private UserService UserService;
+    
+    private String flag;
     /**
      * 
      * 个人信息<BR>
@@ -28,7 +37,7 @@ public class UserController {
      * @since  1.0.0
      */
     @RequestMapping("/info")
-    public String info(){
+    public String info(HttpServletRequest request){
         return "/front/user/info";
     }
     /**
@@ -95,4 +104,12 @@ public class UserController {
     public String integral(){
         return "/front/user/integral";
     }
+    //get/set
+    public String getFlag() {
+        return flag;
+    }
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+    
 }

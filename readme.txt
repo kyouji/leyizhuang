@@ -69,3 +69,5 @@ src/main/resources：所有页面相关，
 			
 			
 			----解说人-:郭正洋
+			
+			//placeholder     autofocus="autofocus"   maxlength

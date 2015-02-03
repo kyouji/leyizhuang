@@ -33,5 +33,8 @@ public class MD5 {
         }
         return result;
     }
-
+public static void main(String[] args) {
+    String str="123";
+   System.out.println(MD5.md5(str, 32));
+}
 }
