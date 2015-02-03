@@ -163,6 +163,7 @@
 			}
 		})
 	}
+	Tmtip({html:"您输入的用户名不能为空!!!",src:"Tm/images/24.PNG"});
 </script>
 </body>
 </html>

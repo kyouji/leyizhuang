@@ -120,6 +120,33 @@
 		<!-- inline scripts related to this page -->
         <script src="/js/manager/parameter.js"></script>
         
+        <script type="text/javascript">
+            $(function(){
+                $("add-smbmit").click(function(){
+                    var type = $("form #type").val();
+                    var name = $("form #name").val();
+                    var input_type = $("form #input_type:select").val();
+                    var isSearchable = $("#searchable:checked").val();
+                    var isSingleValue = $("#multiple:checked").val();
+                    var valueList = $("form #param_list").val();
+                    if(isEmpty(type)||isEmpty(name)||isEmpty(input_type)||isEmpty(isSearchable)||isEmpty(isSingleValue)||isEmpty(valueList)){
+			            alert("请填写完整参数！");
+			        return;
+		            }
+                    
+                    var subDate = {"type":type,"name":name,"input_type":input_type,"isSearchable":isSearchable,"isSingleValue":isSingValue,"valueList":valueList};
+                    $.ajax({
+			            type:"post",
+			            url:"/admin/parameter/save",
+			            data:subData,
+			            success:function(data){
+				        alert("提交成功");
+			            }
+		            });
+                });
+            });
+        </script>
+        
 	</body>
 </html>
 
