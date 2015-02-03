@@ -1,7 +1,7 @@
 jQuery(function($) {
 	
 	// 每页数量
-	var pageSize = 15;
+	var pageSize = 5;
 	
 	// 分页
 	$("#id-pagination").pagination($("#id-total-num").val(), {
@@ -15,7 +15,7 @@ jQuery(function($) {
 		showSelect:true,
 		callback : function(pageIndex) {
 			$.ajax({
-				type:"post",
+				type:"GET",
 				url:"/admin/product/type/page/" + pageIndex,
 				success:function(data){
 					$("#id-tbody").html(data);
@@ -26,13 +26,33 @@ jQuery(function($) {
 	});
 	
 	// 点击新增
-	$("#id-new").click(function(){
+	$("#button-add").click(function(){
 		$("#id-add").siblings().addClass("hide");
 		$("#id-add").removeClass("hide");
 	});
 	
+	// 点击加号添加属性
+	$("a.icon-plus").click(function(){
+	    $("#new-property").append($("#property-show").html());
+	    
+	});
+	
+	// 选择完属性类型
+	$("#prop-type-select").change(function(){
+	    var propDiv = $(this);
+	    
+	    $.ajax({
+            url: '/admin/product/type/param/'+$(this).val(),
+            type: 'POST',
+            success: function (data) {
+                propDiv.parent().siblings().eq(0).html(data);
+            }
+        });
+	});
+	
 	// 提交
 	$("#add-submit").click(function(){
+	    /*
 		var typeStr = "";
 		var types = $(".add.selectProp");
 		
@@ -87,6 +107,7 @@ jQuery(function($) {
                 }
             }
         });
+        */
 	});
 	
 	// 返回上一级
@@ -94,17 +115,13 @@ jQuery(function($) {
 		$("#id-table").siblings().addClass("hide");
 		$("#id-table").removeClass("hide");
 	});
-	
-	// 选择关联类型
-    $(".selectProp").click(function(){
-        $(this).toggleClass("spon");
-    });
    
 });
 
-// 修改品牌
+// 修改
 function modify(id) 
 {
+    /*
 	var formData = new FormData();
 	formData.append("id", id);
 	
@@ -191,11 +208,13 @@ function modify(id)
         	});
         }
     });
+    */
 }
 
-// 删除品牌
+// 删除
 function destroy(id) 
 {
+    /*
 	if(window.confirm('确定要删除吗？')){
 		var formData = new FormData();
 		formData.append("id", id);
@@ -203,11 +222,6 @@ function destroy(id)
 		$.ajax({
 	        url: '/admin/goods/prop/2/delete',
 	        type: 'POST',
-	        data: formData,
-	        async: false,
-	        cache: false,
-	        contentType: false,
-	        processData: false,
 	        success: function () {
 	        	location.reload();
 	        }
@@ -217,4 +231,5 @@ function destroy(id)
     }else{
         return false;
     }
+    */
 }

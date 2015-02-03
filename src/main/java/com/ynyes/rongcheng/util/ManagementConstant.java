@@ -6,5 +6,5 @@ package com.ynyes.rongcheng.util;
  */
 public class ManagementConstant {
 
-    public static final int pageSize = 15;
+    public static final int pageSize = 5;
 }

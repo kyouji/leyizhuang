@@ -17,7 +17,7 @@
 		        ${type.name}
 		    </td>
 		    <td class="center">
-		        <#if type.parent??>${type.parent}</#if>
+		        <#if type.parent??>${type.parent}<#else>根类型</#if>
 		    </td>
 		    <td class="center">
 		        <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
