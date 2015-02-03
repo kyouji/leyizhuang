@@ -49,7 +49,7 @@ public class UserService {
         }
 
         User user = new User();
-        
+ 
         user.setUsername(username);
         
         user.setPassword(MD5.md5(password, 32));
