@@ -8,10 +8,10 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="Tm/css/manhuaTip1.1.0.css" />
+<link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
 <script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
-<script type="text/javascript" src="/Tm/js/util.js"></script>
 <script type="text/javascript" src="/Tm/js/mainTip.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
 </head>
 <body>
 <header>
@@ -59,12 +59,12 @@
       <table width="440" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td class="user_r_tit">*昵称： </td>
-          <td class="user_r_110"><input class="input" type="text" id="nickname" value="<#if user.nickname??>${user.nickname}</#if>"></td>
+          <td class="user_r_110"><input class="input" type="text" id="nickname" autofocus="autofocus" maxlength="20" placeholder="请输入用户名" value="<#if user.nickname??>${user.nickname}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">真实姓名：</td>
-          <td> <input class="input" type="text" id="name" value="<#if user.realName??>${user.realName}</#if>"></td>
+          <td> <input class="input" type="text" id="name"  maxlength="20" placeholder="请输入姓名" value="<#if user.realName??>${user.realName}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
@@ -83,22 +83,22 @@
         </tr>
         <tr>
           <td class="user_r_tit">详细地址：</td>
-          <td><input class="input" type="text" id="address" value="<#if user.detailAddress??>${user.detailAddress}</#if>"></td>
+          <td><input class="input" type="text" id="address"  maxlength="20" placeholder="请输入详细地址" value="<#if user.detailAddress??>${user.detailAddress}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">电子邮件：</td>
-          <td> <input class="input" type="text" id="email" value="<#if user.email??>${user.email}</#if>"></td>
+          <td> <input class="input" type="text" id="email"  maxlength="20" placeholder="rongcheng@qq.com" value="<#if user.email??>${user.email}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">手机号码：</td>
-          <td><input class="input" type="text" id="mobile" value="<#if user.mobile??>${user.mobile}</#if>"></td>
+          <td><input class="input" type="text" id="mobile"  maxlength="11" placeholder="请输入手机号码" value="<#if user.mobile??>${user.mobile}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">联系QQ：</td>
-          <td><input class="input" type="text" id="qq" value="<#if user.qq??>${user.qq}</#if>"></td>
+          <td><input class="input" type="text" id="qq"  maxlength="16" placeholder="请输入QQ" value="<#if user.qq??>${user.qq}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <!--<tr>
@@ -141,6 +141,7 @@
 
 </div>
 <script type="text/javascript">
+	var time = null;
 	function tm_update(obj,id){
 		var nickname=$("#nickname").val();
 		var name=$("#name").val();
@@ -150,19 +151,50 @@
 		var mobile=$("#mobile").val();
 		var qq=$("#qq").val();
 		if(isEmpty(nickname)){
-			 Tmtip({html:"您输入的用户名不能为空!!!",src:"Tm/images/24.PNG"});
+			 Tmtip({html:"您输入的昵称不能为空!!!",src:"/Tm/images/24.PNG"});
+			$("#nickname").focus();
+			return;
+		}
+		if(isEmpty(name)){
+			 Tmtip({html:"您输入的姓名不能为空!!!",src:"/Tm/images/24.PNG"});
+			$("#name").focus();
+			return;
+		}
+		if(isEmpty(sex)){
+			 Tmtip({html:"性别不能为空!!!",src:"/Tm/images/24.PNG"});
+			$("#sex").focus();
+			return;
+		}
+		if(isEmpty(email)){
+			 Tmtip({html:"邮件不能为空!!!",src:"/Tm/images/24.PNG"});
+			$("#email").focus();
+			return;
+		}
+		if(isEmail(email)==false){
+			 Tmtip({html:"邮件格式不正确!",src:"/Tm/images/24.PNG"});
+			$("#email").focus();
+			return;
+		}
+		if(is_QQNum(qq)==false){
+			 Tmtip({html:"你输入的QQ号不正确!",src:"/Tm/images/24.PNG"});
+			$("#qq").focus();
 			return;
 		}
 		var fromData={"nickname":nickname,"realName":name,"sex":sex,"detailAddress":address,"email":email,"mobile":mobile,"qq":qq,"id":id};
+		clearInterval(time);
+			time = setTimeout(function() {
 		$.ajax({
 			type:"post",
 			url:"/user/update",
 			data:fromData,
 			success:function(data){
-				alert(data);
+				if(data=="success"){
+					Tmtip({html:"用户信息修改成功!",src:"/Tm/images/2_1.PNG"});
+				}
 			}
 		})
-	}
+	}, 500);
+		};
 </script>
 </body>
 </html>
