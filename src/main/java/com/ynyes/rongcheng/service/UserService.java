@@ -170,4 +170,21 @@ public class UserService {
     public void saveUser(User user){
         repository.save(user);
     }
+    /**
+     * 
+     * 修改<BR>
+     * 方法名：updateUser<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年2月3日-上午9:16:35 <BR>
+     * @param user
+     * @param id void<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
+    public User updateUser(User user){
+       return repository.save(user);
+    }
+    
 }
