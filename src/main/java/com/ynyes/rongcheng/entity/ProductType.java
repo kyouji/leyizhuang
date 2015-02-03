@@ -28,7 +28,7 @@ public class ProductType {
 	private String name;
 	
 	// 类型名称
-    @Column(unique=true)
+    @Column
     private String parent;
     
     // 排序号
