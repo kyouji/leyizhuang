@@ -34,7 +34,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main mt12">
 <div class="member_lef fll"> <span class="sp55">订单中心</span>
       <ul class="haoh pt10">
-        <li><a href="/order/list" class="act">所有订单</a></li>
+        <li><a href="/order/list" class="act">全部订单</a></li>
         <li><a href="/order/obligation">待付款订单</a></li>
         <li><a href="/order/startorder">待收货订单</a></li>
         <li><a href="/order/orderok">已完成订单</a></li>
