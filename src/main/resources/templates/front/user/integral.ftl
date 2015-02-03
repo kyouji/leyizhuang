@@ -40,9 +40,9 @@ DD_belatedPNG.fix('.,img,background');
       </ul>
       <span class="mt10 sp55">个人中心</span>
       <ul class="haoh pt10">
-        <li><a href="#" >个人信息</a></li>
-        <li><a href="#" >密码修改</a></li>
-        <li><a href="#">收货地址</a></li>
+        <li><a href="/user/info" >个人信息</a></li>
+        <li><a href="/user/updatePassword" >密码修改</a></li>
+        <li><a href="/user/address">收货地址</a></li>
         <li><a href="/user/collect">我的收藏</a></li>
         <li><a href="#" class="act">我的积分</a></li>
       </ul>
@@ -55,7 +55,7 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="flr right">
 <div class="list_banner1">
-<div class="place1"> <span>您现在的位置：</span><a href="#">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
         
         
         
@@ -208,7 +208,7 @@ DD_belatedPNG.fix('.,img,background');
         </li>
       </ul>
       <div class="clear"></div>
-      <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="#">首页</a> <a href="#">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="#">下一页</a> <a href="#">尾页</a> </div>
+      <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="/">首页</a> <a href="#">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="#">下一页</a> <a href="#">尾页</a> </div>
     </div>
     
       

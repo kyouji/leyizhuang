@@ -43,7 +43,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="rc_newsgg"><span>新闻公告:</span><a href="#">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
 </div>
 <div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="#">购物车（1）</a></div>
+<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
 </div>
 
 <nav><div class="main">
@@ -306,7 +306,7 @@ DD_belatedPNG.fix('.,img,background');
         </li>
       </ul>
       <div class="clear"></div>
-      <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="#">首页</a> <a href="#">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="#">下一页</a> <a href="#">尾页</a> </div>
+      <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="/">首页</a> <a href="#">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="#">下一页</a> <a href="#">尾页</a> </div>
     </div>
   </div>
 </div>
@@ -356,7 +356,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="s_footera fll">
 <ul>
 <li><div class="shfw fll"></div><span>售后服务</span></li>
-<li><a href="/help/afshelp-1">三包服务</a></li>
+<li><a href="/help/afshelp/1">三包服务</a></li>
 <li><a href="/help/afshelp-1">售后流程</a></li>
 </ul>
 </div>
