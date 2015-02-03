@@ -1,5 +1,7 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -81,11 +83,10 @@ public class LoginController {
                     "RANDOMVALIDATECODEKEY");
             if (StringUtils.isNotEmpty(VERIF)) {
                 if (VERIF.equalsIgnoreCase(msg)) {
-                    User user = UserService
-                            .findByUsernameAndPasswordAndRoleAndIsEnableTrue(
-                                    username,StringUtils.encryption((password.trim())), "普通会员");
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
+                    Map<String, Object> res = UserService.loginCheck(username, password);
+                    
+                    if (res.get("code").equals(0)) {
+                        request.getSession().setAttribute("username", username);
                         flag = "success";
                     } else {
                         flag = "false";

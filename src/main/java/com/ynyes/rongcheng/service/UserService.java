@@ -133,11 +133,11 @@ public class UserService {
      * @exception <BR>
      * @since  1.0.0
      */
-    public User findByUsernameAndPasswordAndRoleAndIsEnableTrue(String username,String password,String role){
-       User user= repository.findByUsernameAndPasswordAndRoleAndIsEnableTrue(username, password, role);
-    return user;
-    
-    }
+//    public User findByUsernameAndPasswordAndRoleAndIsEnableTrue(String username,String password,String role){
+//       User user= repository.findByUsernameAndPasswordAndRoleAndIsEnableTrue(username, password, role);
+//    return user;
+//    
+//    }
     /**
      * 
      * 根据用户名，角色查询<BR>
