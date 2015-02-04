@@ -16,7 +16,7 @@
 
         <ul class="submenu">
             <li>
-                <a href="elements.html">
+                <a href="/admin/product">
                     <i class="icon-double-angle-right"></i>
                     商品列表
                 </a>

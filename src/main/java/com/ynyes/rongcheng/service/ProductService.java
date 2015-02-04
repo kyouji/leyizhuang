@@ -73,6 +73,44 @@ public class ProductService {
     }
     
     /**
+     * 获取所有商品，并分页
+     * 
+     * @param page 页号，从0开始
+     * @param size 每页大小
+     * @param direction 排序方向，不区分大小写，asc表示升序，desc表示降序，为NULL时不进行排序
+     * @param property 排序的字段名，为NULL时不进行排序
+     * @return 商品列表分页
+     */
+    public Page<Product> findAll(int page,
+                                int size,
+                                String direction,
+                                String property)
+    {
+        Page<Product> productPage = null;
+        PageRequest pageRequest = null;
+        
+        if (page < 0 || size < 0)
+        {
+            return null;
+        }
+        
+        if (null == direction || null == property)
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        else
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, 
+                                 property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        
+        productPage = repository.findAll(pageRequest);
+        
+        return productPage;
+    }
+    
+    /**
      * 获取限时抢购商品，并进行分页
      * 
      * @param page 页号，从0开始
@@ -202,4 +240,28 @@ public class ProductService {
         return null;
     }
     
+    /**
+     * 删除商品
+     * 
+     * @param id 商品ID
+     */
+    public void delete(Long id)
+    {
+        if (null != id)
+        {
+            repository.delete(id);
+        }
+    }
+    
+    /**
+     * 删除商品
+     * @param product 商品
+     */
+    public void delete(Product product)
+    {
+        if (null != product)
+        {
+            repository.delete(product);
+        }
+    }
 }

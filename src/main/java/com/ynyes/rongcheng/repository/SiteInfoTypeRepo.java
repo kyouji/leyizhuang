@@ -27,4 +27,11 @@ public interface SiteInfoTypeRepo extends
     // 通过父类型
     Page<SiteInfoType> findByParentAndIsShowTrue(String parent, Pageable page);
     List<SiteInfoType> findByParentAndIsShowTrue(String parent);
+    
+    // 查找所有类型
+    List<SiteInfoType> findByIsShowTrue();
+    Page<SiteInfoType> findByIsShowTrue(Pageable page);
+    
+    // 通过名称查找
+    SiteInfoType findByName(String name);
 }

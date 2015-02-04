@@ -19,5 +19,5 @@ public interface NewsRepo extends
 		JpaSpecificationExecutor<News> 
 {
     // 按类型查找
-    Page<News> findByType(String type, Pageable page);
+    Page<News> findByTypeAndIsShowTrue(String type, Pageable page);
 }
