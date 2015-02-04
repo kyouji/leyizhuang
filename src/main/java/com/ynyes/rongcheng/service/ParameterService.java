@@ -93,12 +93,12 @@ public class ParameterService {
     }
     
     /**
-     * 新增参数
+     * 保存参数
      * 
      * @param param 要保存的参数
      * @return 返回保存后的参数
      */
-    public Parameter add(Parameter param)
+    public Parameter save(Parameter param)
     {
         return repository.save(param);
     }

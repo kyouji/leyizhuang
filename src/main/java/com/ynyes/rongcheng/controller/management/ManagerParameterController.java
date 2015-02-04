@@ -1,5 +1,8 @@
 package com.ynyes.rongcheng.controller.management;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -46,6 +49,31 @@ public class ManagerParameterController {
         {
             parameterService.delete(paramId);
         }
+    }
+    
+    @RequestMapping(value="/add",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> add(ModelMap map, Parameter param){
+        Map<String, Object> res = new HashMap<String, Object>();
+        res.put("code", 1);
+        
+        if (null == param)
+        {
+            res.put("message", "参数有误");
+            return res;
+        }
+        
+        if (null == param.getName() || "".equals(param.getName()))
+        {
+            res.put("message", "参数为空");
+            return res;
+        }
+        
+        parameterService.save(param);
+        
+        res.put("code", 0);
+        
+        return res;
     }
     
 }
