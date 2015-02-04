@@ -138,7 +138,7 @@ public class UserController {
             user.setIsMobileValidated(true);
             user.setIsEmailValidated(true);
             user.setLastLoginTime(new Date());
-            user= UserService.updateUser(user);
+            user= UserService.save(user); // 取消updateUser()函数, edit by Sharon
             if (user!=null) {
                 flag="success";
             }else {
@@ -147,7 +147,46 @@ public class UserController {
         }    
         return flag;
     }
-    
+    /**
+     * 
+     * 密码修改<BR>
+     * 方法名：updaPs<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年2月3日-下午2:20:47 <BR>
+     * @param name
+     * @param password
+     * @param newpassword
+     * @param oncepassword
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
+    @RequestMapping(value="updatePas")
+    @ResponseBody
+    public String updaPs(String name,String password,String newpassword,String oncepassword){
+        User user= UserService.findByUsername(name);
+        String msgpassword=user.getPassword();
+        if(!msgpassword.equals(StringUtils.encryption(password))){
+            flag="inputerrors";//密码输入错误
+            return flag;
+        }
+            if((StringUtils.isNotEmpty(name)  && StringUtils.isNotEmpty(password) && StringUtils.isNotEmpty(newpassword) && StringUtils.isNotEmpty(oncepassword))){
+                user.setPassword(StringUtils.encryption(oncepassword));
+                UserService.save(user); // 取消updateUser()函数, edit by Sharon
+                flag="success";
+                return flag;
+              
+            }else if(!newpassword.equals(oncepassword)){
+                   flag="coflase";
+                   return flag;
+           }else {
+               flag="flase";   
+           }
+        
+        return flag;
+    }
     //get/set
     public String getFlag() {
         return flag;

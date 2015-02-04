@@ -8,10 +8,11 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="Tm/css/manhuaTip1.1.0.css" />
+<link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
 <script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
-<script type="text/javascript" src="/Tm/js/util.js"></script>
 <script type="text/javascript" src="/Tm/js/mainTip.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/front/info.js"></script>
 </head>
 <body>
 <header>
@@ -29,9 +30,11 @@
 <div class="main mt12">
 <div class="member_lef fll"> <span class="sp55">新手入门</span>
       <ul class="haoh pt10">
-       <li><a href="/help/question/1">购物指南</a></li>
-        <li><a href="/help/question/2">常见问题</a></li>
-        <li><a href="/help/question/3">用户协议</a></li>
+       <li><a href="/order/list" >全部订单</a></li>
+        <li><a href="/order/obligation" >待付款订单</a></li>
+        <li><a href="/order/startorder">待收货订单</a></li>
+        <li><a href="/order/orderok">已完成订单</a></li>
+         <li><a href="/order/orderno" >已关闭订单</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
       <ul class="haoh pt10">
@@ -43,7 +46,7 @@
       </ul>
       <span class="mt10 sp55">客户服务</span>
       <ul class="haoh pt10 pb10">
-        <li><a href="#">帮助中心</a></li>
+        <li><a href="/help/question/1">帮助中心</a></li>
   
       </ul>
     </div>
@@ -59,12 +62,12 @@
       <table width="440" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td class="user_r_tit">*昵称： </td>
-          <td class="user_r_110"><input class="input" type="text" id="nickname" value="<#if user.nickname??>${user.nickname}</#if>"></td>
+          <td class="user_r_110"><input class="input" type="text" id="nickname" autofocus="autofocus" maxlength="20" placeholder="请输入用户名" value="<#if user.nickname??>${user.nickname}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">真实姓名：</td>
-          <td> <input class="input" type="text" id="name" value="<#if user.realName??>${user.realName}</#if>"></td>
+          <td> <input class="input" type="text" id="name"  maxlength="20" placeholder="请输入姓名" value="<#if user.realName??>${user.realName}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
@@ -83,22 +86,22 @@
         </tr>
         <tr>
           <td class="user_r_tit">详细地址：</td>
-          <td><input class="input" type="text" id="address" value="<#if user.detailAddress??>${user.detailAddress}</#if>"></td>
+          <td><input class="input" type="text" id="address"  maxlength="20" placeholder="请输入详细地址" value="<#if user.detailAddress??>${user.detailAddress}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">电子邮件：</td>
-          <td> <input class="input" type="text" id="email" value="<#if user.email??>${user.email}</#if>"></td>
+          <td> <input class="input" type="text" id="email"  maxlength="20" placeholder="rongcheng@qq.com" value="<#if user.email??>${user.email}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">手机号码：</td>
-          <td><input class="input" type="text" id="mobile" value="<#if user.mobile??>${user.mobile}</#if>"></td>
+          <td><input class="input" type="text" id="mobile"  maxlength="11" placeholder="请输入手机号码" value="<#if user.mobile??>${user.mobile}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">联系QQ：</td>
-          <td><input class="input" type="text" id="qq" value="<#if user.qq??>${user.qq}</#if>"></td>
+          <td><input class="input" type="text" id="qq"  maxlength="16" placeholder="请输入QQ" value="<#if user.qq??>${user.qq}</#if>"></td>
           <td>&nbsp;</td>
         </tr>
         <!--<tr>

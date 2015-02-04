@@ -23,7 +23,7 @@ DD_belatedPNG.fix('.,img,background');
 <header>
 <div class="main">
 <div class="fll header_l"><span>您好，欢迎来到荣诚手机超市！<a href="/login" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="/reg">免费注册</a></span></div>
-<div class="flr header_r"><a href="/user/collect">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="/order/list">我的订单</a><a href="#">帮助中心</a><a href="#">收藏本站</a></div>
+<div class="flr header_r"><a href="/user/collect">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="/order/list">我的订单</a><a href="/help/question/1">帮助中心</a><a href="#">收藏本站</a></div>
 </div>
 </header>
 
@@ -94,10 +94,10 @@ DD_belatedPNG.fix('.,img,background');
 <ul>
 <li><a href="/" title="首页">首页</a></li>
 <li><a href="/list/1" title="明星产品">明星产品</a></li>
-<li><a href="#" title="手机产品">手机产品</a></li>
-<li><a href="#" title="手机配件">手机配件</a></li>
-<li><a href="#" title="靓号选择">靓号选择</a></li>
-<li><a href="#" title="新闻资讯">新闻资讯</a></li>
+<li><a href="/list/2" title="手机产品">手机产品</a></li>
+<li><a href="/list/3" title="手机配件">手机配件</a></li>
+<li><a href="/list/4" title="靓号选择">靓号选择</a></li>
+<li><a href="/list/5" title="新闻资讯">新闻资讯</a></li>
 </ul>
 </div>
 
@@ -110,9 +110,9 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="news_lanmu1">
 <ul>
-<li><a href="#">手机资讯</a></li>
-<li><a href="#" >手机发烧友</a></li>
-<li style="border:none;"><a href="#" class="news_lanmu1xz">新闻视频</a></li>
+<li><a href="/news/1">手机资讯</a></li>
+<li><a href="/news/2" >手机发烧友</a></li>
+<li style="border:none;"><a href="/news/3" class="news_lanmu1xz">新闻视频</a></li>
 </ul>
 </div></div>
 

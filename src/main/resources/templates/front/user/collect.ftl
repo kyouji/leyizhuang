@@ -34,9 +34,11 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main mt12">
 <div class="member_lef fll"> <span class="sp55">新手入门</span>
       <ul class="haoh pt10">
-       <li><a href="/help/question/1">购物指南</a></li>
-        <li><a href="/help/question/2">常见问题</a></li>
-        <li><a href="/help/question/3">用户协议</a></li>
+       <li><a href="/order/list" >全部订单</a></li>
+        <li><a href="/order/obligation" >待付款订单</a></li>
+        <li><a href="/order/startorder">待收货订单</a></li>
+        <li><a href="/order/orderok">已完成订单</a></li>
+         <li><a href="/order/orderno" >已关闭订单</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
       <ul class="haoh pt10">
@@ -48,7 +50,7 @@ DD_belatedPNG.fix('.,img,background');
       </ul>
       <span class="mt10 sp55">客户服务</span>
       <ul class="haoh pt10 pb10">
-        <li><a href="#">帮助中心</a></li>
+        <li><a href="/help/question/1">帮助中心</a></li>
   
       </ul>
     </div>

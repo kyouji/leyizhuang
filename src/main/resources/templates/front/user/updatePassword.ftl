@@ -8,15 +8,11 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
+<link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
+<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/front/uppass.js"></script>
 </head>
 <body>
 <header>
@@ -34,9 +30,11 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main mt12">
 <div class="member_lef fll"> <span class="sp55">新手入门</span>
       <ul class="haoh pt10">
-        <li><a href="/help/question/1">购物指南</a></li>
-        <li><a href="/help/question/2">常见问题</a></li>
-        <li><a href="/help/question/3">用户协议</a></li>
+        <li><a href="/order/list" >全部订单</a></li>
+        <li><a href="/order/obligation" >待付款订单</a></li>
+        <li><a href="/order/startorder">待收货订单</a></li>
+        <li><a href="/order/orderok">已完成订单</a></li>
+         <li><a href="/order/orderno" >已关闭订单</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
       <ul class="haoh pt10">
@@ -48,14 +46,14 @@ DD_belatedPNG.fix('.,img,background');
       </ul>
       <span class="mt10 sp55">客户服务</span>
       <ul class="haoh pt10 pb10">
-        <li><a href="#">帮助中心</a></li>
+        <li><a href="/help/question/1">帮助中心</a></li>
   
       </ul>
     </div>
 
 <div class="flr right">
 <div class="list_banner1">
-<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="javascript:void(0)">用户中心</a>&gt;<a href="javascript:void(0)">密码修改</a>&gt; </div>
         
         
         
@@ -63,34 +61,26 @@ DD_belatedPNG.fix('.,img,background');
       <table width="440" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td class="user_r_tit">原密码： </td>
-          <td class="user_r_110"><input class="input" type="text"></td>
+          <td class="user_r_110"><input class="input" id="password" type="password" autofocus="autofocus" maxlength="20" placeholder="请输入密码,8-16位, 允许数字、大小写英文字母、下划线以及常用英文符号"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">新密码：</td>
-          <td> <input class="input" type="text"></td>
+          <td> <input class="input" type="password" id="newpassword"  maxlength="20" placeholder="请输入密码,8-16位, 允许数字、大小写英文字母、下划线以及常用英文符号"></td>
           <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="user_r_tit">再次输入：</td>
-          <td> <input class="input" type="text"></td>
+          <td> <input class="input" type="password" id="oncepassword" maxlength="20" placeholder="请输入密码,8-16位, 允许数字、大小写英文字母、下划线以及常用英文符号"></td>
           <td>&nbsp;</td>
         </tr>
-       
-        <tr>
-            <td class="user_r_tit">验证码：</td>
-            <td><input type="text" class="user_r_txt_input2" />
-              <img src="images/codeImg.jpg" width="100" height="24" /></td>
-            <td>&nbsp;</td>
-          </tr>
         <tr>
           <td class="user_r_tit"></td>
-          <td><input type="submit" class="user_r_btn" value="确认修改" /></td>
-          <td>&nbsp;</td>
+          <td><input type="button" class="user_r_btn" value="确认修改" onclick="tm_update(this)"/></td>
+          <td>&nbsp;<input type="hidden" value="${user.username}" id="hname"></td>
         </tr>
       </table>
     </div>
-        
         
         
     
@@ -117,26 +107,5 @@ DD_belatedPNG.fix('.,img,background');
 
 </div>
 
-
-
-
-
-
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

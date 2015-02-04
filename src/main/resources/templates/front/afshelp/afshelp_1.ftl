@@ -25,7 +25,7 @@
     <div class="main mt12">
 <div class="member_lef fll"> <span class="sp55">新手入门</span>
       <ul class="haoh pt10">
-        <li><a href="/help/question/1"  >购物指南</a></li>
+        <li><a href="/help/question/1">购物指南</a></li>
         <li><a href="/help/question/2">常见问题</a></li>
         <li><a href="/help/question/3">用户协议</a></li>
       </ul>

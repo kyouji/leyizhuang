@@ -99,3 +99,22 @@ function is_passwd_s(str)
     var regExp = /^[\w\~\`\'\"\;\:\@\#\%\,\/\!\$\^\&\*\(\)\-\+\=\{\}\[\]\>\<\.\?\|\\]{8,18}$/;
     return regExp.test(str);
 }
+
+/* 
+用途：检查输入对象的值是否符合E-Mail格式 
+输入：str 输入的字符串 
+返回：如果通过验证返回true,否则返回false 
+
+*/ 
+function isEmail( str ){  
+var myReg = /^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/; 
+if(myReg.test(str)) return true; 
+return false; 
+} 
+
+//验证腾讯QQ号，支持4-13位    
+function is_QQNum(str)
+{
+    var regExp = /^[1-9][0-9]{4,13}$/;
+    return regExp.test(str);
+}

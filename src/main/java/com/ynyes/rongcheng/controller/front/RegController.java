@@ -64,34 +64,35 @@ public class RegController {
     public String saveUser(String name,String mobile,String password,String newpassword,String verify,HttpServletRequest request){
         User user=null;
         String msg = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
-        user= UserService.findByUsername(name, "普通会员");
-        if(user!=null){
-            flag="Already ";//已经存在
-            return flag;
-        }
-            if(StringUtils.isNotEmpty(name) && StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(password) && StringUtils.isNotEmpty(newpassword)){
-                if(password==newpassword || password.equals(newpassword)){
-                      if(verify.equalsIgnoreCase(msg)){
-                        user=new User();
-                        user.setUsername(name);
-                        user.setMobile(mobile);
-                        user.setPassword(StringUtils.encryption(password));
-                        user.setRole("普通会员");
-                        user.setIsEnable(true);
-                        user.setRegisterTime(new Date());
-                        UserService.saveUser(user);
-                        request.getSession().setAttribute("user", user);
-                        flag="success";
-                    }else{
-                        flag="vfalse";//验证码失败
-                    }
-                }else{
-                    flag="erroe";//两次输入的密码不一致
-                }
-            }else{
-                flag="false";//失败
-            }
-        
+//        UserService.add(username, newpassword, mobile)
+//        user= UserService.findByUsername(name, "普通会员");
+//        if(user!=null){
+//            flag="Already ";//已经存在
+//            return flag;
+//        }
+//            if(StringUtils.isNotEmpty(name) && StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(password) && StringUtils.isNotEmpty(newpassword)){
+//                if(password==newpassword || password.equals(newpassword)){
+//                      if(verify.equalsIgnoreCase(msg)){
+//                        user=new User();
+//                        user.setUsername(name);
+//                        user.setMobile(mobile);
+//                        user.setPassword(StringUtils.encryption(password));
+//                        user.setRole("普通会员");
+//                        user.setIsEnable(true);
+//                        user.setRegisterTime(new Date());
+//                        UserService.saveUser(user);
+//                        request.getSession().setAttribute("user", user);
+//                        flag="success";
+//                    }else{
+//                        flag="vfalse";//验证码失败
+//                    }
+//                }else{
+//                    flag="erroe";//两次输入的密码不一致
+//                }
+//            }else{
+//                flag="false";//失败
+//            }
+//        
        
         return flag;
     }
