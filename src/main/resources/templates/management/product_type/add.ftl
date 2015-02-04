@@ -23,23 +23,25 @@
 
         <div class="space-4"></div>
         
-        <div id="new-property" class="col-sm-12" style="margin-top:10px;">
+        <input type="text" id="propIds" name="propIds" style="display:none;" />
+        <div class="col-sm-12" style="margin-top:10px;">
             <label class="col-sm-1 control-label no-padding-right" for="destinationUri">*关联属性</label>
-            <div id="property-show" class="col-sm-11">
-                <div class="col-sm-3">
-                    <a class="icon-plus col-sm-1" style="line-height:34px;"></a>
-                    <select class="col-sm-9" id="prop-type-select">
-                        <option value="">请选择</option>
-                        <#list param_type_list as param_type>
-                            <option value="${param_type}">${param_type}</option>
-                        </#list>
-                    </select>
-                </div>
-                <div class="param-list col-sm-9">
-                    <a href="javascript:void(0)" class="add multiSelectProp">测试</a>
+            <div class="col-sm-11">
+                <a class="icon-plus col-sm-1" style="line-height:34px;"></a>
+                
+                <div id="new-property" class="col-sm-11">
+                    <div class="col-sm-12">
+                        <select class="col-sm-1 prop-type-select">
+                            <option value="">请选择</option>
+                            <#list param_type_list as param_type>
+                                <option value="${param_type}">${param_type}</option>
+                            </#list>
+                        </select>
+                        <div class="param-list col-sm-11">
+                        </div>
+                    </div>
                 </div>
             </div>
-            
         </div>
         
         <div class="col-sm-12" style="margin-top:10px;">

@@ -1,5 +1,11 @@
 jQuery(function($) {
-	
+    
+    // 返回上一级
+    $(".back").click(function(){
+        $("#id-table").siblings().addClass("hide");
+        $("#id-table").removeClass("hide");
+    });
+    
 	// 每页数量
 	var pageSize = 5;
 	
@@ -31,30 +37,53 @@ jQuery(function($) {
 		$("#id-add").removeClass("hide");
 	});
 	
+	var props = $("#new-property").html();
+	
 	// 点击加号添加属性
 	$("a.icon-plus").click(function(){
-	    $("#new-property").append($("#property-show").html());
-	    
-	});
+	    $("#new-property").append(props);
+
+	    // 选择完属性类型
+	    $(".prop-type-select").change(function(){
+	        var propDiv = $(this);
+	        
+	        $.ajax({
+	            url: '/admin/product/type/param/add/' + $(this).val(),
+	            type: 'POST',
+	            success: function (data) {
+	                propDiv.siblings().eq(0).html(data);
+	                
+	                // 点击属性
+	                propDiv.siblings().find(".add.multiSelectProp").click(function(){
+	                    $(this).toggleClass("spon");
+	                });
+	            }
+	        }); // ajax
+	    }); // change
+	}); // click
 	
 	// 选择完属性类型
-	$("#prop-type-select").change(function(){
+	$(".prop-type-select").change(function(){
 	    var propDiv = $(this);
 	    
 	    $.ajax({
-            url: '/admin/product/type/param/'+$(this).val(),
+            url: '/admin/product/type/param/add/' + $(this).val(),
             type: 'POST',
             success: function (data) {
-                propDiv.parent().siblings().eq(0).html(data);
+                propDiv.siblings().eq(0).html(data);
+                
+                // 点击属性
+                $(".add.multiSelectProp").click(function(){
+                    $(this).toggleClass("spon");
+                });
             }
-        });
-	});
+        }); // ajax
+	}); // change
 	
 	// 提交
 	$("#add-submit").click(function(){
-	    /*
-		var typeStr = "";
-		var types = $(".add.selectProp");
+	    var propStr = "";
+		var props = $(".add.multiSelectProp.spon");
 		
 		if ("" == $("#name").val())
 		{
@@ -63,37 +92,25 @@ jQuery(function($) {
 		}
 	
 		var i;
-		for (i=0; i<types.length; i++)
+		for (i=0; i<props.length; i++)
 		{
-			if (types.eq(i).hasClass("spon"))
+			var str = props.eq(i).attr("value");
+			if ("" != str)
 			{
-				var str = types.eq(i).html();
-				if ("" != str)
-				{
-					typeStr += str;
-					typeStr += ",";
-				}
+			    propStr += str;
+			    propStr += ",";
 			}
 		}
+
+        $("#propIds").val(propStr);
 		
-		if ("" == typeStr)
-		{
-			alert("请选择关联类型");
-			return;
-		}
-		
-		$("#type").val(typeStr);
-		
-		var formData = new FormData($('#fm-add')[0]);
+		var data = $('#fm-add').serialize();
         
         $.ajax({
-            url: '/admin/goods/prop/2/save',
+            url: '/admin/product/type/save',
             type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
+            dataType: "json", 
+            data: data,
             success: function (res) {
                 
                 if (0 == res.code)
@@ -107,13 +124,7 @@ jQuery(function($) {
                 }
             }
         });
-        */
-	});
-	
-	// 返回上一级
-	$(".back").click(function(){
-		$("#id-table").siblings().addClass("hide");
-		$("#id-table").removeClass("hide");
+		
 	});
    
 });
@@ -121,18 +132,10 @@ jQuery(function($) {
 // 修改
 function modify(id) 
 {
-    /*
-	var formData = new FormData();
-	formData.append("id", id);
-	
+    
 	$.ajax({
-        url: '/admin/goods/prop/2/modify',
+        url: '/admin/product/type/modify/' + id,
         type: 'POST',
-        data: formData,
-        async: false,
-        cache: false,
-        contentType: false,
-        processData: false,
         success: function (data) {
         	$("#id-modify").siblings().addClass("hide");
         	$("#id-modify").html(data);
@@ -144,54 +147,86 @@ function modify(id)
         		$("#id-table").removeClass("hide");
         	});
         	
-            // 选择关联类型
-            $(".selectProp").click(function(){
+        	// 点击属性
+            $(".modify.multiSelectProp").click(function(){
                 $(this).toggleClass("spon");
             });
             
-            // 提交
-        	$("#modify-submit").click(function(){
-        		var typeStr = "";
-        		var types = $(".modify.selectProp");
-        		
-        		if ("" == $("#m-name").val())
-        		{
-        			alert("请填写名称");
-        			return;
-        		}
-        	
-        		var i;
-        		for (i=0; i<types.length; i++)
-        		{
-        			if (types.eq(i).hasClass("spon"))
-        			{
-        				var str = types.eq(i).html();
-        				if ("" != str)
-        				{
-        					typeStr += str;
-        					typeStr += ",";
-        				}
-        			}
-        		}
-        		
-        		if ("" == typeStr)
-        		{
-        			alert("请选择关联类型");
-        			return;
-        		}
-        		
-        		$("#m-type").val(typeStr);
-        		
-        		var formData = new FormData($('#fm-modify')[0]);
+        	var props = $("#modify-property").html();
+            
+            // 点击加号添加属性
+            $("a.icon-plus").click(function(){
+                $("#modify-property").append(props);
+
+                // 选择完属性类型
+                $(".prop-type-select").change(function(){
+                    var propDiv = $(this);
+                    
+                    $.ajax({
+                        url: '/admin/product/type/param/modify/' + $(this).val(),
+                        type: 'POST',
+                        success: function (data) {
+                            propDiv.siblings().eq(0).html(data);
+                            
+                            // 点击属性
+                            propDiv.siblings().find(".multiSelectProp").click(function(){
+                                $(this).toggleClass("spon");
+                            });
+                        }
+                    }); // ajax
+                }); // change
+            }); // click
+            
+            // 选择完属性类型
+            $(".prop-type-select").change(function(){
+                var propDiv = $(this);
                 
                 $.ajax({
-                    url: '/admin/goods/prop/2/save',
+                    url: '/admin/product/type/param/modify/' + $(this).val(),
                     type: 'POST',
-                    data: formData,
-                    async: false,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
+                    success: function (data) {
+                        propDiv.siblings().eq(0).html(data);
+                        
+                        // 点击属性
+                        propDiv.siblings().find(".multiSelectProp").click(function(){
+                            $(this).toggleClass("spon");
+                        });
+                    }
+                }); // ajax
+            }); // change
+        	
+            
+            // 提交
+        	$("#modify-submit").click(function(){
+        	    var propStr = "";
+                var props = $(".modify.multiSelectProp.spon");
+                
+                if ("" == $("#m-name").val())
+                {
+                    alert("请填写名称");
+                    return;
+                }
+            
+                var i;
+                for (i=0; i<props.length; i++)
+                {
+                    var str = props.eq(i).attr("value");
+                    if ("" != str && -1 == propStr.indexOf(str+","))
+                    {
+                        propStr += str;
+                        propStr += ",";
+                    }
+                }
+
+                $("#m-propIds").val(propStr);
+                
+                var data = $('#fm-modify').serialize();
+                
+                $.ajax({
+                    url: '/admin/product/type/save',
+                    type: 'POST',
+                    dataType: "json", 
+                    data: data,
                     success: function (res) {
                         
                         if (0 == res.code)
@@ -204,32 +239,26 @@ function modify(id)
                             alert(res.message);
                         }
                     }
-                });
-        	});
+                });// ajax
+        	}); // modify-submit
         }
     });
-    */
 }
 
 // 删除
 function destroy(id) 
 {
-    /*
 	if(window.confirm('确定要删除吗？')){
-		var formData = new FormData();
-		formData.append("id", id);
 		
 		$.ajax({
-	        url: '/admin/goods/prop/2/delete',
+	        url: '/admin/product/type/delete/' + id,
 	        type: 'POST',
 	        success: function () {
 	        	location.reload();
 	        }
 	    });
-		
 		return true;
     }else{
         return false;
     }
-    */
 }
