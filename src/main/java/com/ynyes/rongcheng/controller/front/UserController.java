@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.rongcheng.entity.ShippingAddress;
 import com.ynyes.rongcheng.entity.User;
+import com.ynyes.rongcheng.service.ShippingAddressService;
 import com.ynyes.rongcheng.service.UserService;
 import com.ynyes.rongcheng.util.StringUtils;
 
@@ -28,7 +30,8 @@ import com.ynyes.rongcheng.util.StringUtils;
 public class UserController {
     @Autowired
     private UserService UserService;
-    
+    @Autowired
+    private ShippingAddressService shippingAddressService;
     private String flag;
     /**
      * 
@@ -75,7 +78,9 @@ public class UserController {
      * @since  1.0.0
      */
     @RequestMapping("/address")
-    public String address(){
+    public String address(HttpServletRequest request){
+        User user=(User) request.getSession().getAttribute("user");
+        shippingAddressService.findOne(user.getId());
         return "/front/user/address";
     }
     /**
@@ -186,6 +191,10 @@ public class UserController {
            }
         
         return flag;
+    }
+    public String saveAddress(){
+        return flag;
+        
     }
     //get/set
     public String getFlag() {
