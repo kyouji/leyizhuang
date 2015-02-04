@@ -120,25 +120,26 @@
 		<!-- inline scripts related to this page -->
         <script src="/js/manager/parameter.js"></script>
         
+        <!--param_add.ftl中的参数提交   zackma-->
         <script type="text/javascript">
             $(function(){
-                $("add-smbmit").click(function(){
+                $("#add-submit").click(function(){
                     var type = $("form #type").val();
                     var name = $("form #name").val();
-                    var input_type = $("form #input_type:select").val();
+                    var input_type = $("form #input_type:selected").val();
                     var isSearchable = $("#searchable:checked").val();
                     var isSingleValue = $("#multiple:checked").val();
                     var valueList = $("form #param_list").val();
-                    if(isEmpty(type)||isEmpty(name)||isEmpty(input_type)||isEmpty(isSearchable)||isEmpty(isSingleValue)||isEmpty(valueList)){
+                    if(type==""||name==""||input_type==""||isSearchable==""||isSingleValue==""||valueList==""){
 			            alert("请填写完整参数！");
 			        return;
 		            }
                     
-                    var subDate = {"type":type,"name":name,"input_type":input_type,"isSearchable":isSearchable,"isSingleValue":isSingValue,"valueList":valueList};
+                    var subDate = {"type":type,"name":name,"input_type":input_type,"isSearchable":isSearchable,"isSingleValue":isSingleValue,"valueList":valueList};
                     $.ajax({
-			            type:"post",
+			            type:"POST",
 			            url:"/admin/parameter/save",
-			            data:subData,
+			            data:subDate,
 			            success:function(data){
 				        alert("提交成功");
 			            }
