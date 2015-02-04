@@ -1,5 +1,9 @@
 package com.ynyes.rongcheng.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -78,6 +82,7 @@ public class ShoppingOrderService {
      * @param page 页号
      * @param size 每页大小
      * @param direction 排序方向 asc:升序 desc:降序
+     * @param property 排序的字段名
      * @return 订单分页，参数错误时返回NULL
      */
     public Page<ShoppingOrder> findByUsername(String username, 
@@ -158,5 +163,107 @@ public class ShoppingOrderService {
         {
             repository.delete(so);
         }
+    }
+    
+    /**
+     * 查找下单时间在date之后的指定用户的订单
+     * 
+     * @param username 用户名
+     * @param date 下单时间
+     * @param page 页号，从0开始
+     * @param size 每页大小
+     * @param direction 排序方向 asc:升序 desc:降序
+     * @param property 排序的字段名
+     * @return 相应的订单页面
+     */
+    public Page<ShoppingOrder> findByUsernameAndOrderTimeAfter(String username, 
+                                                               Date date,
+                                                               int page,
+                                                               int size,
+                                                               String direction,
+                                                               String property)
+    {
+        Page<ShoppingOrder> orderPage = null;
+        PageRequest pageRequest = null;
+        
+        if (null == username)
+        {
+            return null;
+        }
+        
+        if (page < 0 || size < 0)
+        {
+            return null;
+        }
+        
+        if (null == direction || null == property)
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        else
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, 
+                                 property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        
+        orderPage = repository.findByUsernameAndOrderTimeAfter(username, date, pageRequest);
+        
+        return orderPage;
+    }
+    
+    /**
+     * 查找指定个月之内的订单
+     * 
+     * @param username 用户名
+     * @param month 指定几个月内的订单，取值为[1~12]，例如：该值为1时，表示获取距今一个月以内的订单
+     * @param page 页号，从0开始
+     * @param size 每页大小
+     * @param direction 排序方向 asc:升序 desc:降序
+     * @param property 排序的字段名
+     * @return 相应的订单页面
+     */
+    public Page<ShoppingOrder> findByUsernameInMonth(String username, 
+                                                    int month,
+                                                    int page,
+                                                    int size,
+                                                    String direction,
+                                                    String property)
+    {
+        Page<ShoppingOrder> orderPage = null;
+        PageRequest pageRequest = null;
+
+        if (null == username) {
+            return null;
+        }
+        
+        if (month < 1 || month > 12)
+        {
+            return null;
+        }
+
+        if (page < 0 || size < 0) {
+            return null;
+        }
+
+        if (null == direction || null == property) {
+            pageRequest = new PageRequest(page, size);
+        } else {
+            Sort sort = new Sort(
+                    direction.equalsIgnoreCase("asc") ? Direction.ASC
+                            : Direction.DESC, property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        
+        Date current = new Date();
+
+        Calendar calendar = Calendar.getInstance();//日历对象
+        calendar.setTime(current);              //设置当前日期
+        calendar.add(Calendar.MONTH, 0 - month); //月份减
+
+        orderPage = repository.findByUsernameAndOrderTimeAfter(username, calendar.getTime(),
+                pageRequest);
+
+        return orderPage;
     }
 }

@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -78,14 +80,14 @@ public class UserController {
      * @since  1.0.0
      */
     @RequestMapping("/address")
-    public String address(HttpServletRequest request){
+    public String address(HttpServletRequest request,ModelMap map){
         User user=(User) request.getSession().getAttribute("user");
-       request.setAttribute("address",shippingAddressService.findOne(user.getId()));
+       map.addAttribute("address",UserService.findShippingAddressList(user.getUsername()));
         return "/front/user/address";
     }
     /**
      * 
-     * 跳转我的收藏<BR>
+     * 跳转我的收藏,获取收藏列表<BR>
      * 方法名：collect<BR>
      * 创建人：guozhengyang <BR>
      * 时间：2015年1月29日-下午4:44:01 <BR>
@@ -96,7 +98,14 @@ public class UserController {
      * @since  1.0.0
      */
     @RequestMapping("/collect")
-    public String collect(){
+    public String collect(HttpServletRequest request,ModelMap modelMap){
+       User user= (User) request.getSession().getAttribute("user");
+       String content=user.getCollectedProductIds();
+       if(StringUtils.isEmpty(content)){
+           return "/front/user/collect";
+       }else{
+           modelMap.addAttribute("collectedProductIds", UserService.findCollectedProducts(user.getUsername()));
+       }
         return "/front/user/collect";
     }
     /**
@@ -112,7 +121,9 @@ public class UserController {
      * @since  1.0.0
      */
     @RequestMapping("/point")
-    public String integral(){
+    public String integral(HttpServletRequest request,Model model){
+        User user =(User) request.getSession().getAttribute("user");
+       model.addAttribute("Points", UserService.findPointsList(user.getUsername()));
         return "/front/user/integral";
     }
     /**
@@ -132,7 +143,6 @@ public class UserController {
     public String updainfo(String nickname,String id,String realName,String sex,String detailAddress,String email,String mobile,String qq,HttpServletRequest request){
         User user=(User)request.getSession().getAttribute("user");
         if(StringUtils.isNotEmpty(id)){
-          
             user.setNickname(nickname);
             user.setRealName(realName);
             user.setSex(sex);
@@ -192,6 +202,20 @@ public class UserController {
         
         return flag;
     }
+    /**
+     * 
+     * 保存收货地址<BR>
+     * 方法名：saveAddress<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年2月4日-下午2:38:42 <BR>
+     * @param address
+     * @param request
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
     @RequestMapping(value="/saveaddress",method=RequestMethod.POST)
     @ResponseBody
     public String saveAddress(ShippingAddress address,HttpServletRequest request){
@@ -215,5 +239,45 @@ public class UserController {
     public void setFlag(String flag) {
         this.flag = flag;
     }
-    
+    /**
+     * 
+     * 删除地址<BR>
+     * 方法名：deleteaddres<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年2月4日-下午2:40:42 <BR>
+     * @param id
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
+    @RequestMapping("/addressdelete")
+    @ResponseBody
+    public String deleteaddres(Long id){
+        shippingAddressService.delete(id);
+        return flag="success";
+    }
+    /**
+     * 
+     * 删除收藏<BR>
+     * 方法名：deleteContent<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年2月4日-下午4:31:54 <BR>
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
+    @RequestMapping("/delcontent")
+    @ResponseBody
+    public String deleteContent(HttpServletRequest request){
+        User user =(User) request.getSession().getAttribute("user");
+        if(user!=null){
+            UserService.deleteCollectedProductId(user.getUsername(), Long.parseLong(user.getCollectedProductIds()));
+            flag="success";
+        }
+        return flag;
+        }
 }

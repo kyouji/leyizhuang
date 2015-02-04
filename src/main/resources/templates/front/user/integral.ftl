@@ -8,15 +8,6 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
 </head>
 <body>
 <header>
@@ -57,7 +48,7 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="flr right">
 <div class="list_banner1">
-<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="javascript:void(0)">个人中心</a>&gt;<a href="javascript:void(0)">我的积分</a>&gt; </div>
         
         
         
@@ -79,31 +70,16 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="gwc1_lm255">
 <table>
+<#if Points??>
+<#list Points as point>
 <tr>
-<td  width="20%" class="gwc1_lm2_a155">2014-12-25 16:54:48</td>
-<td  width="15%" class="gwc1_lm2_b155"><span>+20</span></td>
-<td  width="40%" class="gwc1_lm2_c155"><p><a href="#">绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆500g一袋 全店满158减10 高端干货送礼佳品</a></p></td></td>
-<td  width="25%" class="gwc1_lm2_b155"><span>购物订单完成奖励京豆（订单号6154693628等）2</span></td>
+<td  width="20%" class="gwc1_lm2_a155"><#if point.time??>${point.time}</#if></td>
+<td  width="15%" class="gwc1_lm2_b155"><span>+<#if point.points??>${point.points}</#if></span></td>
+<td  width="40%" class="gwc1_lm2_c155"><p><a href="#"><#if point.shoppingOrderNumber??>${point.shoppingOrderNumber}</#if></a></p></td></td>
+<td  width="25%" class="gwc1_lm2_b155"><span><#if point.detail??>${point.detail}</#if></span></td>
 </tr>
-<tr>
-<td  width="20%" class="gwc1_lm2_a155">2014-12-25 16:54:48</td>
-<td  width="15%" class="gwc1_lm2_b155"><span>+20</span></td>
-<td  width="40%" class="gwc1_lm2_c155"><p><a href="#">绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆500g一袋 全店满158减10 高端干货送礼佳品</a></p></td></td>
-<td  width="25%" class="gwc1_lm2_b155"><span>购物订单完成奖励京豆（订单号6154693628等）2</span></td>
-</tr>
-<tr>
-<td  width="20%" class="gwc1_lm2_a155">2014-12-25 16:54:48</td>
-<td  width="15%" class="gwc1_lm2_b155"><span>+20</span></td>
-<td  width="40%" class="gwc1_lm2_c155"><p><a href="#">绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆500g一袋 全店满158减10 高端干货送礼佳品</a></p></td></td>
-<td  width="25%" class="gwc1_lm2_b155"><span>购物订单完成奖励京豆（订单号6154693628等）2</span></td>
-</tr>
-<tr>
-<td  width="20%" class="gwc1_lm2_a155">2014-12-25 16:54:48</td>
-<td  width="15%" class="gwc1_lm2_b155"><span>+20</span></td>
-<td  width="40%" class="gwc1_lm2_c155"><p><a href="#">绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆500g一袋 全店满158减10 高端干货送礼佳品</a></p></td></td>
-<td  width="25%" class="gwc1_lm2_b155"><span>购物订单完成奖励京豆</span></td>
-</tr>
-
+</#list>
+</#if>
 </table>
 </div>
 </div>    
@@ -111,104 +87,7 @@ DD_belatedPNG.fix('.,img,background');
     
     
     <div class="sx_list5 mt15">
-      <ul>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-<li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <p style="text-decoration:line-through;">荣诚原价：￥699</p>  
-          <b>￥5900.00<span>+50积分</span></b></a>
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a></p>
-        </li>
-      </ul>
+     
       <div class="clear"></div>
       <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="/">首页</a> <a href="#">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="#">下一页</a> <a href="#">尾页</a> </div>
     </div>
