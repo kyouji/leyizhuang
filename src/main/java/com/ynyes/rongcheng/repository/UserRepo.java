@@ -18,5 +18,6 @@ public interface UserRepo extends
 {
     // 通过用户名查找
     User findByUsername(String username);
+    User findByUsernameAndPassword(String username, String password);
     User findByUsernameAndRoleAndIsEnableTrue(String username, String role);
 }
