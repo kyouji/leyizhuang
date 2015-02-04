@@ -81,7 +81,7 @@
 			<tbody id="tbody">
 				<tr class="tr_td">
 					<td width="8%"><input type="radio" name="rad"></td>
-					<td width="10%">郭正洋</td>
+					<td width="10%">${address.detailAddress}</td>
 					<td width="20%">云南省曲靖市麒麟区</td>
 					<td width="8%">655000</td>
 					<td width="18%">18817591257</td>

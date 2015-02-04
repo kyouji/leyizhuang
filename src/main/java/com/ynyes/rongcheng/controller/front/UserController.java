@@ -1,7 +1,6 @@
 package com.ynyes.rongcheng.controller.front;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -80,8 +79,8 @@ public class UserController {
      */
     @RequestMapping("/address")
     public String address(HttpServletRequest request){
-//        User user=(User) request.getSession().getAttribute("user");
-//        shippingAddressService.findOne(user.getId());
+        User user=(User) request.getSession().getAttribute("user");
+       request.setAttribute("address",shippingAddressService.findOne(user.getId()));
         return "/front/user/address";
     }
     /**
@@ -197,6 +196,7 @@ public class UserController {
     @ResponseBody
     public String saveAddress(ShippingAddress address,HttpServletRequest request){
         User user=(User) request.getSession().getAttribute("user");
+        user=UserService.findById(user.getId());
        ShippingAddress shippingAddress =shippingAddressService.save(address);
        user.getShippingAddressList().add(address);
        UserService.save(user);

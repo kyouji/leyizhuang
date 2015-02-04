@@ -646,6 +646,14 @@ public class UserService {
         }
         return repository.save(user);
     }
-    
+    /**
+     * id
+     * 
+     * @param user 要保存的用户
+     * @return 保存的用户
+     */
+    public User findById(Long id){
+        return repository.findById(id);
+    }
     
 }
