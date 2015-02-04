@@ -46,10 +46,12 @@ public class OrderController {
     	//根据当前状态获取数据并返回
         User user=(User) req.getSession().getAttribute("user");
         System.out.println(user.getUsername());
+      
         Page<ShoppingOrder> so=shoppingOrderService.findByUsername(user.getUsername(), 0, 15, null, null);
-        model.addAttribute("all_user",so);
+        model.addAttribute("all_user_info",so.getContent());   //so.getContent()是将当前对象默认变为list
         return "/front/order/orderlist";
     }
+    
     /**
      * 
      * 待付款页面<BR>
