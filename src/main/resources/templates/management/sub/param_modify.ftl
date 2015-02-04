@@ -1,11 +1,11 @@
-<div id="id-add" class="hide">
+<div id="id-modify">
     <div class="form-group">
         <a href="javascript:void(0)" class="back btn btn-default btn-sm">返回上一级</a> 
     </div>
 
     <div class="space-4"></div>
  
-    <form id="fm-add" class="form-horizontal" method="POST" >
+    <form id="fm-modify" class="form-horizontal" method="POST" >
         <input type="text" name="type" value="" class="hide" />
         <div class="col-sm-12"  style="margin-top: 10px;">
             <div class="addinput-form">
@@ -89,7 +89,7 @@
         
         <div class="col-sm-12"  style="margin-top: 10px;">
             <div class="col-sm-10"></div>
-            <a href="javascript:void(0)" id="add-submit" class="btn btn-success btn-sm col-sm-1">提交</a> 
+            <a href="javascript:void(0)" id="m-submit" class="btn btn-success btn-sm col-sm-1">提交</a> 
         </div>
     </form>
 </div><!-- dialog -->      

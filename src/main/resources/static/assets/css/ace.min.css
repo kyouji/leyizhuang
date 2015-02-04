@@ -1296,7 +1296,7 @@ blockquote,blockquote.pull-right {
 }
 
 .ace-nav {
-	/*height: 100%;*/
+	height: 100%;
 	margin: 0!important
 }
 
@@ -7022,7 +7022,16 @@ th .lbl:only-child,td .lbl:only-child {
 	font-size: 14px;
 	line-height: 38px;
 	padding-left: 12px;
-	margin-bottom: 1px;
+	margin-bottom: 3px;
+	float:left;
+	height:38px;
+	width:100%;
+}
+
+.table-header a{
+	float:left;
+	height:38px;
+	line-height:24px;
 }
 
 
@@ -15541,3 +15550,8 @@ th[aria-selected=true] .ui-jqgrid-sortable {
 	clear:both;
 }
 /*clear float*/
+
+/**/
+
+/**/
+

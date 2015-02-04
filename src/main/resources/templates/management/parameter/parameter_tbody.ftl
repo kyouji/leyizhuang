@@ -14,15 +14,14 @@
 		        ${param.id}
 		    </td>
 		    <td class="center">
-		        ${param.type}
-		        <i class="icon-info-sign"></i> 
+		        ${param.type} 
 		    </td>
 		    <td class="center">
 		        ${param.name}
 		    </td>
 		    <td class="center">
 		    	<#if param.isValueIputByChoose?? && param.isValueIputByChoose==true>
-		    		选择
+		    		点击选择
 		    	<#else>
 		    		手动输入
 		    	</#if>
