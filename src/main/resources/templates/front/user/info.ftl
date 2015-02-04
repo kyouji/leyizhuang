@@ -143,6 +143,30 @@
 <#include "/front/comment/top1.ftl">
 
 </div>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+	function tm_update(obj,id){
+		var nickname=$("#nickname").val();
+		var name=$("#name").val();
+		var sex=$("input[name='sex']:checked").val();
+		var address=$("#address").val();
+		var email=$("#email").val();
+		var mobile=$("#mobile").val();
+		var qq=$("#qq").val();
+		if(isEmpty(nickname)){
+			 Tmtip({html:"您输入的用户名不能为空!!!",src:"Tm/images/24.PNG"});
+			return;
+		}
+		var fromData={"nickname":nickname,"realName":name,"sex":sex,"detailAddress":address,"email":email,"mobile":mobile,"qq":qq,"id":id};
+		$.ajax({
+			type:"post",
+			url:"/user/update",
+			data:fromData,
+			success:function(data){
+				alert(data);
+			}
+		})
+	}
+	Tmtip({html:"您输入的用户名不能为空!!!",src:"Tm/images/24.PNG"});
+</script>
 </body>
 </html>

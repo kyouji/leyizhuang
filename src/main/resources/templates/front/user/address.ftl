@@ -8,15 +8,15 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
+<style type="text/css">
+	.table{height:34px;text-align:Center;line-height:34px;border:1px solid #e5e5e5;}
+	.table .tb_tr{background:#e5e5e5}
+	.table .tr_td:hover{background:#e4e4e4;}
+</style>
+<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/Tm/js/data.js"></script>
+<script type="text/javascript" src="/Tm/js/datajs.js"></script>
+
 </head>
 <body>
 <header>
@@ -57,57 +57,36 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="flr right">
 <div class="list_banner1">
-<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/2">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/2">用户中心</a>&gt;<a href="#">收货地址</a>&gt; </div>
         
         
         
 <div class="haoh pt15 geren_rig">
         <div class=" ha oh clear bod" style="border:1px solid #d4d4d4; ">
-          <table border="0" cellpadding="0" cellspacing="0" class="biaoti f12 black fb gr_dizhi" style=" height:38px; width:100%;">
-            <tr>
-              <td width="48" align="center">选择</td>
-              <td width="100" align="center">收货人</td>
-              <td width="152" align="center">地区</td>
-              <td width="180" align="center">邮政编码</td>
-              <td width="117" align="center">电话</td>
-              <td width="243" align="center">地址</td>
-              <td width="143" align="center" class="tebie">操作</td>
-            </tr>
-          </table>
-          <table  border="0" cellpadding="0" cellspacing="0" class="tab3  color666 f12 gr_dizhi">
-            <tr>
-            <td  width="48" align="center"><input name="" type="radio" value="" checked /></td>
-              <td width="100" align="center">杨小姐</td>
-              <td width="152" align="center">云南省 <span class="ml10">昆明市</span></td>
-              <td width="180" align="center">650034</td>
-              <td width="117" align="center">0871-44646456</td>
-              <td width="243"><dl class="fl ml10 mr10 block">
-                  <dt style="line-height:18px;" class="h40">
-                    <div class=" pt10 ha oh cb"></div>
-                    云坊国际商厦云坊国际商厦云坊国际商厦云坊国际商厦云坊国际商厦</dt>
-                </dl>
-                <div class=" pt10 ha oh cb"></div></td>
-              <td width="143" align="center" class="tdbg tebie hov"><a href="#" class="f12 color666">修改</a><a href="#" class="f12 color666 ml10">删除</a></td>
-            </tr>
-            
-          </table>
-          <table  border="0" cellpadding="0" cellspacing="0" class="tab3  color666 f12 gr_dizhi">
-            <tr>
-            <td  width="48" align="center"><input name="" type="radio" value="" checked /></td>
-              <td width="100" align="center">杨小姐</td>
-              <td width="152" align="center">云南省 <span class="ml10">昆明市</span></td>
-              <td width="180" align="center">650034</td>
-              <td width="117" align="center">0871-44646456</td>
-              <td width="243"><dl class="fl ml10 mr10 block">
-                  <dt style="line-height:18px;" class="h40">
-                    <div class=" pt10 ha oh cb"></div>
-                    云坊国际商厦云坊国际商厦云坊国际商厦云坊国际商厦云坊国际商厦</dt>
-                </dl>
-                <div class=" pt10 ha oh cb"></div></td>
-              <td width="143" align="center" class="tdbg tebie hov"><a href="#" class="f12 color666">修改</a><a href="#" class="f12 color666 ml10">删除</a></td>
-            </tr>
-            
-          </table>
+          <table width="100%" border="1" cellspacing="0" cellpadding="0" class="table">
+			<thead>
+				<tr class="tb_tr">
+					<td></td>
+					<td>收货人</td>
+					<td>地区</td>
+					<td>邮政编码</td>
+					<td>电话</td>
+					<td>地址</td>
+					<td>操作</td>
+				</tr>	  	
+			</thead>
+			<tbody id="tbody">
+				<tr class="tr_td">
+					<td width="8%"><input type="radio" name="rad"></td>
+					<td width="10%">郭正洋</td>
+					<td width="20%">云南省曲靖市麒麟区</td>
+					<td width="8%">655000</td>
+					<td width="18%">18817591257</td>
+					<td width="20%">建宁街道小坡</td>
+					<td width="8%" class="upda_del"><a href="javascript:void(0)">修改</a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a></td>
+				</tr>
+			</tbody>
+		</table>	  
         </div>
         <div class="h20"></div>
         <div class="ml20 ha oh">
@@ -115,16 +94,13 @@ DD_belatedPNG.fix('.,img,background');
             <div class="h50 black"><span class="fll mt5 fontsize">收货人姓名：</span>
               <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/></div>
             <div class="h50 color666 clear"><span class="fll black fontsize">　　　地区：</span>
-              <select class="ml10 ">
-                <option>请选择</option>
+              <select class="ml10 " id="province">
               </select>
               <b class="black" style="margin-left:10px;margin-right:10px;">省</b>
-              <select  style="width:90px;">
-                <option>请选择</option>
+              <select  style="width:90px;" id="city">
               </select >
               <b class="black" style="margin-left:10px;margin-right:10px;">市</b>
-              <select style="width:90px;">
-                <option>请选择</option>
+              <select style="width:90px;" id="town">
               </select>
               <b class="black" style="margin-left:10px;margin-right:10px;">区</b> </div>
             <div class="h50 black clear"><span class="fll mt5 fontsize">　　　地址：</span>
@@ -142,7 +118,7 @@ DD_belatedPNG.fix('.,img,background');
               <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/>
             </div>
             <div class=" ha oh ml68">
-              <input type="button" value="保存"  class="user_r_btn"/>
+              <input type="button" value="提交"  class="user_r_btn"/>
             </div>
           </form>
         </div>
@@ -172,27 +148,11 @@ DD_belatedPNG.fix('.,img,background');
 <#include "/front/comment/top1.ftl">
 
 </div>
+<script type="text/javascript">
+	$(function(){
+		 $(document).ready(function(){init("province","","city","","town","");});
+	})
 
-
-
-
-
-
+</script>
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

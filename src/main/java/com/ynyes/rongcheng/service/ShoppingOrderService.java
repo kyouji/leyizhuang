@@ -116,4 +116,47 @@ public class ShoppingOrderService {
         return orderPage;
     }
  
+    /**
+     * 获取订单
+     * 
+     * @param id 订单ID
+     * @return 获取到的订单
+     */
+    public ShoppingOrder findOne(Long id)
+    {
+        ShoppingOrder so = null;
+        
+        if (null != id)
+        {
+            so = repository.findOne(id);
+        }
+        
+        return so;
+    }
+    
+    /**
+     * 删除订单
+     * 
+     * @param id 订单ID
+     */
+    public void delete(Long id)
+    {
+        if (null != id)
+        {
+            repository.delete(id);
+        }
+    }
+    
+    /**
+     * 删除订单
+     * 
+     * @param so 订单实体
+     */
+    public void delete(ShoppingOrder so)
+    {
+        if (null != so)
+        {
+            repository.delete(so);
+        }
+    }
 }

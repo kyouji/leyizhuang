@@ -138,7 +138,7 @@ public class UserController {
             user.setIsMobileValidated(true);
             user.setIsEmailValidated(true);
             user.setLastLoginTime(new Date());
-            user= UserService.updateUser(user);
+            user= UserService.save(user); // 取消updateUser()函数, edit by Sharon
             if (user!=null) {
                 flag="success";
             }else {
@@ -174,7 +174,7 @@ public class UserController {
         }
             if((StringUtils.isNotEmpty(name)  && StringUtils.isNotEmpty(password) && StringUtils.isNotEmpty(newpassword) && StringUtils.isNotEmpty(oncepassword))){
                 user.setPassword(StringUtils.encryption(oncepassword));
-                UserService.updateUser(user);
+                UserService.save(user); // 取消updateUser()函数, edit by Sharon
                 flag="success";
                 return flag;
               
