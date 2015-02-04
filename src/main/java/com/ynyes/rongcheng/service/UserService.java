@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +24,7 @@ import com.ynyes.rongcheng.repository.ProductRepo;
 import com.ynyes.rongcheng.repository.ShippingAddressRepo;
 import com.ynyes.rongcheng.repository.UserPointRepo;
 import com.ynyes.rongcheng.repository.UserRepo;
+import com.ynyes.rongcheng.util.StringUtils;
 
 /**
  * 品牌服务类
@@ -54,18 +57,18 @@ public class UserService {
      * @return res.code 0: 成功 1: 失败
      *         res.message 失败时的失败信息
      */
-    public Map<String, Object> add(String username, String md5Password, String mobile)
+    public Map<String, Object> add(String name, String password, String mobile,HttpServletRequest request)
     {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 1);
         
-        if (null == username || "".equals(username))
+        if (null == name || "".equals(name))
         {
             map.put("message", "用户名不能为空");
             return map;
         }
         
-        if (null != repository.findByUsername(username))
+        if (null != repository.findByUsername(name))
         {
             map.put("message", "该用户名已存在");
             return map;
@@ -73,9 +76,9 @@ public class UserService {
 
         User user = new User();
  
-        user.setUsername(username);
+        user.setUsername(name);
         
-        user.setPassword(md5Password);
+        user.setPassword(StringUtils.encryption(password));
         
         user.setMobile(mobile);
         
@@ -88,7 +91,7 @@ public class UserService {
         repository.save(user);
         
         map.put("code", 0);
-        
+        request.getSession().setAttribute("username", user);
         return map;
     }
     
@@ -111,7 +114,7 @@ public class UserService {
      * @return res.code 0：成功   1：失败
      *         res.message 失败时的具体信息
      */
-    public Map<String, Object> loginCheck(String username, String md5Password)
+    public Map<String, Object> loginCheck(String username, String md5Password,HttpServletRequest request)
     {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 1);
@@ -141,7 +144,7 @@ public class UserService {
             map.put("message", "密码错误");
             return map;
         }
-        
+        request.getSession().setAttribute("user", user);
         map.put("code", 0);
         
         return map;
