@@ -132,7 +132,6 @@ jQuery(function($) {
 // 修改
 function modify(id) 
 {
-    
 	$.ajax({
         url: '/admin/product/type/modify/' + id,
         type: 'POST',

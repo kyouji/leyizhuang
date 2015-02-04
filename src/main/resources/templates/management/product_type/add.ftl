@@ -31,13 +31,13 @@
                 
                 <div id="new-property" class="col-sm-11">
                     <div class="col-sm-12">
-                        <select class="col-sm-1 prop-type-select">
+                        <select class="col-sm-2 prop-type-select">
                             <option value="">请选择</option>
                             <#list param_type_list as param_type>
                                 <option value="${param_type}">${param_type}</option>
                             </#list>
                         </select>
-                        <div class="param-list col-sm-11">
+                        <div class="param-list col-sm-10">
                         </div>
                     </div>
                 </div>

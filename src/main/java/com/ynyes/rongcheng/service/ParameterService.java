@@ -142,4 +142,20 @@ public class ParameterService {
         repository.delete(param);
     }
     
+    /**
+     * 通过ID获取参数
+     * 
+     * @param id 参数ID
+     * @return 找到的参数
+     */
+    public Parameter findOne(Long id)
+    {
+        if (null == id)
+        {
+            return null;
+        }
+        
+        return repository.findOne(id);
+    }
+    
 }
