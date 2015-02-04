@@ -27,10 +27,18 @@
 		    	</#if>
 		    </td>
 		    <td class="center">
-		        ${param.isSearchable?c}
+		        <#if param.isSearchable?? && param.isSearchable==true>
+		                                   是
+		        <#else>
+		                                   否
+		        </#if>
 		    </td>
 		    <td class="center">
-		        ${param.isSingleValue?c}
+		        <#if param.isSingleValue?? && param.isSingleValue==true>
+		                                   是
+		        <#else>
+		                                   否
+		        </#if>
 		    </td>
 		    <td class="center">
 		    	<#if param.valueList??>
