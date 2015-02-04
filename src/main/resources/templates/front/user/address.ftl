@@ -8,6 +8,7 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
 <style type="text/css">
 	.table{height:34px;text-align:Center;line-height:34px;border:1px solid #e5e5e5;}
 	.table .tb_tr{background:#e5e5e5}
@@ -16,6 +17,8 @@
 <script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="/Tm/js/data.js"></script>
 <script type="text/javascript" src="/Tm/js/datajs.js"></script>
+<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
 
 </head>
 <body>
@@ -78,7 +81,7 @@
 			<tbody id="tbody">
 				<tr class="tr_td">
 					<td width="8%"><input type="radio" name="rad"></td>
-					<td width="10%">郭正洋</td>
+					<td width="10%">${address.detailAddress}</td>
 					<td width="20%">云南省曲靖市麒麟区</td>
 					<td width="8%">655000</td>
 					<td width="18%">18817591257</td>
@@ -92,7 +95,7 @@
         <div class="ml20 ha oh">
           <form action="#" method="get">
             <div class="h50 black"><span class="fll mt5 fontsize">收货人姓名：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/></div>
+              <input type="text" id="name"  class="inp ml10 gr_sz fll" style="width:320px;"/></div>
             <div class="h50 color666 clear"><span class="fll black fontsize">　　　地区：</span>
               <select class="ml10 " id="province">
               </select>
@@ -104,21 +107,21 @@
               </select>
               <b class="black" style="margin-left:10px;margin-right:10px;">区</b> </div>
             <div class="h50 black clear"><span class="fll mt5 fontsize">　　　地址：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/>
+              <input type="text" id="address"  class="inp ml10 gr_sz fll" style="width:320px;"/>
               <span class=" ml10 fll mt5 black">（填写详细地址有助于快速配送）</span></div>
             <div class="h50 black clear"><span class="fll mt5 fontsize">　邮政编码：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/>
+              <input type="text" id="postcode" class="inp ml10 gr_sz fll" style="width:320px;"/>
             </div>
             <div class="h50 color666 clear"><span class="fll mt5 black fontsize">　固定电话：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:50px;"/>
+              <input type="text" id="carts"  class="inp ml10 gr_sz fll" style="width:50px;"/>
               <b class="black" style="margin-left:8px;" >-</b>
-              <input type="text"  class="inp ml5 gr_sz fll" style="width:236px;"/>
+              <input type="text" id="receiverTelephone" class="inp ml5 gr_sz fll" style="width:236px;"/>
             </div>
             <div class="h50 black clear"><span class="fll mt5 fontsize">　　　手机：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/>
+              <input type="text" id="receiverMobile" class="inp ml10 gr_sz fll" style="width:320px;"/>
             </div>
             <div class=" ha oh ml68">
-              <input type="button" value="提交"  class="user_r_btn"/>
+              <input type="button" value="提交" onclick="tm_save(this)" class="user_r_btn"/>
             </div>
           </form>
         </div>
@@ -152,6 +155,38 @@
 	$(function(){
 		 $(document).ready(function(){init("province","","city","","town","");});
 	})
+	
+	function tm_save(obj){
+		var name=$("#name").val();
+		var province=$("#province").val();
+		var city=$("#city").val();
+		var town=$("#town").val();
+		var address=$("#address").val();
+		var postcode=$("#postcode").val();
+		var carts=$("#carts").val();
+		var receiverTelephone=$("#receiverTelephone").val();
+		var receiverMobile=$("#receiverMobile").val();
+		var formDate={"receiverName":name,"province":province,"city":city,"disctrict":town,"detailAddress":address,"postcode":postcode,"receiverTelephone":carts+receiverTelephone,"receiverMobile":receiverMobile};
+		$.ajax({
+			type:"post",
+			url:"/user/saveaddress",
+			data:formDate,
+			success:function(data){
+				if(data=="success"){
+					 Tmtip({html:"添加成功!",src:"/Tm/images/2_1.PNG"});
+					$("#name").val("");
+					$("#province").val("");
+					$("#city").val("");
+					$("#town").val("");
+					$("#address").val("");
+					$("#postcode").val("");
+					$("#carts").val("");
+					$("#receiverTelephone").val("");
+					$("#receiverMobile").val("");
+				}
+			}
+		})
+	}
 
 </script>
 </body>

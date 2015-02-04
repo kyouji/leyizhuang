@@ -119,7 +119,7 @@ public class UserService {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 1);
         
-        User user = repository.findByUsername(username);
+        User user = repository.findByUsernameAndPassword(username, md5Password);
         
         if (null == user)
         {
@@ -133,7 +133,7 @@ public class UserService {
             return map;
         }
         
-        if ("USER".equalsIgnoreCase(user.getRole()))
+        if (!"USER".equalsIgnoreCase(user.getRole()))
         {
             map.put("message", "用户无访问权限");
             return map;
@@ -144,10 +144,11 @@ public class UserService {
             map.put("message", "密码错误");
             return map;
         }
-        request.getSession().setAttribute("user", user);
-        map.put("code", 0);
-        
-        return map;
+        {
+            request.getSession().setAttribute("user", user);
+            map.put("code", 0);
+            return map;
+        }
 
     }
     
@@ -645,6 +646,14 @@ public class UserService {
         }
         return repository.save(user);
     }
-    
+    /**
+     * id
+     * 
+     * @param user 要保存的用户
+     * @return 保存的用户
+     */
+    public User findById(Long id){
+        return repository.findById(id);
+    }
     
 }

@@ -88,6 +88,7 @@ public class LoginController {
                     if (res.get("code").equals(0)) {
                        
                         flag = "success";
+                        return flag;
                     } else {
                         flag = "false";
                     }

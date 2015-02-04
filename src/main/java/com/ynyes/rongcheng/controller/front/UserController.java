@@ -80,7 +80,7 @@ public class UserController {
     @RequestMapping("/address")
     public String address(HttpServletRequest request){
         User user=(User) request.getSession().getAttribute("user");
-        shippingAddressService.findOne(user.getId());
+       request.setAttribute("address",shippingAddressService.findOne(user.getId()));
         return "/front/user/address";
     }
     /**
@@ -192,8 +192,20 @@ public class UserController {
         
         return flag;
     }
-    public String saveAddress(){
-        return flag;
+    @RequestMapping(value="/saveaddress",method=RequestMethod.POST)
+    @ResponseBody
+    public String saveAddress(ShippingAddress address,HttpServletRequest request){
+        User user=(User) request.getSession().getAttribute("user");
+        user=UserService.findById(user.getId());
+       ShippingAddress shippingAddress =shippingAddressService.save(address);
+       user.getShippingAddressList().add(address);
+       UserService.save(user);
+       if(shippingAddress!=null){
+           flag="success";
+       }else{
+           flag="flase";
+       }
+       return flag;
         
     }
     //get/set

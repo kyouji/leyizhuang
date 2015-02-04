@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,22 @@ public class ParameterService {
         }
         
         return repository.findByType(type);
+    }
+    
+    /**
+     * 通过ID查找
+     * 
+     * @param ids 参数ID列表
+     * @return 参数列表
+     */
+    public List<Parameter> findByIdIn(Collection<Long> ids)
+    {
+        if (null == ids)
+        {
+            return null;
+        }
+        
+        return repository.findByIdIn(ids);
     }
     
     /**

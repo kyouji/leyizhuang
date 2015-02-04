@@ -194,4 +194,52 @@ public class ProductTypeService {
 
         return (List<ProductType>) repository.findAll();
     }
+    
+    /**
+     * 保存商品类型
+     * 
+     * @return 保存的商品类型
+     */
+    public ProductType save(ProductType type) {
+
+        return repository.save(type);
+    }
+    
+    /**
+     * 删除商品类型
+     * 
+     * @param type 商品类型
+     * @return
+     */
+    public void delete(ProductType type) {
+
+        repository.delete(type);
+    }
+    
+    /**
+     * 删除商品类型
+     * 
+     * @param id 商品类型ID
+     * @return
+     */
+    public void delete(Long id) {
+
+        repository.delete(id);
+    }
+    
+    /**
+     * 根据ID查找类型
+     * @param id 类型ID
+     * @return 找到的类型，未找到时返回NULL
+     */
+    public ProductType findOne(Long id) {
+
+        ProductType type = null;
+        
+        if (null != id)
+        {
+            type = repository.findOne(id);
+        }
+        return type;
+    }
 }

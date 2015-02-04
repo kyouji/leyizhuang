@@ -73,28 +73,26 @@ DD_belatedPNG.fix('.,img,background');
 </div>
 
 
-<#list>
-<#if all_user.orderNumber?? && all_user.orderItemList.productBrief?? && all_user.orderItemList.quantity?? all_user.statusCode??>
+
 <div class="member_dd">
-<span class=" member_ddrq">2014-05-06<span>订单号：${all_user.orderNumber}</span></span>
+
+
+<#list all_user_info as all_user>
+<span class=" member_ddrq">2014-05-06<#if all_user.orderNumber??><span>订单号：${all_user.orderNumber}</span></#if></span>
 <table>
 <tr class="member_ddhe">
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>${all_user.orderItemList.productBrief}</p></a></td>
+<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><#if all_user.orderItemList??><p>${all_user.orderItemList.productBrief}</p></#if></a></td>
 <td class="member_dd_b"><span>￥144.22</span></td>
-<td class="member_dd_c">${all_user.orderItemList.quantity}</td>
-<td class="member_dd_d">${all_user.statusCode}</td>
+<#if all_user.orderItemList??><td class="member_dd_c">${all_user.orderItemList.quantity}</td></#if>
+<#if all_user.statusCode??><td class="member_dd_d">${all_user.statusCode}</td></#if>
 <td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
 </tr>
-
-
 <tr>
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>${all_user.orderItemList.productBrief}</p></a></td>
+<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><#if all_user.orderItemList??><p>${all_user.orderItemList.productBrief}</p></#if></a></td>
 </tr>
 </table>
-</div>
-</#if>
 </#list>
-
+</div>
         <div class="clear h20"></div>
         <div class="flr fot_fanye"><ul class="haoh">
         <li><a href="#" ><<</a></li>

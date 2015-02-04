@@ -36,7 +36,7 @@ public class ProductType {
     private Long sortNumber;
     
     // 关联的属性
-    @OneToMany(orphanRemoval=true)
+    @OneToMany
     @JoinColumn(name="productTypeId")
     private List<ProductTypeParameter> typeParamList;
 
