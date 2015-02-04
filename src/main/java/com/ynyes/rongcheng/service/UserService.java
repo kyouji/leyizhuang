@@ -91,7 +91,7 @@ public class UserService {
         repository.save(user);
         
         map.put("code", 0);
-        request.getSession().setAttribute("username", user);
+        request.getSession().setAttribute("user", user);
         return map;
     }
     
