@@ -43,7 +43,6 @@ public class ShoppingOrderService {
     {
         Page<ShoppingOrder> orderPage = null;
         PageRequest pageRequest = null;
-        
         if (null == username || null == statusCode)
         {
             return null;
