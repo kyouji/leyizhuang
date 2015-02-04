@@ -141,7 +141,12 @@
 			            url:"/admin/parameter/save",
 			            data:subDate,
 			            success:function(data){
-				        alert("提交成功");
+					        if(data.code == 0){
+					            alert("参数添加成功！");
+					            location.reload();
+					        }else{
+					            alert(data.message);
+					        }
 			            }
 		            });
                 });

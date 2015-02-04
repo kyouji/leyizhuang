@@ -51,7 +51,7 @@ public class ManagerParameterController {
         }
     }
     
-    @RequestMapping(value="/add",method = RequestMethod.POST)
+    @RequestMapping(value="/save",method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> add(ModelMap map, Parameter param){
         Map<String, Object> res = new HashMap<String, Object>();
