@@ -35,10 +35,10 @@ DD_belatedPNG.fix('.,img,background');
 <div class="member_lef fll"> <span class="sp55">订单中心</span>
       <ul class="haoh pt10">
         <li><a href="/order/list" >全部订单</a></li>
-        <li><a href="/order/obligation" class="act">待付款订单</a></li>
-        <li><a href="/order/startorder">待收货订单</a></li>
-        <li><a href="/order/orderok">已完成订单</a></li>
-        <li><a href="/order/orderno">已关闭订单</a></li>
+        <li><a href="/order/obligation?status=0" class="act">待付款订单</a></li>
+        <li><a href="/order/startorder?status=1">待收货订单</a></li>
+        <li><a href="/order/orderok?status=3">已完成订单</a></li>
+        <li><a href="/order/orderno?status=4">已关闭订单</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
       <ul class="haoh pt10">
@@ -72,26 +72,27 @@ DD_belatedPNG.fix('.,img,background');
 </table>
 </div>
 
+<#list>
+<#if all_user.orderNumber?? && all_user.orderItemList.productBrief?? && all_user.orderItemList.quantity?? all_user.statusCode??>
 <div class="member_dd">
-<span class=" member_ddrq">2014-05-06<span>订单号：2524545565</span></span>
+<span class=" member_ddrq">2014-05-06<span>订单号：${all_user.orderNumber}</span></span>
 <table>
 <tr class="member_ddhe">
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
+<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>${all_user.orderItemList.productBrief}</p></a></td>
 <td class="member_dd_b"><span>￥144.22</span></td>
-<td class="member_dd_c">1</td>
-<td class="member_dd_d">已完成</td>
+<td class="member_dd_c">${all_user.orderItemList.quantity}</td>
+<td class="member_dd_d">${all_user.statusCode}</td>
 <td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
 </tr>
 
 
 <tr>
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
+<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>${all_user.orderItemList.productBrief}</p></a></td>
 </tr>
 </table>
-
-
 </div>
-
+</#if>
+</#list>
 
 <div class="member_dd">
 <span class=" member_ddrq">2014-05-06<span>订单号：2524545565</span></span>

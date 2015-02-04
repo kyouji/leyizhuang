@@ -83,11 +83,12 @@ public class LoginController {
                     "RANDOMVALIDATECODEKEY");
             if (StringUtils.isNotEmpty(VERIF)) {
                 if (VERIF.equalsIgnoreCase(msg)) {
-                    Map<String, Object> res = UserService.loginCheck(username, password);
+                    Map<String, Object> res = UserService.loginCheck(username, StringUtils.encryption(password),request);
                     
                     if (res.get("code").equals(0)) {
-                        request.getSession().setAttribute("username", username);
+                       
                         flag = "success";
+                        return flag;
                     } else {
                         flag = "false";
                     }

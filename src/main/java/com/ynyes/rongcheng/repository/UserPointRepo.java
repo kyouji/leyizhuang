@@ -3,6 +3,7 @@ package com.ynyes.rongcheng.repository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import com.ynyes.rongcheng.entity.User;
 import com.ynyes.rongcheng.entity.UserPoint;
 
 /**
@@ -16,5 +17,5 @@ public interface UserPointRepo extends
 		PagingAndSortingRepository<UserPoint, Long>,
 		JpaSpecificationExecutor<UserPoint> 
 {
- 
+
 }
