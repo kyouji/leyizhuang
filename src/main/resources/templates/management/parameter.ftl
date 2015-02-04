@@ -40,8 +40,8 @@
 
 					<div class="page-content">
 						<div class="row">
-						    <#include "/management/sub/param_add.ftl">
-                            <!--div id="id-modify"></div-->
+						    <#include "/management/parameter/param_add.ftl">
+                            <div id="id-modify"></div>
 							<div id="id-table" class="col-sm-12">
 								<!-- PAGE CONTENT BEGINS -->
                                 <div class="table-header">

@@ -1,4 +1,4 @@
-    
+
 // 新增参数
 $("#id-new-param").click(function() {
     $("#id-table").addClass("hide");
@@ -48,7 +48,7 @@ $("#id-delete").click(function(){
     }); // ajax
 });
 
-// 删除类型
+// 删除参数
 function destroy(id) {
     if (window.confirm('确定要删除该参数吗？')) {
 
@@ -68,39 +68,39 @@ function destroy(id) {
 }
 
 // 参数修改  zackma-20150204
-/*function modify(id) {
+function modify(id) {
 
     $.ajax({
-        url : '/admin/parameter/modify'+id,
+        url : '/admin/parameter/modify/'+id,
         type : 'POST',
-        data : id,
-        success : function(data) {
+        success : function(data) {	
             $("#id-modify").siblings().addClass("hide");
             $("#id-modify").html(data);
             $("#id-modify").removeClass("hide");
-        
+            
             // 返回上一级
             $(".back").click(function() {
                 $("#id-table").siblings().addClass("hide");
                 $("#id-table").removeClass("hide");
             });
+        }
+    });
+            
         
+            
             //修改后文本框变色显示变色  zackma-20150204
-            var link = window.location.href;
-            if(link.indexOf("modify")>0){
-	            $(".addinput-form input").change(function(){
-	            	$("input").css({"background-color":"#ffffcc"});
-	            });
-	            $(".addinput-form select").change(function(){
-	            	$("select").css({"background-color":"#ffffcc"});
-	            });
-	            $(".addinput-form textarea").change(function(){
-	                $("textarea").css({"background-color":"#ffffcc"});	
-	            });
-            }
+            $(".addinput-form input").change(function(){
+            	$("input").css({"background-color":"#ffffcc"});
+            });
+            $(".addinput-form select").change(function(){
+            	$("select").css({"background-color":"#ffffcc"});
+            });
+            $(".addinput-form textarea").change(function(){
+                $("textarea").css({"background-color":"#ffffcc"});	
+            });
              
             // 修改提交  zackma-20150204
-            $("#m-submit").click(
+            /*$("#m-submit").click(
                     var type = $("form #type").val();
                     var name = $("form #name").val();
                     var input_type = $("form #input_type:selected").val();
@@ -128,8 +128,7 @@ function destroy(id) {
                     });
                 });
                 }
-            });
+            });*/
 }
-*/
 
 

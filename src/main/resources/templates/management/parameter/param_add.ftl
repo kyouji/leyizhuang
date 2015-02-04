@@ -35,9 +35,9 @@
 	                    <option value="">请选择</option>    
 	                    <#--list param_list as param-->
 	                        <#--if param.isValueIputByChoose?? && param.isValueIputByChoose==true-->
-	                        <option>点击选择</option>
+	                        <option value="true">点击选择</option>
 	                        <#--else-->
-	                        <option>手动输入</option>
+	                        <option value="false">手动输入</option>
 	                        <#--if-->
 	                    <#--list-->
 	                </select>
