@@ -19,6 +19,7 @@
 <script type="text/javascript" src="/Tm/js/datajs.js"></script>
 <script type="text/javascript" src="/Tm/js/mainTip.js"></script>
 <script type="text/javascript" src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/front/address.js"></script>
 
 </head>
 <body>
@@ -74,26 +75,32 @@
 					<td>地区</td>
 					<td>邮政编码</td>
 					<td>电话</td>
+					<td>手机</td>
 					<td>地址</td>
 					<td>操作</td>
 				</tr>	  	
 			</thead>
 			<tbody id="tbody">
+			<#if address??>
+			<#list address as addres>
 				<tr class="tr_td">
-					<td width="8%"><input type="radio" name="rad"></td>
-					<td width="10%">${address.detailAddress}</td>
-					<td width="20%">云南省曲靖市麒麟区</td>
-					<td width="8%">655000</td>
-					<td width="18%">18817591257</td>
-					<td width="20%">建宁街道小坡</td>
-					<td width="8%" class="upda_del"><a href="javascript:void(0)">修改</a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a></td>
+					<td width="6%"><input type="radio" name="rad" checked=true></td>
+					<td width="10%" class="td_name"><#if addres.receiverName??>${addres.receiverName}</#if></span></td>
+					<td width="15%"><span class="td_province">${addres.province}</span>--<span class="td_city">${addres.city}</span>--<span class="td_disctrict">${addres.disctrict}</span></td>
+					<td width="8%" class="td_postcode">${addres.postcode}</td>
+					<td width="10%" class="td_receiverTelephone"><#if addres.receiverMobile??>${addres.receiverTelephone}</#if></td>
+					<td width="10%" class="td_receiverMobile">${addres.receiverMobile}</td>
+					<td width="20%" class="td_detailAddress">${addres.detailAddress}</td>
+					<td width="8%" class="upda_del"><a href="javascript:void(0)" onclick="tm_update(this,${addres.id})">修改</a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="tm_delete(this,${addres.id})">删除</a></td>
 				</tr>
+			</#list>
+			</#if>
 			</tbody>
 		</table>	  
         </div>
         <div class="h20"></div>
-        <div class="ml20 ha oh">
-          <form action="#" method="get">
+        <div class="ml20 ha oh" id="centent">
+          <form action="" method="post">
             <div class="h50 black"><span class="fll mt5 fontsize">收货人姓名：</span>
               <input type="text" id="name"  class="inp ml10 gr_sz fll" style="width:320px;"/></div>
             <div class="h50 color666 clear"><span class="fll black fontsize">　　　地区：</span>
@@ -121,7 +128,7 @@
               <input type="text" id="receiverMobile" class="inp ml10 gr_sz fll" style="width:320px;"/>
             </div>
             <div class=" ha oh ml68">
-              <input type="button" value="提交" onclick="tm_save(this)" class="user_r_btn"/>
+              <input type="button" value="提交" onclick="tm_save(this)" class="user_r_btn" />
             </div>
           </form>
         </div>
@@ -156,38 +163,5 @@
 		 $(document).ready(function(){init("province","","city","","town","");});
 	})
 	
-	function tm_save(obj){
-		var name=$("#name").val();
-		var province=$("#province").val();
-		var city=$("#city").val();
-		var town=$("#town").val();
-		var address=$("#address").val();
-		var postcode=$("#postcode").val();
-		var carts=$("#carts").val();
-		var receiverTelephone=$("#receiverTelephone").val();
-		var receiverMobile=$("#receiverMobile").val();
-		var formDate={"receiverName":name,"province":province,"city":city,"disctrict":town,"detailAddress":address,"postcode":postcode,"receiverTelephone":carts+receiverTelephone,"receiverMobile":receiverMobile};
-		$.ajax({
-			type:"post",
-			url:"/user/saveaddress",
-			data:formDate,
-			success:function(data){
-				if(data=="success"){
-					 Tmtip({html:"添加成功!",src:"/Tm/images/2_1.PNG"});
-					$("#name").val("");
-					$("#province").val("");
-					$("#city").val("");
-					$("#town").val("");
-					$("#address").val("");
-					$("#postcode").val("");
-					$("#carts").val("");
-					$("#receiverTelephone").val("");
-					$("#receiverMobile").val("");
-				}
-			}
-		})
-	}
-
-</script>
-</body>
+  </script>
 </html>

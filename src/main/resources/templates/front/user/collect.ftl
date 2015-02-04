@@ -57,7 +57,7 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="flr right">
 <div class="list_banner1">
-<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="javascript:void(0)">个人中心</a>&gt;<a href="javascript:void(0)">我的收藏</a>&gt; </div>
  <div class="gwc1_lm mt15">
 <table>
 <tr>
@@ -70,21 +70,15 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="member_dd">
 <table>
+<#if collectedProductIds??>
+<#list collectedProductIds as collect>
 <tr class="member_ddhe">
-<td class="member_sc_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
-<td class="member_sc_b"><span>￥144.22</span></td>
-<td class="member_sc_e"><a href="#">购买产品</a><a href="#">删除收藏</a></td>
+<td class="member_sc_a"><span><a href="#"><img src="<#if collect.coverImageUri??>{collect.coverImageUri}</#if>" width="76" height="76"></a></span><a href="#"><p><#if collect.name??>{collect.name}</#if></p></a></td>
+<td class="member_sc_b"><span>￥<#if collect.flashSalePrice??>{collect.flashSalePrice}</#if></span></td>
+<td class="member_sc_e"><a href="/cart">购买产品</a><a href="javascript:void(0)">删除收藏</a></td>
 </tr>
-</table>
-</div>
-
-<div class="member_dd">
-<table>
-<tr class="member_ddhe">
-<td class="member_sc_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
-<td class="member_sc_b"><span>￥144.22</span></td>
-<td class="member_sc_e"><a href="#">购买产品</a><a href="#">删除收藏</a></td>
-</tr>
+</#list>
+</#if>
 </table>
 </div>
      
