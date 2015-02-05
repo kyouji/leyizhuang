@@ -97,8 +97,6 @@ DD_belatedPNG.fix('.,img,background');
 </#list>
 </div>
 
-
-
         <div class="clear h20"></div>
         <div class="flr fot_fanye"><ul class="haoh">
         <li><a href="#" ><<</a></li>
