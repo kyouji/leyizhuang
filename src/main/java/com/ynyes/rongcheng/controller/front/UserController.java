@@ -103,9 +103,8 @@ public class UserController {
        String content=user.getCollectedProductIds();
        if(StringUtils.isEmpty(content)){
            return "/front/user/collect";
-       }else{
-           modelMap.addAttribute("collectedProductIds", UserService.findCollectedProducts(user.getUsername()));
        }
+       modelMap.addAttribute("collectedProductIds", UserService.findCollectedProducts(user.getUsername()));
         return "/front/user/collect";
     }
     /**

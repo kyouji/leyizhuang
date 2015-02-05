@@ -8,15 +8,7 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
+<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
 </head>
 <body>
 <header>
@@ -73,9 +65,9 @@ DD_belatedPNG.fix('.,img,background');
 <#if collectedProductIds??>
 <#list collectedProductIds as collect>
 <tr class="member_ddhe">
-<td class="member_sc_a"><span><a href="#"><img src="<#if collect.coverImageUri??>{collect.coverImageUri}</#if>" width="76" height="76"></a></span><a href="#"><p><#if collect.name??>{collect.name}</#if></p></a></td>
-<td class="member_sc_b"><span>￥<#if collect.flashSalePrice??>{collect.flashSalePrice}</#if></span></td>
-<td class="member_sc_e"><a href="/cart">购买产品</a><a href="javascript:void(0)">删除收藏</a></td>
+<td class="member_sc_a"><span><a href="#"><img src="<#if collect.coverImageUri??>${collect.coverImageUri}</#if>" width="76" height="76"></a></span><a href="#"><p><#if collect.name??>${collect.name}</#if></p></a></td>
+<td class="member_sc_b"><span>￥<#if collect.flashSalePrice??>${collect.flashSalePrice?c}</#if></span></td>
+<td class="member_sc_e"><a href="/cart">购买产品</a><a href="javascript:void(0)" onclick="tm_del(this)">删除收藏</a></td>
 </tr>
 </#list>
 </#if>
@@ -110,22 +102,12 @@ DD_belatedPNG.fix('.,img,background');
 
 
 
-
+<script type="text/javascript">
+function tm_del(obj){
+	 if (window.confirm('确定要删除该收藏吗？')) {
+	 	alert("正在开发!")
+	 }
+}
+</script>
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

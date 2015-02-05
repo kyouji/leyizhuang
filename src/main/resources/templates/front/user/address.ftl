@@ -119,10 +119,10 @@
             <div class="h50 black clear"><span class="fll mt5 fontsize">　邮政编码：</span>
               <input type="text" id="postcode" class="inp ml10 gr_sz fll" style="width:320px;"/>
             </div>
-            <div class="h50 color666 clear"><span class="fll mt5 black fontsize">　固定电话：</span>
-              <input type="text" id="carts"  class="inp ml10 gr_sz fll" style="width:50px;"/>
-              <b class="black" style="margin-left:8px;" >-</b>
-              <input type="text" id="receiverTelephone" class="inp ml5 gr_sz fll" style="width:236px;"/>
+            <div class="h50 color666 clear"><span class="fll mt5 black fontsize">固定电话：</span>
+            
+              <b class="black" style="margin-left:8px;" ></b>
+              <input type="text" id="receiverTelephone" class="inp ml10 gr_sz fll" style="width:320px;"/>
             </div>
             <div class="h50 black clear"><span class="fll mt5 fontsize">　　　手机：</span>
               <input type="text" id="receiverMobile" class="inp ml10 gr_sz fll" style="width:320px;"/>

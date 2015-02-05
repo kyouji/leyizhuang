@@ -26,7 +26,7 @@ DD_belatedPNG.fix('.,img,background');
 </header>
 
 <div class="header1 main">
-<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="img/rc_logo.png" width="177" height="69"></a></div>
+<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="/img/rc_logo.png" width="177" height="69"></a></div>
 <div class="fll city"><a href="#">城市切换</a><span></span>
 <#--<div class="cityqh"><ul>
 <li><a href="#">昆明市</a></li>
@@ -119,7 +119,7 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="clear"></div>
 <div class="main">
-<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/2">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/2">明星产品</a>&gt;<a href="#">筛选</a>&gt; </div>
 <div class="w1200 overflow">
   <div class="sub_left">
     <div class="hot_list">

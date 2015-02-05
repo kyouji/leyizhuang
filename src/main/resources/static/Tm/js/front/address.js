@@ -34,7 +34,7 @@
 
     function tm_delete(obj,id){
     
-     if (window.confirm('确定要删除该用户吗？')) {
+     if (window.confirm('确定要删除该条记录吗？')) {
         $.ajax({
             type:"post",
             url:"/user/addressdelete",
@@ -62,7 +62,35 @@
         var carts=$("#carts").val();
         var receiverTelephone=$("#receiverTelephone").val();
         var receiverMobile=$("#receiverMobile").val();
-        var formDate={"receiverName":name,"province":province,"city":city,"disctrict":town,"detailAddress":address,"postcode":postcode,"receiverTelephone":carts+"--"+receiverTelephone,"receiverMobile":receiverMobile};
+        if(isEmpty(name)){
+            Tmtip({html:"您输入的收货人姓名不能为空!!!",src:"/Tm/images/24.PNG"});
+            $("#name").focus();
+            return
+        }
+        if(isEmpty(province) || isEmpty(city) || isEmpty(town)){
+            $("#province").css("border","1px solid red")
+            $("#city").css("border","1px solid red")
+            $("#town").css("border","1px solid red")
+             Tmtip({html:"地区不能为空!",src:"/Tm/images/24.PNG",callback: function() {
+                 $("#province").css("border","1px solid #e5e5e5")
+                 $("#city").css("border","1px solid #e5e5e5")
+                 $("#town").css("border","1px solid #e5e5e5")
+             }});
+             $("#name").focus();
+             return
+         }
+        if(isEmpty(address)){
+            Tmtip({html:"您输入的详细地址不能为空!!!",src:"/Tm/images/24.PNG"});
+            $("#address").focus();
+            return
+        }
+        if(isEmpty(receiverMobile)){
+            Tmtip({html:"您输入的手机号码不能为空!!!",src:"/Tm/images/24.PNG"});
+            $("#receiverMobile").focus();
+            return
+        }
+
+        var formDate={"receiverName":name,"province":province,"city":city,"disctrict":town,"detailAddress":address,"postcode":postcode,"receiverTelephone":receiverTelephone,"receiverMobile":receiverMobile};
         $.ajax({
             type:"post",
             url:"/user/saveaddress",
@@ -120,9 +148,8 @@
  "             <input type='text' id='postcode' class='inp ml10 gr_sz fll' style='width:320px;' value="+postcode+" />"+
  "           </div>"+
  "           <div class='h50 color666 clear'><span class='fll mt5 black fontsize'>　固定电话：</span>"+
- "             <input type='text' id='carts'  class='inp ml10 gr_sz fll' style='width:50px;'  />"+
- "             <b class='black' style='margin-left:8px;' >-</b>"+
- "             <input type='text' id='receiverTelephone' class='inp ml5 gr_sz fll' style='width:236px;'value="+receiverTelephone+" />"+
+ "                                                                                                  "+
+ "             <input type='text' id='receiverTelephone' class='inp ml5 gr_sz fll' style='width:320px;'value="+receiverTelephone+" />"+
  "           </div>"+
  "           <div class='h50 black clear'><span class='fll mt5 fontsize'>　　　手机：</span>"+
  "             <input type='text' id='receiverMobile' class='inp ml10 gr_sz fll' style='width:320px;' value="+receiverMobile+" />"+
