@@ -21,7 +21,7 @@ public class SiteInfo {
     private Long id;
     
     // 类型
-    @Column
+    @Column(unique=true)
     private String type;
     
     // 内容

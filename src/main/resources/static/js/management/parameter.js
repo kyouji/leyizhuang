@@ -1,4 +1,4 @@
-    
+
 // 新增参数
 $("#id-new-param").click(function() {
     $("#id-table").addClass("hide");
@@ -48,7 +48,29 @@ $("#id-delete").click(function(){
     }); // ajax
 });
 
-// 删除类型
+//分页
+$("#id-pagination").pagination($("#id-total-num").val(), {
+	num_display_entries : 2, 
+	num_edge_entries : 3,
+	current_page : 0,
+	items_per_page : pageSize,
+	prev_text : "上一页",
+	next_text : "下一页",
+	showGo:true,
+	showSelect:true,
+	callback : function(pageIndex) {
+		$.ajax({
+			type:"GET",
+			url:"/admin/parameter/page/" + pageIndex,
+			success:function(data){
+				$("#id-tbody").html(data);
+			}
+		});
+	}
+	
+});
+
+// 删除参数
 function destroy(id) {
     if (window.confirm('确定要删除该参数吗？')) {
 
@@ -68,51 +90,47 @@ function destroy(id) {
 }
 
 // 参数修改  zackma-20150204
-/*function modify(id) {
+function modify(id) {
 
     $.ajax({
-        url : '/admin/parameter/modify'+id,
+        url : '/admin/parameter/modify/'+id,
         type : 'POST',
-        data : id,
-        success : function(data) {
+        success : function(data) {	
             $("#id-modify").siblings().addClass("hide");
             $("#id-modify").html(data);
             $("#id-modify").removeClass("hide");
-        
+            
             // 返回上一级
             $(".back").click(function() {
                 $("#id-table").siblings().addClass("hide");
                 $("#id-table").removeClass("hide");
             });
-        
-            //修改后文本框变色显示变色  zackma-20150204
-            var link = window.location.href;
-            if(link.indexOf("modify")>0){
-	            $(".addinput-form input").change(function(){
-	            	$("input").css({"background-color":"#ffffcc"});
-	            });
-	            $(".addinput-form select").change(function(){
-	            	$("select").css({"background-color":"#ffffcc"});
-	            });
-	            $(".addinput-form textarea").change(function(){
-	                $("textarea").css({"background-color":"#ffffcc"});	
-	            });
-            }
+            
+          //修改后文本框变色显示变色  zackma-20150204
+            $(".addinput-form input").change(function(){
+            	$("input").css({"background-color":"#ffffcc"});
+            });
+            $(".addinput-form select").change(function(){
+            	$("select").css({"background-color":"#ffffcc"});
+            });
+            $(".addinput-form textarea").change(function(){
+                $("textarea").css({"background-color":"#ffffcc"});	
+            });
              
             // 修改提交  zackma-20150204
-            $("#m-submit").click(
-                    var type = $("form #type").val();
-                    var name = $("form #name").val();
-                    var input_type = $("form #input_type:selected").val();
-                    var isSearchable = $("#searchable:checked").val();
-                    var isSingleValue = $("#multiple:checked").val();
-                    var valueList = $("form #param_list").val();
-                    if(type==""||name==""||input_type==""||isSearchable==""||isSingleValue==""||valueList==""){
+            $("#m-submit").click(function(){
+                    var type = $("form #m-type").val();
+                    var name = $("form #m-name").val();
+                    var isValueInputByChoose = $("form #m-input_type option:selected").val();
+                    var isSearchable = $("#m-searchable:checked").val();
+                    var isSingleValue = $("#m-multiple:checked").val();
+                    var valueList = $("form #m-param_list").val();
+                    if(type==""||name==""||isValueInputByChoose==""||isSearchable==""||isSingleValue==""||valueList==""){
 			            alert("请填写完整参数！");
 			        return;
 		            }
                     
-                    var modiDate = {"type":type,"name":name,"input_type":input_type,"isSearchable":isSearchable,"isSingleValue":isSingleValue,"valueList":valueList};
+                    var modiDate = {"type":type,"name":name,"isValueInputByChoose":isValueInputByChoose,"isSearchable":isSearchable,"isSingleValue":isSingleValue,"valueList":valueList};
                     $.ajax({
                         url : '/admin/parameter/save',
                         type : 'POST',
@@ -127,9 +145,9 @@ function destroy(id) {
                         }
                     });
                 });
-                }
-            });
+        }
+    });
+                                                           
 }
-*/
 
 

@@ -199,7 +199,7 @@ public class ManagerProductTypeController {
                 }
             }
         }
-        
+
         return "/management/product_type/modify";
     }
     
