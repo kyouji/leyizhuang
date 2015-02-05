@@ -121,7 +121,7 @@
 		<script src="/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-        <script src="/js/manager/parameter.js"></script>
+        <script src="/js/management/parameter.js"></script>
         
         <!--新增参数提交-->
         
