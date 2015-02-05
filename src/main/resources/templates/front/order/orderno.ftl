@@ -35,10 +35,10 @@ DD_belatedPNG.fix('.,img,background');
 <div class="member_lef fll"> <span class="sp55">订单中心</span>
       <ul class="haoh pt10">
         <li><a href="/order/list" >全部订单</a></li>
-        <li><a href="/order/obligation" >待付款订单</a></li>
-        <li><a href="/order/startorder" >待收货订单</a></li>
-        <li><a href="/order/orderok">已完成订单</a></li>
-        <li><a href="/order/orderno" class="act">已关闭订单</a></li>
+        <li><a href="/order/obligation?status=0" >待付款订单</a></li>
+        <li><a href="/order/startorder?status=1" >待收货订单</a></li>
+        <li><a href="/order/orderok?status=3">已完成订单</a></li>
+        <li><a href="/order/orderno?status=4" class="act">已关闭订单</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
       <ul class="haoh pt10">
@@ -72,91 +72,29 @@ DD_belatedPNG.fix('.,img,background');
 </table>
 </div>
 
-<div class="member_dd">
-<span class=" member_ddrq">2014-05-06<span>订单号：2524545565</span></span>
-<table>
-<tr class="member_ddhe">
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
-<td class="member_dd_b"><span>￥144.22</span></td>
-<td class="member_dd_c">1</td>
-<td class="member_dd_d">已完成</td>
-<td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
-</tr>
 
-
-<tr>
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
-</tr>
-</table>
-
-
-</div>
-
-
-<div class="member_dd">
-<span class=" member_ddrq">2014-05-06<span>订单号：2524545565</span></span>
-<table>
-<tr class="member_ddhe">
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
-<td class="member_dd_b"><span>￥144.22</span></td>
-<td class="member_dd_c">1</td>
-<td class="member_dd_d">已完成</td>
-<td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
-</tr>
-</table>
-</div>
-
-
-
-
-
-<div class="member_dd">
-<span class=" member_ddrq">2014-05-06<span>订单号：2524545565</span></span>
-<table>
-<tr class="member_ddhe">
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
-<td class="member_dd_b"><span>￥144.22</span></td>
-<td class="member_dd_c">1</td>
-<td class="member_dd_d">已完成</td>
-<td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
-</tr>
-</table>
-</div>
-<div class="member_dd">
-<span class=" member_ddrq">2014-05-06<span>订单号：2524545565</span></span>
-<table>
-<tr class="member_ddhe">
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
-<td class="member_dd_b"><span>￥144.22</span></td>
-<td class="member_dd_c">1</td>
-<td class="member_dd_d">已完成</td>
-<td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
-</tr>
-</table>
-</div>
-<div class="member_dd">
-<span class=" member_ddrq">2014-05-06<span>订单号：2524545565</span></span>
-<table>
-<tr class="member_ddhe">
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
-<td class="member_dd_b"><span>￥144.22</span></td>
-<td class="member_dd_c">1</td>
-<td class="member_dd_d">已完成</td>
-<td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
-</tr>
-</table>
-</div>
-<div class="member_dd">
-<span class=" member_ddrq">2014-05-06<span>订单号：2524545565</span></span>
-<table>
-<tr class="member_ddhe">
-<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆高端干货送礼佳品</p></a></td>
-<td class="member_dd_b"><span>￥144.22</span></td>
-<td class="member_dd_c">1</td>
-<td class="member_dd_d">已完成</td>
-<td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
-</tr>
-</table>
+<#list shopping_order_list as shopping_order>
+		<div class="member_dd">
+		<span class=" member_ddrq">2014-05-06<#if shopping_order.orderNumber??>
+		    <span>订单号：${shopping_order.orderNumber}</span></#if>
+		</span>
+		<#list shopping_order.orderItemList as shopping_order_orderItemList>
+		<table>
+		<tr class="member_ddhe">
+		<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a>
+		    </span><a href="#"><#if shopping_order_orderItemList.productBrief??><p>${shopping_order_orderItemList.productBrief}</p></#if></a>
+		</td>
+		<td class="member_dd_b"><#if shopping_order_orderItemList.price??>
+		    <span>${shopping_order_orderItemList.price}</span></#if>
+		</td>
+		<#if shopping_order_orderItemList??><td class="member_dd_c">${shopping_order_orderItemList.quantity}</td></#if>
+		<#if shopping_order.statusCode??><td class="member_dd_d">${shopping_order.statusCode}</td></#if>
+		<td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
+		</tr>
+		</table>
+		</#list>
+		</div>
+</#list>
 </div>
 
 
