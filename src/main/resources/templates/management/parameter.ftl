@@ -57,7 +57,7 @@
                                         <tr>
                                             <th width="5%" class="center"></th>  
                                             <th width="5%" class="center">排序</th>                                                                                                 
-                                            <th width="8%" class="center">id</th>
+                                            <th width="8%" class="center">ID</th>
                                             <th width="15%" class="center">类型</th>                                            
                                             <th width="21%" class="center">名称</th>
                                             <th width="8%" class="center">值输入类型</th>

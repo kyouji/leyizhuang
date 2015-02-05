@@ -49,7 +49,7 @@ $("#id-delete").click(function(){
 });
 
 //分页
-$("#id-pagination").pagination($("#id-total-num").val(), {
+/*$("#id-pagination").pagination($("#id-total-num").val(), {
 	num_display_entries : 2, 
 	num_edge_entries : 3,
 	current_page : 0,
@@ -68,7 +68,7 @@ $("#id-pagination").pagination($("#id-total-num").val(), {
 		});
 	}
 	
-});
+});*/
 
 // 删除参数
 function destroy(id) {
@@ -107,14 +107,17 @@ function modify(id) {
             });
             
           //修改后文本框变色显示变色  zackma-20150204
-            $(".addinput-form input").change(function(){
-            	$("input").css({"background-color":"#ffffcc"});
+            $(".addinput-form #m-type").change(function(){
+            	$("#m-type").css({"background-color":"#ffffdb"});
+            });
+            $(".addinput-form #m-name").change(function(){
+            	$("#m-name").css({"background-color":"#ffffdb"});
             });
             $(".addinput-form select").change(function(){
-            	$("select").css({"background-color":"#ffffcc"});
+            	$("select").css({"background-color":"#ffffdb"});
             });
             $(".addinput-form textarea").change(function(){
-                $("textarea").css({"background-color":"#ffffcc"});	
+                $("textarea").css({"background-color":"#ffffdb"});	
             });
              
             // 修改提交  zackma-20150204
