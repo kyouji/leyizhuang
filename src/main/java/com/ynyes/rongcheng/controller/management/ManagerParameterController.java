@@ -51,6 +51,16 @@ public class ManagerParameterController {
         }
     }
     
+    @RequestMapping(value="/modify/{paramId}",method = RequestMethod.POST)
+    public String modify(ModelMap map, @PathVariable Long paramId){
+        if (null != paramId)
+        {
+            map.addAttribute("parameter", parameterService.findOne(paramId));
+        }
+        
+        return "/management/parameter/param_modify";
+    }
+    
     @RequestMapping(value="/save",method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> add(ModelMap map, Parameter param){

@@ -14,24 +14,31 @@
 		        ${param.id}
 		    </td>
 		    <td class="center">
-		        ${param.type}
-		        <i class="icon-info-sign"></i> 
+		        ${param.type} 
 		    </td>
 		    <td class="center">
 		        ${param.name}
 		    </td>
 		    <td class="center">
 		    	<#if param.isValueIputByChoose?? && param.isValueIputByChoose==true>
-		    		选择
+		    		点击选择
 		    	<#else>
 		    		手动输入
 		    	</#if>
 		    </td>
 		    <td class="center">
-		        ${param.isSearchable?c}
+		        <#if param.isSearchable?? && param.isSearchable==true>
+		                                   是
+		        <#else>
+		                                   否
+		        </#if>
 		    </td>
 		    <td class="center">
-		        ${param.isSingleValue?c}
+		        <#if param.isSingleValue?? && param.isSingleValue==true>
+		                                   是
+		        <#else>
+		                                   否
+		        </#if>
 		    </td>
 		    <td class="center">
 		    	<#if param.valueList??>

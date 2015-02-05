@@ -8,6 +8,7 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/member.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
 <style type="text/css">
 	.table{height:34px;text-align:Center;line-height:34px;border:1px solid #e5e5e5;}
 	.table .tb_tr{background:#e5e5e5}
@@ -16,6 +17,9 @@
 <script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="/Tm/js/data.js"></script>
 <script type="text/javascript" src="/Tm/js/datajs.js"></script>
+<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/front/address.js"></script>
 
 </head>
 <body>
@@ -71,28 +75,34 @@
 					<td>地区</td>
 					<td>邮政编码</td>
 					<td>电话</td>
+					<td>手机</td>
 					<td>地址</td>
 					<td>操作</td>
 				</tr>	  	
 			</thead>
 			<tbody id="tbody">
+			<#if address??>
+			<#list address as addres>
 				<tr class="tr_td">
-					<td width="8%"><input type="radio" name="rad"></td>
-					<td width="10%">郭正洋</td>
-					<td width="20%">云南省曲靖市麒麟区</td>
-					<td width="8%">655000</td>
-					<td width="18%">18817591257</td>
-					<td width="20%">建宁街道小坡</td>
-					<td width="8%" class="upda_del"><a href="javascript:void(0)">修改</a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a></td>
+					<td width="6%"><input type="radio" name="rad" checked=true></td>
+					<td width="10%" class="td_name"><#if addres.receiverName??>${addres.receiverName}</#if></span></td>
+					<td width="15%"><span class="td_province">${addres.province}</span>--<span class="td_city">${addres.city}</span>--<span class="td_disctrict">${addres.disctrict}</span></td>
+					<td width="8%" class="td_postcode">${addres.postcode}</td>
+					<td width="10%" class="td_receiverTelephone"><#if addres.receiverMobile??>${addres.receiverTelephone}</#if></td>
+					<td width="10%" class="td_receiverMobile">${addres.receiverMobile}</td>
+					<td width="20%" class="td_detailAddress">${addres.detailAddress}</td>
+					<td width="8%" class="upda_del"><a href="javascript:void(0)" onclick="tm_update(this,${addres.id})">修改</a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="tm_delete(this,${addres.id})">删除</a></td>
 				</tr>
+			</#list>
+			</#if>
 			</tbody>
 		</table>	  
         </div>
         <div class="h20"></div>
-        <div class="ml20 ha oh">
-          <form action="#" method="get">
+        <div class="ml20 ha oh" id="centent">
+          <form action="" method="post">
             <div class="h50 black"><span class="fll mt5 fontsize">收货人姓名：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/></div>
+              <input type="text" id="name"  class="inp ml10 gr_sz fll" style="width:320px;"/></div>
             <div class="h50 color666 clear"><span class="fll black fontsize">　　　地区：</span>
               <select class="ml10 " id="province">
               </select>
@@ -104,21 +114,21 @@
               </select>
               <b class="black" style="margin-left:10px;margin-right:10px;">区</b> </div>
             <div class="h50 black clear"><span class="fll mt5 fontsize">　　　地址：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/>
+              <input type="text" id="address"  class="inp ml10 gr_sz fll" style="width:320px;"/>
               <span class=" ml10 fll mt5 black">（填写详细地址有助于快速配送）</span></div>
             <div class="h50 black clear"><span class="fll mt5 fontsize">　邮政编码：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/>
+              <input type="text" id="postcode" class="inp ml10 gr_sz fll" style="width:320px;"/>
             </div>
             <div class="h50 color666 clear"><span class="fll mt5 black fontsize">　固定电话：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:50px;"/>
+              <input type="text" id="carts"  class="inp ml10 gr_sz fll" style="width:50px;"/>
               <b class="black" style="margin-left:8px;" >-</b>
-              <input type="text"  class="inp ml5 gr_sz fll" style="width:236px;"/>
+              <input type="text" id="receiverTelephone" class="inp ml5 gr_sz fll" style="width:236px;"/>
             </div>
             <div class="h50 black clear"><span class="fll mt5 fontsize">　　　手机：</span>
-              <input type="text"  class="inp ml10 gr_sz fll" style="width:320px;"/>
+              <input type="text" id="receiverMobile" class="inp ml10 gr_sz fll" style="width:320px;"/>
             </div>
             <div class=" ha oh ml68">
-              <input type="button" value="提交"  class="user_r_btn"/>
+              <input type="button" value="提交" onclick="tm_save(this)" class="user_r_btn" />
             </div>
           </form>
         </div>
@@ -152,7 +162,6 @@
 	$(function(){
 		 $(document).ready(function(){init("province","","city","","town","");});
 	})
-
-</script>
-</body>
+	
+  </script>
 </html>

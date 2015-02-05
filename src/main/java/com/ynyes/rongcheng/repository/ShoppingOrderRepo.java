@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -27,6 +28,9 @@ public interface ShoppingOrderRepo extends
     // 通过用户名和订单状态查找
     Page<ShoppingOrder> findByUsernameAndStatusCode(String username, Long statusCode, Pageable page);
     List<ShoppingOrder> findByUsernameAndStatusCode(String username, Long statusCode);
+    
+    // 通过用户名和下单时间查找
+    Page<ShoppingOrder> findByUsernameAndOrderTimeAfter(String username, Date time, Pageable page);
     
     // 通过订单号查找
     ShoppingOrder findByOrderNumber(String orderNumber);

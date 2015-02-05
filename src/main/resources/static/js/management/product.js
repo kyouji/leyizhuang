@@ -22,7 +22,7 @@ jQuery(function($) {
 		callback : function(pageIndex) {
 			$.ajax({
 				type:"GET",
-				url:"/admin/product/type/page/" + pageIndex,
+				url:"/admin/product/page/" + pageIndex,
 				success:function(data){
 					$("#id-tbody").html(data);
 				}
@@ -36,7 +36,7 @@ jQuery(function($) {
 		$("#id-add").siblings().addClass("hide");
 		$("#id-add").removeClass("hide");
 	});
-	
+	/*
 	var props = $("#new-property").html();
 	
 	// 点击加号添加属性
@@ -79,9 +79,10 @@ jQuery(function($) {
             }
         }); // ajax
 	}); // change
-	
+	*/
 	// 提交
 	$("#add-submit").click(function(){
+	    /*
 	    var propStr = "";
 		var props = $(".add.multiSelectProp.spon");
 		
@@ -124,7 +125,7 @@ jQuery(function($) {
                 }
             }
         });
-		
+		*/
 	});
    
 });
@@ -132,6 +133,7 @@ jQuery(function($) {
 // 修改
 function modify(id) 
 {
+    /*
 	$.ajax({
         url: '/admin/product/type/modify/' + id,
         type: 'POST',
@@ -242,6 +244,7 @@ function modify(id)
         	}); // modify-submit
         }
     });
+    */
 }
 
 // 删除
@@ -250,7 +253,7 @@ function destroy(id)
 	if(window.confirm('确定要删除吗？')){
 		
 		$.ajax({
-	        url: '/admin/product/type/delete/' + id,
+	        url: '/admin/product/delete/' + id,
 	        type: 'POST',
 	        success: function () {
 	        	location.reload();

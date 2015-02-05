@@ -1,9 +1,5 @@
 package com.ynyes.rongcheng.repository;
 
-import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -21,6 +17,5 @@ public interface SiteInfoRepo extends
 		JpaSpecificationExecutor<SiteInfo> 
 {
     // 通过类型查找
-    Page<SiteInfo> findByTypeAndIsShowTrue(String type, Pageable page);
-    List<SiteInfo> findByTypeAndIsShowTrue(String type);
+    SiteInfo findByTypeAndIsShowTrue(String type);
 }

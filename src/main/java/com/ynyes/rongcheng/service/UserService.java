@@ -56,8 +56,9 @@ public class UserService {
      * @param mobile 移动电话
      * @return res.code 0: 成功 1: 失败
      *         res.message 失败时的失败信息
+     *         res.data 保存的User
      */
-    public Map<String, Object> add(String name, String password, String mobile,HttpServletRequest request)
+    public Map<String, Object> add(String name, String password, String mobile)
     {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 1);
@@ -88,10 +89,11 @@ public class UserService {
         
         user.setIsEnable(true);
         
-        repository.save(user);
+        user = repository.save(user);
         
         map.put("code", 0);
-        request.getSession().setAttribute("user", user);
+        map.put("data", user);
+        
         return map;
     }
     
@@ -646,6 +648,14 @@ public class UserService {
         }
         return repository.save(user);
     }
-    
+    /**
+     * id
+     * 
+     * @param user 要保存的用户
+     * @return 保存的用户
+     */
+    public User findById(Long id){
+        return repository.findById(id);
+    }
     
 }

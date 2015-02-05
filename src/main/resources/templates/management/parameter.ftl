@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -10,6 +11,8 @@
 		<link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css"/>
 		<link rel="stylesheet" href="/assets/css/ace.min.css" type="text/css"/>
+		<link rel="stylesheet" href="/css/select.css">
+		<link rel="stylesheet" href="/css/pagination.css">
 	</head>
 
 	<body>
@@ -37,8 +40,8 @@
 
 					<div class="page-content">
 						<div class="row">
-						    <#include "/management/sub/param_add.ftl">
-                            <!--div id="id-modify"></div-->
+						    <#include "/management/parameter/param_add.ftl">
+                            <div id="id-modify"></div>
 							<div id="id-table" class="col-sm-12">
 								<!-- PAGE CONTENT BEGINS -->
                                 <div class="table-header">
@@ -58,8 +61,8 @@
                                             <th width="15%" class="center">类型</th>                                            
                                             <th width="21%" class="center">名称</th>
                                             <th width="8%" class="center">值输入类型</th>
-                                            <th width="10%" class="center">可检索？</th>
-                                            <th width="10%" class="center">多值？</th>
+                                            <th width="10%" class="center">是否可检索</th>
+                                            <th width="10%" class="center">是否多值</th>
                                             <th width="10%" class="center">值列表</th>
                                             <th width="8%" class="center">编辑</th>
                                         </tr>
@@ -87,9 +90,9 @@
 				</div><!-- /.main-content -->
 			</div><!-- /.main-container-inner -->
 		</div><!-- /.main-container -->
-
+    
 		<!-- basic scripts -->
- 
+         
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
@@ -120,38 +123,9 @@
 		<!-- inline scripts related to this page -->
         <script src="/js/manager/parameter.js"></script>
         
-        <!--param_add.ftl中的参数提交   zackma-->
-        <script type="text/javascript">
-            $(function(){
-                $("#add-submit").click(function(){
-                    var type = $("form #type").val();
-                    var name = $("form #name").val();
-                    var input_type = $("form #input_type:selected").val();
-                    var isSearchable = $("#searchable:checked").val();
-                    var isSingleValue = $("#multiple:checked").val();
-                    var valueList = $("form #param_list").val();
-                    if(type==""||name==""||input_type==""||isSearchable==""||isSingleValue==""||valueList==""){
-			            alert("请填写完整参数！");
-			        return;
-		            }
-                    
-                    var subDate = {"type":type,"name":name,"input_type":input_type,"isSearchable":isSearchable,"isSingleValue":isSingleValue,"valueList":valueList};
-                    $.ajax({
-			            type:"POST",
-			            url:"/admin/parameter/save",
-			            data:subDate,
-			            success:function(data){
-					        if(data.code == 0){
-					            alert("参数添加成功！");
-					            location.reload();
-					        }else{
-					            alert(data.message);
-					        }
-			            }
-		            });
-                });
-            });
-        </script>
+        <!--新增参数提交-->
+        
+        <script src="/js/management/param_add.js" type="text/javascript"></script>
         
 	</body>
 </html>
