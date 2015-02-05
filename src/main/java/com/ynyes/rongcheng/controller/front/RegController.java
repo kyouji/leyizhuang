@@ -72,9 +72,12 @@ public class RegController {
             if(StringUtils.isNotEmpty(name) && StringUtils.isNotEmpty(mobile) && StringUtils.isNotEmpty(password) && StringUtils.isNotEmpty(newpassword)){
                 if(password==newpassword || password.equals(newpassword)){
                       if(verify.equalsIgnoreCase(msg)){
-                        Map<String, Object> map=  UserService.add(name, password, mobile,request);
-                       if(map.get("code").equals(0)){
+                        Map<String, Object> map=  UserService.add(name, password, mobile);
+                        
+                        if(map.get("code").equals(0)){
                            flag="success";
+
+                           request.getSession().setAttribute("user", map.get("data"));
                        }
                     }else{
                         flag="vfalse";//验证码失败
