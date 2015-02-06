@@ -35,6 +35,10 @@ public class ProductVersion {
     @Column
     private String picUri;
     
+    // 该版本的成本价
+    @Column(nullable=false, scale=2)
+    private Double costPrice;
+    
     // 该版本的市场价
     @Column(nullable=false, scale=2)
     private Double marketPrice;
@@ -93,6 +97,22 @@ public class ProductVersion {
 
     public void setPicUri(String picUri) {
         this.picUri = picUri;
+    }
+
+    public Double getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(Double costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    public Double getIncludePrice() {
+        return includePrice;
+    }
+
+    public void setIncludePrice(Double includePrice) {
+        this.includePrice = includePrice;
     }
 
     public Double getMarketPrice() {

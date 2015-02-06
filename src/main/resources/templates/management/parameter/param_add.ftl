@@ -6,7 +6,7 @@
     <div class="space-4"></div>
  
     <form id="fm-add" class="form-horizontal" method="POST" >
-        <input type="text" name="type" value="" class="hide" />
+        <input type="text" name="type" id="id" value="" class="hide" />
         <div class="col-sm-12"  style="margin-top: 10px;">
             <div class="addinput-form">
 	            <label class="col-sm-1 control-label no-padding-right" for="name"> 类型:</label>
@@ -62,7 +62,7 @@
 	        <div class="clear"></div>
 	        
 	        <div class="addinput-form">
-	            <label class="col-sm-2 control-label no-padding-right" for="name"> 是否为多值参数:</label>
+	            <label class="col-sm-2 control-label no-padding-right" for="name"> 是否为单值参数:</label>
 	            <div class="col-sm-8" style="line-height:32px">
 	                <label style="font-size:16px" class="col-xs-10 col-sm-2">是
 	                <input type="radio" id="multiple" class="" name="multiple"  value="true" />

@@ -241,6 +241,22 @@ public class ProductService {
     }
     
     /**
+     * 保存商品
+     * 
+     * @param product 要保存的商品
+     * @return 找到的商品，出错时返回NULL
+     */
+    public Product save(Product product)
+    {
+        if (null == product)
+        {
+            return null;
+        }
+        
+        return repository.save(product);
+    }
+    
+    /**
      * 删除商品
      * 
      * @param id 商品ID

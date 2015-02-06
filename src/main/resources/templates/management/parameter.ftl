@@ -57,12 +57,12 @@
                                         <tr>
                                             <th width="5%" class="center"></th>  
                                             <th width="5%" class="center">排序</th>                                                                                                 
-                                            <th width="8%" class="center">id</th>
+                                            <th width="8%" class="center">ID</th>
                                             <th width="15%" class="center">类型</th>                                            
                                             <th width="21%" class="center">名称</th>
                                             <th width="8%" class="center">值输入类型</th>
                                             <th width="10%" class="center">是否可检索</th>
-                                            <th width="10%" class="center">是否多值</th>
+                                            <th width="10%" class="center">是否单值</th>
                                             <th width="10%" class="center">值列表</th>
                                             <th width="8%" class="center">编辑</th>
                                         </tr>
@@ -121,12 +121,16 @@
 		<script src="/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-        <script src="/js/management/parameter.js"></script>
+		
+		<!--全选反选提交删除等-->
+        <script src="/js/management/parameter.js" type="text/javascript"></script>
         
-        <!--新增参数提交-->
+        <!--pagination-->
+		<script src="/js/jquery.pagination.js" type="text/javascript"></script>
         
+        <!--新增参数提交-->        
         <script src="/js/management/param_add.js" type="text/javascript"></script>
-        
+                
 	</body>
 </html>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>商品管理页</title>
+		<title>商品管理</title>
 
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,7 +41,7 @@
 					<div class="page-content">
 					    <input type="text" id="id-total-num" hidden value="<#if type_total??>${type_total}</#if>" />
                         <div class="row">
-						    <#--include "/management/product/add.ftl" -->
+						    <#include "/management/product/add.ftl" >
                             <div id="id-modify"></div>
 							<div id="id-table" class="col-xs-12">
 								<div class="table-header">
@@ -55,12 +55,13 @@
                                 <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th width="3%" ></th>
+                                            <th width="4%" ></th>
+                                            <th width="5%" class="center">排序</th>                                            
+                                            <th width="5%" class="center">ID</th>
+                                            <th width="7%" class="center">商品编码</th>
+                                            <th width="7%" class="center">商品名称</th>
+                                            <th width="7%" class="center">商品参数   </th>                                                                                        
                                             <th width="4%" class="center">选择</th>
-                                            <th width="5%" class="center">排序</th>
-                                            <th width="5%" class="center">商品ID</th>
-                                            <th width="14%" class="center">商品名称</th>
-                                            <th width="8%" class="center">商品类型</th>
                                             <th width="8%" class="center">市场价</th>
                                             <th width="8%" class="center">本网价</th>
                                             <th width="27%" class="center">状态(点击可改变状态)</th>
@@ -73,6 +74,14 @@
                                         <#include "/management/product/tbody.ftl">
                                     </tbody>
                                 </table>
+                                
+                                <div style="margin-top: 5px;float: left;">
+                                    <button id="id-all-check" class="btn btn-xs">全选</button>
+                                    <button id="id-all-uncheck" class="btn btn-xs">反选</button>
+                                    <button id="id-sort" class="btn btn-xs">排序</button>
+                                    <button id="id-delete" class="btn btn-xs">删除选中</button> 
+                                </div>
+                                
                                 <div id="id-pagination" class="pagination" style="margin-top: 5px;float: right;"></div>
 							</div><!-- /.col -->
 						</div><!-- /.row -->
