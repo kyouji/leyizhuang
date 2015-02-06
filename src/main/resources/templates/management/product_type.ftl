@@ -68,6 +68,14 @@
                                         <#include "/management/product_type/tbody.ftl">
                                     </tbody>
                                 </table>
+                                
+                                <div style="margin-top: 5px;float: left;">
+                                    <button id="id-all-check" class="btn btn-xs">全选</button>
+                                    <button id="id-all-uncheck" class="btn btn-xs">反选</button>
+                                    <button id="id-sort" class="btn btn-xs">排序</button>
+                                    <button id="id-delete" class="btn btn-xs">删除选中</button> 
+                                </div>
+                                
                                 <div id="id-pagination" class="pagination" style="margin-top: 5px;float: right;"></div>
 							</div><!-- /.col -->
 						</div><!-- /.row -->

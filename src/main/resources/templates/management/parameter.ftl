@@ -121,12 +121,16 @@
 		<script src="/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
+		
+		<!--全选反选提交删除等-->
         <script src="/js/management/parameter.js" type="text/javascript"></script>
         
-        <!--新增参数提交-->
+        <!--pagination-->
+		<script src="/js/jquery.pagination.js" type="text/javascript"></script>
         
+        <!--新增参数提交-->        
         <script src="/js/management/param_add.js" type="text/javascript"></script>
-        
+                
 	</body>
 </html>
 
