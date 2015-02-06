@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.service.ProductService;
@@ -39,8 +38,8 @@ public class TypelistController {
     @RequestMapping("/list/{typeId}")
     public String index(@PathVariable String typeId,Integer page,Integer size,String direction,Model model){
         page=0;
-        size=3;
-        direction="asc";//排序
+        size=12;
+        direction="desc";//排序
         String property="sortNumber";//字段
         if(StringUtils.isNotEmpty(typeId) && StringUtils.isNumber(typeId)){
             if(typeId.equals("1")){
@@ -50,7 +49,7 @@ public class TypelistController {
                 //根据类型获取所有子类
                 Page<Product> pages=productservice.findByType("2", page, size, direction, property);
                 model.addAttribute("product", pages.getContent());
-                model.addAttribute("count", "12");
+                model.addAttribute("count", "15");
                 return "/front/type_list_mobile";//手机产品
             }
             if(typeId.equals("3")){
@@ -81,13 +80,13 @@ public class TypelistController {
      */
     @RequestMapping("/list/{typeId}_")
     public String mobile(@PathVariable String typeId,Integer page,Integer size,String direction,Model model){
-            direction="asc";//排序
+            direction="desc";//排序
             String property="sortNumber";//字段
            
                 //根据类型获取所有子类
                 Page<Product> pages=productservice.findByType("2", page, size, direction, property);
                 model.addAttribute("product", pages.getContent());
-                model.addAttribute("count", "12");
+                model.addAttribute("count", "15");
            
         return "/front/listtemp/pageProduct";//手机产品
     }

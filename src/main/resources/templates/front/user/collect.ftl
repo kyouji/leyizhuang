@@ -65,9 +65,9 @@
 <#if collectedProductIds??>
 <#list collectedProductIds as collect>
 <tr class="member_ddhe">
-<td class="member_sc_a"><span><a href="#"><img src="<#if collect.coverImageUri??>${collect.coverImageUri}</#if>" width="76" height="76"></a></span><a href="#"><p><#if collect.name??>${collect.name}</#if></p></a></td>
+<td class="member_sc_a"><span><a href="/product/${collect.id}"><img src="<#if collect.coverImageUri??>${collect.coverImageUri}</#if>" width="76" height="76"></a></span><a href="/product/${collect.id}"><p><#if collect.name??>${collect.name}</#if></p></a></td>
 <td class="member_sc_b"><span>￥<#if collect.flashSalePrice??>${collect.flashSalePrice?c}</#if></span></td>
-<td class="member_sc_e"><a href="/cart">购买产品</a><a href="javascript:void(0)" onclick="tm_del(this)">删除收藏</a></td>
+<td class="member_sc_e"><a href="/cart">购买产品</a><a href="javascript:void(0)" onclick="tm_del(this,${collect.id})">删除收藏</a></td>
 </tr>
 </#list>
 </#if>
@@ -103,9 +103,18 @@
 
 
 <script type="text/javascript">
-function tm_del(obj){
+function tm_del(obj,id){
 	 if (window.confirm('确定要删除该收藏吗？')) {
-	 	alert("正在开发!")
+	 	$.ajax({
+	 		type:"post",
+	 		url:"/user/delcontent",
+	 		data:{"produid":id},
+	 		success:function(data){
+	 			if(data=="success"){
+	 				alert("删除成功！")
+	 			}
+	 		}
+	 	})
 	 }
 }
 </script>

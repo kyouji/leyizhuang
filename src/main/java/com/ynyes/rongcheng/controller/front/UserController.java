@@ -271,10 +271,10 @@ public class UserController {
      */
     @RequestMapping("/delcontent")
     @ResponseBody
-    public String deleteContent(HttpServletRequest request){
+    public String deleteContent(HttpServletRequest request,Long produid){
         User user =(User) request.getSession().getAttribute("user");
         if(user!=null){
-            UserService.deleteCollectedProductId(user.getUsername(), Long.parseLong(user.getCollectedProductIds()));
+            UserService.deleteCollectedProductId(user.getUsername(), produid);
             flag="success";
         }
         return flag;

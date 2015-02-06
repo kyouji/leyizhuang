@@ -7,15 +7,10 @@
 <meta name="copyright" content="荣诚手机超市 版权所有" />
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
+<liNK rel=stylesheet type=text/css href="/Tm/css/carousel.css">
+<script type="text/javascript" src="/Tm/js/jquery-1.11.1.min.js"></script>
+<script type=text/javascript src="/Tm/js/jquery.jqzoom.js"></script>
+<script type=text/javascript src="/Tm/js/jquery.livequery.js"></script>
 </head>
 <body>
 <header>
@@ -26,16 +21,8 @@ DD_belatedPNG.fix('.,img,background');
 </header>
 
 <div class="header1 main">
-<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="img/rc_logo.png" width="177" height="69"></a></div>
+<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="/img/rc_logo.png" width="177" height="69"></a></div>
 <div class="fll city"><a href="#">城市切换</a><span></span>
-<!--<div class="cityqh"><ul>
-<li><a href="#">昆明市</a></li>
-<li><a href="#">曲靖市</a></li>
-<li><a href="#">大理州</a></li>
-<li><a href="#">西双版纳</a></li>
-<li><a href="#">德宏州</a></li>
-<li><a href="#">丽江市</a></li>
-</ul></div>-->
 </div>
 <div class="sercha fll">
 <input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
@@ -49,42 +36,6 @@ DD_belatedPNG.fix('.,img,background');
 <nav><div class="main">
 <div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15">全部商品分类</a></div>
 
-<!--<ul>
-<li>
-<div class="mbj m1"></div>
-<div class="divshop">
-<h4><a href="/list/1">手机产品</a></h4>
-<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-</div>
-<div class="clear"></div>
-
-<div class="threeright">
-<ul id="threeright1">
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-</ul>
-</div>
-</li>
-
-<li>
-<div class="mbj m2"></div>
-<div class="divshop">
-<h4><a href="/list/3">手机配件</a></h4>
-<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-</div>
-<div class="clear"></div>
-</li>
-<li style="border-bottom:none;">
-<div class="mbj m3"></div>
-<div class="divshop">
-<h4><a href="/list/4">手机靓号</a></h4>
-<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-</div>
-<div class="clear"></div>
-</li>
-</ul>-->
 
 </div>
 
@@ -104,15 +55,15 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main mt10 rc_ppfl">
 <span class="fll">品牌分类：</span>
 <ul>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
 </ul>
 <a href="#">更多>></a>
 </div>
@@ -123,42 +74,43 @@ DD_belatedPNG.fix('.,img,background');
 <div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/1">手机产品</a>&gt;<a href="#">手机详情</a>&gt; </div>
 <div class="shop_show">
   <div class="shop_show_left">
-    <div class="shopBigImg">
-      <ul>
-        <li style="display:block;"><a href="#"><img src="/images/bigshow.jpg" /></a></li>
-        <li><a href="#"><img src="/images/bigshow.jpg" /></a></li>
-        <li><a href="#"><img src="/images/bigshow.jpg" /></a></li>
-        <li><a href="#"><img src="/images/bigshow.jpg" /></a></li>
-        <li><a href="#"><img src="/images/bigshow.jpg" /></a></li>
-      </ul>
+    <div id="preview">
+    <div class=jqzoom>
+        <#if ShowPictures??>
+            <img id=bigImg src="${ShowPictures[0]}" width=310 height=310 jqimg="${ShowPictures[0]}">
+        </#if>
+        
     </div>
-    <div class="shopSmallImg"> <a href="#" class="LeftBtn"><img src="/images/leftBtn.jpg" /></a>
-      <ul>
-        <li class="shopSmallImg_on"><a href="#"><img src="images/hot.jpg" /></a></li>
-        <li><a href="#"><img src="images/hot.jpg" /></a></li>
-        <li><a href="#"><img src="images/hot.jpg" /></a></li>
-        <li><a href="#"><img src="images/hot.jpg" /></a></li>
-        <li><a href="#"><img src="images/hot.jpg" /></a></li>
-      </ul>
-      <a href="#" class="LeftRight"><img src="/images/rightBtn.jpg" /></a> </div>
+    <div id=spec>
+        <div id=specLeft class="control specLeftT"></div>
+        <div id=specList>
+            <ul class=listImg>
+               <#list ShowPictures as pic>
+                   <li><a href="javascript:void(0)"><img src="${pic}" src_H="${pic}" src_D="${pic}" /></a></li>
+               </#list>
+            </ul>
+        </div>
+        <div id=specRight class="control specRightT"></div>
+    </div>
+</div>
     <div class="box">
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
       <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin","tieba","sqq"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","tieba","sqq"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 </script>
-      <div class="love"><a href="#"><img src="/images/scsp.jpg" /></a></div>
+      <div class="love"><a href="javascript:void(0)" onclick="tm_collect(this,${product.id})" style="text—decoration：none"><img src="/images/scsp.jpg" class="img_s"/></a></div>
     </div>
   </div>
   <div class="ShopShowRight">
   <div class="erweimacontent"><img src="/img/erweima.png" width="180" height="180"></div>
-    <h2>Apple iPhone 6 128G 银</h2>
-    <h3>土豪必备】版本A1530，兼容移动/联通双4G网络，配备先进疾速A7芯片，Touch ID指纹识别传感器，全新800万iSight摄像头，全新Face Time HD高清摄像头。</h3>
-    <p><span>商品编码：</span>TC19394217479</p>
-    <p><span>市&nbsp;&nbsp;场&nbsp;价：</span>￥9388.00</p>
-    <p><span>荣&nbsp;&nbsp;诚&nbsp;价：</span><em>￥3499.00</em><span class="orange ml10">(降价通知)</span></p>
-    <p><span>促&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销：</span><i>购机即送原装高清贴膜！包贴好!包邮！</i></p>
-    <p><span>商品评价：</span><img src="images/star.jpg" /><img src="images/star.jpg" /><img src="images/star.jpg" /><img src="images/star.jpg" /><img src="images/star.jpg" /><span style="color:#1480DB">（共有3668条评价）</span></p>
-    <p><span>配&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置：</span>一原充一数据线（内置电池，3100mAh）</p>
-    <p><span>服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</span>由"荣诚"直接销售和发货，并提供售后服务</p>
+    <h2><#if product.id??>${product.name}</#if></h2>
+    <!--<h3><#if product.detail??>${product.detail}</#if></h3>-->
+    <p><span>商品编码：</span><#if product.code??>${product.code}</#if></p>
+    <p><span>市&nbsp;&nbsp;场&nbsp;价：</span>￥${product.priceMinimum?c}.00</p>
+    <p><span>荣&nbsp;&nbsp;诚&nbsp;价：</span><em>￥<#if product.flashSalePrice??>${product.flashSalePrice?c}</#if>.00</em><span class="orange ml10">(降价通知)</span></p>
+    <p><span>促&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销：</span><i><#if product.promotion??>${product.promotion}</#if></i></p>
+    <p><span>商品评价：</span><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><span style="color:#1480DB">（共有<#if product.averagePoints??>${product.averagePoints}</#if>条评价）</span></p>
+    <p><span>配&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置：</span><#if product.configuration??>${product.configuration}</#if></p>
+    <p><span>服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</span><#if product.service??>${product.service}</#if></p>
     <div class="SelectPackage">
       <p class="mb5"><span class="fll">颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色：</span><a href="#" class="SelectPackage_on">灰色行货</a><a href="#">白色行货</a></p>
       <div class="clear"></div>
@@ -167,11 +119,12 @@ DD_belatedPNG.fix('.,img,background');
       <p class="mb5"><span class="fll">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本：</span><a href="#">4G</a><a href="#">全网通</a><a href="#" class="SelectPackage_on">2G/3G</a></p>
       <div class="clear"></div>
     </div>
-    <p class="shopbtn mt10"><span class="fll">我要购买：</span><a href="#" class="fll"><img src="images/jia.jpg" /></a>
-      <input type="text" class="select_num"  value="1"/>
-      <a href="#" class="fll"><img src="images/jian.jpg" /></a></p>
+    <p class="shopbtn mt10"><span class="fll">我要购买：</span>
+    <a href="javascript:void(0)" class="fll prev"><img src="/images/jia.jpg" /></a>
+      <input type="text" class="select_num " id="count" value="1"/>
+      <a href="javascript:void(0)" class="fll next"><img src="/images/jian.jpg" /></a></p>
     <div class="clear"></div>
-    <div class="gm_btn"> <span class="gm_btn1"><a href="/cartStep">立即购买</a></span> <span class="gm_btn2"><a href="/cartStep">加入购物车</a></span><span class="gm_btn3"><a href="#">对比</a></span></div>
+    <div class="gm_btn"> <span class="gm_btn1"><a href="javascript:void(0)" onclick="tm_buy()">立即购买</a></span> <span class="gm_btn2"><a href="/cart">加入购物车</a></span><span class="gm_btn3"><a href="javascript:void(0)" onclick="tm_contra(this,${product.id})">对比</a></span></div>
   </div>
 </div>
 <div class="clear"></div>
@@ -182,37 +135,37 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="fll tuijianzuhe_a"><ul>
 
-        <li><a href="#"> <img src="images/spsx.jpg" width="135" height="135" />
+        <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
           <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b></a>
           <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
         </li>
-                <li><a href="#"> <img src="images/spsx.jpg" width="135" height="135" />
+                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
           <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b></a>
           <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
         </li>
-                <li><a href="#"> <img src="images/spsx.jpg" width="135" height="135" />
+                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
           <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b></a>
           <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
         </li>
-                <li><a href="#"> <img src="images/spsx.jpg" width="135" height="135" />
+                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
           <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b></a>
           <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
         </li>
-                <li><a href="#"> <img src="images/spsx.jpg" width="135" height="135" />
+                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
           <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b></a>
           <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
         </li>
-                <li><a href="#"> <img src="images/spsx.jpg" width="135" height="135" />
+                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
           <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b></a>
           <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
         </li>
-                <li><a href="#"> <img src="images/spsx.jpg" width="135" height="135" />
+                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
           <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
           <b>￥5900.00</b></a>
           <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
@@ -239,25 +192,25 @@ DD_belatedPNG.fix('.,img,background');
     <div class="hot_list">
       <h2>热销排行</h2>
       <ul>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num1">1</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num1">2</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num1">3</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num2">4</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num2">5</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num2">6</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num2">7</div>
         </li>
       </ul>
@@ -265,38 +218,31 @@ DD_belatedPNG.fix('.,img,background');
     <div class="hot_list mt20">
       <h2>浏览记录</h2>
       <ul>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
       </ul>
     </div>
   </div>
   <div class="sub_right">
     <div class="sx_tit" style="padding:0;">
-      <ul>
-        <li><a href="/product/1" class="con">商品详情</a></li>
-        <li><a href="#">商品参数</a></li>
-        <li><a href="#">商品评价（639）</a></li>
-        <li><a href="#">购买咨询</a></li>
-        <li><a href="#">价格走势</a></li>
+      <ul id="id-tab-list">
+        <li><a href="javascript:void(0)" class="con">商品详情</a></li>
+        <li><a href="javascript:void(0)">商品参数</a></li>
+        <li><a href="javascript:void(0)">商品评价（639）</a></li>
+        <li><a href="javascript:void(0)">购买咨询</a></li>
+      <!--  <li><a href="javascript:void(0)">价格走势</a></li>-->
       </ul>
     </div>
-    <div class="products_det"> 【宝贝时尚物语】<br />
-      <br />
-      BananaRepublic香蕉共和国女士MadMen系列蝴蝶结七分袖上衣，不拘的风格设计，凸显欧美时尚潮流的特点，穿上他展现十足的欧美明星气质，十足的欧美女性气质，没有太多的束缚，你就是你自己！<br />
-      <br />
-      <p style="text-align:center;"> <img src="images/banner.jpg" width="900"></p>
-      - 材质：100%的聚酯纤维<br />
-      - 洗衣方式：冷水机洗<br />
-      - 进口<br />
-      - 脖颈处有系带<br />
-      - 袖子<a href="#">为七分袖</a>款式<br />
-      - V形衣领<br />
-      <p>【商品英文介绍】</p>
-    </div>
-    <div class="lr_right_main main_top2">
+    <div class="products_det"> 
+    	<ul id="id-tab-content" >
+    		<li ><#if product.detail??>${product.detail}</#if></li>
+    		<li style="display:none">${product.configuration}</li>
+    		<li style="display:none">商品评价</li>
+    		<li style="display:none">商品咨询
+    		<div class="lr_right_main main_top2">
       <div class="pinglun">
         <h2>购买咨询</h2>
       </div>
@@ -351,7 +297,12 @@ DD_belatedPNG.fix('.,img,background');
         </dl>
         <p>&nbsp;</p>
       </div>
+    </div></li>
+    		
+    	</ul>
+    
     </div>
+    
     
     <div class="lr_right_main main_top2">
       <div class="pinglun">
@@ -408,7 +359,7 @@ DD_belatedPNG.fix('.,img,background');
         <li class="yzminp">
           <input type="text" name="textfield2" id="textfield2" />
         </li>
-        <li class="yzmimg"><img src="images/auth.gif" width="96" height="21" alt="验证码" /></li>
+        <li class="yzmimg"><img src="/images/auth.gif" width="96" height="21" alt="验证码" /></li>
         <li class="tijiaobox">
           <input type="submit" value="提交信息"  class="tijiaoan"/>
         </li>
@@ -424,7 +375,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="clear"></div>
 
 <div class="main mt20">
-<div class="floor_n fll"><img src="img/peisongyuanze.png" width="719" height="44"></div>
+<div class="floor_n fll"><img src="/img/peisongyuanze.png" width="719" height="44"></div>
 <div class="flr">
 <input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
 <input type="submit" class="search-btn" title="搜索" value="  ">
@@ -491,17 +442,17 @@ DD_belatedPNG.fix('.,img,background');
 
 
 
-<div class="main"><div class="duibi_bottom">
+<div class="main"><div class="duibi_bottom" style="display:none">
 
 <div class="fll duibi_bottom_a"><ul>
-<li><a href="#"><img src="images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
-<li><a href="#"><img src="images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
-<li><a href="#"><img src="images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
-<li><a href="#"><img src="images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
+<li><a href="#"><img src="/images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
+<li><a href="#"><img src="/images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
+<li><a href="#"><img src="/images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
+<li><a href="#"><img src="/images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
 </ul></div>
 
 <div class="flr duibi_bottom_b">
-<div class="duibi_bottom_b_gb"><a href="#">隐藏</a></div>
+<div class="duibi_bottom_b_gb"><a href="javascript:void(0)" class="tm_none">隐藏</a></div>
 <div class="duibi_bottom_b_db"><a href="/ProductContrast">对比</a></div>
 <div class="duibi_bottom_b_qk"><a href="#">清空对比信息</a></div>
 
@@ -509,7 +460,155 @@ DD_belatedPNG.fix('.,img,background');
   
 </div></div>
 
+<script type="text/javascript">
 
+$(function(){
+    
+    /* 鼠标移动小图,小图对应大图显示在大图上,并替换放大镜中的图*/
+    $("#specList ul li img").livequery("mouseover",function(){ 
+        var imgSrc = $(this).attr("src");
+        var i = imgSrc.lastIndexOf(".");
+        var unit = imgSrc.substring(i);
+        imgSrc = imgSrc.substring(0,i);
+        var imgSrc_small = $(this).attr("src_D");
+        var imgSrc_big = $(this).attr("src_H");
+        $("#bigImg").attr({"src": imgSrc_small ,"jqimg": imgSrc_big });
+        $(this).css({"border":"2px solid #3399cc","padding":"1px"});
+    });
+    
+    $("#specList ul li img").livequery("mouseout",function(){ 
+        $(this).css({"border":"1px solid #ddd","padding":"2px"});
+    });
+    
+    //使用jqzoom
+    $(".jqzoom").jqueryzoom({
+        xzoom: 400, //放大图的宽度(默认是 200)
+        yzoom: 400, //放大图的高度(默认是 200)
+        offset: 10, //离原图的距离(默认是 10)
+        position: "right", //放大图的定位(默认是 "right")
+        preload:1   
+    });
+    
+    /*如果小图过多,则出现滚动条在一行展示*/
+    var btnNext = $('#specRight');
+    var btnPrev = $('#specLeft')
+    var ul = btnPrev.next().find('ul');
+
+    var len = ul.find('li').length;
+    var i = 0 ;
+    if (len > 5) {
+        $("#specRight").addClass("specRightF").removeClass("specRightT");
+        ul.css("width", 54 * len)
+        btnNext.click(function(e) {
+            if(i>=len-5){
+                
+                return;
+            }
+            i++;
+            if(i == len-5){
+                $("#specRight").addClass("specRightT").removeClass("specRightF");
+            }
+            $("#specLeft").addClass("specLeftF").removeClass("specLeftT");
+            moveS(i);
+        })
+        btnPrev.click(function(e) {
+            if(i<=0){
+                return;
+            }
+            i--;
+            if(i==0){
+                $("#specLeft").addClass("specLeftT").removeClass("specLeftF");
+            }
+            $("#specRight").addClass("specRightF").removeClass("specRightT");
+            moveS(i);
+        })
+    }
+    function moveS(i) {
+        ul.animate({left:-54 * i}, 500)
+    }
+    function picAuto(){
+      if ($(".listImg li").size()<=5) {
+        $("#specLeft,#specRight").hide();
+      }
+    }
+    picAuto();
+    		
+			
+});
+$(function(){
+			//分页---上一页(减1)  / 下一页(加1)
+
+			var index = 0;
+			var totalCount = 100;
+			//下一页功能
+			$(".next").click(function(){
+				index++;//相当于index = index +1;
+				if(index>totalCount)index = 0;
+				$("#count").val(index);
+			});
+
+		
+			//上一页功能
+			$(".prev").click(function(){
+				index--;//相当于index = index +1;
+				if(index<0)index = totalCount;
+				$("#count").val(index);
+			});
+			
+			
+		});
+	//去购买	
+		function tm_buy(){
+			var id=$("#count").val();
+			alert(id)
+			window.location.href='/cart?sum='+id;
+		}
+//收藏
+		function tm_collect(obj,id){
+		$.ajax({
+			type:"post",
+			url:"/addcollect",
+			data:{"productid":id},
+			success:function(data){
+			//收藏商品未登录
+				if(data=="logout"){
+					window.location.href="/login";
+				}else if(data=="success"){
+					$(obj).parents().find(".img_s").remove()
+					$(obj).empty()
+					$(obj).append("<div style='font-size:14px;color:red;'>已经收藏</div>").fadeIn(3000,function(){
+						window.location.href="/user/collect";
+					})
+				}else if(data=="flok"){
+					$(obj).parents().find(".img_s").remove()
+					$(obj).empty()
+					$(obj).append("<div style='font-size:14px;color:red;'>已经收藏过!</div>");
+				}
+			}
+		})
+		
+		}
+		//对比
+		function tm_contra(obj,id){
+			$(".duibi_bottom").css("display","block");
+		}
+		//隐藏对比
+		$(".tm_none").on("click",function(){
+			$(".duibi_bottom").css("display","none");
+		})
+		 // 点击进行Tab切换   tab_d
+            $('#id-tab-list li').click(function(){
+                var index = $(this).index();
+                
+                var _tab = $('#id-tab-list li');
+                _tab.find("a").removeClass("con");
+                _tab.eq(index).find("a").addClass("con");
+                
+                var _arr = $('#id-tab-content li');
+                _arr.eq(index).fadeIn(0).siblings().fadeOut(0);
+            });
+		
+</script>
 
 
 </body>

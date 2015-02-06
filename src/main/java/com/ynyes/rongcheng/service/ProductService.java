@@ -264,4 +264,10 @@ public class ProductService {
             repository.delete(product);
         }
     }
+    public Product findByid(Long id){
+        if(id==null){
+            return null;
+        }
+        return repository.findOne(id);
+    }
 }

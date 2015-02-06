@@ -273,7 +273,7 @@ function tm_initPage(count) {
         num_display_entries : 3,
         num_edge_entries : 4,
         current_page : 0,
-        items_per_page : 5,
+        items_per_page : 12,
         prev_text : "上一页",
         next_text : "下一页",
         showGo : false,
@@ -304,19 +304,3 @@ function tm_initPage(count) {
 </script>
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

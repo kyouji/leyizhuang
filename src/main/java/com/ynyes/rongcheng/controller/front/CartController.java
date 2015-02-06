@@ -1,6 +1,7 @@
 package com.ynyes.rongcheng.controller.front;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -28,7 +29,7 @@ public class CartController {
      * @since  1.0.0
      */
     @RequestMapping("/cart")
-    public String cart(){
+    public String cart(Long sum){
         return "/front/cart/cart";
     }
     /**
@@ -45,6 +46,7 @@ public class CartController {
      */
     @RequestMapping("/cartStep")
     public String cartStep(){
+        
         return "/front/cart/cartStep";
     }
     /**
