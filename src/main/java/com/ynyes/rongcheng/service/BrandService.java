@@ -27,6 +27,22 @@ public class BrandService {
     BrandRepo repository;
     
     /**
+     * 通过名称查找品牌
+     * 
+     * @param type 品牌类型
+     * @return 品牌列表
+     */
+    public Brand findByName(String name)
+    {
+        if (null == name)
+        {
+            return null;
+        }
+        
+        return repository.findByName(name);
+    }
+    
+    /**
      * 通过类型查找品牌
      * 
      * @param type 品牌类型
@@ -176,5 +192,63 @@ public class BrandService {
         brandPage = repository.findAll(pageRequest);
         
         return brandPage;
+    }
+    
+    /**
+     * 删除品牌
+     * 
+     * @param id 品牌ID
+     */
+    public void delete(Long id)
+    {
+        if (null != id)
+        {
+            repository.delete(id);
+        }
+    }
+    
+    /**
+     * 删除品牌
+     * 
+     * @param brand 商品
+     */
+    public void delete(Brand brand)
+    {
+        if (null != brand)
+        {
+            repository.delete(brand);
+        }
+    }
+    
+    /**
+     * 查找品牌
+     * 
+     * @param id 品牌ID
+     * @return
+     */
+    public Brand findOne(Long id)
+    {
+        if (null == id)
+        {
+            return null;
+        }
+        
+        return repository.findOne(id);
+    }
+    
+    /**
+     * 保存品牌
+     * 
+     * @param brand 品牌
+     * @return 保存的品牌，错误时返回NULL
+     */
+    public Brand save(Brand brand)
+    {
+        if (null == brand)
+        {
+            return null;
+        }
+        
+        return repository.save(brand);
     }
 }

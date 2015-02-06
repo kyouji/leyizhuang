@@ -27,4 +27,7 @@ public interface BrandRepo extends
     // 通过类型查找推荐的品牌
     Page<Brand> findByTypeContainingAndIsRecommendTrue(String type, Pageable page);
     List<Brand> findByTypeContainingAndIsRecommendTrue(String type);
+    
+    // 通过名称查找
+    Brand findByName(String name);
 }

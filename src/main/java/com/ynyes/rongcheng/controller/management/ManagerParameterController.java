@@ -54,11 +54,11 @@ public class ManagerParameterController {
         
         if (null != pageIndex && pageIndex.intValue() >= 0)
         {
-            Page<Parameter> typePage = parameterService.findAll(pageIndex, ManagementConstant.pageSize, "desc", "id");
+            Page<Parameter> parameterPage = parameterService.findAll(pageIndex, ManagementConstant.pageSize, "desc", "id");
             
-            if (null != typePage)
+            if (null != parameterPage)
             {
-                map.addAttribute("type_list", typePage.getContent());
+                map.addAttribute("param_list", parameterPage.getContent());
             }
         }
         

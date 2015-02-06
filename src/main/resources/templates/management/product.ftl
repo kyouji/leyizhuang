@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>商品管理页</title>
+		<title>商品管理</title>
 
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,7 +41,7 @@
 					<div class="page-content">
 					    <input type="text" id="id-total-num" hidden value="<#if type_total??>${type_total}</#if>" />
                         <div class="row">
-						    <#--include "/management/product/product_add.ftl"-->
+						    <#include "/management/product/add.ftl" >
                             <div id="id-modify"></div>
 							<div id="id-table" class="col-xs-12">
 								<div class="table-header">
