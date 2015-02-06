@@ -231,7 +231,7 @@
       <ul id="id-tab-list">
         <li><a href="javascript:void(0)" class="con">商品详情</a></li>
         <li><a href="javascript:void(0)">商品参数</a></li>
-        <li><a href="javascript:void(0)">商品评价（639）</a></li>
+        <li><a href="javascript:void(0)">商品评价（${product.averagePoints}）</a></li>
         <li><a href="javascript:void(0)">购买咨询</a></li>
       <!--  <li><a href="javascript:void(0)">价格走势</a></li>-->
       </ul>
