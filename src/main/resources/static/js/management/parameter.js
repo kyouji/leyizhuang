@@ -78,7 +78,6 @@ function destroy(id) {
             url : '/admin/parameter/destroy/'+id,
             type : 'POST',
             success : function() {
-                alert("删除成功");
                 location.reload();
             }
         });
@@ -113,27 +112,28 @@ function modify(id) {
             $(".addinput-form #m-name").change(function(){
             	$("#m-name").css({"background-color":"#ffffdb"});
             });
-            $(".addinput-form select").change(function(){
+            $(".addinput-form #m-input_type").change(function(){
             	$("select").css({"background-color":"#ffffdb"});
             });
-            $(".addinput-form textarea").change(function(){
+            $(".addinput-form #m-param_list").change(function(){
                 $("textarea").css({"background-color":"#ffffdb"});	
             });
              
             // 修改提交  zackma-20150204
             $("#m-submit").click(function(){
+            	    var id = $("form #m-id").val();
                     var type = $("form #m-type").val();
                     var name = $("form #m-name").val();
-                    var isValueInputByChoose = $("form #m-input_type option:selected").val();
+                    var isValueInputByChoose = $("#m-input_type option:selected").val();
                     var isSearchable = $("#m-searchable:checked").val();
                     var isSingleValue = $("#m-multiple:checked").val();
                     var valueList = $("form #m-param_list").val();
-                    if(type==""||name==""||isValueInputByChoose==""||isSearchable==""||isSingleValue==""||valueList==""){
+                    if(type==""||name==""||isValueInputByChoose==""||isSearchable==""||isSingleValue==""||(isValueInputByChoose=="true" && valueList=="")){
 			            alert("请填写完整参数！");
 			        return;
 		            }
                     
-                    var modiDate = {"type":type,"name":name,"isValueInputByChoose":isValueInputByChoose,"isSearchable":isSearchable,"isSingleValue":isSingleValue,"valueList":valueList};
+                    var modiDate = {"id":id,"type":type,"name":name,"isValueInputByChoose":isValueInputByChoose,"isSearchable":isSearchable,"isSingleValue":isSingleValue,"valueList":valueList};
                     $.ajax({
                         url : '/admin/parameter/save',
                         type : 'POST',

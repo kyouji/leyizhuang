@@ -6,7 +6,7 @@
     <div class="space-4"></div>
  
     <form id="fm-modify" class="form-horizontal" method="POST" >
-        <input type="text" name="id" value="${parameter.id}" class="hide" />
+        <input type="text" name="id" id="m-id" value="${parameter.id}" class="hide" />
         <div class="col-sm-12"  style="margin-top: 10px;">
             <div class="addinput-form">
 	            <label class="col-sm-1 control-label no-padding-right" for="name"> 类型:</label>
@@ -31,7 +31,7 @@
 	        <div class="addinput-form col-sm-8 no-padding-left">
 	            <label class="col-sm-2 control-label no-padding-right" for="type">参数值输入类型:</label>
 	            <div class="col-sm-4" style="width:34%">	            
-	                <select class="form-control " id="m-input_type" name="input_type">
+	                <select class="form-control " id="m-input_type" name="m-input_type">
 	                    <#if parameter.isValueIputByChoose??&&parameter.isValueIputByChoose==true>
                         <option value="true">点击选择</option>
                         <option value="false">手动输入</option>
@@ -50,10 +50,10 @@
 	            <label class="col-sm-2 control-label no-padding-right" for="name"> 是否可检索:</label>
 	            <div class="col-sm-8" style="line-height:32px">
 	                <label style="font-size:16px" class="col-xs-10 col-sm-2">是
-	                <input type="radio" id="m-searchable" class="" name="searchable" value="yes" <#if parameter.isSearchable??&&parameter.isSearchable==true>checked</#if> />
+	                <input type="radio" id="m-searchable" class="" name="searchable" value="true" <#if parameter.isSearchable??&&parameter.isSearchable==true>checked</#if> />
 	                </label>
 	                <label style="font-size:16px" class="col-xs-10 col-sm-2" >否
-	                <input type="radio" id="m-searchable" class="" name="searchable" value="no" <#if parameter.isSearchable??&&parameter.isSearchable==false>checked</#if> />
+	                <input type="radio" id="m-searchable" class="" name="searchable" value="false" <#if parameter.isSearchable??&&parameter.isSearchable==false>checked</#if> />
 	                </label>
 	            </div>
 	        </div>
@@ -61,13 +61,13 @@
 	        <div class="clear"></div>
 	        
 	        <div class="addinput-form">
-	            <label class="col-sm-2 control-label no-padding-right" for="name"> 是否为多值参数:</label>
+	            <label class="col-sm-2 control-label no-padding-right" for="name"> 是否为单值参数:</label>
 	            <div class="col-sm-8" style="line-height:32px">
 	                <label style="font-size:16px" class="col-xs-10 col-sm-2">是
-	                <input type="radio" id="m-multiple" class="" name="multiple"  value="yes" <#if parameter.isSingleValue??&&parameter.isSingleValue==true>checked</#if> />
+	                <input type="radio" id="m-multiple" class="" name="multiple"  value="true" <#if parameter.isSingleValue??&&parameter.isSingleValue==true>checked</#if> />
 	                </label>
 	                <label style="font-size:16px" class="col-xs-10 col-sm-2">否
-	                <input type="radio" id="m-multiple" class="" name="multiple" value="no" <#if parameter.isSingleValue??&&parameter.isSingleValue==false>checked</#if> />
+	                <input type="radio" id="m-multiple" class="" name="multiple" value="false" <#if parameter.isSingleValue??&&parameter.isSingleValue==false>checked</#if> />
 	                </label>
 	            </div>
 	        </div>

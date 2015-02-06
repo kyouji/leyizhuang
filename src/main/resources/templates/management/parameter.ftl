@@ -62,7 +62,7 @@
                                             <th width="21%" class="center">名称</th>
                                             <th width="8%" class="center">值输入类型</th>
                                             <th width="10%" class="center">是否可检索</th>
-                                            <th width="10%" class="center">是否多值</th>
+                                            <th width="10%" class="center">是否单值</th>
                                             <th width="10%" class="center">值列表</th>
                                             <th width="8%" class="center">编辑</th>
                                         </tr>
@@ -121,7 +121,7 @@
 		<script src="/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-        <script src="/js/management/parameter.js"></script>
+        <script src="/js/management/parameter.js" type="text/javascript"></script>
         
         <!--新增参数提交-->
         
