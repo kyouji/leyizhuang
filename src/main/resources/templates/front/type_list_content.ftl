@@ -120,19 +120,19 @@ DD_belatedPNG.fix('.,img,background');
 <div class="clear"></div>
 
 <div class="main">
-<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/1">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/1">手机产品</a>&gt;<a href="#">手机详情</a>&gt; </div>
 <div class="shop_show">
   <div class="shop_show_left">
     <div class="shopBigImg">
       <ul>
-        <li style="display:block;"><a href="#"><img src="images/bigshow.jpg" /></a></li>
-        <li><a href="#"><img src="images/bigshow.jpg" /></a></li>
-        <li><a href="#"><img src="images/bigshow.jpg" /></a></li>
-        <li><a href="#"><img src="images/bigshow.jpg" /></a></li>
-        <li><a href="#"><img src="images/bigshow.jpg" /></a></li>
+        <li style="display:block;"><a href="#"><img src="/images/bigshow.jpg" /></a></li>
+        <li><a href="#"><img src="/images/bigshow.jpg" /></a></li>
+        <li><a href="#"><img src="/images/bigshow.jpg" /></a></li>
+        <li><a href="#"><img src="/images/bigshow.jpg" /></a></li>
+        <li><a href="#"><img src="/images/bigshow.jpg" /></a></li>
       </ul>
     </div>
-    <div class="shopSmallImg"> <a href="#" class="LeftBtn"><img src="images/leftBtn.jpg" /></a>
+    <div class="shopSmallImg"> <a href="#" class="LeftBtn"><img src="/images/leftBtn.jpg" /></a>
       <ul>
         <li class="shopSmallImg_on"><a href="#"><img src="images/hot.jpg" /></a></li>
         <li><a href="#"><img src="images/hot.jpg" /></a></li>
@@ -140,16 +140,16 @@ DD_belatedPNG.fix('.,img,background');
         <li><a href="#"><img src="images/hot.jpg" /></a></li>
         <li><a href="#"><img src="images/hot.jpg" /></a></li>
       </ul>
-      <a href="#" class="LeftRight"><img src="images/rightBtn.jpg" /></a> </div>
+      <a href="#" class="LeftRight"><img src="/images/rightBtn.jpg" /></a> </div>
     <div class="box">
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
       <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin","tieba","sqq"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","tieba","sqq"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 </script>
-      <div class="love"><a href="#"><img src="images/scsp.jpg" /></a></div>
+      <div class="love"><a href="#"><img src="/images/scsp.jpg" /></a></div>
     </div>
   </div>
   <div class="ShopShowRight">
-  <div class="erweimacontent"><img src="img/erweima.png" width="180" height="180"></div>
+  <div class="erweimacontent"><img src="/img/erweima.png" width="180" height="180"></div>
     <h2>Apple iPhone 6 128G 银</h2>
     <h3>土豪必备】版本A1530，兼容移动/联通双4G网络，配备先进疾速A7芯片，Touch ID指纹识别传感器，全新800万iSight摄像头，全新Face Time HD高清摄像头。</h3>
     <p><span>商品编码：</span>TC19394217479</p>

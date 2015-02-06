@@ -42,6 +42,29 @@ public class ManagerParameterController {
         return "/management/parameter";
     }
     
+    /**
+     * 获取指定页号的参数
+     * 
+     * @param map
+     * @param pageIndex 页号
+     * @return
+     */
+    @RequestMapping(value="/page/{pageIndex}")
+    public String page(ModelMap map, @PathVariable Integer pageIndex) {
+        
+        if (null != pageIndex && pageIndex.intValue() >= 0)
+        {
+            Page<Parameter> typePage = parameterService.findAll(pageIndex, ManagementConstant.pageSize, "desc", "id");
+            
+            if (null != typePage)
+            {
+                map.addAttribute("type_list", typePage.getContent());
+            }
+        }
+        
+        return "/management/parameter/parameter_tbody";
+    }
+    
     @RequestMapping(value="/destroy/{paramId}",method = RequestMethod.POST)
     @ResponseBody
     public void destroy(ModelMap map, @PathVariable Long paramId){

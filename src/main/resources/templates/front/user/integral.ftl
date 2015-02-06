@@ -51,17 +51,20 @@
 <div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="javascript:void(0)">个人中心</a>&gt;<a href="javascript:void(0)">我的积分</a>&gt; </div>
         
         
-        
-        
-<div class="integration_a"><div class="fll integration_a_1">可用积分<span>30分</span> 2015-12-31将过期积分<span>30分</span></div><div class="flr integration_a_2"><a href="#">积分使用详情</a></div></div>
-    
+ <#assign total=0>       
+<#if Points??>
+<#list Points as pointt>  
+<#assign e=pointt.points><#--这里需要一个统计总数，去计算该用户的所有可用积分,现在还没有service-->
+<div class="integration_a"><div class="fll integration_a_1">可用积分<span>${e}</span> 2015-12-31将过期积分<span>0分</span></div><div class="flr integration_a_2"><a href="#">积分使用详情</a></div></div>
+</#list>
+</#if>   
 <div class="gwc2_psfs mt12">
 
 <div class="gwc1_lm mt12">
 <table>
 <tr>
 <td width="20%">日期</td>
-<td width="15%">收入/支出</td>
+<td width="15%">积分</td>
 <td width="40%">涉及订单</td>
 <td width="25%">详情</td>
 </tr>
@@ -89,7 +92,7 @@
     <div class="sx_list5 mt15">
      
       <div class="clear"></div>
-      <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="/">首页</a> <a href="#">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="#">下一页</a> <a href="#">尾页</a> </div>
+   <#--   <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="/">首页</a> <a href="#">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="#">下一页</a> <a href="#">尾页</a> </div>-->
     </div>
     
       

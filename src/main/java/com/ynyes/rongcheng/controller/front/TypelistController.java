@@ -1,9 +1,15 @@
 package com.ynyes.rongcheng.controller.front;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.rongcheng.entity.Product;
+import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.util.StringUtils;
 
 /**
@@ -17,6 +23,8 @@ import com.ynyes.rongcheng.util.StringUtils;
  */
 @Controller
 public class TypelistController {
+    @Autowired
+    private  ProductService productservice;
     /**
      * 
      * 跳转到商品类型列表页面<BR>
@@ -29,13 +37,20 @@ public class TypelistController {
      * @since  1.0.0
      */
     @RequestMapping("/list/{typeId}")
-    public String index(@PathVariable String typeId){
-        
+    public String index(@PathVariable String typeId,Integer page,Integer size,String direction,Model model){
+        page=0;
+        size=3;
+        direction="asc";//排序
+        String property="sortNumber";//字段
         if(StringUtils.isNotEmpty(typeId) && StringUtils.isNumber(typeId)){
             if(typeId.equals("1")){
                 return "/front/type_list_star";//明星产品
             }
             if(typeId.equals("2")){
+                //根据类型获取所有子类
+                Page<Product> pages=productservice.findByType("2", page, size, direction, property);
+                model.addAttribute("product", pages.getContent());
+                model.addAttribute("count", "12");
                 return "/front/type_list_mobile";//手机产品
             }
             if(typeId.equals("3")){
@@ -51,5 +66,29 @@ public class TypelistController {
             return "error404";//错误
         }
         return "error404";//错误
+    }
+    /**
+     * 
+     * 手机产品跳转模版<BR>
+     * 方法名：mobile<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年2月5日-下午3:30:43 <BR>
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
+    @RequestMapping("/list/{typeId}_")
+    public String mobile(@PathVariable String typeId,Integer page,Integer size,String direction,Model model){
+            direction="asc";//排序
+            String property="sortNumber";//字段
+           
+                //根据类型获取所有子类
+                Page<Product> pages=productservice.findByType("2", page, size, direction, property);
+                model.addAttribute("product", pages.getContent());
+                model.addAttribute("count", "12");
+           
+        return "/front/listtemp/pageProduct";//手机产品
     }
 }

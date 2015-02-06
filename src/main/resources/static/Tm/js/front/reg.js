@@ -30,8 +30,8 @@ function tm_reg(obj){
         }
     
         if(is_user_s(name)==false){
-           Tmtip({html:"用户名格式错误!",src:"Tm/images/24.PNG"});
-            $("#name").focus();
+           Tmtip({html:"用户名格式错误,必须6位以上的数字，字母组合!",src:"Tm/images/24.PNG"});
+            $("#name").select();
             return;
         }
         if(isEmpty(phone)){

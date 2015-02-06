@@ -219,10 +219,6 @@ nav{ height:40px; background:#317ef3;width:100%; margin:0 auto; min-width:1200px
 .sx_list li img:hover{-moz-opacity:0.68 !important; filter:alpha(opacity=68); opacity: 0.68; -ms-opacity:0.68; -o-opacity:0.68; -webkit-opacity:0.68; transition:all .2s linear;-webkit-transition:all .2s linear; -ms-transition:all .2s linear; -moz-transition:all .2s linear; -o-transition:all .2s linear;}
 .sx_list li p { margin-top: 5px; }
 .sx_list li b { display: block; font-family: Arial, Helvetica, sans-serif; color: #f60; font-size: 15px; }
-.page { padding: 20px; overflow: hidden; float: right; }
-.page a, .page a:visited { padding: 2px 10px; border: 1px solid #eee; margin: 0 3px; display: block; float: left; }
-.page span { float: left; margin-top: 4px; }
-.page a.pageon { background: #f60; font-weight: bold; color: #fff; }
 .list_fenye{ height:20px; width:auto; margin-top:10px; margin-right:10px; _margin-right:7px; display:inline; width:auto;}
 .list_fenye a{ margin-left:8px; margin-right:8px;}
 .list_fenye span{ float:none;}
