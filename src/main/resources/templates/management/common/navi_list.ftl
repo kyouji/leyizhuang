@@ -35,6 +35,14 @@
                     参数
                 </a>
             </li>
+            
+            <li>
+                <a href="/admin/brand">
+                    <i class="icon-double-angle-right"></i>
+                    品牌
+                </a>
+            </li>
+            
         </ul>
     </li>
 
