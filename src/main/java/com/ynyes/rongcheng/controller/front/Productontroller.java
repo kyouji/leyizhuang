@@ -49,7 +49,7 @@ public class Productontroller {
     @RequestMapping("/product/{typeId}")
     public ModelAndView index(@PathVariable Long typeId){
         ModelAndView modelAndView=new ModelAndView();
-        Product product=productservice.findByid(typeId);
+        Product product=productservice.findOne(typeId);
         String list=product.getShowPictures();
         String[] sList = list.split(",");
         modelAndView.addObject("ShowPictures",sList);
