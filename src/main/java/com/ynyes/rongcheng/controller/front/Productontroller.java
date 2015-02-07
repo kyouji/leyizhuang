@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ynyes.rongcheng.entity.Parameter;
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.User;
+import com.ynyes.rongcheng.service.ParameterService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.UserService;
 import com.ynyes.rongcheng.util.StringUtils;
@@ -30,6 +33,8 @@ import com.ynyes.rongcheng.util.StringUtils;
 public class Productontroller {
     @Autowired
     private  ProductService productservice;
+    @Autowired
+    private  ParameterService parameterService;
     @Autowired
     private  UserService userService;
     private  String flag;
@@ -49,11 +54,14 @@ public class Productontroller {
     @RequestMapping("/product/{typeId}")
     public ModelAndView index(@PathVariable Long typeId){
         ModelAndView modelAndView=new ModelAndView();
-        Product product=productservice.findByid(typeId);
+        Product product=productservice.findOne(typeId);
+        String type =product.getType();
+        List<Parameter> parameters= parameterService.findByType(type);
         String list=product.getShowPictures();
         String[] sList = list.split(",");
-        modelAndView.addObject("ShowPictures",sList);
-        modelAndView.addObject("product",product);
+        modelAndView.addObject("ShowPictures",sList);//轮播展示图片
+        modelAndView.addObject("product",product);//商品详情
+        modelAndView.addObject("parameters",parameters);//商品属性
         modelAndView.setViewName("/front/type_list_content");
         return modelAndView;
     }

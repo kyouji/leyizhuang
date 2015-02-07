@@ -1,7 +1,12 @@
 package com.ynyes.rongcheng.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +16,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ynyes.rongcheng.entity.OrderItem;
 import com.ynyes.rongcheng.entity.ShoppingOrder;
 import com.ynyes.rongcheng.repository.ShoppingOrderRepo;
 
@@ -26,6 +32,9 @@ import com.ynyes.rongcheng.repository.ShoppingOrderRepo;
 public class ShoppingOrderService {
     @Autowired
     ShoppingOrderRepo repository;
+    
+    @Autowired
+    OrderItemService orderItemService;
     
     /**
      * 根据用户名及状态查找订单，并分页
@@ -264,5 +273,101 @@ public class ShoppingOrderService {
                 pageRequest);
 
         return orderPage;
+    }
+    
+    /**
+     * 保存订单
+     * 
+     * @param username 用户名
+     * @param productList 订单商品列表
+     * @param shippingAddress 收货地址
+     * @param receiverName 收货人
+     * @param receiverPhone 收货电话
+     * @param paymentType 支付方式
+     * @param invoiceTitle 发票抬头
+     * 
+     * @return map.code 0:成功 1:失败
+     *         map.message 失败时的错误信息
+     *         map.data 成功时将返回保存后的订单
+     */
+    public Map<String, Object> save(String username,
+                                    List<OrderItem> productList,
+                                    String shippingAddress,
+                                    String receiverName,
+                                    String receiverPhone,
+                                    String paymentType,
+                                    String invoiceTitle)
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 1);
+        
+        if (null == username || "".equals(username))
+        {
+            map.put("message", "用户名不能为空");
+            return map;
+        }
+        
+        if (null == productList || productList.size() < 1)
+        {
+            map.put("message", "订单商品列表不能为空");
+            return map;
+        }
+        
+        ShoppingOrder order = new ShoppingOrder();
+
+        // 订单号
+        DateFormat format = new SimpleDateFormat("yyyyMMddhhmmssSSS");
+        order.setOrderNumber(format.format(new Date()) + (int)(Math.random() * 100));
+        
+        // 收货地址
+        order.setShippingAddress(shippingAddress);
+        
+        // 收货人
+        order.setShippingName(receiverName);
+        
+        // 收货电话
+        order.setShippingPhone(receiverPhone);
+        
+        // 支付方式
+        order.setPaymentType(paymentType);
+        
+        // 发票抬头
+        order.setInvoiceTitle(invoiceTitle);
+        
+        // 下单时间
+        order.setOrderTime(new Date());
+        
+        // 订单状态
+        order.setStatusCode(0L);
+        
+        // 用户名
+        order.setUsername(username);
+        
+        // 保存订单商品列表
+        order.setOrderItemList(productList);
+        
+        Double totalPrice = 0.0;
+        
+        if (null != productList)
+        {
+            for (OrderItem item : productList)
+            {
+                totalPrice += item.getQuantity() * item.getPrice();
+                
+                // 保存订单商品项
+                orderItemService.save(item);
+            }
+        }
+        
+        // 订单总额
+        order.setTotalPrice(totalPrice);
+        
+        // 保存订单
+        order = repository.save(order);
+        
+        map.put("code", 0);
+        map.put("data", order);
+        
+        return map;
     }
 }

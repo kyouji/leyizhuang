@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.service.ProductService;
+import com.ynyes.rongcheng.service.ProductTypeService;
 import com.ynyes.rongcheng.util.ManagementConstant;
 
 /**
@@ -25,6 +26,9 @@ public class ManagerProductController {
     
     @Autowired
     ProductService productService;
+    
+    @Autowired
+    ProductTypeService productTypeService;
     
     @RequestMapping
     public String product(ModelMap map){

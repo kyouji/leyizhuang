@@ -20,4 +20,7 @@ public interface ShoppingCartRepo extends
 {
     // 通过用户名查找
     List<ShoppingCart> findByUsername(String username);
+    
+    // 通过用户名和ID查找
+    ShoppingCart findByUsernameAndId(String username, Long id);
 }

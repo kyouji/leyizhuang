@@ -85,20 +85,7 @@
 		</div><!-- /.main-container -->
 
 		<!-- basic scripts -->
- 
-		<!--[if !IE]> -->
-
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-        <script type="text/javascript">
-            window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-        </script>
-        <![endif]-->
+        <script src='/assets/js/jquery-1.10.2.min.js'></script>
 
 		<script src="/assets/js/bootstrap.min.js"></script>
 
@@ -114,8 +101,8 @@
 		<script src="/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
-        <script src="/js/management/product_type.js"></script>
         <script src="/js/jquery.pagination.js"></script>
+        <script src="/js/management/product_type.js"></script>
         
 	</body>
 </html>

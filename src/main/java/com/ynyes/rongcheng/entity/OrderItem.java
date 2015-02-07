@@ -26,6 +26,10 @@ public class OrderItem {
     @Column
     private Long pid;
     
+    // 版本ID
+    @Column
+    private Long vid;
+    
     // 商品名称
     @Column
     private String productName;
@@ -84,6 +88,14 @@ public class OrderItem {
 
     public void setPid(Long pid) {
         this.pid = pid;
+    }
+
+    public Long getVid() {
+        return vid;
+    }
+
+    public void setVid(Long vid) {
+        this.vid = vid;
     }
 
     public String getProductName() {
