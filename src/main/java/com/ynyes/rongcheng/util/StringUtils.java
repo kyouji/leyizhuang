@@ -184,8 +184,8 @@ public class StringUtils {
        return string;
    }
    public static void main(String[] args) {
-    String str="123";
-    System.out.println(encryption(str, 12));
+    String str="1";
+    System.out.println(encryption(str));
 }
 } 
   
