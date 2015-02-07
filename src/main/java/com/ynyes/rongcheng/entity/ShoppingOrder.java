@@ -82,7 +82,7 @@ public class ShoppingOrder {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date orderTime;
     
-    // 订单状态
+    // 订单状态 0:待付款 1:待收货 2:待评价 3:已完成 4:已关闭 5: 已取消
     @Column
     private Long statusCode;
     
