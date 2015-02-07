@@ -44,6 +44,7 @@ public class ShoppingOrderService {
      * @param page 页号
      * @param size 每页大小
      * @param direction 排序方向 asc:升序 desc:降序
+     * @param property 排序的字段名
      * @return 订单分页，参数错误时返回NULL
      */
     public Page<ShoppingOrder> findByUsernameAndStatusCode(String username, 
@@ -55,6 +56,7 @@ public class ShoppingOrderService {
     {
         Page<ShoppingOrder> orderPage = null;
         PageRequest pageRequest = null;
+        
         if (null == username || null == statusCode)
         {
             return null;
@@ -75,7 +77,6 @@ public class ShoppingOrderService {
                                  property);
             pageRequest = new PageRequest(page, size, sort);
         }
-        
         
         // 按状态获取订单
         orderPage = repository.findByUsernameAndStatusCode(username, statusCode, pageRequest);

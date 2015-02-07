@@ -34,9 +34,13 @@ public class ProductComment {
     @Column
     private String content;
     
+    // 评论标签
+    @Column
+    private String tags;
+    
     // 评论星级
     @Column
-    private Double stars;
+    private Long stars;
     
     // 评论被点击“有用”的数量
     @Column
@@ -51,9 +55,13 @@ public class ProductComment {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date commentTime;
     
-    // 评论的商品ID或回复的评论ID
+    // 评论的商品ID
     @Column
     private Long pid;
+    
+    // 评论的商品版本ID
+    @Column
+    private Long vid;
     
     // 订单编号
     @Column
@@ -87,11 +95,19 @@ public class ProductComment {
         this.content = content;
     }
 
-    public Double getStars() {
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public Long getStars() {
         return stars;
     }
 
-    public void setStars(Double stars) {
+    public void setStars(Long stars) {
         this.stars = stars;
     }
 
@@ -125,6 +141,14 @@ public class ProductComment {
 
     public void setPid(Long pid) {
         this.pid = pid;
+    }
+
+    public Long getVid() {
+        return vid;
+    }
+
+    public void setVid(Long vid) {
+        this.vid = vid;
     }
 
     public String getOrderNumber() {
