@@ -8,11 +8,18 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <liNK rel=stylesheet type=text/css href="/Tm/css/carousel.css">
+<style type="text/css">
+	.t_red{font-size:14px;color:red;font-family:微软雅黑"}
+</style>
+<link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
+<link id="cssfile" type="text/css" rel="stylesheet" href="/Tm/css/dialog_blue.css"/>
 <script type="text/javascript" src="/Tm/js/jquery-1.11.1.min.js"></script>
 <script type=text/javascript src="/Tm/js/jquery.jqzoom.js"></script>
 <script type=text/javascript src="/Tm/js/jquery.livequery.js"></script>
 <script type=text/javascript src="/Tm/js/AJAX.js"></script>
 <script type=text/javascript src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/popup_dialog.js"></script>
+<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
 </head>
 <body>
 <header>
@@ -105,7 +112,7 @@
   <div class="ShopShowRight">
   <div class="erweimacontent"><img src="/img/erweima.png" width="180" height="180"></div>
     <h2><#if product.id??>${product.name}</#if></h2>
-    <!--<h3><#if product.detail??>${product.detail}</#if></h3>-->
+   <h3><#if product.brief??>${product.brief}</#if></h3>
     <p><span>商品编码：</span><#if product.code??>${product.code}</#if></p>
     <p><span>市&nbsp;&nbsp;场&nbsp;价：</span>￥${product.priceMinimum?c}.00</p>
     <p><span>荣&nbsp;&nbsp;诚&nbsp;价：</span><em>￥<#if product.flashSalePrice??>${product.flashSalePrice?c}</#if>.00</em><span class="orange ml10">(降价通知)</span></p>
@@ -114,8 +121,6 @@
     <p><span>配&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置：</span><#if product.configuration??>${product.configuration}</#if></p>
     <p><span>服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</span><#if product.service??>${product.service}</#if></p>
     <div class="SelectPackage">
-      <p class="mb5"><span class="fll">颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色：</span><a href="#" class="SelectPackage_on">灰色行货</a><a href="#">白色行货</a></p>
-      <div class="clear"></div>
       <p class="mb5"><span class="fll">容&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量：</span><a href="#">6G</a><a href="#" class="SelectPackage_on">32G</a></p>
       <div class="clear"></div>
       <p class="mb5"><span class="fll">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本：</span><a href="#">4G</a><a href="#">全网通</a><a href="#" class="SelectPackage_on">2G/3G</a></p>
@@ -241,7 +246,7 @@
     <div class="products_det"> 
     	<ul id="id-tab-content" >
     		<li ><#if product.detail??>${product.detail}</#if></li>
-    		<li style="display:none">${product.configuration}</li>
+    		<li style="display:none"><#if product.configuration??>${product.configuration}</#if></li>
     		<li style="display:none">商品评价</li>
     		<li style="display:none">商品咨询
     		<div class="lr_right_main main_top2">
@@ -259,42 +264,7 @@
             <div class="clear"></div>
           </dt>
           <dd>
-            <ul>
-              <li class="name">客服回复</li>
-              <li class="ddlr">您好：您的订单已于24号发货，配送时间为2-3个工作日，请您耐心等待，祝您生活愉快！您好：您的订单已于24号发货，配送时间为2-3个工作日，请您耐心等待，祝您生活愉快！您好：您的订单已于24号发货，配送时间为2-3个工作日，请您耐心等待，祝您生活愉快！</li>
-            </ul>
-            <div class="clear"></div>
-          </dd>
-        </dl>
-      </div>
-      <div class="pinlunbox">
-        <dl>
-          <dt>
-            <ul>
-              <li class="name">zhangjinhao</li>
-              <li class="time">2011-08-25 07:34:42</li>
-              <li class="dtlr">我23号买的东西为什么还没备货出库啊 快点好吗 等着用呢 谢谢</li>
-            </ul>
-            <div class="clear"></div>
-          </dt>
-          <dd>
-            <ul>
-              <li class="name">客服回复</li>
-              <li class="ddlr">您好：您的订单已于24号发货，配送时间为2-3个工作日，请您耐心等待，祝您生活愉快！</li>
-            </ul>
-            <div class="clear"></div>
-          </dd>
-        </dl>
-      </div>
-      <div class="pinlunbox">
-        <dl>
-          <dt>
-            <ul>
-              <li class="name">zhangjinhao</li>
-              <li class="time">2011-08-25 07:34:42</li>
-              <li class="dtlr">我23号买的东西为什么还没备货出库啊 快点好吗 等着用呢 谢谢</li>
-            </ul>
-            <div class="clear"></div>
+           
           </dt>
         </dl>
         <p>&nbsp;</p>
@@ -350,22 +320,26 @@
     <div class="lr_right_main main_top2 fbpn">
       <h2>提交问答/评论</h2>
       <ul>
-        <li class="pyts">欢迎您<a href="#"><strong>Services</strong></a>发表问答/评论! 欢迎您访客，您在<a href="/login">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg">注册</a>！</li>
-        <li class="title">内容：</li>
+       <#if user??> <li class="pyts">欢迎您,<a href="/user/info"><strong>${user.username}</strong></a>发表问答/评论!
+       			 <li class="title">内容：</li>
         <li class="texta">
           <label>
-            <textarea name="textarea" id="textarea" cols="100" rows="5" class="inp"></textarea>
+            <textarea name="textarea" id="centent" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
           </label>
         </li>
         <li class="title">验证码：</li>
         <li class="yzminp">
-          <input type="text" name="textfield2" id="textfield2" />
+          <input type="text" name="textfield2" id="verify" maxlength="4" />
         </li>
-        <li class="yzmimg"><img src="/images/auth.gif" width="96" height="21" alt="验证码" /></li>
+        <li class="yzmimg"><a href="javascript:void(0)"><img onclick="this.src = '/verify?date='+Math.random();" src="/verify" id="yzm" alt="验证码"/></a></li>
         <li class="tijiaobox">
-          <input type="submit" value="提交信息"  class="tijiaoan"/>
+          <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_save(this,${product.id},${product.type})"/>
         </li>
       </ul>
+       
+       
+       <#else> 欢迎您访客，您在<a href="/login" class="t_red">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg" class="t_red">注册</a>！</li></#if>
+       
       <div style="clear:both;"></div>
     </div>
   </div>
@@ -540,12 +514,12 @@ $(function(){
 $(function(){
 			//分页---上一页(减1)  / 下一页(加1)
 
-			var index = 0;
+			var index = 1;
 			var totalCount = 100;
 			//下一页功能
 			$(".next").click(function(){
 				index++;//相当于index = index +1;
-				if(index>totalCount)index = 0;
+				if(index>totalCount)index = 1;
 				$("#count").val(index);
 			});
 
@@ -553,7 +527,7 @@ $(function(){
 			//上一页功能
 			$(".prev").click(function(){
 				index--;//相当于index = index +1;
-				if(index<0)index = totalCount;
+				if(index<1)index = totalCount;
 				$("#count").val(index);
 			});
 			
@@ -610,25 +584,37 @@ $(function(){
                 var _arr = $('#id-tab-content li');
                 _arr.eq(index).fadeIn(0).siblings().fadeOut(0);
             });
-		
+        function tm_save(obj,id,type){
+        	var centent=$("#centent").val();
+        	var verify=$("#verify").val();
+        	if(isEmpty(centent)){
+        		 Tmtip({html:"您输入的内容不能为空!!!",src:"/Tm/images/24.PNG"});
+        		 $("#centent").focus();
+        		 return;
+        	}
+        	if(isEmpty(verify)){
+        		 Tmtip({html:"验证码不能为空!!!",src:"/Tm/images/24.PNG"});
+        		 $("#verify").focus();
+        		 return;
+        	}
+        	tm_ajax({
+        		url:"/saveComm",
+        		data:{"productId":id,"content":centent,"verify":verify,"type":type},
+        		 callback:function(data) {
+        		 	 if(data=="success"){
+        		 	 	Tmtip({html:"咨询已经提交！工作人员会在24小时内处理!",src:"/Tm/images/24.PNG"});
+        		 		$("#centent").val("");
+        				$("#verify").val("");
+        		 	 }else if(data=="vfalse"){
+        		 	 	Tmtip({html:"验证码输入错误!",src:"/Tm/images/24.PNG"});
+        		 	 	$("#verify").select();
+        		 	 }
+        		 }
+        		
+        	})
+        } 
 </script>
 
 
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

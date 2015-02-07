@@ -9,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ynyes.rongcheng.entity.Parameter;
 import com.ynyes.rongcheng.entity.Product;
+import com.ynyes.rongcheng.entity.ProductConsult;
 import com.ynyes.rongcheng.entity.User;
 import com.ynyes.rongcheng.service.ParameterService;
+import com.ynyes.rongcheng.service.ProductCommentService;
+import com.ynyes.rongcheng.service.ProductConsultService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.UserService;
 import com.ynyes.rongcheng.util.StringUtils;
@@ -32,11 +36,15 @@ import com.ynyes.rongcheng.util.StringUtils;
 @Controller
 public class Productontroller {
     @Autowired
-    private  ProductService productservice;
+    private  ProductService productservice;//商品信息相关
     @Autowired
-    private  ParameterService parameterService;
+    private  ParameterService parameterService;//商品参数相关
     @Autowired
-    private  UserService userService;
+    private  UserService userService;//用户相关
+    @Autowired
+    private ProductCommentService productCommentService;//商品评论相关
+    @Autowired
+    private ProductConsultService productConsultService;//商品资讯相关
     private  String flag;
     /**
      * 
@@ -55,6 +63,7 @@ public class Productontroller {
     public ModelAndView index(@PathVariable Long typeId){
         ModelAndView modelAndView=new ModelAndView();
         Product product=productservice.findOne(typeId);
+        ProductConsult productConsult=productConsultService.findOne(typeId);
         String type =product.getType();
         List<Parameter> parameters= parameterService.findByType(type);
         String list=product.getShowPictures();
@@ -62,8 +71,9 @@ public class Productontroller {
         modelAndView.addObject("ShowPictures",sList);//轮播展示图片
         modelAndView.addObject("product",product);//商品详情
         modelAndView.addObject("parameters",parameters);//商品属性
+        modelAndView.addObject("productConsult",productConsult);//商品评论
         modelAndView.setViewName("/front/type_list_content");
-        return modelAndView;
+    return modelAndView;
     }
     /**
      * 
@@ -118,6 +128,40 @@ public class Productontroller {
       }
       return flag;
     }
+    /**
+     * 
+     * 添加评论<BR>
+     * 方法名：saveComment<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年2月7日-下午5:15:45 <BR>
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>String 
+     * @since  1.0.0
+     */
+    @RequestMapping(value="/saveComm",method=RequestMethod.POST)
+    @ResponseBody
+    public String saveComment(HttpServletRequest request,String verify,String type,String content,Long productId,Long productVersionId){
+        User user= (User) request.getSession().getAttribute("user");
+       String msg = (String)request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
+      if(user!=null){ 
+           if(StringUtils.isNotEmpty(user.getUsername())){
+               if(verify.equalsIgnoreCase(msg)){
+                   if(productVersionId==null){
+                       productVersionId=(long) 1;
+                       productConsultService.add(user.getUsername(), type, content, productId, productVersionId);
+                       flag="success";
+                       return flag;
+                   }
+               }else{
+                   flag="vfalse";//验证码失败
+                   return flag;
+               }
+           }
+       }
+    return flag;
+     }
     //grt/set
     public String getFlag() {
         return flag;

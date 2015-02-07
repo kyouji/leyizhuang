@@ -1,8 +1,13 @@
 package com.ynyes.rongcheng.controller.front;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.ynyes.rongcheng.entity.User;
+import com.ynyes.rongcheng.service.ShoppingCartService;
 import com.ynyes.rongcheng.util.StringUtils;
 
 /**
@@ -17,6 +22,8 @@ import com.ynyes.rongcheng.util.StringUtils;
 @Controller
 
 public class CartController {
+    @Autowired
+    private ShoppingCartService shoppingCartService;
     /**
      * 
      * 跳转购物车<BR>
@@ -30,14 +37,22 @@ public class CartController {
      * @since  1.0.0
      */
     @RequestMapping("/cart")
-    public String cart(String sum){
+    public ModelAndView cart(String sum,ModelMap map){
+       ModelAndView modelAndView=new ModelAndView();
+        User user =(User) map.get("user");
         if(StringUtils.isNotEmpty(sum)){
-         
-            return "/front/cart/cart";
+            String username=user.getUsername();
+            if(StringUtils.isNotEmpty(username)){
+                modelAndView.addObject("cartId",shoppingCartService.findOne(username, Long.parseLong(sum)));
+                modelAndView.setViewName("/front/cart/cart");
+            }else {
+                modelAndView.setViewName("/front/cart/cart");
+            }
         }else{
             
-            return "/front/cart/cart";
+            modelAndView.setViewName("/front/cart/cart");
         }
+        return modelAndView;
     }
     /**
      * 
