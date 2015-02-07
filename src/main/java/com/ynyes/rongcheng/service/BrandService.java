@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -247,6 +248,11 @@ public class BrandService {
         if (null == brand)
         {
             return null;
+        }
+        
+        if (null == brand.getId())
+        {
+            brand.setCreateTime(new Date());
         }
         
         return repository.save(brand);
