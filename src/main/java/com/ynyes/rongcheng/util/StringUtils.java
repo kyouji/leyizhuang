@@ -109,9 +109,83 @@ public class StringUtils {
        }
        return re_md5;
    }
+   /**
+    * 凯德加密
+    * 方法名：encryption<BR>
+    * 创建人：xiaowei <BR>
+    * 时间：2014年10月25日-下午9:48:19 <BR>
+    * @param str
+    * @param k
+    * @return String<BR>
+    * @exception <BR>
+    * @since  1.0.0
+    */
+   public static String encryption(String str,int k){
+       String string = "";
+       for (int i = 0; i < str.length(); i++) {
+           char c= str.charAt(i);
+           if(c>='a' && c<='z'){
+               c += k%26;
+               if(c<'a'){
+                   c+=26;
+               }
+               if(c>'z'){
+                   c-=26;
+               }
+           }else if(c>='A' && c<='Z'){
+               c+=k%26;
+               if(c<'A'){
+                   c+=26;
+               }
+               if(c>'Z'){
+                   c-=26;
+               }
+           }
+           string+=c;
+       }
+       return string;
+   }
+   
+   /**
+    * 凯德解密
+    * 方法名：dencryption<BR>
+    * 创建人：xiaowei <BR>
+    * 时间：2014年10月25日-下午9:48:35 <BR>
+    * @param str
+    * @param n
+    * @return String<BR>
+    * @exception <BR>
+    * @since  1.0.0
+    */
+   public static String dencryption(String str,int n){
+       String string = "";
+       int k = Integer.parseInt("-"+n);
+       for (int i = 0; i < str.length(); i++) {
+           char c= str.charAt(i);
+           if(c>='a' && c<='z'){
+               c += k%26;
+               if(c<'a'){
+                   c+=26;
+               }
+               if(c>'z'){
+                   c-=26;
+               }
+           }else if(c>='A' && c<='Z'){
+               c+=k%26;
+               if(c<'A'){
+                   c+=26;
+               }
+               if(c>'Z'){
+                   c-=26;
+               }
+           }
+           string+=c;
+       }
+       return string;
+   }
    public static void main(String[] args) {
     String str="123";
-    System.out.println(encryption(str));
+    System.out.println(encryption(str, 12));
 }
 } 
   

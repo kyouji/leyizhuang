@@ -11,6 +11,8 @@
 <script type="text/javascript" src="/Tm/js/jquery-1.11.1.min.js"></script>
 <script type=text/javascript src="/Tm/js/jquery.jqzoom.js"></script>
 <script type=text/javascript src="/Tm/js/jquery.livequery.js"></script>
+<script type=text/javascript src="/Tm/js/AJAX.js"></script>
+<script type=text/javascript src="/Tm/js/util.js"></script>
 </head>
 <body>
 <header>
@@ -560,8 +562,9 @@ $(function(){
 	//去购买	
 		function tm_buy(){
 			var id=$("#count").val();
-			alert(id)
 			window.location.href='/cart?sum='+id;
+			
+		
 		}
 //收藏
 		function tm_collect(obj,id){

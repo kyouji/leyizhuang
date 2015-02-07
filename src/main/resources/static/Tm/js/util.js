@@ -118,3 +118,28 @@ function is_QQNum(str)
     var regExp = /^[1-9][0-9]{4,13}$/;
     return regExp.test(str);
 }
+
+
+function encodeSTR(str){
+    var t="%%";
+
+    for(var x=0;x<str.length;x++){
+        a=str.charCodeAt(x);
+        if(x!=0){
+            t+='|';
+        }
+        t+=new Number(a).toString(10);
+    }
+    return t
+}
+
+
+function decodeSTR(str){
+    
+    var a1 = str.split('|');
+    alert(a1[0]);
+    for(var x=0;x<a1.length;x++){
+        a1[x] = String.fromCharCode(a1[x]);
+    }
+    return a1.join('');
+}

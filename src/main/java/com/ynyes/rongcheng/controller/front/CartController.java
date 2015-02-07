@@ -1,8 +1,9 @@
 package com.ynyes.rongcheng.controller.front;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ynyes.rongcheng.util.StringUtils;
 
 /**
  * 购物车
@@ -29,8 +30,14 @@ public class CartController {
      * @since  1.0.0
      */
     @RequestMapping("/cart")
-    public String cart(Long sum){
-        return "/front/cart/cart";
+    public String cart(String sum){
+        if(StringUtils.isNotEmpty(sum)){
+         
+            return "/front/cart/cart";
+        }else{
+            
+            return "/front/cart/cart";
+        }
     }
     /**
      * 
