@@ -7,10 +7,23 @@
 <meta name="copyright" content="荣诚手机超市 版权所有" />
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
-<link href="/css/member.css" rel="stylesheet" type="text/css" />
+<!--<link href="/css/member.css" rel="stylesheet" type="text/css" />-->
+<link rel="stylesheet" rel="stylesheet" href="/img/order/gao/style.css" />
+<link rel="stylesheet" type="text/css" href="/img/order/gao/global.css" />
+<link rel="stylesheet" type="text/css" href="/img/order/gao/buy.css" />
+<link href="/img/order/gao/member.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/img/order/gao/pagination.css" />
+
 <!--[if IE]>
    <script src="/js/html5.js"></script>
 <![endif]-->
+
+
+	<!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
 <!--[if IE 6]>
 <script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
 <script>
@@ -35,9 +48,9 @@ DD_belatedPNG.fix('.,img,background');
 <div class="member_lef fll"> <span class="sp55">订单中心</span>
       <ul class="haoh pt10">
         <li><a href="/order/list" class="act">全部订单</a></li>
-        <li><a href="/order/obligation?status=0">待付款订单</a></li>
-        <li><a href="/order/startorder?status=1">待收货订单</a></li>
-        <li><a href="/order/orderok?status=3">已完成订单</a></li>
+        <li><a href="/order/obligation?status=0" >待付款订单</a></li>
+        <li><a href="/order/startorder?status=1" >待收货订单</a></li>
+        <li><a href="/order/orderok?status=3" >已完成订单</a></li>
         <li><a href="/order/orderno?status=4">已关闭订单</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
@@ -55,56 +68,46 @@ DD_belatedPNG.fix('.,img,background');
       </ul>
     </div>
 
-<div class="flr right">
-<div class="list_banner1">
-<div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
-        
-        <div class="gwc1_lm mt15">
-<table>
-<tr>
-<td>商品信息</td>
-<td>合计</td>
-<td>数量</td>
-<td>状态</td>
-<td>操作</td>
-</tr>
-</table>
-</div>
-
-<#list shopping_order_list as shopping_order>
-		<div class="member_dd">
-		<span class=" member_ddrq"><#if shopping_order.orderTime??>${shopping_order.orderTime}</#if><#if shopping_order.orderNumber??>
-		    <span>订单号：${shopping_order.orderNumber}</span></#if>
-		</span>
-		<#list shopping_order.orderItemList as shopping_order_orderItemList>
-		<table>
-		<tr class="member_ddhe">
-		<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a>
-		    <#if shopping_order.id??></span><a href="/product/${shopping_order.id}"></#if><#if shopping_order_orderItemList.productBrief??><p>${shopping_order_orderItemList.productBrief}</p></#if></a>
-		</td>
-		<td class="member_dd_b"><#if shopping_order_orderItemList.price??>
-		    <span>${shopping_order_orderItemList.price}</span></#if>
-		</td>
-		<#if shopping_order_orderItemList??><td class="member_dd_c">${shopping_order_orderItemList.quantity}</td></#if>
-		<#if shopping_order.statusCode??><td class="member_dd_d">${shopping_order.statusCode}</td></#if>
-		<td class="member_dd_e"><a href="#">评价订单</a><a href="#">订单详情</a></td>
-		</tr>
-		</table>
-		</#list>
-		</div>
-</#list>
-</div>
-
-        <div class="clear h20"></div>
-        <div class="flr fot_fanye"><ul class="haoh">
-        <li><a href="#" ><<</a></li>
-         <li><a href="#" class="act">1</a></li>
-          <li><a href="#">2</a></li>
-           <li><a href="#">>></a></li>
-        </ul></div>
-        
-</div></div>
-</div>
+<div class="flr">
+    <div class="list_banner1">
+      <div class="list_banner_fj">
+        <p>您当前的位置：<a href="/">首页</a> >> <a href="#">订单</a> >>所有订单</p>
+      </div>
+      
+      <style>
+      .data_s{overflow:hidden;padding:20px 0;}
+      .data_s a,.data_s a:visited{margin-right:10px;padding:5px 10px;border:1px solid #ddd;border-radius:3px;-moz-border-radius:3px;-ms-border-radius:3px;-webkit-border-radius:3px;-o-border-radius:3px;
+      transition:all .2s linear;-webkit-transition:all .2s linear;-o-transition:all .2s linear;-ms-transition:all .2s linear;-moz-transition:all .2s linear;
+      }
+      .data_s a.on,.data_s a:hover{ background:#2881D5; color:#fff;border:none;}
+      
+      </style>
+      <div class="data_s">
+        <a>近一个月</a>
+        <a>近三个月</a>
+        <a>近六个月</a>
+        <a>近一年</a>
+      </div>
+      
+      
+      <div class="member_dd">
+        <table width="720" border="0" cellpadding="0" cellspacing="0" id="table" >
+        	<#include "/front/order/orderchild/page.ftl">	
+        </table>
+      
+      <div id="id-pagination" style="margin-top: 0px;float: right;">
+          <div class="pagination">
+	          <span class="current prev">上一页</span>
+	          <span class="current">1</span>
+	          <span class="current next">下一页</span>
+          </div>
+      </div>
+      
+    </div>
+    <div class="clear"></div>
+       <div class="page" style="margin-top: 5px;text-align: right;"></div>
+  </div>
+  <div class="clear"></div>
 </div>
 
 <div class="clear"></div>
@@ -114,17 +117,44 @@ DD_belatedPNG.fix('.,img,background');
 </div>
 
 <div class="clear"></div>
-
 <div class="footallbg">
 <#include "/front/comment/top1.ftl">
-
 </div>
+<script src="/js/jquery.pagination.js"></script>
+      // 分页
+    <script type="text/javascript">
+    
+    // 每页数量
+    var pageSize = 5;
+    $("#id-pagination").pagination(${goods_order_total},
+    {
+        var status = window.location.search;
+        
+        num_display_entries : 3,
+        num_edge_entries : 3,
+        current_page : 0,
+        items_per_page : pageSize,
+        prev_text : "上一页",
+        next_text : "下一页",
+        showGo : true,
+        showSelect : true,
+        callback : function(pageNo) {
+            $.ajax({
+                type : "post",
+                url : "/order/page"+ status,
+                data : {
+                    "page" : pageNo,
+                    "size" : pageSize
+                },
+                success : function(data) {
+                    $("#table").html(data);
+                }
+            });
+        }
+    });
+    
 
-
-
-
-
-
+</script>
 </body>
 </html>
 
