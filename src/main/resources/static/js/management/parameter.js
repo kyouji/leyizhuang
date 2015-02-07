@@ -42,7 +42,6 @@ jQuery(function($) {
 	        url : '/admin/parameter/destroy/',
 	        type : 'POST',
 	        success : function() {
-	            alert("删除成功");
 	            location.reload();
 	        }
 	    }); // ajax

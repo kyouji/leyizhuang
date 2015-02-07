@@ -14,20 +14,22 @@
 		        ${brand.id}
 		    </td>
 		    <td class="center">
-		        <#if brand.type??>${brand.type}</#if> 
+		        ${brand.type} 
 		    </td>
 		    <td class="center">
 		        ${brand.name}
 		    </td>
 		    <td class="center">
-		        <#if brand.logoUri??>${brand.logoUri}</#if>
+		    	<#if brand.logoUri??>
+		    		${brand.logoUri}
+		    	</#if>
 		    </td>
 		    <td class="center">
-		    	<#if brand.isRecommend?? && brand.isRecommend==true>
-		    		是
-		    	<#else>
-		    		否
-		    	</#if>
+		        <#if brand.recommend?? && brand.recommend==true>
+		                                   是
+		        <#else>
+		                                   否
+		        </#if>
 		    </td>
 		    <td class="center">
 		        ${brand.createTime}

@@ -13,11 +13,12 @@
 		<link rel="stylesheet" href="/assets/css/ace.min.css" type="text/css"/>
 		<link rel="stylesheet" href="/css/select.css">
 		<link rel="stylesheet" href="/css/pagination.css">
-				
+		<link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
+        <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css" />
+        <link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.full.min.css" />
 	</head>
 
 	<body>
-	
 		<#include "/management/common/page_head.ftl">
 
 		<div class="main-container" id="main-container">
@@ -60,11 +61,11 @@
                                             <th width="5%" class="center"></th>  
                                             <th width="5%" class="center">排序</th>                                                                                                 
                                             <th width="8%" class="center">ID</th>
-                                            <th width="20%" class="center">品牌类型</th>                                            
-                                            <th width="20%" class="center">品牌名称</th>
-                                            <th width="12%" class="center">品牌图片</th>
+                                            <th width="15%" class="center">类型</th>                                            
+                                            <th width="15%" class="center">名称</th>
+                                            <th width="20%" class="center">品牌图片</th>
                                             <th width="8%" class="center">是否推荐</th>
-                                            <th width="14%" class="center">创建时间</th>
+                                            <th width="16%" class="center">创建时间</th>
                                             <th width="8%" class="center">编辑</th>
                                         </tr>
                                     </thead>
@@ -94,13 +95,13 @@
     
 		<!-- basic scripts -->
          
-		<!--[if !IE]> 
+		<!--[if !IE]> -->
 
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
-		<![endif]-->
+		<!-- <![endif]-->
 
 		<!--[if IE]>
         <script type="text/javascript">
@@ -109,7 +110,11 @@
         <![endif]-->
 
 		<script src="/assets/js/bootstrap.min.js"></script>
-
+        <script src="/assets/js/jquery-ui-1.10.3.full.min.js"></script>
+        <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+        
+        
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
@@ -130,7 +135,7 @@
 		<script src="/js/jquery.pagination.js" type="text/javascript"></script>
         
         <!--新增参数提交-->        
-        <script src="/js/management/param_add.js" type="text/javascript"></script>
+        <script src="/js/management/brand_add.js" type="text/javascript"></script>
                 
 	</body>
 </html>

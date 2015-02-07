@@ -39,10 +39,9 @@ jQuery(function($) {
 	    }
 	            
 	    $.ajax({
-	        url : '/admin/parameter/destroy/',
+	        url : '/admin/brand/delete/',
 	        type : 'POST',
 	        success : function() {
-	            alert("删除成功");
 	            location.reload();
 	        }
 	    }); // ajax
@@ -64,7 +63,7 @@ jQuery(function($) {
 		callback : function(pageIndex) {
 			$.ajax({
 				type:"GET",
-				url:"/admin/parameter/page/" + pageIndex,
+				url:"/admin/brand/page/" + pageIndex,
 				success:function(data){
 					$("#id-tbody").html(data);
 				}
@@ -80,7 +79,7 @@ function destroy(id) {
     if (window.confirm('确定要删除该参数吗？')) {
 
         $.ajax({
-            url : '/admin/parameter/destroy/'+id,
+            url : '/admin/brand/delete/'+id,
             type : 'POST',
             success : function() {
                 location.reload();
@@ -94,10 +93,10 @@ function destroy(id) {
 }
 
 // 参数修改  zackma-20150204
-function modify(id) {
+/*function modify(id) {
 
     $.ajax({
-        url : '/admin/parameter/modify/'+id,
+        url : '/admin/admin/modify/'+id,
         type : 'POST',
         success : function(data) {	
             $("#id-modify").siblings().addClass("hide");
@@ -117,12 +116,6 @@ function modify(id) {
             $(".addinput-form #m-name").change(function(){
             	$("#m-name").css({"background-color":"#ffffdb"});
             });
-            $(".addinput-form #m-input_type").change(function(){
-            	$("select").css({"background-color":"#ffffdb"});
-            });
-            $(".addinput-form #m-param_list").change(function(){
-                $("textarea").css({"background-color":"#ffffdb"});	
-            });
              
             // 修改提交  zackma-20150204
             $("#m-submit").click(function(){
@@ -140,7 +133,7 @@ function modify(id) {
                     
                     var modiDate = {"id":id,"type":type,"name":name,"isValueInputByChoose":isValueInputByChoose,"isSearchable":isSearchable,"isSingleValue":isSingleValue,"valueList":valueList};
                     $.ajax({
-                        url : '/admin/parameter/save',
+                        url : '/admin/brand/save',
                         type : 'POST',
                         data : modiDate,
                         success : function(data) {
@@ -156,6 +149,6 @@ function modify(id) {
         }
     });
                                                            
-}
+}*/
 
 
