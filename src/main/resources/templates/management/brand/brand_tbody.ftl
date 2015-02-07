@@ -25,7 +25,7 @@
 		    	</#if>
 		    </td>
 		    <td class="center">
-		        <#if brand.recommend?? && brand.recommend==true>
+		        <#if brand.isRecommend?? && brand.isRecommend==true>
 		                                   是
 		        <#else>
 		                                   否

@@ -1,4 +1,4 @@
-<div id="sub-modify class="hide">
+<div id="sub-modify>
     <div class="form-group">
         <a href="javascript:void(0)" class="back btn btn-default btn-sm">返回上一级</a> 
     </div>
