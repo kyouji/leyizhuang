@@ -28,6 +28,10 @@ public class ProductConsult {
     @Column
     private String content;
     
+    // 咨询分类
+    @Column
+    private String type;
+    
     // 咨询时间
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -44,6 +48,10 @@ public class ProductConsult {
     // 咨询的商品ID
     @Column
     private Long pid;
+    
+    // 咨询的商品版本ID
+    @Column
+    private Long vid;
 
     public Long getId() {
         return id;
@@ -59,6 +67,14 @@ public class ProductConsult {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Date getConsultTime() {
@@ -91,6 +107,14 @@ public class ProductConsult {
 
     public void setPid(Long pid) {
         this.pid = pid;
+    }
+
+    public Long getVid() {
+        return vid;
+    }
+
+    public void setVid(Long vid) {
+        this.vid = vid;
     }
 
 }

@@ -13,14 +13,13 @@ import com.ynyes.rongcheng.entity.ProductComment;
  * ProductComment 实体数据库操作接口
  * 
  * @author Sharon
- *
  */
 
 public interface ProductCommentRepo extends
 		PagingAndSortingRepository<ProductComment, Long>,
 		JpaSpecificationExecutor<ProductComment> 
 {
-    // 通过评论的商品ID查找
-    Page<ProductComment> findByPidOrderByCommentTimeDesc(Long pid, Pageable page);
-    List<ProductComment> findByPidOrderByCommentTimeDesc(Long pid);
+    // 通过评论的商品ID和版本ID查找
+    Page<ProductComment> findByPidAndVid(Long pid, Long vid, Pageable page);
+    List<ProductComment> findByPidAndVid(Long pid, Long vid);
 }

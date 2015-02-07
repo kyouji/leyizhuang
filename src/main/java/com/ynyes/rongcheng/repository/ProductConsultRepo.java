@@ -20,7 +20,7 @@ public interface ProductConsultRepo extends
 		PagingAndSortingRepository<ProductConsult, Long>,
 		JpaSpecificationExecutor<ProductConsult> 
 {
-    // 通过资讯的商品ID查找
-    Page<ProductConsult> findByPidOrderByConsultTimeDesc(Long pid, Pageable page);
-    List<ProductConsult> findByPidOrderByConsultTimeDesc(Long pid);
+    // 通过咨询的商品ID及版本ID查找
+    Page<ProductConsult> findByPidAndVid(Long pid, Long vid, Pageable page);
+    List<ProductConsult> findByPidAndVid(Long pid, Long vid);
 }
