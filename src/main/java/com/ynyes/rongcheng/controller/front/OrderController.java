@@ -54,13 +54,12 @@ public class OrderController {
 	 * @exception <BR>
 	 * @since 1.0.0
 	 */
-	@RequestMapping("/list")
+	@RequestMapping(value="/list")
 	public String orderlist(Model model, HttpServletRequest req) {
 		// 根据当前状态获取数据并返回
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(
 				user.getUsername(), 0, 5, "desc", "id"); 
-	//	Page<Product>	so=productService.findAll(0, 5, "desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent()); // so.getContent()是将当前对象默认变为list
 		model.addAttribute("goods_order_total", so.getTotalElements());
 		return "/front/order/orderlist";
@@ -88,6 +87,7 @@ public class OrderController {
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,"desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
+		model.addAttribute("status", status);     //将访问某个状态栏的状态保存下来，在发送异步请求的时候再写回去
 		return "/front/order/obligation";
 	}
 
@@ -107,7 +107,6 @@ public class OrderController {
 	 */
 	@RequestMapping("/startorder")
 	public String startorder(Long status, Model model, HttpServletRequest req) {
-		int total;
 		User user = (User) req.getSession().getAttribute("user");
 
 		Page<ShoppingOrder> so = shoppingOrderService
@@ -115,6 +114,7 @@ public class OrderController {
 						"desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
+		model.addAttribute("status", status);
 		return "/front/order/startorder";
 	}
 
@@ -131,7 +131,7 @@ public class OrderController {
 	 * @exception <BR>
 	 * @since 1.0.0
 	 */
-	@RequestMapping("/orderok")
+	@RequestMapping(value="/orderok")
 	public String orderok(Long status, Model model, HttpServletRequest req) {
 		int total;
 		User user = (User) req.getSession().getAttribute("user");
@@ -140,6 +140,7 @@ public class OrderController {
 						"desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
+		model.addAttribute("status", status);
 		return "/front/order/orderok";
 	}
 
@@ -165,6 +166,7 @@ public class OrderController {
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,"desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
+		model.addAttribute("status", status);
 		return "/front/order/orderno";
 	}
 	
@@ -184,7 +186,7 @@ public class OrderController {
 	 * @since 1.0.0
 	 */
 	@RequestMapping("/delorder")
-	public String deleteorder(Long id,HttpServletRequest req,Model model) {
+	public String deleteorder(Long id,HttpServletRequest req,Model model,Long status) {
 		int total;
 		shoppingOrderService.delete(id);
 		User user = (User) req.getSession().getAttribute("user");
@@ -192,6 +194,7 @@ public class OrderController {
 				user.getUsername(), 0, 5, "desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
+		model.addAttribute("status", status);
 		return "/front/order/orderlist"; 
 	}
 	
@@ -213,13 +216,14 @@ public class OrderController {
 	 * @since 1.0.0
 	 */
 	@RequestMapping("/order_detail")
-	public String orderdetail(Long id,HttpServletRequest req,Model model) {
+	public String orderdetail(Long id,HttpServletRequest req,Model model,Long status) {
 		User user = (User) req.getSession().getAttribute("user");
 		ShoppingOrder so = shoppingOrderService.findOne(id);
 		model.addAttribute("shopping_order_list", so);
 		List<OrderItem> item = so.getOrderItemList();
 	    int order_size=item.size();
 		model.addAttribute("goods_order_total", order_size);
+		model.addAttribute("status", status);
 		return "/front/order/order_detail"; 
 	}
 	
@@ -238,13 +242,14 @@ public class OrderController {
 	 * @since 1.0.0
 	 */
 	@RequestMapping("/cartstep")
-	public String cartstep(Long id,HttpServletRequest req,Model model) {
+	public String cartstep(Long id,HttpServletRequest req,Model model,Long status) {
 		User user = (User) req.getSession().getAttribute("user");
 		ShoppingOrder so = shoppingOrderService.findOne(id);
 		model.addAttribute("order", so);
 	    List<OrderItem> item = so.getOrderItemList();
 	    int order_size=item.size();
 		model.addAttribute("goods_order_total", order_size);
+		model.addAttribute("status", status);
 		return "/front/cart/cartStep"; 
 	}
 	
@@ -266,11 +271,14 @@ public class OrderController {
 	 * @since 1.0.0
 	 */
 	@RequestMapping(value="/page_list",method=RequestMethod.POST )
-	public String listpage(Long status, Model model, HttpServletRequest req) {
+	public String listpage(Long status, Model model, HttpServletRequest req,int page) {
+		System.out.println("进入函数了");
+		System.out.println("status的值为"+status);
 		User user = (User) req.getSession().getAttribute("user");
-		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,"desc", "id");
+		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, page, 5,"desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
         model.addAttribute("goods_order_total", so.getTotalElements());
+        model.addAttribute("status", status);
 		return "/front/order/orderchild/page"; 
 	}
 	

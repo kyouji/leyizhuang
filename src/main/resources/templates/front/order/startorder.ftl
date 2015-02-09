@@ -44,7 +44,7 @@ DD_belatedPNG.fix('.,img,background');
         <li><a href="/order/list">全部订单</a></li>
         <li><a href="/order/obligation?status=0" >待付款订单</a></li>
         <li><a href="/order/startorder?status=1" class="act">待收货订单</a></li>
-        <li><a href="/order/orderok?status=3" >已完成订单</a></li>
+        <li><a href="/order/orderok?status=3">已完成订单</a></li>
         <li><a href="/order/orderno?status=4">已关闭订单</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
@@ -91,7 +91,7 @@ DD_belatedPNG.fix('.,img,background');
       
       <div id="id-pagination" style="margin-top: 0px;float: right;">
           <div class="pagination">
-	          <span class="current prev"><a href="www.baidu.com">上一页</a></span>
+	          <span class="current prev"><a href="javascrpt:void(0)">上一页</a></span>
 	          <span class="current next"><a href="javascrpt:void(0)">下一页</a></span>
           </div>
       </div>
@@ -117,10 +117,8 @@ DD_belatedPNG.fix('.,img,background');
 <script src="/js/jquery.pagination.js"></script>
       // 分页
     <script type="text/javascript">
-    var status = window.location.search;
     // 每页数量
     var pageSize = 5;
-    var pageNo=0;
     $("#id-pagination").pagination(${goods_order_total},
     {
     
@@ -135,9 +133,10 @@ DD_belatedPNG.fix('.,img,background');
         callback : function(pageNo) {
             $.ajax({
                 type : "post",
-                url : "/order/page_list_all",
+                url : "/order/page_list",
                 data : {
-                    "page" : pageNo
+                    "page" : pageNo,
+                    "status" : ${status}
                 },
                 success : function(data) {
                     $("#table").html(data);
