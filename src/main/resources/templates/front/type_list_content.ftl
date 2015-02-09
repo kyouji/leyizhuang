@@ -117,7 +117,7 @@
     <p><span>市&nbsp;&nbsp;场&nbsp;价：</span>￥${product.priceMinimum?c}.00</p>
     <p><span>荣&nbsp;&nbsp;诚&nbsp;价：</span><em>￥<#if product.flashSalePrice??>${product.flashSalePrice?c}</#if>.00</em><span class="orange ml10">(降价通知)</span></p>
     <p><span>促&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销：</span><i><#if product.promotion??>${product.promotion}</#if></i></p>
-    <p><span>商品评价：</span><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><span style="color:#1480DB">（共有<#if product.averagePoints??>${product.averagePoints}</#if>条评价）</span></p>
+    <p><span>商品评价：</span><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><span style="color:#1480DB">（共有<#if productcount??>${productcount}</#if>条评价）</span></p>
     <p><span>配&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置：</span><#if product.configuration??>${product.configuration}</#if></p>
     <p><span>服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</span><#if product.service??>${product.service}</#if></p>
     <div class="SelectPackage">
@@ -136,11 +136,11 @@
 </div>
 <div class="clear"></div>
 
-<div class="tuijianzuhe">
+<div class="tuijianzuhe" >
 <div class="tuijianzuhe_bt"><span>组合推荐</span><a href="#">推荐配置（12）</a><a href="#">推荐配置（32）</a><a href="#" class="tuijianzuhe_btxz">推荐配置</a><a href="#">推荐配置</a><a href="#">推荐配置</a><a href="#">推荐配置</a><a href="#">推荐配置</a><a href="#">推荐配置（5）</a><a href="#">推荐配置</a><div class="clear"></div></div>
 
 
-<div class="fll tuijianzuhe_a"><ul>
+<div class="fll tuijianzuhe_a" ><ul>
 
         <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
           <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
@@ -185,10 +185,10 @@
 
 <div class="fll tuijianzuhe_b">
 <span>您自己的DIY</span>
-<p>已选择5件产品<a href="#">（清除选项）</a></p>
-<p>搭配价格：<span>￥5999.00</span></p>
-<p>参考价格：￥5999.00</p>
-<p>节省金额：￥129.00</p>
+<p>已选择&nbsp;&nbsp;<span class="jia">5</span>件产品<a href="javascript:void(0)" class="tm_close">（清除选项）</a></p>
+<p>搭配价格：<span class="jia">￥5999.00</span></p>
+<p>参考价格：<span class="jia">￥599.00</span></p>
+<p>节省金额：<span class="jia">￥129.00</span></p>
 <p class="mt5"><a href="#" class="ligmooo" style="color:#fff;">立即购买</a></p>
 </div>
 </div>
@@ -238,113 +238,128 @@
       <ul id="id-tab-list">
         <li><a href="javascript:void(0)" class="con">商品详情</a></li>
         <li><a href="javascript:void(0)">商品参数</a></li>
-        <li><a href="javascript:void(0)">商品评价（${product.averagePoints}）</a></li>
         <li><a href="javascript:void(0)">购买咨询</a></li>
-      <!--  <li><a href="javascript:void(0)">价格走势</a></li>-->
+        <li><a href="javascript:void(0)">商品评价（${productcount}）</a></li>
+       <li><a href="javascript:void(0)">价格走势</a></li>
       </ul>
     </div>
     <div class="products_det"> 
     	<ul id="id-tab-content" >
     		<li ><#if product.detail??>${product.detail}</#if></li>
     		<li style="display:none"><#if product.configuration??>${product.configuration}</#if></li>
-    		<li style="display:none">商品评价</li>
-    		<li style="display:none">商品咨询
-    		<div class="lr_right_main main_top2">
-      <div class="pinglun">
-        <h2>购买咨询</h2>
-      </div>
-      <div class="pinlunbox">
-        <dl>
-          <dt>
-            <ul>
-              <li class="name">zhangjinhao</li>
-              <li class="time">2011-08-25 07:34:42</li>
-              <li class="dtlr">我23号买的东西为什么还没备货出库啊 快点好吗 等着用呢 谢谢</li>
-            </ul>
-            <div class="clear"></div>
-          </dt>
-          <dd>
-           
-          </dt>
-        </dl>
-        <p>&nbsp;</p>
-      </div>
-    </div></li>
-    		
+    		<li style="display:none">
+    			商品咨询
+    				
+		      <div class="pinglun">
+		        <h2>商品咨询</h2>
+		      </div>
+		      <div class="pinlunbox">
+		        <dl>
+		          <dt>
+		          <#if productConsult??>
+		          <#list productConsult as prod>
+		            <ul>
+		              <li class="name"><#if prod.username??>${prod.username}</#if></li>
+		              <li class="time"><#if prod.commentTime??>${prod.commentTime}</#if></li>
+		              <li class="dtlr">${prod.content}</li>
+		            </ul>
+		            </#list>
+		            </#if>
+		            <div class="clear"></div>
+		          </dt>
+		          <dd>
+		           
+		          </dt>
+		        </dl>
+		        <p>&nbsp;</p>
+		    </div>
+		     <div class="lr_right_main main_top2 fbpn">
+		      <h2>提交问答/咨询</h2>
+		      <ul>
+		       <#if user??> <li class="pyts">欢迎您,<a href="/user/info"><strong>${user.username}</strong></a>发表问答/评论!
+		       			 <li class="title">内容：</li>
+		        <li class="texta">
+		          <label>
+		            <textarea name="textarea" id="centent" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
+		          </label>
+		        </li>
+		        <li class="title">验证码：</li>
+		        <li class="yzminp">
+		          <input type="text" name="textfield2" id="verify" maxlength="4" />
+		        </li>
+		        <li class="yzmimg"><a href="javascript:void(0)"><img onclick="this.src = '/verify?date='+Math.random();" src="/verify" id="yzm" alt="验证码"/></a></li>
+		        <li class="tijiaobox">
+		          <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_save(this,${product.id})"/>
+		        </li>
+		      </ul>
+		       
+		       
+		       <#else> 欢迎您访客，您在<a href="/login" class="t_red">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg" class="t_red">注册</a>！</li></#if>
+		       
+		      <div style="clear:both;"></div>
+		    </div>
+    		</li>
+    		<li style="display:none">
+		    		商品评价
+		      <div class="pinglun">
+		        <h2>商品评价</h2>
+		      </div>
+		      <div class="pinlunbox">
+		        <dl>
+		          <dt>
+		          <#if productConsult??>
+		          <#list productConsult as prod>
+		            <ul>
+		              <li class="name"><#if prod.username??>${prod.username}</#if></li>
+		              <li class="time"><#if prod.commentTime??>${prod.commentTime}</#if></li>
+		              <li class="dtlr">${prod.content}</li>
+		            </ul>
+		            </#list>
+		            </#if>
+		            <div class="clear"></div>
+		          </dt>
+		          <dd>
+		           
+		          </dt>
+		        </dl>
+		        <p>&nbsp;</p>
+		    </div>
+		     <div class="lr_right_main main_top2 fbpn">
+		      <h2>提交问答/评论</h2>
+		      <ul>
+		       <#if user??> <li class="pyts">欢迎您,<a href="/user/info"><strong>${user.username}</strong></a>发表问答/评论!
+		       			 <li class="title">内容：</li>
+		        <li class="texta">
+		          <label>
+		            <textarea name="textarea" id="centent" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
+		          </label>
+		        </li>
+		        <li class="title">验证码：</li>
+		        <li class="yzminp">
+		          <input type="text" name="textfield2" id="verify" maxlength="4" />
+		        </li>
+		        <li class="yzmimg"><a href="javascript:void(0)"><img onclick="this.src = '/verify?date='+Math.random();" src="/verify" id="yzm" alt="验证码"/></a></li>
+		        <li class="tijiaobox">
+		          <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_save(this,${product.id})"/>
+		        </li>
+		      </ul>
+		       
+		       
+		       <#else> 欢迎您访客，您在<a href="/login" class="t_red">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg" class="t_red">注册</a>！</li></#if>
+		       
+		      <div style="clear:both;"></div>
+		    </div>
+    </li>
+    <li style="display:none">
+    			价格
+    		</li>		
     	</ul>
     
     </div>
-    
-    
-    <div class="lr_right_main main_top2">
-      <div class="pinglun">
-        <h2>商品评价</h2>
       </div>
-      <div class="pinlunbox">
-        <dl>
-          <dt>
-            <ul>
-              <li class="name1">zhangjinhao</li>
-              <li class="time">2011-08-25 07:34:42</li>
-              <li class="dtlr">我23号买的东西为什么还没备货出库啊 快点好吗 等着用呢 谢谢</li>
-            </ul>
-            <div class="clear"></div>
-          </dt>
-        </dl>
-      </div>
-<div class="pinlunbox">
-        <dl>
-          <dt>
-            <ul>
-              <li class="name1">zhangjinhao</li>
-              <li class="time">2011-08-25 07:34:42</li>
-              <li class="dtlr">我23号买的东西为什么还没备货出库啊 快点好吗 等着用呢 谢谢</li>
-            </ul>
-            <div class="clear"></div>
-          </dt>
-        </dl>
-      </div>
-<div class="pinlunbox">
-        <dl>
-          <dt>
-            <ul>
-              <li class="name1">zhangjinhao</li>
-              <li class="time">2011-08-25 07:34:42</li>
-              <li class="dtlr">我23号买的东西为什么还没备货出库啊 快点好吗 等着用呢 谢谢</li>
-            </ul>
-            <div class="clear"></div>
-          </dt>
-        </dl>
-      </div>
-    
-    <div class="lr_right_main main_top2 fbpn">
-      <h2>提交问答/评论</h2>
-      <ul>
-       <#if user??> <li class="pyts">欢迎您,<a href="/user/info"><strong>${user.username}</strong></a>发表问答/评论!
-       			 <li class="title">内容：</li>
-        <li class="texta">
-          <label>
-            <textarea name="textarea" id="centent" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
-          </label>
-        </li>
-        <li class="title">验证码：</li>
-        <li class="yzminp">
-          <input type="text" name="textfield2" id="verify" maxlength="4" />
-        </li>
-        <li class="yzmimg"><a href="javascript:void(0)"><img onclick="this.src = '/verify?date='+Math.random();" src="/verify" id="yzm" alt="验证码"/></a></li>
-        <li class="tijiaobox">
-          <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_save(this,${product.id},${product.type})"/>
-        </li>
-      </ul>
-       
-       
-       <#else> 欢迎您访客，您在<a href="/login" class="t_red">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg" class="t_red">注册</a>！</li></#if>
-       
-      <div style="clear:both;"></div>
-    </div>
-  </div>
 </div>
 </div></div>
+   
 
 
 
@@ -419,18 +434,18 @@
 
 
 <div class="main"><div class="duibi_bottom" style="display:none">
-
-<div class="fll duibi_bottom_a"><ul>
+<div  class="tm_click_">
+<div class="fll duibi_bottom_a" ><ul>
 <li><a href="#"><img src="/images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
 <li><a href="#"><img src="/images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
 <li><a href="#"><img src="/images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
 <li><a href="#"><img src="/images/hot.jpg" width="66" height="66"><p>苹果 iPad Air 2 【极致轻薄】支持Touch ID X芯片,</p><p style="color:#ff6600;">￥4999.00</p></a></li>
 </ul></div>
-
+</div>
 <div class="flr duibi_bottom_b">
 <div class="duibi_bottom_b_gb"><a href="javascript:void(0)" class="tm_none">隐藏</a></div>
 <div class="duibi_bottom_b_db"><a href="/ProductContrast">对比</a></div>
-<div class="duibi_bottom_b_qk"><a href="#">清空对比信息</a></div>
+<div class="duibi_bottom_b_qk"><a href="javascript:void(0)" class="_click">清空对比信息</a></div>
 
 </div>
   
@@ -573,18 +588,27 @@ $(function(){
 		$(".tm_none").on("click",function(){
 			$(".duibi_bottom").css("display","none");
 		})
-		 // 点击进行Tab切换   tab_d
+		$("._click").on("click",function(){
+			$(".tm_click_").css("display","none");
+		})
+		$(".tm_close").on("click",function(){
+			$(".tuijianzuhe_a").css("display","none");
+			$(".jia").empty()
+		})
+		// 点击进行Tab切换   tab_d
             $('#id-tab-list li').click(function(){
                 var index = $(this).index();
-                
+               // alert(index)
                 var _tab = $('#id-tab-list li');
                 _tab.find("a").removeClass("con");
                 _tab.eq(index).find("a").addClass("con");
                 
                 var _arr = $('#id-tab-content li');
+          
                 _arr.eq(index).fadeIn(0).siblings().fadeOut(0);
             });
-        function tm_save(obj,id,type){
+            
+        function tm_save(obj,id){
         	var centent=$("#centent").val();
         	var verify=$("#verify").val();
         	if(isEmpty(centent)){
@@ -599,10 +623,10 @@ $(function(){
         	}
         	tm_ajax({
         		url:"/saveComm",
-        		data:{"productId":id,"content":centent,"verify":verify,"type":type},
+        		data:{"productId":id,"content":centent,"verify":verify},
         		 callback:function(data) {
         		 	 if(data=="success"){
-        		 	 	Tmtip({html:"咨询已经提交！工作人员会在24小时内处理!",src:"/Tm/images/24.PNG"});
+        		 	 	Tmtip({html:"咨询已经提交！工作人员会在24小时内处理!",src:"/Tm/images/24.PNG",callback:function(){location.reload()}});
         		 		$("#centent").val("");
         				$("#verify").val("");
         		 	 }else if(data=="vfalse"){

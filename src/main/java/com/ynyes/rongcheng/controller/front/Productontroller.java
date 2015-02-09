@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ynyes.rongcheng.entity.Parameter;
 import com.ynyes.rongcheng.entity.Product;
+import com.ynyes.rongcheng.entity.ProductComment;
 import com.ynyes.rongcheng.entity.ProductConsult;
 import com.ynyes.rongcheng.entity.User;
 import com.ynyes.rongcheng.service.ParameterService;
@@ -56,22 +58,32 @@ public class Productontroller {
      * @return String<BR>
      * @param  [参数1]   [参数1说明]
      * @param  [参数2]   [参数2说明]
-     * @exception <BR>
+     * @exception <BR>                          Long pid,
+                                                Long vid,
+                                                int page,
+                                                int size,
+                                                String direction,
+                                                String property
      * @since  1.0.0
      */
     @RequestMapping("/product/{typeId}")
-    public ModelAndView index(@PathVariable Long typeId){
+    public ModelAndView index(@PathVariable Long typeId,Long vid){
         ModelAndView modelAndView=new ModelAndView();
         Product product=productservice.findOne(typeId);
-        ProductConsult productConsult=productConsultService.findOne(typeId);
-        String type =product.getType();
+        Page<ProductComment> productConsult = null;
+        if(vid==null){
+            vid=(long) 0;
+            productConsult=productCommentService.findByPidAndVid(typeId, vid, 0, 10, "desc", "commentTime");
+        }
+            String type =product.getType();
         List<Parameter> parameters= parameterService.findByType(type);
         String list=product.getShowPictures();
         String[] sList = list.split(",");
         modelAndView.addObject("ShowPictures",sList);//轮播展示图片
         modelAndView.addObject("product",product);//商品详情
         modelAndView.addObject("parameters",parameters);//商品属性
-        modelAndView.addObject("productConsult",productConsult);//商品评论
+        modelAndView.addObject("productConsult",productConsult.getContent());//商品评论
+        modelAndView.addObject("productcount",productConsult.getTotalElements());//商品评论数量
         modelAndView.setViewName("/front/type_list_content");
     return modelAndView;
     }
@@ -137,20 +149,26 @@ public class Productontroller {
      * @return String<BR>
      * @param  [参数1]   [参数1说明]
      * @param  [参数2]   [参数2说明]
-     * @exception <BR>String 
+     * @exception <BR>String username,
+                                   Long starCount,
+                                   String tags,
+                                   String content,
+                                   Long productId,
+                                   Long productVersionId
      * @since  1.0.0
      */
     @RequestMapping(value="/saveComm",method=RequestMethod.POST)
     @ResponseBody
-    public String saveComment(HttpServletRequest request,String verify,String type,String content,Long productId,Long productVersionId){
+    public String saveComment(HttpServletRequest request,String verify,Long starCount,String tags,String content,Long productId,Long productVersionId){
         User user= (User) request.getSession().getAttribute("user");
        String msg = (String)request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
       if(user!=null){ 
            if(StringUtils.isNotEmpty(user.getUsername())){
                if(verify.equalsIgnoreCase(msg)){
-                   if(productVersionId==null){
-                       productVersionId=(long) 1;
-                       productConsultService.add(user.getUsername(), type, content, productId, productVersionId);
+                   if(productVersionId==null || starCount==null){
+                       productVersionId=(long) 0;
+                       starCount=(long) 0;
+                       productCommentService.add(user.getUsername(), productVersionId, tags, content, productId, productVersionId);
                        flag="success";
                        return flag;
                    }
