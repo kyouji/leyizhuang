@@ -74,7 +74,6 @@ DD_belatedPNG.fix('.,img,background');
       transition:all .2s linear;-webkit-transition:all .2s linear;-o-transition:all .2s linear;-ms-transition:all .2s linear;-moz-transition:all .2s linear;
       }
       .data_s a.on,.data_s a:hover{ background:#2881D5; color:#fff;border:none;}
-      
       </style>
       <div class="data_s">
         <a>近一个月</a>
@@ -91,7 +90,7 @@ DD_belatedPNG.fix('.,img,background');
       
       <div id="id-pagination" style="margin-top: 0px;float: right;">
           <div class="pagination">
-	          <span class="current prev"><a href="www.baidu.com">上一页</a></span>
+	          <span class="current prev"><a href="javascrpt:void(0)">上一页</a></span>
 	          <span class="current next"><a href="javascrpt:void(0)">下一页</a></span>
           </div>
       </div>
@@ -148,5 +147,6 @@ DD_belatedPNG.fix('.,img,background');
     
 
 </script>
+
 </body>
 </html>
