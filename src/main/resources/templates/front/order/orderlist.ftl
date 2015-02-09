@@ -13,17 +13,11 @@
 <link rel="stylesheet" type="text/css" href="/img/order/gao/buy.css" />
 <link href="/img/order/gao/member.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="/img/order/gao/pagination.css" />
-
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-
-
-	<!--[if IE]>
-    <script type="text/javascript">
-        window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-    </script>
-    <![endif]-->
+<script src="/js/html5.js"></script>
+<script type="text/javascript">
+     window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+   
 <!--[if IE 6]>
 <script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
 <script>
@@ -97,9 +91,8 @@ DD_belatedPNG.fix('.,img,background');
       
       <div id="id-pagination" style="margin-top: 0px;float: right;">
           <div class="pagination">
-	          <span class="current prev">上一页</span>
-	          <span class="current">1</span>
-	          <span class="current next">下一页</span>
+	          <span class="current prev"><a href="www.baidu.com">上一页</a></span>
+	          <span class="current next"><a href="javascrpt:void(0)">下一页</a></span>
           </div>
       </div>
       
@@ -120,16 +113,17 @@ DD_belatedPNG.fix('.,img,background');
 <div class="footallbg">
 <#include "/front/comment/top1.ftl">
 </div>
+
 <script src="/js/jquery.pagination.js"></script>
       // 分页
     <script type="text/javascript">
-    
+    var status = window.location.search;
     // 每页数量
     var pageSize = 5;
+    var pageNo=0;
     $("#id-pagination").pagination(${goods_order_total},
     {
-        var status = window.location.search;
-        
+    
         num_display_entries : 3,
         num_edge_entries : 3,
         current_page : 0,
@@ -141,10 +135,9 @@ DD_belatedPNG.fix('.,img,background');
         callback : function(pageNo) {
             $.ajax({
                 type : "post",
-                url : "/order/page"+ status,
+                url : "/order/page_list_all",
                 data : {
-                    "page" : pageNo,
-                    "size" : pageSize
+                    "page" : pageNo
                 },
                 success : function(data) {
                     $("#table").html(data);
@@ -157,19 +150,3 @@ DD_belatedPNG.fix('.,img,background');
 </script>
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

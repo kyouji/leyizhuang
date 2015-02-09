@@ -11,11 +11,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.rongcheng.entity.OrderItem;
 import com.ynyes.rongcheng.entity.ShoppingOrder;
 import com.ynyes.rongcheng.entity.User;
+import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ShoppingOrderService;
 
 /**
@@ -35,6 +37,9 @@ public class OrderController {
 
 	@Autowired
 	ShoppingOrderService shoppingOrderService;
+	
+	@Autowired
+	ProductService productService;
 	/**
 	 * 
 	 * 跳转所有订单页面<BR>
@@ -50,14 +55,14 @@ public class OrderController {
 	 * @since 1.0.0
 	 */
 	@RequestMapping("/list")
-	public String orderlist(Long status, Model model, HttpServletRequest req) {
+	public String orderlist(Model model, HttpServletRequest req) {
 		// 根据当前状态获取数据并返回
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(
-				user.getUsername(), 0, 15, "desc", "id"); 
-		
+				user.getUsername(), 0, 5, "desc", "id"); 
+	//	Page<Product>	so=productService.findAll(0, 5, "desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent()); // so.getContent()是将当前对象默认变为list
-		model.addAttribute("goods_order_total", so.getContent().size());
+		model.addAttribute("goods_order_total", so.getTotalElements());
 		return "/front/order/orderlist";
 	}
 
@@ -82,7 +87,7 @@ public class OrderController {
 
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,"desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
-		model.addAttribute("goods_order_total", so.getContent().size());
+		model.addAttribute("goods_order_total", so.getTotalElements());
 		return "/front/order/obligation";
 	}
 
@@ -109,7 +114,7 @@ public class OrderController {
 				.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,
 						"desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
-		model.addAttribute("goods_order_total", so.getContent().size());
+		model.addAttribute("goods_order_total", so.getTotalElements());
 		return "/front/order/startorder";
 	}
 
@@ -134,7 +139,7 @@ public class OrderController {
 				.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,
 						"desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
-		model.addAttribute("goods_order_total", so.getContent().size());
+		model.addAttribute("goods_order_total", so.getTotalElements());
 		return "/front/order/orderok";
 	}
 
@@ -159,7 +164,7 @@ public class OrderController {
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,"desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
-		model.addAttribute("goods_order_total", so.getContent().size());
+		model.addAttribute("goods_order_total", so.getTotalElements());
 		return "/front/order/orderno";
 	}
 	
@@ -186,7 +191,7 @@ public class OrderController {
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(
 				user.getUsername(), 0, 5, "desc", "id");
 		model.addAttribute("shopping_order_list", so.getContent());
-		model.addAttribute("goods_order_total", so.getContent().size());
+		model.addAttribute("goods_order_total", so.getTotalElements());
 		return "/front/order/orderlist"; 
 	}
 	
@@ -245,7 +250,9 @@ public class OrderController {
 	
 	
 	/**
-	 * 对分页进行处理
+	 * 对分页进行处理(暂时没有使用，因为每一次页面返回的数据都是按照不同的状态进行返回
+	 * 也就是说，不用status进行访问，只需要按照状态进行返回以后，在当前状态下分页
+	 * )
 	 * <BR>
 	 * 方法名：orderdetail<BR>
 	 * 创建人：小高 <BR>
@@ -258,13 +265,35 @@ public class OrderController {
 	 * @exception <BR>
 	 * @since 1.0.0
 	 */
-	@RequestMapping("/page")
-	public String listpage(Long status, Model model, HttpServletRequest req,int pageSize) {
+	@RequestMapping(value="/page_list",method=RequestMethod.POST )
+	public String listpage(Long status, Model model, HttpServletRequest req) {
 		User user = (User) req.getSession().getAttribute("user");
-		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, 0, pageSize,"desc", "id");
-		
-        model.addAttribute("sub_type_list", so.getContent());
+		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,"desc", "id");
+		model.addAttribute("shopping_order_list", so.getContent());
         model.addAttribute("goods_order_total", so.getTotalElements());
-		return "/order/orderchild/page"; 
+		return "/front/order/orderchild/page"; 
+	}
+	
+	/**
+	 * 对分页进行处理,这是全部订单，不需要status
+	 * <BR>
+	 * 方法名：orderdetail<BR>
+	 * 创建人：小高 <BR>
+	 *      
+	 * 时间：2015年2月7日14:03:49<BR>
+	 * 
+	 * @return String<BR>
+	 * @param [参数1] [参数1说明]
+	 * @param [参数2] [参数2说明]
+	 * @exception <BR>
+	 * @since 1.0.0
+	 */
+	@RequestMapping(value="/page_list_all",method=RequestMethod.POST )
+	public String listpageall( Model model, HttpServletRequest req,int page) {
+		User user = (User) req.getSession().getAttribute("user");
+		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(user.getUsername(), page, 5, "desc", "id");
+		model.addAttribute("shopping_order_list", so.getContent());
+        model.addAttribute("goods_order_total", so.getTotalElements());
+		return "/front/order/orderchild/page"; 
 	}
 }

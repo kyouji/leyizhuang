@@ -306,7 +306,7 @@ DD_belatedPNG.fix('.,img,background');
         </li>
       </ul>
       <div class="clear"></div>
-      <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="/">首页</a> <a href="#">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="#">下一页</a> <a href="#">尾页</a> </div>
+      <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="/">首页</a> <a href="javascript:void(0)">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="javascript:void(0)">下一页</a> <a href="#">尾页</a> </div>
     </div>
   </div>
 </div>
