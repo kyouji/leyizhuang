@@ -7,26 +7,28 @@
 <meta name="copyright" content="荣诚手机超市 版权所有" />
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
-<!--[if IE]>
-   <script src="js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
+<style type="text/css">
+.pagination a{text-decoration:none;border:solid 1px #ccc;color:#999;}
+.pagination a,.pagination span{display:block;float:left;padding:0.3em 0.5em;margin-right:5px;margin-bottom:5px;min-width:1em;text-align:center;}
+.pagination .current{background:#ff6600;color:#fff;border:solid 1px #ccc;}
+.pagination .current.prev,.pagination .current.next{color:#999;border-color:#999;background:#fff;}
+.tm_psize_go{padding:5px;margin-right:4px; float:left;height:27px;line-height:27px;position:relative;border:1px solid #ff6600;}
+#tm_pagego{height:27px;line-height:27px;width:30px;float:left;text-align:center;border:1px solid #ccc;}</style>
+<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/jquery.pagination.js"></script>
 </head>
 <body>
 <header>
 <div class="main">
-<div class="fll header_l"><#if user??><span>您好，<a href="/user/info" >${user.username}</a>欢迎来到荣诚手机超市！您的身份：${user.role}&nbsp;&nbsp;<a href="/logout" >退出</a></span><#else><span>您好，欢迎来到荣诚手机超市！您的身份：${user.role}&nbsp;&nbsp;<a href="/login" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="/reg">免费注册</a></span></#if></div>
+<<div class="fll header_l"><#if user??><span>您好，<a href="/user/info" >${user.username}</a>欢迎来到荣诚手机超市！您的身份：${user.role}&nbsp;&nbsp;<a href="/logout" >退出</a></span><#else><span>您好，欢迎来到荣诚手机超市！<a href="/login" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="/reg">免费注册</a></span></#if></div>
 <div class="flr header_r"><a href="/user/collect">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="/order/list">我的订单</a><a href="/help/question/1">帮助中心</a><a href="#">收藏本站</a></div>
 </div>
 </header>
 
 <div class="header1 main">
-<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="img/rc_logo.png" width="177" height="69"></a></div>
+<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="/img/rc_logo.png" width="177" height="69"></a></div>
 <div class="fll city"><a href="#">城市切换</a><span></span>
 <!--<div class="cityqh"><ul>
 <li><a href="#">昆明市</a></li>
@@ -49,42 +51,6 @@ DD_belatedPNG.fix('.,img,background');
 <nav><div class="main">
 <div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15">全部商品分类</a></div>
 
-<!--<ul>
-<li>
-<div class="mbj m1"></div>
-<div class="divshop">
-<h4><a href="/list/2">手机产品</a></h4>
-<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-</div>
-<div class="clear"></div>
-
-<div class="threeright">
-<ul id="threeright1">
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-</ul>
-</div>
-</li>
-
-<li>
-<div class="mbj m2"></div>
-<div class="divshop">
-<h4><a href="/list/3">手机配件</a></h4>
-<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-</div>
-<div class="clear"></div>
-</li>
-<li style="border-bottom:none;">
-<div class="mbj m3"></div>
-<div class="divshop">
-<h4><a href="/list/4">手机靓号</a></h4>
-<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-</div>
-<div class="clear"></div>
-</li>
-</ul>-->
 
 </div>
 
@@ -104,46 +70,46 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main mt10 rc_ppfl">
 <span class="fll">品牌分类：</span>
 <ul>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
 </ul>
 <a href="#">更多>></a>
 </div>
 
 <div class="clear"></div>
 <div class="main">
-<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/1">手机产品</a>&gt;<a href="#">手机筛选</a>&gt; </div>
+<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/1">手机产品</a>&gt;<a href="#">手机配件</a>&gt; </div>
 <div class="w1200 overflow">
   <div class="sub_left">
     <div class="hot_list">
       <h2>热销排行</h2>
       <ul>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num1">1</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num1">2</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num1">3</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num2">4</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num2">5</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num2">6</div>
         </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
           <div class="num2">7</div>
         </li>
 
@@ -152,11 +118,11 @@ DD_belatedPNG.fix('.,img,background');
     <div class="hot_list mt20">
       <h2>浏览记录</h2>
       <ul>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
-        <li> <a href="#"> <img src="images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
+        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a> </li>
       </ul>
     </div>
   </div>
@@ -172,21 +138,7 @@ DD_belatedPNG.fix('.,img,background');
         <li> <span>价格：</span>
           <p><a href="#">全部</a><a href="#" class="sxon">0-999</a><a href="#">1000-1999</a><a href="#">2000-2999</a><a href="#">3000-3999</a><a href="#">4000-4999</a><a href="#">5000以上</a><a href="#">稀少高端</a></p>
         </li>
-        <li> <span>网络制式：</span>
-          <p><a href="#">全部</a><a href="#">移动4G（TD-LTE）</a><a href="#" class="sxon">电信4G（TD/FDD-LTE）</a><a href="#">联通4G（TD/FDD-LTE）</a><a href="#">全网通（TD/FDD-LTE）</a></p>
-        </li>
-        <li> <span>后置摄像头：</span>
-          <p><a href="#">全部</a><a href="#" class="sxon">1600W以上</a><a href="#">1300W-1600W</a><a href="#">800-1300</a><a href="#">800-500w</a><a href="#">500w以下</a></p>
-        </li>
-        <li> <span>核心数：</span>
-          <p><a href="#">全部</a><a href="#">八核</a><a href="#">双四核</a><a href="#">双核</a><a href="#" class="sxon">非智能</a></p>
-        </li>
-        <li> <span>网络制式：</span>
-          <p><a href="#" class="sxon">全部</a><a href="#">移动4G（TD-LTE）</a><a href="#">电信4G（TD/FDD-LTE）</a><a href="#">联通4G（TD/FDD-LTE）</a><a href="#">全网通（TD/FDD-LTE）</a></p>
-        </li>
-        <li> <span>后置摄像头：</span>
-          <p><a href="#">全部</a><a href="#">1600W以上</a><a href="#" class="sxon">1300W-1600W</a><a href="#">800-1300</a><a href="#">800-500w</a><a href="#">500w以下</a></p>
-        </li>
+      
       </ul>
     </div>
     <div class="sxtj">
@@ -203,112 +155,18 @@ DD_belatedPNG.fix('.,img,background');
         </div>
       </ul>
       
-      <div class="list_fenye flr"><a href="#"><img src="img/left.png"></a><span>1/5</span><a href="#"><img src="img/right.png"></a></div>
+      <div class="list_fenye flr"><a href="#"><img src="/img/left.png"></a><span>1/5</span><a href="#"><img src="/img/right.png"></a></div>
       
     </div>
-    <div class="sx_list">
-      <ul>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-     <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-        <li><a href="#"> <img src="images/spsx.jpg" />
-          <p>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b> </a>
-          <p>已有54人关注</p>  
-          <p><a href="/cartStep" class="jiongwc">加入购物车</a><a href="#" class="jiongwc1">购买</a><a href="#" class="jiongwc1">对比</a></p>
-        </li>
-      </ul>
+    <div class="sx_list" id="page_con">
+    <#include "/front/listtemp/pageaccessories.ftl">
       <div class="clear"></div>
       <div class="page"> <span>共365条记录&nbsp;&nbsp;5/14页&nbsp;&nbsp;</span> <a href="/">首页</a> <a href="javascript:void(0)">上一页</a> <a href="#">1</a> <a href="#" class="pageon">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span>...</span> <a href="#">18</a> <a href="javascript:void(0)">下一页</a> <a href="#">尾页</a> </div>
     </div>
   </div>
+    <div class="page" style="margin-top: 5px;float: right;" ></div>
+ 
+	</div>
 </div>
 </div>
 
@@ -323,7 +181,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="clear"></div>
 
 <div class="main mt20">
-<div class="floor_n fll"><img src="img/peisongyuanze.png" width="719" height="44"></div>
+<div class="floor_n fll"><img src="/img/peisongyuanze.png" width="719" height="44"></div>
 <div class="flr">
 <input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
 <input type="submit" class="search-btn" title="搜索" value="  ">
@@ -387,12 +245,47 @@ DD_belatedPNG.fix('.,img,background');
 </div>
 
 </div>
+<script type="text/javascript">
+	var count="${count}"
+	$(function(){
+		tm_initPage(count)
+	})
 
+		//分页初始化调用的方法
+function tm_initPage(count) {
+    $(".page").pagination(count, {
+        num_display_entries : 3,
+        num_edge_entries : 4,
+        current_page : 0,
+        items_per_page : 12,
+        prev_text : "上一页",
+        next_text : "下一页",
+        showGo : false,
+        showSelect : false,
+        callback : function(pageNo, psize) {
+            // alert(pageNo + "====" + psize);
+            loadTemp(pageNo, psize);
+        }
+    });
+}
+	function loadTemp(pageNo,psize,callback){
+	var typeId=2;
+		$.ajax({
+			type:"post",
+			url:"/list/"+typeId+"_3",
+			data:{"page":pageNo,"size":psize},
+			success:function(data){
+				$("#page_con").html(data);
+				 if (callback) {
+	                var count = $("#count").val();
+	                callback(count);
+            	}
+			}
+		})
+	}
+	
 
-
-
-
-
+</script>
 </body>
 </html>
 

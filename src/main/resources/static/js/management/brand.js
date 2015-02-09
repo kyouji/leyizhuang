@@ -93,10 +93,10 @@ function destroy(id) {
 }
 
 // 参数修改  zackma-20150204
-/*function modify(id) {
+function modify(id) {
 
     $.ajax({
-        url : '/admin/admin/modify/'+id,
+        url : '/admin/brand/modify/'+id,
         type : 'POST',
         success : function(data) {	
             $("#id-modify").siblings().addClass("hide");
@@ -122,16 +122,14 @@ function destroy(id) {
             	    var id = $("form #m-id").val();
                     var type = $("form #m-type").val();
                     var name = $("form #m-name").val();
-                    var isValueInputByChoose = $("#m-input_type option:selected").val();
-                    var isSearchable = $("#m-searchable:checked").val();
-                    var isSingleValue = $("#m-multiple:checked").val();
-                    var valueList = $("form #m-param_list").val();
-                    if(type==""||name==""||isValueInputByChoose==""||isSearchable==""||isSingleValue==""||(isValueInputByChoose=="true" && valueList=="")){
-			            alert("请填写完整参数！");
+                    var logoUri = $("form .m-brand-picture").val();
+                    var isRecommend = $("#m-recommend:checked").val();
+                    if(type==""||name==""||isRecommend==""){
+			            alert("请填写完整品牌信息！");
 			        return;
 		            }
                     
-                    var modiDate = {"id":id,"type":type,"name":name,"isValueInputByChoose":isValueInputByChoose,"isSearchable":isSearchable,"isSingleValue":isSingleValue,"valueList":valueList};
+                    var modiDate = {"id":id,"type":type,"name":name,"logoUri":logoUri,"isRecommend":isRecommend};
                     $.ajax({
                         url : '/admin/brand/save',
                         type : 'POST',
@@ -149,6 +147,6 @@ function destroy(id) {
         }
     });
                                                            
-}*/
+}
 
 

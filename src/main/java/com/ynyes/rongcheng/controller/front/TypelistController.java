@@ -53,6 +53,9 @@ public class TypelistController {
                 return "/front/type_list_mobile";//手机产品
             }
             if(typeId.equals("3")){
+                Page<Product> pages=productservice.findByType("3", page, size, direction, property);
+                model.addAttribute("armature", pages.getContent());
+                model.addAttribute("count", "15");
                 return "/front/type_list_accessories";//手机配件
             }
             if(typeId.equals("4")){
@@ -88,6 +91,35 @@ public class TypelistController {
                 model.addAttribute("product", pages.getContent());
                 model.addAttribute("count", "15");
            
+        return "/front/listtemp/pageProduct";//手机产品
+    }
+    /**
+     * 
+     * 手机配件模版<BR>
+     * 方法名：accessories<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年2月7日-下午4:35:57 <BR>
+     * @param typeId
+     * @param page
+     * @param size
+     * @param direction
+     * @param model
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
+    @RequestMapping("/list/{typeId}_3")
+    public String accessories(@PathVariable String typeId,Integer page,Integer size,String direction,Model model){
+        direction="desc";//排序
+        String property="sortNumber";//字段
+        
+        //根据类型获取所有子类
+        Page<Product> pages=productservice.findByType("3", page, size, direction, property);
+        model.addAttribute("product", pages.getContent());
+        model.addAttribute("count", "15");
+        
         return "/front/listtemp/pageProduct";//手机产品
     }
 }

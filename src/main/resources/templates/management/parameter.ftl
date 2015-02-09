@@ -13,6 +13,9 @@
 		<link rel="stylesheet" href="/assets/css/ace.min.css" type="text/css"/>
 		<link rel="stylesheet" href="/css/select.css">
 		<link rel="stylesheet" href="/css/pagination.css">
+		<link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
+        <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css" />
+        <link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.full.min.css" />
 	</head>
 
 	<body>

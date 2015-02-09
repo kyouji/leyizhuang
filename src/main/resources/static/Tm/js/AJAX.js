@@ -1,6 +1,6 @@
 
 /*小郭封装：消息框*/
-function ajax(b) {
+function tm_ajax(b) {
     var c = {
         type: "post",
         url: "/",
