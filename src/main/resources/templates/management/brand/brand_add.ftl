@@ -37,7 +37,8 @@
 		                <input type="file" class="brand-picture" name="f" />
 		            </div>
 	            </div>
-	            <span style="font-size:16px">*请上传品牌图片(可以为空)</sapn>	            
+	            <span style="font-size:16px">*请上传品牌图片(可以为空)</sapn>
+	            	            	            
 	        </div>
 	        
 	        <div class="clear"></div>

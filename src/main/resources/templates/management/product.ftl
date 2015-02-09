@@ -11,8 +11,49 @@
 		<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="/js/kindleditor/themes/default/default.css" />
 		<link rel="stylesheet" href="/css/select.css"/>
 		<link rel="stylesheet" href="/css/pagination.css"/>
+		
+		<script src="/js/kindleditor/kindleditor-min.js" charset="utf-8"></script>
+		<script src="/js/kindleditor/kindleditor.js" charset="utf-8"></script>
+		<script src="/js/kindleditor/lang/zh-CN.js" charset="utf-8"></script>
+		<script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="content"]', {
+					allowFileManager : true
+				});
+				K('input[name=getHtml]').click(function(e) {
+					alert(editor.html());
+				});
+				K('input[name=isEmpty]').click(function(e) {
+					alert(editor.isEmpty());
+				});
+				K('input[name=getText]').click(function(e) {
+					alert(editor.text());
+				});
+				K('input[name=selectedHtml]').click(function(e) {
+					alert(editor.selectedHtml());
+				});
+				K('input[name=setHtml]').click(function(e) {
+					editor.html('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=setText]').click(function(e) {
+					editor.text('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=insertHtml]').click(function(e) {
+					editor.insertHtml('<strong>插入HTML</strong>');
+				});
+				K('input[name=appendHtml]').click(function(e) {
+					editor.appendHtml('<strong>添加HTML</strong>');
+				});
+				K('input[name=clear]').click(function(e) {
+					editor.html('');
+				});
+			});
+		</script>
+		
 	</head>
 
 	<body>
@@ -120,6 +161,7 @@
 		<script src="/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
+		
         <script src="/js/management/product.js"></script>
         <script src="/js/jquery.pagination.js"></script>
         
