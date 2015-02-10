@@ -120,13 +120,16 @@
             
         <div class="space-4"></div> 
         
-        <label class="col-sm-1 control-label no-padding-right" for="propDetail">商品参数</label>
-        <!--input type="text" id="propDetail-input" name="propDetail" hidden></input-->
-        <!--div class="wysiwyg-editor" id="propDetail"></div-->
-		<textarea name="content" style="width:800px;height:400px;visibility:hidden;"></textarea>
+        <div class="col-sm-12" style="margin:10px 0">
+	        <label class="col-sm-1 control-label no-padding-right" for="propDetail">商品参数</label>
+	        <!--input type="text" id="propDetail-input" name="propDetail" hidden></input-->
+	        <!--div class="wysiwyg-editor" id="propDetail"></div-->
+			<textarea id="editor1" name="content1" style="width:91.6%;height:400px;visibility:hidden;margin-top:5px;"></textarea>
+        </div>
+        
         <div class="space-4"></div>
         
-        <div class="form-group">
+        <div class="form-group col-sm-12 no-padding-right">
             <div class="col-sm-6">
                 <label for="description">商品简述</label>
     
@@ -142,7 +145,7 @@
         
         <div class="space-4"></div>
         
-        <div class="form-group">
+        <div class="form-group col-sm-12 no-padding-right">
             <div class="col-sm-6">
                 <label for="service">服务说明</label>
     
@@ -231,10 +234,13 @@
         
         <div class="space-4"></div>
         
-        <label class="col-sm-1 control-label no-padding-right" for="detail">商品详情</label>
-        <input type="text" id="detail-input" name="detail" hidden></input>
-        <div class="wysiwyg-editor" id="detail"></div>
-        
+        <div class="col-sm-12" style="margin:10px 0">
+	        <label class="col-sm-1 control-label no-padding-right" for="detail">商品详情</label>
+	        <#--input type="text" id="detail-input" name="detail" hidden></input>
+	        <div class="wysiwyg-editor" id="detail"></div-->
+	        
+	        <textarea id="editor2" name="content2" style="width:91.6%;height:400px;visibility:hidden;margin-top:5px;"></textarea>
+        </div>
         <div class="space-4"></div>
         
         <div class="form-group">
