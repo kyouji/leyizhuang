@@ -23,7 +23,7 @@
 
 <div class="gwcbg">
 <div class="main mt12">
-<div class="member_lef fll"> <span class="sp55">新手入门</span>
+<div class="member_lef fll"> <span class="sp55">订单中心</span>
       <ul class="haoh pt10">
         <li><a href="/order/list" >全部订单</a></li>
         <li><a href="/order/obligation?status=0" >待付款订单</a></li>

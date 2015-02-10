@@ -60,7 +60,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="flr right">
 <div class="list_banner1">
 <div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">订单详情</a>&gt; </div>
-<div>订单状态：<#if shopping_order_list.statusCode??>${shopping_order_list.statusCode}</#if></div>
+<div>订单状态：${status_all}</div>
 <div>收货地址：<#if shopping_order_list.shippingAddress??>${shopping_order_list.shippingAddress}</#if></div>
 <div>配送方式：由荣诚同意发货</div>
 <div>发票抬头：<#if shopping_order_list.invoiceTitle??>${shopping_order_list.invoiceTitle}</#if></div>     
@@ -68,6 +68,7 @@ DD_belatedPNG.fix('.,img,background');
         <div class="gwc1_lm mt15">
 <table>
 <tr>
+<td></td>
 <td>商品信息</td>
 <td>单价</td>
 <td>数量</td>
@@ -78,13 +79,11 @@ DD_belatedPNG.fix('.,img,background');
 		<div class="member_dd">
 		<#assign totalPrice = 0>
 		<#list shopping_order_list.orderItemList as shopping_order_orderItemList>
-		<table>
-		<tr class="member_ddhe">
+		<table class="member_ddhe">
+		<tr>
 		<td class="member_dd_a"><span><a href="href="/product/${shopping_order_list.id}""><#if shopping_order_orderItemList.productCoverImageUri??><img src="${shopping_order_orderItemList.productCoverImageUri}" width="76" height="76"></#if></a>
 		</td>
-		<td>
-		   <#if shopping_order_orderItemList.productBrief??>${shopping_order_orderItemList.productBrief}</#if>
-		</td>
+		<td> <#if shopping_order_orderItemList.productBrief??>${shopping_order_orderItemList.productBrief}</#if></td>
 		<td class="member_dd_b"><#if shopping_order_orderItemList.price??>
 		    <span>${shopping_order_orderItemList.price}</span></#if>
 		</td>
@@ -100,9 +99,9 @@ DD_belatedPNG.fix('.,img,background');
 
     <div id="id-pagination" style="margin-top: 0px;float: right;">
           <div class="pagination">
-          总计： <#if shopping_order_list.totalPrice??>
-	            ￥  ${shopping_order_list.totalPrice}元
-	          </#if>
+          总计：￥<#if shopping_order_list.totalPrice??>
+	              ${shopping_order_list.totalPrice}
+	          </#if>XXXXXX元
           </div>
       </div>
         
@@ -122,15 +121,6 @@ DD_belatedPNG.fix('.,img,background');
 <#include "/front/comment/top1.ftl">
 
 </div>
-
-
-
-
-
-
-
-
-
 
 
 </body>

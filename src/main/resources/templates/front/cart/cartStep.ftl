@@ -63,23 +63,6 @@ DD_belatedPNG.fix('.,img,background');
 <p>收货地址：云南省昆明市西山区昆明市环城南路668号（云纺商业区）云纺国际商厦A座18层</p>
 <p>联系方式：18683687755</p>
 </a></div>
-<div class="s_gwc2_1_b"><a href="#" class="dzxz">
-<p>收货人：郑小洲</p>
-<p>收货地址：云南省昆明市西山区昆明市环城南路668号（云纺商业区）云纺国际商厦A座18层</p>
-<p>联系方式：18683687755</p>
-</a></div>
-
-<div class="s_gwc2_1_b"><a href="#">
-<p>收货人：郑小洲</p>
-<p>收货地址：云南省昆明市西山区昆明市环城南路668号（云纺商业区）云纺国际商厦A座18层</p>
-<p>联系方式：18683687755</p>
-</a></div>
-
-<div class="s_gwc2_1_b"><a href="#">
-<p>收货人：郑小洲</p>
-<p>收货地址：云南省昆明市西山区昆明市环城南路668号（云纺商业区）云纺国际商厦A座18层</p>
-<p>联系方式：18683687755</p>
-</a></div>
 
 </div>
 <div class="clear"></div>
@@ -153,23 +136,6 @@ DD_belatedPNG.fix('.,img,background');
 <td class="gwc1_lm2_b1"><span>￥144.22</span></td>
 </tr>
 
-<tr>
-<td class="gwc1_lm2_a0">00022</td>
-<td class="gwc1_lm2_a1"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span>
-<p><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆500g一袋 全店满158减10 高端干货送礼佳品</p></a></td>
-<td class="gwc1_lm2_b1"><span>￥144.22</span></td>
-<td class="gwc1_lm2_c1"><div class="ds content_nr_3_jg2"><a href="#"><img src="img/slj.png" width="20" height="20"></a><input type="text" class="content_zj"><a href="#"><img src="img/sljj.png" width="20" height="20"></a></div></td>
-<td class="gwc1_lm2_b1"><span>￥144.22</span></td>
-</tr>
-
-<tr>
-<td class="gwc1_lm2_a0">00022</td>
-<td class="gwc1_lm2_a1"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span>
-<p><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆500g一袋 全店满158减10 高端干货送礼佳品</p></a></td>
-<td class="gwc1_lm2_b1"><span>￥144.22</span></td>
-<td class="gwc1_lm2_c1"><div class="ds content_nr_3_jg2"><a href="#"><img src="img/slj.png" width="20" height="20"></a><input type="text" class="content_zj"><a href="#"><img src="img/sljj.png" width="20" height="20"></a></div></td>
-<td class="gwc1_lm2_b1"><span>￥144.22</span></td>
-</tr>
 </table>
 </div>
 </div>
@@ -191,8 +157,6 @@ DD_belatedPNG.fix('.,img,background');
           <span class="orange">抵用金额：￥55.22元</span></div>
 </div>
 </div>
-
-
 <div class="main mt15">
 <div class="s_gwc3_1">
 <div class="s_gwc3_1_a"><p><span>商品备注</span></p></div>
@@ -207,12 +171,9 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main"><div class="s_gwc1zj flr"><p>商品<span> 3 </span>件  总价：商品价格（<span>¥599.00</span>)+运费（<span>¥10.00</span>）+优惠劵（<span>¥19.00</span>）=商品总计(含运费)： <span>¥599.00</span> </p></div></div>
 <div class="clear"></div>
 <div class="main">
-<div class="s_gwc1zja"><div class="flr s_gwc1zja_2"><a href="#" title="提交订单">提交订单 </a></div></div>
+<div class="s_gwc1zja"><div class="flr s_gwc1zja_2"><a id="submit_order" href="/order/add_order" title="提交订单">提交订单 </a></div></div>
 </div>
 </div>
-
-
-
 
 <div class="clear"></div>
 
@@ -220,11 +181,6 @@ DD_belatedPNG.fix('.,img,background');
 <#include "/front/comment/top1.ftl">
 
 </div>
-
-
-
-
-
 
 </body>
 </html>

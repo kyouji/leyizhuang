@@ -117,8 +117,83 @@ DD_belatedPNG.fix('.,img,background');
 <script src="/js/jquery.pagination.js"></script>
       // 分页
     <script type="text/javascript">
+    
     // 每页数量
     var pageSize = 5;
+    
+     $(".data_s a").click(function(){
+        $(this).siblings().removeClass("on");
+        $(this).addClass("on");
+        
+        var search = window.location.search;
+        var snew;
+        
+        if ("" == search)
+        {
+            snew="?";
+        }
+        else
+        {
+            snew=search + "&";
+        }
+        
+        if ($(this).html()=="近一个月")
+        {
+            snew += "timeId=1";
+        }
+        else if ($(this).html()=="近三个月")
+        {
+            snew += "timeId=3";
+        }
+        else if ($(this).html()=="近六个月")
+        {
+            snew += "timeId=6";
+        }
+        else if ($(this).html()=="近一年")
+        {
+            snew += "timeId=12";
+        }
+        $.ajax({
+            type : "post",
+            url : "/order/list_time"+snew,
+            data : {"snew":snew,"status":search},
+            success : function(data) {
+                $("#table").html(data);
+                var b=pageSize;
+                // 重新初始化分页
+            $("#id-pagination").pagination(${goods_order_total},
+	                {
+	                    num_display_entries : 3,
+	                    num_edge_entries : 3,
+	                    current_page : 0,
+	                    items_per_page : pageSize,
+	                    prev_text : "上一页",
+	                    next_text : "下一页",
+	                    showGo : true,
+	                    showSelect : true,
+	                    callback : function(pageNo) {
+	                        $.ajax({
+	                            type : "post",
+	                            url : "/order/page_list_all",
+	                            data : {
+	                                "page" : pageNo
+	                            },
+	                            success : function(data) {
+	                                $("#table").html(data);
+	                            }
+	                        });
+	                    }
+        
+                });
+            }
+        });
+    });
+    
+    
+    
+    
+    
+    // 分页
     $("#id-pagination").pagination(${goods_order_total},
     {
     
