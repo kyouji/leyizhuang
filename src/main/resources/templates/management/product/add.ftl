@@ -121,9 +121,9 @@
         <div class="space-4"></div> 
         
         <label class="col-sm-1 control-label no-padding-right" for="propDetail">商品参数</label>
-        <input type="text" id="propDetail-input" name="propDetail" hidden></input>
-        <div class="wysiwyg-editor" id="propDetail"></div>
-        
+        <!--input type="text" id="propDetail-input" name="propDetail" hidden></input-->
+        <!--div class="wysiwyg-editor" id="propDetail"></div-->
+		<textarea name="content" style="width:800px;height:400px;visibility:hidden;"></textarea>
         <div class="space-4"></div>
         
         <div class="form-group">

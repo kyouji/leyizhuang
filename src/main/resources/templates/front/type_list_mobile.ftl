@@ -160,9 +160,10 @@
 	
     <div class="sxtj">
       <ul id="ul_li">
-        <li><a href="javascript:void(0)" class="sxtj_on click">销量&nbsp;↓</a></li>
-        <li><a href="javascript:void(0)" class=" click">价格&nbsp;↑</a></li>
-        <li><a href="javascript:void(0)" class=" click">上架时间&nbsp;↑</a></li>
+        <li><a href="javascript:void(0)" class="click sxtj_on">销量&nbsp;↓</a></li>
+        <li><a href="javascript:void(0)" class="click">价格&nbsp;↑</a></li>
+        <li><a href="javascript:void(0)" class="click">上架时间&nbsp;↑</a></li>
+     </ul>
         <div class="sxtjBox">
         <span>价格范围：</span>
           <input type="text" class="jgqj_txt" />
@@ -170,7 +171,7 @@
           <input type="text" class="jgqj_txt" />
           <input type="submit" class="jgqj_btn" value="确定" />
         </div>
-      </ul>
+      
       
       <div class="list_fenye flr"><a href="#"><img src="/img/left.png"></a><span>1/5</span><a href="#"><img src="/img/right.png"></a></div>
       
@@ -299,7 +300,10 @@ function tm_initPage(count) {
 			}
 		})
 	}
-	
+	$("#ul_li").on("click",function(){
+		   var li = $('#ul_li li');
+		   $(this).find("a").addClass("sxtj_on").siblings().removeClass("sxtj_on");
+	})
 
 </script>
 </body>

@@ -1,5 +1,5 @@
 jQuery(function($) {
-	// 新增参数
+	// 新增品牌
 	$("#id-new-brand").click(function() {
 	    $("#id-table").addClass("hide");
 	    $("#id-add").removeClass("hide");
@@ -71,6 +71,18 @@ jQuery(function($) {
 		}
 		
 	});
+	
+	// 图片显示
+    $('.brand-picture').ace_file_input({
+        style:'well',
+        btn_choose:'点击选择',
+        btn_change:null,
+        no_icon:'icon-picture',
+        droppable:true,
+        thumbnail:'fit'//small | large | fit
+
+    }).on('change', function(){
+    });
 
 });
 	
@@ -109,7 +121,20 @@ function modify(id) {
                 $("#id-table").removeClass("hide");
             });
             
-          //修改后文本框变色显示变色  zackma-20150204
+            // 图片显示
+            $('.m-brand-picture').ace_file_input({
+                style:'well',
+                btn_choose:'点击更换',
+                btn_change:null,
+                no_icon:'icon-picture',
+                droppable:true,
+                thumbnail:'fit'//small | large | fit
+
+            }).on('change', function(){
+            	$("#old-pic").addClass("hide");
+            });   
+            
+            //修改后文本框变色显示变色  zackma-20150204
             $(".addinput-form #m-type").change(function(){
             	$("#m-type").css({"background-color":"#ffffdb"});
             });

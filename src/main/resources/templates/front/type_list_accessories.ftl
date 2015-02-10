@@ -159,8 +159,8 @@
       
     </div>
     <div class="sx_list" id="page_con">
-    <#include "/front/listtemp/pageaccessories.ftl">
-      <div class="clear"></div>
+        <#include "/front/listtemp/pageaccessories.ftl">
+        <div class="clear"></div>
     </div>
   </div>
     <div class="page" style="margin-top: 5px;float: right;" ></div>

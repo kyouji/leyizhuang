@@ -42,6 +42,7 @@
 					</div>
 
 					<div class="page-content">
+					    <input type="text" id="id-total-num" class="hide" value="<#if param_total??>${param_total}</#if>" />
 						<div class="row">
 						    <#include "/management/parameter/param_add.ftl">
                             <div id="id-modify"></div>

@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
         <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css" />
         <link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.full.min.css" />
+        
 	</head>
 
 	<body>
@@ -42,6 +43,7 @@
 					</div>
 
 					<div class="page-content">
+					    <input type="text" id="id-total-num" class="hide" value="<#if type_total??>${type_total}</#if>" />
 						<div class="row">
 						    <#include "/management/brand/brand_add.ftl">
                             <div id="id-modify"></div>
@@ -126,7 +128,7 @@
 		<script src="/assets/js/ace-elements.min.js"></script>
 		<script src="/assets/js/ace.min.js"></script>
 
-		<!-- inline scripts related to this page -->
+		<!-- inline scripts related to this page -->				
 		
 		<!--全选反选提交删除等-->
         <script src="/js/management/brand.js" type="text/javascript"></script>
@@ -136,7 +138,7 @@
         
         <!--新增参数提交-->        
         <script src="/js/management/brand_add.js" type="text/javascript"></script>
+        
                 
 	</body>
 </html>
-

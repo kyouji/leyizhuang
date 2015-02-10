@@ -76,14 +76,14 @@ DD_belatedPNG.fix('.,img,background');
 </table>
 </div>
 		<div class="member_dd">
-		<span class=" member_ddrq"><#if shopping_order_list.orderTime??>${shopping_order_list.orderTime}</#if><#if shopping_order_list.orderNumber??>
-		    <span>订单号：${shopping_order_list.orderNumber}</span></#if>
-		</span>
 		<#assign totalPrice = 0>
 		<#list shopping_order_list.orderItemList as shopping_order_orderItemList>
 		<table>
 		<tr class="member_ddhe">
-		<td class="member_dd_a"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a>
+		<td class="member_dd_a"><span><a href="href="/product/${shopping_order_list.id}""><#if shopping_order_orderItemList.productCoverImageUri??><img src="${shopping_order_orderItemList.productCoverImageUri}" width="76" height="76"></#if></a>
+		</td>
+		<td>
+		   <#if shopping_order_orderItemList.productBrief??>${shopping_order_orderItemList.productBrief}</#if>
 		</td>
 		<td class="member_dd_b"><#if shopping_order_orderItemList.price??>
 		    <span>${shopping_order_orderItemList.price}</span></#if>
@@ -98,15 +98,13 @@ DD_belatedPNG.fix('.,img,background');
 		</#list>
 		</div>
 
-</div>
-
-        <div class="clear h20"></div>
-        <div class="flr fot_fanye"><ul class="haoh">
-        <li><a href="#" ><<</a></li>
-         <li><a href="#" class="act">1</a></li>
-          <li><a href="#">2</a></li>
-           <li><a href="#">>></a></li>
-        </ul></div>
+    <div id="id-pagination" style="margin-top: 0px;float: right;">
+          <div class="pagination">
+          总计： <#if shopping_order_list.totalPrice??>
+	            ￥  ${shopping_order_list.totalPrice}元
+	          </#if>
+          </div>
+      </div>
         
 </div></div>
 </div>
@@ -124,6 +122,17 @@ DD_belatedPNG.fix('.,img,background');
 <#include "/front/comment/top1.ftl">
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
 

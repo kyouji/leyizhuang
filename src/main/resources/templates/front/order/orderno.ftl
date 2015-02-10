@@ -13,17 +13,11 @@
 <link rel="stylesheet" type="text/css" href="/img/order/gao/buy.css" />
 <link href="/img/order/gao/member.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="/img/order/gao/pagination.css" />
-
-<!--[if IE]>
-   <script src="/js/html5.js"></script>
-<![endif]-->
-
-
-	<!--[if IE]>
-    <script type="text/javascript">
-        window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-    </script>
-    <![endif]-->
+<script src="/js/html5.js"></script>
+<script type="text/javascript">
+     window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+   
 <!--[if IE 6]>
 <script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a.js" ></script>
 <script>
@@ -50,7 +44,7 @@ DD_belatedPNG.fix('.,img,background');
         <li><a href="/order/list">全部订单</a></li>
         <li><a href="/order/obligation?status=0" >待付款订单</a></li>
         <li><a href="/order/startorder?status=1" >待收货订单</a></li>
-        <li><a href="/order/orderok?status=3" >已完成订单</a></li>
+        <li><a href="/order/orderok?status=3">已完成订单</a></li>
         <li><a href="/order/orderno?status=4" class="act">已关闭订单</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
@@ -90,30 +84,24 @@ DD_belatedPNG.fix('.,img,background');
       </div>
       
       
-      <div class="member_dd"  >
+      <div class="member_dd">
         <table width="720" border="0" cellpadding="0" cellspacing="0" id="table" >
         	<#include "/front/order/orderchild/page.ftl">	
         </table>
+      
+      <div id="id-pagination" style="margin-top: 0px;float: right;">
+          <div class="pagination">
+	          <span class="current prev"><a href="javascrpt:void(0)">上一页</a></span>
+	          <span class="current next"><a href="javascrpt:void(0)">下一页</a></span>
+          </div>
       </div>
       
-      </div>
-        <div class="clear h20"></div>
-        <div class="flr fot_fanye"><ul class="haoh">
-        <li><a href="#" ><<</a></li>
-         <li><a href="#" class="act">1</a></li>
-          <li><a href="#">2</a></li>
-           <li><a href="#">>></a></li>
-        </ul></div>
-      
-      <div id="id-pagination" style="margin-top: 0px;float: right;"></div>
     </div>
     <div class="clear"></div>
        <div class="page" style="margin-top: 5px;text-align: right;"></div>
   </div>
   <div class="clear"></div>
 </div>
-
-
 
 <div class="clear"></div>
 
@@ -125,6 +113,39 @@ DD_belatedPNG.fix('.,img,background');
 <div class="footallbg">
 <#include "/front/comment/top1.ftl">
 </div>
+
+<script src="/js/jquery.pagination.js"></script>
+      // 分页
+    <script type="text/javascript">
+    // 每页数量
+    var pageSize = 5;
+    $("#id-pagination").pagination(${goods_order_total},
+    {
+    
+        num_display_entries : 3,
+        num_edge_entries : 3,
+        current_page : 0,
+        items_per_page : pageSize,
+        prev_text : "上一页",
+        next_text : "下一页",
+        showGo : true,
+        showSelect : true,
+        callback : function(pageNo) {
+            $.ajax({
+                type : "post",
+                url : "/order/page_list",
+                data : {
+                    "page" : pageNo,
+                    "status" : ${status}
+                },
+                success : function(data) {
+                    $("#table").html(data);
+                }
+            });
+        }
+    });
+    
+
+</script>
 </body>
 </html>
-

@@ -21,7 +21,7 @@
 		    </td>
 		    <td class="center">
 		    	<#if brand.logoUri??>
-		    		${brand.logoUri}
+		    		<img src="${brand.logoUri}" style="height:36px;width:58px"/>
 		    	</#if>
 		    </td>
 		    <td class="center">

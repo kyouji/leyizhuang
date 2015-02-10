@@ -49,7 +49,6 @@ jQuery(function($) {
 	
 	// 每页数量
 	var pageSize = 2;
-	
 	//分页
 	$("#id-pagination").pagination($("#id-total-num").val(), {
 		num_display_entries : 2, 
