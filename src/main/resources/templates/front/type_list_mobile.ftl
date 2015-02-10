@@ -130,7 +130,7 @@
   <div class="sub_right">
     <div class="sx_tit">
       <h2>手机</h2>
-      （共搜索到<b>587</b>个商品）<span></span> </div>
+      （共搜索到<b><#if count??>${count}</#if></b>个商品）<span></span> </div>
      <div class="sx_lb">
       <ul>
         <li> <span>品牌：</span>

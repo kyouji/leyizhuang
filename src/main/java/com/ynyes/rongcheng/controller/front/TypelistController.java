@@ -49,13 +49,13 @@ public class TypelistController {
                 //根据类型获取所有子类
                 Page<Product> pages=productservice.findByType("2", page, size, direction, property);
                 model.addAttribute("product", pages.getContent());
-                model.addAttribute("count", "15");
+                model.addAttribute("count",pages.getTotalElements());
                 return "/front/type_list_mobile";//手机产品
             }
             if(typeId.equals("3")){
                 Page<Product> pages=productservice.findByType("3", page, size, direction, property);
                 model.addAttribute("armature", pages.getContent());
-                model.addAttribute("count", "15");
+                model.addAttribute("count", pages.getTotalElements());
                 return "/front/type_list_accessories";//手机配件
             }
             if(typeId.equals("4")){
@@ -89,7 +89,7 @@ public class TypelistController {
                 //根据类型获取所有子类
                 Page<Product> pages=productservice.findByType("2", page, size, direction, property);
                 model.addAttribute("product", pages.getContent());
-                model.addAttribute("count", "15");
+                model.addAttribute("count", pages.getTotalElements());
            
         return "/front/listtemp/pageProduct";//手机产品
     }
@@ -118,7 +118,7 @@ public class TypelistController {
         //根据类型获取所有子类
         Page<Product> pages=productservice.findByType("3", page, size, direction, property);
         model.addAttribute("product", pages.getContent());
-        model.addAttribute("count", "15");
+        model.addAttribute("count", pages.getTotalElements());
         
         return "/front/listtemp/pageProduct";//手机产品
     }
