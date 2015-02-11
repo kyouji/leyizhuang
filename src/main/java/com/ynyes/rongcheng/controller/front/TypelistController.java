@@ -36,11 +36,16 @@ public class TypelistController {
      * @since  1.0.0
      */
     @RequestMapping("/list/{typeId}")
-    public String index(@PathVariable String typeId,Integer page,Integer size,String direction,Model model){
+    public String index(@PathVariable String typeId,Integer page,Integer size,String direction,String property,Model model){
         page=0;
         size=12;
         direction="desc";//排序
-        String property="sortNumber";//字段
+        property="sortNumber";//字段
+        if(property.equals("价格↑")){
+            property="flashSalePrice";
+            }else if(property.equals("上架时间↑") || property=="上架时间↑"){
+                property="onSaleTime";
+            }
         if(StringUtils.isNotEmpty(typeId) && StringUtils.isNumber(typeId)){
             if(typeId.equals("1")){
                 return "/front/type_list_star";//明星产品
@@ -49,13 +54,13 @@ public class TypelistController {
                 //根据类型获取所有子类
                 Page<Product> pages=productservice.findByType("2", page, size, direction, property);
                 model.addAttribute("product", pages.getContent());
-                model.addAttribute("count", "15");
+                model.addAttribute("count",pages.getTotalElements());
                 return "/front/type_list_mobile";//手机产品
             }
             if(typeId.equals("3")){
                 Page<Product> pages=productservice.findByType("3", page, size, direction, property);
                 model.addAttribute("armature", pages.getContent());
-                model.addAttribute("count", "15");
+                model.addAttribute("count", pages.getTotalElements());
                 return "/front/type_list_accessories";//手机配件
             }
             if(typeId.equals("4")){
@@ -82,14 +87,22 @@ public class TypelistController {
      * @since  1.0.0
      */
     @RequestMapping("/list/{typeId}_")
-    public String mobile(@PathVariable String typeId,Integer page,Integer size,String direction,Model model){
+    public String mobile(@PathVariable String typeId,Integer page,Integer size,String direction,String property,Model model){
             direction="desc";//排序
-            String property="sortNumber";//字段
-           
+          if(StringUtils.isNotEmpty(property)){
+              if(property.equals("价格↑")||property=="价格↑"){
+                  property="priceMinimum";
+              }else if(property.equals("上架时间↑") || property=="上架时间↑"){
+                  property="onSaleTime";
+              }
+          }else{
+              property="sortNumber"; 
+          }
+            
                 //根据类型获取所有子类
                 Page<Product> pages=productservice.findByType("2", page, size, direction, property);
                 model.addAttribute("product", pages.getContent());
-                model.addAttribute("count", "15");
+                model.addAttribute("count", pages.getTotalElements());
            
         return "/front/listtemp/pageProduct";//手机产品
     }
@@ -118,7 +131,7 @@ public class TypelistController {
         //根据类型获取所有子类
         Page<Product> pages=productservice.findByType("3", page, size, direction, property);
         model.addAttribute("product", pages.getContent());
-        model.addAttribute("count", "15");
+        model.addAttribute("count", pages.getTotalElements());
         
         return "/front/listtemp/pageProduct";//手机产品
     }

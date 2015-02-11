@@ -17,6 +17,7 @@
 <script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="/Tm/js/mainTip.js"></script>
 <script type="text/javascript" src="/Tm/js/util.js"></script>
+<script type="text/javascript" src="/Tm/js/AJAX.js"></script>
 <script type="text/javascript" src="/Tm/js/jquery.pagination.js"></script>
 <script type="text/javascript" src="/Tm/js/front/producttype.js"></script>
 </head>
@@ -130,7 +131,7 @@
   <div class="sub_right">
     <div class="sx_tit">
       <h2>手机</h2>
-      （共搜索到<b>587</b>个商品）<span></span> </div>
+      （共搜索到<b><#if count??>${count}</#if></b>个商品）<span></span> </div>
      <div class="sx_lb">
       <ul>
         <li> <span>品牌：</span>
@@ -160,20 +161,20 @@
 	
     <div class="sxtj">
       <ul id="ul_li">
-        <li><a href="javascript:void(0)" class="click sxtj_on">销量&nbsp;↓</a></li>
-        <li><a href="javascript:void(0)" class="click">价格&nbsp;↑</a></li>
-        <li><a href="javascript:void(0)" class="click">上架时间&nbsp;↑</a></li>
+        <li><a href="javascript:void(0)" class="sxtj_on">销量↓</a></li>
+        <li><a href="javascript:void(0)" class="">价格↑</a></li>
+        <li><a href="javascript:void(0)" class="">上架时间↑</a></li>
      </ul>
         <div class="sxtjBox">
         <span>价格范围：</span>
-          <input type="text" class="jgqj_txt" />
+          <input type="text" class="jgqj_txt" id="minMoney"/>
           <span>--</span>
-          <input type="text" class="jgqj_txt" />
-          <input type="submit" class="jgqj_btn" value="确定" />
+          <input type="text" class="jgqj_txt" id="maxMoney" />
+          <input type="button" class="jgqj_btn" onclick="tm_searchProfit(this)" value="搜 索" />
         </div>
       
       
-      <div class="list_fenye flr"><a href="#"><img src="/img/left.png"></a><span>1/5</span><a href="#"><img src="/img/right.png"></a></div>
+      <div class="list_fenye flr"><a href="javascript:void(0)"><img src="/img/left.png"></a><span>1/5</span><a href="#"><img src="/img/right.png"></a></div>
       
     </div>
     <div class="sx_list" id="page_con">
@@ -186,17 +187,7 @@
 	</div>
 </div>
 </div>
-
-
-
-
-
-
-
-
-
 <div class="clear"></div>
-
 <div class="main mt20">
 <div class="floor_n fll"><img src="/img/peisongyuanze.png" width="719" height="44"></div>
 <div class="flr">
@@ -267,8 +258,7 @@
 	$(function(){
 		tm_initPage(count)
 	})
-
-		//分页初始化调用的方法
+//分页
 function tm_initPage(count) {
     $(".page").pagination(count, {
         num_display_entries : 3,
@@ -285,8 +275,11 @@ function tm_initPage(count) {
         }
     });
 }
+//加载模版
 	function loadTemp(pageNo,psize,callback){
 	var typeId=2;
+	var maxMoney = $("#maxMoney").val();
+	var minMoney = $("#minMoney").val();
 		$.ajax({
 			type:"post",
 			url:"/list/"+typeId+"_",
@@ -296,14 +289,68 @@ function tm_initPage(count) {
 				 if (callback) {
 	                var count = $("#count").val();
 	                callback(count);
+	                
+	                
+	 $("#ul_li li").on("click",function(){
+		var typeId=2;
+		var index=$(this).index();
+		var $this=$("#ul_li li");
+        $this.find("a").removeClass("sxtj_on");
+        $this.eq(index).find("a").addClass("sxtj_on");
+        var text=$(this).text();
+   		$.ajax({
+			type:"post",
+			url:"/list/"+typeId+"_",
+			data:{"page":0,"size":12,"property":text},
+			success:function(data){
+				$("#page_con").html(data);
+				 if (callback) {
+	                var count = $("#count").val();
+	                callback(count);
+            	}
+			}
+		})
+	})
             	}
 			}
 		})
 	}
-	$("#ul_li").on("click",function(){
-		   var li = $('#ul_li li');
-		   $(this).find("a").addClass("sxtj_on").siblings().removeClass("sxtj_on");
+	//切换查询
+	$("#ul_li li").on("click",function(){
+		var typeId=2;
+		var index=$(this).index();
+		var $this=$("#ul_li li");
+        $this.find("a").removeClass("sxtj_on");
+        $this.eq(index).find("a").addClass("sxtj_on");
+        var text=$(this).text();
+   		$.ajax({
+			type:"post",
+			url:"/list/"+typeId+"_",
+			data:{"page":0,"size":12,"property":text},
+			success:function(data){
+				$("#page_con").html(data);
+				 if (callback) {
+	                var count = $("#count").val();
+	                callback(count);
+            	}
+			}
+		})
 	})
+	
+	function tm_searchProfit(obj){
+		
+				var maxMoney = $("#maxMoney").val();
+				var minMoney = $("#minMoney").val();
+				if(isNotEmpty(maxMoney) && isNotEmpty(minMoney) && maxMoney < minMoney){
+					alert("最小金额不能大于最大金额");
+					$("#maxMoney").select();
+					return ;
+				}
+			
+			tm_loadTemplate(0,10,function(itemCount){
+				tm_initPage(itemCount);//搜索以后重新初始化分页
+			});
+		}
 
 </script>
 </body>

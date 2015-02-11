@@ -1,5 +1,7 @@
 package com.ynyes.rongcheng.controller.front;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,20 +39,26 @@ public class CartController {
      * @since  1.0.0
      */
     @RequestMapping("/cart")
-    public ModelAndView cart(String sum,ModelMap map){
+    public ModelAndView cart(String sum,HttpServletRequest request){
        ModelAndView modelAndView=new ModelAndView();
-        User user =(User) map.get("user");
-        if(StringUtils.isNotEmpty(sum)){
-            String username=user.getUsername();
-            if(StringUtils.isNotEmpty(username)){
-                modelAndView.addObject("cartId",shoppingCartService.findOne(username, Long.parseLong(sum)));
+        User user =(User) request.getSession().getAttribute("user");
+        if(user!=null){
+            if(StringUtils.isNotEmpty(sum)){
+                String username=user.getUsername();
+                if(StringUtils.isNotEmpty(username)){
+                    modelAndView.addObject("cartId",shoppingCartService.findOne(username, Long.parseLong(sum)));
+                    modelAndView.setViewName("/front/cart/cart");
+                    return modelAndView;
+                }else {
+                  //  modelAndView.addObject("carts",shoppingCartService.findByUsername(username));
+                    modelAndView.setViewName("/front/cart/cart");
+                    return modelAndView; 
+                }
+            }else{
+                
                 modelAndView.setViewName("/front/cart/cart");
-            }else {
-                modelAndView.setViewName("/front/cart/cart");
+                return modelAndView;
             }
-        }else{
-            
-            modelAndView.setViewName("/front/cart/cart");
         }
         return modelAndView;
     }

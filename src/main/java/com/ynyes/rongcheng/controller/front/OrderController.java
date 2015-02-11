@@ -2,6 +2,8 @@ package com.ynyes.rongcheng.controller.front;
 
 
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+
+
 import com.ynyes.rongcheng.entity.OrderItem;
 import com.ynyes.rongcheng.entity.ShoppingOrder;
 import com.ynyes.rongcheng.entity.User;
+import com.ynyes.rongcheng.service.OrderItemService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ShoppingOrderService;
 
@@ -39,10 +45,10 @@ public class OrderController {
 	ShoppingOrderService shoppingOrderService;
 	
 	@Autowired
-	ProductService productService;
+	OrderItemService orderItemService;
 	/**
 	 * 
-	 * 跳转所有订单页面<BR>
+	 * 跳转所有订单页面<BR>（全部订单栏专用）
 	 * 方法名：orderlist<BR>
 	 * 创建人：guozhengyang <BR>
 	 *      +订单逻辑业务处理：小高
@@ -56,6 +62,7 @@ public class OrderController {
 	 */
 	@RequestMapping(value="/list")
 	public String orderlist(Model model, HttpServletRequest req) {
+		
 		// 根据当前状态获取数据并返回
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(
@@ -76,11 +83,163 @@ public class OrderController {
 				model.addAttribute("status_all", "已关闭");
 			}
 		}
-		
 		model.addAttribute("shopping_order_list", so.getContent()); // so.getContent()是将当前对象默认变为list
 		model.addAttribute("goods_order_total", so.getTotalElements());
+		model.addAttribute("status", null);
 		return "/front/order/orderlist";
 	}
+	
+	
+	
+	/**
+	 * 
+	 *控制按照时间进行控制的页面（全部订单栏专用，这里的分页只是显示了首页而已）<BR>
+	 * 方法名：orderlist<BR>
+	 * 创建人：guozhengyang <BR>
+	 *      +订单逻辑业务处理：小高
+	 * 时间：2015年2月10日11:13:56 <BR>
+	 * 
+	 * @return String<BR>
+	 * @param [参数1] [参数1说明]
+	 * @param [参数2] [参数2说明]
+	 * @exception <BR>
+	 * @since 1.0.0
+	 */
+	@RequestMapping(value="/list_time")
+	public String orderlist_time(Model model, HttpServletRequest req,
+			    String order,
+	            String prop,
+	            Integer page,
+	            Integer size,
+	            Long timeId
+			) {
+		// 根据当前状态获取数据并返回
+		User user = (User) req.getSession().getAttribute("user");
+		Page<ShoppingOrder> p = null;
+        if (null == order || null == prop)
+        {
+            order = "desc";
+            prop = "orderTime";
+        }
+        
+        if (null == page || null == size)
+        {
+            page = 0;
+            size = 5;
+        }
+        
+        if (null != timeId)                          //对点击的时间进行判断
+        {
+            Date current = new Date();
+            Calendar  g = Calendar.getInstance();  
+            g.setTime(current);  
+            Date time = null;
+            
+            if (1 == timeId) // 最近一月
+            {
+                g.add(Calendar.MONTH, -1);              
+                time = g.getTime(); 
+                p=shoppingOrderService.findByUsernameInMonth(user.getUsername(), 1, page, size, "desc", "id");
+            }
+            else if (3 == timeId) // 最近三月
+            {
+            	
+                g.add(Calendar.MONTH, -3);              
+                time = g.getTime(); 
+
+                p=shoppingOrderService.findByUsernameInMonth(user.getUsername(), 3, page, size, "desc", "id");
+            }
+            else if (6 == timeId) // 最近半年
+            {
+                g.add(Calendar.MONTH, -6);              
+                time = g.getTime(); 
+                p=shoppingOrderService.findByUsernameInMonth(user.getUsername(), 6, page, size, "desc", "id");
+            }
+            else if (12 == timeId) // 最近一年
+            {
+                g.add(Calendar.YEAR, -1);              
+                time = g.getTime(); 
+                p=shoppingOrderService.findByUsernameInMonth(user.getUsername(),12, page, size, "desc", "id");
+            }
+        }
+        else
+        {
+        	p=shoppingOrderService.findByUsername(user.getUsername(), page, size, "desc", "id");
+        }
+		for(ShoppingOrder s:p){                      //将状态由数字改为汉字
+			Long sta=null;
+			sta=s.getStatusCode();
+			if(sta==0){
+				model.addAttribute("status_all", "待付款");
+			}
+			if(sta==1){
+				model.addAttribute("status_all", "待收货");
+			}
+			if(sta==3){
+				model.addAttribute("status_all", "已完成");
+			}
+			if(sta==4){
+				model.addAttribute("status_all", "已关闭");
+			}
+		}
+		model.addAttribute("shopping_order_list", p.getContent()); // so.getContent()是将当前对象默认变为list
+		model.addAttribute("goods_order_total", p.getTotalElements());
+		return "/front/order/orderchild/page"; 
+	}
+	
+	
+	
+	/**
+	 * 对分页进行处理,这是在点击时间按钮的前提下，对查询到的数据进行分页
+	 * <BR>
+	 * 方法名：orderdetail<BR>
+	 * 创建人：小高 <BR>
+	 *      
+	 * 时间：2015年2月7日14:03:49<BR>
+	 * 
+	 * @return String<BR>
+	 * @param [参数1] [参数1说明]
+	 * @param [参数2] [参数2说明]
+	 * @exception <BR>
+	 * @since 1.0.0
+	 */
+	@RequestMapping(value="/page_list_all_time",method=RequestMethod.POST )
+	public String pageAndTime( Model model, HttpServletRequest req,Integer page,Long status) {
+		User user = (User) req.getSession().getAttribute("user");
+		//这里差一个按照订单时间和状态同时满足的方法
+		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(user.getUsername(), page, 5, "desc", "id");
+		for(ShoppingOrder s:so){
+			Long sta=null;
+			sta=s.getStatusCode();
+			if(sta==0){
+				model.addAttribute("status_all", "待付款");
+			}
+			if(sta==1){
+				model.addAttribute("status_all", "待收货");
+			}
+			if(sta==3){
+				model.addAttribute("status_all", "已完成");
+			}
+			if(sta==4){
+				model.addAttribute("status_all", "已关闭");
+			}
+		}
+		model.addAttribute("shopping_order_list", so.getContent());
+        model.addAttribute("goods_order_total", so.getTotalElements());
+		return "/front/order/orderchild/page"; 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * 
@@ -295,9 +454,6 @@ public class OrderController {
 		model.addAttribute("status", status);
 		return "/front/order/orderlist"; 
 	}
-	
-	
-	
 
 	/**
 	 * 跳转到订单详情页面
@@ -381,8 +537,7 @@ public class OrderController {
 	
 	
 	/**
-	 * 对分页进行处理(暂时没有使用，因为每一次页面返回的数据都是按照不同的状态进行返回
-	 * 也就是说，不用status进行访问，只需要按照状态进行返回以后，在当前状态下分页
+	 * 对分页进行处理,这是需要status进行分页
 	 * )
 	 * <BR>
 	 * 方法名：orderdetail<BR>
@@ -397,7 +552,7 @@ public class OrderController {
 	 * @since 1.0.0
 	 */
 	@RequestMapping(value="/page_list",method=RequestMethod.POST )
-	public String listpage(Long status, Model model, HttpServletRequest req,int page) {
+	public String listpage(Long status, Model model, HttpServletRequest req,Integer page) {
 	
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, page, 5,"desc", "id");
@@ -438,7 +593,7 @@ public class OrderController {
 	 * @since 1.0.0
 	 */
 	@RequestMapping(value="/page_list_all",method=RequestMethod.POST )
-	public String listpageall( Model model, HttpServletRequest req,int page) {
+	public String listpageall( Model model, HttpServletRequest req,Integer page) {
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(user.getUsername(), page, 5, "desc", "id");
 		for(ShoppingOrder s:so){
@@ -461,4 +616,59 @@ public class OrderController {
         model.addAttribute("goods_order_total", so.getTotalElements());
 		return "/front/order/orderchild/page"; 
 	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * 待付款页面<BR>
+	 * 方法名：obligation<BR>
+	 * 创建人：guozhengyang <BR>
+	 *      +订单逻辑业务处理：小高
+	 * 时间：2015年2月9日19:38:05 <BR>
+	 * 
+	 * @return String<BR>
+	 * @param [参数1] [参数1说明]
+	 * @param [参数2] [参数2说明]
+	 * @exception <BR>
+	 * @since 1.0.0
+	 */
+	@RequestMapping("/add_order")
+	public String addorder(ShoppingOrder shoppingorder, Model model, HttpServletRequest req) {
+		User user = (User) req.getSession().getAttribute("user");
+		//orderItemService.newOne(productId, productName, productBrief, productCoverImageUri, productCode, productVerId, productVerColor, productVerCap, productVerName, productNumber, price, quantity)
+		shoppingOrderService.save(user.getUsername(),
+				                  shoppingorder.getOrderItemList(),
+				                  shoppingorder.getShippingAddress(), 
+				                  shoppingorder.getShippingName(), 
+				                  shoppingorder.getShippingPhone(), 
+				                  shoppingorder.getShippingType(), 
+				                  shoppingorder.getInvoiceTitle());
+		 
+		
+		
+//		
+//			sta=s.getStatusCode();
+//			if(sta==0){
+//				model.addAttribute("status_all", "待付款");
+//			}
+//			if(sta==1){
+//				model.addAttribute("status_all", "待收货");
+//			}
+//			if(sta==3){
+//				model.addAttribute("status_all", "已完成");
+//			}
+//			if(sta==4){
+//				model.addAttribute("status_all", "已关闭");
+//			}
+//		}
+//		model.addAttribute("shopping_order_list", so.getContent());
+//		model.addAttribute("goods_order_total", so.getTotalElements());
+//		model.addAttribute("status", status);     //将访问某个状态栏的状态保存下来，在发送异步请求的时候再写回去
+		return "redirect:/order/list";
+	}
+	
+	
+	
 }
