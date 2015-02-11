@@ -32,6 +32,9 @@ public interface ShoppingOrderRepo extends
     // 通过用户名和下单时间查找
     Page<ShoppingOrder> findByUsernameAndOrderTimeAfter(String username, Date time, Pageable page);
     
+    // 通过用户名、订单状态和下单时间查找
+    Page<ShoppingOrder> findByUsernameAndStatusCodeAndOrderTimeAfter(String username, Long statusCode, Date time, Pageable page);
+    
     // 通过订单号查找
     ShoppingOrder findByOrderNumber(String orderNumber);
 }
