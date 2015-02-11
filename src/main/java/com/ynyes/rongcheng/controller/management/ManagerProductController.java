@@ -1,5 +1,8 @@
 package com.ynyes.rongcheng.controller.management;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -60,4 +63,36 @@ public class ManagerProductController {
         }
     }
     
+    /**
+     * 保存商品
+     * 
+     * @param product 要保存的商品
+     * @return
+     */
+    
+    @RequestMapping(value="/save",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> add(ModelMap map, Product product){
+        Map<String, Object> res = new HashMap<String, Object>();
+        res.put("code", 1);
+        
+        if (null == product)
+        {
+            res.put("message", "信息有误");
+            return res;
+        }
+        
+        if (null == product.getName() || "".equals(product.getName()))
+        {
+            res.put("message", "商品名为空");
+            return res;
+        }
+        
+        
+        productService.save(product);
+        
+        res.put("code", 0);
+        
+        return res;
+    } 
 }

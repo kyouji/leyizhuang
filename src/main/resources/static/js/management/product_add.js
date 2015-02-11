@@ -7,10 +7,14 @@ $(function(){
                 $("#add-submit").click(function(){
                 	var NeContent = $("#fm-add").serialize();
                 	var eContent1 = editor1.html();
-                    var eContent2 = deitor2.html();
+                    var eContent2 = editor2.html();
                     
-                    if(type==""||name==""||code==""){
-			            alert("请填写完整品牌信息！");
+                    var type = $('select[name="type"]:selected').val();
+                    var name = $("#name").val();
+                    var code = $("#code").val();
+                    
+                    if(name==""||code==""){
+			            alert("请填写完整商品信息！");
 			        return;
 		            }
                     
