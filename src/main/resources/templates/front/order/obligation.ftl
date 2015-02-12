@@ -113,7 +113,6 @@ DD_belatedPNG.fix('.,img,background');
 <div class="footallbg">
 <#include "/front/comment/top1.ftl">
 </div>
-
 <script src="/js/jquery.pagination.js"></script>
       // 分页
     <script type="text/javascript">
@@ -155,13 +154,15 @@ DD_belatedPNG.fix('.,img,background');
         }
         $.ajax({
             type : "post",
-            url : "/order/list_time"+snew,
-            data : {"snew":snew,"status":search},
+            url : "/order/otherorder_time"+snew,
+            data : {"snew":snew,
+                     "status":${status}
+                     },
             success : function(data) {
                 $("#table").html(data);
                 var b=pageSize;
                 // 重新初始化分页
-            $("#id-pagination").pagination(${goods_order_total},
+            $("#id-pagination").pagination(parseInt($("#all_order_number").html()),
 	                {
 	                    num_display_entries : 3,
 	                    num_edge_entries : 3,
@@ -174,9 +175,10 @@ DD_belatedPNG.fix('.,img,background');
 	                    callback : function(pageNo) {
 	                        $.ajax({
 	                            type : "post",
-	                            url : "/order/page_list_all",
+	                            url : "/order/page_list_all_time"+snew,
 	                            data : {
-	                                "page" : pageNo
+	                                "page" : pageNo,
+	                                 "status":${status}
 	                            },
 	                            success : function(data) {
 	                                $("#table").html(data);

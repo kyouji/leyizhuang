@@ -154,12 +154,14 @@ DD_belatedPNG.fix('.,img,background');
         $.ajax({
             type : "post",
             url : "/order/list_time"+snew,
-            data : {"snew":snew,"status":search},
+            data : {"snew":snew
+                     },
             success : function(data) {
                 $("#table").html(data);
                 var b=pageSize;
                 // 重新初始化分页
-            $("#id-pagination").pagination(${goods_order_total},
+                alert($("#all_order_number").html());
+            $("#id-pagination").pagination(parseInt($("#all_order_number").html()),
 	                {
 	                    num_display_entries : 3,
 	                    num_edge_entries : 3,
@@ -172,9 +174,10 @@ DD_belatedPNG.fix('.,img,background');
 	                    callback : function(pageNo) {
 	                        $.ajax({
 	                            type : "post",
-	                            url : "/order/page_list_all",
+	                            url : "/order/page_list_time"+snew,
 	                            data : {
-	                                "page" : pageNo
+	                                "page" : pageNo,
+	                                "timeId": snew
 	                            },
 	                            success : function(data) {
 	                                $("#table").html(data);
@@ -186,6 +189,7 @@ DD_belatedPNG.fix('.,img,background');
             }
         });
     });
+    
     
     
     //分页

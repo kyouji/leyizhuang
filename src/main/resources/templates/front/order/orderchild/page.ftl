@@ -3,7 +3,8 @@
         <#list order.orderItemList as item>
             <#assign total = total + item.quantity * item.price>
         </#list>
-   <!-- <input type="hidden" id="goods-order-total" value=""/>-->
+        <#if goods_order_total1??><div style="display:none" id="all_order_number">${goods_order_total1}</div></#if>
+
     <tr class="member_ddhe" style="border-bottom:1px solid #ddd; height:30px; line-height:30px; background:#f2f2f2 ;">
         <td width="331" class="member_dd_a"><em id="changebackground" style="width:55px;text-align:center;font-size:12px;float:left;color:#fff;height:40px;line-height:40px;background:#2881D5;display:block;">${status_all}</em><div class="fl" style="line-height:40px;">&nbsp;&nbsp;&nbsp;&nbsp;${order.orderTime}&nbsp;&nbsp;&nbsp;&nbsp;订单号：<i><#if order.orderNumber??>${order.orderNumber}</#if></i></div></td>
         <td colspan="4" class="member_dd_b"><div class="fr"><span style="color:#f60">￥${total?string("#.##")}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
