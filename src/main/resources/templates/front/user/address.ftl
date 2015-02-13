@@ -45,7 +45,7 @@
          <li><a href="/order/orderno?status=4" >已关闭订单</a></li>
       </ul>
       <span class="mt10 sp55">个人中心</span>
-      <ul class="haoh pt10">s
+      <ul class="haoh pt10">
         <li><a href="/user/info" >个人信息</a></li>
         <li><a href="/user/updatePassword" >密码修改</a></li>
         <li><a href="/user/address" class="act">收货地址</a></li>

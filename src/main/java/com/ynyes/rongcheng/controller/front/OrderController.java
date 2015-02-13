@@ -2,6 +2,7 @@ package com.ynyes.rongcheng.controller.front;
 
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
+
 
 
 
@@ -66,23 +70,11 @@ public class OrderController {
 		// 根据当前状态获取数据并返回
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(
-				user.getUsername(), 0, 5, "desc", "id"); 
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+				user.getUsername(), 0, 5, "desc", "id");
+		int length=so.getContent().size();
+		List<String> list=new ArrayList<String>(length);
+		
+		
 		model.addAttribute("shopping_order_list", so.getContent()); // so.getContent()是将当前对象默认变为list
 		model.addAttribute("goods_order_total", so.getTotalElements());
 		return "/front/order/orderlist";
@@ -165,22 +157,7 @@ public class OrderController {
         {
         	p=shoppingOrderService.findByUsername(user.getUsername(), page, 5, "desc", "id");
         }
-		for(ShoppingOrder s:p){                      //将状态由数字改为汉字
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+	
 		System.out.println("点击月份刷新");
 		model.addAttribute("shopping_order_list", p.getContent()); // so.getContent()是将当前对象默认变为list
 		model.addAttribute("goods_order_total1", p.getTotalElements());
@@ -268,22 +245,7 @@ public class OrderController {
         {
         	p=shoppingOrderService.findByUsername(user.getUsername(), page, 5, "desc", "id");
         }
-		for(ShoppingOrder s:p){                      //将状态由数字改为汉字
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+		
 		model.addAttribute("shopping_order_list", p.getContent()); // so.getContent()是将当前对象默认变为list
 		model.addAttribute("goods_order_total1", p.getTotalElements());
 		return "/front/order/orderchild/page"; 
@@ -313,22 +275,7 @@ public class OrderController {
 		User user = (User) req.getSession().getAttribute("user");
 
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,"desc", "id");
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+		
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
 		model.addAttribute("status", status);     //将访问某个状态栏的状态保存下来，在发送异步请求的时候再写回去
@@ -356,22 +303,6 @@ public class OrderController {
 		Page<ShoppingOrder> so = shoppingOrderService
 				.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,
 						"desc", "id");
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
 		
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
@@ -400,22 +331,7 @@ public class OrderController {
 		Page<ShoppingOrder> so = shoppingOrderService
 				.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,
 						"desc", "id");
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+		
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
 		model.addAttribute("status", status);
@@ -442,22 +358,7 @@ public class OrderController {
 		int total;
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, 0, 5,"desc", "id");
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+		
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
 		model.addAttribute("status", status);
@@ -486,22 +387,7 @@ public class OrderController {
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(
 				user.getUsername(), 0, 5, "desc", "id");
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+	
 		model.addAttribute("shopping_order_list", so.getContent());
 		model.addAttribute("goods_order_total", so.getTotalElements());
 		model.addAttribute("status", status);
@@ -526,24 +412,10 @@ public class OrderController {
 	public String orderdetail(Long id,HttpServletRequest req,Model model,Long status) {
 		User user = (User) req.getSession().getAttribute("user");
 		ShoppingOrder so = shoppingOrderService.findOne(id);
-		
-			Long sta=so.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		
 		model.addAttribute("shopping_order_list", so);
 		List<OrderItem> item = so.getOrderItemList();
 	    int order_size=item.size();
+	    model.addAttribute("order", so);
 		model.addAttribute("goods_order_total", order_size);
 		model.addAttribute("status", status);
 		return "/front/order/order_detail"; 
@@ -567,19 +439,7 @@ public class OrderController {
 	public String cartstep(Long id,HttpServletRequest req,Model model,Long status) {
 		User user = (User) req.getSession().getAttribute("user");
 		ShoppingOrder so = shoppingOrderService.findOne(id);
-		Long sta=so.getStatusCode();
-		if(sta==0){
-			model.addAttribute("status_all", "待付款");
-		}
-		if(sta==1){
-			model.addAttribute("status_all", "待收货");
-		}
-		if(sta==3){
-			model.addAttribute("status_all", "已完成");
-		}
-		if(sta==4){
-			model.addAttribute("status_all", "已关闭");
-		}
+	
 		model.addAttribute("order", so);
 	    List<OrderItem> item = so.getOrderItemList();
 	    int order_size=item.size();
@@ -609,22 +469,7 @@ public class OrderController {
 	
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusCode(user.getUsername(), status, page, 5,"desc", "id");
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+	
 		model.addAttribute("shopping_order_list", so.getContent());
         model.addAttribute("goods_order_total", so.getTotalElements());
         model.addAttribute("status", status);
@@ -650,22 +495,7 @@ public class OrderController {
 		User user = (User) req.getSession().getAttribute("user");
 		Page<ShoppingOrder> so=shoppingOrderService.findByUsernameInMonth(user.getUsername(), timeId, page,5, "desc", "id");
 		//Page<ShoppingOrder> so = shoppingOrderService.findByUsername(user.getUsername(), page, 5, "desc", "id");
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+		
 		System.out.println("刷新完毕");
 		model.addAttribute("shopping_order_list", so.getContent());
         model.addAttribute("goods_order_total1", so.getTotalElements());
@@ -691,22 +521,7 @@ public class OrderController {
 		User user = (User) req.getSession().getAttribute("user");
 		
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsername(user.getUsername(), page, 5, "desc", "id");
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+		
 		System.out.println("刷新完毕");
 		model.addAttribute("shopping_order_list", so.getContent());
         model.addAttribute("goods_order_total", so.getTotalElements());
@@ -733,22 +548,7 @@ public class OrderController {
 		//这里差一个按照订单时间和状态同时满足的方法
 		Page<ShoppingOrder> so = shoppingOrderService.findByUsernameAndStatusAndInMonth(user.getUsername(), status, timeId, page, 5, "desc", "id");
 		
-		for(ShoppingOrder s:so){
-			Long sta=null;
-			sta=s.getStatusCode();
-			if(sta==0){
-				model.addAttribute("status_all", "待付款");
-			}
-			if(sta==1){
-				model.addAttribute("status_all", "待收货");
-			}
-			if(sta==3){
-				model.addAttribute("status_all", "已完成");
-			}
-			if(sta==4){
-				model.addAttribute("status_all", "已关闭");
-			}
-		}
+	
 		model.addAttribute("shopping_order_list", so.getContent());
         model.addAttribute("goods_order_total1", so.getTotalElements());
 		return "/front/order/orderchild/page"; 
