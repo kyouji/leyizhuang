@@ -24,6 +24,30 @@
 DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
+<style>
+   .member_lef li a:hover, .member_lef li a.act {
+background: url(../img/memberleftxz.png) center no-repeat;
+color: #fff;
+font-weight: bold;
+}
+
+.member_lef li a {
+display: block;
+height: 34px;
+line-height: 34px;
+padding-left: 6px;
+font-family: "微软雅黑";
+font-size: 14px;
+margin-bottom: 1px;
+}
+
+.list_banner1 {
+height: auto;
+width: 900px;
+float: right;
+}
+
+</style>
 </head>
 <body>
 <header>
@@ -65,7 +89,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="flr">
     <div class="list_banner1">
       <div class="list_banner_fj">
-        <p>您当前的位置：<a href="/">首页</a> >> <a href="#">订单</a> >>所有订单</p>
+        <p>您当前的位置：<a href="/">首页</a> >> <a href="#">订单</a> >>已完成订单</p>
       </div>
       
       <style>

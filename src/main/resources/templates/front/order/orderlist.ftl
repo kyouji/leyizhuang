@@ -24,6 +24,30 @@
 DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
+<style>
+   .member_lef li a:hover, .member_lef li a.act {
+background: url(../img/memberleftxz.png) center no-repeat;
+color: #fff;
+font-weight: bold;
+}
+
+.member_lef li a {
+display: block;
+height: 34px;
+line-height: 34px;
+padding-left: 6px;
+font-family: "微软雅黑";
+font-size: 14px;
+margin-bottom: 1px;
+}
+
+.list_banner1 {
+height: auto;
+width: 900px;
+float: right;
+}
+
+</style>
 </head>
 <body>
 
@@ -160,7 +184,6 @@ DD_belatedPNG.fix('.,img,background');
                 $("#table").html(data);
                 var b=pageSize;
                 // 重新初始化分页
-                alert($("#all_order_number").html());
             $("#id-pagination").pagination(parseInt($("#all_order_number").html()),
 	                {
 	                    num_display_entries : 3,
@@ -217,6 +240,8 @@ DD_belatedPNG.fix('.,img,background');
             });
         }
     });
+    
+    
 </script>
 </body>
 </html>
