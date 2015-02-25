@@ -139,6 +139,7 @@
 		<!-- inline scripts related to this page -->
 		
         <script src="/js/management/product.js"></script>
+        <script src="/js/management/product_add.js"></script>
         <script src="/js/jquery.pagination.js"></script>
         
 	</body>

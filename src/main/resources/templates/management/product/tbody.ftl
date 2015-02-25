@@ -8,12 +8,12 @@
             </a>
         </div>
     </td>
-    <td class="center">
+    <!--td class="center">
         <label>
             <input type="checkbox" class="tr-check ace" value="${product.id}"/>
             <span class="lbl"></span>
         </label>
-    </td>
+    </td-->
     <td class="center">
         <input type="text" onchange="change(${product.id}, this)" class="col-sm-12 order-input" value="<#if product.sortNumber??>${product.sortNumber}</#if>"/>
     </td>
@@ -21,23 +21,33 @@
         ${product.id}
     </td>
     <td class="center">
+        ${product.code}
+    </td>
+    <td class="center">
         ${product.name}
-        <i class="icon-info-sign"></i> 
     </td>
     <td class="center">
-        ${product.type}
+        <#if paramList??>
+        ${product.paramList}
+        </#if>
     </td>
     <td class="center">
-        <#if product.marketPrice??>${product.marketPrice?string("#.##")}</#if>
+        <input type="checkbox" onchange="change(${product.id},this)" class="" value="onsaleCheck" <#if product.isOnSale?? && product.isOnSale==true>checked</#if>/>
     </td>
     <td class="center">
-        <#if product.priceMinimum??>${product.priceMinimum?string("#.##")}</#if>
+        <#if product.priceMinimum??>
+        ${product.priceMinimum}
+        </#if>
     </td>
     <td class="center">
-        <a href="/admin/product/bool/toggle?id=${product.id}&param=isOnSale" class="table-a<#if product.isOnSale?? && product.isOnSale> ton</#if>">热卖中</a> 
+        <span><#if product.priceUnit??>${product.priceUnit}<#else>￥</#if></span>${product.flashSalePrice}
     </td>
     <td class="center">
-        ${product.onSaleDate}
+        <a href="#" class="table-a<#if product.isStarProduct?? && product.isStarProduct> ton</#if>">明星产品</a> |
+        <a href="#" class="table-a<#if product.isFlashSale?? && product.isFlashSale> ton</#if>">限时抢购</a>
+    </td>    
+    <td class="center">
+        ${product.createTime}
     </td>
     <td class="center">
         <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
@@ -52,7 +62,7 @@
     </td>
 </tr>
 
-<tr class="hide">
+<!--<tr class="hide">
     <td colspan="10">
     <table style="width:100%;background-color: #E1F1C7;">
         <tbody>
@@ -79,6 +89,6 @@
         <tbody>
     </table>
     </td>
-</tr>
+</tr>-->
 </#list>
 </#if>

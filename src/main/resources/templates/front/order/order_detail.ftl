@@ -60,7 +60,11 @@ DD_belatedPNG.fix('.,img,background');
 <div class="flr right">
 <div class="list_banner1">
 <div class="place1"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="#">手机产品</a>&gt;<a href="#">订单详情</a>&gt; </div>
-<div>订单状态：${status_all}</div>
+<div>订单状态：      <#if order.statusCode==0>待付款
+			   <#elseif order.statusCode==1>待收货
+			   <#elseif order.statusCode==3>已完成
+			   <#elseif order.statusCode==4>已关闭
+			   </#if></div>
 <div>收货地址：<#if shopping_order_list.shippingAddress??>${shopping_order_list.shippingAddress}</#if></div>
 <div>配送方式：由荣诚同意发货</div>
 <div>发票抬头：<#if shopping_order_list.invoiceTitle??>${shopping_order_list.invoiceTitle}</#if></div>     

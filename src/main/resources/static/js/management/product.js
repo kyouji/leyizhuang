@@ -31,6 +31,55 @@ jQuery(function($) {
 		
 	});
 	
+	
+	
+	// 图片显示
+    $('#coverImage, #promotionPic').ace_file_input({
+        style : 'well',
+        no_file : '无图片',
+        btn_choose : '单选',
+        btn_change : '重选',
+        droppable : false,
+        onchange : null,
+        thumbnail : 'fit', // false | true | large
+        whitelist : 'gif|png|jpg|jpeg'
+    // blacklist:'exe|php'
+    // onchange:''
+    //
+    });
+    
+    $('.show-picture').ace_file_input({
+        style : 'well',
+        btn_choose : '多选',
+        btn_change : null,
+        no_icon : 'icon-picture',
+        droppable : true,
+        thumbnail : 'fit'// small | large | fit,
+        // ,icon_remove:null//set null, to hide remove/reset button
+        /**
+         * ,before_change:function(files, dropped) { //Check an example below
+         * //or examples/file-upload.html return true; }
+         */
+        /**
+         * ,before_remove : function() { return true; }
+         */
+        ,
+        preview_error : function(filename, error_code) {
+            // name of the file that failed
+            // error_code values
+            // 1 = 'FILE_LOAD_FAILED',
+            // 2 = 'IMAGE_LOAD_FAILED',
+            // 3 = 'THUMBNAIL_FAILED'
+            // alert(error_code);
+        }
+
+    }).on('change', function() {
+        // console.log($(this).data('ace_input_files'));
+        // console.log($(this).data('ace_input_method'));
+    });
+	
+    
+    
 	// 点击新增
 	$("#button-add").click(function(){
 		$("#id-add").siblings().addClass("hide");

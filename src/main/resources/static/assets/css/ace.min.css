@@ -15527,6 +15527,7 @@ th[aria-selected=true] .ui-jqgrid-sortable {
 }
 
 /*addinput-form begin*/
+
 .addinput-form{
 	float:left;
 	width:100%;
@@ -15543,12 +15544,15 @@ th[aria-selected=true] .ui-jqgrid-sortable {
 	text-align:left !important;
 	padding:0;
 }
+
 /*addinput-form over*/
 
 /*clear float*/
+
 .clear{
 	clear:both;
 }
+
 /*clear float*/
 
 /**/
