@@ -112,13 +112,13 @@ public class Product {
     
     // 上架时间
     @Column
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date onSaleTime;
     
     // 创建日期
     @Column
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     

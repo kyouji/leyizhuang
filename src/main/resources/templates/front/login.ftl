@@ -8,10 +8,10 @@
 	<link href="css/layout.css" rel="stylesheet" type="text/css" />
 	<link href="css/rcindex.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="Tm/css/manhuaTip1.1.0.css" />
-	<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
-	<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
-	<script type="text/javascript" src="/Tm/js/util.js"></script>
-	<script type="text/javascript" src="/Tm/js/front/login.js"></script>
+	<script async type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
+	<script async type="text/javascript" src="/Tm/js/mainTip.js"></script>
+	<script async type="text/javascript" src="/Tm/js/util.js"></script>
+	<script async type="text/javascript" src="/Tm/js/front/login.js"></script>
 </head>
 <body style="background:#eee;">
 <div class="logo2">

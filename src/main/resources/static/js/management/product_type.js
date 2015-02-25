@@ -5,6 +5,16 @@ jQuery(function($) {
         $("#id-table").siblings().addClass("hide");
         $("#id-table").removeClass("hide");
     });
+	
+	// 全选
+	$("#id-all-check").click(function() {
+	    $(".tr-check").prop("checked", true);
+	});
+	
+	// 反选
+	$("#id-all-uncheck").click(function() {
+	    $(".tr-check").prop("checked", false);
+	});
     
 	// 每页数量
 	var pageSize = 5;
