@@ -43,8 +43,8 @@ public interface ProductRepo extends
     List<Product> findByIdInAndIsOnSaleTrue(Collection<Long> ids);
     
     // 通过类型查找
-    Page<Product> findByTypeAndIsOnSaleTrueOrFatherTypeAndIsOnSaleTrueOrGrandFatherTypeAndIsOnSaleTrue(String type, String ftype, String gftype, Pageable page);
-    List<Product> findByTypeAndIsOnSaleTrueOrFatherTypeAndIsOnSaleTrueOrGrandFatherTypeAndIsOnSaleTrue(String type, String ftype, String gftype);
+    Page<Product> findByTypeAllLikeAndIsOnSaleTrue(String type, Pageable page);
+    List<Product> findByTypeAllLikeAndIsOnSaleTrue(String type);
 
     // 查找限时抢购商品
     Page<Product> findByIsOnSaleTrueAndIsFlashSaleTrueAndFlashSaleStopTimeAfterOrderByFlashSaleStartTimeDesc(Date now, Pageable page);

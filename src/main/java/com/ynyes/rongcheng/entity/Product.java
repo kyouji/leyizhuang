@@ -88,19 +88,14 @@ public class Product {
     // 库存递减时机 分为下订单递减、支付完成递减、发货递减等
     @Column
     private Long numberDecType;
-    
-    // 支持类型的3级分类: 父父类型->父类型->类型
-    // 商品父父类型
-    @Column
-    private String grandFatherType;
-    
-    // 商品父类型
-    @Column
-    private String fatherType;
-    
+ 
     // 商品类型
     @Column
     private String type;
+  
+    // 商品所有类型
+    @Column
+    private String typeAll;
     
     // 价格最小值
     @Column(nullable=false, scale=2)
@@ -343,22 +338,6 @@ public class Product {
     public void setNumberDecType(Long numberDecType) {
         this.numberDecType = numberDecType;
     }
-    
-    public String getGrandFatherType() {
-        return grandFatherType;
-    }
-
-    public void setGrandFatherType(String grandFatherType) {
-        this.grandFatherType = grandFatherType;
-    }
-
-    public String getFatherType() {
-        return fatherType;
-    }
-
-    public void setFatherType(String fatherType) {
-        this.fatherType = fatherType;
-    }
 
     public String getType() {
         return type;
@@ -366,6 +345,14 @@ public class Product {
 
     public void setType(String type) {
         this.type = type;
+    }
+    
+    public String getTypeAll() {
+        return typeAll;
+    }
+
+    public void setTypeAll(String typeAll) {
+        this.typeAll = typeAll;
     }
 
     public String getPriceUnit() {
@@ -480,11 +467,11 @@ public class Product {
         this.isStarProduct = isStarProduct;
     }
 
-    public Long getStarProductOrderNumber() {
+    public Long getStarProductSortNumber() {
         return starProductSortNumber;
     }
 
-    public void setStarProductOrderNumber(Long starProductSortNumber) {
+    public void setStarProductSortNumber(Long starProductSortNumber) {
         this.starProductSortNumber = starProductSortNumber;
     }
 

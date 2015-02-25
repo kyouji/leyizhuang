@@ -67,7 +67,7 @@ public class ProductService {
             pageRequest = new PageRequest(page, size, sort);
         }
         
-        productPage = repository.findByTypeAndIsOnSaleTrueOrFatherTypeAndIsOnSaleTrueOrGrandFatherTypeAndIsOnSaleTrue(type, type, type, pageRequest);
+        productPage = repository.findByTypeAllLikeAndIsOnSaleTrue("%[" + type.trim() + "]%", pageRequest);
         
         return productPage;
     }
