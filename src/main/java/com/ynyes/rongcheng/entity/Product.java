@@ -33,7 +33,7 @@ public class Product {
 	private String code;
 	
 	// 商品名称
-	@Column(nullable=false)
+	@Column
 	private String name;
 	
 	// 封面图片
@@ -42,11 +42,11 @@ public class Product {
     
     // 封面图片宽度
     @Column
-    private Long coverImageWidth;
+    private Double coverImageWidth;
     
     // 封面图片高度
     @Column
-    private Long coverImageHeight;
+    private Double coverImageHeight;
     
     // 轮播展示图片，多张图片以,隔开
     @Column
@@ -152,7 +152,7 @@ public class Product {
     private Date flashSaleStopTime;
     
     // 限时抢购价格
-    @Column(nullable=false, scale=2)
+    @Column(scale=2)
     private Double flashSalePrice;
     
     // 限时抢购剩余数量
@@ -235,19 +235,19 @@ public class Product {
         this.coverImageUri = coverImageUri;
     }
 
-    public Long getCoverImageWidth() {
+    public Double getCoverImageWidth() {
         return coverImageWidth;
     }
 
-    public void setCoverImageWidth(Long coverImageWidth) {
+    public void setCoverImageWidth(Double coverImageWidth) {
         this.coverImageWidth = coverImageWidth;
     }
 
-    public Long getCoverImageHeight() {
+    public Double getCoverImageHeight() {
         return coverImageHeight;
     }
 
-    public void setCoverImageHeight(Long coverImageHeight) {
+    public void setCoverImageHeight(Double coverImageHeight) {
         this.coverImageHeight = coverImageHeight;
     }
 

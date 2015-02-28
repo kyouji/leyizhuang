@@ -5,14 +5,14 @@
 
     <form id="fm-add" enctype="multipart/form-data" class="form-horizontal" role="form">
         <div class="col-sm-12">
-            <label class="col-sm-1 control-label no-padding-right" for="type">类型</label>
+            <label class="col-sm-1 control-label no-padding-right" for="type">*分类</label>
                 
             <div class="col-sm-3">
-                <select class="form-control" id="type" name="type">
+                <select class="form-control" id="type" name="typeId">
                     <option value="">请选择</option>
-                    <#if type_list??>
-                        <#list type_list as type>
-                        <option value="${type.name}">${type.name}</option>
+                    <#if product_type_list??>
+                        <#list product_type_list as type>
+                        <option value="${type.id}">${type.name}</option>
                         </#list>
                     </#if>
                 </select>
@@ -20,49 +20,66 @@
         </div>
     
         <div class="col-sm-12" style="margin-top: 10px;">
-            <label class="col-sm-1 control-label no-padding-right" for="name">名称</label>
+            <label class="col-sm-1 control-label no-padding-right" for="name">*名称</label>
     
             <div class="col-sm-5">
-                <input type="text" id="name" name="name" class="col-xs-10 col-sm-12" />
-            </div>
-        </div>
-            
-        <div class="col-sm-12" style="margin-top: 10px;">
-            <label class="col-sm-1 control-label no-padding-right" for="code">编号</label>
-    
-            <div class="col-sm-5">
-                <input type="text" id="code" name="code" class="col-xs-10 col-sm-12" />
+                <input type="text" id="name" name="name" class="col-sm-12" />
             </div>
         </div>
         
         <div class="col-sm-12" style="margin-top: 10px;">
-            <label class="col-sm-1 control-label" for="description">副标题</label>
-
-            <textarea class="limited col-sm-5" id="description" name="description" maxlength="100"></textarea>
+            <label class="col-sm-1 control-label no-padding-right" for="brief">*副标题</label>
+            <div class="col-sm-5">
+                <textarea class="limited col-sm-12" id="brief" name="brief" maxlength="100"></textarea>
+            </div>
+        </div>
+            
+        <div class="col-sm-12" style="margin-top: 10px;">
+            <label class="col-sm-1 control-label no-padding-right" for="code">*编号</label>
+    
+            <div class="col-sm-5">
+                <input type="text" id="code" name="code" class="col-sm-12" />
+            </div>
+        </div>
+        
+        <div class="col-sm-12" style="margin-top: 10px;">
+            <label class="col-sm-1 control-label no-padding-right" for="promotion">*促销</label>
+            <div class="col-sm-5">
+                <textarea class="limited col-sm-12" id="promotion" name="promotion" maxlength="100"></textarea>
+            </div>
+        </div>
+        
+        <div class="col-sm-12" style="margin-top: 10px;">
+            <label class="col-sm-1 control-label no-padding-right" for="configuration">*配置</label>
+            <div class="col-sm-5">
+                <textarea class="limited col-sm-12" id="configuration" name="configuration" maxlength="100"></textarea>
+            </div>
+        </div>
+        
+        <div class="col-sm-12" style="margin-top: 10px;">
+            <label class="col-sm-1 control-label no-padding-right" for="service">*服务</label>
+            <div class="col-sm-5">
+                <textarea class="limited col-sm-12" id="service" name="service" maxlength="100"></textarea>
+            </div>
         </div>
         
         <div class="col-sm-12" style="margin-top: 10px;">
             
-            <label class="col-sm-1 control-label no-padding-right" for="coverImage">封面图片</label>
+            <label class="col-sm-1 control-label no-padding-right">封面图片</label>
     
             <div class="col-sm-2">
                 <input type="file" id="coverImage" name="coverImage" />
             </div>
             
             <label class="col-sm-1 control-label no-padding-right">展示图片</label>
+            
             <div class="col-sm-2">
                 <input type="file" multiple class="show-picture" name="pictures" />
-            </div>
-            
-            <label class="col-sm-1 control-label no-padding-right" for="promotionPic">促销图片</label>
-    
-            <div class="col-sm-2">
-                <input type="file" id="promotionPic" name="promotionPic" />
             </div>
         </div>
         
         <!-- 参数块 -->
-        <div id="props-section" class="col-sm-12" style="margin-top: 10px;"> </div>
+        <div id="property-section" class="col-sm-12" style="margin-top: 10px;"> </div>
         
         <!-- 价格块 -->
         <div class="col-sm-12" style="margin-top: 10px;">
@@ -80,170 +97,182 @@
     
                 <div class="widget-body">
                     
-                        <!-- 价格 -->
-                        <div id="versionPrice" class="row">
-                        
-                            <div class="col-sm-12">
-                                <label class="col-sm-1 control-label" for="versionNames">版本名</label>
-    
-                                <input type="text" id="versionNames" name="versionNames" class="versionNames col-sm-2" />
-                                 
-                                <label class="col-sm-1 control-label" for="versionColors">颜色</label>
-    
-                                <input type="text" id="versionColors" name="versionColors" class="versionColors col-sm-1" />
+                    <!-- 价格 -->
+                    <div id="versionList" class="row">
+                        <div class="col-sm-12">
+                            <label style="margin-left:10px;" class="control-label">版本</label>
+
+                            <input type="text" name="versionNames" style="width:100px;" value=""/>
+                             
+                            <label style="margin-left:10px;" class="control-label">颜色</label>
+
+                            <input type="text" name="versionColors" style="width:100px;" value=""/>
+                            
+                            <label style="margin-left:10px;" class="control-label">容量</label>
+
+                            <input type="text" name="versionCapacities" style="width:100px;" value=""/>
+                            
+                            <label style="margin-left:10px;" class="control-label">成本价</label>
                                 
-                                <label class="col-sm-1 control-label" for="versionCapacities">容量</label>
-    
-                                <input type="text" id="versionCapacities" name="versionCapacities" class="versionCapacities col-sm-1" />
+                            <input type="text" name="versionCostPrices" style="width:100px;" value=""/>
+                            
+                            <label style="margin-left:10px;" class="control-label">*市场价</label>
                                 
-                                <label class="col-sm-1 control-label" for="versionPrices">价格</label>
-                                    
-                                <input type="text" id="versionPrices" name="versionPrices" class="price versionPrices col-sm-1" />
+                            <input type="text" class="versionMarketPrices" name="versionMarketPrices" style="width:100px;" value=""/>
+                            
+                            <label style="margin-left:10px;" class="control-label">*销售价</label>
                                 
-                                <label class="col-sm-1 control-label" for="versionNumbers">数量</label>
-                                    
-                                <input type="text" id="versionNumbers" name="versionNumbers" class="number versionNumbers col-sm-1" />
+                            <input type="text" class="versionSalePrices" name="versionSalePrices" style="width:100px;" value=""/>
+                            
+                            <label style="margin-left:10px;" class="control-label">*数量</label>
                                 
-                                <label class="col-sm-1">
-                                
+                            <input type="text" class="versionLeftNumbers" name="versionLeftNumbers" style="width:100px;" value=""/>
+                            
+                            <label style="margin-left:10px;" >
+                            
                                 <a href="javascript:void(0)" class="btn btn-grey btn-xs del-version">
                                     <i class="icon-trash icon-2x icon-only"></i>
                                 </a>
-                                </label>
-                            
+                            </label>
+                        
                         </div>
-                        <!-- 分版本定价 -->
-                    </div>
+                        
+                        
+                    </div><!-- versionPrice -->
                 </div>
             </div>
         </div> <!-- 价格块 -->
-            
-        <div class="space-4"></div> 
-        
-        <div class="col-sm-12" style="margin:10px 0">
-	        <label class="col-sm-1 control-label no-padding-right" for="propDetail">商品参数</label>
-	        <!--input type="text" id="propDetail-input" name="propDetail" hidden></input-->
-	        <!--div class="wysiwyg-editor" id="propDetail"></div-->
-			<textarea id="editor1" name="content1" style="width:91.6%;height:400px;visibility:hidden;margin-top:5px;"></textarea>
+          
+        <div class="col-sm-12" style="margin:10px;">
+	        <label class="col-sm-1 control-label no-padding-right" for="detail-editor">商品详情</label>
+	        <textarea id="detail-editor" name="detailArea" style="width:100%;height:400px;visibility:hidden;margin-top:5px;"></textarea>
         </div>
         
-        <div class="space-4"></div>
-        
-        <div class="form-group col-sm-12 no-padding-right">
-            <div class="col-sm-6">
-                <label for="description">商品简述</label>
-    
-                <textarea class="form-control limited" id="description" name="description" maxlength="100"></textarea>
-            </div>
-            
-            <div class="col-sm-6">
-                <label for="config">配置说明</label>
-    
-                <textarea class="form-control limited" id="config" name="config" maxlength="100"></textarea>
+        <div class="col-sm-12" style="margin-top:10px;">
+            <div class="checkbox">
+                <label>
+                    <input name="isStarProduct" type="checkbox" class="ace" />
+                    <span class="lbl">明星商品?</span>
+                </label>
             </div>
         </div>
         
-        <div class="space-4"></div>
-        
-        <div class="form-group col-sm-12 no-padding-right">
-            <div class="col-sm-6">
-                <label for="service">服务说明</label>
-    
-                <textarea class="form-control limited" id="service" name="service" maxlength="100"></textarea>
-            </div>
-            
-            <div class="col-sm-6">
-                <label for="deliverySpec">配送说明</label>
-    
-                <textarea class="form-control limited" id="deliverySpec" name="deliverySpec" maxlength="100"></textarea>
+        <div class="col-sm-12" style="margin-top:10px;">
+            <div class="checkbox">
+                <label>
+                    <input id="isFlashSale" name="isFlashSale" type="checkbox" class="ace" />
+                    <span class="lbl">限时抢购?</span>
+                </label>
             </div>
         </div>
         
-        <div class="space-4"></div>
-        
-        <div class="form-group">
-            <label class="col-sm-1 control-label no-padding-right" for="form-field-tags">商品标签</label>
-    
-            <div class="col-sm-5">
-                <input type="text" name="tags" id="form-field-tags" value="" placeholder="按回车录入标签 ..." />
+        <div id="flash-sale-input" class="col-sm-12" style="margin-top:10px; display:none;">
+            <label class="control-label col-sm-1 no-padding-right">*开始时间</label>
+            <div class="input-group col-sm-3">
+                <input class="form-control date-picker" id="id-start-date" name="fsStartDate" type="text" data-date-format="yyyy-mm-dd" />
+                <span class="input-group-addon">
+                    <i class="icon-calendar bigger-110"></i>
+                </span>
+                
+                <input id="id-start-time" type="text" name="fsStartTime" class="time-picker form-control" />
+                <span class="input-group-addon">
+                    <i class="icon-time bigger-110"></i>
+                </span>
             </div>
+            
+            <label class="control-label col-sm-1 no-padding-right">*结束时间</label>
+            <div class="input-group col-sm-3">
+                <input class="form-control date-picker" name="fsEndDate" id="id-end-date" type="text" data-date-format="yyyy-mm-dd" />
+                <span class="input-group-addon">
+                    <i class="icon-calendar bigger-110"></i>
+                </span>
+                
+                <input id="id-end-time" type="text" name="fsEndTime" class="time-picker form-control" />
+                <span class="input-group-addon">
+                    <i class="icon-time bigger-110"></i>
+                </span>
+            </div>
+            
+            <label class="control-label no-padding-right col-sm-1" for="flashSalePrice">*抢购价</label>
+                            
+            <input type="text" id="flashSalePrice" class="col-sm-1 control-label" name="flashSalePrice"/>
+            
+            <label class="control-label no-padding-right col-sm-1" for="flashSaleLeftNumber">*数量</label>
+                            
+            <input type="text" id="flashSaleLeftNumber" class="col-sm-1 control-label" name="flashSaleLeftNumber"/>
         </div>
         
-        <div class="space-4"></div>
-        
-        <div class="form-group hide">
-            
-            <label class="col-sm-1 control-label no-padding-right" for="shop">商家</label>
-            
-            <div class="col-sm-2">
-                <select class="form-control" id="shopName" name="shopName">
-                    <option selected value="">请选择</option>
-                </select>
-            </div> 
-            
-            <label class="col-sm-1 control-label no-padding-right" for="providerName">供货商</label>
-            
-            <div class="col-sm-2">
-                <select class="form-control" id="providerName" name="providerName">
-                    <option selected value="">请选择</option>
-                </select>
-            </div> 
-            
-            <label class="col-sm-1 control-label no-padding-right" for="storehouseName">储存仓库</label>
-            
-            <div class="col-sm-2">
-                <select class="form-control" id="storehouseName" name="storehouseName">
-                    <option selected value="">请选择</option>
-                </select>
-            </div> 
-            
-            <label class="col-sm-1 control-label no-padding-right" for="warningMinNumber">库存预警值</label>
-            
-            <div class="col-sm-2">
-                <input type="text" id="warningMinNumber" name="warningMinNumber" placeholder="0" class="col-xs-10 col-sm-10" />
-            </div> 
-            
-        </div> <!-- /form-group -->
-        
-        <div class="space-4"></div>
-        
-        <div class="form-group hide">
-            
-            <label class="col-sm-1 control-label no-padding-right" for="putInStorageDate">入库日期</label>
-    
-            <div class="col-sm-2">
-                <div class="input-group">
-                    <input class="form-control date-picker" id="putInStorageDate" name="putInStorageDate" type="text" data-date-format="yyyy-mm-dd" />
-                    <span class="input-group-addon">
-                        <i class="icon-calendar bigger-110"></i>
-                    </span>
+        <!-- 组合商品 -->
+        <div class="col-sm-12" style="margin-top: 10px;">
+            <div class="widget-box">
+                <div class="widget-header widget-header-flat">
+                    <h4 class="smaller col-sm-1">商品组合</h4>
+                    
+                    <div class="widget-toolbar">
+                        
+                        <label>
+                            <a href="javascript:void(0)" id="id-add-comb" class="btn btn-success btn-sm">增加</a> 
+                        </label>
+                    </div>
                 </div>
-            </div>
-            
-            <label class="col-sm-1 control-label no-padding-right" for="validDate">过期日期</label>
     
-            <div class="col-sm-2">
-                <div class="input-group">
-                    <input class="form-control date-picker" id="validDate" name="validDate" type="text" data-date-format="yyyy-mm-dd" />
-                    <span class="input-group-addon">
-                        <i class="icon-calendar bigger-110"></i>
-                    </span>
-                </div>
+                <div class="widget-body">
+                    <div id="combinationList" class="row">
+                        <div class="col-sm-12" style="margin-top:10px;">
+                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">商品类型</label>
+                        
+                            <select class="combi-type" style="width:140px;" >
+                                <option value="">请选择</option>
+                                <#if product_type_list??>
+                                    <#list product_type_list as type>
+                                    <option value="${type.name}">${type.name}</option>
+                                    </#list>
+                                </#if>
+                            </select>
+                            
+                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">商品名称</label>
+                        
+                            <select class="combi-name" name="combPid" style="width:140px;">
+                                <option value="">请选择</option>
+                                <#if type_list??>
+                                    <#list type_list as type>
+                                    <option value="${type.name}">${type.name}</option>
+                                    </#list>
+                                </#if>
+                            </select>
+                            
+                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">版本</label>
+                        
+                            <select class="combi-version" name="combVid" style="width:140px;">
+                                <option value="">请选择</option>
+                                <#if type_list??>
+                                    <#list type_list as type>
+                                    <option value="${type.name}">${type.name}</option>
+                                    </#list>
+                                </#if>
+                            </select>
+                            
+                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">原价</label>
+                            
+                            <input type="text" class="combi-origin-price" readonly/>
+                            
+                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">组合价</label>
+                        
+                            <input type="text" class="combi-price" name="combPrice"/>
+                            
+                            <label style="margin-left:10px;" >
+                            
+                                <a href="javascript:void(0)" class="btn btn-grey btn-xs del-combination">
+                                    <i class="icon-trash icon-2x icon-only"></i>
+                                </a>
+                            </label>
+                        </div>
+                    </div>
+                </div> <!-- widget-body -->
             </div>
-        </div> <!-- /form-group -->
+        </div> <!-- 组合商品 -->
         
-        <div class="space-4"></div>
-        
-        <div class="col-sm-12" style="margin:10px 0">
-	        <label class="col-sm-1 control-label no-padding-right" for="detail">商品详情</label>
-	        <#--input type="text" id="detail-input" name="detail" hidden></input>
-	        <div class="wysiwyg-editor" id="detail"></div-->
-	        
-	        <textarea id="editor2" name="content2" style="width:91.6%;height:400px;visibility:hidden;margin-top:5px;"></textarea>
-        </div>
-        <div class="space-4"></div>
-        
-        <div class="form-group">
+        <div class="form-group" style="margin-top:10px;">
             <div class="col-sm-10"></div>
             <a href="javascript:void(0)" id="add-submit" class="btn btn-success btn-sm col-sm-1">提交</a> 
         </div>

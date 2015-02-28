@@ -14,21 +14,12 @@
 		<link rel="stylesheet" href="/js/kindleditor/themes/default/default.css" />
 		<link rel="stylesheet" href="/css/select.css"/>
 		<link rel="stylesheet" href="/css/pagination.css"/>
+		<link rel="stylesheet" href="/assets/css/datepicker.css" />
+        <link rel="stylesheet" href="/assets/css/bootstrap-timepicker.css" />
 		
 		<script src="/js/kindleditor/kindeditor-min.js" charset="utf-8"></script>
 		<script src="/js/kindleditor/kindeditor.js" charset="utf-8"></script>
 		<script src="/js/kindleditor/lang/zh_CN.js" charset="utf-8"></script>
-		<script type="text/javascript">
-			var editor1,editor2;
-			KindEditor.ready(function(K) {
-				editor1 = K.create('textarea[name="content1"]', {
-					allowFileManager : true
-				});
-			    editor2 = K.create('textarea[name="content2"]', {
-					allowFileManager : true
-				});
-			});
-		</script>
 		
 	</head>
 
@@ -138,6 +129,8 @@
 
 		<!-- inline scripts related to this page -->
 		
+        <script src="/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+        <script src="/assets/js/date-time/bootstrap-timepicker.min.js"></script>
         <script src="/js/management/product.js"></script>
         <script src="/js/management/product_add.js"></script>
         <script src="/js/jquery.pagination.js"></script>
