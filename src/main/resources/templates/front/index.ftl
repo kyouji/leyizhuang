@@ -50,44 +50,44 @@
      <div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15" id="goods">全部商品分类</a></div>
 
 <ul id="goods_style" style="display:none">
-<li id="phone">
-<div class="mbj m1"></div>
-        
+    <li id="phone">
+    <div class="mbj m1"></div>
+            
         <div class="divshop">
 		<h4><a href="/list/2">手机产品</a></h4>
 		<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
 		</div>
-		
-		
-		
-<div class="clear"></div>
+    		
+    		
+    		
+    <div class="clear"></div>
+    
+    <div class="threeright">
+    <ul id="threeright1" style="display:none">
+    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+    </ul>
+    </div>
+    </li>
 
-<div class="threeright">
-<ul id="threeright1" style="display:none">
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-<li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-</ul>
-</div>
-</li>
-
-<li id="phone_body">
-<div class="mbj m2"></div>
-			<div class="divshop">
-			<h4><a href="/list/3">手机配件</a></h4>
-			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-			</div>
-<div class="clear"></div>
-</li>
-<li id="phone_number">
-<div class="mbj m3"></div>
-            <div class="divshop">
-			<h4><a href="/list/4">手机靓号</a></h4>
-			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-			</div>
-<div class="clear"></div>
-</li>
+    <li id="phone_body">
+    <div class="mbj m2"></div>
+    			<div class="divshop">
+    			<h4><a href="/list/3">手机配件</a></h4>
+    			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
+    			</div>
+    <div class="clear"></div>
+    </li>
+    <li id="phone_number">
+    <div class="mbj m3"></div>
+                <div class="divshop">
+    			<h4><a href="/list/4">手机靓号</a></h4>
+    			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
+    			</div>
+    <div class="clear"></div>
+    </li>
 </ul>
 
 </div>
@@ -104,7 +104,8 @@
 	</ul>
 </div>
 
-</div></nav>
+</div>
+</nav>
 
 
 
@@ -113,30 +114,49 @@
 <div class="main mt10 rc_ppfl">
 <span class="fll">品牌分类：</span>
 <ul>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="img/rc_pp.png" width="90" height="45"></a></li>
+<#if recommend_brand_list??>
+<#list recommend_brand_list as brand>
+    <#if brand_index < 9>
+        <li><a href="javascript:;"><img src="${brand.logoUri}" width="90" height="45"></a></li>
+    </#if>
+</#list>
+</#if>
 </ul>
 <a href="#">更多>></a>
 </div>
 
 <div class="clear h10"></div>
 
-<div class="banner"><a href="#" title="荣诚手机" style="background:url(img/banner.jpg) center no-repeat;"></a></div>
+<div class="banner">
+    <#if banner_ad??>
+        <a href="${banner_ad.destinationUri}" title="${banner_ad.name}" style="background:url(${banner_ad.imageUri}) center no-repeat;"></a>
+    </#if>
+</div>
 
 <div class="main mt20">
 <div class="floor"><span>1F-限时抢购</span></div>
 <div class="floor_1 mt10">
 <table>
 <tr>
-<td><div class="daojishi"><span id="clock"></span><a href="#">立即抢购</a></div><a href="#"><img src="img/rc_1fmx.jpg" width="596" height="326"></a></td>
-<td><div class="daojishi"><span id="clock1"></span><a href="#">立即抢购</a></div><a href="#"><img src="img/rc_1fmx.jpg" width="596" height="326"></a></td>
+<#if flash_sale_product_list??>
+    <#list flash_sale_product_list as product>
+        <td class="fubox">
+            <div class="daojishi">
+                <span id="clock"></span><a href="#">立即抢购</a>
+            </div>
+            <div class="fupic">
+                <a href="#"><img src="${product.coverImageUri}" width="360" height="326"></a>
+            </div>
+            <div class="fuzi">
+                <a href="#">
+                    <h2>${product.name}</h2>
+                    <h3>${product.brief}</h3>
+                    <h4>${product.flashSalePrice?string("#.##")}元<span>原价：${product.versionList[0].salePrice?string("#.##")}元</span></h4>
+                </a>
+            </div>
+        </td>
+    </#list>
+</#if>
 </tr>
 </table>
 </div>
@@ -148,8 +168,24 @@
 <div class="floor_1 mt10">
 <table>
 <tr>
-<td><a href="#"><img src="img/rc_1fmx.jpg" width="596" height="326"></a></td>
-<td><a href="#"><img src="img/rc_1fmx.jpg" width="596" height="326"></a></td>
+<#if star_product_list??>
+    <#list star_product_list as product>
+        <#if product_index < 2>
+            <td class="fubox">
+                <div class="fupic">
+                    <a href="#"><img src="${product.coverImageUri}" width="360" height="326"></a>
+                </div>
+                <div class="fuzi">
+                    <a href="#">
+                        <h2>${product.name}</h2>
+                        <h3>${product.brief}</h3>
+                        <h4>${product.versionList[0].salePrice?string("#.##")}元</h4>
+                    </a>
+                </div>
+            </td>
+        </#if>
+    </#list>
+</#if>
 </tr>
 </table>
 </div>
@@ -157,10 +193,18 @@
 <div class="floor_1_1">
 <table>
 <tr>
-<td><a href="#"><p>HTC One(M8)<br />16G ROM+2G RAM<br />抢购价：￥3699.00</p><img src="img/rc_1fsj.jpg" width="296" height="296"></a></td>
-<td><a href="#"><p>HTC One(M8)<br />16G ROM+2G RAM<br />抢购价：￥3699.00</p><img src="img/rc_1fsj.jpg" width="296" height="296"></a></td>
-<td><a href="#"><p>HTC One(M8)<br />16G ROM+2G RAM<br />抢购价：￥3699.00</p><img src="img/rc_1fsj.jpg" width="296" height="296"></a></td>
-<td><a href="#"><p>HTC One(M8)<br />16G ROM+2G RAM<br />抢购价：￥3699.00</p><img src="img/rc_1fsj.jpg" width="296" height="296"></a></td>
+<#if star_product_list??>
+    <#list star_product_list as product>
+        <#if product_index gt 1 && product_index lt 6 >
+            <td>
+                <a href="#">
+                    <p>${product.name}<br />${product.brief}<br />抢购价：￥${product.versionList[0].salePrice?string("#.##")}</p>
+                    <img src="${product.coverImageUri}" width="296" height="296">
+                </a>
+            </td>
+        </#if>
+    </#list>
+</#if>
 </tr>
 </table>
 </div>
