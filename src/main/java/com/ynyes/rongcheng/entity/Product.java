@@ -142,13 +142,13 @@ public class Product {
     // 限时抢购开始时间
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date flashSaleStartTime;
     
     // 限时抢购结束时间
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date flashSaleStopTime;
     
     // 限时抢购价格

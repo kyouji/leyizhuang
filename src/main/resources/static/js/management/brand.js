@@ -21,6 +21,11 @@ jQuery(function($) {
 	    $(".tr-check").prop("checked", false);
 	});
 	
+	// 点击关联类型
+	$(".multiSelectProp").click(function(){
+        $(this).toggleClass("spon");
+    });
+	
 	// 删除选中
 	$("#id-delete").click(function(){
 	    var items = $(".tr-check:checked");
@@ -48,7 +53,7 @@ jQuery(function($) {
 	});
 	
 	// 每页数量
-	var pageSize = 2;
+	var pageSize = 15;
 	
 	//分页
 	$("#id-pagination").pagination($("#id-total-num").val(), {
@@ -84,6 +89,52 @@ jQuery(function($) {
     }).on('change', function(){
     });
 
+    $("#add-submit").click(function(){
+        // 填充多选参数
+        var multiProp = $("a.multiSelectProp.spon");
+        multiProp.siblings("input").val("");
+        for (i=0; i<multiProp.length; i++)
+        {
+            var inputValue = multiProp.eq(i).siblings("input").val();
+            var text = multiProp.eq(i).html();
+            
+            multiProp.eq(i).siblings("input").val(inputValue + text + ",");
+        }
+        
+        var formData = new FormData($('#fm-add')[0]);
+        
+        $.ajax({
+            url : '/admin/brand/save',
+            type : 'POST',
+            data : formData,
+            async : false,
+            cache : false,
+            contentType : false,
+            processData : false,
+            success : function(res) {
+                if (0 == res.code) {
+                    alert("添加商品成功");
+                    location.reload();
+                } else {
+                    alert(res.message);
+                }
+            }
+        }); // ajax
+       
+//        $.ajax({
+//            type:"POST",
+//            url:"/admin/brand/save",
+//            data:subDate,
+//            success:function(data){
+//                if(data.code == 0){
+//                    alert("品牌添加成功！");
+//                    location.reload();
+//                }else{
+//                    alert(data.message);
+//                }
+//            }
+//        });
+    });
 });
 	
 // 删除参数

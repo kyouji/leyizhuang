@@ -28,4 +28,6 @@ public interface ProductTypeRepo extends
     Page<ProductType> findByParent(String parent, Pageable page);
     List<ProductType> findByParent(String parent);
     
+    // 通过名称查找
+    ProductType findByName(String name);
 }

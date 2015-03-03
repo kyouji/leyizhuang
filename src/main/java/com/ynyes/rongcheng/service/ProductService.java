@@ -1,5 +1,7 @@
 package com.ynyes.rongcheng.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,18 @@ import com.ynyes.rongcheng.util.ImageUtil;
 public class ProductService {
     @Autowired
     ProductRepo repository;
+    
+    @Autowired
+    ProductTypeService productTypeService;
+    
+    @Autowired
+    ProductCombinationService productCombinationService;
+    
+    @Autowired
+    ProductVersionService productVersionService;
+    
+    @Autowired
+    ProductParameterService productParameterService;
     
     /**
      * 根据类型获取商品，并进行分页
@@ -338,32 +352,89 @@ public class ProductService {
         // 设置类型
         if (null != type)
         {
+            product.setType(type.getName());
             
+            String typeAll = "";
+            
+            while (null != type)
+            {
+                typeAll = "[" + type.getName() + "]," + typeAll;
+                
+                type = productTypeService.findByName(type.getParent());
+            }
+            
+            product.setTypeAll(typeAll);
         }
         
         // 设置商品组合
         if (null != combiList)
         {
-            
+            product.setCombinationList(combiList);
+            productCombinationService.save(combiList);
         }
         
         // 设置版本
-        if (null != versionList)
+        if (null != versionList && versionList.size() > 0)
         {
+            product.setVersionList(versionList);
+            productVersionService.save(versionList);
             
+            Double priceMinimum = versionList.get(0).getSalePrice();
+            
+            for (ProductVersion ver : versionList)
+            {
+                if (ver.getSalePrice() < priceMinimum)
+                {
+                    priceMinimum = ver.getSalePrice();
+                }
+            }
+            
+            product.setPriceMinimum(priceMinimum);
         }
         
         // 设置参数
         if (null != paramList)
         {
-            
+            product.setParamList(paramList);
+            productParameterService.save(paramList);
         }
         
         // 设置限时抢购时间
-        if (product.getIsFlashSale() && null != flashStartTime && null != flashEndTime)
+        if (null != product.getIsFlashSale() && product.getIsFlashSale() 
+                && null != flashStartTime && null != flashEndTime)
         {
-            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                Date date = sdf.parse(flashStartTime);
+                product.setFlashSaleStartTime(date);
+                
+                date = sdf.parse(flashEndTime);
+                product.setFlashSaleStopTime(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         }
+        else
+        {
+            product.setIsFlashSale(false);
+        }
+        
+        if (null == product.getIsStarProduct())
+        {
+            product.setIsStarProduct(false);
+        }
+        
+        product.setIsOnSale(true);
+        product.setCreateTime(new Date());
+        
+        product.setMondayVisitNumber(0L);
+        product.setTuesdayVisitNumber(0L);
+        product.setWednesdayVisitNumber(0L);
+        product.setThursdayVisitNumber(0L);
+        product.setFridayVisitNumber(0L);
+        product.setSaturdayVisitNumber(0L);
+        product.setSundayVisitNumber(0L);
         
         return repository.save(product);
     }

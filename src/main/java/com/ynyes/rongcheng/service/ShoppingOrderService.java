@@ -490,4 +490,30 @@ public class ShoppingOrderService {
         
         return map;
     }
+    
+    /**
+     * 查找订单
+     * 
+     * @param page 页号
+     * @param size 页大小
+     * @param direction 排序方向 ASC:升序 DESC:降序
+     * @param property 排序字段名
+     * @return 用户分页
+     */
+    public Page<ShoppingOrder> findAll(int page, int size, String direction, String property)
+    {
+        PageRequest pageRequest = null;
+        
+        if (null != direction && null != property)
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        else
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        
+        return repository.findAll(pageRequest);
+    }
 }

@@ -23,6 +23,7 @@ import com.ynyes.rongcheng.entity.ProductParameter;
 import com.ynyes.rongcheng.entity.ProductType;
 import com.ynyes.rongcheng.entity.ProductTypeParameter;
 import com.ynyes.rongcheng.entity.ProductVersion;
+import com.ynyes.rongcheng.service.BrandService;
 import com.ynyes.rongcheng.service.ParameterService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductTypeParameterService;
@@ -51,6 +52,9 @@ public class ManagerProductController {
     
     @Autowired
     ParameterService parameterService;
+    
+    @Autowired
+    BrandService brandService;
     
     /**
      * 商品主界面
@@ -92,6 +96,9 @@ public class ManagerProductController {
             if (null != ptype)
             {
                 tpList = ptype.getTypeParamList();
+                
+
+                map.addAttribute("brand_list", brandService.findByType(ptype.getName()));
             }
         }
         
@@ -357,8 +364,8 @@ public class ManagerProductController {
                             productCombiList, 
                             productVersionList, 
                             productParamList, 
-                            fsStartDate+fsStartTime, 
-                            fsEndDate+fsEndTime))
+                            fsStartDate + " " + fsStartTime, 
+                            fsEndDate + " " + fsEndTime))
         {
             res.put("message", "保存商品出错");
             return res;

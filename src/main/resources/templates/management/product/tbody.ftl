@@ -3,7 +3,7 @@
 <tr>
     <td class="center">
         <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-            <a class="blue azoom" href="javascript:void(0)">
+            <a class="blue azoom" href="javascript:;">
                 <i class="icon-zoom-in bigger-130"></i>
             </a>
         </div>
@@ -25,22 +25,6 @@
     </td>
     <td class="center">
         ${product.name}
-    </td>
-    <td class="center">
-        <#if paramList??>
-        ${product.paramList}
-        </#if>
-    </td>
-    <td class="center">
-        <input type="checkbox" onchange="change(${product.id},this)" class="" value="onsaleCheck" <#if product.isOnSale?? && product.isOnSale==true>checked</#if>/>
-    </td>
-    <td class="center">
-        <#if product.priceMinimum??>
-        ${product.priceMinimum}
-        </#if>
-    </td>
-    <td class="center">
-        <span><#if product.priceUnit??>${product.priceUnit}<#else>￥</#if></span>${product.flashSalePrice}
     </td>
     <td class="center">
         <a href="#" class="table-a<#if product.isStarProduct?? && product.isStarProduct> ton</#if>">明星产品</a> |

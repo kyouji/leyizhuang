@@ -11,7 +11,7 @@
             <div class="addinput-form">
 	            <label class="col-sm-1 control-label no-padding-right" for="name"> 类型:</label>
 	            <div class="col-sm-5">
-	                <input type="text" id="type" name="type" class="col-xs-10 col-sm-12"  autofocus="autofocus" maxlength="20"/>
+	                <input type="text" id="type" name="type" class="col-xs-10 col-sm-12"  autofocus="autofocus" maxlength="100"/>
 	            </div>
 	            <span style="font-size:16px">*请输入参数类型</sapn>
 	        </div>
@@ -21,7 +21,7 @@
 	        <div class="addinput-form">
 	            <label class="col-sm-1 control-label no-padding-right" for="name"> 名称:</label>
 	            <div class="col-sm-5">
-	                <input type="text" id="name" class="col-xs-10 col-sm-12"  autofocus="autofocus" maxlength="20"/>
+	                <input type="text" id="name" class="col-xs-10 col-sm-12"  autofocus="autofocus" maxlength="100"/>
 	            </div>
 	            <span style="font-size:16px">*请输入参数名称</sapn>
 	        </div>

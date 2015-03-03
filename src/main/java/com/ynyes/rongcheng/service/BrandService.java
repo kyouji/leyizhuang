@@ -2,6 +2,7 @@ package com.ynyes.rongcheng.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,9 +11,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ynyes.rongcheng.entity.Brand;
 import com.ynyes.rongcheng.repository.BrandRepo;
+import com.ynyes.rongcheng.util.ImageUtil;
 
 /**
  * 品牌服务类
@@ -58,7 +61,7 @@ public class BrandService {
             return null;
         }
         
-        brandList = repository.findByTypeContaining(type);
+        brandList = repository.findByTypeContaining("[" + type + "]");
         
         return brandList;
     }
@@ -96,7 +99,7 @@ public class BrandService {
             pageRequest = new PageRequest(page, size, sort);
         }
         
-        brandPage = repository.findByTypeContaining(type, pageRequest);
+        brandPage = repository.findByTypeContaining("[" + type + "]", pageRequest);
         
         return brandPage;
     }
@@ -241,18 +244,56 @@ public class BrandService {
      * 保存品牌
      * 
      * @param brand 品牌
+     * @Param logoPic 品牌图片
      * @return 保存的品牌，错误时返回NULL
      */
-    public Brand save(Brand brand)
+    public Brand save(Brand brand, MultipartFile logoPic)
     {
         if (null == brand)
         {
             return null;
         }
         
+        String typeStr = brand.getType();
+        
+        if (null != typeStr)
+        {
+            String newTypeStr = "";
+            String[] typeSplit = typeStr.split(",");
+            
+            for (String type : typeSplit)
+            {
+                if (null != type && !"".equals(type))
+                {
+                    newTypeStr += "[" + type + "],";
+                }
+            }
+            brand.setType(newTypeStr);
+        }
+        
+        if (null != logoPic)
+        {
+            Map<String, String> uploadRes = ImageUtil.upload(logoPic);
+            
+            // 成功
+            if ("0".equals(uploadRes.get("code"))) {
+                // 保存uri
+                brand.setLogoUri(uploadRes.get("message"));
+            } 
+            else // 失败
+            {
+                return null;
+            }
+        }
+        
         if (null == brand.getId())
         {
             brand.setCreateTime(new Date());
+        }
+        
+        if (null == brand.getIsRecommend())
+        {
+            brand.setIsRecommend(false);
         }
         
         return repository.save(brand);

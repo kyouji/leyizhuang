@@ -648,14 +648,58 @@ public class UserService {
         }
         return repository.save(user);
     }
+    
     /**
-     * id
+     * 查找用户
      * 
-     * @param user 要保存的用户
-     * @return 保存的用户
+     * @param id 用户ID
+     * @return 找到的用户
      */
-    public User findById(Long id){
-        return repository.findById(id);
+    public User findOne(Long id){
+        return repository.findOne(id);
     }
     
+    /**
+     * 查找用户
+     * 
+     * @param page 页号
+     * @param size 页大小
+     * @param direction 排序方向 ASC:升序 DESC:降序
+     * @param property 排序字段名
+     * @return 用户分页
+     */
+    public Page<User> findAll(int page, int size, String direction, String property)
+    {
+        PageRequest pageRequest = null;
+        
+        if (null != direction && null != property)
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        else
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        
+        return repository.findAll(pageRequest);
+    }
+    
+    /**
+     * 删除广告
+     * 
+     * @param user 用户
+     */
+    public void delete(User user){
+        repository.delete(user); 
+    }
+    
+    /**
+     * 删除用户
+     * 
+     * @param id 用户ID
+     */
+    public void delete(Long id){
+        repository.delete(id);
+    }
 }

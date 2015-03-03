@@ -219,7 +219,7 @@ public class UserController {
     @ResponseBody
     public String saveAddress(ShippingAddress address,HttpServletRequest request){
         User user=(User) request.getSession().getAttribute("user");
-        user=UserService.findById(user.getId());
+        user=UserService.findOne(user.getId());
        ShippingAddress shippingAddress =shippingAddressService.save(address);
        user.getShippingAddressList().add(address);
        UserService.save(user);
