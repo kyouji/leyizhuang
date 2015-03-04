@@ -47,6 +47,20 @@ public interface ProductRepo extends
     Page<Product> findByTypeAllLikeAndIsOnSaleTrue(String type, Pageable page);
     List<Product> findByTypeAllLikeAndIsOnSaleTrue(String type);
     
+
+    // 这个函数用于按类型、品牌、各个后台设定的可检索属性值进行查找，并能根据销量、价格、上架时间等进行排序，还能进行分页，十分牛逼
+    Page<Product> findByTypeAllLikeAndBrandNameAndParamValueAllLikeAndIsOnSaleTrue(String type, 
+                                                               String brandName, 
+                                                               String paramValue,
+                                                               Pageable page);
+    
+    Page<Product> findByTypeAllLikeAndBrandNameAndParamValueAllLikeAndPriceMinimumBetweenAndIsOnSaleTrue(String type, 
+                                                                String brandName, 
+                                                                String paramValue,
+                                                                Double priceLow,
+                                                                Double priceHigh,
+                                                                Pageable page);
+    
     // 通过类型查找商品ID
     @Query("select p.id from Product p where p.typeAll like ?1 and p.isOnSale = 1")
     List<Long> findIdByTypeAllLikeAndIsOnSaleTrue(String type);

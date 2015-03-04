@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.ynyes.rongcheng.entity.ProductType;
 import com.ynyes.rongcheng.service.BrandService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductTypeService;
+import com.ynyes.rongcheng.util.ClientConstant;
 import com.ynyes.rongcheng.util.StringUtils;
 
 /**
@@ -31,7 +33,7 @@ import com.ynyes.rongcheng.util.StringUtils;
 @Controller
 public class TypelistController {
     @Autowired
-    private ProductService productservice;
+    private ProductService productService;
     
     @Autowired
     private ProductTypeService productTypeService;
@@ -40,7 +42,7 @@ public class TypelistController {
     private BrandService brandService;
     /**
      * 
-     * @param queryStr 组成：typeID-brandIndex-[paramIndex]-[销量排序标志]-[价格排序标志]-[上架时间排序标志]-[页号]_[价格低值]-[价格高值]
+     * @param queryStr 组成：typeID-brandIndex-[paramIndex]-[排序字段]-[销量排序标志]-[价格排序标志]-[上架时间排序标志]-[页号]_[价格低值]-[价格高值]
      * @param page
      * @param size
      * @param direction
@@ -130,28 +132,98 @@ public class TypelistController {
             
             if (null != index && index.intValue() > 0)
             {
-                brandName = brandList.get(index).getName();
+                brandName = brandList.get(index-1).getName();
             }
         }
+      
+        List<String> paramValueList = new ArrayList<String>();
+        
+        int paramListLength = 0;
         
         if (null != paramList && paramList.size() > 0)
         {
-            if (queryArray.length > paramList.size() + 1)
+            paramListLength = paramList.size();
+        }
+        
+        if (paramListLength > 0)
+        {
+            if (queryArray.length > paramListLength + 1)
             {
-                for (int i=0; i<paramList.size(); i++)
+                // 遍历所有参数，i是参数的位置号
+                for (int i=0; i<paramListLength; i++)
                 {
+                    // index是参数值的位置号
                     Integer index = Integer.parseInt(queryArray[2+i]);
                     if (null != index && index.intValue() > 0)
                     {
+                        String[] values = paramList.get(i).getValueList().split(",");
                         
+                        if (null != values && values.length > index)
+                        {
+                            paramValueList.add(values[index-1]);
+                        }
                     }
                 }
             }
         }
         
-        //typeID-brandIndex-[paramIndex]-[销量排序标志]-[价格排序标志]-[上架时间排序标志]-[页号]_[价格低值]-[价格高值]
+        // 0:按销量排序 1:价格排序 2:上架时间排序
+        Integer sortType = null;
         
+        if (queryArray.length > paramListLength + 2)
+        {
+            sortType = Integer.parseInt(queryArray[paramListLength + 2]);
+        }
         
+        String direction = "desc";
+        String property = "soldNumber";
+        
+        // 只有价格排序会区分升降序
+        if (null != sortType)
+        {
+            if (sortType.equals(0))
+            {
+                
+            }
+            else if (sortType.equals(1))
+            {
+                if (queryArray.length > paramListLength + 4)
+                {
+                    Integer dirFlag = Integer.parseInt(queryArray[paramListLength + 4]);
+                    
+                    // 1:升序  0:降序
+                    if (null != dirFlag && dirFlag.equals(1))
+                    {
+                        direction = "asc";
+                    }
+                }
+                
+                property = "priceMinimum";
+            }
+            else
+            {
+                property = "onSaleTime";
+            }
+        }
+        
+        int pageIndex = 0;
+        
+        if (queryArray.length > paramListLength + 6)
+        {
+            pageIndex = Integer.parseInt(queryArray[paramListLength + 6]);
+        }
+        
+        Page<Product> productPage = productService.findByTypeAndBrandNameAndPriceAndParameters(pType.getName(), 
+                                                            brandName, priceLow, priceHigh, 
+                                                            pageIndex, ClientConstant.pageSize, 
+                                                            direction, property, 
+                                                            paramValueList.toArray(new String[0]));
+        
+        if (null != productPage)
+        {
+            map.addAttribute("count", productPage.getTotalElements());
+            map.addAttribute("product_list", productPage.getContent());
+        }
         
         // 商品类型逐级分类
         map.addAttribute("type_list", productTypeService.findPredecessors(pType));
@@ -224,7 +296,7 @@ public class TypelistController {
           }
             
                 //根据类型获取所有子类
-                Page<Product> pages=productservice.findByType("2", page, size, direction, property);
+                Page<Product> pages=productService.findByType("2", page, size, direction, property);
                 model.addAttribute("product", pages.getContent());
                 model.addAttribute("count", pages.getTotalElements());
            
@@ -253,7 +325,7 @@ public class TypelistController {
         String property="sortNumber";//字段
         
         //根据类型获取所有子类
-        Page<Product> pages=productservice.findByType("3", page, size, direction, property);
+        Page<Product> pages=productService.findByType("3", page, size, direction, property);
         model.addAttribute("product", pages.getContent());
         model.addAttribute("count", pages.getTotalElements());
         

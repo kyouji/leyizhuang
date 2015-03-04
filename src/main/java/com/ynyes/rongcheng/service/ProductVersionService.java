@@ -1,6 +1,5 @@
 package com.ynyes.rongcheng.service;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,15 +40,15 @@ public class ProductVersionService {
      * @param limit 商品条数
      * @return
      */
-    public List<BigInteger> findProductIdOrderBySoldNumberDesc(List<Long> pidList, int limit)
-    {
-        List<BigInteger> list = repository.findProductIdOrderBySoldNumberDesc(pidList);
-        
-        if (list.size() > limit)
-        {
-            list = list.subList(0, limit - 1);
-        }
-        
-        return list;
-    }
+//    public List<BigInteger> findProductIdOrderBySoldNumberDesc(List<Long> pidList, int limit)
+//    {
+//        List<BigInteger> list = repository.findProductIdOrderBySoldNumberDesc(pidList);
+//        
+//        if (list.size() > limit)
+//        {
+//            list = list.subList(0, limit - 1);
+//        }
+//        
+//        return list;
+//    }
 }

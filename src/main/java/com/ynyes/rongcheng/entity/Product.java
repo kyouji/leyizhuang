@@ -105,9 +105,9 @@ public class Product {
     @Column(nullable=false, scale=2)
     private Double priceMinimum;
     
-    // 销售数量最大值
+    // 各版本销售数量总和
     @Column
-    private Long soldNumberMaximum;
+    private Long soldNumber;
     
     // 商品价格单位
     @Column
@@ -290,13 +290,13 @@ public class Product {
     public void setPriceMinimum(Double priceMinimum) {
         this.priceMinimum = priceMinimum;
     }
-    
-    public Long getSoldNumberMaximum() {
-        return soldNumberMaximum;
+
+    public Long getSoldNumber() {
+        return soldNumber;
     }
 
-    public void setSoldNumberMaximum(Long soldNumberMaximum) {
-        this.soldNumberMaximum = soldNumberMaximum;
+    public void setSoldNumber(Long soldNumber) {
+        this.soldNumber = soldNumber;
     }
 
     public String getPromotion() {
