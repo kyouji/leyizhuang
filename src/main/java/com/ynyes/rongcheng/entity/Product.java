@@ -97,9 +97,17 @@ public class Product {
     @Column
     private String typeAll;
     
+    // 参数值，用于搜索
+    @Column
+    private String paramValueAll;
+    
     // 价格最小值
     @Column(nullable=false, scale=2)
     private Double priceMinimum;
+    
+    // 销售数量最大值
+    @Column
+    private Long soldNumberMaximum;
     
     // 商品价格单位
     @Column
@@ -283,6 +291,14 @@ public class Product {
         this.priceMinimum = priceMinimum;
     }
     
+    public Long getSoldNumberMaximum() {
+        return soldNumberMaximum;
+    }
+
+    public void setSoldNumberMaximum(Long soldNumberMaximum) {
+        this.soldNumberMaximum = soldNumberMaximum;
+    }
+
     public String getPromotion() {
         return promotion;
     }
@@ -353,6 +369,14 @@ public class Product {
 
     public void setTypeAll(String typeAll) {
         this.typeAll = typeAll;
+    }
+
+    public String getParamValueAll() {
+        return paramValueAll;
+    }
+
+    public void setParamValueAll(String paramValueAll) {
+        this.paramValueAll = paramValueAll;
     }
 
     public String getPriceUnit() {

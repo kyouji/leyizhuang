@@ -259,4 +259,29 @@ public class ProductTypeService {
         }
         return type;
     }
+    
+    /**
+     * 查找一个类型的所有上级类型，按顺序排列
+     * 
+     * @param type 商品类型
+     * @return 逐级排列的商品类型
+     */
+    public List<ProductType> findPredecessors(ProductType type)
+    {
+        List<ProductType> preList = new ArrayList<ProductType>();
+        
+        preList.add(type);
+        
+        while (null != type && null != type.getParent() && !"".equals(type.getParent()))
+        {
+            type = repository.findByName(type.getParent());
+            
+            if (null != type)
+            {
+                preList.add(0, type);
+            }
+        }
+        
+        return preList;
+    }
 }

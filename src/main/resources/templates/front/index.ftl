@@ -41,10 +41,6 @@
 </div>
 
 
-
-
-
-
 <nav>
    <div class="main">
      <div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15" id="goods">全部商品分类</a></div>
@@ -53,7 +49,7 @@
     <#if root_type_list??>
         <#list root_type_list as type>
             <li id="phone">
-                <div class="mbj m1"></div>
+                <div class="mbj m${type_index+1}"></div>
                         
                     <div class="divshop">
                     <h4><a href="/list/${type.id}">${type.name}</a></h4>
@@ -73,6 +69,7 @@
             </li>
         </#list>
     </#if>
+    <#--
     <li id="phone">
         <div class="mbj m1"></div>
                 
@@ -110,6 +107,7 @@
 			</div>
         <div class="clear"></div>
     </li>
+    -->
 </ul>
 
 </div>
@@ -250,9 +248,11 @@
         
         <div class="fll floor_2_3">
             <ul>
-                <#list phone_ad_list as ad>
-                    <li><a href="${ad.destinationUri}"><img src="${ad.imageUri}" width="346" height="230"></a></li>
-                </#list>
+                <#if phone_ad_list??>
+                    <#list phone_ad_list as ad>
+                        <li><a href="${ad.destinationUri}"><img src="${ad.imageUri}" width="346" height="230"></a></li>
+                    </#list>
+                </#if>
             </ul>
         </div>
         <div class="flr floor_2_4">
@@ -284,9 +284,11 @@
         
         <div class="fll floor_2_3">
             <ul>
-                <#list pad_ad_list as ad>
-                    <li><a href="${ad.destinationUri}"><img src="${ad.imageUri}" width="346" height="230"></a></li>
-                </#list>
+                <#if pad_ad_list??>
+                    <#list pad_ad_list as ad>
+                        <li><a href="${ad.destinationUri}"><img src="${ad.imageUri}" width="346" height="230"></a></li>
+                    </#list>
+                </#if>
             </ul>
         </div>
         <div class="flr floor_2_4">

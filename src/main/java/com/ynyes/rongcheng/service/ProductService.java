@@ -411,6 +411,7 @@ public class ProductService {
             }
             
             product.setPriceMinimum(priceMinimum);
+            product.setSoldNumberMaximum(0L);
         }
         
         // 设置参数
@@ -418,6 +419,11 @@ public class ProductService {
         {
             product.setParamList(paramList);
             productParameterService.save(paramList);
+            
+            for (ProductParameter pp : paramList)
+            {
+                
+            }
         }
         
         // 设置限时抢购时间
