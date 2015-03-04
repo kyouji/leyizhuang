@@ -20,8 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class ImageUtil {
     
-    //static public final String ImageRoot = "src/main/resources/static";
-    static public final String ImageRoot = "/root";
+    static public final String ImageRoot = "src/main/resources/static";
+    //static public final String ImageRoot = "/root";
 
     /**
      * 上传图片，成功后返回uriggs

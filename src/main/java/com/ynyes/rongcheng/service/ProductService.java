@@ -420,10 +420,16 @@ public class ProductService {
             product.setParamList(paramList);
             productParameterService.save(paramList);
             
+            String paramAll = "";
+            
             for (ProductParameter pp : paramList)
             {
-                
+                paramAll += "[";
+                paramAll += pp.getValue();
+                paramAll += "];";
             }
+            
+            product.setParamValueAll(paramAll);
         }
         
         // 设置限时抢购时间

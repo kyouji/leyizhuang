@@ -608,12 +608,10 @@ function change_city(name){
      $("#threeright1").css({"display":"block"});
  })
     
-
  $("#threeright1").mouseover(function(){
      $("#threeright1").css({"display":"block"});
  })
    
-
 $("#phone").mouseout(function(){
      $("#threeright1").css({"display":"none"});
  })
@@ -622,20 +620,16 @@ $("#threeright1").mouseout(function(){
      $("#threeright1").css({"display":"none"});
  })
 
-
-
 //经过手机配件
 
 $("#phone_body").mouseover(function(){
      $("#threeright1").css({"display":"block"});
  })
     
-
  $("#threeright1").mouseover(function(){
      $("#threeright1").css({"display":"block"});
  })
    
-
 $("#phone_body").mouseout(function(){
      $("#threeright1").css({"display":"none"});
  })
@@ -643,8 +637,6 @@ $("#phone_body").mouseout(function(){
 $("#threeright1").mouseout(function(){
      $("#threeright1").css({"display":"none"});
  })
-
-
 
 //经过手机靓号
 
@@ -665,29 +657,6 @@ $("#phone_number").mouseout(function(){
 $("#threeright1").mouseout(function(){
      $("#threeright1").css({"display":"none"});
  })
-
-
 </script>
-
-
-
-
-
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

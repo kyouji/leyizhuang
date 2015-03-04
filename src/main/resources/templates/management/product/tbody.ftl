@@ -21,7 +21,7 @@
         ${product.id}
     </td>
     <td class="center">
-        ${product.code}
+        <#if product.code??>${product.code}</#if>
     </td>
     <td class="center">
         ${product.name}

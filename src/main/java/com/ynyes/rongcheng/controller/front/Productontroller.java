@@ -22,6 +22,7 @@ import com.ynyes.rongcheng.service.ParameterService;
 import com.ynyes.rongcheng.service.ProductCommentService;
 import com.ynyes.rongcheng.service.ProductConsultService;
 import com.ynyes.rongcheng.service.ProductService;
+import com.ynyes.rongcheng.service.ProductTypeService;
 import com.ynyes.rongcheng.service.UserService;
 import com.ynyes.rongcheng.util.StringUtils;
 
@@ -46,6 +47,8 @@ public class Productontroller {
     private ProductCommentService productCommentService;//商品评论相关
     @Autowired
     private ProductConsultService productConsultService;//商品资讯相关
+    @Autowired
+    private ProductTypeService productTypeService;//商品类型相关
     private  String flag;
     /**
      * 
@@ -81,10 +84,13 @@ public class Productontroller {
         List<Parameter> parameters= parameterService.findByType(type);
         String list=product.getShowPictures();
         String[] sList = list.split(",");
+        
+        modelAndView.addObject("qgPictures",productservice.findStar(0, 10, "desc","sortNumber").getContent());//抢购
         modelAndView.addObject("ShowPictures",sList);//轮播展示图片
         modelAndView.addObject("product",product);//商品详情
         modelAndView.addObject("parameters",parameters);//商品属性
         modelAndView.addObject("productConsult",productConsult.getContent());//商品评论
+        modelAndView.addObject("productComm",productConsultService.findByPidAndVid(product.getId(),vid, 0, 10, "desc","consultTime" ).getContent());//商品资讯
         modelAndView.addObject("productcount",productConsult.getTotalElements());//商品评论数量
 
         modelAndView.setViewName("/front/type_list_content");
@@ -131,13 +137,13 @@ public class Productontroller {
           String username=user.getUsername();
           if(StringUtils.isNotEmpty(username)){
               Map<String,Object> map=userService.addCollectedProductId(username, productid);
-          if(map.get("code").equals(0)){
-              flag="success";
-              return flag;
-          }else if(map.get("message").equals("已收藏过该商品")){
-              flag="flok";
-              return flag;
-          }
+              if(map.get("code").equals(0)){
+                  flag="success";
+                  return flag;
+              }else if(map.get("message").equals("已收藏过该商品")){
+                  flag="flok";
+                  return flag;
+              }
           }
           flag="flase";
       }
@@ -183,6 +189,46 @@ public class Productontroller {
        }
     return flag;
      }
+    /**
+     * 
+     * 添加评论<BR>
+     * 方法名：saveConnect<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年2月7日-下午5:15:45 <BR>
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>String username,
+                                   Long starCount,
+                                   String tags,
+                                   String content,
+                                   Long productId,
+                                   Long productVersionId
+     * @since  1.0.0
+     */
+    @RequestMapping(value="/saveConn",method=RequestMethod.POST)
+    @ResponseBody
+    public String saveConnect(HttpServletRequest request,String verify,Long starCount,String type,String content,Long productId,Long productVersionId){
+        User user= (User) request.getSession().getAttribute("user");
+        String msg = (String)request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
+        if(user!=null){ 
+            if(StringUtils.isNotEmpty(user.getUsername())){
+                if(verify.equalsIgnoreCase(msg)){
+                    if(productVersionId==null || starCount==null){
+                        productVersionId=(long) 0;
+                        starCount=(long) 0;
+                        productConsultService.add(user.getUsername(), type, content, productId, productVersionId);
+                        flag="success";
+                        return flag;
+                    }
+                }else{
+                    flag="vfalse";//验证码失败
+                    return flag;
+                }
+            }
+        }
+        return flag;
+    }
     //grt/set
     public String getFlag() {
         return flag;
