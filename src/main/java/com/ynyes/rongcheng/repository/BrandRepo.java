@@ -30,4 +30,7 @@ public interface BrandRepo extends
     
     // 通过名称查找
     Brand findByName(String name);
+    
+    // 查找推荐品牌
+    Page<Brand> findByIsRecommendTrue(Pageable page);
 }

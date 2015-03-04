@@ -20,6 +20,6 @@ public interface AdvertisementRepo extends
 		JpaSpecificationExecutor<Advertisement> 
 {
     // 通过类型查找
-    Page<Advertisement> findByTypeAndIsShowTrue(String type, Pageable page);
-    List<Advertisement> findByTypeAndIsShowTrue(String type);
+    Page<Advertisement> findByTypeContainingAndIsShowTrue(String type, Pageable page);
+    List<Advertisement> findByTypeContainingAndIsShowTrue(String type);
 }

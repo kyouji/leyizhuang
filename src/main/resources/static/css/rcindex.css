@@ -10,7 +10,7 @@ header{ height:30px; background:#f4f3f3;  width:100%; margin:0 auto; min-width:1
 input:focus {outline:none;}
 .header1{ height:108px;}
 .logo{ margin-top:20px;}
-.city{ margin-top:41px; margin-left:50px; position:relative;width: 65px;height: 28px; z-index:19;}
+.city{ margin-top:41px; margin-left:50px; position:relative;}
 .city a{ float:left; font-family:"微软雅黑", "宋体"; font-size:12px; color:#747474; }
 .city a:hover{ color:#ff6600;}
 .city span{ display:block;background:url(../img/othertu.png) no-repeat -160px 0;width: 9px;height: 5px; float:left; margin-top:9px; margin-left:8px; }
@@ -219,6 +219,10 @@ nav{ height:40px; background:#317ef3;width:100%; margin:0 auto; min-width:1200px
 .sx_list li img:hover{-moz-opacity:0.68 !important; filter:alpha(opacity=68); opacity: 0.68; -ms-opacity:0.68; -o-opacity:0.68; -webkit-opacity:0.68; transition:all .2s linear;-webkit-transition:all .2s linear; -ms-transition:all .2s linear; -moz-transition:all .2s linear; -o-transition:all .2s linear;}
 .sx_list li p { margin-top: 5px; }
 .sx_list li b { display: block; font-family: Arial, Helvetica, sans-serif; color: #f60; font-size: 15px; }
+.page { padding: 20px; overflow: hidden; float: right; }
+.page a, .page a:visited { padding: 2px 10px; border: 1px solid #eee; margin: 0 3px; display: block; float: left; }
+.page span { float: left; margin-top: 4px; }
+.page a.pageon { background: #f60; font-weight: bold; color: #fff; }
 .list_fenye{ height:20px; width:auto; margin-top:10px; margin-right:10px; _margin-right:7px; display:inline; width:auto;}
 .list_fenye a{ margin-left:8px; margin-right:8px;}
 .list_fenye span{ float:none;}
@@ -371,7 +375,7 @@ nav{ height:40px; background:#317ef3;width:100%; margin:0 auto; min-width:1200px
 .btmnav2 a { margin: 0 7px; }
 .btmnav2 { color: #666; padding-top: 30px; }
 /*注册*/
-#yzm { margin: 0; padding: 0; width: 80px; height: 30px; display: inline; float: left; margin-left: 10px; }
+#yzm { margin: 0; padding: 0; width: 80px; height: 38px; display: inline; float: left; margin-left: 10px; }
 
 
 
@@ -454,9 +458,15 @@ nav{ height:40px; background:#317ef3;width:100%; margin:0 auto; min-width:1200px
 .phonenumber_listgm a{ background:#ddd; font-size:12px; color:#666666; height:70px;  position:absolute; bottom:0; right:0; line-height:35px; width:35px;word-wrap: break-word; letter-spacing: 10px; display:block; text-align:right; z-index:99;}
 .phonenumber_listgm a:hover{ background:#ff6600; color:#fff; font-family:"微软雅黑", "宋体"; font-size:12px; font-weight:bold;}
 
-
-
-
+.fupic { text-align:right; overflow:hidden;}
+.fuzi { width:400px; height:100px; position:absolute; left:25px; top:75px; z-index:10;}
+.fuzi a h2 {font-size:34px; color:#363636; font-weight:normal; height:37px;}
+.fuzi a h3 { font-size:14px; height:45px; font-weight:normal; color:#898989;}
+.fuzi a h4 { font-size:24px; color:#404040; font-weight:normal;}
+.fuzi a h4 span { font-size:16px; color:#959492; text-decoration:line-through;}
+.fuzi a:hover h2 { color:#0d679b;}
+.fuzi a:hover h4 { color:#0d679b;}
+.fubox { width:617px; height:326px;}
 
 
 

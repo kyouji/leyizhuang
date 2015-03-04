@@ -123,7 +123,7 @@ public class AdvertisementService {
             pageRequest = new PageRequest(page, size);
         }
         
-        return repository.findByTypeAndIsShowTrue(type, pageRequest);
+        return repository.findByTypeContainingAndIsShowTrue(type, pageRequest);
     }
  
     /**
