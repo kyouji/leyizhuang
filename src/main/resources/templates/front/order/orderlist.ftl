@@ -24,6 +24,30 @@
 DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
+<style>
+   .member_lef li a:hover, .member_lef li a.act {
+background: url(../img/memberleftxz.png) center no-repeat;
+color: #fff;
+font-weight: bold;
+}
+
+.member_lef li a {
+display: block;
+height: 34px;
+line-height: 34px;
+padding-left: 6px;
+font-family: "微软雅黑";
+font-size: 14px;
+margin-bottom: 1px;
+}
+
+.list_banner1 {
+height: auto;
+width: 900px;
+float: right;
+}
+
+</style>
 </head>
 <body>
 
@@ -154,12 +178,13 @@ DD_belatedPNG.fix('.,img,background');
         $.ajax({
             type : "post",
             url : "/order/list_time"+snew,
-            data : {"snew":snew,"status":search},
+            data : {"snew":snew
+                     },
             success : function(data) {
                 $("#table").html(data);
                 var b=pageSize;
                 // 重新初始化分页
-            $("#id-pagination").pagination(${goods_order_total},
+            $("#id-pagination").pagination(parseInt($("#all_order_number").html()),
 	                {
 	                    num_display_entries : 3,
 	                    num_edge_entries : 3,
@@ -172,9 +197,10 @@ DD_belatedPNG.fix('.,img,background');
 	                    callback : function(pageNo) {
 	                        $.ajax({
 	                            type : "post",
-	                            url : "/order/page_list_all",
+	                            url : "/order/page_list_time"+snew,
 	                            data : {
-	                                "page" : pageNo
+	                                "page" : pageNo,
+	                                "timeId": snew
 	                            },
 	                            success : function(data) {
 	                                $("#table").html(data);
@@ -186,6 +212,7 @@ DD_belatedPNG.fix('.,img,background');
             }
         });
     });
+    
     
     
     //分页
@@ -213,6 +240,8 @@ DD_belatedPNG.fix('.,img,background');
             });
         }
     });
+    
+    
 </script>
 </body>
 </html>

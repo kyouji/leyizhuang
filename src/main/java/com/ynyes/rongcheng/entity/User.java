@@ -138,6 +138,10 @@ public class User {
 	// 浏览记录
     @Column
     private String recentVisitedProductIds;
+    
+    // 排序号
+    @Column
+    private Long sortNumber;
 
     public Long getId() {
         return id;
@@ -353,5 +357,13 @@ public class User {
 
     public void setRecentVisitedProductIds(String recentVisitedProductIds) {
         this.recentVisitedProductIds = recentVisitedProductIds;
+    }
+
+    public Long getSortNumber() {
+        return sortNumber;
+    }
+
+    public void setSortNumber(Long sortNumber) {
+        this.sortNumber = sortNumber;
     }
 }

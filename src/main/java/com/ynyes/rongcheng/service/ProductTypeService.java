@@ -56,6 +56,23 @@ public class ProductTypeService {
     }
     
     /**
+     * 根据名称查找类型
+     * 
+     * @param name 类型名称
+     * 
+     * @return 商品类型
+     */
+    public ProductType findByName(String name)
+    {
+        if (null == name)
+        {
+            return null;
+        }
+        
+        return repository.findByName(name);
+    }
+    
+    /**
      * 通过类型ID查找该类型的参数列表
      * 
      * @param typeId 商品类型ID

@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ynyes.rongcheng.entity.Brand;
 import com.ynyes.rongcheng.service.BrandService;
+import com.ynyes.rongcheng.service.ProductTypeService;
 import com.ynyes.rongcheng.util.ManagementConstant;
 
 /**
@@ -32,15 +34,21 @@ public class ManagerBrandController {
     @Autowired
     BrandService brandService;
     
+    @Autowired
+    ProductTypeService productTypeService;
+    
     @RequestMapping
     public String brand(ModelMap map){
         
         Page<Brand> brandPage = brandService.findAll(0, ManagementConstant.pageSize, "desc", "id");
         
+        
         if (null != brandPage)
         {
             map.addAttribute("brand_list", brandPage.getContent());
         }
+        
+        map.addAttribute("type_list", productTypeService.findAll());
         
         return "/management/brand";
     }
@@ -75,12 +83,16 @@ public class ManagerBrandController {
             map.addAttribute("brand", brandService.findOne(brandId));
         }
         
+        map.addAttribute("type_list", productTypeService.findAll());
+        
         return "/management/brand/brand_modify";
     }
     
     @RequestMapping(value="/save",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> add(ModelMap map, Brand brand){
+    public Map<String, Object> add(ModelMap map, 
+                                Brand brand,
+                                @RequestParam MultipartFile logoPic){
         Map<String, Object> res = new HashMap<String, Object>();
         res.put("code", 1);
         
@@ -96,17 +108,13 @@ public class ManagerBrandController {
             return res;
         }
         
-        // 新增
-        if (null == brand.getId())
+        if (null != brandService.findByName(brand.getName()))
         {
-            if (null != brandService.findByName(brand.getName()))
-            {
-                res.put("message", "同名品牌已存在");
-                return res;
-            }
+            res.put("message", "该品牌已存在");
+            return res;
         }
         
-        brandService.save(brand);
+        brandService.save(brand, logoPic);
         
         res.put("code", 0);
         

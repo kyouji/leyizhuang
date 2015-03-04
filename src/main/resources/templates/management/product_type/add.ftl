@@ -25,7 +25,7 @@
         
         <input type="text" id="propIds" name="propIds" style="display:none;" />
         <div class="col-sm-12" style="margin-top:10px;">
-            <label class="col-sm-1 control-label no-padding-right" for="destinationUri">*关联属性</label>
+            <label class="col-sm-1 control-label no-padding-right" for="destinationUri">*关联参数</label>
             <div class="col-sm-11">
                 <a class="icon-plus col-sm-1" style="line-height:34px;"></a>
                 

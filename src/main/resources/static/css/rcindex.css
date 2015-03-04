@@ -10,7 +10,7 @@ header{ height:30px; background:#f4f3f3;  width:100%; margin:0 auto; min-width:1
 input:focus {outline:none;}
 .header1{ height:108px;}
 .logo{ margin-top:20px;}
-.city{ margin-top:41px; margin-left:50px; position:relative;}
+.city{ margin-top:41px; margin-left:50px; position:relative;width: 65px;height: 28px; z-index:19;}
 .city a{ float:left; font-family:"微软雅黑", "宋体"; font-size:12px; color:#747474; }
 .city a:hover{ color:#ff6600;}
 .city span{ display:block;background:url(../img/othertu.png) no-repeat -160px 0;width: 9px;height: 5px; float:left; margin-top:9px; margin-left:8px; }

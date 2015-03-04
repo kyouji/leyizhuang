@@ -88,6 +88,7 @@
         <#if ShowPictures??>
             <img id=bigImg src="${ShowPictures[0]}" width=310 height=310 jqimg="${ShowPictures[0]}">
         </#if>
+          <!--  <img id=bigImg src="${product.coverImageUri}" width=310 height=310 jqimg="${ShowPictures[0]}">-->
         
     </div>
     <div id=spec>
@@ -131,7 +132,7 @@
       <input type="text" class="select_num " id="count" value="1"/>
       <a href="javascript:void(0)" class="fll next" data-num="${product.numberDecType}"><img src="/images/jian.jpg"/></a></p>
     <div class="clear"></div>
-    <div class="gm_btn"> <span class="gm_btn1"><a href="javascript:void(0)" onclick="tm_buy()">立即购买</a></span> <span class="gm_btn2"><a href="/cart">加入购物车</a></span><span class="gm_btn3"><a href="javascript:void(0)" onclick="tm_contra(this,${product.id})" >对比</a></span></div>
+    <div class="gm_btn"> <span class="gm_btn1"><a href="javascript:void(0)" onclick="tm_buy(${product.id})">立即购买</a></span> <span class="gm_btn2"><a href="javascript:void(0)" onclick="tm_buy(${product.id})">加入购物车</a></span><span class="gm_btn3"><a href="javascript:void(0)" onclick="tm_contra(this,${product.id})" >对比</a></span></div>
   </div>
 </div>
 <div class="clear"></div>
@@ -199,27 +200,20 @@
     <div class="hot_list">
       <h2>热销排行</h2>
       <ul>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num1">1</div>
+      <#list qgPictures as pics>
+      <#if pics.name?? && pics.name?length lt 8>
+			           <span>${pics.name?default("")}</span>
+			      <#else>
+			       	<span>${pics.name[0..7]?default("")}...</span>
+			</#if>
+        <li> <a href="#"> <img src="${pics.coverImageUri}" />  <#if pics.name?? && pics.name?length lt 8>
+			           <span>${pics.name?default("")}</span>
+			      <#else>
+			       	<span>${pics.name[0..7]?default("")}...</span>
+			</#if><b>￥${pics.flashSalePrice?c}</b> </a>
+          <div class="num1">${pics.sortNumber}</div>
         </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num1">2</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num1">3</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num2">4</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num2">5</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num2">6</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num2">7</div>
-        </li>
+        </#list>
       </ul>
     </div>
     <div class="hot_list mt20">
@@ -238,20 +232,20 @@
       <ul id="id-tab-list">
         <li><a href="javascript:void(0)" class="con">商品详情</a></li>
         <li><a href="javascript:void(0)">商品参数</a></li>
-        <li><a href="javascript:void(0)">购买咨询</a></li>
         <li><a href="javascript:void(0)">商品评价（${productcount}）</a></li>
+        <li><a href="javascript:void(0)">购买咨询</a></li>
        <li><a href="javascript:void(0)">价格走势</a></li>
       </ul>
     </div>
     <div class="products_det"> 
     	<ul id="id-tab-content" >
-    		<li ><#if product.detail??>${product.detail}</#if></li>
-    		<li style="display:none"><#if product.configuration??>${product.configuration}</#if></li>
-    		<li style="display:none">
-    			商品咨询
+    		<li class="tab_li"><#if product.detail??>${product.detail}</#if></li>
+    		<li class="tab_li" style="display:none"><#if product.configuration??>${product.configuration}</#if></li>
+    		<li class="tab_li" style="display:none">
+    			商品评价
     				
 		      <div class="pinglun">
-		        <h2>商品咨询</h2>
+		        <h2>商品评价</h2>
 		      </div>
 		      <div class="pinlunbox">
 		        <dl>
@@ -259,7 +253,7 @@
 		          <#if productConsult??>
 		          <#list productConsult as prod>
 		            <ul>
-		              <li class="name"><#if prod.username??>${prod.username}</#if></li>
+		              <li class="name"><#if prod.username??>${prod.username}说:</#if></li>
 		              <li class="time"><#if prod.commentTime??>${prod.commentTime}</#if></li>
 		              <li class="dtlr">${prod.content}</li>
 		            </ul>
@@ -274,7 +268,7 @@
 		        <p>&nbsp;</p>
 		    </div>
 		     <div class="lr_right_main main_top2 fbpn">
-		      <h2>提交问答/咨询</h2>
+		      <h2>提交问答/评价</h2>
 		      <ul>
 		       <#if user??> <li class="pyts">欢迎您,<a href="/user/info"><strong>${user.username}</strong></a>发表问答/评论!
 		       			 <li class="title">内容：</li>
@@ -299,20 +293,20 @@
 		      <div style="clear:both;"></div>
 		    </div>
     		</li>
-    		<li style="display:none">
-		    		商品评价
+    		<li class="tab_li" style="display:none">
+		    		商品咨询
 		      <div class="pinglun">
-		        <h2>商品评价</h2>
+		        <h2>商品咨询</h2>
 		      </div>
 		      <div class="pinlunbox">
 		        <dl>
 		          <dt>
-		          <#if productConsult??>
-		          <#list productConsult as prod>
+		          <#if productComm??>
+		          <#list productComm as prodm>
 		            <ul>
-		              <li class="name"><#if prod.username??>${prod.username}</#if></li>
-		              <li class="time"><#if prod.commentTime??>${prod.commentTime}</#if></li>
-		              <li class="dtlr">${prod.content}</li>
+		              <li class="name"><#if prodm.username??>${prodm.username}</#if></li>
+		              <li class="time"><#if prodm.commentTime??>${prodm.commentTime}</#if></li>
+		              <li class="dtlr">${prodm.content}</li>
 		            </ul>
 		            </#list>
 		            </#if>
@@ -325,22 +319,22 @@
 		        <p>&nbsp;</p>
 		    </div>
 		     <div class="lr_right_main main_top2 fbpn">
-		      <h2>提交问答/评论</h2>
+		       <h2>提交问答/咨询</h2>
 		      <ul>
 		       <#if user??> <li class="pyts">欢迎您,<a href="/user/info"><strong>${user.username}</strong></a>发表问答/评论!
 		       			 <li class="title">内容：</li>
 		        <li class="texta">
 		          <label>
-		            <textarea name="textarea" id="centent" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
+		            <textarea name="textarea" id="centents" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
 		          </label>
 		        </li>
 		        <li class="title">验证码：</li>
 		        <li class="yzminp">
-		          <input type="text" name="textfield2" id="verify" maxlength="4" />
+		          <input type="text" name="textfield2" id="verifys" maxlength="4" />
 		        </li>
 		        <li class="yzmimg"><a href="javascript:void(0)"><img onclick="this.src = '/verify?date='+Math.random();" src="/verify" id="yzm" alt="验证码"/></a></li>
 		        <li class="tijiaobox">
-		          <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_save(this,${product.id})"/>
+		          <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_saveconn(this,${product.id})"/>
 		        </li>
 		      </ul>
 		       
@@ -350,7 +344,7 @@
 		      <div style="clear:both;"></div>
 		    </div>
     </li>
-    <li style="display:none">
+    <li class="tab_li" style="display:none">
     			价格
     		</li>		
     	</ul>
@@ -555,16 +549,16 @@ $(function(){
 	//去购买	
 		function tm_buy(){
 			var id=$("#count").val();
-			var pric=$("#pric").av
 			$.ajax({
 				type:"post",
-				url:"/cart/add",
-				data:{"sum":id},
+				url:"/add",
+				data:{"quantity":id,"pid":id,"vid":1},
 				success:function(data){
 					if(data=="success"){
 						window.location.href="/cart";
-					}else if(data="false"){
+					}else if(data="nulluser"){
 						window.location.href="/login";
+						alert(data.message)
 					}
 				}
 			})
@@ -619,7 +613,7 @@ $(function(){
                 _tab.find("a").removeClass("con");
                 _tab.eq(index).find("a").addClass("con");
                 
-                var _arr = $('#id-tab-content li');
+                var _arr = $('#id-tab-content .tab_li');
           
                 _arr.eq(index).fadeIn(0).siblings().fadeOut(0);
             });
@@ -639,6 +633,35 @@ $(function(){
         	}
         	tm_ajax({
         		url:"/saveComm",
+        		data:{"productId":id,"content":centent,"verify":verify},
+        		 callback:function(data) {
+        		 	 if(data=="success"){
+        		 	 	Tmtip({html:"评论已经提交！工作人员会在24小时内处理!",src:"/Tm/images/24.PNG",callback:function(){location.reload()}});
+        		 		$("#centent").val("");
+        				$("#verify").val("");
+        		 	 }else if(data=="vfalse"){
+        		 	 	Tmtip({html:"验证码输入错误!",src:"/Tm/images/24.PNG"});
+        		 	 	$("#verify").select();
+        		 	 }
+        		 }
+        		
+        	})
+        } 
+        function tm_saveconn(obj,id){
+        	var centent=$("#centents").val();
+        	var verify=$("#verifys").val();
+        	if(isEmpty(centent)){
+        		 Tmtip({html:"您输入的内容不能为空!!!",src:"/Tm/images/24.PNG"});
+        		 $("#centents").focus();
+        		 return;
+        	}
+        	if(isEmpty(verify)){
+        		 Tmtip({html:"验证码不能为空!!!",src:"/Tm/images/24.PNG"});
+        		 $("#verifys").focus();
+        		 return;
+        	}
+        	tm_ajax({
+        		url:"/saveConn",
         		data:{"productId":id,"content":centent,"verify":verify},
         		 callback:function(data) {
         		 	 if(data=="success"){

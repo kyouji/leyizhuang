@@ -34,7 +34,7 @@
         
         <input type="text" id="m-propIds" name="propIds" style="display:none;" />
         <div class="col-sm-12" style="margin-top:10px;">
-            <label class="col-sm-1 control-label no-padding-right" for="destinationUri">*关联属性</label>
+            <label class="col-sm-1 control-label no-padding-right" for="destinationUri">*关联参数</label>
             <div class="col-sm-11">
                 <#if prop_list??>
                     <#list prop_list as param>

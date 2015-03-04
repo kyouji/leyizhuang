@@ -33,7 +33,7 @@ public class Product {
 	private String code;
 	
 	// 商品名称
-	@Column(nullable=false)
+	@Column
 	private String name;
 	
 	// 封面图片
@@ -42,11 +42,11 @@ public class Product {
     
     // 封面图片宽度
     @Column
-    private Long coverImageWidth;
+    private Double coverImageWidth;
     
     // 封面图片高度
     @Column
-    private Long coverImageHeight;
+    private Double coverImageHeight;
     
     // 轮播展示图片，多张图片以,隔开
     @Column
@@ -88,19 +88,14 @@ public class Product {
     // 库存递减时机 分为下订单递减、支付完成递减、发货递减等
     @Column
     private Long numberDecType;
-    
-    // 支持类型的3级分类: 父父类型->父类型->类型
-    // 商品父父类型
-    @Column
-    private String grandFatherType;
-    
-    // 商品父类型
-    @Column
-    private String fatherType;
-    
+ 
     // 商品类型
     @Column
     private String type;
+  
+    // 商品所有类型
+    @Column
+    private String typeAll;
     
     // 价格最小值
     @Column(nullable=false, scale=2)
@@ -112,13 +107,13 @@ public class Product {
     
     // 上架时间
     @Column
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date onSaleTime;
     
     // 创建日期
     @Column
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     
@@ -147,17 +142,17 @@ public class Product {
     // 限时抢购开始时间
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date flashSaleStartTime;
     
     // 限时抢购结束时间
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date flashSaleStopTime;
     
     // 限时抢购价格
-    @Column(nullable=false, scale=2)
+    @Column(scale=2)
     private Double flashSalePrice;
     
     // 限时抢购剩余数量
@@ -240,19 +235,19 @@ public class Product {
         this.coverImageUri = coverImageUri;
     }
 
-    public Long getCoverImageWidth() {
+    public Double getCoverImageWidth() {
         return coverImageWidth;
     }
 
-    public void setCoverImageWidth(Long coverImageWidth) {
+    public void setCoverImageWidth(Double coverImageWidth) {
         this.coverImageWidth = coverImageWidth;
     }
 
-    public Long getCoverImageHeight() {
+    public Double getCoverImageHeight() {
         return coverImageHeight;
     }
 
-    public void setCoverImageHeight(Long coverImageHeight) {
+    public void setCoverImageHeight(Double coverImageHeight) {
         this.coverImageHeight = coverImageHeight;
     }
 
@@ -343,22 +338,6 @@ public class Product {
     public void setNumberDecType(Long numberDecType) {
         this.numberDecType = numberDecType;
     }
-    
-    public String getGrandFatherType() {
-        return grandFatherType;
-    }
-
-    public void setGrandFatherType(String grandFatherType) {
-        this.grandFatherType = grandFatherType;
-    }
-
-    public String getFatherType() {
-        return fatherType;
-    }
-
-    public void setFatherType(String fatherType) {
-        this.fatherType = fatherType;
-    }
 
     public String getType() {
         return type;
@@ -366,6 +345,14 @@ public class Product {
 
     public void setType(String type) {
         this.type = type;
+    }
+    
+    public String getTypeAll() {
+        return typeAll;
+    }
+
+    public void setTypeAll(String typeAll) {
+        this.typeAll = typeAll;
     }
 
     public String getPriceUnit() {
@@ -480,11 +467,11 @@ public class Product {
         this.isStarProduct = isStarProduct;
     }
 
-    public Long getStarProductOrderNumber() {
+    public Long getStarProductSortNumber() {
         return starProductSortNumber;
     }
 
-    public void setStarProductOrderNumber(Long starProductSortNumber) {
+    public void setStarProductSortNumber(Long starProductSortNumber) {
         this.starProductSortNumber = starProductSortNumber;
     }
 

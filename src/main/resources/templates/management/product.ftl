@@ -14,21 +14,12 @@
 		<link rel="stylesheet" href="/js/kindleditor/themes/default/default.css" />
 		<link rel="stylesheet" href="/css/select.css"/>
 		<link rel="stylesheet" href="/css/pagination.css"/>
+		<link rel="stylesheet" href="/assets/css/datepicker.css" />
+        <link rel="stylesheet" href="/assets/css/bootstrap-timepicker.css" />
 		
 		<script src="/js/kindleditor/kindeditor-min.js" charset="utf-8"></script>
 		<script src="/js/kindleditor/kindeditor.js" charset="utf-8"></script>
 		<script src="/js/kindleditor/lang/zh_CN.js" charset="utf-8"></script>
-		<script type="text/javascript">
-			var editor1,editor2;
-			KindEditor.ready(function(K) {
-				editor1 = K.create('textarea[name="content1"]', {
-					allowFileManager : true
-				});
-			    editor2 = K.create('textarea[name="content2"]', {
-					allowFileManager : true
-				});
-			});
-		</script>
 		
 	</head>
 
@@ -74,16 +65,12 @@
                                         <tr>
                                             <th width="4%" ></th>
                                             <th width="5%" class="center">排序</th>                                            
-                                            <th width="5%" class="center">ID</th>
-                                            <th width="7%" class="center">商品编码</th>
-                                            <th width="7%" class="center">商品名称</th>
-                                            <th width="7%" class="center">商品参数   </th>                                                                                        
-                                            <th width="4%" class="center">选择</th>
-                                            <th width="8%" class="center">市场价</th>
-                                            <th width="8%" class="center">本网价</th>
-                                            <th width="27%" class="center">状态(点击可改变状态)</th>
-                                            <th width="8%" class="center">发布日期</th>
-                                            <th width="8%" class="center">编辑</th>
+                                            <th width="6%" class="center">ID</th>
+                                            <th width="20%" class="center">商品编码</th>
+                                            <th width="20%" class="center">商品名称</th>
+                                            <th width="20%" class="center">状态(点击可改变状态)</th>
+                                            <th width="15%" class="center">发布日期</th>
+                                            <th width="10%" class="center">编辑</th>
                                         </tr>
                                     </thead>
 
@@ -138,6 +125,8 @@
 
 		<!-- inline scripts related to this page -->
 		
+        <script src="/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+        <script src="/assets/js/date-time/bootstrap-timepicker.min.js"></script>
         <script src="/js/management/product.js"></script>
         <script src="/js/management/product_add.js"></script>
         <script src="/js/jquery.pagination.js"></script>

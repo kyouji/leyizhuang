@@ -36,7 +36,7 @@ public class ProductVersion {
     private String picUri;
     
     // 该版本的成本价
-    @Column(nullable=false, scale=2)
+    @Column(scale=2)
     private Double costPrice;
     
     // 该版本的市场价
@@ -48,7 +48,7 @@ public class ProductVersion {
     private Double salePrice;
     
     // 包含价值，销售靓号时会包含话费
-    @Column(nullable=false, scale=2)
+    @Column(scale=2)
     private Double includePrice;
 
     // 该版本剩余数量

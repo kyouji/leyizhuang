@@ -7,6 +7,7 @@
 <meta name="copyright" content="荣诚手机超市 版权所有" />
 <link href="css/layout.css" rel="stylesheet" type="text/css" />
 <link href="css/rcindex.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
 </head>
 <body>
 <header>
@@ -18,7 +19,17 @@
 
 <div class="header1 main">
 <div class="fll logo"><a href="#" title="荣诚手机超市"><img src="img/rc_logo.png" width="177" height="69"></a></div>
-<div class="fll city"><a href="#">城市切换</a><span></span>
+<div class="fll city"><a href="#" id="city">城市切换</a><span></span>
+<div class="cityqh" style="display:none" id="change"><ul>
+<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="昆明市">昆明市</a></li>
+<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="曲靖市">曲靖市</a></li>
+<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="大理州">大理州</a></li>
+<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="西双版纳">西双版纳</a></li>
+<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="德宏州">德宏州</a></li>
+<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="丽江市">丽江市</a></li>
+</ul></div>
+
+
 </div>
 <div class="sercha fll">
 <input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
@@ -34,20 +45,25 @@
 
 
 
-<nav><div class="main">
-<div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15">全部商品分类</a></div>
+<nav>
+   <div class="main">
+     <div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15" id="goods">全部商品分类</a></div>
 
-<ul style="display:none">
-<li>
+<ul id="goods_style" style="display:none">
+<li id="phone">
 <div class="mbj m1"></div>
-<div class="divshop">
-<h4><a href="/list/2">手机产品</a></h4>
-<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-</div>
+        
+        <div class="divshop">
+		<h4><a href="/list/2">手机产品</a></h4>
+		<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
+		</div>
+		
+		
+		
 <div class="clear"></div>
 
 <div class="threeright">
-<ul id="threeright1">
+<ul id="threeright1" style="display:none">
 <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
 <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
 <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
@@ -56,20 +72,20 @@
 </div>
 </li>
 
-<li>
+<li id="phone_body">
 <div class="mbj m2"></div>
-<div class="divshop">
-<h4><a href="/list/3">手机配件</a></h4>
-<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-</div>
+			<div class="divshop">
+			<h4><a href="/list/3">手机配件</a></h4>
+			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
+			</div>
 <div class="clear"></div>
 </li>
-<li style="border-bottom:none;">
+<li id="phone_number">
 <div class="mbj m3"></div>
-<div class="divshop">
-<h4><a href="/list/4">手机靓号</a></h4>
-<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-</div>
+            <div class="divshop">
+			<h4><a href="/list/4">手机靓号</a></h4>
+			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
+			</div>
 <div class="clear"></div>
 </li>
 </ul>
@@ -89,6 +105,10 @@
 </div>
 
 </div></nav>
+
+
+
+
 
 <div class="main mt10 rc_ppfl">
 <span class="fll">品牌分类：</span>
@@ -377,23 +397,121 @@
 </script>
 
 
+<script type="text/javascript">
+
+//经过城市切换和内容都显示
+$("#city").mouseover(function(){
+   $("#change").css({"display":"block"});
+
+})
+
+$("#change").mouseover(function(){
+   $("#change").css({"display":"block"});
+
+})
+
+//离开城市和离开内容都隐藏
+$("#change").mouseout(function(){
+
+   $("#change").css({"display":"none"});
+
+})
+
+$("#city").mouseout(function(){
+
+   $("#change").css({"display":"none"});
+
+})
+
+//对城市切换的内容进行替换
+function change_city(name){
+	var content=$("#city").html();
+	$("#city").html(name);
+	return false;
+}
+</script>
 
 
-</body>
-</html>
 
 
+<script type="text/javascript">
+ //经过商品栏目或者是经过内容的时候，都显示（栏目和大类）
+ $("#goods").mouseover(function(){
+     $("#goods_style").css({"display":"block"});
+ })
+    
 
+ $("#goods_style").mouseover(function(){
+     $("#goods_style").css({"display":"block"});
+ })
+  
+//离开栏目或者是离开内容都进行隐藏（栏目和大类）
 
+ $("#goods").mouseout(function(){
+     $("#goods_style").css({"display":"none"});
+ })
+  
+ $("#goods_style").mouseout(function(){
+     $("#goods_style").css({"display":"none"});
+ })
   
 
 
+//经过手机以后，显示详细框
 
+ $("#phone").mouseover(function(){
+     $("#threeright1").css({"display":"block"});
+ })
+    
+ $("#threeright1").mouseover(function(){
+     $("#threeright1").css({"display":"block"});
+ })
+   
+$("#phone").mouseout(function(){
+     $("#threeright1").css({"display":"none"});
+ })
 
+$("#threeright1").mouseout(function(){
+     $("#threeright1").css({"display":"none"});
+ })
 
+//经过手机配件
 
+$("#phone_body").mouseover(function(){
+     $("#threeright1").css({"display":"block"});
+ })
+    
+ $("#threeright1").mouseover(function(){
+     $("#threeright1").css({"display":"block"});
+ })
+   
+$("#phone_body").mouseout(function(){
+     $("#threeright1").css({"display":"none"});
+ })
 
+$("#threeright1").mouseout(function(){
+     $("#threeright1").css({"display":"none"});
+ })
 
+//经过手机靓号
 
+$("#phone_number").mouseover(function(){
+     $("#threeright1").css({"display":"block"});
+ })
+    
 
+ $("#threeright1").mouseover(function(){
+     $("#threeright1").css({"display":"block"});
+ })
+   
 
+$("#phone_number").mouseout(function(){
+     $("#threeright1").css({"display":"none"});
+ })
+
+$("#threeright1").mouseout(function(){
+     $("#threeright1").css({"display":"none"});
+ })
+</script>
+</body>
+</html>

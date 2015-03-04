@@ -7,7 +7,7 @@
     </li>
 
     <li>
-        <a href="#" class="dropdown-toggle">
+        <a href="javascript:;" class="dropdown-toggle">
             <i class="icon-desktop"></i>
             <span class="menu-text"> 商品 </span>
 
@@ -47,94 +47,64 @@
     </li>
 
     <li>
-        <a href="#" class="dropdown-toggle">
+        <a href="javascript:;" class="dropdown-toggle">
+            <i class="icon-camera-retro"></i>
+            <span class="menu-text"> 广告 </span>
+
+            <b class="arrow icon-angle-down"></b>
+        </a>
+
+        <ul class="submenu">
+            <li>
+                <a href="/admin/ad/type">
+                    <i class="icon-double-angle-right"></i>
+                    广告类型
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/ad">
+                    <i class="icon-double-angle-right"></i>
+                    广告列表
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="javascript:;" class="dropdown-toggle">
             <i class="icon-list"></i>
-            <span class="menu-text"> Tables </span>
+            <span class="menu-text"> 订单 </span>
 
             <b class="arrow icon-angle-down"></b>
         </a>
 
         <ul class="submenu">
             <li>
-                <a href="tables.html">
+                <a href="/admin/order">
                     <i class="icon-double-angle-right"></i>
-                    Simple &amp; Dynamic
-                </a>
-            </li>
-
-            <li>
-                <a href="jqgrid.html">
-                    <i class="icon-double-angle-right"></i>
-                    jqGrid plugin
+                    订单列表
                 </a>
             </li>
         </ul>
     </li>
-
+    
     <li>
-        <a href="#" class="dropdown-toggle">
-            <i class="icon-edit"></i>
-            <span class="menu-text"> Forms </span>
+        <a href="javascript:;" class="dropdown-toggle">
+            <i class="icon-group"></i>
+            <span class="menu-text"> 用户 </span>
 
             <b class="arrow icon-angle-down"></b>
         </a>
 
         <ul class="submenu">
             <li>
-                <a href="form-elements.html">
+                <a href="/admin/user">
                     <i class="icon-double-angle-right"></i>
-                    Form Elements
-                </a>
-            </li>
-
-            <li>
-                <a href="form-wizard.html">
-                    <i class="icon-double-angle-right"></i>
-                    Wizard &amp; Validation
-                </a>
-            </li>
-
-            <li>
-                <a href="wysiwyg.html">
-                    <i class="icon-double-angle-right"></i>
-                    Wysiwyg &amp; Markdown
-                </a>
-            </li>
-
-            <li>
-                <a href="dropzone.html">
-                    <i class="icon-double-angle-right"></i>
-                    Dropzone File Upload
+                    用户列表
                 </a>
             </li>
         </ul>
-    </li>
-
-    <li>
-        <a href="widgets.html">
-            <i class="icon-list-alt"></i>
-            <span class="menu-text"> Widgets </span>
-        </a>
-    </li>
-
-    <li>
-        <a href="calendar.html">
-            <i class="icon-calendar"></i>
-
-            <span class="menu-text">
-                Calendar
-                <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
-                    <i class="icon-warning-sign red bigger-130"></i>
-                </span>
-            </span>
-        </a>
-    </li>
-
-    <li>
-        <a href="gallery.html">
-            <i class="icon-picture"></i>
-            <span class="menu-text"> Gallery </span>
-        </a>
     </li>
 
     <li>
