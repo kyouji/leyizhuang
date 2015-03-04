@@ -50,43 +50,65 @@
      <div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15" id="goods">全部商品分类</a></div>
 
 <ul id="goods_style" style="display:none">
+    <#if root_type_list??>
+        <#list root_type_list as type>
+            <li id="phone">
+                <div class="mbj m1"></div>
+                        
+                    <div class="divshop">
+                    <h4><a href="/list/${type.id}">${type.name}</a></h4>
+                    <p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
+                </div>
+                        
+                <div class="clear"></div>
+                
+                <div class="threeright">
+                    <ul id="threeright1" style="display:none">
+                    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+                    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+                    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+                    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+                    </ul>
+                </div>
+            </li>
+        </#list>
+    </#if>
     <li id="phone">
-    <div class="mbj m1"></div>
-            
-        <div class="divshop">
-		<h4><a href="/list/2">手机产品</a></h4>
-		<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-		</div>
-    		
-    		
-    		
-    <div class="clear"></div>
-    
-    <div class="threeright">
-    <ul id="threeright1" style="display:none">
-    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-    </ul>
-    </div>
+        <div class="mbj m1"></div>
+                
+            <div class="divshop">
+    		<h4><a href="/list/2">手机产品</a></h4>
+    		<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
+    	</div>
+        		
+        <div class="clear"></div>
+        
+        <div class="threeright">
+            <ul id="threeright1" style="display:none">
+            <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+            <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+            <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+            <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
+            </ul>
+        </div>
     </li>
 
     <li id="phone_body">
-    <div class="mbj m2"></div>
-    			<div class="divshop">
-    			<h4><a href="/list/3">手机配件</a></h4>
-    			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-    			</div>
-    <div class="clear"></div>
+        <div class="mbj m2"></div>
+			<div class="divshop">
+			<h4><a href="/list/3">手机配件</a></h4>
+			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
+			</div>
+        <div class="clear"></div>
     </li>
+    
     <li id="phone_number">
-    <div class="mbj m3"></div>
-                <div class="divshop">
-    			<h4><a href="/list/4">手机靓号</a></h4>
-    			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-    			</div>
-    <div class="clear"></div>
+        <div class="mbj m3"></div>
+            <div class="divshop">
+			<h4><a href="/list/4">手机靓号</a></h4>
+			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
+			</div>
+        <div class="clear"></div>
     </li>
 </ul>
 
@@ -211,29 +233,84 @@
 </div>
 
 <div class="main mt20">
-<div class="floor"><span>3F-手机产品</span></div>
-<div class="floor_2 mt10"><ul><li><a href="#" class="floor_2xz">手机大全</a></li><li><a href="#">平板电脑</a></li></ul></div>
-<div class="floor_2_1 mt10">
-<div class="fll floor_2_2"><a href="#"><img src="img/2f_ad.jpg" width="210" height="461"></a></div>
-<div class="fll floor_2_3"><ul>
-<li><a href="#"><img src="img/2f_sj.jpg" width="346" height="230"></a></li>
-<li><a href="#"><img src="img/2f_sj.jpg" width="346" height="230"></a></li>
-<li><a href="#"><img src="img/2f_sj.jpg" width="346" height="230"></a></li>
-<li><a href="#"><img src="img/2f_sj.jpg" width="346" height="230"></a></li>
-</ul></div>
-<div class="flr floor_2_4">
-<div class="floor_2_4_a"><span>TOP销售排行榜</span></div>
-<div class="floor_2_4_b"><ul>
-<li><span class="tophong">1</span><span class="topjieshao"><p>锤子 T1 (SM705) 32GB 白</p><p>￥2480.00</p></span><a href="#"><img src="img/2f_sjx.jpg" width="78" height="78"></a></li>
-<li><span class="tophong">2</span><span class="topjieshao"><p>锤子 T1 (SM705) 32GB 色</p><p>￥2480.00</p></span><a href="#"><img src="img/2f_sjx.jpg" width="78" height="78"></a></li>
-<li><span class="tophong">3</span><span class="topjieshao"><p>锤子 T1 (SM705) 32GB白色</p><p>￥2480.00</p></span><a href="#"><img src="img/2f_sjx.jpg" width="78" height="78"></a></li>
-<li><span class="tophui">4</span><span class="topjieshao"><p>锤子 T1 (SM705) 32GB 色</p><p>￥2480.00</p></span><a href="#"><img src="img/2f_sjx.jpg" width="78" height="78"></a></li>
-<li><span class="tophui">5</span><span class="topjieshao"><p>锤子 T1 (SM705) 32GB白色</p><p>￥2480.00</p></span><a href="#"><img src="img/2f_sjx.jpg" width="78" height="78"></a></li>
-</ul></div>
+    <div class="floor"><span>3F-手机产品</span></div>
+    <div class="floor_2 mt10">
+        <ul>
+            <li><a href="#" class="floor_2xz">手机大全</a></li>
+            <li><a href="#">平板电脑</a></li>
+        </ul>
+    </div>
+    
+    <div class="floor_2_1 mt10">
+        <div class="fll floor_2_2">
+            <#if phone_left_ad??>
+                <a href="${phone_left_ad.destinationUri}"><img src="${phone_left_ad.imageUri}" width="210" height="461"></a>
+            </#if>
+        </div>
+        
+        <div class="fll floor_2_3">
+            <ul>
+                <#list phone_ad_list as ad>
+                    <li><a href="${ad.destinationUri}"><img src="${ad.imageUri}" width="346" height="230"></a></li>
+                </#list>
+            </ul>
+        </div>
+        <div class="flr floor_2_4">
+            <div class="floor_2_4_a"><span>TOP销售排行榜</span></div>
+            <div class="floor_2_4_b">
+                <ul>
+                    <#if phone_hot_product_list??>
+                        <#list phone_hot_product_list as product>
+                            <li>
+                                <span class="tophong">${product_index+1}</span>
+                                <span class="topjieshao">
+                                    <p>${product.name} ${product.brief}</p>
+                                    <p>￥${product.versionList[0].salePrice?string("#.##")}</p>
+                                </span>
+                                <a href="#"><img src="${product.coverImageUri}" width="78" height="78"></a>
+                            </li>
+                        </#list>
+                    </#if>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="floor_2_1 mt10">
+        <div class="fll floor_2_2">
+            <#if pad_left_ad??>
+                <a href="${pad_left_ad.destinationUri}"><img src="${pad_left_ad.imageUri}" width="210" height="461"></a>
+            </#if>
+        </div>
+        
+        <div class="fll floor_2_3">
+            <ul>
+                <#list pad_ad_list as ad>
+                    <li><a href="${ad.destinationUri}"><img src="${ad.imageUri}" width="346" height="230"></a></li>
+                </#list>
+            </ul>
+        </div>
+        <div class="flr floor_2_4">
+            <div class="floor_2_4_a"><span>TOP销售排行榜</span></div>
+            <div class="floor_2_4_b">
+                <ul>
+                    <#if pad_hot_product_list??>
+                        <#list pad_hot_product_list as product>
+                            <li>
+                                <span class="tophong">${product_index+1}</span>
+                                <span class="topjieshao">
+                                    <p>${product.name} ${product.brief}</p>
+                                    <p>￥${product.versionList[0].salePrice?string("#.##")}</p>
+                                </span>
+                                <a href="#"><img src="${product.coverImageUri}" width="78" height="78"></a>
+                            </li>
+                        </#list>
+                    </#if>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
-</div>
-</div>
 
 <div class="clear"></div>
 
@@ -241,16 +318,36 @@
 <div class="floor"><span>4F-手机配件</span></div>
 <div class="floor_3 mt10">
 
-<div class="floor_3_1"><a href="#"><img src="img/3f_ad.jpg" width="208" height="320"></a><div class="floor_3_1_a"><span>手机配件：</span><a href="#">蓝牙耳机</a><a href="#">移动电源</a><a href="#">充电器</a><a href="#">数据线手机</a><a href="#">电池</a><a href="#">手机贴膜</a><a href="#">存储卡</a><a href="#">保护套</a><a href="#">车载iPhone配件</a><a href="#">创意配件</a><a href="#">音箱手机饰品</a></div></div>
+<div class="floor_3_1">
+    <#if accessory_left_ad??>
+        <a href="${accessory_left_ad.destinationUri}"><img src="${accessory_left_ad.imageUri}" width="208" height="320"></a>
+    </#if>
+    <div class="floor_3_1_a">
+        <span>手机配件：</span>
+        <a href="#">蓝牙耳机</a>
+        <a href="#">移动电源</a>
+        <a href="#">充电器</a>
+        <a href="#">数据线手机</a>
+        <a href="#">电池</a>
+        <a href="#">手机贴膜</a>
+        <a href="#">存储卡</a>
+        <a href="#">保护套</a>
+        <a href="#">车载iPhone配件</a>
+        <a href="#">创意配件</a>
+        <a href="#">音箱手机饰品</a>
+    </div>
+</div>
 
 <div class="floor_3_2 flr">
 <table>
 <tr>
-<td><a href="#"><img src="img/3f_sj.jpg" width="195" height="317"></a></td>
-<td><a href="#"><img src="img/3f_sj.jpg" width="195" height="317"></a></td>
-<td><a href="#"><img src="img/3f_sj.jpg" width="195" height="317"></a></td>
-<td><a href="#"><img src="img/3f_sj.jpg" width="195" height="317"></a></td>
-<td><a href="#"><img src="img/3f_sj.jpg" width="195" height="317"></a></td>
+<#if accessory_big_ad_list??>
+    <#list accessory_big_ad_list as ad>
+        <#if ad_index lt 5>
+            <td><a href="${ad.destinationUri}"><img src="${ad.imageUri}" width="195" height="317"></a></td>
+        </#if>
+    </#list>
+</#if>
 </tr>
 </table>
 </div>
@@ -258,11 +355,13 @@
 <div class="floor_3_3 flr">
 <table>
 <tr>
-<td><a href="#"><img src="img/3f_pj.jpg" width="195" height="136"></a></td>
-<td><a href="#"><img src="img/3f_pj.jpg" width="195" height="136"></a></td>
-<td><a href="#"><img src="img/3f_pj.jpg" width="195" height="136"></a></td>
-<td><a href="#"><img src="img/3f_pj.jpg" width="195" height="136"></a></td>
-<td><a href="#"><img src="img/3f_pj.jpg" width="195" height="136"></a></td>
+<#if accessory_big_ad_list??>
+    <#list accessory_small_ad_list as ad>
+        <#if ad_index lt 5>
+            <td><a href="${ad.destinationUri}"><img src="${ad.imageUri}" width="195" height="136"></a></td>
+        </#if>
+    </#list>
+</#if>
 </tr>
 </table>
 </div>

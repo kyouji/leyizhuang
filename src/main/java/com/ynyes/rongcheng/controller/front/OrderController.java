@@ -15,19 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-
-
-
-
-
 
 import com.ynyes.rongcheng.entity.OrderItem;
 import com.ynyes.rongcheng.entity.ShoppingOrder;
 import com.ynyes.rongcheng.entity.User;
 import com.ynyes.rongcheng.service.OrderItemService;
-import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ShoppingOrderService;
 
 /**

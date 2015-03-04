@@ -1,7 +1,9 @@
 package com.ynyes.rongcheng.service;
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -109,6 +111,25 @@ public class ProductService {
         productList = repository.findByTypeAllLikeAndIsOnSaleTrue("%[" + type.trim() + "]%");
 
         return productList;
+    }
+    
+    /**
+     * 根据类型获取商品ID
+     * 
+     * @param type 类型名称
+     * @return 商品列表
+     */
+    public List<Long> findIdByType(String type) 
+    {
+        List<Long> idList = null;
+
+        if (null == type) {
+            return null;
+        }
+
+        idList = repository.findIdByTypeAllLikeAndIsOnSaleTrue("%[" + type.trim() + "]%");
+
+        return idList;
     }
     
     /**
@@ -464,8 +485,47 @@ public class ProductService {
         }
     }
     
-    public void buy(Long pid, Long vid)
+    /**
+     * 查找指定类型的热销商品，并按销量排序
+     * 
+     * @param type 商品类型
+     * @param limit 商品条数
+     * @return
+     */
+    public List<Product> findByTypeOrderBySoldNumberDesc(String type, Integer limit)
     {
+        // 查找该类型所有商品
+        List<Long> pidList = this.findIdByType(type);
         
+        if (pidList.size() <= 0)
+        {
+            return null;
+        }
+        
+        if (null == limit)
+        {
+            limit = 5;
+        }
+        
+        // 查找所有商品中
+        List<BigInteger> idList = productVersionService.findProductIdOrderBySoldNumberDesc(pidList, limit);
+        
+        // 为什么要用这种狗血的一个个查找的方法呢，因为忽然之间findByIdIn()突然不好使了
+        List<Product> productList = new ArrayList<Product>();
+        
+        for (BigInteger pid : idList)
+        {
+            if (null != pid)
+            {
+                Product product = repository.findOne(pid.longValue());
+                
+                if (null != product)
+                {
+                    productList.add(product);
+                }
+            }
+        }
+        
+        return productList;
     }
 }

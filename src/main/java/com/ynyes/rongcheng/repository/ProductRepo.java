@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ynyes.rongcheng.entity.Product;
@@ -45,7 +46,11 @@ public interface ProductRepo extends
     // 通过类型查找
     Page<Product> findByTypeAllLikeAndIsOnSaleTrue(String type, Pageable page);
     List<Product> findByTypeAllLikeAndIsOnSaleTrue(String type);
-
+    
+    // 通过类型查找商品ID
+    @Query("select p.id from Product p where p.typeAll like ?1 and p.isOnSale = 1")
+    List<Long> findIdByTypeAllLikeAndIsOnSaleTrue(String type);
+ 
     // 查找限时抢购商品
     Page<Product> findByIsOnSaleTrueAndIsFlashSaleTrueAndFlashSaleStopTimeAfterOrderByFlashSaleStartTimeDesc(Date now, Pageable page);
     List<Product> findByIsOnSaleTrueAndIsFlashSaleTrueAndFlashSaleStopTimeAfterOrderByFlashSaleStartTimeDesc(Date now);
