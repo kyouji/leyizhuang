@@ -1,11 +1,14 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ynyes.rongcheng.entity.User;
@@ -26,6 +29,8 @@ import com.ynyes.rongcheng.util.StringUtils;
 public class CartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
+    
+    private String flag;
     /**
      * 
      * 跳转购物车<BR>
@@ -43,24 +48,24 @@ public class CartController {
        ModelAndView modelAndView=new ModelAndView();
         User user =(User) request.getSession().getAttribute("user");
         if(user!=null){
-            if(StringUtils.isNotEmpty(sum)){
+            
                 String username=user.getUsername();
                 if(StringUtils.isNotEmpty(username)){
-                    modelAndView.addObject("cartId",shoppingCartService.findOne(username, Long.parseLong(sum)));
+                    /*modelAndView.addObject("cartId",shoppingCartService.findOne(username, Long.parseLong(sum)));*/
+                    modelAndView.addObject("carts",shoppingCartService.findByUsername(username));
                     modelAndView.setViewName("/front/cart/cart");
                     return modelAndView;
                 }else {
                   //  modelAndView.addObject("carts",shoppingCartService.findByUsername(username));
-                    modelAndView.setViewName("/front/cart/cart");
+                    modelAndView.setViewName("/front/login");
                     return modelAndView; 
                 }
-            }else{
-                
-                modelAndView.setViewName("/front/cart/cart");
-                return modelAndView;
-            }
+       
+        }else {
+            //  modelAndView.addObject("carts",shoppingCartService.findByUsername(username));
+            modelAndView.setViewName("/front/login");
+            return modelAndView; 
         }
-        return modelAndView;
     }
     /**
      * 
@@ -99,4 +104,36 @@ public class CartController {
     public String paysuccess(){
         return "/front/cart/paysuccess";
     }
+    @RequestMapping(value="/add",method=RequestMethod.POST)
+    public String add(String pid,String vid,String quantity,String price){
+        ModelMap modelMap=new ModelMap();
+        User user =(User) modelMap.get("user");
+       if(user!=null){
+           String username=user.getUsername();
+           if(StringUtils.isNotEmpty(username)){
+               Map<String, Object> map= shoppingCartService.add(username, Long.parseLong(pid), Long.parseLong(vid), Long.parseLong(quantity), Double.parseDouble(price));
+               if(map.get("code").equals("0")){
+                   flag="success";
+                   return flag;
+               }else{
+                   flag="false";
+                   return flag;
+               }
+           }else{
+               flag="false";
+               return flag;
+           }
+       }else{
+           flag="false";
+           return flag;
+       }
+    }
+    public String getFlag() {
+        return flag;
+    }
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+    
+    
 }

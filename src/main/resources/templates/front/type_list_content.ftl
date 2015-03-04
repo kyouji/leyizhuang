@@ -115,7 +115,7 @@
    <h3><#if product.brief??>${product.brief}</#if></h3>
     <p><span>商品编码：</span><#if product.code??>${product.code}</#if></p>
     <p><span>市&nbsp;&nbsp;场&nbsp;价：</span>￥${product.priceMinimum?c}.00</p>
-    <p><span>荣&nbsp;&nbsp;诚&nbsp;价：</span><em>￥<#if product.flashSalePrice??>${product.flashSalePrice?c}</#if>.00</em><span class="orange ml10">(降价通知)</span></p>
+    <p><span>荣&nbsp;&nbsp;诚&nbsp;价：</span><em id="pric">￥<#if product.flashSalePrice??>${product.flashSalePrice?c}</#if>.00</em><span class="orange ml10">(降价通知)</span></p>
     <p><span>促&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销：</span><i><#if product.promotion??>${product.promotion}</#if></i></p>
     <p><span>商品评价：</span><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><span style="color:#1480DB">（共有<#if productcount??>${productcount}</#if>条评价）</span></p>
     <p><span>配&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置：</span><#if product.configuration??>${product.configuration}</#if></p>
@@ -129,7 +129,7 @@
     <p class="shopbtn mt10"><span class="fll">我要购买：</span>
     <a href="javascript:void(0)" class="fll prev" data-num="${product.numberDecType}"><img src="/images/jia.jpg" /></a>
       <input type="text" class="select_num " id="count" value="1"/>
-      <a href="javascript:void(0)" class="fll next" data-num="${product.numberDecType}"><img src="/images/jian.jpg" /></a></p>
+      <a href="javascript:void(0)" class="fll next" data-num="${product.numberDecType}"><img src="/images/jian.jpg"/></a></p>
     <div class="clear"></div>
     <div class="gm_btn"> <span class="gm_btn1"><a href="javascript:void(0)" onclick="tm_buy()">立即购买</a></span> <span class="gm_btn2"><a href="/cart">加入购物车</a></span><span class="gm_btn3"><a href="javascript:void(0)" onclick="tm_contra(this,${product.id})" >对比</a></span></div>
   </div>
@@ -555,7 +555,19 @@ $(function(){
 	//去购买	
 		function tm_buy(){
 			var id=$("#count").val();
-			window.location.href='/cart?sum='+id;
+			var pric=$("#pric").av
+			$.ajax({
+				type:"post",
+				url:"/cart/add",
+				data:{"sum":id},
+				success:function(data){
+					if(data=="success"){
+						window.location.href="/cart";
+					}else if(data="false"){
+						window.location.href="/login";
+					}
+				}
+			})
 			
 		
 		}

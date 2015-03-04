@@ -61,16 +61,18 @@
 
 <div class="gwc1_lm2">
 <table>
-<tr>
-<#if cartId??>>
-<td class="gwc1_lm2_a"><input type="checkbox" class="fll duoxuank"   name="coursename"><span><a href="javascript:void(0)"><img src="${cartId.productCoverImageUri}" width="76" height="76"></a></span>
+<#if carts??>
+<#list carts as cartId>
+<tr id="tr_list">
+<td class="gwc1_lm2_a"><input type="checkbox" class="fll duoxuank"   name="coursename"><span><a href="javascript:void(0)" class="t_timg"><img src="${cartId.productCoverImageUri}" width="76" height="76"></a></span>
 <p><a href="javascript:void(0)"> <p><#if cartId.productName??>${cartId.productName}</#if></p></a></td>
-<td class="gwc1_lm2_b"><span>￥<#if cartId.price??>${cartId.price?c}</#if></span></td>
-<td class="gwc1_lm2_c"><div class="ds content_nr_3_jg2"><a href="javascript:void(0)" class="prev" data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/slj.png" width="20" height="20" ></a><input type="text" class="content_zj" value="1" id="count"><a href="javascript:void(0)" class="next"  data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/sljj.png" width="20" height="20" ></a></div></td>
-<td class="gwc1_lm2_b"><span>￥0</span></td>
+<td class="gwc1_lm2_b"><span class="money">￥<#if cartId.price??>${cartId.price?c}</#if></span></td>
+<td class="gwc1_lm2_c"><div class="ds content_nr_3_jg2"><a href="javascript:void(0)" class="prev" data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/slj.png" width="20" height="20" ></a><input type="text" class="content_zj" value="1" id="count" ><a href="javascript:void(0)" class="next"  data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/sljj.png" width="20" height="20" ></a></div></td>
+<td class="gwc1_lm2_b"><span id="td_sum">￥0</span></td>
 <td class="gwc1_lm2_d"><input type="button" class="gwc_delete" value="删除订单"></td>
-</#if>
 </tr>
+</#list>
+</#if>
 </table>
 </div>
 </div>
@@ -78,7 +80,7 @@
 <div class="main">
 <div class="s_gwc1zj_left fll mt12"><p><input type="checkbox" onclick="checkAll(this)" class="fll">全选</p></div>
 
-<div class="s_gwc1zj flr"><p>商品<span> 3 </span>件  总价：<span>¥599.00</span>  商品总计(不含运费)： <span>¥599.00</span> </p></div>
+<div class="s_gwc1zj flr"><p>商品<span id="code_su"> 3 </span>件  总价：<span>¥599.00</span>  商品总计(不含运费)： <span>¥599.00</span> </p></div>
 
 </div>
 
@@ -110,9 +112,7 @@
 			//下一页功能
 			$(".next").click(function(){
 				index++;//相当于index = index +1;
-					var datasum=$(this).data("sum");
-					
-				if(index>datasum)index = 1;
+				if(index > datasum)index = 1;
 				$("#count").val(index);
 			});
 
@@ -125,7 +125,7 @@
 				$("#count").val(index);
 			});
 			
-				/*全选*/
+	/*全选*/
 	function checkAll(obj){
 		var courseName = document.getElementsByName("coursename");
 		if(obj.checked){//判断当前全选选中
@@ -144,19 +144,6 @@
 
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
 
 
 

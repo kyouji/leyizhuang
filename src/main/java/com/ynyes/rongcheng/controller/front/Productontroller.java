@@ -131,13 +131,13 @@ public class Productontroller {
           String username=user.getUsername();
           if(StringUtils.isNotEmpty(username)){
               Map<String,Object> map=userService.addCollectedProductId(username, productid);
-          if(map.get("code").equals(0)){
-              flag="success";
-              return flag;
-          }else if(map.get("message").equals("已收藏过该商品")){
-              flag="flok";
-              return flag;
-          }
+              if(map.get("code").equals(0)){
+                  flag="success";
+                  return flag;
+              }else if(map.get("message").equals("已收藏过该商品")){
+                  flag="flok";
+                  return flag;
+              }
           }
           flag="flase";
       }
