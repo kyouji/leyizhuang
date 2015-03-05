@@ -121,7 +121,12 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main mt15">
 <div class="news_lanmulist">
 <ul>
-<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPhone如何选择是一个持记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
+<#if news?exists>
+  <#list news as newss>
+     <li><a href="/news/${newss.id}"><img src="<#if newss.coverImageUri?exists>${newss.coverImageUri}</#if>" width="360" height="200"><p>　<#if newss.content?exists>${newss.content}</#if></p></a></li>
+  </#list>
+</#if>
+<li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　00000000</p></a></li>
 <li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPhone如何选择是一个持续火热的话题，国外科技博客iMore记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
 <li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安，国外科技博客iMore记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
 <li><a href="#"><img src="img/20150120135045_4896.png" width="360" height="200"><p>　1月20日下午消息，安卓与iPhone如何选择是一个持续火热的话题，国ore记者在CES会展上被频频搭讪后，认为iPhone的受欢迎程度与大屏是人们从安卓转投iPhone阵营的原因。</p></a></li>
