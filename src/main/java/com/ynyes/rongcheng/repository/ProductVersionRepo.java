@@ -20,9 +20,6 @@ public interface ProductVersionRepo extends
 		PagingAndSortingRepository<ProductVersion, Long>,
 		JpaSpecificationExecutor<ProductVersion> 
 {
-    @Query(value = "select distinct product_id from product_version where product_id in ?1 order by sold_number desc", nativeQuery = true)
-    List<BigInteger> findProductIdOrderBySoldNumberDesc(List<Long> idList);
-    
-//    @Query("select distinct t.productId from ProductVersion t where t.productId in ?1 order by t.soldNumber desc")
-//    Page<Long> findProductIdOrderBySoldNumberDesc(List<Long> idList, Pageable page);
+//    @Query(value = "select distinct product_id from product_version where product_id in ?1 order by sold_number desc", nativeQuery = true)
+//    List<BigInteger> findProductIdOrderBySoldNumberDesc(List<Long> idList);
 }

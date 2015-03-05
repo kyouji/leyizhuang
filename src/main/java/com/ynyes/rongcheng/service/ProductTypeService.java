@@ -203,6 +203,42 @@ public class ProductTypeService {
     }
     
     /**
+     * 查找推荐的类型
+     * 
+     * @param page 页号，从0开始
+     * @param size 每页大小
+     * @param direction 排序方向，不区分大小写，asc表示升序，desc表示降序，为NULL时不进行排序
+     * @param property 排序的字段名，为NULL时不进行排序
+     * @return 类型分页
+     */
+    public Page<ProductType> findByIsRecommendTrue(int page, int size, 
+                            String direction, String property)
+    {
+        Page<ProductType> typePage = null;
+        PageRequest pageRequest = null;
+        
+        if (page < 0 || size < 0)
+        {
+            return null;
+        }
+        
+        if (null == direction || null == property)
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        else
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, 
+                                 property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        
+        typePage = repository.findByIsRecommendTrue(pageRequest);
+        
+        return typePage;
+    }
+    
+    /**
      * 返回所有商品类型
      * 
      * @return 所有商品类型
@@ -219,6 +255,11 @@ public class ProductTypeService {
      */
     public ProductType save(ProductType type) {
 
+        if (null == type.getIsRecommend())
+        {
+            type.setIsRecommend(false);
+        }
+        
         return repository.save(type);
     }
     
@@ -258,5 +299,30 @@ public class ProductTypeService {
             type = repository.findOne(id);
         }
         return type;
+    }
+    
+    /**
+     * 查找一个类型的所有上级类型，按顺序排列
+     * 
+     * @param type 商品类型
+     * @return 逐级排列的商品类型
+     */
+    public List<ProductType> findPredecessors(ProductType type)
+    {
+        List<ProductType> preList = new ArrayList<ProductType>();
+        
+        preList.add(type);
+        
+        while (null != type && null != type.getParent() && !"".equals(type.getParent()))
+        {
+            type = repository.findByName(type.getParent());
+            
+            if (null != type)
+            {
+                preList.add(0, type);
+            }
+        }
+        
+        return preList;
     }
 }

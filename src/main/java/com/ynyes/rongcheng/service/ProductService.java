@@ -1,9 +1,7 @@
 package com.ynyes.rongcheng.service;
 
-import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -90,6 +88,109 @@ public class ProductService {
         }
         
         productPage = repository.findByTypeAllLikeAndIsOnSaleTrue("%[" + type.trim() + "]%", pageRequest);
+        
+        return productPage;
+    }
+    
+    /**
+     * 根据类型、品牌、价格区间及参数组合查找商品
+     * 
+     * @param type 商品类型
+     * @param brandName 品牌
+     * @param priceLow 价格低值
+     * @param priceHigh 价格高值
+     * @param page 页号
+     * @param size 页大小
+     * @param direction 排序方向 asc:升序 desc:降序
+     * @param property 排序字段名
+     * @param paramValues 参数值列表
+     * @return 商品分页
+     */
+    public Page<Product> findByTypeAndBrandNameAndPriceAndParameters(String type,
+                                    String brandName,
+                                    Double priceLow,
+                                    Double priceHigh,
+                                    int page,
+                                    int size,
+                                    String direction,
+                                    String property,
+                                    String... paramValues)
+    {
+        Page<Product> productPage = null;
+        PageRequest pageRequest = null;
+        
+        if (null == type)
+        {
+            return null;
+        }
+        
+        if (page < 0 || size < 0)
+        {
+            return null;
+        }
+        
+        if (null == direction || null == property)
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        else
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, 
+                                 property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        
+        if (null == paramValues)
+        {
+            return null;
+        }
+        
+        String paramValue = "%";
+        
+        for (String param : paramValues)
+        {
+            if (null != param)
+            {
+                paramValue += "%[" + param.trim() + "]%";
+            }
+        }
+        
+        if (null == priceLow || null == priceHigh)
+        {
+            if (null == brandName || "".equals(brandName))
+            {
+                productPage = repository.findByTypeAllLikeAndParamValueAllLikeAndIsOnSaleTrue("%[" + type.trim() + "]%", 
+                        paramValue, 
+                        pageRequest);
+            }
+            else
+            {
+                productPage = repository.findByTypeAllLikeAndBrandNameAndParamValueAllLikeAndIsOnSaleTrue("%[" + type.trim() + "]%", 
+                        brandName, 
+                        paramValue, 
+                        pageRequest);
+            }
+        }
+        else
+        {
+            if (null == brandName || "".equals(brandName))
+            {
+                productPage = repository.findByTypeAllLikeAndParamValueAllLikeAndPriceMinimumBetweenAndIsOnSaleTrue("%[" + type.trim() + "]%", 
+                                                                                                    paramValue,
+                                                                                                    priceLow, 
+                                                                                                    priceHigh, 
+                                                                                                    pageRequest);
+            }
+            else
+            {
+                productPage = repository.findByTypeAllLikeAndBrandNameAndParamValueAllLikeAndPriceMinimumBetweenAndIsOnSaleTrue("%[" + type.trim() + "]%", 
+                                                                                                brandName, 
+                                                                                                paramValue,
+                                                                                                priceLow, 
+                                                                                                priceHigh, 
+                                                                                                pageRequest);
+            }
+        }
         
         return productPage;
     }
@@ -401,16 +502,19 @@ public class ProductService {
             productVersionService.save(versionList);
             
             Double priceMinimum = versionList.get(0).getSalePrice();
+            Long priceMinimumVid = versionList.get(0).getId();
             
             for (ProductVersion ver : versionList)
             {
                 if (ver.getSalePrice() < priceMinimum)
                 {
                     priceMinimum = ver.getSalePrice();
+                    priceMinimumVid = ver.getId();
                 }
             }
             
             product.setPriceMinimum(priceMinimum);
+            product.setPriceMinimumVid(priceMinimumVid);
         }
         
         // 设置参数
@@ -418,6 +522,26 @@ public class ProductService {
         {
             product.setParamList(paramList);
             productParameterService.save(paramList);
+            
+            String paramAll = "";
+            
+            for (ProductParameter pp : paramList)
+            {
+                if (null != pp.getValue())
+                {
+                    for (String value : pp.getValue().split(";"))
+                    {
+                        if (null != value && !"".equals(value))
+                        {
+                            paramAll += "[";
+                            paramAll += value.trim();
+                            paramAll += "];";
+                        }
+                    }
+                }
+            }
+            
+            product.setParamValueAll(paramAll);
         }
         
         // 设置限时抢购时间
@@ -434,7 +558,6 @@ public class ProductService {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
         }
         else
         {
@@ -446,16 +569,29 @@ public class ProductService {
             product.setIsStarProduct(false);
         }
         
-        product.setIsOnSale(true);
-        product.setCreateTime(new Date());
+        if (null == product.getBrandName())
+        {
+            product.setBrandName("");
+        }
         
-        product.setMondayVisitNumber(0L);
-        product.setTuesdayVisitNumber(0L);
-        product.setWednesdayVisitNumber(0L);
-        product.setThursdayVisitNumber(0L);
-        product.setFridayVisitNumber(0L);
-        product.setSaturdayVisitNumber(0L);
-        product.setSundayVisitNumber(0L);
+        if (null == product.getParamValueAll())
+        {
+            product.setParamValueAll("");
+        }
+        
+        if (null == product.getId())
+        {
+            product.setIsOnSale(true);
+            product.setCreateTime(new Date());
+            product.setSoldNumber(0L);
+            product.setMondayVisitNumber(0L);
+            product.setTuesdayVisitNumber(0L);
+            product.setWednesdayVisitNumber(0L);
+            product.setThursdayVisitNumber(0L);
+            product.setFridayVisitNumber(0L);
+            product.setSaturdayVisitNumber(0L);
+            product.setSundayVisitNumber(0L);
+        }
         
         return repository.save(product);
     }
@@ -483,49 +619,5 @@ public class ProductService {
         {
             repository.delete(product);
         }
-    }
-    
-    /**
-     * 查找指定类型的热销商品，并按销量排序
-     * 
-     * @param type 商品类型
-     * @param limit 商品条数
-     * @return
-     */
-    public List<Product> findByTypeOrderBySoldNumberDesc(String type, Integer limit)
-    {
-        // 查找该类型所有商品
-        List<Long> pidList = this.findIdByType(type);
-        
-        if (pidList.size() <= 0)
-        {
-            return null;
-        }
-        
-        if (null == limit)
-        {
-            limit = 5;
-        }
-        
-        // 查找所有商品中
-        List<BigInteger> idList = productVersionService.findProductIdOrderBySoldNumberDesc(pidList, limit);
-        
-        // 为什么要用这种狗血的一个个查找的方法呢，因为忽然之间findByIdIn()突然不好使了
-        List<Product> productList = new ArrayList<Product>();
-        
-        for (BigInteger pid : idList)
-        {
-            if (null != pid)
-            {
-                Product product = repository.findOne(pid.longValue());
-                
-                if (null != product)
-                {
-                    productList.add(product);
-                }
-            }
-        }
-        
-        return productList;
     }
 }

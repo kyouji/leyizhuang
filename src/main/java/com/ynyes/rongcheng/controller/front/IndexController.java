@@ -1,7 +1,5 @@
 package com.ynyes.rongcheng.controller.front;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ynyes.rongcheng.entity.Advertisement;
 import com.ynyes.rongcheng.entity.Brand;
 import com.ynyes.rongcheng.entity.Product;
+import com.ynyes.rongcheng.entity.ProductType;
 import com.ynyes.rongcheng.service.AdvertisementService;
 import com.ynyes.rongcheng.service.BrandService;
 import com.ynyes.rongcheng.service.ProductService;
@@ -148,23 +147,29 @@ public class IndexController {
         }
         
         // 手机热销排行榜
-        List<Product> phoneList = productService.findByTypeOrderBySoldNumberDesc("手机", 5);
+        Page<Product> phonePage = productService.findByType("手机", 0, 5, "desc", "soldNumber");
         
-        if (null != phoneList)
+        if (null != phonePage)
         {
-            map.addAttribute("phone_hot_product_list", phoneList);
+            map.addAttribute("phone_hot_product_list", phonePage.getContent());
         }
         
         // 平板热销排行榜
-        List<Product> padList = productService.findByTypeOrderBySoldNumberDesc("平板电脑", 5);
+        Page<Product> padPage = productService.findByType("平板电脑", 0, 5, "desc", "soldNumber");
         
-        if (null != padList)
+        if (null != padPage)
         {
-            map.addAttribute("pad_hot_product_list", padList);
+            map.addAttribute("pad_hot_product_list", padPage.getContent());
+        }
+        
+        Page<ProductType> typePage = productTypeService.findByIsRecommendTrue(0, 6, "desc", "id");
+        
+        if (null != typePage)
+        {
+            map.addAttribute("", typePage.getContent());
         }
         
         return "/front/index";
     }
     
-   
 }

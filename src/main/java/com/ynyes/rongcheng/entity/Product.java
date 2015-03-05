@@ -97,9 +97,21 @@ public class Product {
     @Column
     private String typeAll;
     
+    // 参数值，用于搜索
+    @Column
+    private String paramValueAll;
+    
     // 价格最小值
     @Column(nullable=false, scale=2)
     private Double priceMinimum;
+    
+    // 具有价格最小值的版本ID
+    @Column
+    private Long priceMinimumVid;
+    
+    // 各版本销售数量总和
+    @Column
+    private Long soldNumber;
     
     // 商品价格单位
     @Column
@@ -282,7 +294,23 @@ public class Product {
     public void setPriceMinimum(Double priceMinimum) {
         this.priceMinimum = priceMinimum;
     }
-    
+
+    public Long getPriceMinimumVid() {
+        return priceMinimumVid;
+    }
+
+    public void setPriceMinimumVid(Long priceMinimumVid) {
+        this.priceMinimumVid = priceMinimumVid;
+    }
+
+    public Long getSoldNumber() {
+        return soldNumber;
+    }
+
+    public void setSoldNumber(Long soldNumber) {
+        this.soldNumber = soldNumber;
+    }
+
     public String getPromotion() {
         return promotion;
     }
@@ -353,6 +381,14 @@ public class Product {
 
     public void setTypeAll(String typeAll) {
         this.typeAll = typeAll;
+    }
+
+    public String getParamValueAll() {
+        return paramValueAll;
+    }
+
+    public void setParamValueAll(String paramValueAll) {
+        this.paramValueAll = paramValueAll;
     }
 
     public String getPriceUnit() {
