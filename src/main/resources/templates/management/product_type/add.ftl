@@ -10,7 +10,7 @@
                 <input type="text" id="name" name="name" class="col-xs-10 col-sm-12"  autofocus="autofocus" maxlength="20"/>
             </div>
             
-            <label class="col-sm-2 control-label no-padding-right" for="type">*父类型</label>
+            <label class="col-sm-1 control-label no-padding-right" for="type">*父类型</label>
             <div class="col-sm-4">
                 <select class="form-control" id="parent" name="parent">
                     <option value="">根类型</option>
@@ -19,9 +19,14 @@
                     </#list>
                 </select>
             </div>
+            
+            <div class="checkbox col-sm-2">
+                <label>
+                    <input name="isRecommend" type="checkbox" class="ace" checked/>
+                    <span class="lbl">是否推荐?</span>
+                </label>
+            </div>
         </div>
-
-        <div class="space-4"></div>
         
         <input type="text" id="propIds" name="propIds" style="display:none;" />
         <div class="col-sm-12" style="margin-top:10px;">

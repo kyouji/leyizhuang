@@ -54,8 +54,18 @@ public interface ProductRepo extends
                                                                String paramValue,
                                                                Pageable page);
     
+    Page<Product> findByTypeAllLikeAndParamValueAllLikeAndIsOnSaleTrue(String type,
+                                                                String paramValue,
+                                                                Pageable page);
+    
     Page<Product> findByTypeAllLikeAndBrandNameAndParamValueAllLikeAndPriceMinimumBetweenAndIsOnSaleTrue(String type, 
                                                                 String brandName, 
+                                                                String paramValue,
+                                                                Double priceLow,
+                                                                Double priceHigh,
+                                                                Pageable page);
+    
+    Page<Product> findByTypeAllLikeAndParamValueAllLikeAndPriceMinimumBetweenAndIsOnSaleTrue(String type, 
                                                                 String paramValue,
                                                                 Double priceLow,
                                                                 Double priceHigh,

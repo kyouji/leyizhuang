@@ -129,11 +129,6 @@ public class ProductService {
             return null;
         }
         
-        if (null == brandName)
-        {
-            brandName = "";
-        }
-        
         if (null == direction || null == property)
         {
             pageRequest = new PageRequest(page, size);
@@ -162,19 +157,39 @@ public class ProductService {
         
         if (null == priceLow || null == priceHigh)
         {
-            productPage = repository.findByTypeAllLikeAndBrandNameAndParamValueAllLikeAndIsOnSaleTrue("%[" + type.trim() + "]%", 
-                                                                                                    brandName, 
-                                                                                                    paramValue, 
-                                                                                                    pageRequest);
+            if (null == brandName || "".equals(brandName))
+            {
+                productPage = repository.findByTypeAllLikeAndParamValueAllLikeAndIsOnSaleTrue("%[" + type.trim() + "]%", 
+                        paramValue, 
+                        pageRequest);
+            }
+            else
+            {
+                productPage = repository.findByTypeAllLikeAndBrandNameAndParamValueAllLikeAndIsOnSaleTrue("%[" + type.trim() + "]%", 
+                        brandName, 
+                        paramValue, 
+                        pageRequest);
+            }
         }
         else
         {
-            productPage = repository.findByTypeAllLikeAndBrandNameAndParamValueAllLikeAndPriceMinimumBetweenAndIsOnSaleTrue("%[" + type.trim() + "]%", 
-                                                                                                    brandName, 
+            if (null == brandName || "".equals(brandName))
+            {
+                productPage = repository.findByTypeAllLikeAndParamValueAllLikeAndPriceMinimumBetweenAndIsOnSaleTrue("%[" + type.trim() + "]%", 
                                                                                                     paramValue,
                                                                                                     priceLow, 
                                                                                                     priceHigh, 
                                                                                                     pageRequest);
+            }
+            else
+            {
+                productPage = repository.findByTypeAllLikeAndBrandNameAndParamValueAllLikeAndPriceMinimumBetweenAndIsOnSaleTrue("%[" + type.trim() + "]%", 
+                                                                                                brandName, 
+                                                                                                paramValue,
+                                                                                                priceLow, 
+                                                                                                priceHigh, 
+                                                                                                pageRequest);
+            }
         }
         
         return productPage;
@@ -487,16 +502,19 @@ public class ProductService {
             productVersionService.save(versionList);
             
             Double priceMinimum = versionList.get(0).getSalePrice();
+            Long priceMinimumVid = versionList.get(0).getId();
             
             for (ProductVersion ver : versionList)
             {
                 if (ver.getSalePrice() < priceMinimum)
                 {
                     priceMinimum = ver.getSalePrice();
+                    priceMinimumVid = ver.getId();
                 }
             }
             
             product.setPriceMinimum(priceMinimum);
+            product.setPriceMinimumVid(priceMinimumVid);
         }
         
         // 设置参数
@@ -540,7 +558,6 @@ public class ProductService {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
         }
         else
         {

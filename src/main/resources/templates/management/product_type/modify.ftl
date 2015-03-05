@@ -11,7 +11,7 @@
                 <input type="text" id="m-name" name="name" value="${product_type.name}" class="col-xs-10 col-sm-12"  autofocus="autofocus" maxlength="20"/>
             </div>
             
-            <label class="col-sm-2 control-label no-padding-right" for="type">*父类型</label>
+            <label class="col-sm-1 control-label no-padding-right" for="type">*父类型</label>
             <div class="col-sm-4">
                 <select class="form-control" id="m-parent" name="parent">
                     <#if product_type.parent=="">
@@ -27,6 +27,13 @@
                         </#if>
                     </#list>
                 </select>
+            </div>
+            
+            <div class="checkbox col-sm-2">
+                <label>
+                    <input name="isRecommend" type="checkbox" class="ace" <#if product_type.isRecommend?? && product_type.isRecommend==true>checked</#if>/>
+                    <span class="lbl">是否推荐?</span>
+                </label>
             </div>
         </div>
 

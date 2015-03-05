@@ -24,6 +24,10 @@ public interface ProductTypeRepo extends
     Page<ProductType> findByParentIsNull(Pageable page);
     List<ProductType> findByParentIsNull();
     
+    // 查找推荐类型
+    Page<ProductType> findByIsRecommendTrue(Pageable page);
+    List<ProductType> findByIsRecommendTrue();
+    
     // 通过父类型查找子类型
     Page<ProductType> findByParent(String parent, Pageable page);
     List<ProductType> findByParent(String parent);

@@ -35,6 +35,10 @@ public class ProductType {
     @Column
     private Long sortNumber;
     
+    // 是否推荐类型
+    @Column
+    private Boolean isRecommend;
+    
     // 关联的属性
     @OneToMany
     @JoinColumn(name="productTypeId")
@@ -78,6 +82,14 @@ public class ProductType {
 
     public void setTypeParamList(List<ProductTypeParameter> typeParamList) {
         this.typeParamList = typeParamList;
+    }
+
+    public Boolean getIsRecommend() {
+        return isRecommend;
+    }
+
+    public void setIsRecommend(Boolean isRecommend) {
+        this.isRecommend = isRecommend;
     }
 
 }

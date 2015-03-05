@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ynyes.rongcheng.entity.Advertisement;
 import com.ynyes.rongcheng.entity.Brand;
 import com.ynyes.rongcheng.entity.Product;
+import com.ynyes.rongcheng.entity.ProductType;
 import com.ynyes.rongcheng.service.AdvertisementService;
 import com.ynyes.rongcheng.service.BrandService;
 import com.ynyes.rongcheng.service.ProductService;
@@ -161,8 +162,14 @@ public class IndexController {
             map.addAttribute("pad_hot_product_list", padPage.getContent());
         }
         
+        Page<ProductType> typePage = productTypeService.findByIsRecommendTrue(0, 6, "desc", "id");
+        
+        if (null != typePage)
+        {
+            map.addAttribute("", typePage.getContent());
+        }
+        
         return "/front/index";
     }
     
-   
 }

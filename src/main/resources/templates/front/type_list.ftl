@@ -62,6 +62,7 @@
 <li><a href="/list/1" title="明星产品">明星产品</a></li>
 <li><a href="/list/2" title="手机产品">手机产品</a></li>
 <li><a href="/list/3" title="手机配件">手机配件</a></li>
+<li><a href="/list/3" title="二手手机">二手手机</a></li>
 <li><a href="/list/4" title="靓号选择">靓号选择</a></li>
 <li><a href="/list/5" title="新闻资讯">新闻资讯</a></li>
 </ul>
@@ -99,28 +100,22 @@
     <div class="hot_list">
       <h2>热销排行</h2>
       <ul>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num1">1</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num1">2</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num1">3</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num2">4</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num2">5</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num2">6</div>
-        </li>
-        <li> <a href="#"> <img src="/images/hot.jpg" /> <span>BlackBerryZ30【黑莓典范】5英寸Super AMOLED显示屏黑莓10.2系</span> <b>￥4599.00</b> </a>
-          <div class="num2">7</div>
-        </li>
-
+        <#if hot_product_list??>
+            <#list hot_product_list as product>
+                <li> 
+                    <a href="/product/${product.id}"> 
+                        <img src="${product.coverImageUri}" /> 
+                        <span>${product.name} ${product.brief}</span> 
+                        <b>￥${product.priceMinimum?string("#.##")}</b> 
+                    </a>
+                    <#if product_index < 3>
+                        <div class="num1">${product_index+1}</div>
+                    <#else>
+                        <div class="num2">${product_index+1}</div>
+                    </#if>
+                </li>
+            </#list>
+        </#if>
       </ul>
     </div>
     <div class="hot_list mt20">
@@ -137,15 +132,18 @@
   <div class="sub_right">
     <div class="sx_tit">
       <h2>手机</h2>
-      （共搜索到<b><#if count??>${count}</#if></b>个商品）<span></span> </div>
+      <input type="text" id="type-id" value="<#if type_id??>${type_id}</#if>" style="display:none;"/>
+      （共搜索到<b><#if count??>${count}</#if></b>个商品）<span></span> 
+    </div>
      <div class="sx_lb">
-      <ul>
+      <ul id="prop-ul">
         <#if brand_list??>
             <li> 
                 <span>品牌：</span>
                 <p>
+                    <a href="javascript:;" class="<#if brandIndex == 0 >sxon</#if> brand prop">全部</a>
                     <#list brand_list as brand>
-                        <a href="javascript:;" class="sxon">${brand.name}</a>
+                        <a href="javascript:;" class="<#if brandIndex == brand_index+1>sxon</#if> brand prop">${brand.name}</a>
                     </#list>
                     <#if brand_list?size gt 10>
                         <a href="javascript:;" class="orange">查看更多品牌>></a>
@@ -158,9 +156,19 @@
                 <li> 
                     <span>${param.name}：</span>
                     <p>
+                        <#if param_index_list?size==0 || param_index_list?size gt param_index && param_index_list[param_index]==0>
+                            <a href="javascript:;" class="sxon prop">全部</a>
+                        <#else>
+                            <a href="javascript:;" class="prop">全部</a>
+                        </#if>
+                        
                         <#if param.valueList??>
                             <#list param.valueList?split(",") as value>
-                                <a href="javascript:;" class="sxon">${value}</a>
+                                <#if param_index_list?size gt param_index && param_index_list[param_index]==value_index+1>
+                                    <a href="javascript:;" class="sxon prop">${value}</a>
+                                <#else>
+                                    <a href="javascript:;" class="prop">${value}</a>
+                                </#if>
                             </#list>
                         </#if>
                     </p>
@@ -172,21 +180,23 @@
 	<div id="centent">
 	
     <div class="sxtj">
-      <ul id="ul_li">
-        <li><a href="javascript:void(0)" class="sxtj_on">销量↓</a></li>
-        <li><a href="javascript:void(0)" class="">价格↑</a></li>
-        <li><a href="javascript:void(0)" class="">上架时间↑</a></li>
+      <ul id="ul-sort">
+        <li><a href="javascript:void(0)" <#if sort_type?? && sort_type==0>class="sxtj_on"</#if>>销量</a></li>
+        <li><a href="javascript:void(0)" id="sort-price" <#if sort_type?? && sort_type==1>class="sxtj_on"</#if>>价格<#if price_direction?? && price_direction==1>↑<#else>↓</#if></a></li>
+        <li><a href="javascript:void(0)" <#if sort_type?? && sort_type==2>class="sxtj_on"</#if>>上架时间</a></li>
      </ul>
         <div class="sxtjBox">
-        <span>价格范围：</span>
-          <input type="text" class="jgqj_txt" id="minMoney"/>
-          <span>--</span>
-          <input type="text" class="jgqj_txt" id="maxMoney" />
-          <input type="button" class="jgqj_btn" onclick="tm_searchProfit(this)" value="搜 索" />
+            <span>价格范围：</span>
+            <input type="text" class="jgqj_txt" id="minMoney" value="<#if price_low??>${price_low?string("#")}<#else>0</#if>"/>
+            <span>--</span>
+            <input type="text" class="jgqj_txt" id="maxMoney" value="<#if price_high??>${price_high?string("#")}<#else>0</#if>"/>
+            <input type="button" class="jgqj_btn" id="priceSearch" value="搜 索" />
+        </div> 
+      <div class="list_fenye flr">
+        <a id="prev-page" href="javascript:;"><img src="/img/left.png"></a>
+        <span><b id="page-index">${page_index+1}</b>/<b id="page-total"><#if page_total==0>${page_total+1}<#else>${page_total}</#if></b></span>
+        <a id="next-page" href="javascript:;"><img src="/img/right.png"></a>
         </div>
-      
-      
-      <div class="list_fenye flr"><a href="javascript:void(0)"><img src="/img/left.png"></a><span>1/5</span><a href="#"><img src="/img/right.png"></a></div>
       
     </div>
     <div class="sx_list" id="page_con">
@@ -265,106 +275,5 @@
 </div>
 
 </div>
-<script type="text/javascript">
-<#--
-	var count="${count}"
-	$(function(){
-		tm_initPage(count)
-	})
-//分页
-function tm_initPage(count) {
-    $(".page").pagination(count, {
-        num_display_entries : 3,
-        num_edge_entries : 4,
-        current_page : 0,
-        items_per_page : 12,
-        prev_text : "上一页",
-        next_text : "下一页",
-        showGo : false,
-        showSelect : false,
-        callback : function(pageNo, psize) {
-            // alert(pageNo + "====" + psize);
-            loadTemp(pageNo, psize);
-        }
-    });
-}
-//加载模版
-	function loadTemp(pageNo,psize,callback){
-	var typeId=2;
-	var maxMoney = $("#maxMoney").val();
-	var minMoney = $("#minMoney").val();
-		$.ajax({
-			type:"post",
-			url:"/list/"+typeId+"_",
-			data:{"page":pageNo,"size":psize},
-			success:function(data){
-				$("#page_con").html(data);
-				 if (callback) {
-	                var count = $("#count").val();
-	                callback(count);
-	                
-	                
-	 $("#ul_li li").on("click",function(){
-		var typeId=2;
-		var index=$(this).index();
-		var $this=$("#ul_li li");
-        $this.find("a").removeClass("sxtj_on");
-        $this.eq(index).find("a").addClass("sxtj_on");
-        var text=$(this).text();
-   		$.ajax({
-			type:"post",
-			url:"/list/"+typeId+"_",
-			data:{"page":0,"size":12,"property":text},
-			success:function(data){
-				$("#page_con").html(data);
-				 if (callback) {
-	                var count = $("#count").val();
-	                callback(count);
-            	}
-			}
-		})
-	})
-            	}
-			}
-		})
-	}
-	//切换查询
-	$("#ul_li li").on("click",function(){
-		var typeId=2;
-		var index=$(this).index();
-		var $this=$("#ul_li li");
-        $this.find("a").removeClass("sxtj_on");
-        $this.eq(index).find("a").addClass("sxtj_on");
-        var text=$(this).text();
-   		$.ajax({
-			type:"post",
-			url:"/list/"+typeId+"_",
-			data:{"page":0,"size":12,"property":text},
-			success:function(data){
-				$("#page_con").html(data);
-				 if (callback) {
-	                var count = $("#count").val();
-	                callback(count);
-            	}
-			}
-		})
-	})
-	
-	function tm_searchProfit(obj){
-		
-				var maxMoney = $("#maxMoney").val();
-				var minMoney = $("#minMoney").val();
-				if(isNotEmpty(maxMoney) && isNotEmpty(minMoney) && maxMoney < minMoney){
-					alert("最小金额不能大于最大金额");
-					$("#maxMoney").select();
-					return ;
-				}
-			
-			tm_loadTemplate(0,10,function(itemCount){
-				tm_initPage(itemCount);//搜索以后重新初始化分页
-			});
-		}
--->
-</script>
 </body>
 </html>

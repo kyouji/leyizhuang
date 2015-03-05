@@ -79,6 +79,9 @@ public class TypelistController {
                 {
                     priceLow = Double.parseDouble(priceStr[0]);
                     priceHigh = Double.parseDouble(priceStr[1]);
+                    
+                    map.addAttribute("price_low", priceLow);
+                    map.addAttribute("price_high", priceHigh);
                 }
             }
         }
@@ -104,6 +107,8 @@ public class TypelistController {
             pType = productTypeService.findOne(typeId);
         }
         
+        map.addAttribute("type_id", typeId);
+        
         if (null == pType)
         {
             return "error404";
@@ -126,13 +131,16 @@ public class TypelistController {
         
         String brandName = null;
         
+        map.addAttribute("brandIndex", 0);
+        
         if (queryArray.length > 1)
         {
-            Integer index = Integer.parseInt(queryArray[1]);
+            Integer brandIndex = Integer.parseInt(queryArray[1]);
             
-            if (null != index && index.intValue() > 0)
+            if (null != brandIndex && brandIndex.intValue() > 0)
             {
-                brandName = brandList.get(index-1).getName();
+                brandName = brandList.get(brandIndex-1).getName();
+                map.addAttribute("brandIndex", brandIndex);
             }
         }
       
@@ -145,6 +153,8 @@ public class TypelistController {
             paramListLength = paramList.size();
         }
         
+        List<Integer> paramIndexList = new ArrayList<Integer>();
+        
         if (paramListLength > 0)
         {
             if (queryArray.length > paramListLength + 1)
@@ -154,7 +164,15 @@ public class TypelistController {
                 {
                     // index是参数值的位置号
                     Integer index = Integer.parseInt(queryArray[2+i]);
-                    if (null != index && index.intValue() > 0)
+                    
+                    if (null == index)
+                    {
+                        index = 0;
+                    }
+                    
+                    paramIndexList.add(index);
+                    
+                    if (index.intValue() > 0)
                     {
                         String[] values = paramList.get(i).getValueList().split(",");
                         
@@ -167,6 +185,8 @@ public class TypelistController {
             }
         }
         
+        map.addAttribute("param_index_list", paramIndexList);
+        
         // 0:按销量排序 1:价格排序 2:上架时间排序
         Integer sortType = null;
         
@@ -175,16 +195,25 @@ public class TypelistController {
             sortType = Integer.parseInt(queryArray[paramListLength + 2]);
         }
         
+        if (null == sortType || sortType.intValue() > 2)
+        {
+            sortType = 0;
+        }
+        
+        map.addAttribute("sort_type", sortType);
+        
         String direction = "desc";
         String property = "soldNumber";
         
-        // 只有价格排序会区分升降序
+        map.addAttribute("price_direction", 0);
+        
         if (null != sortType)
         {
             if (sortType.equals(0))
             {
                 
             }
+            // 只有价格排序会区分升降序
             else if (sortType.equals(1))
             {
                 if (queryArray.length > paramListLength + 4)
@@ -195,6 +224,7 @@ public class TypelistController {
                     if (null != dirFlag && dirFlag.equals(1))
                     {
                         direction = "asc";
+                        map.addAttribute("price_direction", 1);
                     }
                 }
                 
@@ -213,6 +243,8 @@ public class TypelistController {
             pageIndex = Integer.parseInt(queryArray[paramListLength + 6]);
         }
         
+        map.addAttribute("page_index", pageIndex);
+        
         Page<Product> productPage = productService.findByTypeAndBrandNameAndPriceAndParameters(pType.getName(), 
                                                             brandName, priceLow, priceHigh, 
                                                             pageIndex, ClientConstant.pageSize, 
@@ -223,6 +255,15 @@ public class TypelistController {
         {
             map.addAttribute("count", productPage.getTotalElements());
             map.addAttribute("product_list", productPage.getContent());
+            map.addAttribute("page_total", productPage.getTotalPages());
+        }
+        
+        // 热销排行
+        productPage = productService.findByType(pType.getName(), 0, 10, "desc", "soldNumber");
+        
+        if (null != productPage)
+        {
+            map.addAttribute("hot_product_list", productPage.getContent());
         }
         
         // 商品类型逐级分类
@@ -236,38 +277,6 @@ public class TypelistController {
             map.addAttribute("recommend_brand_list", brandPage.getContent());
         }
         
-        
-//        if(property.equals("价格↑")){
-//            property="flashSalePrice";
-//            }else if(property.equals("上架时间↑") || property=="上架时间↑"){
-//                property="onSaleTime";
-//            }
-//        if(StringUtils.isNotEmpty(typeId) && StringUtils.isNumber(typeId)){
-//            if(typeId.equals("1")){
-//                return "/front/type_list_star";//明星产品
-//            }
-//            if(typeId.equals("2")){
-//                //根据类型获取所有子类
-//                Page<Product> pages=productservice.findByType("2", page, size, direction, property);
-//                model.addAttribute("product", pages.getContent());
-//                model.addAttribute("count",pages.getTotalElements());
-//                return "/front/type_list_mobile";//手机产品
-//            }
-//            if(typeId.equals("3")){
-//                Page<Product> pages=productservice.findByType("3", page, size, direction, property);
-//                model.addAttribute("armature", pages.getContent());
-//                model.addAttribute("count", pages.getTotalElements());
-//                return "/front/type_list_accessories";//手机配件
-//            }
-//            if(typeId.equals("4")){
-//                return "/front/type_list_number";//靓号选择
-//            }
-//            if(typeId.equals("5")){
-//                return "/front/news";//新闻资讯
-//            }
-//        }else{
-//            return "error404";//错误
-//        }
         return "/front/type_list";//错误
     }
     /**
