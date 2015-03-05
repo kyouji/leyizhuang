@@ -143,6 +143,20 @@ public class CartController {
            return flag;
        }
     }
+    @RequestMapping("delete")
+    @ResponseBody
+    public String delete(String id,HttpServletRequest request){
+        User user=(User) request.getSession().getAttribute("user");
+        if(user!=null){
+            shoppingCartService.delete(user.getUsername(), Long.parseLong(id));
+            flag="success";
+            return flag;
+        }else{
+            flag="flase";
+            return flag;
+        }
+        
+    }
     public String getFlag() {
         return flag;
     }

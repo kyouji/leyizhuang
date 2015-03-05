@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ynyes.rongcheng.entity.Parameter;
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.ProductComment;
+import com.ynyes.rongcheng.entity.ProductVersion;
 import com.ynyes.rongcheng.entity.User;
 import com.ynyes.rongcheng.service.ParameterService;
 import com.ynyes.rongcheng.service.ProductCommentService;
@@ -66,10 +68,13 @@ public class Productontroller {
                                                 int size,
                                                 String direction,
                                                 String property
+                                                co 已选颜色
+                                                ca 已选容量
+                                                na 已选版本名
      * @since  1.0.0
      */
     @RequestMapping("/product/{typeId}")
-    public ModelAndView index(@PathVariable Long typeId,Long vid){
+    public ModelAndView index(@PathVariable Long typeId,Long vid,String co, String ca, String na){
         ModelAndView modelAndView=new ModelAndView();
         Product product=productservice.findOne(typeId);
 
@@ -80,7 +85,92 @@ public class Productontroller {
         }
         
         String type =product.getType();
+        List<String> versionColors = new ArrayList<String>();
+        List<String> versionNames = new ArrayList<String>();
+        List<String> versionCapacities = new ArrayList<String>();
+        List<ProductVersion> productVersions =product.getVersionList();
+        for (ProductVersion ver : productVersions) {
+        {
+            // 版本颜色全部添加
+            if (null != ver.getColor()
+                    && !"".equals(ver.getColor()) 
+                    && !versionColors.contains(ver.getColor()))
+            {
+                versionColors.add(ver.getColor());
+            }
+            
+            // 添加版本
+            // 已选颜色
+            if (null != co && !"".equals(co))
+            {
+                // 匹配已选颜色才添加
+                if (null != ver.getName() 
+                        && !"".equals(ver.getName()) 
+                        && co.equals(ver.getColor())
+                        && !versionNames.contains(ver.getName()))
+                {
+                    versionNames.add(ver.getName());
+                }
+            }
+            else // 未选颜色
+            {
+                if (null != ver.getName() 
+                        && !"".equals(ver.getName()) 
+                        && !versionNames.contains(ver.getName()))
+                {
+                    versionNames.add(ver.getName());
+                }
+            }
+            
+            // 添加容量
+            // 已选颜色
+            if (null != co && !"".equals(co))
+            {
+                // 已选版本
+                if (null != na && !"".equals(na))
+                {
+                    // 满足版本和颜色均匹配
+                    if (null != ver.getCapacity()
+                            && !"".equals(ver.getCapacity()) 
+                            && co.equals(ver.getColor())
+                            && na.equals(ver.getName())
+                            && !versionCapacities.contains(ver.getCapacity()))
+                    {
+                        versionCapacities.add(ver.getCapacity());
+                    }
+                }
+                else
+                {
+                    // 仅满足颜色匹配
+                    if (null != ver.getCapacity()
+                            && !"".equals(ver.getCapacity()) 
+                            && co.equals(ver.getColor())
+                            && !versionCapacities.contains(ver.getCapacity()))
+                    {
+                        versionCapacities.add(ver.getCapacity());
+                    }
+                }
+            }
+            else // 未选颜色
+            {
+                // 添加所有版本
+                if (null != ver.getCapacity()
+                        && !"".equals(ver.getCapacity()) 
+                        && !versionCapacities.contains(ver.getCapacity()))
+                {
+                    versionCapacities.add(ver.getCapacity());
+                }
+            }
+        }
+        
 
+        modelAndView.addObject("co", co);
+        modelAndView.addObject("ca", ca);
+        modelAndView.addObject("na", na);
+        modelAndView.addObject("version_names", versionNames);
+        modelAndView.addObject("version_colors", versionColors);
+        modelAndView.addObject("version_capacities", versionCapacities);
+    }
         List<Parameter> parameters= parameterService.findByType(type);
         String list=product.getShowPictures();
         String[] sList = list.split(",");
