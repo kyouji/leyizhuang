@@ -83,7 +83,7 @@
 <div class="main">
 <div class="s_gwc1zj_left fll mt12"><p><input type="checkbox" onclick="checkAll(this)" class="fll">全选</p></div>
 
-<div class="s_gwc1zj flr"><p>商品<span id="code_su"> 3 </span>件  总价：<span>¥599.00</span>  商品总计(不含运费)： <span>¥599.00</span> </p></div>
+<div class="s_gwc1zj flr"><p>商品<span id="code_su"> ${count} </span>件  总价：<span>¥599.00</span>  商品总计(不含运费)： <span>¥599.00</span> </p></div>
 
 </div>
 
@@ -107,7 +107,7 @@
 
 <script type="text/javascript">
 
-			//分页---上一页(减1)  / 下一页(加1)
+			//--上一页(减1)  / 下一页(加1)
 			
 			var index = 1;
 	
@@ -126,6 +126,7 @@
 				var money=$this.parents().find("#moneys").text();
 				total += money * num;
 				$this.parents().find("#td_sum").text(total);
+				
 			});
 
 		
@@ -141,8 +142,25 @@
 				var money=$this.parents().find("#moneys").text();
 				$this.parents().find("#td_sum").text(num*money);
 				var unit_price = $(this).parent().parent().find("b.unit-price").eq(0).html();
-				
+				tm_total()
 			});
+			
+			/*总金额计算*/
+			function tm_total(){
+				var total = 0;
+				$("#tr_list").find("td").each(function(){
+				var checked =$(this).find(".duoxuank").prop("checked")
+					if(checked==true){
+						var money =  $(this).find("#moneys").text();
+						var num =  $(this).find("#count").val();
+						total += money * num;
+					}
+				});
+
+				var count = $("#listbox").find("li").find(".c_xz:visible").length;
+				$("#count").text(count);
+				$("#sum").text(total);
+			};
 			
 			
 	/*全选*/

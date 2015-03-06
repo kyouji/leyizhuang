@@ -61,6 +61,7 @@ public class CartController {
                     /*modelAndView.addObject("cartId",shoppingCartService.findOne(username, Long.parseLong(sum)));*/
                     
                     modelAndView.addObject("carts",shoppingCartService.findByUsername(username));
+                    modelAndView.addObject("count",shoppingCartService.countByUsername(username));/*数量*/
                     modelAndView.setViewName("/front/cart/cart");
                     return modelAndView;
                 }else {
