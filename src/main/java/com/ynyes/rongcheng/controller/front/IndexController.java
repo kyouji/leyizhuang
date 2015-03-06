@@ -1,5 +1,7 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +57,61 @@ public class IndexController {
      */
     @RequestMapping
     public String index(HttpServletRequest request, ModelMap map){
+     
+        // 导航栏
+        List<ProductType> rptList = productTypeService.findByParent("");
         
-        map.addAttribute("root_type_list", productTypeService.findByParent(""));
+        map.addAttribute("root_type_list", rptList);
+        
+        for (ProductType pType : rptList)
+        {
+            if (pType.getName().equals("手机"))
+            {
+                List<Brand> brandList = brandService.findByType(pType.getName());
+                
+                if (null != brandList)
+                {
+                    for (int i=0; i < brandList.size(); i++)
+                    {
+                        if (brandList.get(i).getName().contains("苹果"))
+                        {
+                            map.addAttribute("apple_index", i + 1);
+                        }
+                        
+                        if (brandList.get(i).getName().contains("小米"))
+                        {
+                            map.addAttribute("mi_index", i + 1);
+                        }
+                        
+                        if (brandList.get(i).getName().contains("华为"))
+                        {
+                            map.addAttribute("huawei_index", i + 1);
+                        }
+                        
+                        if (brandList.get(i).getName().contains("联想"))
+                        {
+                            map.addAttribute("lenovo_index", i + 1);
+                        }
+                    }
+                }
+                map.addAttribute("phone_type", pType);
+            }
+            else if (pType.getName().equals("手机配件"))
+            {
+                List<ProductType> ptList = productTypeService.findByParent("手机配件");
+                
+                map.addAttribute("accessory_sub_type_list", ptList);
+                map.addAttribute("phone_accessory_type", pType);
+            }
+            else if (pType.getName().equals("靓号中心"))
+            {
+                map.addAttribute("phone_number_type", pType);
+            }
+        }
+        
+        map.addAttribute("second_hand_phone_type", productTypeService.findByName("二手手机"));
+        
+        // 导航栏结束
         
         Page<Brand> brandPage = brandService.findByIsRecommendTrue(0, 9, null, null);
         
@@ -164,9 +219,32 @@ public class IndexController {
         
         Page<ProductType> typePage = productTypeService.findByIsRecommendTrue(0, 6, "desc", "id");
         
+        // 推荐类型
         if (null != typePage)
         {
-            map.addAttribute("", typePage.getContent());
+            List<ProductType> rptPageList = typePage.getContent();
+            if (rptPageList.size() > 0)
+            {
+                map.addAttribute("recommend_type_list", typePage.getContent());
+                
+                for (int i = 0; i < 6 && i < rptPageList.size(); i++)
+                {
+                    Page<Product> rptProductPage = productService.findByType(rptPageList.get(i).getName(),
+                                                    0, 6, "desc", "id");
+                    if (null != rptProductPage && rptProductPage.getContent().size() > 0)
+                    {
+                        map.addAttribute("recommed_type_product_list"+i, rptProductPage.getContent());
+                    }
+                }
+            }
+        }
+        
+        // 靓号商品
+        productPage = productService.findByType("靓号中心", 0, 10, "desc", "id");
+        
+        if (null != productPage && productPage.getContent().size() > 0)
+        {
+            map.addAttribute("phone_number_list", productPage.getContent());
         }
         
         return "/front/index";

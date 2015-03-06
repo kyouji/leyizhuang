@@ -6,7 +6,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif; color:#333; margin
 table{border-collapse:collapse;border-spacing:0;}
 
 a{color:#333;text-decoration:none;}
-a:hover{color:#c00; text-decoration:underline;}
+a:hover{color:#c00; text-decoration:none;}
 
 #preview {text-align: center; margin: 10px auto 0px; width: 310px; float: none; cursor:pointer;}
 /* .jqzoom {border-bottom: #ddd 1px solid; border-left: #ddd 1px solid; width: 310px; margin-bottom: 10px; height: 310px; overflow: hidden; border-top: #ddd 1px solid; border-right: #ddd 1px solid; _height: 310px; position: relative;} */

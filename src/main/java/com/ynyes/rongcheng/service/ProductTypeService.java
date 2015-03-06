@@ -49,7 +49,7 @@ public class ProductTypeService {
         }
         else
         {
-            typeList = repository.findByParent(parent);
+            typeList = repository.findByParent(parent.trim());
         }
         
         return typeList;
@@ -161,6 +161,11 @@ public class ProductTypeService {
             {
                 idList.add(param.getParamId());
             }
+        }
+        
+        if (0 == idList.size())
+        {
+            return null;
         }
         
         return parameterRepo.findByIdInAndIsSearchableTrue(idList);

@@ -128,9 +128,9 @@
       <div class="clear"></div>
     </div>
     <p class="shopbtn mt10"><span class="fll">我要购买：</span>
-    <a href="javascript:void(0)" class="fll prev" data-num="${product.numberDecType}"><img src="/images/jia.jpg" /></a>
+    <a href="javascript:void(0)" class="fll prev" data-num="${product.versionList[0].leftNumber}"><img src="/images/jia.jpg" /></a>
       <input type="text" class="select_num " id="count" value="1"/>
-      <a href="javascript:void(0)" class="fll next" data-num="${product.numberDecType}"><img src="/images/jian.jpg"/></a></p>
+      <a href="javascript:void(0)" class="fll next" data-num="${product.versionList[0].leftNumber}"><img src="/images/jian.jpg"/></a></p>
     <div class="clear"></div>
     <div class="gm_btn"> <span class="gm_btn1"><a href="javascript:void(0)" onclick="tm_buy(${product.id})">立即购买</a></span> <span class="gm_btn2"><a href="javascript:void(0)" onclick="tm_buy(${product.id})">加入购物车</a></span><span class="gm_btn3"><a href="javascript:void(0)" onclick="tm_contra(this,${product.id})" >对比</a></span></div>
   </div>

@@ -107,7 +107,7 @@ public class TypelistController {
             pType = productTypeService.findOne(typeId);
         }
         
-        map.addAttribute("type_id", typeId);
+        map.addAttribute("type", pType);
         
         if (null == pType)
         {
@@ -118,7 +118,7 @@ public class TypelistController {
         Page<Brand>  brandPage = brandService.findByType(pType.getName(), 0, 10, null, null);
         List<Brand> brandList = null;
         
-        if (null != brandPage)
+        if (null != brandPage && brandPage.getContent().size() > 0)
         {
             brandList = brandPage.getContent();
         }

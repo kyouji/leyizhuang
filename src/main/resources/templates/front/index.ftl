@@ -8,128 +8,13 @@
 <link href="css/layout.css" rel="stylesheet" type="text/css" />
 <link href="css/rcindex.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/Tm/js/jquery-1.11.2.js"></script>
+<script type="text/javascript" src="/Tm/js/common/nav.js"></script>
+<script type="text/javascript" src="/Tm/js/common/head.js"></script>
+<script type="text/javascript" src="/Tm/js/front/index.js"></script>
 </head>
 <body>
-<header>
-<div class="main">
-<div class="fll header_l"><#if user??><span>您好，<a href="/user/info" >${user.username}</a>欢迎来到荣诚手机超市！您的身份：${user.role}&nbsp;&nbsp;<a href="/logout" >退出</a></span><#else><span>您好，欢迎来到荣诚手机超市！<a href="/login" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="/reg">免费注册</a></span></#if></div>
-<div class="flr header_r"><a href="/user/collect">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="/order/list">我的订单</a><a href="/help/question/1">帮助中心</a><a href="#">收藏本站</a></div>
-</div>
-</header>
-
-<div class="header1 main">
-<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="img/rc_logo.png" width="177" height="69"></a></div>
-<div class="fll city"><a href="#" id="city">城市切换</a><span></span>
-<div class="cityqh" style="display:none" id="change"><ul>
-<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="昆明市">昆明市</a></li>
-<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="曲靖市">曲靖市</a></li>
-<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="大理州">大理州</a></li>
-<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="西双版纳">西双版纳</a></li>
-<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="德宏州">德宏州</a></li>
-<li><a href="javascript:void(0)" onclick="change_city(this.name)" name="丽江市">丽江市</a></li>
-</ul></div>
-
-
-</div>
-<div class="sercha fll">
-<input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
-<input type="submit" class="search-btn" title="搜索" value="  ">
-<div class="rc_newsgg"><span>新闻公告:</span><a href="#">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
-</div>
-<div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
-</div>
-
-
-<nav>
-   <div class="main">
-     <div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15" id="goods">全部商品分类</a></div>
-
-<ul id="goods_style" style="display:none">
-    <#if root_type_list??>
-        <#list root_type_list as type>
-            <li id="phone">
-                <div class="mbj m${type_index+1}"></div>
-                        
-                    <div class="divshop">
-                    <h4><a href="/list/${type.id}">${type.name}</a></h4>
-                    <p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-                </div>
-                        
-                <div class="clear"></div>
-                
-                <div class="threeright">
-                    <ul id="threeright1" style="display:none">
-                    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-                    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-                    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-                    <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-                    </ul>
-                </div>
-            </li>
-        </#list>
-    </#if>
-    <#--
-    <li id="phone">
-        <div class="mbj m1"></div>
-                
-            <div class="divshop">
-    		<h4><a href="/list/2">手机产品</a></h4>
-    		<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-    	</div>
-        		
-        <div class="clear"></div>
-        
-        <div class="threeright">
-            <ul id="threeright1" style="display:none">
-            <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-            <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-            <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-            <li><span>品牌：</span><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a><a href="#">小米</a></li>
-            </ul>
-        </div>
-    </li>
-
-    <li id="phone_body">
-        <div class="mbj m2"></div>
-			<div class="divshop">
-			<h4><a href="/list/3">手机配件</a></h4>
-			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-			</div>
-        <div class="clear"></div>
-    </li>
-    
-    <li id="phone_number">
-        <div class="mbj m3"></div>
-            <div class="divshop">
-			<h4><a href="/list/4">手机靓号</a></h4>
-			<p><a href="#">小米</a><a href="#">苹果（Apple）</a><a href="#">联想</a><a href="#">电信4G</a></p>
-			</div>
-        <div class="clear"></div>
-    </li>
-    -->
-</ul>
-
-</div>
-
-<div class="nav_2 fll ml4">
-	<ul>
-		<li><a href="/" title="首页">首页</a></li>
-		
-		<li><a href="/list/1" title="明星产品">明星产品</a></li>
-		<li><a href="/list/2" title="手机产品">手机产品</a></li>
-		<li><a href="/list/3" title="手机配件">手机配件</a></li>
-		<li><a href="/list/4" title="靓号选择">靓号选择</a></li>
-		<li><a href="/list/5" title="新闻资讯">新闻资讯</a></li>
-	</ul>
-</div>
-
-</div>
-</nav>
-
-
-
-
+<#include "/front/common/head.ftl" />
+<#include "/front/common/nav.ftl" />
 
 <div class="main mt10 rc_ppfl">
 <span class="fll">品牌分类：</span>
@@ -372,45 +257,135 @@
 <div class="floor_3_4">
 <div class="floor_3_4_1">
 <ul>
-<li class="floor_3_4_1_a"><a href="#" class="floor_3_4_1_axz">电源类</a></li>
-<li class="floor_3_4_1_b"><a href="#">电源类</a></li>
-<li class="floor_3_4_1_b"><a href="#" class="floor_3_4_1_bxz">电源类</a></li>
-<li class="floor_3_4_1_b"><a href="#">电源类</a></li>
-<li class="floor_3_4_1_b"><a href="#">电源类</a></li>
-<li class="floor_3_4_1_b"><a href="#">电源类</a></li>
+<#if recommend_type_list??>
+    <#list recommend_type_list as rtype>
+        <#if rtype_index == 0>
+            <li class="floor_3_4_1_a">
+                <a href="/list/${rtype.id}" class="floor_3_4_1_axz">${rtype.name}</a>
+            </li>
+        <#elseif rtype_index < 6>
+            <li class="floor_3_4_1_a">
+                <a href="/list/${rtype.id}">${rtype.name}</a>
+            </li>
+        </#if>
+    </#list>
+</#if>
 </ul>
 </div>
 <div class="floor_3_4_2">
-<ul>
-<li><a href="#"><img src="img/3f_pj1.jpg" width="122" height="122"><p>湛蓝贝手机保护壳</p><p class="orange">￥288.00</p></a></li>
-<li><a href="#"><img src="img/3f_pj1.jpg" width="122" height="122"><p>湛蓝贝壳 金属边框手机保护壳</p><p class="orange">￥288.00</p></a></li>
-<li><a href="#"><img src="img/3f_pj1.jpg" width="122" height="122"><p>湛蓝贝壳 金属边框手机保护壳</p><p class="orange">￥288.00</p></a></li>
-<li><a href="#"><img src="img/3f_pj1.jpg" width="122" height="122"><p>湛蓝贝壳 金属边框手机保护壳</p><p class="orange">￥288.00</p></a></li>
-<li><a href="#"><img src="img/3f_pj1.jpg" width="122" height="122"><p>湛蓝贝壳 金属边框手机保护壳</p><p class="orange">￥288.00</p></a></li>
-<li><a href="#"><img src="img/3f_pj1.jpg" width="122" height="122"><p>湛蓝贝壳 金属边框手机保护壳</p><p class="orange">￥288.00</p></a></li>
-</ul>
+    <ul style="display:block;">
+        <#if recommed_type_product_list0??>
+            <#list recommed_type_product_list0 as product>
+                <li>
+                    <a href="/product/${product.id}">
+                        <img src="${product.coverImageUri}" width="122" height="122">
+                        <p>${product.name}</p>
+                        <p class="orange">￥${product.priceMinimum?string("#.##")}</p>
+                    </a>
+                </li>
+            </#list>
+        </#if>
+    </ul>
+    <ul style="display:none;">
+        <#if recommed_type_product_list1??>
+            <#list recommed_type_product_list1 as product>
+                <li>
+                    <a href="/product/${product.id}">
+                        <img src="${product.coverImageUri}" width="122" height="122">
+                        <p>${product.name}</p>
+                        <p class="orange">￥${product.priceMinimum?string("#.##")}</p>
+                    </a>
+                </li>
+            </#list>
+        </#if>
+    </ul>
+    <ul style="display:none;">
+        <#if recommed_type_product_list2??>
+            <#list recommed_type_product_list2 as product>
+                <li>
+                    <a href="/product/${product.id}">
+                        <img src="${product.coverImageUri}" width="122" height="122">
+                        <p>${product.name}</p>
+                        <p class="orange">￥${product.priceMinimum?string("#.##")}</p>
+                    </a>
+                </li>
+            </#list>
+        </#if>
+    </ul>
+    <ul style="display:none;">
+        <#if recommed_type_product_list3??>
+            <#list recommed_type_product_list3 as product>
+                <li>
+                    <a href="/product/${product.id}">
+                        <img src="${product.coverImageUri}" width="122" height="122">
+                        <p>${product.name}</p>
+                        <p class="orange">￥${product.priceMinimum?string("#.##")}</p>
+                    </a>
+                </li>
+            </#list>
+        </#if>
+    </ul>
+    <ul style="display:none;">
+        <#if recommed_type_product_list4??>
+            <#list recommed_type_product_list4 as product>
+                <li>
+                    <a href="/product/${product.id}">
+                        <img src="${product.coverImageUri}" width="122" height="122">
+                        <p>${product.name}</p>
+                        <p class="orange">￥${product.priceMinimum?string("#.##")}</p>
+                    </a>
+                </li>
+            </#list>
+        </#if>
+    </ul>
+    <ul style="display:none;">
+        <#if recommed_type_product_list5??>
+            <#list recommed_type_product_list5 as product>
+                <li>
+                    <a href="/product/${product.id}">
+                        <img src="${product.coverImageUri}" width="122" height="122">
+                        <p>${product.name}</p>
+                        <p class="orange">￥${product.priceMinimum?string("#.##")}</p>
+                    </a>
+                </li>
+            </#list>
+        </#if>
+    </ul>
 </div>
 </div>
 </div>
 
 <div class="main mt20 phonenumber">
-<div class="phonenumber_1"><a href="#">查看更多>></a></div>
+<div class="phonenumber_1"><a href="<#if phone_number_type??>/list/${phone_number_type.id}<#else>javascrip:;</#if>">查看更多>></a></div>
 <div class="phonenumber_2 fll">
 <table>
 <tr>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
+<#if phone_number_list??>
+    <#list phone_number_list as product>
+        <#if product_index < 5>
+            <td>
+                <a href="/product/${product.id}">
+                    <p class="phonenumber_2_a">${product.name}</p>
+                    <p class="phonenumber_2_b">卡费：${product.versionList[0].salePrice?string("#.##")}元  话费：${product.versionList[0].includePrice?string("#.##")}元</p><
+                /a>
+            </td>
+        </#if>
+    </#list>
+</#if>
 </tr>
 <tr>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
-<td><a href="#"><p class="phonenumber_2_a">13985698569</p><p class="phonenumber_2_b">卡费：399元  话费：299元</p></a></td>
-</tr>
+<#if phone_number_list??>
+    <#list phone_number_list as product>
+        <#if product_index gt 4 && product_index < 10 >
+            <td>
+                <a href="/product/${product.id}">
+                    <p class="phonenumber_2_a">${product.name}</p>
+                    <p class="phonenumber_2_b">卡费：${product.versionList[0].salePrice?string("#.##")}元  话费：${product.versionList[0].includePrice?string("#.##")}元</p><
+                /a>
+            </td>
+        </#if>
+    </#list>
+</#if></tr>
 </table>
 </div>
 </div>
@@ -451,71 +426,7 @@
 
 <div class="clear"></div>
 
-<div class="main mt20">
-<div class="floor_n fll"><img src="img/peisongyuanze.png" width="719" height="44"></div>
-<div class="flr">
-<input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
-<input type="submit" class="search-btn" title="搜索" value="  ">
-</div>
-</div>
-
-<div class="clear"></div>
-
-<div class="footallbg">
-<div class="main mt15">
-<div class="s_footer pt15">
-<div class="s_footera fll">
-<ul>
-<li><div class="bzzx fll"></div><span>帮助中心</span></li>
-<li><a href="/help/question-1">购物指南</a></li>
-<li><a href="/help/question-2">常见问题</a></li>
-<li><a href="/help/question-3">用户协议</a></li>
-</ul>
-</div>
-
-<div class="s_footera fll" id="s_footera45">
-<ul>
-<li><div class="zfps fll"></div><span>支付配送</span></li>
-        <li><a href="/help/distribution/1">支付方式</a></li>
-        <li><a href="/help/distribution/2">配送方式</a></li>
-        <li><a href="/help/distribution/3">配送费用</a></li>
-</ul>
-</div>
-
-<div class="s_footera fll">
-<ul>
-<li><div class="shfw fll"></div><span>售后服务</span></li>
-<li><a href="/help/afshelp-1">三包服务</a></li>
-<li><a href="/help/afshelp-2">售后流程</a></li>
-</ul>
-</div>
-
-<div class="s_footera fll" id="s_footera55">
-<ul>
-<li><div class="gyzc fll"></div><span>关于荣诚</span></li>
-<li><a href="#">了解荣诚</a></li>
-<li><a href="#">加入荣诚</a></li>
-<li><a href="#">附近门店</a></li>
-</ul>
-</div>
-
-<div class="s_footerb flr">
-<ul>
-<li><div class="mfrxdh fll"></div><span>免费热线电话</span></li>
-<li class="ml30" id="s_phone">0871-68421560</li>
-<li class="ml30">传真：0871-68421560</li>
-<li class="ml30">周一到周日9:30-18:00</li>
-</ul>
-</div>
-
-</div>
-</div>
-<div class="clear"></div>
-<div class="s_footerc">
-<p>©2014 荣诚手机超市<a href="#">www.rcsj.com </a>   滇ICP证8888888号  587 号 <a href="http://www.ynyes.com" target="_blank" title="云南网站建设">网站建设</a>技术支持：<a href="http://www.ynyes.com" target="_blank" title="云南网站建设">昆明天度网络公司</a></p>
-</div>
-
-</div>
+<#include "/front/common/tail.ftl" />
 
 <script>
     function displayTime(){
@@ -539,124 +450,6 @@
         }
     }
     displayTime();
-</script>
-
-
-<script type="text/javascript">
-
-//经过城市切换和内容都显示
-$("#city").mouseover(function(){
-   $("#change").css({"display":"block"});
-
-})
-
-$("#change").mouseover(function(){
-   $("#change").css({"display":"block"});
-
-})
-
-//离开城市和离开内容都隐藏
-$("#change").mouseout(function(){
-
-   $("#change").css({"display":"none"});
-
-})
-
-$("#city").mouseout(function(){
-
-   $("#change").css({"display":"none"});
-
-})
-
-//对城市切换的内容进行替换
-function change_city(name){
-	var content=$("#city").html();
-	$("#city").html(name);
-	return false;
-}
-</script>
-
-
-
-
-<script type="text/javascript">
- //经过商品栏目或者是经过内容的时候，都显示（栏目和大类）
- $("#goods").mouseover(function(){
-     $("#goods_style").css({"display":"block"});
- })
-    
-
- $("#goods_style").mouseover(function(){
-     $("#goods_style").css({"display":"block"});
- })
-  
-//离开栏目或者是离开内容都进行隐藏（栏目和大类）
-
- $("#goods").mouseout(function(){
-     $("#goods_style").css({"display":"none"});
- })
-  
- $("#goods_style").mouseout(function(){
-     $("#goods_style").css({"display":"none"});
- })
-  
-
-
-//经过手机以后，显示详细框
-
- $("#phone").mouseover(function(){
-     $("#threeright1").css({"display":"block"});
- })
-    
- $("#threeright1").mouseover(function(){
-     $("#threeright1").css({"display":"block"});
- })
-   
-$("#phone").mouseout(function(){
-     $("#threeright1").css({"display":"none"});
- })
-
-$("#threeright1").mouseout(function(){
-     $("#threeright1").css({"display":"none"});
- })
-
-//经过手机配件
-
-$("#phone_body").mouseover(function(){
-     $("#threeright1").css({"display":"block"});
- })
-    
- $("#threeright1").mouseover(function(){
-     $("#threeright1").css({"display":"block"});
- })
-   
-$("#phone_body").mouseout(function(){
-     $("#threeright1").css({"display":"none"});
- })
-
-$("#threeright1").mouseout(function(){
-     $("#threeright1").css({"display":"none"});
- })
-
-//经过手机靓号
-
-$("#phone_number").mouseover(function(){
-     $("#threeright1").css({"display":"block"});
- })
-    
-
- $("#threeright1").mouseover(function(){
-     $("#threeright1").css({"display":"block"});
- })
-   
-
-$("#phone_number").mouseout(function(){
-     $("#threeright1").css({"display":"none"});
- })
-
-$("#threeright1").mouseout(function(){
-     $("#threeright1").css({"display":"none"});
- })
 </script>
 </body>
 </html>
