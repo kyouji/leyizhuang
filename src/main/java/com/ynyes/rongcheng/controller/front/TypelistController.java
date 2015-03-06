@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ import com.ynyes.rongcheng.service.BrandService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductTypeService;
 import com.ynyes.rongcheng.util.ClientConstant;
-import com.ynyes.rongcheng.util.StringUtils;
 
 /**
  * 商品类型集合
@@ -40,7 +38,11 @@ public class TypelistController {
     
     @Autowired
     private BrandService brandService;
+    
     /**
+     * 返回商品列表
+     * 
+     * @author Sharon
      * 
      * @param queryStr 组成：typeID-brandIndex-[paramIndex]-[排序字段]-[销量排序标志]-[价格排序标志]-[上架时间排序标志]-[页号]_[价格低值]-[价格高值]
      * @param page
@@ -51,7 +53,61 @@ public class TypelistController {
      * @return
      */
     @RequestMapping("/list/{queryStr}")
-    public String index(@PathVariable String queryStr, ModelMap map){
+    public String list(@PathVariable String queryStr, ModelMap map){
+     // 导航栏
+        List<ProductType> rptList = productTypeService.findByParent("");
+        
+        map.addAttribute("root_type_list", rptList);
+        
+        for (ProductType pType : rptList)
+        {
+            if (pType.getName().equals("手机"))
+            {
+                List<Brand> brandList = brandService.findByType(pType.getName());
+                
+                if (null != brandList)
+                {
+                    for (int i=0; i < brandList.size(); i++)
+                    {
+                        if (brandList.get(i).getName().contains("苹果"))
+                        {
+                            map.addAttribute("apple_index", i + 1);
+                        }
+                        
+                        if (brandList.get(i).getName().contains("小米"))
+                        {
+                            map.addAttribute("mi_index", i + 1);
+                        }
+                        
+                        if (brandList.get(i).getName().contains("华为"))
+                        {
+                            map.addAttribute("huawei_index", i + 1);
+                        }
+                        
+                        if (brandList.get(i).getName().contains("联想"))
+                        {
+                            map.addAttribute("lenovo_index", i + 1);
+                        }
+                    }
+                }
+                map.addAttribute("phone_type", pType);
+            }
+            else if (pType.getName().equals("手机配件"))
+            {
+                List<ProductType> ptList = productTypeService.findByParent("手机配件");
+                
+                map.addAttribute("accessory_sub_type_list", ptList);
+                map.addAttribute("phone_accessory_type", pType);
+            }
+            else if (pType.getName().equals("靓号中心"))
+            {
+                map.addAttribute("phone_number_type", pType);
+            }
+        }
+        
+        map.addAttribute("second_hand_phone_type", productTypeService.findByName("二手手机"));
+        
+        // 导航栏结束
         
         if (null == queryStr || "".equals(queryStr))
         {
@@ -278,66 +334,5 @@ public class TypelistController {
         }
         
         return "/front/type_list";//错误
-    }
-    /**
-     * 
-     * 手机产品跳转模版<BR>
-     * 方法名：mobile<BR>
-     * 创建人：guozhengyang <BR>
-     * 时间：2015年2月5日-下午3:30:43 <BR>
-     * @return String<BR>
-     * @param  [参数1]   [参数1说明]
-     * @param  [参数2]   [参数2说明]
-     * @exception <BR>
-     * @since  1.0.0
-     */
-    @RequestMapping("/list/{typeId}_")
-    public String mobile(@PathVariable String typeId,Integer page,Integer size,String direction,String property,Model model){
-            direction="desc";//排序
-          if(StringUtils.isNotEmpty(property)){
-              if(property.equals("价格↑")||property=="价格↑"){
-                  property="priceMinimum";
-              }else if(property.equals("上架时间↑") || property=="上架时间↑"){
-                  property="onSaleTime";
-              }
-          }else{
-              property="sortNumber"; 
-          }
-            
-                //根据类型获取所有子类
-                Page<Product> pages=productService.findByType("2", page, size, direction, property);
-                model.addAttribute("product", pages.getContent());
-                model.addAttribute("count", pages.getTotalElements());
-           
-        return "/front/listtemp/pageProduct";//手机产品
-    }
-    /**
-     * 
-     * 手机配件模版<BR>
-     * 方法名：accessories<BR>
-     * 创建人：guozhengyang <BR>
-     * 时间：2015年2月7日-下午4:35:57 <BR>
-     * @param typeId
-     * @param page
-     * @param size
-     * @param direction
-     * @param model
-     * @return String<BR>
-     * @param  [参数1]   [参数1说明]
-     * @param  [参数2]   [参数2说明]
-     * @exception <BR>
-     * @since  1.0.0
-     */
-    @RequestMapping("/list/{typeId}_3")
-    public String accessories(@PathVariable String typeId,Integer page,Integer size,String direction,Model model){
-        direction="desc";//排序
-        String property="sortNumber";//字段
-        
-        //根据类型获取所有子类
-        Page<Product> pages=productService.findByType("3", page, size, direction, property);
-        model.addAttribute("product", pages.getContent());
-        model.addAttribute("count", pages.getTotalElements());
-        
-        return "/front/listtemp/pageProduct";//手机产品
     }
 }

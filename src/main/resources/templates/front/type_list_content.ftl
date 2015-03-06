@@ -20,59 +20,23 @@
 <script type=text/javascript src="/Tm/js/util.js"></script>
 <script type="text/javascript" src="/Tm/js/popup_dialog.js"></script>
 <script type="text/javascript" src="/Tm/js/mainTip.js"></script>
+<script type="text/javascript" src="/Tm/js/common/nav.js"></script>
+<script type="text/javascript" src="/Tm/js/common/head.js"></script>
 </head>
 <body>
-<header>
-<div class="main">
-<div class="fll header_l"><#if user??><span>您好，<a href="/user/info" >${user.username}</a>欢迎来到荣诚手机超市！您的身份：${user.role}&nbsp;&nbsp;<a href="/logout" >退出</a></span><#else><span>您好，欢迎来到荣诚手机超市！<a href="/login" id="orange">登录</a>&nbsp;&nbsp;&nbsp;<a href="/reg">免费注册</a></span></#if></div>
-<div class="flr header_r"><a href="/user/collect">我的收藏</a><a href="#">销售网点</a><a href="#">手机版切换</a><a href="/order/list">我的订单</a><a href="/help/question/1">帮助中心</a><a href="/help/question-1">收藏本站</a></div>
-</div>
-</header>
-
-<div class="header1 main">
-<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="/img/rc_logo.png" width="177" height="69"></a></div>
-<div class="fll city"><a href="#">城市切换</a><span></span>
-</div>
-<div class="sercha fll">
-<input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
-<input type="submit" class="search-btn" title="搜索" value="  ">
-<div class="rc_newsgg"><span>新闻公告:</span><a href="#">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
-</div>
-<div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
-</div>
-
-<nav><div class="main">
-<div class="nav_more fll"><div class="nav_more1"><a href="/type/list" title="全部商品分类" class="nav_more15">全部商品分类</a></div>
-
-
-</div>
-
-<div class="nav_2 fll ml4">
-<ul>
-<li><a href="/" title="首页">首页</a></li>
-<li><a href="/list/1" title="明星产品">明星产品</a></li>
-<li><a href="/list/2" title="手机产品">手机产品</a></li>
-<li><a href="/list/3" title="手机配件">手机配件</a></li>
-<li><a href="/list/4" title="靓号选择">靓号选择</a></li>
-<li><a href="/list/5" title="新闻资讯">新闻资讯</a></li>
-</ul>
-</div>
-
-</div></nav>
-
+<#include "/front/common/head.ftl" />
+<#include "/front/common/nav.ftl" />
 <div class="main mt10 rc_ppfl">
+
 <span class="fll">品牌分类：</span>
 <ul>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
-<li><a href="#"><img src="/img/rc_pp.png" width="90" height="45"></a></li>
+    <#if recommend_brand_list??>
+        <#list recommend_brand_list as brand>
+            <#if brand_index < 9>
+                <li><a href="javascript:;"><img src="${brand.logoUri}" width="90" height="45"></a></li>
+            </#if>
+        </#list>
+    </#if>
 </ul>
 <a href="#">更多>></a>
 </div>
@@ -80,7 +44,11 @@
 <div class="clear"></div>
 
 <div class="main">
-<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/1">手机产品</a>&gt;<a href="#">手机详情</a>&gt; </div>
+<div class="place"> 
+    <span>您现在的位置：</span>
+    <a href="/">首页</a><#if type_list??><#list type_list as type>&gt;<a href="/list/${type.id}">${type.name}</a></#list></#if><a href="javascript:;">&gt; 手机详情</a>
+</div>
+
 <div class="shop_show">
   <div class="shop_show_left">
     <div id="preview">
@@ -118,14 +86,42 @@
     <p><span>市&nbsp;&nbsp;场&nbsp;价：</span>￥${product.priceMinimum?c}.00</p>
     <p><span>荣&nbsp;&nbsp;诚&nbsp;价：</span><em id="pric">￥<#if product.flashSalePrice??>${product.flashSalePrice?c}</#if>.00</em><span class="orange ml10">(降价通知)</span></p>
     <p><span>促&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销：</span><i><#if product.promotion??>${product.promotion}</#if></i></p>
-    <p><span>商品评价：</span><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><span style="color:#1480DB">（共有<#if productcount??>${productcount}</#if>条评价）</span></p>
+    <p><span>商品评价：</span><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><span style="color:#1480DB">（共有<#if comment_total??>${comment_total}</#if>条评价）</span></p>
     <p><span>配&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置：</span><#if product.configuration??>${product.configuration}</#if></p>
     <p><span>服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：</span><#if product.service??>${product.service}</#if></p>
     <div class="SelectPackage">
-      <p class="mb5"><span class="fll">容&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量：</span><a href="#">6G</a><a href="#" class="SelectPackage_on">32G</a></p>
-      <div class="clear"></div>
-      <p class="mb5"><span class="fll">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本：</span><a href="#">4G</a><a href="#">全网通</a><a href="#" class="SelectPackage_on">2G/3G</a></p>
-      <div class="clear"></div>
+        <#if ver_color_list??>
+            <p class="mb5"><span class="fll">颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色：</span>
+                <#list ver_color_list as item>
+                    <a href="javascript:;">${item}</a>
+                </#list>
+              </p>
+        </#if>
+        
+        <#if ver_name_list??>
+            <p class="mb5"><span class="fll">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本：</span>
+                <#list ver_name_list as item>
+                    <a href="javascript:;">${item}</a>
+                </#list>
+              </p>
+        </#if>
+        
+        <#if ver_capacity_list??>
+            <p class="mb5"><span class="fll">容&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量：</span>
+                <#list ver_capacity_list as item>
+                    <a href="javascript:;">${item}</a>
+                </#list>
+              </p>
+        </#if>
+    
+      
+        <#--
+        <p class="mb5"><span class="fll">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本：</span>
+            <a href="#">4G</a>
+            <a href="#">全网通</a>
+            <a href="#" class="SelectPackage_on">2G/3G</a>
+        </p>
+        -->
     </div>
     <p class="shopbtn mt10"><span class="fll">我要购买：</span>
     <a href="javascript:void(0)" class="fll prev" data-num="${product.versionList[0].leftNumber}"><img src="/images/jia.jpg" /></a>
@@ -200,20 +196,22 @@
     <div class="hot_list">
       <h2>热销排行</h2>
       <ul>
-      <#list qgPictures as pics>
-      <#if pics.name?? && pics.name?length lt 8>
-			           <span>${pics.name?default("")}</span>
-			      <#else>
-			       	<span>${pics.name[0..7]?default("")}...</span>
-			</#if>
-        <li> <a href="#"> <img src="${pics.coverImageUri}" />  <#if pics.name?? && pics.name?length lt 8>
-			           <span>${pics.name?default("")}</span>
-			      <#else>
-			       	<span>${pics.name[0..7]?default("")}...</span>
-			</#if><b>￥${pics.flashSalePrice?c}</b> </a>
-          <div class="num1">${pics.sortNumber}</div>
-        </li>
-        </#list>
+        <#if hot_product_list??>
+            <#list hot_product_list as product>
+                <li> 
+                    <a href="/product/${product.id}"> 
+                        <img src="${product.coverImageUri}" /> 
+                        <span>${product.name} ${product.brief}</span> 
+                        <b>￥${product.priceMinimum?string("#.##")}</b> 
+                    </a>
+                    <#if product_index < 3>
+                        <div class="num1">${product_index+1}</div>
+                    <#else>
+                        <div class="num2">${product_index+1}</div>
+                    </#if>
+                </li>
+            </#list>
+        </#if>
       </ul>
     </div>
     <div class="hot_list mt20">
@@ -232,200 +230,128 @@
       <ul id="id-tab-list">
         <li><a href="javascript:void(0)" class="con">商品详情</a></li>
         <li><a href="javascript:void(0)">商品参数</a></li>
-        <li><a href="javascript:void(0)">商品评价（${productcount}）</a></li>
+        <li><a href="javascript:void(0)">商品评价（${comment_total}）</a></li>
         <li><a href="javascript:void(0)">购买咨询</a></li>
-       <li><a href="javascript:void(0)">价格走势</a></li>
+        <#--<li><a href="javascript:void(0)">价格走势</a></li>-->
       </ul>
     </div>
     <div class="products_det"> 
     	<ul id="id-tab-content" >
-    		<li class="tab_li"><#if product.detail??>${product.detail}</#if></li>
-    		<li class="tab_li" style="display:none"><#if product.configuration??>${product.configuration}</#if></li>
+            <li class="tab_li">
+                <#if product.detail??>${product.detail}</#if>
+            </li>
+    		
     		<li class="tab_li" style="display:none">
-    			商品评价
-    				
-		      <div class="pinglun">
-		        <h2>商品评价</h2>
-		      </div>
-		      <div class="pinlunbox">
-		        <dl>
-		          <dt>
-		          <#if productConsult??>
-		          <#list productConsult as prod>
-		            <ul>
-		              <li class="name"><#if prod.username??>${prod.username}说:</#if></li>
-		              <li class="time"><#if prod.commentTime??>${prod.commentTime}</#if></li>
-		              <li class="dtlr">${prod.content}</li>
-		            </ul>
-		            </#list>
-		            </#if>
-		            <div class="clear"></div>
-		          </dt>
-		          <dd>
-		           
-		          </dt>
-		        </dl>
-		        <p>&nbsp;</p>
-		    </div>
-		     <div class="lr_right_main main_top2 fbpn">
-		      <h2>提交问答/评价</h2>
-		      <ul>
-		       <#if user??> <li class="pyts">欢迎您,<a href="/user/info"><strong>${user.username}</strong></a>发表问答/评论!
-		       			 <li class="title">内容：</li>
-		        <li class="texta">
-		          <label>
-		            <textarea name="textarea" id="centent" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
-		          </label>
-		        </li>
-		        <li class="title">验证码：</li>
-		        <li class="yzminp">
-		          <input type="text" name="textfield2" id="verify" maxlength="4" />
-		        </li>
-		        <li class="yzmimg"><a href="javascript:void(0)"><img onclick="this.src = '/verify?date='+Math.random();" src="/verify" id="yzm" alt="验证码"/></a></li>
-		        <li class="tijiaobox">
-		          <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_save(this,${product.id})"/>
-		        </li>
-		      </ul>
-		       
-		       
-		       <#else> 欢迎您访客，您在<a href="/login" class="t_red">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg" class="t_red">注册</a>！</li></#if>
-		       
-		      <div style="clear:both;"></div>
-		    </div>
+    		  <#if product.paramList??>
+    		      <#list product.paramList as param>
+    		          <p>${param.paramName}: ${param.value}</p>
+    		      </#list>
+    		  </#if>
+    		</li>
+    		
+            <li class="tab_li" style="display:none">
+                <div class="pinglun">
+                    <h2>商品评价</h2>
+                </div>
+                <#if comment_list??>
+                    <#list comment_list as comment>
+                    <div class="pinlunbox">
+                        <dl>
+                            <dt>
+                                <ul>
+                                    <li class="name"><#if comment.username??>${comment.username}说:</#if></li>
+                                    <li class="time"><#if comment.commentTime??>${comment.commentTime}</#if></li>
+                                    <li class="dtlr">${comment.content}</li>
+                                </ul>
+                                <div class="clear"></div>
+                            </dt>
+                        </dl>
+                    </div>
+                    </#list>
+                </#if>
+		          
+                <div class="lr_right_main main_top2 fbpn">
+                    <h2>提交问答/评价</h2>
+                    <ul>
+                        <#if user??>
+                            <li class="pyts">欢迎您,<a href="/user/info"><strong>${user.username}</strong></a>发表问答/评论!
+                            <li class="title">内容：</li>
+                            <li class="texta">
+                            <label>
+                                <textarea name="textarea" id="centent" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
+                            </label>
+                            </li>
+                            <li class="title">验证码：</li>
+                            <li class="yzminp">
+                              <input type="text" name="textfield2" id="verify" maxlength="4" />
+                            </li>
+                            <li class="yzmimg"><a href="javascript:void(0)"><img onclick="this.src = '/verify?date='+Math.random();" src="/verify" id="yzm" alt="验证码"/></a></li>
+                            <li class="tijiaobox">
+                              <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_save(this,${product.id})"/>
+                            </li>
+                    
+                        <#else>
+    		                欢迎您访客，您在<a href="/login" class="t_red">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg" class="t_red">注册</a>！</li>
+    		            </#if>
+                    </ul>
+                    <div style="clear:both;"></div>
+                </div>
     		</li>
     		<li class="tab_li" style="display:none">
-		    		商品咨询
-		      <div class="pinglun">
-		        <h2>商品咨询</h2>
-		      </div>
-		      <div class="pinlunbox">
-		        <dl>
-		          <dt>
-		          <#if productComm??>
-		          <#list productComm as prodm>
-		            <ul>
-		              <li class="name"><#if prodm.username??>${prodm.username}</#if></li>
-		              <li class="time"><#if prodm.commentTime??>${prodm.commentTime}</#if></li>
-		              <li class="dtlr">${prodm.content}</li>
-		            </ul>
-		            </#list>
-		            </#if>
-		            <div class="clear"></div>
-		          </dt>
-		          <dd>
-		           
-		          </dt>
-		        </dl>
-		        <p>&nbsp;</p>
-		    </div>
-		     <div class="lr_right_main main_top2 fbpn">
-		       <h2>提交问答/咨询</h2>
-		      <ul>
-		       <#if user??> <li class="pyts">欢迎您,<a href="/user/info"><strong>${user.username}</strong></a>发表问答/评论!
-		       			 <li class="title">内容：</li>
-		        <li class="texta">
-		          <label>
-		            <textarea name="textarea" id="centents" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
-		          </label>
-		        </li>
-		        <li class="title">验证码：</li>
-		        <li class="yzminp">
-		          <input type="text" name="textfield2" id="verifys" maxlength="4" />
-		        </li>
-		        <li class="yzmimg"><a href="javascript:void(0)"><img onclick="this.src = '/verify?date='+Math.random();" src="/verify" id="yzm" alt="验证码"/></a></li>
-		        <li class="tijiaobox">
-		          <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_saveconn(this,${product.id})"/>
-		        </li>
-		      </ul>
-		       
-		       
-		       <#else> 欢迎您访客，您在<a href="/login" class="t_red">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg" class="t_red">注册</a>！</li></#if>
-		       
-		      <div style="clear:both;"></div>
-		    </div>
-    </li>
-    <li class="tab_li" style="display:none">
-    			价格
-    		</li>		
+                <div class="pinglun">
+		          <h2>商品咨询</h2>
+                </div>
+                <#if consult_list??>
+                    <#list consult_list as consult>
+                        <div class="pinlunbox">
+                            <dl>
+                                <dt>
+                		            <ul>
+                		              <li class="name"><#if consult.username??>${consult.username}</#if></li>
+                		              <li class="time"><#if consult.consultTime??>${consult.consultTime}</#if></li>
+                		              <li class="dtlr">${consult.content}</li>
+                		            </ul>
+        	                        <div class="clear"></div>
+                                </dt>
+                            </dl>
+                        </div>
+                    </#list>
+                </#if>
+                
+                <div class="lr_right_main main_top2 fbpn">
+                    <h2>提交咨询</h2>
+                    <ul>
+                        <li class="pyts">欢迎您,<#if user??><a href="/user/info"><strong>${user.username}</strong></a><#else>游客</#if>,咨询商品!
+		       			<li class="title">内容：</li>
+                        <li class="texta">
+        		          <label>
+        		            <textarea name="textarea" id="centents" cols="100" rows="5" class="inp"  maxlength="200" placeholder="请输入内容"></textarea>
+        		          </label>
+                        </li>
+                        <li class="title">验证码：</li>
+                        <li class="yzminp">
+                          <input type="text" name="textfield2" id="verifys" maxlength="4" />
+                        </li>
+                        <li class="yzmimg"><a href="javascript:void(0)"><img onclick="this.src = '/verify?date='+Math.random();" src="/verify" id="yzm" alt="验证码"/></a></li>
+                        <li class="tijiaobox">
+                          <input type="button" value="提交信息"  class="tijiaoan" onclick="tm_saveconn(this,${product.id})"/>
+                        </li>
+                    </ul>
+                    <div style="clear:both;"></div>
+    		    </div>
+            </li>
+            <li class="tab_li" style="display:none">
+            			价格
+            </li>		
     	</ul>
-    
     </div>
-      </div>
+</div>
 </div>
 </div></div>
-   
-
-
-
+ 
 <div class="clear"></div>
 
-<div class="main mt20">
-<div class="floor_n fll"><img src="/img/peisongyuanze.png" width="719" height="44"></div>
-<div class="flr">
-<input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
-<input type="submit" class="search-btn" title="搜索" value="  ">
-</div>
-</div>
-
-<div class="clear"></div>
-
-<div class="footallbg">
-<div class="main mt15">
-<div class="s_footer pt15">
-<div class="s_footera fll">
-<ul>
-<li><div class="bzzx fll"></div><span>帮助中心</span></li>
-<li><a href="/help/question-1">购物指南</a></li>
-<li><a href="/help/question-2">常见问题</a></li>
-<li><a href="/help/question-3">用户协议</a></li>
-</ul>
-</div>
-
-<div class="s_footera fll" id="s_footera45">
-<ul>
-<li><div class="zfps fll"></div><span>支付配送</span></li>
-        <li><a href="/help/distribution/1">支付方式</a></li>
-        <li><a href="/help/distribution/2">配送方式</a></li>
-        <li><a href="/help/distribution/3">配送费用</a></li>
-</ul>
-</div>
-
-<div class="s_footera fll">
-<ul>
-<li><div class="shfw fll"></div><span>售后服务</span></li>
-<li><a href="/help/afshelp-1">三包服务</a></li>
-<li><a href="/help/afshelp-2">售后流程</a></li>
-</ul>
-</div>
-
-<div class="s_footera fll" id="s_footera55">
-<ul>
-<li><div class="gyzc fll"></div><span>关于荣诚</span></li>
-<li><a href="#">了解荣诚</a></li>
-<li><a href="#">加入荣诚</a></li>
-<li><a href="#">附近门店</a></li>
-</ul>
-</div>
-
-<div class="s_footerb flr">
-<ul>
-<li><div class="mfrxdh fll"></div><span>免费热线电话</span></li>
-<li class="ml30" id="s_phone">0871-68421560</li>
-<li class="ml30">传真：0871-68421560</li>
-<li class="ml30">周一到周日9:30-18:00</li>
-</ul>
-</div>
-
-</div>
-</div>
-<div class="clear"></div>
-<div class="s_footerc">
-<p>©2014 荣诚手机超市<a href="#">www.rcsj.com </a>   滇ICP证8888888号  587 号 <a href="http://www.ynyes.com" target="_blank" title="云南网站建设">网站建设</a>技术支持：<a href="http://www.ynyes.com" target="_blank" title="云南网站建设">昆明天度网络公司</a></p>
-</div>
-
-</div>
-
-
+<#include "/front/common/tail.ftl" />
 
 <div class="main"><div class="duibi_bottom" style="display:none">
 <div  class="tm_click_">

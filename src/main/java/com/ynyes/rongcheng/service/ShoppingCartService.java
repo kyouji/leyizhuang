@@ -124,6 +124,32 @@ public class ShoppingCartService {
     }
     
     /**
+     * 统计购物车商品数量 
+     *
+     * @param username 用户名
+     * @return 购物车内商品数量
+     */
+    public Long countByUsername(String username)
+    {
+        Long count = 0L;
+        
+        if (null != username)
+        {
+            List<ShoppingCart> cartList = repository.findByUsername(username);
+            
+            for (ShoppingCart sc : cartList)
+            {
+                if (null != sc)
+                {
+                    count += sc.getProductNumber();
+                }
+            }
+        }
+        
+        return count;
+    }
+    
+    /**
      * 添加商品到购物车
      * 
      * @param username 用户名
