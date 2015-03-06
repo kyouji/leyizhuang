@@ -141,7 +141,7 @@ public class ShoppingCartService {
             {
                 if (null != sc)
                 {
-                    count += sc.getProductNumber();
+                    count += sc.getQuantity();
                 }
             }
         }

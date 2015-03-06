@@ -113,15 +113,6 @@
                 </#list>
               </p>
         </#if>
-    
-      
-        <#--
-        <p class="mb5"><span class="fll">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本：</span>
-            <a href="#">4G</a>
-            <a href="#">全网通</a>
-            <a href="#" class="SelectPackage_on">2G/3G</a>
-        </p>
-        -->
     </div>
     <p class="shopbtn mt10"><span class="fll">我要购买：</span>
     <a href="javascript:void(0)" class="fll prev" data-num="${product.versionList[0].leftNumber}"><img src="/images/jia.jpg" /></a>
