@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,11 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ynyes.rongcheng.entity.OrderItem;
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.ProductVersion;
+import com.ynyes.rongcheng.entity.SiteInfo;
 import com.ynyes.rongcheng.entity.User;
 import com.ynyes.rongcheng.service.OrderItemService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductVersionService;
 import com.ynyes.rongcheng.service.ShoppingCartService;
+import com.ynyes.rongcheng.service.SiteInfoService;
 import com.ynyes.rongcheng.util.StringUtils;
 
 /**
@@ -43,6 +46,9 @@ public class CartController {
     @Autowired
     private OrderItemService orderItemService;
     
+    @Autowired
+    private SiteInfoService siteInfoService;
+    
     private String flag;
     /**
      * 
@@ -57,8 +63,29 @@ public class CartController {
      * @since  1.0.0
      */
     @RequestMapping("/cart")
-    public ModelAndView cart(String sum,HttpServletRequest request,String pid){
-       ModelAndView modelAndView=new ModelAndView();
+    public String cart(String sum,HttpServletRequest request,String pid, ModelMap map){
+        // 页脚数据
+        List<SiteInfo> infoList = siteInfoService.findByType("帮助中心");
+        
+        map.addAttribute("help_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("支付配送");
+        
+        map.addAttribute("delivery_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("售后服务");
+        
+        map.addAttribute("service_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("关于荣诚");
+        
+        map.addAttribute("about_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("免费热线电话");
+        
+        map.addAttribute("phone_info_list", infoList);
+        // 页脚数据结束
+        
         User user =(User) request.getSession().getAttribute("user");
         if(user!=null){
             
@@ -66,20 +93,16 @@ public class CartController {
                 if(StringUtils.isNotEmpty(username)){
                     /*modelAndView.addObject("cartId",shoppingCartService.findOne(username, Long.parseLong(sum)));*/
                     
-                    modelAndView.addObject("carts",shoppingCartService.findByUsername(username));
-                    modelAndView.addObject("count",shoppingCartService.countByUsername(username));/*数量*/
-                    modelAndView.setViewName("/front/cart/cart");
-                    return modelAndView;
+                    map.addAttribute("carts",shoppingCartService.findByUsername(username));
+                    map.addAttribute("count",shoppingCartService.countByUsername(username));/*数量*/
+                    
+                    return "/front/cart/cart";
                 }else {
-                  //  modelAndView.addObject("carts",shoppingCartService.findByUsername(username));
-                    modelAndView.setViewName("/front/login");
-                    return modelAndView; 
+                    return "/front/login"; 
                 }
        
         }else {
-            //  modelAndView.addObject("carts",shoppingCartService.findByUsername(username));
-            modelAndView.setViewName("/front/login");
-            return modelAndView; 
+            return "/front/login"; 
         }
     }
     /**

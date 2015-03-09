@@ -1,51 +1,35 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
-<title>荣诚手机超市--购物车</title>
+<title>荣诚手机超市</title>
 <meta name="keywords" content="荣诚手机超市" />
 <meta name="description" content="荣诚手机超市" />
 <meta name="copyright" content="荣诚手机超市 版权所有" />
-<link href="/css/layout.css" rel="stylesheet" type="text/css" />
-<link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
-<link href="/css/gwc.css" rel="stylesheet" type="text/css" />
-<link href="Tm/css/qikoo.css" type="text/css" rel="stylesheet" />
-<link href="Tm/css/store.css" type="text/css" rel="stylesheet" />
+<link href="css/layout.css" rel="stylesheet" type="text/css" />
+<link href="css/rcindex.css" rel="stylesheet" type="text/css" />
+<link href="css/gwc.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/Tm/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/Tm/js/common/head.js"></script>
 <script src="Tm/js/qikoo.js"></script>
+<!--[if IE]>
+   <script src="js/html5.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script type="text/javascript" src="js/DD_belatedPNG_0.0.8a.js" ></script>
+<script>
+DD_belatedPNG.fix('.,img,background');
+</script>
+<![endif]-->
 </head>
 <body>
-<header>
-<div class="main">
-<#include "/front/comment/header.ftl">
-</div>
-</header>
-
-<div class="header1 main">
-<div class="fll logo"><a href="javascript:void(0)" title="荣诚手机超市"><img src="img/rc_logo.png" width="177" height="69"></a></div>
-<div class="fll city"><a href="javascript:void(0)">城市切换</a><span></span>
-<!--<div class="cityqh"><ul>
-<li><a href="javascript:void(0)">昆明市</a></li>
-<li><a href="javascript:void(0)">曲靖市</a></li>
-<li><a href="javascript:void(0)">大理州</a></li>
-<li><a href="javascript:void(0)">西双版纳</a></li>
-<li><a href="javascript:void(0)">德宏州</a></li>
-<li><a href="javascript:void(0)">丽江市</a></li>
-</ul></div>-->
-</div>
-<div class="sercha fll">
-<input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
-<input type="submit" class="search-btn" title="搜索" value="  ">
-<div class="rc_newsgg"><span>新闻公告:</span><a href="javascript:void(0)">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
-</div>
-<div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
-</div>
-
-
+<#include "/front/common/head.ftl" />
 
 <div class="gwcbg">
 <div class="main mt10">
-<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/2">手机产品</a>&gt;<a href="javascript:void(0)">手机筛选</a>&gt; </div>
+<div class="place"> <span>您现在的位置：</span>
+    <a href="/">首页</a>&gt;
+    <a href="/cart">购物车</a>
+</div>
 <div class="s_gwc1"><span id="colorfff">1、我的购物车</span><span>2、我的订单信息</span><span>3、支付成功</span></div>
 </div>
 
@@ -63,6 +47,7 @@
 </div>
 
 <div class="gwc1_lm2">
+
 <table>
 <#if carts??>
 <#list carts as cartId>
@@ -100,144 +85,136 @@
 
 <div class="clear"></div>
 
-<div class="footallbg">
-<#include "/front/comment/top1.ftl">
-</div>
-
+<#include "/front/common/tail.ftl" />
 
 <script type="text/javascript">
 
-			//--上一页(减1)  / 下一页(加1)
-			
-			var index = 1;
-	
-		
-			//下一页功能
-			$("#tr_list td").find(".next").on("click",function(){
-				var $this = $(this);
-				var $input =$(this).prev();
-				var datasum=$(this).data("sum");
-				var total = 0;
-				
-				index++;//相当于index = index +1;
-				if(index > datasum)index = 1;
-				$input.val(index);
-				var num=$this.parents().find("#count").val();
-				var money=$this.parents().find("#moneys").text();
-				total += money * num;
-				$this.parents().find("#td_sum").text(total);
-				tm_total()
-				
-			});
+            //--上一页(减1)  / 下一页(加1)
+            
+            var index = 1;
+    
+        
+            //下一页功能
+            $("#tr_list td").find(".next").on("click",function(){
+                var $this = $(this);
+                var $input =$(this).prev();
+                var datasum=$(this).data("sum");
+                var total = 0;
+                
+                index++;//相当于index = index +1;
+                if(index > datasum)index = 1;
+                $input.val(index);
+                var num=$this.parents().find("#count").val();
+                var money=$this.parents().find("#moneys").text();
+                total += money * num;
+                $this.parents().find("#td_sum").text(total);
+                tm_total()
+                
+            });
 
-		
-			//上一页功能
-			$("#tr_list td").find(".prev").on("click",function(){
-			var datasum=$(this).data("sum");
-			var $this = $(this);
-			var $input =$(this).next();
-				index--;//相当于index = index +1;
-				if(index<1)index = datasum;
-				$input.val(index);
-				var num=$this.parents().find("#count").val();
-				var money=$this.parents().find("#moneys").text();
-				$this.parents().find("#td_sum").text(num*money);
-				var unit_price = $(this).parent().parent().find("b.unit-price").eq(0).html();
-				tm_total()
-			});
-			/*总金额计算*/
-			function tm_total(){
-				var total = 0;
-				$("#tr_list").each(function(){
-				var checked =$(this).find("td").find(".duoxuank").prop("checked")
-					if(checked==true){
-						var money =  $(this).parents().find("#td_sum").text();
-						var num =  $(this).find("#count").val();
-						total += money * num;
-					}
-					$(".tm_code_zon").text(money)
-				});
+        
+            //上一页功能
+            $("#tr_list td").find(".prev").on("click",function(){
+            var datasum=$(this).data("sum");
+            var $this = $(this);
+            var $input =$(this).next();
+                index--;//相当于index = index +1;
+                if(index<1)index = datasum;
+                $input.val(index);
+                var num=$this.parents().find("#count").val();
+                var money=$this.parents().find("#moneys").text();
+                $this.parents().find("#td_sum").text(num*money);
+                var unit_price = $(this).parent().parent().find("b.unit-price").eq(0).html();
+                tm_total()
+            });
+            /*总金额计算*/
+            function tm_total(){
+                var total = 0;
+                $("#tr_list").each(function(){
+                var checked =$(this).find("td").find(".duoxuank").prop("checked")
+                    if(checked==true){
+                        var money =  $(this).parents().find("#td_sum").text();
+                        var num =  $(this).find("#count").val();
+                        total += money * num;
+                    }
+                    $(".tm_code_zon").text(money)
+                });
 
-				var count = $("#listbox").find("li").find(".c_xz:visible").length;
-				$("#count").text(count);
-				$("#sum").text(total);
-			};
-			
-			
-	/*全选*/
-	function checkAll(obj,flag){
-		var courseName = document.getElementsByName("coursename");
-		var count="${count}"
-		if(flag){
-			if(obj.checked){//判断当前全选选中
-			for(var i=0;i<courseName.length;i++){
-				courseName[i].checked = true;
-				$("#code_su").text(count)
-			}
-			}else{
-				for(var i=0;i<courseName.length;i++){	
-					courseName[i].checked = false;
-					$("#code_su").text(2)
-				}	
-				$("#code_su").text(0)
-			}
-		}else{
-			
-			if(obj.checked){
-				$("#code_su").text(count)
-			}else{
-				$("#code_su").text(0)
-			}
-		}
-	};
-	
+                var count = $("#listbox").find("li").find(".c_xz:visible").length;
+                $("#count").text(count);
+                $("#sum").text(total);
+            };
+            
+            
+    /*全选*/
+    function checkAll(obj,flag){
+        var courseName = document.getElementsByName("coursename");
+        var count="${count}"
+        if(flag){
+            if(obj.checked){//判断当前全选选中
+            for(var i=0;i<courseName.length;i++){
+                courseName[i].checked = true;
+                $("#code_su").text(count)
+            }
+            }else{
+                for(var i=0;i<courseName.length;i++){   
+                    courseName[i].checked = false;
+                    $("#code_su").text(2)
+                }   
+                $("#code_su").text(0)
+            }
+        }else{
+            
+            if(obj.checked){
+                $("#code_su").text(count)
+            }else{
+                $("#code_su").text(0)
+            }
+        }
+    };
+    
 
-		/*删除购物车*/
-		$("#tr_list .gwc1_lm2_d").on("click",".gwc_delete",function(){
-			var $this = $(this);
-			var id = $this.data("opid");
-			qikoo.dialog.confirm('确定要将该商品移除购物车吗？',function(){
-				$.ajax({
-					type:"post",
-					url:"/delete",
-					data:{"id":id},
-					success:function(data){
-						if(data=="success"){
-							 $this.parents("#tr_list").fadeOut("slow",function(){
-								$(this).remove();
-							});
-						}
-					}
-				})
-			},function(){
-				
-			});
-			
-		});
-		/*去结算*/
-		function tm_setp(obj){
-			var $this=$("#tr_list").find("td");
-			var productName =$this.parents().find(".nemes a").text();
-			var productNumber =$this.parents().find(".content_zj").val();
-			var price =$this.parents().find(".money").text();
-			
-			$.ajax({
-				type:"post",
-				url:"/cartStep",
-				data:{"productName":productName,"deliveryQuantity":productNumber,"price":price},
-				success:function(data){
-					alert(data)
-				}
-			})
-		
-		}
+        /*删除购物车*/
+        $("#tr_list .gwc1_lm2_d").on("click",".gwc_delete",function(){
+            var $this = $(this);
+            var id = $this.data("opid");
+            qikoo.dialog.confirm('确定要将该商品移除购物车吗？',function(){
+                $.ajax({
+                    type:"post",
+                    url:"/delete",
+                    data:{"id":id},
+                    success:function(data){
+                        if(data=="success"){
+                             $this.parents("#tr_list").fadeOut("slow",function(){
+                                $(this).remove();
+                            });
+                        }
+                    }
+                })
+            },function(){
+                
+            });
+            
+        });
+        /*去结算*/
+        function tm_setp(obj){
+            var $this=$("#tr_list").find("td");
+            var productName =$this.parents().find(".nemes a").text();
+            var productNumber =$this.parents().find(".content_zj").val();
+            var price =$this.parents().find(".money").text();
+            
+            $.ajax({
+                type:"post",
+                url:"/cartStep",
+                data:{"productName":productName,"deliveryQuantity":productNumber,"price":price},
+                success:function(data){
+                    alert(data)
+                }
+            })
+        
+        }
 
 </script>
 
-
-
 </body>
 </html>
-
-
-
