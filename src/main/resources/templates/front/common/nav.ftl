@@ -74,7 +74,7 @@
         <div class="nav_2 fll ml4">
             <ul>
                 <li><a href="/" title="首页">首页</a></li>
-                <li><a href="#" title="明星产品">明星产品</a></li>
+                <li><a href="/star/0-0-0-0-0" title="明星产品">明星产品</a></li>
                 <#if phone_type??>
                     <li><a href="/list/${phone_type.id}" title="手机产品">手机产品</a></li>
                 </#if>
@@ -87,7 +87,7 @@
                 <#if second_hand_phone_type??>
                     <li><a href="/list/${second_hand_phone_type.id}" title="二手手机">二手手机</a></li>
                 </#if>
-                <li><a href="/news/1" title="新闻资讯">新闻资讯</a></li>
+                <li><a href="/news/0" title="新闻资讯">新闻资讯</a></li>
             </ul>
         </div>
     

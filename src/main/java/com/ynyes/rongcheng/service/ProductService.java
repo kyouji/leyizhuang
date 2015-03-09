@@ -323,7 +323,9 @@ public class ProductService {
     public Page<Product> findStar(int page,
                                         int size,
                                         String direction,
-                                        String property)
+                                        String property,
+                                        Double priceLow,
+                                        Double priceHigh)
     {
         Page<Product> productPage = null;
         PageRequest pageRequest = null;
@@ -344,7 +346,14 @@ public class ProductService {
             pageRequest = new PageRequest(page, size, sort);
         }
         
-        productPage = repository.findByIsOnSaleTrueAndIsStarProductTrue(pageRequest);
+        if (null == priceLow || null == priceHigh)
+        {
+            productPage = repository.findByIsOnSaleTrueAndIsStarProductTrue(pageRequest);
+        }
+        else
+        {
+            productPage = repository.findByIsOnSaleTrueAndIsStarProductTrueAndPriceMinimumBetween(pageRequest, priceLow, priceHigh);
+        }
         
         return productPage;
     }

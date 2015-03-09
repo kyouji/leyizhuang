@@ -148,7 +148,7 @@ public class IndexController {
         }
         
         // 明星产品
-        productPage = productService.findStar(0, 6, "desc", "id");
+        productPage = productService.findStar(0, 6, "desc", "id", null, null);
         
         if (null != productPage)
         {

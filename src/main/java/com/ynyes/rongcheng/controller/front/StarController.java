@@ -1,6 +1,5 @@
 package com.ynyes.rongcheng.controller.front;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ynyes.rongcheng.entity.Brand;
-import com.ynyes.rongcheng.entity.Parameter;
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.ProductType;
 import com.ynyes.rongcheng.entity.SiteInfo;
@@ -31,7 +29,7 @@ import com.ynyes.rongcheng.util.ClientConstant;
  *
  */
 @Controller
-public class TypelistController {
+public class StarController {
     @Autowired
     private ProductService productService;
     
@@ -49,7 +47,7 @@ public class TypelistController {
      * 
      * @author Sharon
      * 
-     * @param queryStr 组成：typeID-brandIndex-[paramIndex]-[排序字段]-[销量排序标志]-[价格排序标志]-[上架时间排序标志]-[页号]_[价格低值]-[价格高值]
+     * @param queryStr 组成：[排序字段]-[销量排序标志]-[价格排序标志]-[上架时间排序标志]-[页号]_[价格低值]-[价格高值]
      * @param page
      * @param size
      * @param direction
@@ -57,7 +55,7 @@ public class TypelistController {
      * @param map
      * @return
      */
-    @RequestMapping("/list/{queryStr}")
+    @RequestMapping("/star/{queryStr}")
     public String list(@PathVariable String queryStr, ModelMap map){
         // 导航栏
         List<ProductType> rptList = productTypeService.findByParent("");
@@ -136,11 +134,6 @@ public class TypelistController {
         map.addAttribute("phone_info_list", infoList);
         // 页脚数据结束
         
-        if (null == queryStr || "".equals(queryStr))
-        {
-            return "error404";
-        }
-        
         Double priceLow = null;
         Double priceHigh = null;
         
@@ -169,35 +162,7 @@ public class TypelistController {
             }
         }
         
-        String[] queryArray = queryStr.split("-");
-        
-        if (queryArray.length <= 0)
-        {
-            return "error404";
-        }
-        
-        Long typeId = Long.parseLong(queryArray[0]);
-        
-        if (null == typeId)
-        {
-            return "error404";
-        }
-        
-        ProductType pType = null;
-        
-        if (null != typeId)
-        {
-            pType = productTypeService.findOne(typeId);
-        }
-        
-        map.addAttribute("type", pType);
-        
-        if (null == pType)
-        {
-            return "error404";
-        }
-        
-        // brand_list和param_list将在前端进行显示
+        // 推荐品牌
         map.addAttribute("phone_type", productTypeService.findByName("手机"));
         Page<Brand> brandPage = brandService.findByType("手机", 0, 9, null, null);
         List<Brand> brandList = null;
@@ -209,74 +174,15 @@ public class TypelistController {
         
         map.addAttribute("brand_list", brandList);
         
-        List<Parameter> paramList = productTypeService.findParametersSearchableById(typeId);
-        
-        map.addAttribute("param_list", paramList);
-        
-        String brandName = null;
-        
-        map.addAttribute("brandIndex", 0);
-        
-        if (queryArray.length > 1)
-        {
-            Integer brandIndex = Integer.parseInt(queryArray[1]);
-            
-            if (null != brandIndex && brandIndex.intValue() > 0)
-            {
-                brandName = brandList.get(brandIndex-1).getName();
-                map.addAttribute("brandIndex", brandIndex);
-            }
-        }
-      
-        List<String> paramValueList = new ArrayList<String>();
-        
-        int paramListLength = 0;
-        
-        if (null != paramList && paramList.size() > 0)
-        {
-            paramListLength = paramList.size();
-        }
-        
-        List<Integer> paramIndexList = new ArrayList<Integer>();
-        
-        if (paramListLength > 0)
-        {
-            if (queryArray.length > paramListLength + 1)
-            {
-                // 遍历所有参数，i是参数的位置号
-                for (int i=0; i<paramListLength; i++)
-                {
-                    // index是参数值的位置号
-                    Integer index = Integer.parseInt(queryArray[2+i]);
-                    
-                    if (null == index)
-                    {
-                        index = 0;
-                    }
-                    
-                    paramIndexList.add(index);
-                    
-                    if (index.intValue() > 0)
-                    {
-                        String[] values = paramList.get(i).getValueList().split(",");
-                        
-                        if (null != values && values.length > index)
-                        {
-                            paramValueList.add(values[index-1]);
-                        }
-                    }
-                }
-            }
-        }
-        
-        map.addAttribute("param_index_list", paramIndexList);
+        // [排序字段]-[销量排序标志]-[价格排序标志]-[上架时间排序标志]-[页号]_[价格低值]-[价格高值]
+        String[] queryArray = queryStr.split("-");
         
         // 0:按销量排序 1:价格排序 2:上架时间排序
         Integer sortType = null;
         
-        if (queryArray.length > paramListLength + 2)
+        if (queryArray.length > 0)
         {
-            sortType = Integer.parseInt(queryArray[paramListLength + 2]);
+            sortType = Integer.parseInt(queryArray[0]);
         }
         
         if (null == sortType || sortType.intValue() > 2)
@@ -300,9 +206,9 @@ public class TypelistController {
             // 只有价格排序会区分升降序
             else if (sortType.equals(1))
             {
-                if (queryArray.length > paramListLength + 4)
+                if (queryArray.length > 2)
                 {
-                    Integer dirFlag = Integer.parseInt(queryArray[paramListLength + 4]);
+                    Integer dirFlag = Integer.parseInt(queryArray[2]);
                     
                     // 1:升序  0:降序
                     if (null != dirFlag && dirFlag.equals(1))
@@ -322,18 +228,16 @@ public class TypelistController {
         
         int pageIndex = 0;
         
-        if (queryArray.length > paramListLength + 6)
+        if (queryArray.length > 4)
         {
-            pageIndex = Integer.parseInt(queryArray[paramListLength + 6]);
+            pageIndex = Integer.parseInt(queryArray[4]);
         }
         
         map.addAttribute("page_index", pageIndex);
         
-        Page<Product> productPage = productService.findByTypeAndBrandNameAndPriceAndParameters(pType.getName(), 
-                                                            brandName, priceLow, priceHigh, 
-                                                            pageIndex, ClientConstant.pageSize, 
-                                                            direction, property, 
-                                                            paramValueList.toArray(new String[0]));
+        Page<Product> productPage = productService.findStar(pageIndex, ClientConstant.pageSize, 
+                                                            direction, property,
+                                                            priceLow, priceHigh);
         
         if (null != productPage)
         {
@@ -343,24 +247,13 @@ public class TypelistController {
         }
         
         // 热销排行
-        productPage = productService.findByType(pType.getName(), 0, 10, "desc", "soldNumber");
+        productPage = productService.findByType("手机", 0, 10, "desc", "soldNumber");
         
         if (null != productPage)
         {
             map.addAttribute("hot_product_list", productPage.getContent());
         }
         
-        // 商品类型逐级分类
-        map.addAttribute("type_list", productTypeService.findPredecessors(pType));
-        
-        brandPage = brandService.findByIsRecommendTrue(0, 9, null, null);
-        
-        if (null != brandPage)
-        {
-            // 推荐品牌
-            map.addAttribute("recommend_brand_list", brandPage.getContent());
-        }
-        
-        return "/front/type_list";//错误
+        return "/front/star_list";//错误
     }
 }

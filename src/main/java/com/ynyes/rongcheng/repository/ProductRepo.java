@@ -83,6 +83,7 @@ public interface ProductRepo extends
     
     // 查找明星产品
     Page<Product> findByIsOnSaleTrueAndIsStarProductTrue(Pageable page);
+    Page<Product> findByIsOnSaleTrueAndIsStarProductTrueAndPriceMinimumBetween(Pageable page, Double priceLow, Double priceHigh);
     List<Product> findByIsOnSaleTrueAndIsStarProductTrue();
 
 }
