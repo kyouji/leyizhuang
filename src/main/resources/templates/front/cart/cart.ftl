@@ -67,8 +67,8 @@
 <#if carts??>
 <#list carts as cartId>
 <tr id="tr_list">
-<td class="gwc1_lm2_a"><input type="checkbox" class="fll duoxuank"   name="coursename"><span><a href="javascript:void(0)" class="t_timg"><img src="${cartId.productCoverImageUri}" width="76" height="76"></a></span>
-<p><a href="javascript:void(0)"> <p><#if cartId.productName??>${cartId.productName}</#if></p></a></td>
+<td class="gwc1_lm2_a"><input type="checkbox" class="fll duoxuank"   name="coursename" onchange="checkAll(this)"><span><a href="javascript:void(0)" class="t_timg"><img src="${cartId.productCoverImageUri}" width="76" height="76"></a></span>
+<p><a href="javascript:void(0)"> <p class="nemes"><#if cartId.productName??>${cartId.productName}</#if></p></a></td>
 <td class="gwc1_lm2_b">￥<span class="money" id="moneys"><#if cartId.price??>${cartId.price?c}</#if></span></td>
 <td class="gwc1_lm2_c"><div class="ds content_nr_3_jg2"><a href="javascript:void(0)" class="prev" data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/slj.png" width="20" height="20" ></a><input type="text" class="content_zj" value="${cartId.pid}" id="count" ><a href="javascript:void(0)" class="next"  data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/sljj.png" width="20" height="20" ></a></div></td>
 <td class="gwc1_lm2_b">￥<span id="td_sum">0</span></td>
@@ -81,16 +81,16 @@
 </div>
 
 <div class="main">
-<div class="s_gwc1zj_left fll mt12"><p><input type="checkbox" onclick="checkAll(this)" class="fll">全选</p></div>
+<div class="s_gwc1zj_left fll mt12"><p><input type="checkbox" onclick="checkAll(this,true)" class="fll">全选</p></div>
 
-<div class="s_gwc1zj flr"><p>商品<span id="code_su"> ${count} </span>件  总价：<span>¥599.00</span>  商品总计(不含运费)： <span>¥599.00</span> </p></div>
+<div class="s_gwc1zj flr"><p>商品<span id="code_su"> 0 </span>件  总价：¥<span class="tm_code_zon">0.00</span>  商品总计(不含运费)： <span class="tm_code_zon">¥599.00</span> </p></div>
 
 </div>
 
 <div class="clear"></div>
 
 <div class="main">
-<div class="s_gwc1zja"><div class="fll s_gwc1zja_1"><a href="javascript:void(0)"> << 继续购物 </a></div><div class="flr s_gwc1zja_2"><a href="/cartStep" title="去结算">去结算 </a></div></div>
+<div class="s_gwc1zja"><div class="fll s_gwc1zja_1"><a href="javascript:void(0)"> << 继续购物 </a></div><div class="flr s_gwc1zja_2"><a href="javascript:void(0)" onclick="tm_setp(this)" title="去结算">去结算 </a></div></div>
 </div>
 
 </div>
@@ -126,6 +126,7 @@
 				var money=$this.parents().find("#moneys").text();
 				total += money * num;
 				$this.parents().find("#td_sum").text(total);
+				tm_total()
 				
 			});
 
@@ -144,17 +145,17 @@
 				var unit_price = $(this).parent().parent().find("b.unit-price").eq(0).html();
 				tm_total()
 			});
-			
 			/*总金额计算*/
 			function tm_total(){
 				var total = 0;
-				$("#tr_list").find("td").each(function(){
-				var checked =$(this).find(".duoxuank").prop("checked")
+				$("#tr_list").each(function(){
+				var checked =$(this).find("td").find(".duoxuank").prop("checked")
 					if(checked==true){
-						var money =  $(this).find("#moneys").text();
+						var money =  $(this).parents().find("#td_sum").text();
 						var num =  $(this).find("#count").val();
 						total += money * num;
 					}
+					$(".tm_code_zon").text(money)
 				});
 
 				var count = $("#listbox").find("li").find(".c_xz:visible").length;
@@ -164,17 +165,33 @@
 			
 			
 	/*全选*/
-	function checkAll(obj){
+	function checkAll(obj,flag){
 		var courseName = document.getElementsByName("coursename");
-		if(obj.checked){//判断当前全选选中
+		var count="${count}"
+		if(flag){
+			if(obj.checked){//判断当前全选选中
 			for(var i=0;i<courseName.length;i++){
 				courseName[i].checked = true;
+				$("#code_su").text(count)
+			}
+			}else{
+				for(var i=0;i<courseName.length;i++){	
+					courseName[i].checked = false;
+					$("#code_su").text(2)
+				}	
+				$("#code_su").text(0)
 			}
 		}else{
-			for(var i=0;i<courseName.length;i++){											courseName[i].checked = false;
-			}	
+			
+			if(obj.checked){
+				$("#code_su").text(count)
+			}else{
+				$("#code_su").text(0)
+			}
 		}
 	};
+	
+
 		/*删除购物车*/
 		$("#tr_list .gwc1_lm2_d").on("click",".gwc_delete",function(){
 			var $this = $(this);
@@ -196,7 +213,24 @@
 				
 			});
 			
-		})
+		});
+		/*去结算*/
+		function tm_setp(obj){
+			var $this=$("#tr_list").find("td");
+			var productName =$this.parents().find(".nemes a").text();
+			var productNumber =$this.parents().find(".content_zj").val();
+			var price =$this.parents().find(".money").text();
+			
+			$.ajax({
+				type:"post",
+				url:"/cartStep",
+				data:{"productName":productName,"deliveryQuantity":productNumber,"price":price},
+				success:function(data){
+					alert(data)
+				}
+			})
+		
+		}
 
 </script>
 

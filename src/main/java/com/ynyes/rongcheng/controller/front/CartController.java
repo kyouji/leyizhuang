@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ynyes.rongcheng.entity.OrderItem;
 import com.ynyes.rongcheng.entity.Product;
+import com.ynyes.rongcheng.entity.ProductVersion;
 import com.ynyes.rongcheng.entity.User;
+import com.ynyes.rongcheng.service.OrderItemService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductVersionService;
 import com.ynyes.rongcheng.service.ShoppingCartService;
@@ -33,9 +37,11 @@ public class CartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
     @Autowired
-    ProductService productService;
+    private ProductService productService;
     @Autowired
-    ProductVersionService productVers;
+    private ProductVersionService productVers;
+    @Autowired
+    private OrderItemService orderItemService;
     
     private String flag;
     /**
@@ -87,11 +93,31 @@ public class CartController {
      * @param  [参数2]   [参数2说明]
      * @exception <BR>
      * @since  1.0.0
+     *  productId (必选)商品ID
      */
+    
     @RequestMapping("/cartStep")
-    public String cartStep(){
-        
-        return "/front/cart/cartStep";
+    public ModelAndView cartStep(String productId,
+            String productName,
+            String productVerId,
+            String productVerColor,
+            String productVerCap,
+            String productVerName,
+            String deliveryQuantity,
+            String price){
+        ModelAndView modelAndView=new ModelAndView();
+        /*空判断*/
+        OrderItem item=null;
+       if(StringUtils.isNotEmpty(productName) &&
+               StringUtils.isNotEmpty(deliveryQuantity) &&
+               StringUtils.isNotEmpty(price)){
+           item=new OrderItem();
+           /*新增订单*/
+           item.setProductName(productName);
+           orderItemService.save(item);
+           modelAndView.addObject("/front/cart/cartStep");
+       }
+        return modelAndView;
     }
     /**
      * 
@@ -113,28 +139,57 @@ public class CartController {
     public String paysuccess(){
         return "/front/cart/paysuccess";
     }
+    /**
+     * 
+     * 添加购物车<BR>
+     * 方法名：add<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年3月9日-上午10:37:25 <BR>
+     * @param pid
+     * @param vid
+     * @param quantity
+     * @param request
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
     @RequestMapping(value="/add",method=RequestMethod.POST)
     @ResponseBody
-    public String add(String pid,String vid,String quantity,HttpServletRequest request){
+    public String add(Long[] pid,Long[] vid,Long[] quantity,HttpServletRequest request){
        
         User user =(User)request.getSession().getAttribute("user");
        if(user!=null){
            String username=user.getUsername();
            if(StringUtils.isNotEmpty(username)){
-             Product product=  productService.findOne(Long.parseLong(pid));
-               Map<String, Object> map= shoppingCartService.add(username, Long.parseLong(pid), Long.parseLong(vid), Long.parseLong(quantity), product.getFlashSalePrice());
-               if(map.get("code").equals(0)){
-                   flag="success";
+               if(pid.equals("") && vid.equals("") && quantity.equals("")){
+                   for (int i=0;i<pid.length;i++) {
+                       Product product=  productService.findOne(pid[i]);
+                      List<ProductVersion> versions= product.getVersionList();
+                      for (ProductVersion productVersion : versions) {
+                          if(productVersion.getId()==vid[i]){
+                              Map<String, Object> map= shoppingCartService.add(username, pid[i], vid[i],quantity[i], product.getFlashSalePrice());
+                              if(map.get("code").equals(0)){
+                                  flag="success";
+                                  return flag;
+                              }
+//                              else if(map.get("message").equals("参数错误")){
+//                                  flag="messaee";
+//                                
+//                              }
+                              else{
+                                  flag="false";
+                                  return flag;
+                              }
+                          }
+                      }
+                   }
+              
+               }else {
+                   flag="nullfalse";
                    return flag;
-               }
-//               else if(map.get("message").equals("参数错误")){
-//                   flag="messaee";
-//                 
-//               }
-               else{
-                   flag="false";
-                   return flag;
-               }
+            }
            }else{
                flag="false";
                return flag;
@@ -143,6 +198,7 @@ public class CartController {
          flag="nulluser";
            return flag;
        }
+    return flag;
     }
     @RequestMapping("delete")
     @ResponseBody

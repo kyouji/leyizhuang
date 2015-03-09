@@ -352,19 +352,19 @@ public class ProductService {
     /**
      * 查找商品
      * 
-     * @param id 商品ID
+     * @param pid 商品ID
      * @return 找到的商品，未找到时返回NULL
      */
-    public Product findOne(Long id)
+    public Product findOne(Long pid)
     {
         Product p = null;
         
-        if (null == id)
+        if (null == pid)
         {
             return null;
         }
         
-        p = repository.findOne(id);
+        p = repository.findOne(pid);
         
         if (null == p)
         {
