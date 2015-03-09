@@ -163,7 +163,7 @@ public class CartController {
        if(user!=null){
            String username=user.getUsername();
            if(StringUtils.isNotEmpty(username)){
-               if(pid.equals("") && vid.equals("") && quantity.equals("")){
+               if(pid!=null && pid.length>0 && vid!=null && vid.length>0 && quantity!=null && quantity.length>0){
                    for (int i=0;i<pid.length;i++) {
                        Product product=  productService.findOne(pid[i]);
                       List<ProductVersion> versions= product.getVersionList();
