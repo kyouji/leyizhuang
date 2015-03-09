@@ -39,13 +39,13 @@ public class ProductCombination {
     
     // 商品简介
     private String productBrief;
-    
+
     // 商品类型
     private String productType;
-    
+
     // 单卖价
     private Double productPrice;
-    
+
     // 封面图片uri
     private String productCoverImageUri;
 

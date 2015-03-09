@@ -33,7 +33,7 @@
     <#if recommend_brand_list??>
         <#list recommend_brand_list as brand>
             <#if brand_index < 9>
-                <li><a href="javascript:;"><img src="${brand.logoUri}" width="90" height="45"></a></li>
+                <li><a href="/list/${phone_type.id}-${brand_index+1}"><img src="${brand.logoUri}" width="90" height="45"></a></li>
             </#if>
         </#list>
     </#if>

@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ynyes.rongcheng.entity.Advertisement;
 import com.ynyes.rongcheng.entity.Brand;
+import com.ynyes.rongcheng.entity.News;
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.ProductType;
+import com.ynyes.rongcheng.entity.SiteInfo;
 import com.ynyes.rongcheng.service.AdvertisementService;
 import com.ynyes.rongcheng.service.BrandService;
+import com.ynyes.rongcheng.service.NewsService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductTypeService;
+import com.ynyes.rongcheng.service.SiteInfoService;
 
 /**
  * 前端首页控制
@@ -42,6 +46,12 @@ public class IndexController {
     
     @Autowired
     ProductTypeService productTypeService;
+    
+    @Autowired
+    NewsService newsService;
+    
+    @Autowired
+    SiteInfoService siteInfoService;
     
     /**
      * 
@@ -112,8 +122,8 @@ public class IndexController {
         map.addAttribute("second_hand_phone_type", productTypeService.findByName("二手手机"));
         
         // 导航栏结束
-        
-        Page<Brand> brandPage = brandService.findByIsRecommendTrue(0, 9, null, null);
+        map.addAttribute("phone_type", productTypeService.findByName("手机"));
+        Page<Brand> brandPage = brandService.findByType("手机", 0, 9, null, null);
         
         if (null != brandPage)
         {
@@ -246,6 +256,50 @@ public class IndexController {
         {
             map.addAttribute("phone_number_list", productPage.getContent());
         }
+        
+        // 资讯
+        Page<News> newsPage = newsService.findByType("手机资讯", 0, 2, "desc", "id");
+        
+        if (null != newsPage)
+        {
+            map.addAttribute("phone_news_list", newsPage.getContent());
+        }
+        
+        newsPage = newsService.findByType("手机发烧友", 0, 2, "desc", "id");
+        
+        if (null != newsPage)
+        {
+            map.addAttribute("phone_lover_list", newsPage.getContent());
+        }
+        
+        newsPage = newsService.findByType("新闻视频", 0, 2, "desc", "id");
+        
+        if (null != newsPage)
+        {
+            map.addAttribute("news_video_list", newsPage.getContent());
+        }
+        
+        // 页脚数据
+        List<SiteInfo> infoList = siteInfoService.findByType("帮助中心");
+        
+        map.addAttribute("help_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("支付配送");
+        
+        map.addAttribute("delivery_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("售后服务");
+        
+        map.addAttribute("service_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("关于荣诚");
+        
+        map.addAttribute("about_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("免费热线电话");
+        
+        map.addAttribute("phone_info_list", infoList);
+        // 页脚数据结束
         
         return "/front/index";
     }

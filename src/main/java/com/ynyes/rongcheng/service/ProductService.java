@@ -377,26 +377,26 @@ public class ProductService {
         }
         
         // 重新填充combinationList
-        for (ProductCombination pc : p.getCombinationList())
-        {
-            if (null != pc.getPid() && null != pc.getVid())
-            {
-                Product related = repository.findOne(pc.getPid());
-                
-                // 设置价格
-                for (ProductVersion ver : related.getVersionList())
-                {
-                    if (ver.getId().equals(pc.getVid()))
-                    {
-                        pc.setProductPrice(ver.getSalePrice());
-                        pc.setProductName(related.getName());
-                        pc.setProductCoverImageUri(related.getCoverImageUri());
-                        pc.setProductBrief(related.getBrief());
-                        pc.setProductType(related.getType());
-                    }
-                }
-            }
-        }
+//        for (ProductCombination pc : p.getCombinationList())
+//        {
+//            if (null != pc.getPid() && null != pc.getVid())
+//            {
+//                Product related = repository.findOne(pc.getPid());
+//                
+//                // 设置价格
+//                for (ProductVersion ver : related.getVersionList())
+//                {
+//                    if (ver.getId().equals(pc.getVid()))
+//                    {
+//                        pc.setProductPrice(ver.getSalePrice());
+//                        pc.setProductName(related.getName());
+//                        pc.setProductCoverImageUri(related.getCoverImageUri());
+//                        pc.setProductBrief(related.getBrief());
+//                        pc.setProductType(related.getType());
+//                    }
+//                }
+//            }
+//        }
         
         return p;
     }
@@ -503,6 +503,7 @@ public class ProductService {
             
             Double priceMinimum = versionList.get(0).getSalePrice();
             Long priceMinimumVid = versionList.get(0).getId();
+            Double priceMinimumMarketPrice = versionList.get(0).getMarketPrice();
             
             for (ProductVersion ver : versionList)
             {
@@ -510,11 +511,13 @@ public class ProductService {
                 {
                     priceMinimum = ver.getSalePrice();
                     priceMinimumVid = ver.getId();
+                    priceMinimumMarketPrice = ver.getMarketPrice();
                 }
             }
             
             product.setPriceMinimum(priceMinimum);
             product.setPriceMinimumVid(priceMinimumVid);
+            product.setPriceMinimumMarketPrice(priceMinimumMarketPrice);
         }
         
         // 设置参数

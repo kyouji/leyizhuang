@@ -20,8 +20,12 @@ public class SiteInfo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    // 名称
+    @Column
+    private String name;
+    
     // 类型
-    @Column(unique=true)
+    @Column
     private String type;
     
     // 内容
@@ -42,6 +46,14 @@ public class SiteInfo {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {

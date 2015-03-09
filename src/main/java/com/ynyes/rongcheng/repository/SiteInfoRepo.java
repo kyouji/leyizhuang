@@ -1,5 +1,7 @@
 package com.ynyes.rongcheng.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -17,5 +19,5 @@ public interface SiteInfoRepo extends
 		JpaSpecificationExecutor<SiteInfo> 
 {
     // 通过类型查找
-    SiteInfo findByTypeAndIsShowTrue(String type);
+    List<SiteInfo> findByTypeAndIsShowTrue(String type);
 }

@@ -14,44 +14,53 @@
         <div class="s_footera fll">
             <ul>
                 <li><div class="bzzx fll"></div><span>帮助中心</span></li>
-                <li><a href="/help/question-1">购物指南</a></li>
-                <li><a href="/help/question-2">常见问题</a></li>
-                <li><a href="/help/question-3">用户协议</a></li>
+                <#if help_info_list??>
+                    <#list help_info_list as info>
+                        <li><a href="/help/${info.id}">${info.name}</a></li>
+                    </#list>
+                </#if>
             </ul>
         </div>
 
         <div class="s_footera fll" id="s_footera45">
             <ul>
                 <li><div class="zfps fll"></div><span>支付配送</span></li>
-                <li><a href="/help/distribution/1">支付方式</a></li>
-                <li><a href="/help/distribution/2">配送方式</a></li>
-                <li><a href="/help/distribution/3">配送费用</a></li>
+                <#if delivery_info_list??>
+                    <#list delivery_info_list as info>
+                        <li><a href="/help/${info.id}">${info.name}</a></li>
+                    </#list>
+                </#if>
             </ul>
         </div>
 
         <div class="s_footera fll">
             <ul>
                 <li><div class="shfw fll"></div><span>售后服务</span></li>
-                <li><a href="/help/afshelp-1">三包服务</a></li>
-                <li><a href="/help/afshelp-2">售后流程</a></li>
+                <#if service_info_list??>
+                    <#list service_info_list as info>
+                        <li><a href="/help/${info.id}">${info.name}</a></li>
+                    </#list>
+                </#if>
             </ul>
         </div>
 
         <div class="s_footera fll" id="s_footera55">
             <ul>
                 <li><div class="gyzc fll"></div><span>关于荣诚</span></li>
-                <li><a href="#">了解荣诚</a></li>
-                <li><a href="#">加入荣诚</a></li>
-                <li><a href="#">附近门店</a></li>
+                <#if about_info_list??>
+                    <#list about_info_list as info>
+                        <li><a href="/help/${info.id}">${info.name}</a></li>
+                    </#list>
+                </#if>
             </ul>
         </div>
 
         <div class="s_footerb flr">
             <ul>
                 <li><div class="mfrxdh fll"></div><span>免费热线电话</span></li>
-                <li class="ml30" id="s_phone">0871-68421560</li>
-                <li class="ml30">传真：0871-68421560</li>
-                <li class="ml30">周一到周日9:30-18:00</li>
+                <#if phone_info_list?? && phone_info_list[0]??>
+                    ${phone_info_list[0].content}
+                </#if>
             </ul>
         </div>  
 

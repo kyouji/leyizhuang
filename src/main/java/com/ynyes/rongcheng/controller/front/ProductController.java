@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.rongcheng.entity.Brand;
 import com.ynyes.rongcheng.entity.Product;
+import com.ynyes.rongcheng.entity.ProductCombination;
 import com.ynyes.rongcheng.entity.ProductComment;
 import com.ynyes.rongcheng.entity.ProductConsult;
 import com.ynyes.rongcheng.entity.ProductType;
 import com.ynyes.rongcheng.entity.ProductVersion;
+import com.ynyes.rongcheng.entity.SiteInfo;
 import com.ynyes.rongcheng.entity.User;
 import com.ynyes.rongcheng.service.BrandService;
 import com.ynyes.rongcheng.service.ParameterService;
@@ -28,6 +30,7 @@ import com.ynyes.rongcheng.service.ProductCommentService;
 import com.ynyes.rongcheng.service.ProductConsultService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductTypeService;
+import com.ynyes.rongcheng.service.SiteInfoService;
 import com.ynyes.rongcheng.service.UserService;
 import com.ynyes.rongcheng.util.StringUtils;
 
@@ -64,6 +67,9 @@ public class ProductController {
     @Autowired
     private BrandService brandService;
 
+    @Autowired
+    private SiteInfoService siteInfoService;
+    
     private String flag;
 
     /**
@@ -130,6 +136,28 @@ public class ProductController {
                 productTypeService.findByName("二手手机"));
 
         // 导航栏结束
+        
+        // 页脚数据
+        List<SiteInfo> infoList = siteInfoService.findByType("帮助中心");
+        
+        map.addAttribute("help_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("支付配送");
+        
+        map.addAttribute("delivery_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("售后服务");
+        
+        map.addAttribute("service_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("关于荣诚");
+        
+        map.addAttribute("about_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("免费热线电话");
+        
+        map.addAttribute("phone_info_list", infoList);
+        // 页脚数据结束
         
         Page<Brand> brandPage = brandService.findByIsRecommendTrue(0, 9, null, null);
         
@@ -210,7 +238,16 @@ public class ProductController {
                                 && co.equals(ver.getColor())
                                 && na.equals(ver.getName())
                                 && !versionCapacities.contains(ver.getCapacity())) {
+                            
                             versionCapacities.add(ver.getCapacity());
+                            
+                            // 如果已选容量，则传回版本ID
+                            if (null != ca && ca.equals(ver.getCapacity()))
+                            {
+                                map.addAttribute("vid", ver.getId());
+                                map.addAttribute("verSalePrice", ver.getSalePrice());
+                                map.addAttribute("verMarketPrice", ver.getMarketPrice());
+                            }
                         }
                     } 
                     else 
@@ -245,7 +282,40 @@ public class ProductController {
         String[] picUriList = product.getShowPictures().split(",");
 
         map.addAttribute("ShowPictures", picUriList);// 轮播展示图片
+        
+        // 商品组合
+        List<ProductCombination> pcList = product.getCombinationList();
+        List<String> pcTypeList = new ArrayList<String>();
+        
+        if (null != pcList && pcList.size() > 0)
+        {
+            for (ProductCombination pc : pcList)
+            {
+                Product related = productService.findOne(pc.getPid());
+              
+                // 如果是新类型则添加
+                if (!pcTypeList.contains(related.getType()))
+                {
+                    pcTypeList.add(related.getType());
+                }
+                
+                // 设置价格
+                for (ProductVersion ver : related.getVersionList()) {
+                    if (ver.getId().equals(pc.getVid())) {
+                        pc.setProductPrice(ver.getSalePrice());
+                        pc.setProductName(related.getName());
+                        pc.setProductCoverImageUri(related.getCoverImageUri());
+                        pc.setProductBrief(related.getBrief());
+                        pc.setProductType(related.getType());
+                    }
+                }
+            }
+        }
+        
+        map.addAttribute("combi_type_list", pcTypeList);
+        map.addAttribute("combi_list", pcList);
 
+        // 热销排行
         Page<Product> productPage = productService.findByType(
                 product.getType(), 0, 10, "desc", "soldNumber");
 

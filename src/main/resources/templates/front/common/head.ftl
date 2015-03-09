@@ -4,7 +4,7 @@
         <#if user??>
             <span>
                 您好，
-                <a href="/user/info" >${user.username}</a>
+                <a href="/user/info" id="id-username">${user.username}</a>
                 欢迎来到荣诚手机超市！您的身份：${user.role}&nbsp;&nbsp;
                 <a href="/logout" >退出</a>
             </span>

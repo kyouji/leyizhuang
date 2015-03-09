@@ -87,7 +87,7 @@
                 <#if second_hand_phone_type??>
                     <li><a href="/list/${second_hand_phone_type.id}" title="二手手机">二手手机</a></li>
                 </#if>
-                <li><a href="#" title="新闻资讯">新闻资讯</a></li>
+                <li><a href="/news/1" title="新闻资讯">新闻资讯</a></li>
             </ul>
         </div>
     

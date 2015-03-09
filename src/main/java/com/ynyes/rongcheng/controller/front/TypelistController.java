@@ -14,9 +14,11 @@ import com.ynyes.rongcheng.entity.Brand;
 import com.ynyes.rongcheng.entity.Parameter;
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.ProductType;
+import com.ynyes.rongcheng.entity.SiteInfo;
 import com.ynyes.rongcheng.service.BrandService;
 import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductTypeService;
+import com.ynyes.rongcheng.service.SiteInfoService;
 import com.ynyes.rongcheng.util.ClientConstant;
 
 /**
@@ -38,6 +40,9 @@ public class TypelistController {
     
     @Autowired
     private BrandService brandService;
+    
+    @Autowired
+    private SiteInfoService siteInfoService;
     
     /**
      * 返回商品列表
@@ -109,6 +114,28 @@ public class TypelistController {
         
         // 导航栏结束
         
+        // 页脚数据
+        List<SiteInfo> infoList = siteInfoService.findByType("帮助中心");
+        
+        map.addAttribute("help_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("支付配送");
+        
+        map.addAttribute("delivery_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("售后服务");
+        
+        map.addAttribute("service_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("关于荣诚");
+        
+        map.addAttribute("about_info_list", infoList);
+        
+        infoList = siteInfoService.findByType("免费热线电话");
+        
+        map.addAttribute("phone_info_list", infoList);
+        // 页脚数据结束
+        
         if (null == queryStr || "".equals(queryStr))
         {
             return "error404";
@@ -171,7 +198,8 @@ public class TypelistController {
         }
         
         // brand_list和param_list将在前端进行显示
-        Page<Brand>  brandPage = brandService.findByType(pType.getName(), 0, 10, null, null);
+        map.addAttribute("phone_type", productTypeService.findByName("手机"));
+        Page<Brand> brandPage = brandService.findByType("手机", 0, 9, null, null);
         List<Brand> brandList = null;
         
         if (null != brandPage && brandPage.getContent().size() > 0)
