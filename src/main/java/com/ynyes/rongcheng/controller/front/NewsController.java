@@ -24,7 +24,8 @@ import com.ynyes.rongcheng.util.StringUtils;
 @RequestMapping("/news")
 public class NewsController {
 	@Autowired NewsService NewsService;
-    @RequestMapping("/{typeId}")
+    
+	@RequestMapping("/{typeId}")
     public String news(@PathVariable String typeId,Integer page,Integer size,String direction,String property,Model model){
     	 
     	 if(page==null){

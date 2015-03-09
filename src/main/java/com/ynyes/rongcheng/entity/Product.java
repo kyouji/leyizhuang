@@ -109,6 +109,10 @@ public class Product {
     @Column
     private Long priceMinimumVid;
     
+    // 具有价格最小值的版本市场价
+    @Column(nullable=false, scale=2)
+    private Double priceMinimumMarketPrice;
+    
     // 各版本销售数量总和
     @Column
     private Long soldNumber;
@@ -301,6 +305,14 @@ public class Product {
 
     public void setPriceMinimumVid(Long priceMinimumVid) {
         this.priceMinimumVid = priceMinimumVid;
+    }
+
+    public Double getPriceMinimumMarketPrice() {
+        return priceMinimumMarketPrice;
+    }
+
+    public void setPriceMinimumMarketPrice(Double priceMinimumMarketPrice) {
+        this.priceMinimumMarketPrice = priceMinimumMarketPrice;
     }
 
     public Long getSoldNumber() {

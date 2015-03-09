@@ -22,7 +22,7 @@
 <#if recommend_brand_list??>
 <#list recommend_brand_list as brand>
     <#if brand_index < 9>
-        <li><a href="javascript:;"><img src="${brand.logoUri}" width="90" height="45"></a></li>
+        <li><a href="/list/${phone_type.id}-${brand_index+1}"><img src="${brand.logoUri}" width="90" height="45"></a></li>
     </#if>
 </#list>
 </#if>
@@ -398,25 +398,34 @@
 <td>
 <span>手机资讯</span>
 <ul>
-<li><a href="#">骁龙801顶配旗舰 OPPON3影音娱乐体验最佳音乐手机</a></li>
-<li><a href="#">骁龙801顶配旗舰 OPPON3影音娱乐体验最佳音乐手机</a></li>
-<li style="background:none;"><a href="#">更多>></a></li>
+    <#if phone_news_list??>
+        <#list phone_news_list as news>
+            <li><a href="#">${news.title}</a></li>
+        </#list>
+        <li style="background:none;"><a href="#">更多>></a></li>
+    </#if>
 </ul>
 </td>
 <td>
 <span>手机发烧友</span>
 <ul>
-<li><a href="#">骁龙801顶配旗舰 OPPON3影音娱乐体验最佳音乐手机</a></li>
-<li><a href="#">骁龙801顶配旗舰 OPPON3影音娱乐体验最佳音乐手机</a></li>
-<li style="background:none;"><a href="#">更多>></a></li>
+    <#if phone_lover_list??>
+        <#list phone_lover_list as news>
+            <li><a href="#">${news.title}</a></li>
+        </#list>
+        <li style="background:none;"><a href="#">更多>></a></li>
+    </#if>
 </ul>
 </td>
 <td>
 <span>新闻视频</span>
 <ul>
-<li><a href="#">骁龙801顶配旗舰 OPPON3影音娱乐体验最佳音乐手机</a></li>
-<li><a href="#">骁龙801顶配旗舰 OPPON3影音娱乐体验最佳音乐手机</a></li>
-<li style="background:none;"><a href="#">更多>></a></li>
+    <#if news_video_list??>
+        <#list news_video_list as news>
+            <li><a href="#">${news.title}</a></li>
+        </#list>
+        <li style="background:none;"><a href="#">更多>></a></li>
+    </#if>
 </ul>
 </td>
 </tr>

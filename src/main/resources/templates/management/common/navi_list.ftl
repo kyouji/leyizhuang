@@ -106,4 +106,40 @@
             </li>
         </ul>
     </li>
+    
+    <li>
+        <a href="javascript:;" class="dropdown-toggle">
+            <i class="icon-bullhorn"></i>
+            <span class="menu-text"> 资讯 </span>
+
+            <b class="arrow icon-angle-down"></b>
+        </a>
+
+        <ul class="submenu">
+            <li>
+                <a href="/admin/news">
+                    <i class="icon-double-angle-right"></i>
+                    所有资讯
+                </a>
+            </li>
+        </ul>
+    </li>
+    
+    <li>
+        <a href="javascript:;" class="dropdown-toggle">
+            <i class="icon-cog"></i>
+            <span class="menu-text"> 设置 </span>
+
+            <b class="arrow icon-angle-down"></b>
+        </a>
+
+        <ul class="submenu">
+            <li>
+                <a href="/admin/info">
+                    <i class="icon-double-angle-right"></i>
+                    网站资料
+                </a>
+            </li>
+        </ul>
+    </li>
 </ul><!-- /.nav-list -->

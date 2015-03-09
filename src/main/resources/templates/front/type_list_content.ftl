@@ -22,6 +22,7 @@
 <script type="text/javascript" src="/Tm/js/mainTip.js"></script>
 <script type="text/javascript" src="/Tm/js/common/nav.js"></script>
 <script type="text/javascript" src="/Tm/js/common/head.js"></script>
+<script type="text/javascript" src="/Tm/js/front/product.js"></script>
 </head>
 <body>
 <#include "/front/common/head.ftl" />
@@ -81,10 +82,18 @@
   <div class="ShopShowRight">
   <div class="erweimacontent"><img src="/img/erweima.png" width="180" height="180"></div>
     <h2><#if product.id??>${product.name}</#if></h2>
-   <h3><#if product.brief??>${product.brief}</#if></h3>
+    <h3><#if product.brief??>${product.brief}</#if></h3>
+    <input id="id-pid" type="text" value="${product.id}" style="display:none;" />
+    <input id="id-vid"  type="text" value="<#if vid??>${vid}<#else>${product.priceMinimumVid}</#if>" style="display:none;" />
     <p><span>商品编码：</span><#if product.code??>${product.code}</#if></p>
-    <p><span>市&nbsp;&nbsp;场&nbsp;价：</span>￥${product.priceMinimum?c}.00</p>
-    <p><span>荣&nbsp;&nbsp;诚&nbsp;价：</span><em id="pric">￥<#if product.flashSalePrice??>${product.flashSalePrice?c}</#if>.00</em><span class="orange ml10">(降价通知)</span></p>
+    <p><span>市&nbsp;&nbsp;场&nbsp;价：</span>￥
+        <#if verMarketPrice??>
+            ${verMarketPrice?string("#.##")}
+        <#else>
+            ${product.priceMinimumMarketPrice?string("#.##")}
+        </#if>
+    </p>
+    <p><span>荣&nbsp;&nbsp;诚&nbsp;价：</span><em id="pric">￥<#if verSalePrice??>${verSalePrice?string("#.##")}<#else>${product.priceMinimum?string("#.##")}</#if></em><span class="orange ml10">(降价通知)</span></p>
     <p><span>促&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销：</span><i><#if product.promotion??>${product.promotion}</#if></i></p>
     <p><span>商品评价：</span><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><img src="/images/star.jpg" /><span style="color:#1480DB">（共有<#if comment_total??>${comment_total}</#if>条评价）</span></p>
     <p><span>配&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置：</span><#if product.configuration??>${product.configuration}</#if></p>
@@ -93,7 +102,11 @@
         <#if ver_color_list??>
             <p class="mb5"><span class="fll">颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色：</span>
                 <#list ver_color_list as item>
-                    <a href="javascript:;">${item}</a>
+                    <#if co?? && co==item>
+                        <a href="javascript:;" class="verSelect colorSelect SelectPackage_on">${item}</a>
+                    <#else>
+                        <a href="javascript:;" class="verSelect colorSelect">${item}</a>
+                    </#if>
                 </#list>
               </p>
         </#if>
@@ -101,7 +114,11 @@
         <#if ver_name_list??>
             <p class="mb5"><span class="fll">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本：</span>
                 <#list ver_name_list as item>
-                    <a href="javascript:;">${item}</a>
+                    <#if na?? && na==item>
+                        <a href="javascript:;" class="verSelect nameSelect SelectPackage_on">${item}</a>
+                    <#else>
+                        <a href="javascript:;" class="verSelect nameSelect">${item}</a>
+                    </#if>
                 </#list>
               </p>
         </#if>
@@ -109,76 +126,98 @@
         <#if ver_capacity_list??>
             <p class="mb5"><span class="fll">容&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量：</span>
                 <#list ver_capacity_list as item>
-                    <a href="javascript:;">${item}</a>
+                    <#if ca?? && ca==item>
+                        <a href="javascript:;" class="verSelect capSelect SelectPackage_on">${item}</a>
+                    <#else>
+                        <a href="javascript:;" class="verSelect capSelect">${item}</a>
+                    </#if>
                 </#list>
               </p>
         </#if>
     </div>
     <p class="shopbtn mt10"><span class="fll">我要购买：</span>
     <a href="javascript:void(0)" class="fll prev" data-num="${product.versionList[0].leftNumber}"><img src="/images/jia.jpg" /></a>
-      <input type="text" class="select_num " id="count" value="1"/>
+      <input type="text" class="select_num " id="quantity" value="1"/>
       <a href="javascript:void(0)" class="fll next" data-num="${product.versionList[0].leftNumber}"><img src="/images/jian.jpg"/></a></p>
     <div class="clear"></div>
-    <div class="gm_btn"> <span class="gm_btn1"><a href="javascript:void(0)" onclick="tm_buy(${product.id})">立即购买</a></span> <span class="gm_btn2"><a href="javascript:void(0)" onclick="tm_buy(${product.id})">加入购物车</a></span><span class="gm_btn3"><a href="javascript:void(0)" onclick="tm_contra(this,${product.id})" >对比</a></span></div>
+    <div class="gm_btn"> <span class="gm_btn1"><a id="id-buy" href="javascript:void(0)">立即购买</a></span> <span class="gm_btn2"><a href="javascript:void(0)" onclick="tm_buy()">加入购物车</a></span><span class="gm_btn3"><a href="javascript:void(0)" onclick="tm_contra(this,${product.id})" >对比</a></span></div>
   </div>
 </div>
 <div class="clear"></div>
 
 <div class="tuijianzuhe" >
-<div class="tuijianzuhe_bt"><span>组合推荐</span><a href="#">推荐配置（12）</a><a href="#">推荐配置（32）</a><a href="#" class="tuijianzuhe_btxz">推荐配置</a><a href="#">推荐配置</a><a href="#">推荐配置</a><a href="#">推荐配置</a><a href="#">推荐配置</a><a href="#">推荐配置（5）</a><a href="#">推荐配置</a><div class="clear"></div></div>
+    <div class="tuijianzuhe_bt">
+        <span>组合推荐</span>
+        <#if combi_type_list??>
+            <#list combi_type_list as ctype>
+                <a href="javascript:;" <#if ctype_index == 0>class="tuijianzuhe_btxz" </#if> >${ctype}</a>
+                <a href="javascript:;" >${ctype}</a>
+            </#list>
+        </#if>
+    </div>
 
-
-<div class="fll tuijianzuhe_a" ><ul>
-
-        <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
-          <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b></a>
-          <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
-        </li>
-                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
-          <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b></a>
-          <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
-        </li>
-                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
-          <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b></a>
-          <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
-        </li>
-                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
-          <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b></a>
-          <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
-        </li>
-                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
-          <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b></a>
-          <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
-        </li>
-                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
-          <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b></a>
-          <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
-        </li>
-                <li><a href="#"> <img src="/images/spsx.jpg" width="135" height="135" />
-          <p>BlackBerryZ30 5英寸Super AMOLED显示屏黑莓10.2系</p>
-          <b>￥5900.00</b></a>
-          <p><input name="" type="checkbox" value="300.00" ppid="14901" id="ch14901"><span>￥5999.00</span></p>
-        </li>
-          
-</ul>
-<div class="clear"></div>
-</div>
-
-
-<div class="fll tuijianzuhe_b">
-<span>您自己的DIY</span>
-<p>已选择&nbsp;&nbsp;<span class="jia">5</span>件产品<a href="javascript:void(0)" class="tm_close">（清除选项）</a></p>
-<p>搭配价格：<span class="jia">￥5999.00</span></p>
-<p>参考价格：<span class="jia">￥599.00</span></p>
-<p>节省金额：<span class="jia">￥129.00</span></p>
-<p class="mt5"><a href="#" class="ligmooo" style="color:#fff;">立即购买</a></p>
-</div>
+    <#if combi_type_list??>
+        <#list combi_type_list as ctype>
+            <div class="fll tuijianzuhe_a" <#if ctype_index != 0>style="display:none;"</#if> >
+                <ul>
+                    <#if combi_list??>
+                        <#list combi_list as combiProduct>
+                            <li>
+                                <a href="/product/${combiProduct.pid}"> 
+                                <img src="${combiProduct.productCoverImageUri}" width="135" height="135" />
+                                <p>${combiProduct.productName}</p>
+                                <b>￥${combiProduct.productPrice?string("#.##")}</b></a>
+                                <p>
+                                    <input class="combi-price-check" type="checkbox">
+                                    <span>￥${combiProduct.combinationPrice?string("#.##")}</span>
+                                </p>
+                            </li>
+                        </#list>
+                    </#if>
+                </ul>
+            </div>
+            
+            <div class="fll tuijianzuhe_a" style="display: none;">
+                <ul>
+                    <#if combi_list??>
+                        <#list combi_list as combiProduct>
+                            <li>
+                                <a href="/product/${combiProduct.pid}"> 
+                                <img src="${combiProduct.productCoverImageUri}" width="135" height="135" />
+                                <p>${combiProduct.productName}</p>
+                                <b>￥${combiProduct.productPrice?string("#.##")}</b></a>
+                                <p>
+                                    <input class="combi-price-check" type="checkbox">
+                                    <span>￥${combiProduct.combinationPrice?string("#.##")}</span>
+                                </p>
+                            </li>
+                            <li>
+                                <a href="/product/${combiProduct.pid}"> 
+                                <img src="${combiProduct.productCoverImageUri}" width="135" height="135" />
+                                <p>${combiProduct.productName}</p>
+                                <b>￥${combiProduct.productPrice?string("#.##")}</b></a>
+                                <p>
+                                    <input class="combi-price-check" type="checkbox">
+                                    <span>￥${combiProduct.combinationPrice?string("#.##")}</span>
+                                </p>
+                            </li>
+                        </#list>
+                    </#if>
+                </ul>
+            </div>
+        </#list>
+    </#if>
+    
+    <div class="fll tuijianzuhe_b">
+        <span>您自己的DIY</span>
+        <p>已选择&nbsp;&nbsp;<span id="combi-num" class="jia">0</span>件产品
+            <a id="clear-select" href="javascript:void(0)">（清除选项）</a>
+        </p>
+        <p>搭配价格：<span id="combi-price-total" class="jia">￥<#if verSalePrice??>${verSalePrice?string("#.##")}<#else>${product.priceMinimum?string("#.##")}</#if></span></p>
+        <p>原价：<span id="combi-price-origin" class="jia">￥<#if verSalePrice??>${verSalePrice?string("#.##")}<#else>${product.priceMinimum?string("#.##")}</#if></span></p>
+        <p>节省金额：<span id="combi-price-saved" class="jia">￥0.00</span></p>
+        <p class="mt5"><a href="javascript:;" class="ligmooo" style="color:#fff;">立即购买</a></p>
+    </div>
 </div>
 
 <div class="clear"></div>
@@ -463,7 +502,7 @@ $(function(){
 			
 			
 		});
-	//去购买	
+	   //去购买	
 		function tm_buy(){
 			var id=$("#count").val();
 			$.ajax({
