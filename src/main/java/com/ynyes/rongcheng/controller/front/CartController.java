@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ynyes.rongcheng.entity.OrderItem;
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.ProductVersion;
+import com.ynyes.rongcheng.entity.ShoppingCart;
 import com.ynyes.rongcheng.entity.SiteInfo;
 import com.ynyes.rongcheng.entity.User;
 import com.ynyes.rongcheng.service.OrderItemService;
@@ -120,27 +121,72 @@ public class CartController {
      */
     
     @RequestMapping("/cartStep")
-    public ModelAndView cartStep(String productId,
+    public ModelAndView cartStep(){
+        ModelAndView modelAndView=new ModelAndView();
+           modelAndView.setViewName("/front/cart/cartStep");
+       
+        return modelAndView;
+    }
+    /**
+     * 
+     * 添加订单<BR>
+     * 方法名：cartStep<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年3月9日-下午5:09:58 <BR>
+     * @param productId
+     * @param productName
+     * @param productVerId
+     * @param productVerColor
+     * @param productVerCap
+     * @param productVerName
+     * @param deliveryQuantity
+     * @param price
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
+    @RequestMapping("/addcartStep")
+    @ResponseBody
+    public String cartStep(String productId,
             String productName,
             String productVerId,
             String productVerColor,
             String productVerCap,
             String productVerName,
             String deliveryQuantity,
-            String price){
-        ModelAndView modelAndView=new ModelAndView();
+            String price,HttpServletRequest request){
         /*空判断*/
         OrderItem item=null;
-       if(StringUtils.isNotEmpty(productName) &&
-               StringUtils.isNotEmpty(deliveryQuantity) &&
-               StringUtils.isNotEmpty(price)){
-           item=new OrderItem();
-           /*新增订单*/
-           item.setProductName(productName);
-           orderItemService.save(item);
-           modelAndView.addObject("/front/cart/cartStep");
-       }
-        return modelAndView;
+        User user=(User) request.getSession().getAttribute("user");
+        if(user!=null){
+            if(StringUtils.isNotEmpty(productName) &&
+                    StringUtils.isNotEmpty(deliveryQuantity) &&
+                    StringUtils.isNotEmpty(price)){
+                item=new OrderItem();
+                /*新增订单*/
+                item.setProductName(productName);
+                item.setDeliveryQuantity(Long.parseLong(deliveryQuantity));
+                item.setPrice(Double.parseDouble(price));
+//                orderItemService.save(item);
+              
+                List<ShoppingCart> carts=shoppingCartService.findByUsername(user.getUsername());
+                for (ShoppingCart shoppingCart : carts) {
+                   shoppingCartService.delete(user.getUsername(), shoppingCart.getId());
+                    
+                }
+               flag="success";
+               
+               return flag;
+            }else{
+                flag="false";
+                return flag;
+            }
+        }else{
+            flag="nullUser";
+            return flag;
+        }
     }
     /**
      * 

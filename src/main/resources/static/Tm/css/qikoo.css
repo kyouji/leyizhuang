@@ -1,36 +1,4 @@
-body {
-	background-color: #ededed;
-	color: #666;
-	font: 12px "微软雅黑", Verdana, SimHei, "Microsoft JhengHei", Tahoma;
-	overflow-x: hidden;
-	position: relative;
-}
-body, ul, dl, dd, h1, h2, h3, h4, h5, h6, p, form, ol {
-	margin: 0;
-}
-ul, ol {
-	padding: 0;
-}
-table, td, th {
-	border-collapse: collapse;
-}
-ol, ul, li {
-	list-style: none;
-}
-img{
-	border: 0;
-	vertical-align: middle;
-}
-a {
-	color: #666;
-	outline: none;
-}
-a, a.noline {
-	text-decoration: none;
-}
-* html .clearFix, *:first-child+html .clearFix {
-	zoom: 1;
-}
+
 .mod-dialog-bg {
 	background: #000;
 	opacity: .5;
