@@ -89,7 +89,7 @@
 </div>
 
 <div class="main">
-<div class="s_gwc1zj_left fll mt12"><p><input type="checkbox" onclick="checkAll(this,true)" class="fll">全选</p></div>
+<div class="s_gwc1zj_left fll mt12"><p><input type="checkbox" onclick="checkAll(this,true)" class="fll" id="checked">全选</p></div>
 
 <div class="s_gwc1zj flr"><p>商品<span id="code_su"> 0 </span>件  总价：¥<span class="tm_code_zon">0.00</span>  商品总计(不含运费)：¥ <span class="tm_code_zon">0.00</span> </p></div>
 
@@ -226,12 +226,13 @@
 		function tm_setp(obj){
 			var $this=$("#tr_list").find("td");
 			var checked =$this.find(".duoxuank").prop("checked")
+			var checkeds =$("#checked").prop("checked")
 			var productName =$this.parents().find(".nemes a").text();
 			var productNumber =$this.parents().find(".content_zj").val();
 			var price =$this.parents().find(".money").text();
 			var pid =$this.parents().find(".p_pid").val();
 			var vid =$this.parents().find(".v_vid").val();
-			if(checked==true){
+			if(checked==true || checkeds==true){
 			$.ajax({
 				type:"post",
 				url:"/stepCart",

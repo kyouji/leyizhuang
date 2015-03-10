@@ -17,6 +17,7 @@
 DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
+<script type="text/javascript" src="/Tm/js/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 <header>
@@ -133,13 +134,19 @@ DD_belatedPNG.fix('.,img,background');
 <div class="gwc1_lm2">
 <table>
 <#list carts as cart>
-<tr>
-<td class="gwc1_lm2_a0">${cart.id}</td>
-<td class="gwc1_lm2_a1"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span>
-<p><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆500g一袋 全店满158减10 高端干货送礼佳品</p></a></td>
-<td class="gwc1_lm2_b1"><span>￥144.22</span></td>
-<td class="gwc1_lm2_c1"><div class="ds content_nr_3_jg2"><a href="#"><img src="img/slj.png" width="20" height="20"></a><input type="text" class="content_zj"><a href="#"><img src="img/sljj.png" width="20" height="20"></a></div></td>
-<td class="gwc1_lm2_b1"><span>￥144.22</span></td>
+<tr class="tr_td">
+<input type="hidden" value="${cart.pid}" class="pid">
+<input type="hidden" value="${cart.vid}" class="vid">
+<td class="gwc1_lm2_a0">${cart.pid}</td>
+<td class="gwc1_lm2_a1"><span><a href="#"><img src="${cart.productCoverImageUri}" width="76" height="76"></a></span>
+<p><a href="" class="names"><p>${cart.productName}</p></a></td>
+<td class="gwc1_lm2_b1">￥<span class="t_price">${cart.price?c}</span></td>
+<td class="gwc1_lm2_c1"><div class="ds content_nr_3_jg2"><a href="#"><img src="img/slj.png" width="20" height="20"></a>
+<input type="text" class="content_zj" value="${cart.quantity}"><a href="#"><img src="img/sljj.png" width="20" height="20"></a></div></td>
+<td class="gwc1_lm2_b1">
+<#assign total=0>
+<#assign total=total+cart.price*cart.quantity>
+<span>￥<b class="counts">${total?c}</b></span></td>
 </tr>
 </#list>
 </table>
@@ -174,10 +181,10 @@ DD_belatedPNG.fix('.,img,background');
 </div>
 </div>
 
-<div class="main"><div class="s_gwc1zj flr"><p>商品<span> 3 </span>件  总价：商品价格（<span>¥599.00</span>)+运费（<span>¥10.00</span>）+优惠劵（<span>¥19.00</span>）=商品总计(含运费)： <span>¥599.00</span> </p></div></div>
+<div class="main"><div class="s_gwc1zj flr"><p>商品<span> ${count} </span>件  总价：商品价格¥（<span id="sum"></span>元)+运费（￥<span class="freight">10</span>元）+优惠劵¥（<span class="pres">19</span>元）=商品总计(含运费)： ¥<span id="sumits">0.00</span> </p></div></div>
 <div class="clear"></div>
 <div class="main">
-<div class="s_gwc1zja"><div class="flr s_gwc1zja_2"><a id="submit_order" href="/order/add_order" title="提交订单">提交订单 </a></div></div>
+<div class="s_gwc1zja"><div class="flr s_gwc1zja_2"><a id="submit_order" href="javascript:void(0)" title="提交订单" onclick="tm_submit(this)">提交订单 </a></div></div>
 </div>
 </div>
 
@@ -187,22 +194,37 @@ DD_belatedPNG.fix('.,img,background');
 <#include "/front/comment/top1.ftl">
 
 </div>
+<script type="text/javascript">
+	$(function(){
+		var $this=$(".tr_td").find("td");
+		var counts =$this.parents().find(".counts").text();
+		var freight =$(".freight").text();
+		var pres= $(".pres").text();
+		var sum=$("#sum").text(counts);
+		var coun=counts*1+pres*1+freight*1
+		$("#sumits").text(coun)
+	})
 
+	function tm_submit(obj){
+		var $this=$(".tr_td").find("td");
+			var productName =$this.parents().find(".names").text();
+			var producprice =$this.parents().find(".t_price").text();
+			var producNumer =$this.parents().find(".content_zj").val();
+			var pid =$this.parents().find(".pid").val();
+			var vid =$this.parents().find(".vid").val();
+			$.ajax({
+				type:"post",
+				url:"/addcartStep",
+				data:{"productName":productName,"price":producprice,"deliveryQuantity":producNumer,"pid":pid,"vid":vid},
+				success:function(data){
+					if(data=="success"){
+						window.location.href="/paysuccess";
+					}else{
+						alert(data)
+					}
+				}
+			})
+	}
+</script>
 </body>
 </html>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

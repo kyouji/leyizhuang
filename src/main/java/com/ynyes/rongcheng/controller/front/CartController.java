@@ -132,14 +132,11 @@ public class CartController {
         if(user!=null){
             /*收货地址*/
            List<ShippingAddress> shippingAddresses= userService.findShippingAddressList(user.getUsername());
-           /*商品*/
-           List<ShoppingCart> carts =shoppingCartService.findByUsername(user.getUsername());
-           for (ShoppingCart shoppingCart : carts) {
-            if(shoppingCart.getIsSelected().equals(true) || shoppingCart.getIsSelected()==true){
-                carts=shoppingCartService.findByUsername(user.getUsername());
-                modelAndView.addObject("carts",carts);
-            }
-        }
+           /*选中商品*/
+           List<ShoppingCart> carts =shoppingCartService.findByUsernameAndIsSelectTrue(user.getUsername());
+           
+           modelAndView.addObject("carts",carts);
+           modelAndView.addObject("count",carts.size());
            modelAndView.addObject("shippingAddresses", shippingAddresses);
            modelAndView.setViewName("/front/cart/cartStep");
 
@@ -198,9 +195,9 @@ public class CartController {
      */
     @RequestMapping("/addcartStep")
     @ResponseBody
-    public String cartStep(String productId,
+    public String cartStep(Long pid,
             String productName,
-            String productVerId,
+            Long vid,
             String productVerColor,
             String productVerCap,
             String productVerName,
@@ -218,13 +215,14 @@ public class CartController {
                 item.setProductName(productName);
                 item.setDeliveryQuantity(Long.parseLong(deliveryQuantity));
                 item.setPrice(Double.parseDouble(price));
-//                orderItemService.save(item);
+                orderItemService.save(item);
               
-                List<ShoppingCart> carts=shoppingCartService.findByUsername(user.getUsername());
-                for (ShoppingCart shoppingCart : carts) {
-                   shoppingCartService.delete(user.getUsername(), shoppingCart.getId());
-                    
-                }
+//                List<ShoppingCart> carts=shoppingCartService.findByUsername(user.getUsername());
+//                for (ShoppingCart shoppingCart : carts) {
+//                   shoppingCartService.delete(user.getUsername(), shoppingCart.getId());
+//                    
+//                }
+                shoppingCartService.updateQuantity(user.getUsername(), pid, vid,(long) 0);
                flag="success";
                
                return flag;
@@ -253,10 +251,28 @@ public class CartController {
     public String cartFinish(){
         return "/front/cart/cartFinish";
     }
+    /**
+     * 
+     * 支付完成<BR>
+     * 方法名：paysuccess<BR>
+     * 创建人：guozhengyang <BR>
+     * 时间：2015年3月10日-下午4:47:21 <BR>
+     * @param request
+     * @return String<BR>
+     * @param  [参数1]   [参数1说明]
+     * @param  [参数2]   [参数2说明]
+     * @exception <BR>
+     * @since  1.0.0
+     */
     @RequestMapping("/paysuccess")
-    public String paysuccess(){
-        return "/front/cart/paysuccess";
-    }
+    public String paysuccess(HttpServletRequest request){
+        User user=(User) request.getSession().getAttribute("user");
+        if(user!=null){
+            return "/front/cart/paysuccess";
+        }else{
+            return "redirect:/login";
+        }
+     }
     /**
      * 
      * 添加购物车<BR>
