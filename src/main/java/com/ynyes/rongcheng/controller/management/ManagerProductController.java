@@ -65,7 +65,7 @@ public class ManagerProductController {
     @RequestMapping
     public String product(ModelMap map){
         
-        Page<Product> productPage = productService.findAll(0, ManagementConstant.pageSize, "desc", "onSaleTime");
+        Page<Product> productPage = productService.findAll(0, ManagementConstant.pageSize, "desc", "id");
         
         if (null != productPage)
         {
@@ -73,8 +73,45 @@ public class ManagerProductController {
         }
         
         map.addAttribute("product_type_list", productTypeService.findAll());
+        map.addAttribute("total", productPage.getTotalElements());
         
         return "/management/product";
+    }
+    
+    /**
+     * 获取指定页号的商品
+     * 
+     * @param map
+     * @param pageIndex 页号
+     * @return
+     */
+    @RequestMapping(value="/page/{pageIndex}")
+    public String page(ModelMap map, @PathVariable Integer pageIndex) {
+        
+        if (null != pageIndex && pageIndex.intValue() >= 0)
+        {
+            Page<Product> productPage = productService.findAll(pageIndex, ManagementConstant.pageSize, "desc", "id");
+            
+            if (null != productPage)
+            {
+                map.addAttribute("product_list", productPage.getContent());
+            }
+        }
+        
+        return "/management/product/tbody";
+    }
+    
+    @RequestMapping(value="/modify/{id}", method = RequestMethod.POST)
+    public String modify(ModelMap map, @PathVariable Long id){
+        if (null != id)
+        {
+            Product product = productService.findOne(id);
+            map.addAttribute("product", product);
+            map.addAttribute("show_picture_list", product.getShowPictures().split(","));
+            map.addAttribute("product_type_list", productTypeService.findAll());
+        }
+        
+        return "/management/product/modify";
     }
     
     /**
