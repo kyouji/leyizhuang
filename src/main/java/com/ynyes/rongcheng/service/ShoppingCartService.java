@@ -177,6 +177,21 @@ public class ShoppingCartService {
             return map;
         }
         
+        // 判断商品剩余数量
+        ProductVersion ver = productService.findVersion(pid, vid);
+        
+        if (null == ver)
+        {
+            map.put("message", "商品不存在该版本");
+            return map;
+        }
+        
+        if (quantity > ver.getLeftNumber())
+        {
+            map.put("message", "商品库存不足");
+            return map;
+        }
+        
         ShoppingCart sc = new ShoppingCart();
         
         sc.setUsername(username);
@@ -184,6 +199,7 @@ public class ShoppingCartService {
         sc.setVid(vid);
         sc.setQuantity(quantity);
         sc.setPrice(price);
+        sc.setIsSelected(false);
         
         // 保存
         sc = repository.save(sc);
@@ -198,7 +214,7 @@ public class ShoppingCartService {
      * 删除购物车项
      * 
      * @param username 用户名
-     * @param id 订单ID
+     * @param id 购物车ID
      */
     public void delete(String username, Long id)
     {
@@ -241,5 +257,49 @@ public class ShoppingCartService {
         }
         
         return null;
+    }
+    
+    /**
+     * 修改选择项
+     * @param username 用户名
+     * @param pid 商品ID
+     * @param vid 版本ID
+     * @param ifSelect true: 选择进行结算 false: 选择不进行结算
+     * @return map.code 0:成功 1:失败
+     *         map.message 失败时的错误信息
+     */
+    public Map<String, Object> updateSelect(String username, Long pid, Long vid, Boolean ifSelect)
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 1);
+        
+        if (null == username || null == pid || null == vid || null == ifSelect)
+        {
+            map.put("message", "参数错误");
+            return map;
+        }
+        
+        List<ShoppingCart> scList = repository.findByUsername(username);
+        
+        if (null == scList || 0 == scList.size())
+        {
+            map.put("message", "用户购物车中没有该商品");
+            return map;
+        }
+        
+        for (ShoppingCart sc : scList)
+        {
+            if (sc.getPid().equals(pid) && sc.getVid().equals(vid))
+            {
+                sc.setIsSelected(ifSelect);
+                repository.save(sc);
+                map.put("code", 0);
+                return map;
+            }
+        }
+        
+        map.put("message", "用户购物车中没有该商品");
+        
+        return map;
     }
 }

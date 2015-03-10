@@ -43,6 +43,8 @@ public interface ProductRepo extends
     Page<Product> findByIdInAndIsOnSaleTrue(Collection<Long> ids, Pageable page);
     List<Product> findByIdInAndIsOnSaleTrue(Collection<Long> ids);
     
+    Product findByIdAndIsOnSaleTrue(Long id);
+    
     // 通过类型查找
     Page<Product> findByTypeAllLikeAndIsOnSaleTrue(String type, Pageable page);
     List<Product> findByTypeAllLikeAndIsOnSaleTrue(String type);
@@ -86,4 +88,11 @@ public interface ProductRepo extends
     Page<Product> findByIsOnSaleTrueAndIsStarProductTrueAndPriceMinimumBetween(Pageable page, Double priceLow, Double priceHigh);
     List<Product> findByIsOnSaleTrueAndIsStarProductTrue();
 
+    // 搜索商品
+    Page<Product> findByIsOnSaleTrueAndPriceMinimumBetweenAndNameLikeOrIsOnSaleTrueAndPriceMinimumBetweenAndBriefLikeOrIsOnSaleTrueAndPriceMinimumBetweenAndDetailLike(
+            Double priceLow1, Double priceHigh1, String name,
+            Double priceLow2, Double priceHigh2, String brief,
+            Double priceLow3, Double priceHigh3, String detail, Pageable page);
+    Page<Product> findByIsOnSaleTrueAndNameLikeOrIsOnSaleTrueAndBriefLikeOrIsOnSaleTrueAndDetailLike(
+            String name, String brief, String detail, Pageable page);
 }

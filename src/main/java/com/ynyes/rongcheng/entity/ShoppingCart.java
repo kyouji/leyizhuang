@@ -42,6 +42,10 @@ public class ShoppingCart {
     @Column
     private Double price;
     
+    // 是否选中，选中的商品将进行结算
+    @Column
+    private Boolean isSelected;
+    
     /*
      * 以下字段根据pid取出商品信息进行填充，不保存在数据库
      */
@@ -179,5 +183,13 @@ public class ShoppingCart {
 
     public void setProductNumber(Long productNumber) {
         this.productNumber = productNumber;
+    }
+
+    public Boolean getIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
     }
 }

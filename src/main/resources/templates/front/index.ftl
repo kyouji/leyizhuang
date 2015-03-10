@@ -47,13 +47,13 @@
     <#list flash_sale_product_list as product>
         <td class="fubox">
             <div class="daojishi">
-                <span id="clock"></span><a href="#">立即抢购</a>
+                <span id="clock"></span><a href="/product/${product.id}">立即抢购</a>
             </div>
             <div class="fupic">
-                <a href="#"><img src="${product.coverImageUri}" width="360" height="326"></a>
+                <a href="/product/${product.id}"><img src="${product.coverImageUri}" width="360" height="326"></a>
             </div>
             <div class="fuzi">
-                <a href="#">
+                <a href="/product/${product.id}">
                     <h2>${product.name}</h2>
                     <h3>${product.brief}</h3>
                     <h4>${product.flashSalePrice?string("#.##")}元<span>原价：${product.versionList[0].salePrice?string("#.##")}元</span></h4>
@@ -78,10 +78,10 @@
         <#if product_index < 2>
             <td class="fubox">
                 <div class="fupic">
-                    <a href="#"><img src="${product.coverImageUri}" width="360" height="326"></a>
+                    <a href="/product/${product.id}"><img src="${product.coverImageUri}" width="360" height="326"></a>
                 </div>
                 <div class="fuzi">
-                    <a href="#">
+                    <a href="/product/${product.id}">
                         <h2>${product.name}</h2>
                         <h3>${product.brief}</h3>
                         <h4>${product.versionList[0].salePrice?string("#.##")}元</h4>
@@ -102,7 +102,7 @@
     <#list star_product_list as product>
         <#if product_index gt 1 && product_index lt 6 >
             <td>
-                <a href="#">
+                <a href="/product/${product.id}">
                     <p>${product.name}<br />${product.brief}<br />抢购价：￥${product.versionList[0].salePrice?string("#.##")}</p>
                     <img src="${product.coverImageUri}" width="296" height="296">
                 </a>
@@ -152,7 +152,7 @@
                                     <p>${product.name} ${product.brief}</p>
                                     <p>￥${product.versionList[0].salePrice?string("#.##")}</p>
                                 </span>
-                                <a href="#"><img src="${product.coverImageUri}" width="78" height="78"></a>
+                                <a href="/product/${product.id}"><img src="${product.coverImageUri}" width="78" height="78"></a>
                             </li>
                         </#list>
                     </#if>
@@ -188,7 +188,7 @@
                                     <p>${product.name} ${product.brief}</p>
                                     <p>￥${product.versionList[0].salePrice?string("#.##")}</p>
                                 </span>
-                                <a href="#"><img src="${product.coverImageUri}" width="78" height="78"></a>
+                                <a href="/product/${product.id}"><img src="${product.coverImageUri}" width="78" height="78"></a>
                             </li>
                         </#list>
                     </#if>
@@ -400,9 +400,9 @@
 <ul>
     <#if phone_news_list??>
         <#list phone_news_list as news>
-            <li><a href="#">${news.title}</a></li>
+            <li><a href="/news/content/${news.id}">${news.title}</a></li>
         </#list>
-        <li style="background:none;"><a href="#">更多>></a></li>
+        <li style="background:none;"><a href="/news/0">更多>></a></li>
     </#if>
 </ul>
 </td>
@@ -411,9 +411,9 @@
 <ul>
     <#if phone_lover_list??>
         <#list phone_lover_list as news>
-            <li><a href="#">${news.title}</a></li>
+            <li><a href="/news/content/${news.id}">${news.title}</a></li>
         </#list>
-        <li style="background:none;"><a href="#">更多>></a></li>
+        <li style="background:none;"><a href="/news/1">更多>></a></li>
     </#if>
 </ul>
 </td>
@@ -422,9 +422,9 @@
 <ul>
     <#if news_video_list??>
         <#list news_video_list as news>
-            <li><a href="#">${news.title}</a></li>
+            <li><a href="/news/content/${news.id}">${news.title}</a></li>
         </#list>
-        <li style="background:none;"><a href="#">更多>></a></li>
+        <li style="background:none;"><a href="/news/2">更多>></a></li>
     </#if>
 </ul>
 </td>

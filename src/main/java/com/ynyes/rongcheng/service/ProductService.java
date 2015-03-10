@@ -359,6 +359,64 @@ public class ProductService {
     }
     
     /**
+     * 搜索商品，并进行分页
+     * 
+     * @param key 搜索字段
+     * @param page 页号，从0开始
+     * @param size 每页大小
+     * @param direction 排序方向，不区分大小写，asc表示升序，desc表示降序，为NULL时不进行排序
+     * @param property 排序的字段名，为NULL时不进行排序
+     * @param priceLow 价格低值
+     * @param priceHigh 价格高值
+     * @return 商品列表
+     */
+    public Page<Product> search(String key,
+                                int page,
+                                int size,
+                                String direction,
+                                String property,
+                                Double priceLow,
+                                Double priceHigh)
+    {
+        if (null == key)
+        {
+            key = "";
+        }
+        
+        key = "%" + key.trim() + "%";
+        
+        Page<Product> productPage = null;
+        PageRequest pageRequest = null;
+        
+        if (page < 0 || size < 0)
+        {
+            return null;
+        }
+        
+        if (null == direction || null == property)
+        {
+            pageRequest = new PageRequest(page, size);
+        }
+        else
+        {
+            Sort sort = new Sort(direction.equalsIgnoreCase("asc") ? Direction.ASC : Direction.DESC, 
+                                 property);
+            pageRequest = new PageRequest(page, size, sort);
+        }
+        
+        if (null == priceLow || null == priceHigh)
+        {
+            productPage = repository.findByIsOnSaleTrueAndNameLikeOrIsOnSaleTrueAndBriefLikeOrIsOnSaleTrueAndDetailLike(key, key, key, pageRequest);
+        }
+        else
+        {
+            productPage = repository.findByIsOnSaleTrueAndPriceMinimumBetweenAndNameLikeOrIsOnSaleTrueAndPriceMinimumBetweenAndBriefLikeOrIsOnSaleTrueAndPriceMinimumBetweenAndDetailLike(priceLow, priceHigh, key, priceLow, priceHigh, key, priceLow, priceHigh, key, pageRequest);
+        }
+        
+        return productPage;
+    }
+    
+    /**
      * 查找商品
      * 
      * @param pid 商品ID
@@ -408,6 +466,33 @@ public class ProductService {
 //        }
         
         return p;
+    }
+    
+    /**
+     * 查找商品版本
+     * 
+     * @param pid 商品ID
+     * @param vid 版本ID
+     * @return 商品版本，失败时返回NULL
+     */
+    public ProductVersion findVersion(Long pid, Long vid)
+    {
+        if (null != pid && null != vid)
+        {
+            Product product = repository.findByIdAndIsOnSaleTrue(pid);
+            
+            if (null != product)
+            {
+                for (ProductVersion ver : product.getVersionList())
+                {
+                    if (ver.getId().equals(vid))
+                    {
+                        return ver;
+                    }
+                }
+            }
+        }
+        return null;
     }
     
     /**

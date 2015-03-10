@@ -46,9 +46,11 @@
         </div>
     </div>
     <div class="sercha fll">
-        <input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
-        <input type="submit" class="search-btn" title="搜索" value="  ">
+        <form action="/search/0-0-0-0-0" method="get">
+            <input class="topnews1_serch" type="text" name="key" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="">
+            <input type="submit" class="search-btn" title="搜索" value="  ">
             <div class="rc_newsgg"><span>新闻公告:</span><a href="#">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
+        </form>
     </div>
     <div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
     <div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>

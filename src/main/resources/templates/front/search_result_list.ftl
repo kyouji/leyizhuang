@@ -19,7 +19,7 @@
 <script type="text/javascript" src="/Tm/js/util.js"></script>
 <script type="text/javascript" src="/Tm/js/AJAX.js"></script>
 <script type="text/javascript" src="/Tm/js/jquery.pagination.js"></script>
-<script type="text/javascript" src="/Tm/js/front/star.js"></script>
+<script type="text/javascript" src="/Tm/js/front/search.js"></script>
 <script type="text/javascript" src="/Tm/js/common/nav.js"></script>
 <script type="text/javascript" src="/Tm/js/common/head.js"></script>
 </head>
@@ -45,12 +45,7 @@
 <div class="main">
 <div class="place"> 
     <span>您现在的位置：</span>
-    <a href="/">首页</a>
-    <#if type_list??>
-        <#list type_list as type>
-            &gt;<a href="/list/${type.id}">${type.name}</a>
-        </#list>
-    </#if>
+    <a href="/">首页</a>&gt;<a href="javascript:;">搜索结果</a>
 </div>
 <div class="w1200 overflow">
   <div class="sub_left">
@@ -88,14 +83,14 @@
   </div>
   <div class="sub_right">
     <div class="sx_tit">
-      <h2>明星产品</h2>
+      <h2>搜索结果</h2>
       （共搜索到<b><#if count??>${count}</#if></b>个商品）<span></span> 
     </div>
      <div class="sx_lb">
       
      </div>
 	<div id="centent">
-	
+	<input type="text" id="id-key" value="<#if key??>${key}</#if>" style="display:none;" />
     <div class="sxtj">
       <ul id="ul-sort">
         <li><a href="javascript:void(0)" <#if sort_type?? && sort_type==0>class="sxtj_on"</#if>>销量</a></li>
