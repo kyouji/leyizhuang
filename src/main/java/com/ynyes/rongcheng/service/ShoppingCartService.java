@@ -243,20 +243,56 @@ public class ShoppingCartService {
     }
     
     /**
-     * 修改购物车商品项
+     * 修改购物车商品数量，当quantity为0时为删除购物车中该商品
      * 
-     * @param shoppingCart
-     * @return 修改后的订单商品项，出错时返回NULL
+     * @param username 用户名
+     * @param pid 商品ID
+     * @param vid 版本ID
+     * @param quantity 商品数量
+     * @return
      */
-    public ShoppingCart update(ShoppingCart shoppingCart)
+    public Map<String, Object> updateQuantity(String username, Long pid, Long vid, Long quantity)
     {
-        if (null != shoppingCart && null != shoppingCart.getId())
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 1);
+        
+        if (null == username || null == pid || null == vid || null == quantity)
         {
-            
-            return repository.save(shoppingCart);
+            map.put("message", "参数错误");
+            return map;
         }
         
-        return null;
+        List<ShoppingCart> scList = repository.findByUsername(username);
+        
+        if (null == scList || 0 == scList.size())
+        {
+            map.put("message", "用户购物车中没有商品");
+            return map;
+        }
+        
+        for (ShoppingCart sc : scList)
+        {
+            if (sc.getPid().equals(pid) && sc.getVid().equals(vid))
+            {
+                if (quantity.equals(0))
+                {
+                    repository.delete(sc);
+                    map.put("code", 0);
+                    return map;
+                }
+                else
+                {
+                    sc.setQuantity(quantity);
+                    repository.save(sc);
+                    map.put("code", 0);
+                    return map;
+                }
+            }
+        }
+        
+        map.put("message", "用户购物车中没有该商品");
+        
+        return map;
     }
     
     /**
@@ -283,7 +319,7 @@ public class ShoppingCartService {
         
         if (null == scList || 0 == scList.size())
         {
-            map.put("message", "用户购物车中没有该商品");
+            map.put("message", "用户购物车中没有商品");
             return map;
         }
         

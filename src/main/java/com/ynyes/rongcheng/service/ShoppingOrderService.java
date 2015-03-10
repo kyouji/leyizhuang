@@ -410,7 +410,7 @@ public class ShoppingOrderService {
      *         map.message 失败时的错误信息
      *         map.data 成功时将返回保存后的订单
      */
-    public Map<String, Object> save(String username,
+    public Map<String, Object> add(String username,
                                     List<OrderItem> productList,
                                     String shippingAddress,
                                     String receiverName,
