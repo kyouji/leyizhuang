@@ -26,7 +26,7 @@ DD_belatedPNG.fix('.,img,background');
 </header>
 
 <div class="header1 main">
-<div class="fll logo"><a href="#" title="荣诚手机超市"><img src="/img/rc_logo.png" width="177" height="69"></a></div>
+<div class="fll logo"><a href="/" title="荣诚手机超市"><img src="/img/rc_logo.png" width="177" height="69"></a></div>
 <div class="fll city"><a href="#">城市切换</a><span></span>
 <!--<div class="cityqh"><ul>
 <li><a href="#">昆明市</a></li>
@@ -58,12 +58,17 @@ DD_belatedPNG.fix('.,img,background');
 <div class="s_gwc2_1">
 <div class="s_gwc2_1_a"><p><span>收货地址</span></p><p><a href="#">新增收货地址</a></p></div>
 <div class="gwc2_psfs555">
-<div class="s_gwc2_1_b"><a href="#">
-<p>收货人：郑小洲</p>
-<p>收货地址：云南省昆明市西山区昆明市环城南路668号（云纺商业区）云纺国际商厦A座18层</p>
-<p>联系方式：18683687755</p>
-</a></div>
-
+<div class="s_gwc2_1_b">
+<#if shippingAddresses??>
+<#list shippingAddresses as address>
+<a href="/user/address" target="_blank">
+<p>收货人：<#if address.receiverName??>${address.receiverName}</#if></p>
+<p>收货地址：<#if address.detailAddress??>${address.detailAddress}</#if></p>
+<p>联系方式：<#if address.receiverMobile??>${address.receiverMobile}</#if></p>
+</a>
+</#list>
+</#if>
+</div>
 </div>
 <div class="clear"></div>
 </div>
@@ -127,15 +132,16 @@ DD_belatedPNG.fix('.,img,background');
 
 <div class="gwc1_lm2">
 <table>
+<#list carts as cart>
 <tr>
-<td class="gwc1_lm2_a0">00022</td>
+<td class="gwc1_lm2_a0">${cart.id}</td>
 <td class="gwc1_lm2_a1"><span><a href="#"><img src="img/chdjfk.jpg" width="76" height="76"></a></span>
 <p><a href="#"><p>绿帝 松茸 云南特产野生干货80g/盒 香格里拉野生【支持货到付款】下单即送5A桂圆500g一袋 全店满158减10 高端干货送礼佳品</p></a></td>
 <td class="gwc1_lm2_b1"><span>￥144.22</span></td>
 <td class="gwc1_lm2_c1"><div class="ds content_nr_3_jg2"><a href="#"><img src="img/slj.png" width="20" height="20"></a><input type="text" class="content_zj"><a href="#"><img src="img/sljj.png" width="20" height="20"></a></div></td>
 <td class="gwc1_lm2_b1"><span>￥144.22</span></td>
 </tr>
-
+</#list>
 </table>
 </div>
 </div>
@@ -154,7 +160,7 @@ DD_belatedPNG.fix('.,img,background');
             <option>优惠卡</option>
           </select>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span class="orange">抵用金额：￥55.22元</span></div>
+          <span class="orange">抵用金额：￥0.00元</span></div>
 </div>
 </div>
 <div class="main mt15">

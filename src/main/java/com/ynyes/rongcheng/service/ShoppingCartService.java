@@ -274,7 +274,7 @@ public class ShoppingCartService {
         {
             if (sc.getPid().equals(pid) && sc.getVid().equals(vid))
             {
-                if (quantity.equals(0))
+                if (quantity.equals(0)||quantity==0)
                 {
                     repository.delete(sc);
                     map.put("code", 0);

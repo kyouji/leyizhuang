@@ -67,8 +67,11 @@
 <#if carts??>
 <#list carts as cartId>
 <tr id="tr_list">
+<input type="hidden" value="<#if cartId.pid??>${cartId.pid}</#if>" class="p_pid">
+<input type="hidden" value="<#if cartId.vid??>${cartId.vid}</#if>" class="v_vid">
 <td class="gwc1_lm2_a"><input type="checkbox" class="fll duoxuank"   name="coursename" onchange="checkAll(this)"><span><a href="javascript:void(0)" class="t_timg"><img src="${cartId.productCoverImageUri}" width="76" height="76"></a></span>
 <p><a href="javascript:void(0)"> <p class="nemes"><#if cartId.productName??>${cartId.productName}</#if></p></a></td>
+
 <td class="gwc1_lm2_b">￥<span class="money" id="moneys"><#if cartId.price??>${cartId.price?c}</#if></span></td>
 <td class="gwc1_lm2_c"><div class="ds content_nr_3_jg2"><a href="javascript:void(0)" class="prev" data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/slj.png" width="20" height="20" ></a><input type="text" class="content_zj" value="${cartId.pid}" id="count" ><a href="javascript:void(0)" class="next"  data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/sljj.png" width="20" height="20" ></a></div></td>
 <td class="gwc1_lm2_b">￥<span id="td_sum">
@@ -222,20 +225,31 @@
 		/*去结算*/
 		function tm_setp(obj){
 			var $this=$("#tr_list").find("td");
+			var checked =$this.find(".duoxuank").prop("checked")
 			var productName =$this.parents().find(".nemes a").text();
 			var productNumber =$this.parents().find(".content_zj").val();
 			var price =$this.parents().find(".money").text();
-			
+			var pid =$this.parents().find(".p_pid").val();
+			var vid =$this.parents().find(".v_vid").val();
+			if(checked==true){
 			$.ajax({
 				type:"post",
-				url:"/addcartStep",
-				data:{"productName":productName,"deliveryQuantity":productNumber,"price":price},
+				url:"/stepCart",
+				data:{"deliveryQuantity":productNumber,"price":price,"pid":pid,"vid":vid},
 				success:function(data){
-					if(data=="success"){
+				/*	if(data=="success"){
 						window.location.href="/cartStep"
+					}*/
+					if(data.code==0){
+						window.location.href="/cartStep"
+					}else{
+						alert(data.message)
 					}
 				}
-			})
+				})
+			}else{
+				alert("你还没有选择")
+			}
 		
 		}
 

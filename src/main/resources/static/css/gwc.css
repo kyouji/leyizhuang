@@ -50,6 +50,7 @@
 .s_gwc2_1_a p a:hover{ text-decoration:underline;}
 .s_gwc2_1_b a{ margin-left:20px; float:left; margin-top:12px; width:477px; overflow:hidden; border:2px solid #eeeeee; padding:10px; height:87px; display:block;}
 .s_gwc2_1_b a.dzxz , .s_gwc2_1_b a:hover {border:2px solid #ff6600; background:url(../img/shoppingcartgou.png) bottom right no-repeat;}
+.hobers{border:2px solid #ff6600; background:url(../img/shoppingcartgou.png) bottom right no-repeat;}
 .s_gwc2_1_b p{ line-height:23px; font-family:"微软雅黑", "宋体"; font-size:14px; color:#444444;}
 
 .s_gwc3_1{ width:1198px; height:73px; border:1px solid #e4e4e4;}

@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ynyes.rongcheng.entity.OrderItem;
 import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.ProductVersion;
+import com.ynyes.rongcheng.entity.ShippingAddress;
 import com.ynyes.rongcheng.entity.ShoppingCart;
 import com.ynyes.rongcheng.entity.SiteInfo;
 import com.ynyes.rongcheng.entity.User;
@@ -24,6 +26,7 @@ import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductVersionService;
 import com.ynyes.rongcheng.service.ShoppingCartService;
 import com.ynyes.rongcheng.service.SiteInfoService;
+import com.ynyes.rongcheng.service.UserService;
 import com.ynyes.rongcheng.util.StringUtils;
 
 /**
@@ -49,6 +52,8 @@ public class CartController {
     
     @Autowired
     private SiteInfoService siteInfoService;
+    @Autowired
+    private UserService userService;/*用户相关*/
     
     private String flag;
     /**
@@ -121,11 +126,55 @@ public class CartController {
      */
     
     @RequestMapping("/cartStep")
-    public ModelAndView cartStep(){
+    public ModelAndView cartStep(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
+        User user=(User) request.getSession().getAttribute("user");
+        if(user!=null){
+            /*收货地址*/
+           List<ShippingAddress> shippingAddresses= userService.findShippingAddressList(user.getUsername());
+           /*商品*/
+           List<ShoppingCart> carts =shoppingCartService.findByUsername(user.getUsername());
+           for (ShoppingCart shoppingCart : carts) {
+            if(shoppingCart.getIsSelected().equals(true) || shoppingCart.getIsSelected()==true){
+                carts=shoppingCartService.findByUsername(user.getUsername());
+                modelAndView.addObject("carts",carts);
+            }
+        }
+           modelAndView.addObject("shippingAddresses", shippingAddresses);
            modelAndView.setViewName("/front/cart/cartStep");
-       
+
+        }else{
+            modelAndView.setViewName("redirect:/login");
+        }
         return modelAndView;
+    }
+    @RequestMapping("/stepCart")
+    @ResponseBody
+    public Map<String, Object> stepcart(
+           Long pid,
+           Long vid,
+           Long deliveryQuantity,
+           Double price,HttpServletRequest request){
+            User user =(User) request.getSession().getAttribute("user");
+            Map<String, Object> map = new HashMap<String, Object>();
+            if(user!=null){
+                  
+                map=   shoppingCartService.updateSelect(user.getUsername(), pid, vid, true);
+                if(map.get("code").equals(0)){
+                        /*if(map.get("code").equals(0)){
+                            map=shoppingCartService.updateQuantity(user.getUsername(), pid, vid,(long) 0);
+                           
+                        }else{
+                            return map;
+                        }*/
+                   }else{
+                       return map;
+                   }
+                
+            }else{
+                map.put("code", 2);
+            }
+          return map;
     }
     /**
      * 
