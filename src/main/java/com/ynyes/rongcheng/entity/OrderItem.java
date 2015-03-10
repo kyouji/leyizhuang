@@ -58,10 +58,6 @@ public class OrderItem {
     @Column
     private String productVerName;
     
-    // 商品库存
-    @Column
-    private Long productNumber;
-    
     // 成交价
     @Column
     private Double price;
@@ -152,14 +148,6 @@ public class OrderItem {
 
     public void setProductVerName(String productVerName) {
         this.productVerName = productVerName;
-    }
-
-    public Long getProductNumber() {
-        return productNumber;
-    }
-
-    public void setProductNumber(Long productNumber) {
-        this.productNumber = productNumber;
     }
 
     public Double getPrice() {

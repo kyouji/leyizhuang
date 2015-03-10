@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,6 +122,57 @@ public class ShoppingCartService {
         }
         
         return cartList;
+    }
+    
+    /**
+     * 根据用户名查找已勾选进行结算的购物车商品列表
+     * 
+     * @param username 用户名
+     * @return 已勾选进行结算的购物车项列表
+     */
+    public List<ShoppingCart> findByUsernameAndIsSelectTrue(String username)
+    {
+        List<ShoppingCart> cartList = null;
+        List<ShoppingCart> selectCartList = new ArrayList<ShoppingCart>();
+        
+        if (null != username)
+        {
+            cartList = repository.findByUsername(username);
+            
+            for (ShoppingCart sc : cartList)
+            {
+                if (null != sc && null != sc.getIsSelected() && sc.getIsSelected().equals(true))
+                {
+                    // 填充其他字段
+                    if (null != sc.getPid())
+                    {
+                        Product product = productService.findOne(sc.getPid());
+                        
+                        if (null != product)
+                        {
+                            sc.setProductName(product.getName());
+                            sc.setProductBrief(product.getBrief());
+                            sc.setProductCoverImageUri(product.getCoverImageUri());
+                            sc.setProductCode(product.getCode());
+                            
+                            for (ProductVersion ver : product.getVersionList())
+                            {
+                                if (ver.getId().equals(sc.getVid()))
+                                {
+                                    sc.setProductVerCap(ver.getCapacity());
+                                    sc.setProductVerName(ver.getName());
+                                    sc.setProductVerColor(ver.getColor());
+                                    sc.setProductNumber(ver.getLeftNumber());
+                                }
+                            }
+                            selectCartList.add(sc);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return selectCartList;
     }
     
     /**

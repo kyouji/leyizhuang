@@ -93,7 +93,6 @@ public class OrderItemService {
      * @param productVerColor 商品版本颜色
      * @param productVerCap 商品版本容量
      * @param productVerName 商品版本名称
-     * @param productNumber (必选)商品数量
      * @param price (必选)成交价
      * @param quantity (必选)购买数量
      * @return 新建的订单商品项，错误时返回NULL
@@ -107,7 +106,6 @@ public class OrderItemService {
                             String productVerColor,
                             String productVerCap,
                             String productVerName,
-                            Long productNumber,
                             Double price,
                             Long quantity)
     {
@@ -139,9 +137,6 @@ public class OrderItemService {
         
         // 商品版本名称
         oi.setProductVerName(productVerName);
-        
-        // 商品库存
-        oi.setProductNumber(productNumber);
         
         // 成交价
         oi.setPrice(price);

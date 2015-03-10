@@ -47,7 +47,7 @@
 					</div>
 
 					<div class="page-content">
-					    <input type="text" id="id-total-num" hidden value="<#if type_total??>${type_total}</#if>" />
+					    <input type="text" id="id-total-num" hidden value="${total?default("0")}" />
                         <div class="row">
 						    <#include "/management/product/add.ftl" >
                             <div id="id-modify"></div>
@@ -128,7 +128,6 @@
         <script src="/assets/js/date-time/bootstrap-datepicker.min.js"></script>
         <script src="/assets/js/date-time/bootstrap-timepicker.min.js"></script>
         <script src="/js/management/product.js"></script>
-        <script src="/js/management/product_add.js"></script>
         <script src="/js/jquery.pagination.js"></script>
         
 	</body>

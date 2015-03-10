@@ -239,7 +239,7 @@ jQuery(function($) {
 	
 	// 分页
 	$("#id-pagination").pagination($("#id-total-num").val(), {
-		num_display_entries : 2, 
+		num_display_entries : 3, 
 		num_edge_entries : 3,
 		current_page : 0,
 		items_per_page : pageSize,
@@ -256,10 +256,7 @@ jQuery(function($) {
 				}
 			});
 		}
-		
 	});
-	
-	
 	
 	// 图片显示
     $('#coverImage').ace_file_input({
@@ -361,59 +358,13 @@ jQuery(function($) {
         
         return;
 	});
-	/*
-	var props = $("#new-property").html();
-	
-	// 点击加号添加属性
-	$("a.icon-plus").click(function(){
-	    $("#new-property").append(props);
-
-	    // 选择完属性类型
-	    $(".prop-type-select").change(function(){
-	        var propDiv = $(this);
-	        
-	        $.ajax({
-	            url: '/admin/product/type/param/add/' + $(this).val(),
-	            type: 'POST',
-	            success: function (data) {
-	                propDiv.siblings().eq(0).html(data);
-	                
-	                // 点击属性
-	                propDiv.siblings().find(".add.multiSelectProp").click(function(){
-	                    $(this).toggleClass("spon");
-	                });
-	            }
-	        }); // ajax
-	    }); // change
-	}); // click
-	
-	// 选择完属性类型
-	$(".prop-type-select").change(function(){
-	    var propDiv = $(this);
-	    
-	    $.ajax({
-            url: '/admin/product/type/param/add/' + $(this).val(),
-            type: 'POST',
-            success: function (data) {
-                propDiv.siblings().eq(0).html(data);
-                
-                // 点击属性
-                $(".add.multiSelectProp").click(function(){
-                    $(this).toggleClass("spon");
-                });
-            }
-        }); // ajax
-	}); // change
-	*/
-   
 });
 
 // 修改
 function modify(id) 
 {
-    /*
-	$.ajax({
-        url: '/admin/product/type/modify/' + id,
+    $.ajax({
+        url: '/admin/product/modify/' + id,
         type: 'POST',
         success: function (data) {
         	$("#id-modify").siblings().addClass("hide");
@@ -426,54 +377,107 @@ function modify(id)
         		$("#id-table").removeClass("hide");
         	});
         	
-        	// 点击属性
-            $(".modify.multiSelectProp").click(function(){
-                $(this).toggleClass("spon");
-            });
-            
-        	var props = $("#modify-property").html();
-            
-            // 点击加号添加属性
-            $("a.icon-plus").click(function(){
-                $("#modify-property").append(props);
-
-                // 选择完属性类型
-                $(".prop-type-select").change(function(){
-                    var propDiv = $(this);
-                    
+        	// 选择商品类型
+            $("#m-type").change(function(){
+                if ($(this).val() != "")
+                {
                     $.ajax({
-                        url: '/admin/product/type/param/modify/' + $(this).val(),
-                        type: 'POST',
-                        success: function (data) {
-                            propDiv.siblings().eq(0).html(data);
+                        type:"GET",
+                        url:"/admin/product/property/" + $(this).val(),
+                        success:function(data){
+                            $("#property-section").html(data);
                             
-                            // 点击属性
-                            propDiv.siblings().find(".multiSelectProp").click(function(){
+                            // 单选 
+                            $(".selectProp").click(function(){
+                                $(this).siblings().removeClass("spon");
+                                $(this).addClass("spon");
+                            });
+                            
+                            // 多选
+                            $(".multiSelectProp").click(function(){
                                 $(this).toggleClass("spon");
                             });
                         }
-                    }); // ajax
-                }); // change
-            }); // click
-            
-            // 选择完属性类型
-            $(".prop-type-select").change(function(){
-                var propDiv = $(this);
-                
-                $.ajax({
-                    url: '/admin/product/type/param/modify/' + $(this).val(),
-                    type: 'POST',
-                    success: function (data) {
-                        propDiv.siblings().eq(0).html(data);
-                        
-                        // 点击属性
-                        propDiv.siblings().find(".multiSelectProp").click(function(){
-                            $(this).toggleClass("spon");
-                        });
-                    }
-                }); // ajax
-            }); // change
+                    });
+                }
+            });
         	
+            // 图片显示
+            $('#m-coverImage').ace_file_input({
+                style : 'well',
+                no_file : '无图片',
+                btn_choose : '单机更换',
+                btn_change : '单击可重选',
+                droppable : false,
+                onchange : null,
+                thumbnail : 'fit', // false | true | large
+                whitelist : 'gif|png|jpg|jpeg'
+            // blacklist:'exe|php'
+            // onchange:''
+            //
+            });
+            
+            $('.m-show-picture').ace_file_input({
+                style : 'well',
+                btn_choose : '多选全部更换',
+                btn_change : null,
+                no_icon : 'icon-picture',
+                droppable : true,
+                thumbnail : 'fit'// small | large | fit,
+                // ,icon_remove:null//set null, to hide remove/reset button
+                /**
+                 * ,before_change:function(files, dropped) { //Check an example below
+                 * //or examples/file-upload.html return true; }
+                 */
+                /**
+                 * ,before_remove : function() { return true; }
+                 */
+                ,
+                preview_error : function(filename, error_code) {
+                    // name of the file that failed
+                    // error_code values
+                    // 1 = 'FILE_LOAD_FAILED',
+                    // 2 = 'IMAGE_LOAD_FAILED',
+                    // 3 = 'THUMBNAIL_FAILED'
+                    // alert(error_code);
+                }
+
+            }).on('change', function() {
+                // console.log($(this).data('ace_input_files'));
+                // console.log($(this).data('ace_input_method'));
+            });
+            
+            // 删除版本
+            $(".del-version").click(function(){
+                if ($(".del-version").length > 1)
+                {
+                    $(this).parent().parent().remove();
+                }
+            });
+            
+            // 增加版本
+            var versionHtml = $("#versionList").html();
+            $("#m-id-add-version").click(function(){
+                $("#m-versionList").append(versionHtml);
+                
+                // 删除版本
+                $(".del-version").click(function(){
+                    if ($(".del-version").length > 1)
+                    {
+                        $(this).parent().parent().remove();
+                    }
+                });
+            });
+            
+            var mDetailEditor;
+            
+            // 商品详情编辑框
+            KindEditor.ready(function(K) {
+                mDetailEditor = K.create('textarea[name="mDetailArea"]', {
+                    allowFileManager : false,
+                    uploadJson: "/admin/product/upload"
+                });
+            });
             
             // 提交
         	$("#modify-submit").click(function(){
@@ -502,7 +506,7 @@ function modify(id)
                 var data = $('#fm-modify').serialize();
                 
                 $.ajax({
-                    url: '/admin/product/type/save',
+                    url: '/admin/product/save',
                     type: 'POST',
                     dataType: "json", 
                     data: data,
@@ -522,7 +526,6 @@ function modify(id)
         	}); // modify-submit
         }
     });
-    */
 }
 
 // 删除
