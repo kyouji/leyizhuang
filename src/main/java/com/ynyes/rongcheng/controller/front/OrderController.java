@@ -565,13 +565,13 @@ public class OrderController {
 	public String addorder(ShoppingOrder shoppingorder, Model model, HttpServletRequest req) {
 		User user = (User) req.getSession().getAttribute("user");
 		//orderItemService.newOne(productId, productName, productBrief, productCoverImageUri, productCode, productVerId, productVerColor, productVerCap, productVerName, productNumber, price, quantity)
-		shoppingOrderService.save(user.getUsername(),
-				                  shoppingorder.getOrderItemList(),
-				                  shoppingorder.getShippingAddress(), 
-				                  shoppingorder.getShippingName(), 
-				                  shoppingorder.getShippingPhone(), 
-				                  shoppingorder.getShippingType(), 
-				                  shoppingorder.getInvoiceTitle());
+//		shoppingOrderService.save(user.getUsername(),
+//				                  shoppingorder.getOrderItemList(),
+//				                  shoppingorder.getShippingAddress(), 
+//				                  shoppingorder.getShippingName(), 
+//				                  shoppingorder.getShippingPhone(), 
+//				                  shoppingorder.getShippingType(), 
+//				                  shoppingorder.getInvoiceTitle());
 		 
 		
 		

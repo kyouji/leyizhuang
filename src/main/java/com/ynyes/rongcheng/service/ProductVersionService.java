@@ -34,6 +34,18 @@ public class ProductVersionService {
     }
     
     /**
+     * 保存商品版本
+     * 
+     * @param version 商品版本
+     * 
+     * @return
+     */
+    public void save(ProductVersion version)
+    {
+        repository.save(version);
+    }
+    
+    /**
      * 查找热销商品
      * 
      * @param pidList 商品ID列表

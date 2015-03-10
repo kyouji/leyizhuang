@@ -264,7 +264,7 @@ public class ShoppingCartService {
         
         List<ShoppingCart> scList = repository.findByUsername(username);
         
-        if (null == scList || 0 == scList.size())
+        if (null == scList || 1 > scList.size())
         {
             map.put("message", "用户购物车中没有商品");
             return map;
@@ -296,7 +296,8 @@ public class ShoppingCartService {
     }
     
     /**
-     * 修改选择项
+     * 是否选中进行结算
+     * 
      * @param username 用户名
      * @param pid 商品ID
      * @param vid 版本ID
@@ -317,7 +318,7 @@ public class ShoppingCartService {
         
         List<ShoppingCart> scList = repository.findByUsername(username);
         
-        if (null == scList || 0 == scList.size())
+        if (null == scList || 1 > scList.size())
         {
             map.put("message", "用户购物车中没有商品");
             return map;
@@ -336,6 +337,43 @@ public class ShoppingCartService {
         
         map.put("message", "用户购物车中没有该商品");
         
+        return map;
+    }
+    
+    /**
+     * 是否全部选中进行结算
+     * 
+     * @param username 用户名
+     * @param ifSelect true: 选择进行结算 false: 选择不进行结算
+     * @return map.code 0:成功 1:失败
+     *         map.message 失败时的错误信息
+     */
+    public Map<String, Object> updateSelectAll(String username, Boolean ifSelect)
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 1);
+        
+        if (null == username || null == ifSelect)
+        {
+            map.put("message", "参数错误");
+            return map;
+        }
+        
+        List<ShoppingCart> scList = repository.findByUsername(username);
+        
+        if (null == scList || 1 > scList.size())
+        {
+            map.put("message", "用户购物车中没有商品");
+            return map;
+        }
+        
+        for (ShoppingCart sc : scList)
+        {
+            sc.setIsSelected(ifSelect);
+            repository.save(sc);
+        }
+        
+        map.put("code", 0);
         return map;
     }
 }

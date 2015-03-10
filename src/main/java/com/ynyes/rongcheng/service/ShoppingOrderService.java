@@ -2,6 +2,7 @@ package com.ynyes.rongcheng.service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.rongcheng.entity.OrderItem;
+import com.ynyes.rongcheng.entity.ProductVersion;
+import com.ynyes.rongcheng.entity.ShoppingCart;
 import com.ynyes.rongcheng.entity.ShoppingOrder;
 import com.ynyes.rongcheng.repository.ShoppingOrderRepo;
 
@@ -34,7 +37,16 @@ public class ShoppingOrderService {
     ShoppingOrderRepo repository;
     
     @Autowired
+    ShoppingCartService shoppingCartService;
+    
+    @Autowired
     OrderItemService orderItemService;
+    
+    @Autowired
+    ProductService productService;
+    
+    @Autowired
+    ProductVersionService productVersionService;
     
     /**
      * 根据用户名及状态查找订单，并分页
@@ -396,10 +408,9 @@ public class ShoppingOrderService {
     }
     
     /**
-     * 保存订单
+     * 生成订单
      * 
      * @param username 用户名
-     * @param productList 订单商品列表
      * @param shippingAddress 收货地址
      * @param receiverName 收货人
      * @param receiverPhone 收货电话
@@ -411,7 +422,6 @@ public class ShoppingOrderService {
      *         map.data 成功时将返回保存后的订单
      */
     public Map<String, Object> add(String username,
-                                    List<OrderItem> productList,
                                     String shippingAddress,
                                     String receiverName,
                                     String receiverPhone,
@@ -427,9 +437,58 @@ public class ShoppingOrderService {
             return map;
         }
         
-        if (null == productList || productList.size() < 1)
+        // 查找所有购物车项
+        List<ShoppingCart> scList = shoppingCartService.findByUsername(username);
+        
+        if (null == scList || 0 == scList.size())
         {
-            map.put("message", "订单商品列表不能为空");
+            map.put("message", "用户购物车中没有商品");
+            return map;
+        }
+        
+        List<OrderItem> orderItemList = new ArrayList<OrderItem>();
+        
+        for (ShoppingCart sc : scList)
+        {
+            if (null != sc.getIsSelected() && sc.getIsSelected().equals(true))
+            {
+                OrderItem item = new OrderItem();
+                
+                ProductVersion ver = productService.findVersion(sc.getPid(), sc.getVid());
+                
+                Long quantity = sc.getQuantity();
+                
+                // 商品库存小于购买数量
+                if (ver.getLeftNumber().compareTo(sc.getQuantity()) < 0)
+                {
+                    ver.setLeftNumber(0L);
+                    productVersionService.save(ver);
+                    quantity = ver.getLeftNumber();
+                }
+                
+                // 选择结算
+                if (null != sc.getIsSelected() && sc.getIsSelected().equals(true))
+                {
+                    item.setPid(sc.getPid());
+                    item.setVid(sc.getVid());
+                    item.setProductName(sc.getProductName());
+                    item.setProductBrief(sc.getProductBrief());
+                    item.setProductCoverImageUri(sc.getProductCoverImageUri());
+                    item.setProductCode(sc.getProductCode());
+                    item.setProductVerColor(sc.getProductVerColor());
+                    item.setProductVerCap(sc.getProductVerCap());
+                    item.setProductVerName(sc.getProductVerName());
+                    item.setPrice(sc.getPrice());
+                    item.setQuantity(quantity);
+                    item.setDeliveryQuantity(0L);
+                    orderItemList.add(item);
+                } 
+            }
+        }
+        
+        if (null == orderItemList || orderItemList.size() < 1)
+        {
+            map.put("message", "订单商品列表为空");
             return map;
         }
         
@@ -464,18 +523,27 @@ public class ShoppingOrderService {
         order.setUsername(username);
         
         // 保存订单商品列表
-        order.setOrderItemList(productList);
+        order.setOrderItemList(orderItemList);
         
         Double totalPrice = 0.0;
         
-        if (null != productList)
+        if (null != orderItemList)
         {
-            for (OrderItem item : productList)
+            for (OrderItem item : orderItemList)
             {
                 totalPrice += item.getQuantity() * item.getPrice();
                 
                 // 保存订单商品项
                 orderItemService.save(item);
+            }
+        }
+        
+        // 删除已购买的购物车项
+        for (ShoppingCart sc : scList)
+        {
+            if (null != sc.getIsSelected() && sc.getIsSelected().equals(true))
+            {
+                shoppingCartService.delete(sc);
             }
         }
         
