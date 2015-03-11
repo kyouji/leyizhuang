@@ -10,6 +10,10 @@
 <liNK rel=stylesheet type=text/css href="/Tm/css/carousel.css">
 <style type="text/css">
 	.t_red{font-size:14px;color:red;font-family:微软雅黑"}
+	#3dmax .3ds{font-size:16px;font-family:微软雅黑;color:#666}
+	 *{padding:0;margin:0;}
+  #outbox {position:absolute;left:150px;top:286px;width:500px;height:400px;display:block;}
+  #outbox img {width:400px;height:400px;}
 </style>
 <link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
 <link id="cssfile" type="text/css" rel="stylesheet" href="/Tm/css/dialog_blue.css"/>
@@ -23,6 +27,7 @@
 <script type="text/javascript" src="/Tm/js/common/nav.js"></script>
 <script type="text/javascript" src="/Tm/js/common/head.js"></script>
 <script type="text/javascript" src="/Tm/js/front/product.js"></script>
+<script src="/Tm/js/common.js"></script>
 </head>
 <body>
 <#include "/front/common/head.ftl" />
@@ -50,10 +55,36 @@
     <a href="/">首页</a><#if type_list??><#list type_list as type>&gt;<a href="/list/${type.id}">${type.name}</a></#list></#if><a href="javascript:;">&gt; 手机详情</a>
 </div>
 
-<div class="shop_show">
+<div class="shop_show" >
   <div class="shop_show_left">
-    <div id="preview">
-    <div class=jqzoom>
+  
+<div id="outbox" style="display:none">
+  <--<img src="/images/sjtp/1.jpg" />
+  <img src="/images/sjtp/2.jpg" />
+  <img src="/images/sjtp/3.jpg" />
+  <img src="/images/sjtp/4.jpg" />
+  <img src="/images/sjtp/5.jpg" />
+  <img src="/images/sjtp/6.jpg" />
+  <img src="/images/sjtp/7.jpg" />
+  <img src="/images/sjtp/8.jpg" />
+  <img src="/images/sjtp/9.jpg" />
+  <img src="/images/sjtp/10.jpg" />
+  <img src="/images/sjtp/11.jpg" />
+  <img src="/images/sjtp/12.jpg" />
+  <img src="/images/sjtp/13.jpg" />
+  <img src="/images/sjtp/14.jpg" />
+  <img src="/images/sjtp/15.jpg" />
+  <img src="/images/sjtp/16.jpg" />
+  <img src="/images/sjtp/17.jpg" />
+  <img src="/images/sjtp/18.jpg" />
+  <img src="/images/sjtp/19.jpg" />
+  <img src="/images/sjtp/20.jpg" />-->
+    < <#list ShowPictures as pic>
+                    <img src="${pic}" />
+               </#list>
+</div><!--outbox END-->
+    <div id="preview" >
+    <div class="jqzoom" >
         <#if ShowPictures??>
             <img id=bigImg src="${ShowPictures[0]}" width=310 height=310 jqimg="${ShowPictures[0]}">
         </#if>
@@ -77,6 +108,10 @@
       <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin","tieba","sqq"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","tieba","sqq"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 </script>
       <div class="love"><a href="javascript:void(0)" onclick="tm_collect(this,${product.id})" style="text—decoration：none"><img src="/images/scsp.jpg" class="img_s"/></a></div>
+    </div>
+    <div id="3dmax">
+    	<a href="javascript:void(0)" class="3ds" >3D视图</a>
+    	<a href="javascript:void(0)" class="kaids" >开箱动画</a>
     </div>
   </div>
   <div class="ShopShowRight">
@@ -632,6 +667,13 @@ $(function(){
         		
         	})
         } 
+        
+        $("#3dmax").find(".3ds").on("click",function(){
+        	$(this).text("平面展示");
+        	$("#preview").css("display","none")
+        	$(".box").css("paddingTop",400)
+        	$("#outbox").css("display","block")
+        })
 </script>
 
 

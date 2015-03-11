@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ynyes.rongcheng.entity.OrderItem;
-import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.ProductVersion;
 import com.ynyes.rongcheng.entity.ShippingAddress;
 import com.ynyes.rongcheng.entity.ShoppingCart;
@@ -98,9 +97,10 @@ public class CartController {
                 String username=user.getUsername();
                 if(StringUtils.isNotEmpty(username)){
                     /*modelAndView.addObject("cartId",shoppingCartService.findOne(username, Long.parseLong(sum)));*/
-                    
-                    map.addAttribute("carts",shoppingCartService.findByUsername(username));
-                    map.addAttribute("count",shoppingCartService.countByUsername(username));/*数量*/
+                    List<ShoppingCart> carts =shoppingCartService.findByUsername(username);
+                   
+                    map.addAttribute("carts",carts);
+                    map.addAttribute("count",carts.size());/*数量*/
                     
                     return "/front/cart/cart";
                 }else {
