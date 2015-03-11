@@ -244,6 +244,23 @@ public class ShoppingCartService {
             return map;
         }
         
+        List<ShoppingCart> scList = repository.findByUsername(username);
+        
+        // 已有该商品，只是数量增加
+        for (ShoppingCart sc : scList)
+        {
+            if (sc.getPid().equals(pid) && sc.getVid().equals(vid))
+            {
+                sc.setQuantity(sc.getQuantity() + quantity);
+                
+                repository.save(sc);
+                
+                map.put("code", 0);
+                map.put("data", sc);
+                return map;
+            }
+        }
+        
         ShoppingCart sc = new ShoppingCart();
         
         sc.setUsername(username);
