@@ -57,7 +57,7 @@ public class Product {
 	private String brief;
 	
 	// 商品参数
-	@OneToMany(orphanRemoval=true)
+	@OneToMany
 	@JoinColumn(name="productId")
 	private List<ProductParameter> paramList;
     
@@ -138,12 +138,12 @@ public class Product {
     private String tags;
     
     // 商品版本
-    @OneToMany(orphanRemoval=true)
+    @OneToMany
     @JoinColumn(name="productId")
     private List<ProductVersion> versionList;
     
     // 商品组合
-    @OneToMany(orphanRemoval=true)
+    @OneToMany
     @JoinColumn(name="combinatedPid")
     private List<ProductCombination> combinationList;
     

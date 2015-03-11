@@ -3,6 +3,7 @@ jQuery(function($) {
     
     // 商品详情编辑框
     KindEditor.ready(function(K) {
+        window.gk = K;
         contentEditor = K.create('textarea[name="contentArea"]', {
             allowFileManager : false,
             uploadJson: "/admin/product/upload"
@@ -145,19 +146,26 @@ function modify(id) {
                 $("#id-table").removeClass("hide");
             });
             
-            $("#modify-submit").click(function(){
-                // 填充单选参数
-                var singleProp = $("a.m-selectProp.spon");
-                for (i=0; i<singleProp.length; i++)
+            var mContentEditor;
+            
+            mContentEditor = window.gk.create('textarea[name="mContentArea"]', {
+                allowFileManager : false,
+                uploadJson: "/admin/product/upload",
+                afterCreate: function()
                 {
-                    var text = singleProp.eq(i).html();
-                    singleProp.eq(i).siblings("input").val(text);
+                    this.html(window.pcontent);
                 }
-                
+            });
+            
+            $("#modify-submit").click(function(){
                 var formData = new FormData($('#fm-modify')[0]);
+                var contentContent = mContentEditor.html();
+                
+                // 填充商品详情
+                formData.append("content", contentContent);
                 
                 $.ajax({
-                    url : '/admin/news/save',
+                    url : '/admin/info/save',
                     type : 'POST',
                     data : formData,
                     async : false,

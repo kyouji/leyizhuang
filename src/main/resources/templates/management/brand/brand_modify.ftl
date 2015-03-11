@@ -4,7 +4,7 @@
     </div>
 
     <form id="fm-modify" class="form-horizontal" method="POST" >
-        <input type="text" name="type" id="id" value="${brand.id}" class="hide" />
+        <input type="text" name="id" id="id" value="${brand.id}" class="hide" />
         <div class="col-sm-12"  style="margin-top: 10px;">
             <div class="addinput-form">
                 <label class="col-sm-1 control-label no-padding-right" for="name"> 名称:</label>
@@ -17,11 +17,15 @@
             
             <div class="addinput-form">
                 <label class="col-sm-1 control-label no-padding-right" for="name"> 关联类型:</label>
-                <div class="col-sm-11">
+                <div id="m-prop" class="col-sm-11">
                     <#if type_list??>
                         <input type="text" name="type" value="" style="display:none;"/>
                         <#list type_list as type>
-                            <a href="javascript:void(0)" class="multiSelectProp">${type.name}</a>
+                            <#if brand.type?contains("["+type.name+"]")>
+                                <a href="javascript:void(0)" class="multiSelectProp spon">${type.name}</a>
+                            <#else>
+                                <a href="javascript:void(0)" class="multiSelectProp">${type.name}</a>
+                            </#if>
                         </#list>
                     </#if>
                 </div>
@@ -35,7 +39,10 @@
                     <label class="col-sm-1 control-label no-padding-right"> 品牌图片:</label>
                     
                     <div class="col-sm-2">
-                        <input type="file" class="brand-picture" name="logoPic" />
+                        <#if brand.logoUri??>
+                            <img src="${brand.logoUri}"  width="120" height="50"/>
+                        </#if>
+                        <input type="file" class="m-brand-picture" name="logoPic" />
                     </div>
                 </div>                  
             </div>
@@ -57,7 +64,7 @@
         
         <div class="col-sm-12"  style="margin-top: 10px;">
             <div class="col-sm-10"></div>
-            <a href="javascript:void(0)" id="add-submit" class="btn btn-success btn-sm col-sm-1">提交</a> 
+            <a href="javascript:void(0)" id="modify-submit" class="btn btn-success btn-sm col-sm-1">提交</a> 
         </div>
     </form>
 </div><!-- dialog -->      

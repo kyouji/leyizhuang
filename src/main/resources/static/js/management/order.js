@@ -92,7 +92,8 @@ function destroy(id) {
 }
 
 function modify(id) {
-
+    alert("暂未开放该功能");
+    return;
     $.ajax({
         url : '/admin/order/modify/'+id,
         type : 'POST',

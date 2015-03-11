@@ -68,7 +68,7 @@ public class ManagerSiteInfoController {
         return "/management/info/info_tbody";
     }
     
-    @RequestMapping(value="/modify/{brandId}",method = RequestMethod.POST)
+    @RequestMapping(value="/modify/{id}",method = RequestMethod.POST)
     public String modify(ModelMap map, @PathVariable Long id){
         if (null != id)
         {

@@ -44,6 +44,30 @@ public class ProductVersionService {
     {
         repository.save(version);
     }
+
+    /**
+     * 删除商品版本列表
+     * 
+     * @param versionList 商品组合列表
+     * 
+     * @return
+     */
+    public void delete(List<ProductVersion> versionList)
+    {
+        repository.delete(versionList);
+    }
+    
+    /**
+     * 删除商品版本
+     * 
+     * @param version 商品版本
+     * 
+     * @return
+     */
+    public void delete(ProductVersion version)
+    {
+        repository.delete(version);
+    }
     
     /**
      * 查找热销商品

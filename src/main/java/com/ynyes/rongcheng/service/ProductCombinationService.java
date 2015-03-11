@@ -32,4 +32,26 @@ public class ProductCombinationService {
     {
         repository.save(combiList);
     }
+    
+    /**
+     * 删除商品组合列表
+     * 
+     * @param combiList 商品组合列表
+     * 
+     * @return
+     */
+    public void delete(List<ProductCombination> combiList)
+    {
+        repository.delete(combiList);
+    }
+    
+    /**
+     * 删除商品组合
+     * 
+     * @param productCombination
+     */
+    public void delete(ProductCombination productCombination)
+    {
+        repository.delete(productCombination);
+    }
 }

@@ -108,7 +108,8 @@ public class ManagerBrandController {
             return res;
         }
         
-        if (null != brandService.findByName(brand.getName()))
+        Brand otherBrand = brandService.findByName(brand.getName());
+        if (null != otherBrand && !otherBrand.getId().equals(brand.getId()))
         {
             res.put("message", "该品牌已存在");
             return res;

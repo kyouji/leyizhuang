@@ -8,7 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,24 +40,24 @@ import com.ynyes.rongcheng.util.ManagementConstant;
  * 
  */
 @Controller
-@RequestMapping(value="/admin/product")
+@RequestMapping(value = "/admin/product")
 public class ManagerProductController {
-    
+
     @Autowired
     ProductService productService;
-    
+
     @Autowired
     ProductTypeService productTypeService;
-    
+
     @Autowired
     ProductTypeParameterService productTypeParameterService;
-    
+
     @Autowired
     ParameterService parameterService;
-    
+
     @Autowired
     BrandService brandService;
-    
+
     /**
      * 商品主界面
      * 
@@ -63,115 +65,139 @@ public class ManagerProductController {
      * @return
      */
     @RequestMapping
-    public String product(ModelMap map){
-        
-        Page<Product> productPage = productService.findAll(0, ManagementConstant.pageSize, "desc", "id");
-        
-        if (null != productPage)
-        {
+    public String product(ModelMap map) {
+
+        Page<Product> productPage = productService.findAll(0,
+                ManagementConstant.pageSize, "desc", "id");
+
+        if (null != productPage) {
             map.addAttribute("product_list", productPage.getContent());
         }
-        
+
         map.addAttribute("product_type_list", productTypeService.findAll());
         map.addAttribute("total", productPage.getTotalElements());
-        
+
         return "/management/product";
     }
-    
+
     /**
      * 获取指定页号的商品
      * 
      * @param map
-     * @param pageIndex 页号
+     * @param pageIndex
+     *            页号
      * @return
      */
-    @RequestMapping(value="/page/{pageIndex}")
+    @RequestMapping(value = "/page/{pageIndex}")
     public String page(ModelMap map, @PathVariable Integer pageIndex) {
-        
-        if (null != pageIndex && pageIndex.intValue() >= 0)
-        {
-            Page<Product> productPage = productService.findAll(pageIndex, ManagementConstant.pageSize, "desc", "id");
-            
-            if (null != productPage)
-            {
+
+        if (null != pageIndex && pageIndex.intValue() >= 0) {
+            Page<Product> productPage = productService.findAll(pageIndex,
+                    ManagementConstant.pageSize, "desc", "id");
+
+            if (null != productPage) {
                 map.addAttribute("product_list", productPage.getContent());
             }
         }
-        
+
         return "/management/product/tbody";
     }
-    
-    @RequestMapping(value="/modify/{id}", method = RequestMethod.POST)
-    public String modify(ModelMap map, @PathVariable Long id){
-        if (null != id)
-        {
+
+    @RequestMapping(value = "/modify/{id}", method = RequestMethod.POST)
+    public String modify(ModelMap map, @PathVariable Long id) {
+        if (null != id) {
             Product product = productService.findOne(id);
             map.addAttribute("product", product);
-            map.addAttribute("show_picture_list", product.getShowPictures().split(","));
+            map.addAttribute("show_picture_list", product.getShowPictures()
+                    .split(","));
             map.addAttribute("product_type_list", productTypeService.findAll());
+
+            if (null != product) {
+                ProductType pType = productTypeService.findByName(product
+                        .getType());
+
+                List<ProductTypeParameter> tpList = null;
+                List<Parameter> paramList = new ArrayList<Parameter>();
+
+                if (null != pType) {
+                    tpList = pType.getTypeParamList();
+
+                    map.addAttribute("brand_list",
+                            brandService.findByType(pType.getName()));
+                }
+
+                if (null != tpList) {
+                    for (ProductTypeParameter ptp : tpList) {
+                        if (null != ptp.getParamId()) {
+                            Parameter p = parameterService.findOne(ptp
+                                    .getParamId());
+
+                            if (null != p) {
+                                paramList.add(p);
+                            }
+                        }
+                    }
+                }
+                map.addAttribute("parameter_list", paramList);
+            }
         }
-        
+
         return "/management/product/modify";
     }
-    
+
     /**
      * 商品属性
      * 
      * @param map
-     * @param typeId 商品类型ID
+     * @param typeId
+     *            商品类型ID
      * @return
      */
-    @RequestMapping(value="/property/{typeId}", method=RequestMethod.GET)
+    @RequestMapping(value = "/property/{typeId}", method = RequestMethod.GET)
     public String property(ModelMap map, @PathVariable Long typeId) {
         List<ProductTypeParameter> tpList = null;
         List<Parameter> paramList = new ArrayList<Parameter>();
-        
-        if (null != typeId)
-        {
-            ProductType ptype = productTypeService.findOne(typeId);
-            
-            if (null != ptype)
-            {
-                tpList = ptype.getTypeParamList();
-                
 
-                map.addAttribute("brand_list", brandService.findByType(ptype.getName()));
+        if (null != typeId) {
+            ProductType ptype = productTypeService.findOne(typeId);
+
+            if (null != ptype) {
+                tpList = ptype.getTypeParamList();
+
+                map.addAttribute("brand_list",
+                        brandService.findByType(ptype.getName()));
             }
         }
-        
-        if (null != tpList)
-        {
-            for (ProductTypeParameter ptp : tpList)
-            {
-                if (null != ptp.getParamId())
-                {
+
+        if (null != tpList) {
+            for (ProductTypeParameter ptp : tpList) {
+                if (null != ptp.getParamId()) {
                     Parameter p = parameterService.findOne(ptp.getParamId());
-                    
-                    if (null != p)
-                    {
+
+                    if (null != p) {
                         paramList.add(p);
                     }
                 }
             }
         }
-        
+
         map.addAttribute("parameter_list", paramList);
-        
+
         return "/management/product/type_parameter_list";
     }
-    
-    @RequestMapping(value="/upload", method=RequestMethod.POST)
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> upload(String dir, @RequestParam MultipartFile imgFile) {
+    public Map<String, Object> upload(String dir,
+            @RequestParam MultipartFile imgFile) {
         Map<String, Object> res = new HashMap<String, Object>();
         res.put("error", 1);
-        
-        if (null == imgFile || imgFile.isEmpty())
-        {
+
+        if (null == imgFile || imgFile.isEmpty()) {
             res.put("message", "图片不存在");
             return res;
         }
-        
+
         // 上传封面图片
         Map<String, String> uploadRes = ImageUtil.upload(imgFile);
 
@@ -180,60 +206,60 @@ public class ManagerProductController {
             // 保存uri
             res.put("url", uploadRes.get("message"));
             res.put("error", 0);
-        } 
-        else // 失败
+        } else // 失败
         {
             res.put("message", "上传图片失败");
             return res;
         }
-        
+
         return res;
     }
-    
+
     /**
      * 商品列表
      * 
      * @param map
-     * @param typeId 商品类型ID
+     * @param typeId
+     *            商品类型ID
      * @return
      */
-    @RequestMapping(value="/list/type/{type}", method=RequestMethod.GET)
+    @RequestMapping(value = "/list/type/{type}", method = RequestMethod.GET)
     @ResponseBody
     public List<Product> list(ModelMap map, @PathVariable String type) {
         List<Product> productList = null;
-        
-        if (null != type)
-        {
+
+        if (null != type) {
             productList = productService.findByType(type);
         }
-        
+
         return productList;
     }
-    
+
     /**
      * 删除商品
      * 
      * @param map
-     * @param productId 商品ID
+     * @param productId
+     *            商品ID
      * @return
      */
-    @RequestMapping(value="/delete/{productId}", method=RequestMethod.POST)
+    @RequestMapping(value = "/delete/{productId}", method = RequestMethod.POST)
     @ResponseBody
     public void delete(ModelMap map, @PathVariable Long productId) {
-        
-        if (null != productId)
-        {
+
+        if (null != productId) {
             productService.delete(productId);
         }
     }
-    
+
     /**
      * 保存商品
      * 
-     * @param product 要保存的商品
+     * @param product
+     *            要保存的商品
      * @return
      */
-    
+
     @RequestMapping(value="/save",method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(ModelMap map, 
@@ -277,16 +303,18 @@ public class ManagerProductController {
             return res;
         }
         
-        if (null == coverImage || coverImage.isEmpty())
+        if (null == product.getCoverImageUri() || "".equals(product.getCoverImageUri()))
         {
-            res.put("message", "请设置封面图片");
-            return res;
-        }
-        
-        if (null == pictures || pictures.length < 1)
-        {
-            res.put("message", "请设置展示图片");
-            return res;
+            if (null == coverImage || coverImage.isEmpty()) {
+                res.put("message", "请设置封面图片");
+                return res;
+            }
+
+            if (null == pictures || pictures.length < 1)
+            {
+                res.put("message", "请设置展示图片");
+                return res;
+            }
         }
         
         ProductType productType = productTypeService.findOne(typeId);
@@ -411,5 +439,17 @@ public class ManagerProductController {
         res.put("code", 0);
         
         return res;
-    } 
+    }    /**
+     * 存在id字段时先查找出对应的实体
+     * 
+     * @param id
+     * @param model
+     */
+    @ModelAttribute
+    public void getModel(@RequestParam(value = "id", required = false) Long id,
+            Model model) {
+        if (id != null) {
+            model.addAttribute("product", productService.findOne(id));
+        }
+    }
 }

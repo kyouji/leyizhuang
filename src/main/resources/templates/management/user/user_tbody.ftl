@@ -26,7 +26,7 @@
                 ${user.isEnable?c}
             </td>
             <td class="center">
-                <#if user.lastLoginTime>${user.lastLoginTime}</#if>
+                <#if user.lastLoginTime??>${user.lastLoginTime}</#if>
             </td>
 		    <td class="center">
 		        <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">

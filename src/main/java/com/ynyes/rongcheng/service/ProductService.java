@@ -524,7 +524,7 @@ public class ProductService {
         }
         
         // 设置封面图片
-        if (null != coverImage)
+        if (null != coverImage && !coverImage.isEmpty())
         {
             Map<String, String> uploadRes = ImageUtil.upload(coverImage);
     
@@ -542,7 +542,7 @@ public class ProductService {
         }
         
         // 设置展示图片
-        if (null != pictures)
+        if (null != pictures && pictures.length > 0 && !pictures[0].isEmpty())
         {
             String showPics = "";
             
@@ -583,8 +583,10 @@ public class ProductService {
         }
         
         // 设置商品组合
-        if (null != combiList)
+        if (null != combiList && combiList.size() > 0)
         {
+            productCombinationService.delete(product.getCombinationList());
+            
             product.setCombinationList(combiList);
             productCombinationService.save(combiList);
         }
@@ -592,6 +594,8 @@ public class ProductService {
         // 设置版本
         if (null != versionList && versionList.size() > 0)
         {
+            productVersionService.delete(product.getVersionList());
+            
             product.setVersionList(versionList);
             productVersionService.save(versionList);
             
@@ -615,8 +619,10 @@ public class ProductService {
         }
         
         // 设置参数
-        if (null != paramList)
+        if (null != paramList && paramList.size() > 0)
         {
+            productParameterService.delete(product.getParamList());
+            
             product.setParamList(paramList);
             productParameterService.save(paramList);
             
@@ -680,7 +686,6 @@ public class ProductService {
         {
             product.setIsOnSale(true);
             product.setCreateTime(new Date());
-            product.setSoldNumber(0L);
             product.setMondayVisitNumber(0L);
             product.setTuesdayVisitNumber(0L);
             product.setWednesdayVisitNumber(0L);
@@ -688,6 +693,11 @@ public class ProductService {
             product.setFridayVisitNumber(0L);
             product.setSaturdayVisitNumber(0L);
             product.setSundayVisitNumber(0L);
+        }
+        
+        if (null == product.getSoldNumber())
+        {
+            product.setSoldNumber(0L);
         }
         
         return repository.save(product);

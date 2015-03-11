@@ -32,4 +32,27 @@ public class ProductParameterService {
     {
         repository.save(paramList);
     }
+    
+    /**
+     * 删除商品参数列表
+     * 
+     * @param combiList 商品组合列表
+     * 
+     * @return
+     */
+    public void delete(List<ProductParameter> paramList)
+    {
+        repository.delete(paramList);
+    }
+    
+    
+    /**
+     * 删除参数
+     * 
+     * @param param 删除参数
+     */
+    public void delete(ProductParameter param)
+    {
+        repository.delete(param);
+    }
 }

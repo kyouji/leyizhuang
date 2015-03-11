@@ -437,17 +437,27 @@ function modify(id)
                 uploadJson: "/admin/product/upload",
                 afterCreate: function()
                 {
-                    this.util.insertHtml($("#m-p-detail").html());
+                    var pdetail = window.pdetail;
+                    this.html(pdetail);
                 }
             });
-            
-            mDetailEditor.sync();
                 
         	// 返回上一级
         	$(".back").click(function(){
         		$("#id-table").siblings().addClass("hide");
         		$("#id-table").removeClass("hide");
         	});
+        	
+        	// 单选 
+            $(".selectProp").click(function(){
+                $(this).siblings().removeClass("spon");
+                $(this).addClass("spon");
+            });
+            
+            // 多选
+            $(".multiSelectProp").click(function(){
+                $(this).toggleClass("spon");
+            });
         	
         	// 选择商品类型
             $("#m-type").change(function(){
@@ -777,48 +787,50 @@ function modify(id)
             
             // 提交
         	$("#modify-submit").click(function(){
-        	    var propStr = "";
-                var props = $(".modify.multiSelectProp.spon");
+        	    var i;
                 
-                if ("" == $("#m-name").val())
+                // 填充单选参数
+                var singleProp = $("#m-property-section .selectProp.spon");
+                for (i=0; i<singleProp.length; i++)
                 {
-                    alert("请填写名称");
-                    return;
+                    var text = singleProp.eq(i).html();
+                    singleProp.eq(i).siblings("input").val(text);
                 }
-            
-                var i;
-                for (i=0; i<props.length; i++)
+                
+                // 填充多选参数
+                var multiProp = $("#m-property-section .multiSelectProp.spon");
+                multiProp.siblings("input").val("");
+                for (i=0; i<multiProp.length; i++)
                 {
-                    var str = props.eq(i).attr("value");
-                    if ("" != str && -1 == propStr.indexOf(str+","))
-                    {
-                        propStr += str;
-                        propStr += ",";
-                    }
+                    var inputValue = multiProp.eq(i).siblings("input").val();
+                    var text = multiProp.eq(i).html();
+                    
+                    multiProp.eq(i).siblings("input").val(inputValue + text + ";");
                 }
+                
+                var formData = new FormData($('#fm-modify')[0]);
+                var mDetailContent = mDetailEditor.html();
+                
+                // 填充商品详情
+                formData.append("detail", mDetailContent);
 
-                $("#m-propIds").val(propStr);
-                
-                var data = $('#fm-modify').serialize();
-                
                 $.ajax({
-                    url: '/admin/product/save',
-                    type: 'POST',
-                    dataType: "json", 
-                    data: data,
-                    success: function (res) {
-                        
-                        if (0 == res.code)
-                        {
-                            alert("修改成功");
+                    url : '/admin/product/save',
+                    type : 'POST',
+                    data : formData,
+                    async : false,
+                    cache : false,
+                    contentType : false,
+                    processData : false,
+                    success : function(res) {
+                        if (0 == res.code) {
+                            alert("修改商品成功");
                             location.reload();
-                        }
-                        else
-                        {
+                        } else {
                             alert(res.message);
                         }
                     }
-                });// ajax
+                }); // ajax
         	}); // modify-submit
         }
     });

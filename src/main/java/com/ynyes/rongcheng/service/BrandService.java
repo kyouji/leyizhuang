@@ -306,7 +306,7 @@ public class BrandService {
             brand.setType(newTypeStr);
         }
         
-        if (null != logoPic)
+        if (null != logoPic && !logoPic.isEmpty())
         {
             Map<String, String> uploadRes = ImageUtil.upload(logoPic);
             
@@ -321,7 +321,7 @@ public class BrandService {
             }
         }
         
-        if (null == brand.getId())
+        if (null == brand.getCreateTime())
         {
             brand.setCreateTime(new Date());
         }

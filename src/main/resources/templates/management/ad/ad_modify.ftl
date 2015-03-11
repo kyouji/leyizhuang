@@ -35,6 +35,9 @@
                     <label class="col-sm-1 control-label no-padding-right"> 图片:</label>
                     
                     <div class="col-sm-2">
+                        <#if ad.imageUri??>
+                            <img src="${ad.imageUri}"  width="176" height="176"/>
+                        </#if>
                         <input type="file" class="m-picture" name="pic" />
                     </div>
                 </div>                  

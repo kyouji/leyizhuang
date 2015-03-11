@@ -96,7 +96,76 @@
         </div>
         
         <!-- 参数块 -->
-        <div id="m-property-section" class="col-sm-12" style="margin-top: 10px;"> </div>
+        <div id="m-property-section" class="col-sm-12" style="margin-top: 10px;">
+            <#if brand_list??>
+                <div class="col-sm-12" style="margin-top: 10px;">
+                    <label class="col-sm-1 control-label no-padding-right" for="name">品牌</label>
+                    <div class="col-sm-11">
+                        <input type="text" name="brandName" value="" style="display:none;" />
+                        <#list brand_list as brand>
+                            <a href="javascript:void(0)" class="selectProp <#if product.brandName==brand.name>spon</#if>">${brand.name}</a>
+                        </#list>
+                    </div>
+                </div>
+            </#if>
+            
+            <#if parameter_list??>
+                <#list parameter_list as parameter>
+                    <div class="col-sm-12" style="margin-top: 10px;">
+                        <label class="col-sm-1 control-label no-padding-right" for="name">${parameter.name}</label>
+                        
+                        <input type="text" name="paramId" value="${parameter.id}" style="display:none;" />
+                        
+                        <#if parameter.isValueInputByChoose>
+                            <div class="col-sm-11">
+                                <input type="text" name="paramValue" value="" class="col-sm-12" style="display:none;"/>
+                                <#if parameter.valueList??>
+                                    <#list parameter.valueList?split(",") as val>
+                                        <#if val?? && ""!=val>
+                                            <#if parameter.isSingleValue>
+                                                <#if product.paramList??>
+                                                    <#list product.paramList as productParam>
+                                                        <#if productParam.paramId == parameter.id>
+                                                            <#if productParam.value == val>
+                                                                <a href="javascript:void(0)" class="selectProp spon">${val}</a>
+                                                            <#else>
+                                                                <a href="javascript:void(0)" class="selectProp">${val}</a>
+                                                            </#if>
+                                                        </#if>
+                                                    </#list>
+                                                </#if>
+                                            <#else>
+                                                <#if product.paramList??>
+                                                    <#list product.paramList as productParam>
+                                                        <#if productParam.paramId == parameter.id>
+                                                            <#if productParam.value?contains(val)>
+                                                                <a href="javascript:void(0)" class="multiSelectProp spon">${val}</a>
+                                                            <#else>
+                                                                <a href="javascript:void(0)" class="multiSelectProp">${val}</a>
+                                                            </#if>
+                                                        </#if>
+                                                    </#list>
+                                                </#if>
+                                            </#if>
+                                        </#if>
+                                    </#list>
+                                </#if>
+                            </div>
+                        <#else>
+                            <div class="col-sm-5">
+                                <#if product.paramList??>
+                                    <#list product.paramList as productParam>
+                                        <#if productParam.paramId == parameter.id>
+                                            <input type="text" name="paramValue" value="${productParam.value}" class="col-sm-12" />
+                                        </#if>
+                                    </#list>
+                                </#if>
+                            </div>
+                        </#if>
+                    </div>
+                </#list>
+            </#if>
+        </div>
         
         <!-- 价格块 -->
         <div class="col-sm-12" style="margin-top: 10px;">
@@ -160,7 +229,9 @@
             </div>
         </div> <!-- 价格块 -->
         
-        <textarea id="m-p-detail" style="display:none;">${product.detail}</textarea>
+        <script type="text/javascript">
+            window.pdetail = '${product.detail?js_string}';
+        </script>
         
         <div class="col-sm-12" style="margin:10px;">
             <label class="col-sm-1 control-label no-padding-right" for="m-detail-editor">商品详情</label>

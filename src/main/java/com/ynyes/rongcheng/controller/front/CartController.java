@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ynyes.rongcheng.entity.OrderItem;
-import com.ynyes.rongcheng.entity.Product;
 import com.ynyes.rongcheng.entity.ProductVersion;
 import com.ynyes.rongcheng.entity.ShippingAddress;
 import com.ynyes.rongcheng.entity.ShoppingCart;
@@ -43,15 +42,19 @@ import com.ynyes.rongcheng.util.StringUtils;
 public class CartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
+    
     @Autowired
     private ProductService productService;
+    
     @Autowired
     private ProductVersionService productVers;
+    
     @Autowired
     private OrderItemService orderItemService;
     
     @Autowired
     private SiteInfoService siteInfoService;
+    
     @Autowired
     private UserService userService;/*用户相关*/
     
