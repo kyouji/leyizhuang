@@ -8,6 +8,15 @@
 <link href="/css/layout.css" rel="stylesheet" type="text/css" />
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <link href="/css/gwc.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.tm_tt{padding-left:34px}
+.tm_ul_ li{padding-top:20px;font-size:14px;font-family:微软雅黑;color:#666}
+.tm_ul_ li input{width:320px;height:24px;text-indent:1em;letter-spacing:3px;}
+.tm_ul_ li .button{width:155px;height:34px;background:rgb(242, 152, 152);margin-left:119px;color:#fff;font-aixe:16px;cursor:pointer}
+#foucs{display:none}
+.p_x {font-size:25px;font-family:微软雅黑;color:red;cursor:pointer}
+</style>
+<link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
 <!--[if IE]>
    <script src="/js/html5.js"></script>
 <![endif]-->
@@ -18,6 +27,10 @@ DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
 <script type="text/javascript" src="/Tm/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/Tm/js/data.js"></script>
+<script type="text/javascript" src="/Tm/js/datajs.js"></script>
+<script type="text/javascript" src="/Tm/js/mainTip.js"></script>
+<script type="text/javascript" src="/Tm/js/util.js"></script>
 </head>
 <body>
 <header>
@@ -55,9 +68,9 @@ DD_belatedPNG.fix('.,img,background');
 <div class="s_gwc2"><span >1、我的购物车</span><span id="colorfff">2、我的订单信息</span><span>3、支付成功</span></div>
 </div>
 
-<div class="main mt15">
+<div class="main mt15" id="mtt">
 <div class="s_gwc2_1">
-<div class="s_gwc2_1_a"><p><span>收货地址</span></p><p><a href="#">新增收货地址</a></p></div>
+<div class="s_gwc2_1_a"><p><span>收货地址</span></p><p><a href="javascript:void(0)" class="news">新增收货地址</a></p></div>
 <div class="gwc2_psfs555">
 <div class="s_gwc2_1_b">
 <#if shippingAddresses??>
@@ -70,12 +83,58 @@ DD_belatedPNG.fix('.,img,background');
 </#list>
 </#if>
 </div>
+
 </div>
+
 <div class="clear"></div>
 </div>
+
+</div>
+<div id="foucs">
+<div class="main mt15">
+<div class="s_gwc2_1">
+<div class="s_gwc2_1_a"><p><span>新增地址</span></p><p><a href="#"></a></p></div>
+<div class="gwc2_psfs555">
+<div class="s_gwc2_1_b">
+<div class="tm_tt">
+	<p>用户信息</p><div style="float:right;margin-top:-14px"><span class="p_x" title="关闭">X<span></div>
+	<ul class="tm_ul_">
+		<li>
+			<span>收货人:</span>&nbsp;&nbsp;<input type="text" class="name" />
+		</li>
+		<li>
+			<span>地区:</span>&nbsp;&nbsp;
+			<select class="ml10 " id="province">
+              </select>
+              <b class="black" style="margin-left:10px;margin-right:10px;">省</b>
+              <select  style="width:90px;" id="city">
+              </select >
+              <b class="black" style="margin-left:10px;margin-right:10px;">市</b>
+              <select style="width:90px;" id="town">
+              </select>
+		</li>
+		<li>
+			<span>收货地址:</span>&nbsp;&nbsp;<input type="text" class="address" />
+		</li>
+		<li>
+			<span>联系方式:</span>&nbsp;&nbsp;<input type="text" class="receiverMobile" />
+		</li>
+		<li>
+			<input type="button" value="保存" class="button" onclick="tm_user_address(this)"/>
+		</li>
+		
+	</ul>
+	</div>
 </div>
 
+</div>
 
+<div class="clear"></div>
+</div>
+
+</div>
+
+</div>
 <div class="main mt15">
 <div class="s_gwc3_1">
 <div class="s_gwc3_1_a"><p><span>支付方式</span></p></div>
@@ -141,8 +200,11 @@ DD_belatedPNG.fix('.,img,background');
 <td class="gwc1_lm2_a1"><span><a href="#"><img src="${cart.productCoverImageUri}" width="76" height="76"></a></span>
 <p><a href="" class="names"><p>${cart.productName}</p></a></td>
 <td class="gwc1_lm2_b1">￥<span class="t_price">${cart.price?c}</span></td>
-<td class="gwc1_lm2_c1"><div class="ds content_nr_3_jg2"><a href="#"><img src="img/slj.png" width="20" height="20"></a>
-<input type="text" class="content_zj" value="${cart.quantity}"><a href="#"><img src="img/sljj.png" width="20" height="20"></a></div></td>
+<td class="gwc1_lm2_c1"><div class="ds content_nr_3_jg2">
+<!--<a href="#"><img src="img/slj.png" width="20" height="20"></a>-->
+<input type="text" class="content_zj" value="${cart.quantity}" disabled="true "/>
+<!--<a href="#"><img src="img/sljj.png" width="20" height="20"></a>-->
+</div></td>
 <td class="gwc1_lm2_b1">
 <#assign total=0>
 <#assign total=total+cart.price*cart.quantity>
@@ -225,6 +287,70 @@ DD_belatedPNG.fix('.,img,background');
 				}
 			})
 	}
+	
+	$(function(){
+		 $(document).ready(function(){init("province","","city","","town","");});
+	})
+	
+	function tm_user_address(obj){
+		var name=$(".name").val();
+		var province=$("#province").val();
+		var city=$("#city").val();
+		var town=$("#town").val();
+		var address=$(".address").val();
+		var receiverMobile=$(".receiverMobile").val();
+		 if(isEmpty(name)){
+            Tmtip({html:"您输入的收货人姓名不能为空!!!",src:"/Tm/images/24.PNG"});
+            $(".name").focus();
+            return
+        }
+        if(isEmpty(province) || isEmpty(city) || isEmpty(town)){
+            $("#province").css("border","1px solid red")
+            $("#city").css("border","1px solid red")
+            $("#town").css("border","1px solid red")
+             Tmtip({html:"地区不能为空!",src:"/Tm/images/24.PNG",callback: function() {
+                 $("#province").css("border","1px solid #e5e5e5")
+                 $("#city").css("border","1px solid #e5e5e5")
+                 $("#town").css("border","1px solid #e5e5e5")
+             }});
+             $(".name").focus();
+             return
+         }
+         
+         if(isEmpty(address)){
+            Tmtip({html:"您输入的详细地址不能为空!!!",src:"/Tm/images/24.PNG"});
+            $(".address").focus();
+            return
+        }
+        
+                if(isEmpty(receiverMobile)){
+            Tmtip({html:"您输入的手机号码不能为空!!!",src:"/Tm/images/24.PNG"});
+            $(".receiverMobile").focus();
+            return
+        }
+        var formDate={"receiverName":name,"province":province,"city":city,"disctrict":town,"detailAddress":address,"receiverMobile":receiverMobile};
+		$.ajax({
+			type:"post",
+			url:"/user/saveaddress",
+			data:formDate,
+			success:function(data){
+			if(data=="success"){
+                     Tmtip({html:"添加成功!",src:"/Tm/images/2_1.PNG"});
+                    
+                    location.reload();
+                }
+			}
+		})
+		
+	}
+	/*显示*/
+	$("#mtt").find(".news").on("click",function(){
+		$("#foucs").css("display","block")
+	})
+	/*影藏*/
+	$("#foucs").find(".p_x").on("click",function(){
+		$("#foucs").css("display","none")
+	})
 </script>
 </body>
 </html>

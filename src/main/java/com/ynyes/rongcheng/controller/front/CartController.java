@@ -101,9 +101,10 @@ public class CartController {
                 String username=user.getUsername();
                 if(StringUtils.isNotEmpty(username)){
                     /*modelAndView.addObject("cartId",shoppingCartService.findOne(username, Long.parseLong(sum)));*/
-                    
-                    map.addAttribute("carts",shoppingCartService.findByUsername(username));
-                    map.addAttribute("count",shoppingCartService.countByUsername(username));/*数量*/
+                    List<ShoppingCart> carts =shoppingCartService.findByUsername(username);
+                   
+                    map.addAttribute("carts",carts);
+                    map.addAttribute("count",carts.size());/*数量*/
                     
                     return "/front/cart/cart";
                 }else {

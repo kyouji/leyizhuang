@@ -247,7 +247,7 @@ nav{ height:40px; background:#317ef3;width:100%; margin:0 auto; min-width:1200px
 .LeftBtn { float: left; }
 .RightBtn { float: right; }
 /*分享*/
-.box { overflow: hidden; padding: 25px 12px 0 12px; }
+.box { overflow: hidden; padding: 69px 12px 0 12px; }
 .bdsharebuttonbox { float: left; }
 .love { width: 92px; height: 27px; display: block; float: right; }
 /*商品信息*/
