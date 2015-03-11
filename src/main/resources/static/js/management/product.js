@@ -4,6 +4,7 @@ jQuery(function($) {
     
     // 商品详情编辑框
     KindEditor.ready(function(K) {
+        window.gK = K;
         detailEditor = K.create('textarea[name="detailArea"]', {
             allowFileManager : false,
             uploadJson: "/admin/product/upload"
@@ -98,11 +99,26 @@ jQuery(function($) {
                             
                             if (1 == verList.length)
                             {
-                                combiVersion.append('<option value="'+verList[0].id+'">'
-                                                    + verList[0].name + " "
-                                                    + verList[0].capacity + " "
-                                                    + verList[0].color + " "
-                                                    +'</option>');
+                                var str = '<option value="'+verList[0].id + '">';
+                                
+                                if (verList[0].name)
+                                {
+                                    str += verList[0].name;
+                                }
+                                
+                                if (verList[0].capacity)
+                                {
+                                    str += verList[0].capacity;
+                                }
+                                
+                                if (verList[0].color)
+                                {
+                                    str += verList[0].color;
+                                }
+
+                                str += '</option>';
+                                
+                                combiVersion.append(str);
                                 combiOriginPrice.val(verList[0].salePrice);
                             }
                             else
@@ -111,13 +127,26 @@ jQuery(function($) {
                                 var j;
                                 for (j=0; j<verList.length; j++)
                                 {
-                                    combiVersion.append('<option id="' + j
-                                                        +'" value="'+verList[j].id
-                                                        + '">'
-                                                        + verList[j].name + " "
-                                                        + verList[j].capacity + " "
-                                                        + verList[j].color + " "
-                                                        +'</option>');
+                                    var str = '<option id="' + j +'" value="'+verList[j].id + '">';
+                                    
+                                    if (verList[j].name)
+                                    {
+                                        str += verList[j].name;
+                                    }
+                                    
+                                    if (verList[j].capacity)
+                                    {
+                                        str += verList[j].capacity;
+                                    }
+                                    
+                                    if (verList[j].color)
+                                    {
+                                        str += verList[j].color;
+                                    }
+
+                                    str += '</option>';
+                                    
+                                    combiVersion.append(str);
                                 }
                                 
                                 // 选择版本后给出原价
@@ -195,11 +224,26 @@ jQuery(function($) {
                         
                         if (1 == verList.length)
                         {
-                            combiVersion.append('<option value="'+verList[0].id+'">'
-                                                + verList[0].name + " "
-                                                + verList[0].capacity + " "
-                                                + verList[0].color + " "
-                                                +'</option>');
+                            var str = '<option value="'+verList[0].id + '">';
+                            
+                            if (verList[0].name)
+                            {
+                                str += verList[0].name;
+                            }
+                            
+                            if (verList[0].capacity)
+                            {
+                                str += verList[0].capacity;
+                            }
+                            
+                            if (verList[0].color)
+                            {
+                                str += verList[0].color;
+                            }
+
+                            str += '</option>';
+                            
+                            combiVersion.append(str);
                             combiOriginPrice.val(verList[0].salePrice);
                         }
                         else
@@ -208,13 +252,26 @@ jQuery(function($) {
                             var j;
                             for (j=0; j<verList.length; j++)
                             {
-                                combiVersion.append('<option id="' + j
-                                                    +'" value="'+verList[j].id
-                                                    + '">'
-                                                    + verList[j].name + " "
-                                                    + verList[j].capacity + " "
-                                                    + verList[j].color + " "
-                                                    +'</option>');
+                                var str = '<option id="' + j +'" value="'+verList[j].id + '">';
+                                
+                                if (verList[j].name)
+                                {
+                                    str += verList[j].name;
+                                }
+                                
+                                if (verList[j].capacity)
+                                {
+                                    str += verList[j].capacity;
+                                }
+                                
+                                if (verList[j].color)
+                                {
+                                    str += verList[j].color;
+                                }
+
+                                str += '</option>';
+                                
+                                combiVersion.append(str);
                             }
                             
                             // 选择版本后给出原价
@@ -337,7 +394,6 @@ jQuery(function($) {
         // 填充商品详情
         formData.append("detail", detailContent);
 
-        
         $.ajax({
             url : '/admin/product/save',
             type : 'POST',
@@ -358,6 +414,8 @@ jQuery(function($) {
         
         return;
 	});
+	
+	
 });
 
 // 修改
@@ -371,6 +429,20 @@ function modify(id)
         	$("#id-modify").html(data);
         	$("#id-modify").removeClass("hide");
         	
+        	var mDetailEditor;
+            
+            // 商品详情编辑框
+            mDetailEditor = gK.create('textarea[name="mDetailArea"]', {
+                allowFileManager : false,
+                uploadJson: "/admin/product/upload",
+                afterCreate: function()
+                {
+                    this.util.insertHtml($("#m-p-detail").html());
+                }
+            });
+            
+            mDetailEditor.sync();
+                
         	// 返回上一级
         	$(".back").click(function(){
         		$("#id-table").siblings().addClass("hide");
@@ -385,7 +457,7 @@ function modify(id)
                         type:"GET",
                         url:"/admin/product/property/" + $(this).val(),
                         success:function(data){
-                            $("#property-section").html(data);
+                            $("#m-property-section").html(data);
                             
                             // 单选 
                             $(".selectProp").click(function(){
@@ -469,13 +541,237 @@ function modify(id)
                 });
             });
             
-            var mDetailEditor;
+            // 点击限时抢购
+            $("#m-isFlashSale").click(function(){
+                if ($(this).prop("checked"))
+                {
+                    $("#m-flash-sale-input").css("display", "block");
+                }
+                else
+                {
+                    $("#m-flash-sale-input").css("display", "none");
+                }
+            });
             
-            // 商品详情编辑框
-            KindEditor.ready(function(K) {
-                mDetailEditor = K.create('textarea[name="mDetailArea"]', {
-                    allowFileManager : false,
-                    uploadJson: "/admin/product/upload"
+            // 选择日期
+            $('.m-date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+                $(this).prev().focus();
+            });
+            
+            // 选择时间
+            $('.m-time-picker').timepicker({
+                minuteStep: 1,
+                showSeconds: true,
+                showMeridian: false
+            }).next().on(ace.click_event, function(){
+                $(this).prev().focus();
+            });
+            
+            // 组合商品选择商品类型
+            $(".combi-type").change(function(){
+                var combiType = $(this);
+                var combiName = combiType.siblings("select.combi-name");
+                
+                if ($(this).val() != "")
+                {
+                    $.ajax({
+                        type:"GET",
+                        url:"/admin/product/list/type/" + $(this).val(),
+                        success:function(productList){
+                            // 清空商品名称下拉框
+                            combiName.empty();
+                            
+                            combiName.append('<option value="">请选择</option>');
+                            
+                            var i;
+                            for (i=0; i<productList.length; i++)
+                            {
+                                combiName.append('<option id="'+i
+                                        +'" value="'+productList[i].id
+                                        +'">'+productList[i].name+'</option>');
+                            }
+                            
+                            // 选择完商品名称后
+                            $(".combi-name").change(function(){
+                                var combiVersion = $(this).siblings("select.combi-version");
+                                var combiOriginPrice = $(this).siblings(".combi-origin-price");
+                                var combiPrice = $(this).siblings(".combi-price");
+                                
+                                var verList = productList[$(this).children('option:selected').attr("id")].versionList;
+                                combiVersion.empty();
+                                combiOriginPrice.val("");
+                                combiPrice.val("");
+                                
+                                if (1 == verList.length)
+                                {
+                                    var str = '<option value="'+verList[0].id + '">';
+                                    
+                                    if (verList[0].name)
+                                    {
+                                        str += verList[0].name;
+                                    }
+                                    
+                                    if (verList[0].capacity)
+                                    {
+                                        str += verList[0].capacity;
+                                    }
+                                    
+                                    if (verList[0].color)
+                                    {
+                                        str += verList[0].color;
+                                    }
+
+                                    str += '</option>';
+                                    
+                                    combiVersion.append(str);
+                                    combiOriginPrice.val(verList[0].salePrice);
+                                }
+                                else
+                                {
+                                    combiVersion.append('<option value="">请选择</option>');
+                                    var j;
+                                    for (j=0; j<verList.length; j++)
+                                    {
+                                        var str = '<option id="' + j +'" value="'+verList[j].id + '">';
+                                        
+                                        if (verList[j].name)
+                                        {
+                                            str += verList[j].name;
+                                        }
+                                        
+                                        if (verList[j].capacity)
+                                        {
+                                            str += verList[j].capacity;
+                                        }
+                                        
+                                        if (verList[j].color)
+                                        {
+                                            str += verList[j].color;
+                                        }
+
+                                        str += '</option>';
+                                        
+                                        combiVersion.append(str);
+                                    }
+                                    
+                                    // 选择版本后给出原价
+                                    $(".combi-version").change(function(){
+                                        $(this).siblings(".combi-origin-price").val(verList[$(this).children('option:selected').attr("id")].salePrice);
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+            
+            // 添加商品组合
+            var combinationHtml = $("#combinationList").html();
+            $("#m-id-add-comb").click(function(){
+                $("#m-combinationList").append(combinationHtml);
+                
+                // 删除组合商品
+                $(".del-combination").click(function(){
+                    $(this).parent().parent().remove();
+                });
+                
+                // 重新绑定事件
+                $(".combi-type").unbind();
+                $(".combi-type").change(function(){
+                    var combiType = $(this);
+                    var combiName = combiType.siblings("select.combi-name");
+                    
+                    if ($(this).val() != "")
+                    {
+                        $.ajax({
+                            type:"GET",
+                            url:"/admin/product/list/type/" + $(this).val(),
+                            success:function(productList){
+                                // 清空商品名称下拉框
+                                combiName.empty();
+                                
+                                combiName.append('<option value="">请选择</option>');
+                                
+                                var i;
+                                for (i=0; i<productList.length; i++)
+                                {
+                                    combiName.append('<option id="'+i
+                                            +'" value="'+productList[i].id
+                                            +'">'+productList[i].name+'</option>');
+                                }
+                                
+                                // 选择完商品名称后
+                                $(".combi-name").change(function(){
+                                    var combiVersion = $(this).siblings("select.combi-version");
+                                    var combiOriginPrice = $(this).siblings(".combi-origin-price");
+                                    var combiPrice = $(this).siblings(".combi-price");
+                                    
+                                    var verList = productList[$(this).children('option:selected').attr("id")].versionList;
+                                    combiVersion.empty();
+                                    combiOriginPrice.val("");
+                                    combiPrice.val("");
+                                    
+                                    if (1 == verList.length)
+                                    {
+                                        var str = '<option value="'+verList[0].id + '">';
+                                        
+                                        if (verList[0].name)
+                                        {
+                                            str += verList[0].name;
+                                        }
+                                        
+                                        if (verList[0].capacity)
+                                        {
+                                            str += verList[0].capacity;
+                                        }
+                                        
+                                        if (verList[0].color)
+                                        {
+                                            str += verList[0].color;
+                                        }
+
+                                        str += '</option>';
+                                        
+                                        combiVersion.append(str);
+                                        combiOriginPrice.val(verList[0].salePrice);
+                                    }
+                                    else
+                                    {
+                                        combiVersion.append('<option value="">请选择</option>');
+                                        var j;
+                                        for (j=0; j<verList.length; j++)
+                                        {
+                                            var str = '<option id="' + j +'" value="'+verList[j].id + '">';
+                                            
+                                            if (verList[j].name)
+                                            {
+                                                str += verList[j].name;
+                                            }
+                                            
+                                            if (verList[j].capacity)
+                                            {
+                                                str += verList[j].capacity;
+                                            }
+                                            
+                                            if (verList[j].color)
+                                            {
+                                                str += verList[j].color;
+                                            }
+
+                                            str += '</option>';
+                                            
+                                            combiVersion.append(str);
+                                        }
+                                        
+                                        // 选择版本后给出原价
+                                        $(".combi-version").change(function(){
+                                            $(this).siblings(".combi-origin-price").val(verList[$(this).children('option:selected').attr("id")].salePrice);
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
                 });
             });
             

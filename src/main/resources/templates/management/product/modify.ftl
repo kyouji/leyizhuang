@@ -96,7 +96,7 @@
         </div>
         
         <!-- 参数块 -->
-        <div id="property-section" class="col-sm-12" style="margin-top: 10px;"> </div>
+        <div id="m-property-section" class="col-sm-12" style="margin-top: 10px;"> </div>
         
         <!-- 价格块 -->
         <div class="col-sm-12" style="margin-top: 10px;">
@@ -159,10 +159,12 @@
                 </div>
             </div>
         </div> <!-- 价格块 -->
-          
+        
+        <textarea id="m-p-detail" style="display:none;">${product.detail}</textarea>
+        
         <div class="col-sm-12" style="margin:10px;">
             <label class="col-sm-1 control-label no-padding-right" for="m-detail-editor">商品详情</label>
-            <textarea id="m-detail-editor" name="mDetailArea" style="width:100%;height:400px;visibility:hidden;margin-top:5px;">${product.detail}</textarea>
+            <textarea id="m-detail-editor" name="mDetailArea" style="width:100%;height:400px;visibility:hidden;margin-top:5px;"></textarea>
         </div>
         
         <div class="col-sm-12" style="margin-top:10px;">
@@ -177,21 +179,21 @@
         <div class="col-sm-12" style="margin-top:10px;">
             <div class="checkbox">
                 <label>
-                    <input id="isFlashSale" name="isFlashSale" type="checkbox" class="ace" <#if product.isFlashSale?? && true==product.isFlashSale>checked</#if>/>
+                    <input id="m-isFlashSale" name="isFlashSale" type="checkbox" class="ace" <#if product.isFlashSale?? && true==product.isFlashSale>checked</#if>/>
                     <span class="lbl">限时抢购?</span>
                 </label>
             </div>
         </div>
         
-        <div id="flash-sale-input" class="col-sm-12" <#if product.isFlashSale?? && true==product.isFlashSale><#else>style="margin-top:10px; display:none;"</#if>>
+        <div id="m-flash-sale-input" class="col-sm-12" <#if product.isFlashSale?? && true==product.isFlashSale><#else>style="margin-top:10px; display:none;"</#if>>
             <label class="control-label col-sm-1 no-padding-right">*开始时间</label>
             <div class="input-group col-sm-3">
-                <input class="form-control date-picker" id="id-start-date" name="fsStartDate" type="text" data-date-format="yyyy-mm-dd" value="${product.flashSaleStartTime?string("yyyy-MM-dd")}" />
+                <input class="form-control m-date-picker" id="m-id-start-date" name="fsStartDate" type="text" data-date-format="yyyy-mm-dd" value="<#if product.flashSaleStartTime??>${product.flashSaleStartTime?string("yyyy-MM-dd")}</#if>" />
                 <span class="input-group-addon">
                     <i class="icon-calendar bigger-110"></i>
                 </span>
                 
-                <input id="id-start-time" type="text" name="fsStartTime" class="time-picker form-control" value="${product.flashSaleStartTime?string("HH:mm:ss")}"/>
+                <input id="m-id-start-time" type="text" name="fsStartTime" class="m-time-picker form-control" value="<#if product.flashSaleStartTime??>${product.flashSaleStartTime?string("HH:mm:ss")}</#if>"/>
                 <span class="input-group-addon">
                     <i class="icon-time bigger-110"></i>
                 </span>
@@ -199,12 +201,12 @@
             
             <label class="control-label col-sm-1 no-padding-right">*结束时间</label>
             <div class="input-group col-sm-3">
-                <input class="form-control date-picker" name="fsEndDate" id="id-end-date" type="text" data-date-format="yyyy-mm-dd" value="${product.flashSaleStopTime?string("yyyy-MM-dd")}" />
+                <input class="form-control m-date-picker" name="fsEndDate" id="m-id-end-date" type="text" data-date-format="yyyy-mm-dd" value="<#if product.flashSaleStopTime??>${product.flashSaleStopTime?string("yyyy-MM-dd")}</#if>" />
                 <span class="input-group-addon">
                     <i class="icon-calendar bigger-110"></i>
                 </span>
                 
-                <input id="id-end-time" type="text" name="fsEndTime" class="time-picker form-control" value="${product.flashSaleStopTime?string("HH:mm:ss")}"/>
+                <input id="m-id-end-time" type="text" name="fsEndTime" class="m-time-picker form-control" value="<#if product.flashSaleStopTime??>${product.flashSaleStopTime?string("HH:mm:ss")}</#if>"/>
                 <span class="input-group-addon">
                     <i class="icon-time bigger-110"></i>
                 </span>
@@ -212,11 +214,11 @@
             
             <label class="control-label no-padding-right col-sm-1" for="flashSalePrice">*抢购价</label>
                             
-            <input type="text" id="flashSalePrice" class="col-sm-1 control-label" name="flashSalePrice"/>
+            <input type="text" id="flashSalePrice" class="col-sm-1 control-label" name="flashSalePrice" value="<#if product.flashSalePrice??>${product.flashSalePrice?string("#.##")}</#if>"/>
             
             <label class="control-label no-padding-right col-sm-1" for="flashSaleLeftNumber">*数量</label>
                             
-            <input type="text" id="flashSaleLeftNumber" class="col-sm-1 control-label" name="flashSaleLeftNumber"/>
+            <input type="text" id="flashSaleLeftNumber" class="col-sm-1 control-label" name="flashSaleLeftNumber" value="${product.flashSaleLeftNumber?default("0")}"/>
         </div>
         
         <!-- 组合商品 -->
@@ -228,62 +230,66 @@
                     <div class="widget-toolbar">
                         
                         <label>
-                            <a href="javascript:void(0)" id="id-add-comb" class="btn btn-success btn-sm">增加</a> 
+                            <a href="javascript:void(0)" id="m-id-add-comb" class="btn btn-success btn-sm">增加</a> 
                         </label>
                     </div>
                 </div>
     
                 <div class="widget-body">
-                    <div id="combinationList" class="row">
-                        <div class="col-sm-12" style="margin-top:10px;">
-                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">商品类型</label>
-                        
-                            <select class="combi-type" style="width:140px;" >
-                                <option value="">请选择</option>
-                                <#if product_type_list??>
-                                    <#list product_type_list as type>
-                                    <option value="${type.name}">${type.name}</option>
-                                    </#list>
-                                </#if>
-                            </select>
-                            
-                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">商品名称</label>
-                        
-                            <select class="combi-name" name="combPid" style="width:140px;">
-                                <option value="">请选择</option>
-                                <#if type_list??>
-                                    <#list type_list as type>
-                                    <option value="${type.name}">${type.name}</option>
-                                    </#list>
-                                </#if>
-                            </select>
-                            
-                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">版本</label>
-                        
-                            <select class="combi-version" name="combVid" style="width:140px;">
-                                <option value="">请选择</option>
-                                <#if type_list??>
-                                    <#list type_list as type>
-                                    <option value="${type.name}">${type.name}</option>
-                                    </#list>
-                                </#if>
-                            </select>
-                            
-                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">原价</label>
-                            
-                            <input type="text" class="combi-origin-price" readonly/>
-                            
-                            <label class="control-label no-padding-right" for="type" style="margin-left:10px;">组合价</label>
-                        
-                            <input type="text" class="combi-price" name="combPrice"/>
-                            
-                            <label style="margin-left:10px;" >
-                            
-                                <a href="javascript:void(0)" class="btn btn-grey btn-xs del-combination">
-                                    <i class="icon-trash icon-2x icon-only"></i>
-                                </a>
-                            </label>
-                        </div>
+                    <div id="m-combinationList" class="row">
+                        <#if product.combinationList??>
+                            <#list product.combinationList as combiProduct>
+                                <div class="col-sm-12" style="margin-top:10px;">
+                                    <label class="control-label no-padding-right" for="type" style="margin-left:10px;">商品类型</label>
+                                
+                                    <select class="combi-type" style="width:140px;" >
+                                        <option value="">请选择</option>
+                                        <#if product_type_list??>
+                                            <#list product_type_list as type>
+                                            <option value="${type.name}">${type.name}</option>
+                                            </#list>
+                                        </#if>
+                                    </select>
+                                    
+                                    <label class="control-label no-padding-right" for="type" style="margin-left:10px;">商品名称</label>
+                                
+                                    <select class="combi-name" name="combPid" style="width:140px;">
+                                        <option value="">请选择</option>
+                                        <#if type_list??>
+                                            <#list type_list as type>
+                                            <option value="${type.name}">${type.name}</option>
+                                            </#list>
+                                        </#if>
+                                    </select>
+                                    
+                                    <label class="control-label no-padding-right" for="type" style="margin-left:10px;">版本</label>
+                                
+                                    <select class="combi-version" name="combVid" style="width:140px;">
+                                        <option value="">请选择</option>
+                                        <#if type_list??>
+                                            <#list type_list as type>
+                                            <option value="${type.name}">${type.name}</option>
+                                            </#list>
+                                        </#if>
+                                    </select>
+                                    
+                                    <label class="control-label no-padding-right" for="type" style="margin-left:10px;">原价</label>
+                                    
+                                    <input type="text" class="combi-origin-price" readonly/>
+                                    
+                                    <label class="control-label no-padding-right" for="type" style="margin-left:10px;">组合价</label>
+                                
+                                    <input type="text" class="combi-price" name="combPrice"/>
+                                    
+                                    <label style="margin-left:10px;" >
+                                    
+                                        <a href="javascript:void(0)" class="btn btn-grey btn-xs del-combination">
+                                            <i class="icon-trash icon-2x icon-only"></i>
+                                        </a>
+                                    </label>
+                                </div>
+                            </#list>
+                            </#if>
                     </div>
                 </div> <!-- widget-body -->
             </div>

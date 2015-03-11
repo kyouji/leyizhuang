@@ -140,7 +140,7 @@
       <input type="text" class="select_num " id="quantity" value="1"/>
       <a href="javascript:void(0)" class="fll next" data-num="${product.versionList[0].leftNumber}"><img src="/images/jian.jpg"/></a></p>
     <div class="clear"></div>
-    <div class="gm_btn"> <span class="gm_btn1"><a id="id-buy" href="javascript:void(0)" onclick="tm_buy()">立即购买</a></span> <span class="gm_btn2"><a href="javascript:void(0)" onclick="tm_buy()">加入购物车</a></span><span class="gm_btn3"><a href="javascript:void(0)" onclick="tm_contra(this,${product.id})" >对比</a></span></div>
+    <div class="gm_btn"> <span class="gm_btn1"><a id="id-buy" href="javascript:void(0)">立即购买</a></span> <span class="gm_btn2"><a href="javascript:void(0)" onclick="tm_buy()">加入购物车</a></span><span class="gm_btn3"><a href="javascript:void(0)" onclick="tm_contra(this,${product.id})" >对比</a></span></div>
   </div>
 </div>
 <div class="clear"></div>

@@ -35,7 +35,7 @@
     </td>
     <td class="center">
         <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-            <button onclick="modify(${product.id})"  class="btn btn-xs btn-info">
+            <button onclick="modify(${product.id})" class="btn-modify btn btn-xs btn-info">
                 <i class="icon-edit bigger-120"></i>
             </button>
 

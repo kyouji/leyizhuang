@@ -294,46 +294,46 @@ public class CartController {
     public String add(Long[] pid,Long[] vid,Long[] quantity,HttpServletRequest request){
        
         User user =(User)request.getSession().getAttribute("user");
-       if(user!=null){
-           String username=user.getUsername();
-           if(StringUtils.isNotEmpty(username)){
-               if(pid!=null && pid.length>0 && vid!=null && vid.length>0 && quantity!=null && quantity.length>0){
-                   for (int i=0;i<pid.length;i++) {
-                       Product product=  productService.findOne(pid[i]);
-                      List<ProductVersion> versions= product.getVersionList();
-                      for (ProductVersion productVersion : versions) {
-                          if(productVersion.getId()==vid[i]){
-                              Map<String, Object> map= shoppingCartService.add(username, pid[i], vid[i],quantity[i], product.getFlashSalePrice());
-                              if(map.get("code").equals(0)){
-                                  flag="success";
-                                  return flag;
-                              }
-//                              else if(map.get("message").equals("参数错误")){
-//                                  flag="messaee";
-//                                
-//                              }
-                              else{
-                                  flag="false";
-                                  return flag;
-                              }
-                          }
-                      }
-                   }
-              
-               }else {
-                   flag="nullfalse";
-                   return flag;
+        if (user != null) {
+            String username = user.getUsername();
+            if (StringUtils.isNotEmpty(username)) {
+                if (pid != null && pid.length > 0 && vid != null
+                        && vid.length > 0 && quantity != null
+                        && quantity.length > 0) {
+                    for (int i = 0; i < pid.length; i++) {
+                        if (pid.length > i && vid.length > i
+                                && quantity.length > i) {
+                            ProductVersion version = productService
+                                    .findVersion(pid[i], vid[i]);
+                            Map<String, Object> map = shoppingCartService.add(
+                                    username, pid[i], vid[i], quantity[i],
+                                    version.getSalePrice());
+
+                            if (map.get("code").equals(0)) {
+                                flag = "success";
+                                return flag;
+                            } else {
+                                flag = "false";
+                                return flag;
+                            }
+                        }
+                    }
+
+                } else {
+                    flag = "nullfalse";
+                    return flag;
+                }
+            } else {
+                flag = "false";
+                return flag;
             }
-           }else{
-               flag="false";
-               return flag;
-           }
-       }else{
-         flag="nulluser";
-           return flag;
-       }
-    return flag;
+        } else {
+            flag = "nulluser";
+            return flag;
+        }
+        return flag;
     }
+    
     @RequestMapping("delete")
     @ResponseBody
     public String delete(String id,HttpServletRequest request){
