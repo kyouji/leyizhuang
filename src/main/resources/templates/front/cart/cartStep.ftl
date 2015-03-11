@@ -75,10 +75,10 @@ DD_belatedPNG.fix('.,img,background');
 <div class="s_gwc2_1_b">
 <#if shippingAddresses??>
 <#list shippingAddresses as address>
-<a href="/user/address" target="_blank">
-<p>收货人：<#if address.receiverName??>${address.receiverName}</#if></p>
-<p>收货地址：<#if address.detailAddress??>${address.detailAddress}</#if></p>
-<p>联系方式：<#if address.receiverMobile??>${address.receiverMobile}</#if></p>
+<a href="/user/address" target="_blank" class="hobers">
+<p>收货人：<span class="names_"><#if address.receiverName??>${address.receiverName}</#if></span></p>
+<p>收货地址：<span class="address_"><#if address.detailAddress??>${address.detailAddress}</#if></span></p>
+<p>联系方式：<span class="Phone_"><#if address.receiverMobile??>${address.receiverMobile}</#if></span></p>
 </a>
 </#list>
 </#if>
@@ -152,7 +152,7 @@ DD_belatedPNG.fix('.,img,background');
 <div class="main mt15">
 <div class="s_gwc3_1">
 <div class="s_gwc3_1_a"><p><span>发票信息</span></p></div>
-<div class="invoice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>是否开具发票：</span><input type="checkbox"><span>是</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"><span>否</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>发票抬头：</span><input type="text" class="fapiaolan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>发票内容：有荣诚手机直接开具</span></div>
+<div class="invoice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>是否开具发票：</span><input type="radio" name="yes"><span>是</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="yes"><span>否</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>发票抬头：</span><input type="text" class="fapiaolan">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>发票内容：有荣诚手机直接开具</span></div>
 </div>
 </div>
 
@@ -161,10 +161,10 @@ DD_belatedPNG.fix('.,img,background');
 <div class="s_gwc3_1">
 <div class="s_gwc3_1_a"><p><span>配送方式</span></p></div>
 <div class="invoice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <select>
-            <option>由荣诚手机配送</option>
-            <option>申通快递</option>
-            <option>顺丰快递</option>
+          <select id="peison">
+            <option value="由荣诚手机配送">由荣诚手机配送</option>
+            <option value="申通快递">申通快递</option>
+            <option value="顺丰快递">顺丰快递</option>
           </select>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <span>说明：</span><input type="text" class="fapiaolan"></div>
@@ -197,8 +197,8 @@ DD_belatedPNG.fix('.,img,background');
 <input type="hidden" value="${cart.pid}" class="pid">
 <input type="hidden" value="${cart.vid}" class="vid">
 <td class="gwc1_lm2_a0">${cart.pid}</td>
-<td class="gwc1_lm2_a1"><span><a href="#"><img src="${cart.productCoverImageUri}" width="76" height="76"></a></span>
-<p><a href="" class="names"><p>${cart.productName}</p></a></td>
+<td class="gwc1_lm2_a1"><span><a href="product/${cart.pid}"><img src="${cart.productCoverImageUri}" width="76" height="76"></a></span>
+<p><a href="product/${cart.pid}" class="names"><p>${cart.productName}</p></a></td>
 <td class="gwc1_lm2_b1">￥<span class="t_price">${cart.price?c}</span></td>
 <td class="gwc1_lm2_c1"><div class="ds content_nr_3_jg2">
 <!--<a href="#"><img src="img/slj.png" width="20" height="20"></a>-->
@@ -274,10 +274,21 @@ DD_belatedPNG.fix('.,img,background');
 			var producNumer =$this.parents().find(".content_zj").val();
 			var pid =$this.parents().find(".pid").val();
 			var vid =$this.parents().find(".vid").val();
+			var Phone =$(".Phone_").text();
+			var address =$(".address_").text();
+			var name =$(".names_").text();
+			var invoiceTitle =$(".fapiaolan").val();
+			var paymentType =$("#peison").val();
+			var val=$('input:radio[name="yes"]:checked').val();
+			if(val=="no"){
+			/*
+			String shippingAddress,String receiverName,String receiverPhone,String paymentType,String invoiceTitle
+			*/
+			var formDate={"shippingAddress":address,"receiverName":name,"receiverPhone":Phone,"paymentType":paymentType,"invoiceTitle":invoiceTitle,"pid":pid,"vid":vid};
 			$.ajax({
 				type:"post",
 				url:"/addcartStep",
-				data:{"productName":productName,"price":producprice,"deliveryQuantity":producNumer,"pid":pid,"vid":vid},
+				data:formDate,
 				success:function(data){
 					if(data=="success"){
 						window.location.href="/paysuccess";
@@ -286,6 +297,7 @@ DD_belatedPNG.fix('.,img,background');
 					}
 				}
 			})
+			}
 	}
 	
 	$(function(){

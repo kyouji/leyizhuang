@@ -9,12 +9,12 @@
 <link href="/css/rcindex.css" rel="stylesheet" type="text/css" />
 <liNK rel=stylesheet type=text/css href="/Tm/css/carousel.css">
 <style type="text/css">
-	.t_red{font-size:14px;color:red;font-family:微软雅黑"}
-	#3dmax .3ds{font-size:16px;font-family:微软雅黑;color:#666}
-	 *{padding:0;margin:0;}
-  #outbox {position:absolute;left:150px;top:286px;width:500px;height:400px;display:block;}
-  #outbox img {width:400px;height:400px;}
-</style>
+.t_red{font-size:14px;color:red;font-family:微软雅黑"}
+#3dmax .3ds{font-size:16px;font-family:微软雅黑;color:#666}
+*{padding:0;margin:0;}
+#outbox {position:absolute;left:150px;top:286px;width:500px;height:400px;display:block;}
+#outbox img {width:400px;height:400px;}
+ </style>
 <link rel="stylesheet" type="text/css" href="/Tm/css/manhuaTip1.1.0.css" />
 <link id="cssfile" type="text/css" rel="stylesheet" href="/Tm/css/dialog_blue.css"/>
 <script type="text/javascript" src="/Tm/js/jquery-1.11.1.min.js"></script>
@@ -79,10 +79,11 @@
   <img src="/images/sjtp/18.jpg" />
   <img src="/images/sjtp/19.jpg" />
   <img src="/images/sjtp/20.jpg" />-->
-    < <#list ShowPictures as pic>
+    <#list ShowPictures as pic>
                     <img src="${pic}" />
                </#list>
 </div><!--outbox END-->
+
     <div id="preview" >
     <div class="jqzoom" >
         <#if ShowPictures??>
@@ -670,6 +671,11 @@ $(function(){
         
         $("#3dmax").find(".3ds").on("click",function(){
         	$(this).text("平面展示");
+        	$("#preview").css("display","none")
+        	$(".box").css("paddingTop",400)
+        	$("#outbox").css("display","block")
+        })
+        $("#3dmax").find(".kaids").on("click",function(){
         	$("#preview").css("display","none")
         	$(".box").css("paddingTop",400)
         	$("#outbox").css("display","block")
