@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ynyes.rongcheng.entity.Brand;
-import com.ynyes.rongcheng.entity.OrderItem;
 import com.ynyes.rongcheng.entity.ProductType;
-import com.ynyes.rongcheng.entity.ProductVersion;
 import com.ynyes.rongcheng.entity.ShippingAddress;
 import com.ynyes.rongcheng.entity.ShoppingCart;
+import com.ynyes.rongcheng.entity.ShoppingOrder;
 import com.ynyes.rongcheng.entity.SiteInfo;
 import com.ynyes.rongcheng.entity.User;
 import com.ynyes.rongcheng.service.BrandService;
@@ -28,9 +27,12 @@ import com.ynyes.rongcheng.service.ProductService;
 import com.ynyes.rongcheng.service.ProductTypeService;
 import com.ynyes.rongcheng.service.ProductVersionService;
 import com.ynyes.rongcheng.service.ShoppingCartService;
+import com.ynyes.rongcheng.service.ShoppingOrderService;
 import com.ynyes.rongcheng.service.SiteInfoService;
 import com.ynyes.rongcheng.service.UserService;
 import com.ynyes.rongcheng.util.StringUtils;
+//nieshr@192.168.1.102/home/git/repositories/rongcheng.git
+import com.ynyes.rongcheng.entity.ProductVersion;
 
 /**
  * 购物车
@@ -67,6 +69,8 @@ public class CartController {
     
     @Autowired
     private UserService userService;/*用户相关*/
+    @Autowired
+    private ShoppingOrderService shoppingOrderService;/*订单相关*/
     
     private String flag;
     /**
@@ -264,27 +268,23 @@ public class CartController {
      */
     @RequestMapping("/addcartStep")
     @ResponseBody
-    public String cartStep(Long pid,
-            String productName,
-            Long vid,
-            String productVerColor,
-            String productVerCap,
-            String productVerName,
-            String deliveryQuantity,
-            String price,HttpServletRequest request){
+    public String cartStep(Long pid,Long vid,String shippingAddress,String receiverName,String receiverPhone,String paymentType,String invoiceTitle, HttpServletRequest request){
         /*空判断*/
-        OrderItem item=null;
+        @SuppressWarnings("unused")
+        ShoppingOrder order=null;
         User user=(User) request.getSession().getAttribute("user");
         if(user!=null){
-            if(StringUtils.isNotEmpty(productName) &&
-                    StringUtils.isNotEmpty(deliveryQuantity) &&
-                    StringUtils.isNotEmpty(price)){
-                item=new OrderItem();
+            if(StringUtils.isNotEmpty(shippingAddress) &&
+                    StringUtils.isNotEmpty(receiverName) &&
+                    StringUtils.isNotEmpty(receiverPhone)){
+                order=new ShoppingOrder();
                 /*新增订单*/
-                item.setProductName(productName);
-                item.setDeliveryQuantity(Long.parseLong(deliveryQuantity));
-                item.setPrice(Double.parseDouble(price));
-                orderItemService.save(item);
+                /*order.setShippingAddress(shippingAddress);
+                order.setShippingName(receiverName);
+                order.setShippingPhone(receiverPhone);
+                order.setPaymentType(paymentType);
+                order.setInvoiceTitle(invoiceTitle);*/
+                shoppingOrderService.add(user.getUsername(), shippingAddress, receiverName, receiverPhone, paymentType, invoiceTitle);
               
 //                List<ShoppingCart> carts=shoppingCartService.findByUsername(user.getUsername());
 //                for (ShoppingCart shoppingCart : carts) {

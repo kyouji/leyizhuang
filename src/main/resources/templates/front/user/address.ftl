@@ -86,12 +86,12 @@
 				<tr class="tr_td">
 					<td width="6%"><input type="radio" name="rad" checked=true></td>
 					<td width="10%" class="td_name"><#if addres.receiverName??>${addres.receiverName}</#if></span></td>
-					<td width="15%"><span class="td_province">${addres.province}</span>--<span class="td_city">${addres.city}</span>--<span class="td_disctrict">${addres.disctrict}</span></td>
-					<td width="8%" class="td_postcode">${addres.postcode}</td>
-					<td width="10%" class="td_receiverTelephone"><#if addres.receiverMobile??>${addres.receiverTelephone}</#if></td>
-					<td width="10%" class="td_receiverMobile">${addres.receiverMobile}</td>
-					<td width="20%" class="td_detailAddress">${addres.detailAddress}</td>
-					<td width="8%" class="upda_del"><a href="javascript:void(0)" onclick="tm_update(this,${addres.id})">修改</a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="tm_delete(this,${addres.id})">删除</a></td>
+					<td width="15%"><span class="td_province"><#if addres.province??>${addres.province}</#if></span>--<span class="td_city">${addres.city}</span>--<span class="td_disctrict">${addres.disctrict}</span></td>
+					<td width="8%" class="td_postcode"><#if addres.postcode??>${addres.postcode}</#if></td>
+					<td width="10%" class="td_receiverTelephone"><#if addres.receiverTelephone??>${addres.receiverTelephone}</#if></td>
+					<td width="10%" class="td_receiverMobile"><#if addres.receiverMobile??>${addres.receiverMobile}</#if></td>
+					<td width="20%" class="td_detailAddress"><#if addres.detailAddress??>${addres.detailAddress}</#if></td>
+					<td width="8%" class="upda_del"><a href="javascript:void(0)" onclick="tm_update(this,<#if addres.id??>${addres.id}</#if>)">修改</a>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="tm_delete(this,<#if addres.id??>${addres.id}</#if>)">删除</a></td>
 				</tr>
 			</#list>
 			</#if>
