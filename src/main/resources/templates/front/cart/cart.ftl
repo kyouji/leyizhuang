@@ -11,41 +11,19 @@
 <link href="Tm/css/qikoo.css" type="text/css" rel="stylesheet" />
 <link href="Tm/css/store.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/Tm/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/Tm/js/common/head.js"></script>
 <script src="Tm/js/qikoo.js"></script>
 </head>
 <body>
-<header>
-<div class="main">
-<#include "/front/comment/header.ftl">
-</div>
-</header>
-
-<div class="header1 main">
-<div class="fll logo"><a href="/" title="荣诚手机超市"><img src="img/rc_logo.png" width="177" height="69"></a></div>
-<div class="fll city"><a href="javascript:void(0)">城市切换</a><span></span>
-<!--<div class="cityqh"><ul>
-<li><a href="javascript:void(0)">昆明市</a></li>
-<li><a href="javascript:void(0)">曲靖市</a></li>
-<li><a href="javascript:void(0)">大理州</a></li>
-<li><a href="javascript:void(0)">西双版纳</a></li>
-<li><a href="javascript:void(0)">德宏州</a></li>
-<li><a href="javascript:void(0)">丽江市</a></li>
-</ul></div>-->
-</div>
-<div class="sercha fll">
-<input class="topnews1_serch" type="text" onfocus="if(value=='热搜机型： iphone 6   MX4 Pro   HTC M8') {value=''}" onblur="if (value=='') {value='热搜机型： iphone 6   MX4 Pro   HTC M8'}"  value="热搜机型： iphone 6   MX4 Pro   HTC M8">
-<input type="submit" class="search-btn" title="搜索" value="  ">
-<div class="rc_newsgg"><span>新闻公告:</span><a href="javascript:void(0)">>>黄章：魅蓝Note有电信版，一月还将发新品</a></div>
-</div>
-<div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-<div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
-</div>
-
-
+<#include "/front/common/head.ftl" />
 
 <div class="gwcbg">
 <div class="main mt10">
-<div class="place"> <span>您现在的位置：</span><a href="/">首页</a>&gt;<a href="/list/2">手机产品</a>&gt;<a href="javascript:void(0)">手机筛选</a>&gt; </div>
+<div class="place"> 
+    <span>您现在的位置：</span>
+    <a href="/">首页</a>&gt;
+    <a href="javascript:;">购物车</a>
+</div>
 <div class="s_gwc1"><span id="colorfff">1、我的购物车</span><span>2、我的订单信息</span><span>3、支付成功</span></div>
 </div>
 
@@ -69,18 +47,40 @@
 <tr id="tr_list">
 <input type="hidden" value="<#if cartId.pid??>${cartId.pid}</#if>" class="p_pid">
 <input type="hidden" value="<#if cartId.vid??>${cartId.vid}</#if>" class="v_vid">
-<td class="gwc1_lm2_a"><input type="checkbox" class="fll duoxuank"   name="coursename" onchange="checkAll(this)"><span><a href="javascript:void(0)" class="t_timg"><img src="${cartId.productCoverImageUri}" width="76" height="76"></a></span>
-<p><a href="/product/${cartId.pid}"> <p class="nemes"><#if cartId.productName??>${cartId.productName}</#if></p></a></td>
+<td class="gwc1_lm2_a">
+    <input type="checkbox" class="fll duoxuank" name="coursename" <#-- onchange="checkAll(this)" --> >
+    <span>
+        <a href="/product/${cartId.pid}" class="t_timg">
+            <img src="${cartId.productCoverImageUri}" width="76" height="76">
+        </a>
+    </span>
+    <p>
+    <a href="/product/${cartId.pid}"> 
+        <p class="nemes">
+            <#if cartId.productName??>
+                ${cartId.productName?default("")} 
+                ${cartId.productVerName?default("")} 
+                ${cartId.productVerColor?default("")}
+                ${cartId.productVerCap?default("")}
+            </#if>
+        </p>
+    </a>
+</td>
 
 <td class="gwc1_lm2_b">￥<span class="money" id="moneys"><#if cartId.price??>${cartId.price?c}</#if></span></td>
-<td class="gwc1_lm2_c"><div class="ds content_nr_3_jg2"><a href="javascript:void(0)" class="prev" data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/slj.png" width="20" height="20" ></a><input type="text" class="content_zj" value="${cartId.quantity}" id="count" ><a href="javascript:void(0)" class="next"  data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>"><img src="/img/sljj.png" width="20" height="20" ></a></div></td>
-<td class="gwc1_lm2_b">￥<span id="td_sum">
-							     <#assign total=0>
-							     
-							         <#assign total=total+cartId.price*cartId.pid>
-							         ${total?c}
-							         </span></td>
-<td class="gwc1_lm2_d"><input type="button" class="gwc_delete" data-opid="${cartId.id}" value="删除购物车"></td>
+<td class="gwc1_lm2_c">
+    <div class="ds content_nr_3_jg2">
+        <a href="javascript:void(0)" class="prev" data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>">
+            <img src="/img/slj.png" width="20" height="20" >
+        </a>
+        <input type="text" class="content_zj" value="${cartId.quantity}" id="count" >
+        <a href="javascript:void(0)" class="next"  data-sum="<#if cartId.productNumber??>${cartId.productNumber}</#if>">
+            <img src="/img/sljj.png" width="20" height="20" >
+        </a>
+    </div>
+</td>
+<td class="gwc1_lm2_b">￥<span id="td_sum">${(cartId.price * cartId.quantity)?string("#.##")}</span></td>
+<td class="gwc1_lm2_d"><input type="button" class="gwc_delete" data-opid="${cartId.id}" value="删除"></td>
 </tr>
 </#list>
 </#if>
@@ -89,9 +89,12 @@
 </div>
 
 <div class="main">
-<div class="s_gwc1zj_left fll mt12"><p><input type="checkbox" onclick="checkAll(this,true)" class="fll" id="checked">全选</p></div>
+<div class="s_gwc1zj_left fll mt12">
+    <p><input type="checkbox" onclick="checkAll(this,true)" class="fll" id="checked">全选</p>
+</div>
 
-<div class="s_gwc1zj flr"><p>商品<span id="code_su"> 0 </span>件  总价：¥<span class="tm_code_zon">0.00</span>  商品总计(不含运费)：¥ <span class="tm_code_zon">0.00</span> </p></div>
+<div class="s_gwc1zj flr">
+    <p>已选择商品<span id="code_su"> 0 </span>件  总价：¥<span id="total-price" class="tm_code_zon">0.00</span></p></div>
 
 </div>
 
@@ -108,19 +111,81 @@
 
 <div class="clear"></div>
 
-<div class="footallbg">
-<#include "/front/comment/top1.ftl">
-</div>
-
+<#include "/front/common/tail.ftl" />
 
 <script type="text/javascript">
 
+    var setTotalCountAndPrice = function(){
+        var i;
+        var cbs = $(".duoxuank");
+        var totalCount = 0;
+        var totalPrice = 0;
+        
+        for(i=0; i<cbs.length; i++)
+        {
+            var count = parseInt(cbs.eq(i).parent().siblings(".gwc1_lm2_c").children(".content_nr_3_jg2").children(".content_zj").val());
+            var price = parseFloat(cbs.eq(i).parent().siblings(".gwc1_lm2_b").children("#td_sum").html());
+                
+            if (cbs.eq(i).prop("checked"))
+            {
+                totalCount += count;
+                totalPrice += price;
+            }
+        }
+        
+        $("#code_su").html(totalCount);
+        $("#total-price").html(totalPrice);
+    }
+    
+    // 点击选择框
+    $(".duoxuank").click(function(){
+        setTotalCountAndPrice();
+    });
+    
+    // 减号
+    $(".prev").click(function(){
+        var countInput = $(this).siblings(".content_zj");
+        var count = parseInt(countInput.val());
+        var sumPriceSpan = $(this).parent().parent().siblings(".gwc1_lm2_b").children("#td_sum");
+        var sumPrice = parseFloat(sumPriceSpan.html());
+        var unitPrice = parseFloat($(this).parent().parent().siblings(".gwc1_lm2_b").children(".money").html());
+        
+        count--;
+        
+        if (count > 0)
+        {
+            countInput.val(count);
+            sumPriceSpan.html(sumPrice - unitPrice);
+        }
+        setTotalCountAndPrice();
+    });
+    
+    // 加号
+    $(".next").click(function(){
+        var countInput = $(this).siblings(".content_zj");
+        var count = parseInt(countInput.val());
+        var sumPriceSpan = $(this).parent().parent().siblings(".gwc1_lm2_b").children("#td_sum");
+        var sumPrice = parseFloat(sumPriceSpan.html());
+        var unitPrice = parseFloat($(this).parent().parent().siblings(".gwc1_lm2_b").children(".money").html());
+        
+        count++;
+        
+        if (count > 0)
+        {
+            countInput.val(count);
+            sumPriceSpan.html(sumPrice + unitPrice);
+        }
+        setTotalCountAndPrice();
+    });
+    
+    
 			//--上一页(减1)  / 下一页(加1)
 			
 			var index = 1;
 	
 		
 			//下一页功能
+			<#--
 			$("#tr_list td").find(".next").on("click",function(){
 				var $this = $(this);
 				var $input =$(this).prev();
@@ -134,25 +199,12 @@
 				var money=$this.parents().find("#moneys").text();
 				total += money * num;
 				$this.parents().find("#td_sum").text(total);
-				tm_total()
+				tm_total();
 				
 			});
-
+            -->
 		
-			//上一页功能
-			$("#tr_list td").find(".prev").on("click",function(){
-			var datasum=$(this).data("sum");
-			var $this = $(this);
-			var $input =$(this).next();
-				index--;//相当于index = index +1;
-				if(index<1)index = datasum;
-				$input.val(index);
-				var num=$this.parents().find("#count").val();
-				var money=$this.parents().find("#moneys").text();
-				$this.parents().find("#td_sum").text(num*money);
-				var unit_price = $(this).parent().parent().find("b.unit-price").eq(0).html();
-				tm_total()
-			});
+			
 			/*总金额计算*/
 			function tm_total(){
 				var total = 0;

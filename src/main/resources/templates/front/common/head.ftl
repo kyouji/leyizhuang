@@ -53,5 +53,5 @@
         </form>
     </div>
     <div class="fll rc_phone"><span>客服电话：400-888-8888</span></div>
-    <div class="flr rc_gwc"><a href="/cart">购物车（1）</a></div>
+    <div class="flr rc_gwc"><a href="/cart">购物车</a></div>
 </div>
