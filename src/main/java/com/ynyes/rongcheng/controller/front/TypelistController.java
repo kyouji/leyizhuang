@@ -57,7 +57,7 @@ public class TypelistController {
      * @param map
      * @return
      */
-    @RequestMapping("/list/{queryStr}")
+    @RequestMapping("/lists/{queryStr}")
     public String list(@PathVariable String queryStr, ModelMap map){
         // 导航栏
         List<ProductType> rptList = productTypeService.findByParent("");

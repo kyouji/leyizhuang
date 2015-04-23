@@ -34,7 +34,7 @@ import com.ynyes.rongcheng.service.ShoppingOrderService;
  *
  */
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/order1")
 public class OrderController {
 
 	@Autowired
@@ -65,7 +65,6 @@ public class OrderController {
 				user.getUsername(), 0, 5, "desc", "id");
 		int length=so.getContent().size();
 		List<String> list=new ArrayList<String>(length);
-		
 		
 		model.addAttribute("shopping_order_list", so.getContent()); // so.getContent()是将当前对象默认变为list
 		model.addAttribute("goods_order_total", so.getTotalElements());

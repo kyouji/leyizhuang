@@ -85,7 +85,7 @@ public class CartController {
      * @exception <BR>
      * @since  1.0.0
      */
-    @RequestMapping("/cart")
+    @RequestMapping("/cartaa")
     public String cart(String sum,HttpServletRequest request,String pid, ModelMap map){
      // 导航栏
         List<ProductType> rptList = productTypeService.findByParent("");

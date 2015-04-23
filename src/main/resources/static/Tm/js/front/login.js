@@ -17,9 +17,18 @@
         }   
         $.ajax({
             type:"post",
-            url:"logsuccess",
-            data:{"username":name,"password":password,"VERIF":verif},
+            url:"login",
+            data:{"usr":name,"pwd":password,"code":verif},
             success:function(data){
+                
+                var url = document.referrer;
+                if(isEmpty(url)){
+                    window.location.href="/";
+                }else{
+                    window.location.href = url; 
+                }
+                
+                return;
                 
                 if(data=="false"){
                     $("#verifs").css({"display":"block"})

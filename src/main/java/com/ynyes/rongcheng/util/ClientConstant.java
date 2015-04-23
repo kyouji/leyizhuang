@@ -6,5 +6,5 @@ package com.ynyes.rongcheng.util;
  */
 public class ClientConstant {
 
-    public static final int pageSize = 28;
+    public static final int pageSize = 20;
 }

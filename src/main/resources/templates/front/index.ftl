@@ -366,8 +366,8 @@
             <td>
                 <a href="/product/${product.id}">
                     <p class="phonenumber_2_a">${product.name}</p>
-                    <p class="phonenumber_2_b">卡费：${product.versionList[0].salePrice?string("#.##")}元  话费：${product.versionList[0].includePrice?string("#.##")}元</p><
-                /a>
+                    <p class="phonenumber_2_b">卡费：${product.versionList[0].salePrice?string("#.##")}元  话费：<#if product.versionList[0].includePrice??>${product.versionList[0].includePrice?string("#.##")}</#if>元</p>
+                </a>
             </td>
         </#if>
     </#list>
