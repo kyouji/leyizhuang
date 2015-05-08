@@ -1,5 +1,6 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.rongcheng.entity.TdUser;
 import com.ynyes.rongcheng.service.TdUserService;
 import com.ynyes.rongcheng.util.VerifServlet;
 
@@ -20,7 +22,7 @@ import com.ynyes.rongcheng.util.VerifServlet;
  *
  */
 @Controller
-public class TdLoginAndRegController {
+public class TdLoginController {
     @Autowired
     private TdUserService tdUserService;
 
@@ -32,7 +34,7 @@ public class TdLoginAndRegController {
         
         if (null == username) 
         {
-            return "/front/login";
+            return "/client/login";
         }
         
         return "redirect:" + referer;
@@ -57,8 +59,8 @@ public class TdLoginAndRegController {
     
     @RequestMapping(value="/login",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> login(String usr, 
-                String pwd, 
+    public Map<String, Object> login(String username, 
+                String password, 
                 String code, 
                 Boolean isSave,
                 HttpServletRequest request) {
@@ -66,42 +68,28 @@ public class TdLoginAndRegController {
         
         res.put("code", 1);
         
-        if (usr.isEmpty() || pwd.isEmpty())
+        if (username.isEmpty() || password.isEmpty())
         {
             res.put("msg", "用户名及密码不能为空");
         }
         
-        request.getSession().setAttribute("username", usr);
+        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        if (!user.getPassword().equals(password))
+        {
+            res.put("msg", "密码错误");
+            return res;
+        }
+        
+        user.setLastLoginTime(new Date());
+        
+        tdUserService.save(user);
+        
+        request.getSession().setAttribute("username", username);
         
         res.put("code", 0);
         
         return res;
-        
-//        if (StringUtils.isEmpty(username) && StringUtils.isEmpty(password)) {
-//            flag = "false";
-//        } else {
-//            String msg = (String) request.getSession().getAttribute(
-//                    "RANDOMVALIDATECODEKEY");
-//            if (StringUtils.isNotEmpty(VERIF)) {
-//                if (VERIF.equalsIgnoreCase(msg)) {
-//                    Map<String, Object> res = UserService.loginCheck(username, StringUtils.encryption(password),request);
-//                    
-//                    if (res.get("code").equals(0)) {
-//                       
-//                        flag = "success";
-//                        return flag;
-//                    } else {
-//                        flag = "false";
-//                    }
-//                }else{
-//                    flag = "vfalse";
-//                }
-//                
-//            }else{
-//                flag = "fnull";
-//            }
-//        }
-//        return flag;
     }
 
     @RequestMapping("/logout")

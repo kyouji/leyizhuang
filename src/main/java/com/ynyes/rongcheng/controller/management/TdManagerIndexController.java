@@ -10,8 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ynyes.rongcheng.entity.TdManager;
 import com.ynyes.rongcheng.entity.TdNavigationMenu;
+import com.ynyes.rongcheng.entity.TdSetting;
+import com.ynyes.rongcheng.service.TdManagerService;
 import com.ynyes.rongcheng.service.TdNavigationMenuService;
+import com.ynyes.rongcheng.service.TdSettingService;
 
 /**
  * 后台首页控制器
@@ -19,13 +23,24 @@ import com.ynyes.rongcheng.service.TdNavigationMenuService;
  * @author Sharon
  */
 @Controller
-public class ManagerIndexController {
+public class TdManagerIndexController {
     
     @Autowired
     TdNavigationMenuService tdNavigationMenuService;
     
+    @Autowired
+    TdManagerService tdManagerService;
+    
+    @Autowired
+    TdSettingService tdSettingService;
+    
     @RequestMapping(value="/admin")
-    public String index(ModelMap map){
+    public String index(ModelMap map, HttpServletRequest req){
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/admin/login";
+        }
         
         List<TdNavigationMenu> rootMenuList = tdNavigationMenuService.findByParentIdAndSort(0L);
         
@@ -68,7 +83,11 @@ public class ManagerIndexController {
     
     @RequestMapping(value="/admin/center")
     public String center(ModelMap map, HttpServletRequest req){
-        
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/admin/login";
+        }
         Properties props = System.getProperties();
         
         map.addAttribute("os_name", props.getProperty("os.name") 
@@ -79,6 +98,31 @@ public class ManagerIndexController {
         map.addAttribute("server_name", req.getServerName());
         map.addAttribute("server_ip", req.getLocalAddr());
         map.addAttribute("server_port", req.getServerPort());
+        
+        TdSetting setting = tdSettingService.findTopBy();
+        
+        map.addAttribute("site_name", setting.getTitle());
+        map.addAttribute("company_name", setting.getCompany());
+        
+        if (!username.equalsIgnoreCase("admin"))
+        {
+            TdManager manager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+            map.addAttribute("last_ip", manager.getLastLoginIp());
+            map.addAttribute("last_login_time", manager.getLastLoginTime());
+        }
+        
+        String ip = req.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = req.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknow".equalsIgnoreCase(ip)) {
+            ip = req.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = req.getRemoteAddr();
+        }
+        
+        map.addAttribute("client_ip", ip);
         
         return "/site_mag/center";
     }

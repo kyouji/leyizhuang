@@ -26,7 +26,7 @@ import com.ynyes.rongcheng.util.ImageUtil;
  *
  */
 @Controller
-public class ImageController{
+public class TdImageController{
 	/*
 	 * 返回图片
 	 */
@@ -39,7 +39,7 @@ public class ImageController{
 		    return;
 		}
 		
-		String path = ImageUtil.ImageRoot + "/images/goods/";
+		String path = ImageUtil.ImageRoot + "/goods/";
 		
 		File file = new File(path + name);
 		
@@ -52,12 +52,24 @@ public class ImageController{
         resp.setHeader("Cache-Control", "no-cache");         
         resp.setDateHeader("Expires", 0);     
         
+//        if (name.contains(".png"))
+//        {
+//            resp.setContentType("image/png");
+//        }
+//        else if (name.contains(".gif"))
+//        {
+//            resp.setContentType("image/gif");
+//        }
+//        else
+//        {
+//            resp.setContentType("image/jpeg");    
+//        }
         
-        if (format.equals("PNG"))
+        if (format.equalsIgnoreCase("PNG"))
         {
             resp.setContentType("image/png");
         }
-        else if (format.equals("GIF"))
+        else if (format.equalsIgnoreCase("GIF"))
         {
             resp.setContentType("image/gif");
         }

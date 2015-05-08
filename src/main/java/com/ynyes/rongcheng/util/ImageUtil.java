@@ -20,8 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class ImageUtil {
     
-    static public final String ImageRoot = "src/main/resources/static";
-//    static public final String ImageRoot = "/root";
+    static public final String ImageRoot = SiteMagConstant.imagePath;
 
     /**
      * 上传图片，成功后返回uriggs
@@ -44,7 +43,7 @@ public class ImageUtil {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
                 String   fileName   =   sdf.format(dt);
                 
-                String uri = ImageRoot + "/images/goods/" + fileName;
+                String uri = ImageRoot + "/goods/" + fileName;
                 
                 File file = new File(uri);
                 
