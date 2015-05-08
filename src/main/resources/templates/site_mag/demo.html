@@ -1,0 +1,12 @@
+<dl>
+    <dt>显示状态</dt>
+    <dd>
+        <div class="rule-multi-radio multi-radio">
+            <span id="rblStatus">
+                <input type="radio" name="isOnSale" value="1" <#if goods??==false || goods.isOnSale==true>checked="checked"</#if>>
+                <label>上架</label>
+                <input type="radio" name="isOnSale" value="0" <#if goods?? && goods.isOnSale?? && goods.isOnSale==false>checked="checked"</#if>>
+                <label>不上架</label>
+        </div>
+    </dd>
+</dl>

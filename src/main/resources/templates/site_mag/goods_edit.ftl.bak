@@ -1,0 +1,586 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/mag/style/idialog.css" rel="stylesheet" id="lhgdialoglink">
+    <title>编辑信息</title>
+    <script type="text/javascript" src="/mag/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/mag/js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="/mag/js/lhgdialog.js"></script>
+    <script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
+    <script type="text/javascript" src="/mag/js/swfupload.js"></script>
+    <script type="text/javascript" src="/mag/js/swfupload.queue.js"></script>
+    <script type="text/javascript" src="/mag/js/swfupload.handlers.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/mag/js/kindeditor-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/mag/js/zh_CN.js"></script>
+    <script type="text/javascript" src="/mag/js/layout.js"></script>
+    <link href="/mag/style/WdatePicker.css" rel="stylesheet" type="text/css">
+    <link href="/mag/style/style.css" rel="stylesheet" type="text/css">
+    <link href="/mag/style/default.css" rel="stylesheet">
+    <script type="text/javascript">
+        $(function () {
+            //初始化表单验证
+            $("#form1").initValidform();
+
+            //初始化编辑器
+            var editor = KindEditor.create('.editor', {
+                width: '98%',
+                height: '350px',
+                resizeType: 1,
+                uploadJson: '/admin/editor/upload?action=EditorFile',
+                fileManagerJson: '/admin/editor/upload?action=EditorFile',
+                allowFileManager: true
+            });
+            
+            //初始化上传控件
+            $(".upload-img").each(function () {
+                $(this).InitSWFUpload({ 
+                    sendurl: "/admin/upload", 
+                    flashurl: "/mag/js/swfupload.swf"
+                });
+            });
+            
+            $("#categoryId").change(function(){
+                alert("test");
+            });
+            
+            //（缩略图）
+            var txtPic = $("#txtImgUrl").val();
+            if (txtPic == "" || txtPic == null) {
+                $(".thumb_ImgUrl_show").hide();
+            }
+            else {
+                $(".thumb_ImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + txtPic + "' bigsrc='" + txtPic + "' /></div></li></ul>");
+                $(".thumb_ImgUrl_show").show();
+            }
+
+            $("#txtImgUrl").blur(function () {
+                var txtPic = $("#txtImgUrl").val();
+                if (txtPic == "" || txtPic == null) {
+                    $(".thumb_ImgUrl_show").hide();
+                }
+                else {
+                    $(".thumb_ImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + txtPic + "' bigsrc='" + txtPic + "' /></div></li></ul>");
+                    $(".thumb_ImgUrl_show").show();
+                }
+            });
+
+            $(".upload-album").each(function () {
+                $(this).InitSWFUpload({ 
+                    btntext: "批量上传", 
+                    btnwidth: 66, 
+                    single: false, 
+                    water: true, 
+                    thumbnail: true, filesize: "5120", 
+                    sendurl: "../../tools/upload_ajax.ashx", 
+                    flashurl: "../../scripts/swfupload/swfupload.swf", 
+                    filetypes: "*.jpg;*.jpge;*.png;*.gif;" 
+                });
+            });
+
+            $(".attach-btn").click(function () {
+                showAttachDialog();
+            });
+
+            //设置封面图片的样式
+            $(".photo-list ul li .img-box img").each(function () {
+                if ($(this).attr("src") == $("#hidFocusPhoto").val()) {
+                    $(this).parent().addClass("selected");
+                }
+            });
+
+        });
+        
+
+        //创建组合配件窗口
+        function show_peijian_Dialog(obj) {
+            var objNum = arguments.length;
+            var peijianDialog = $.dialog({
+                id: 'peijianhDialogId',
+                lock: true,
+                max: false,
+                min: false,
+                title: "组合配件",
+                content: 'url:dialog/dialog_peijian.aspx?article_id=0&channel_id=2',
+                width: 800,
+                height: 550
+            });
+            //如果是修改状态，将对象传进去
+            if (objNum == 1) {
+                peijianDialog.data = obj;
+            }
+        }
+        
+        //删除组合配件节点
+        function del_peijian_Node(obj) {
+            $(obj).parent().parent().remove();
+        }
+
+
+    </script>
+</head>
+<body class="mainbody">
+<div class="" style="left: 0px; top: 0px; visibility: hidden; position: absolute;"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0);" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_max" href="javascript:void(0);" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0);" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0);" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon" style="display: none;"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div>
+    <form name="form1" method="post" action="/admin/goods/save" id="form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" />
+</div>
+    <!--导航栏-->
+    <div class="location">
+        <a href="/admin/content/list?cid=${cid!""}&mid=${mid!""}" class="back"><i></i><span>
+            返回列表页</span></a> 
+        <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+        <i class="arrow"></i>
+        <a href="/admin/content/list?cid=${cid!""}&mid=${mid!""}"><span>
+            内容管理</span></a> <i class="arrow"></i><span>编辑信息</span>
+    </div>
+    <div class="line10"></div>
+    <!--/导航栏-->
+    <!--内容-->
+    <div class="content-tab-wrap">
+        <div id="floatHead" class="content-tab" style="position: static; top: 52px;">
+            <div class="content-tab-ul-wrap">
+                <ul>
+                    <li><a href="javascript:;" onclick="tabs(this);" class="selected">基本信息</a></li>
+                    <li id="field_tab_item"><a href="javascript:;" onclick="tabs(this);">
+                        扩展选项</a></li>
+                    <li><a href="javascript:;" onclick="tabs(this);">详细描述</a></li>
+                    <li><a href="javascript:;" onclick="tabs(this);">SEO选项</a></li>
+                    <li id="color_tab_item"><a href="javascript:;" onclick="tabs(this);">
+                        个性颜色</a></li>
+                    <li id="banben_tab_item"><a href="javascript:;" onclick="tabs(this);">
+                        个性版本</a></li>
+                    <li id="cxzp_tab_item"><a href="javascript:;" onclick="tabs(this);">
+                        促销赠品</a></li>
+                    <li id="zhpj_tab_item"><a href="javascript:;" onclick="tabs(this);">
+                        组合配件</a></li>
+                    <li id="zhprice_tab_item"><a href="javascript:;" onclick="tabs(this);">
+                        价格管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content">
+        <dl>
+            <dt>所属类别</dt>
+            <dd>
+                <div class="rule-single-select single-select">
+                    <select name="categoryId" id="categoryId" datatype="*" sucmsg=" " style="display: none;">
+                    	<#if goods??==false>
+                        <option value="">请选择类别...</option>
+                        </#if>
+                        <#if category_list??>
+                            <#list category_list as c>
+                                <option value="${c.id!""}" <#if article?? && article.categoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                            </#list>
+                        </#if>
+                    </select>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>显示状态</dt>
+            <dd>
+                <div class="rule-multi-radio multi-radio">
+                    <span id="rblStatus" style="display: none;">
+                        <input id="rblStatus_0" type="radio" name="isOnSale" value="1" checked="checked">
+                        <label for="rblStatus_0">上架</label>
+                        <input id="rblStatus_1" type="radio" name="isOnSale" value="0">
+                        <label for="rblStatus_1">不上架</label>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>推荐类型</dt>
+            <dd>
+                <div class="rule-multi-checkbox multi-checkbox">
+                    <span id="cblItem" style="display: none;">
+                        <input id="cblItem_0" type="checkbox" name="isRecommendIndex">
+                        <label for="cblItem_0">首页推荐</label>
+                        <input id="cblItem_1" type="checkbox" name="isRecommendType">
+                        <label for="cblItem_1">分类推荐</label>
+                        <input id="cblItem_2" type="checkbox" name="isHot">
+                        <label for="cblItem_2">热销</label>
+                        <input id="cblItem_3" type="checkbox" name="isNew">
+                        <label for="cblItem_3">新品</label>
+                        <input id="cblItem_4" type="checkbox" name="isSpecialPrice">
+                        <label for="cblItem_4">特价</label></span>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>内容标题</dt>
+            <dd>
+                <input name="name" type="text" id="txtTitle" class="input normal" datatype="*2-100" sucmsg=" ">
+                <span class="Validform_checktip">*标题最多100个字符</span>
+            </dd>
+        </dl>
+        
+        <dl>
+            <dt>封面图片</dt>
+            <dd>
+                <input name="txtImgUrl" type="text" id="txtImgUrl" class="input normal upload-path">
+                <div class="upload-box upload-img">
+                <div class="upload-btn">
+                <object id="KindEditor_SWFUpload_0" type="application/x-shockwave-flash" data="http://demorcsj.yun2.ynyes.com/scripts/swfupload/swfupload.swf?preventswfcaching=1428574660890" width="48" height="28" class="swfupload"><param name="wmode" value="transparent"><param name="movie" value="../../scripts/swfupload/swfupload.swf?preventswfcaching=1428574660890"><param name="quality" value="high"><param name="menu" value="false"><param name="allowScriptAccess" value="always"><param name="flashvars" value="movieName=KindEditor_SWFUpload_0&amp;uploadURL=%2Fsite_mag%2Farticle%2F..%2F..%2Ftools%2Fupload_ajax.ashx%3Faction%3DUpLoadFile&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=ASPSESSID%3DNONE&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.jpge%3B*.png%3B*.gif%3B*.doc%3B*.docx%3B*.xls%3B*.xlsx%3B*.ppt%3B*.pptx%3B*.pdf%3B*.rar%3B*.zip%3B*.txt%3B&amp;fileTypesDescription=JPG%20Images&amp;fileSizeLimit=1024000&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=%2Fsite_mag%2Farticle%2F&amp;buttonWidth=48&amp;buttonHeight=28&amp;buttonText=%3Cspan%20class%3D%22btnText%22%3E%E6%B5%8F%E8%A7%88...%3C%2Fspan%3E&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=.btnText%7Bfont-family%3AMicrosoft%20YaHei%3Bfont-size%3A12px%3Bline-height%3A28px%3Bcolor%3A%23333333%3Btext-align%3Acenter%3B%7D&amp;buttonAction=-100&amp;buttonDisabled=false&amp;buttonCursor=-2"></object></div></div>
+                <div class="photo-list thumb_ImgUrl_show" style="display: none;">
+                    <ul>
+                        <li>
+                            <div class="img-box1">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </dd>
+        </dl>
+        <dl id="div_goods_no">
+            <dt>
+                <span id="div_goods_no_title">商品货号</span></dt>
+            <dd>
+                <input name="field_control_goods_no" type="text" id="field_control_goods_no" class="input normal" datatype="*0-100" sucmsg=" ">
+                <span id="div_goods_no_tip" class="Validform_checktip">允许字母、下划线，100个字符内</span>
+            </dd>
+        </dl>
+        <dl id="div_stock_quantity">
+            <dt>
+                <span id="div_stock_quantity_title">库存数量</span></dt>
+            <dd>
+                <input name="field_control_stock_quantity" type="text" value="0" id="field_control_stock_quantity" class="input txt100" datatype="n" sucmsg=" ">
+                <span id="div_stock_quantity_tip" class="Validform_checktip">库存数量为0时显示缺货状态</span>
+            </dd>
+        </dl>
+        <dl id="div_market_price">
+            <dt>
+                <span id="div_market_price_title">市场价格</span></dt>
+            <dd>
+                <input name="field_control_market_price" type="text" value="0" id="field_control_market_price" class="input txt100" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                元
+                <span id="div_market_price_tip" class="Validform_checktip">市场的参与价格，不参与计算</span>
+            </dd>
+        </dl>
+        <dl id="div_sell_price">
+            <dt>
+                <span id="div_sell_price_title">销售价格</span></dt>
+            <dd>
+                <input name="field_control_sell_price" type="text" value="0" id="field_control_sell_price" class="input txt100" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                元
+                <span id="div_sell_price_tip" class="Validform_checktip">*出售的实际交易价格</span>
+            </dd>
+        </dl>
+        
+        
+        <dl>
+            <dt>排序数字</dt>
+            <dd>
+                <input name="txtSortId" type="text" value="99" id="txtSortId" class="input txt100" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">*数字，越小越向前</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>浏览次数</dt>
+            <dd>
+                <input name="txtClick" type="text" value="0" id="txtClick" class="input txt100" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">点击浏览该信息自动+1</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>发布时间</dt>
+            <dd>
+                <div class="input-date">
+                    <input name="txtAddTime" type="text" id="txtAddTime" class="input date" onfocus="WdatePicker({dateFmt:&#39;yyyy-MM-dd HH:mm:ss&#39;})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" ">
+                    <i>日期</i>
+                </div>
+                <span class="Validform_checktip">不选择默认当前发布时间</span>
+            </dd>
+        </dl>
+        
+        
+    </div>
+    <div id="field_tab_content" class="tab-content" style="display: none">
+    <dl><dt>品牌</dt><dd><div class="rule-multi-radio multi-radio"><div class="boxwrap"><a href="javascript:;">苹果（Apple）</a><a href="javascript:;">小米（MI）</a><a href="javascript:;">华为（HUAWEI）</a><a href="javascript:;">三星（SAMSUNG）</a><a href="javascript:;">vivo（步步高）</a><a href="javascript:;">OPPO</a><a href="javascript:;">HTC</a><a href="javascript:;">诺基亚（NOKIA）</a><a href="javascript:;">联想（Lenovo）</a><a href="javascript:;">金立（Gionee）</a><a href="javascript:;">索尼（SONY）</a><a href="javascript:;">朵唯（DOOV）</a><a href="javascript:;">魅族（MEIZU）</a><a href="javascript:;">酷派(Coolpad)</a><a href="javascript:;">其他</a></div><span id="field_control_brand" style="display: none;"><input id="field_control_brand_0" type="radio" name="field_control_brand" value="1"><label for="field_control_brand_0">苹果（Apple）</label><input id="field_control_brand_1" type="radio" name="field_control_brand" value="2"><label for="field_control_brand_1">小米（MI）</label><input id="field_control_brand_2" type="radio" name="field_control_brand" value="3"><label for="field_control_brand_2">华为（HUAWEI）</label><input id="field_control_brand_3" type="radio" name="field_control_brand" value="4"><label for="field_control_brand_3">三星（SAMSUNG）</label><input id="field_control_brand_4" type="radio" name="field_control_brand" value="5"><label for="field_control_brand_4">vivo（步步高）</label><input id="field_control_brand_5" type="radio" name="field_control_brand" value="6"><label for="field_control_brand_5">OPPO</label><input id="field_control_brand_6" type="radio" name="field_control_brand" value="7"><label for="field_control_brand_6">HTC</label><input id="field_control_brand_7" type="radio" name="field_control_brand" value="8"><label for="field_control_brand_7">诺基亚（NOKIA）</label><input id="field_control_brand_8" type="radio" name="field_control_brand" value="11"><label for="field_control_brand_8">联想（Lenovo）</label><input id="field_control_brand_9" type="radio" name="field_control_brand" value="12"><label for="field_control_brand_9">金立（Gionee）</label><input id="field_control_brand_10" type="radio" name="field_control_brand" value="14"><label for="field_control_brand_10">索尼（SONY）</label><input id="field_control_brand_11" type="radio" name="field_control_brand" value="15"><label for="field_control_brand_11">朵唯（DOOV）</label><input id="field_control_brand_12" type="radio" name="field_control_brand" value="27"><label for="field_control_brand_12">魅族（MEIZU）</label><input id="field_control_brand_13" type="radio" name="field_control_brand" value="76"><label for="field_control_brand_13">酷派(Coolpad)</label><input id="field_control_brand_14" type="radio" name="field_control_brand" value="29"><label for="field_control_brand_14">其他</label></span></div><span class="Validform_checktip"></span></dd></dl><dl><dt>网络制式</dt><dd><div class="rule-multi-checkbox multi-checkbox"><div class="boxwrap"><a href="javascript:;">移动4G（TD-LTE）</a><a href="javascript:;">联通4G（TD/FDD-LTE）</a><a href="javascript:;">电信4G（TD/FDD-LTE）</a><a href="javascript:;">移动3G（TD-SCDMA）</a><a href="javascript:;">联通3G（WCDMA）</a><a href="javascript:;">电信3G（CDMA2000）</a><a href="javascript:;">全网通</a><a href="javascript:;">移动2G/联通2G（GSM ）</a><a href="javascript:;">双模（CDMA+GSM）</a><a href="javascript:;">双卡</a><a href="javascript:;">双4G版本</a></div><span id="field_control_network" style="display: none;"><input id="field_control_network_0" type="checkbox" name="field_control_network$0"><label for="field_control_network_0">移动4G（TD-LTE）</label><input id="field_control_network_1" type="checkbox" name="field_control_network$1"><label for="field_control_network_1">联通4G（TD/FDD-LTE）</label><input id="field_control_network_2" type="checkbox" name="field_control_network$2"><label for="field_control_network_2">电信4G（TD/FDD-LTE）</label><input id="field_control_network_3" type="checkbox" name="field_control_network$3"><label for="field_control_network_3">移动3G（TD-SCDMA）</label><input id="field_control_network_4" type="checkbox" name="field_control_network$4"><label for="field_control_network_4">联通3G（WCDMA）</label><input id="field_control_network_5" type="checkbox" name="field_control_network$5"><label for="field_control_network_5">电信3G（CDMA2000）</label><input id="field_control_network_6" type="checkbox" name="field_control_network$6"><label for="field_control_network_6">全网通</label><input id="field_control_network_7" type="checkbox" name="field_control_network$7"><label for="field_control_network_7">移动2G/联通2G（GSM ）</label><input id="field_control_network_8" type="checkbox" name="field_control_network$8"><label for="field_control_network_8">双模（CDMA+GSM）</label><input id="field_control_network_9" type="checkbox" name="field_control_network$9"><label for="field_control_network_9">双卡</label><input id="field_control_network_10" type="checkbox" name="field_control_network$10"><label for="field_control_network_10">双4G版本</label></span></div><span class="Validform_checktip"></span></dd></dl><dl><dt>后置摄像头</dt><dd><input name="field_control_camera" type="text" value="0" id="field_control_camera" class="input txt100"><span>&nbsp;W像素</span><span class="Validform_checktip"></span></dd></dl><dl><dt>操作系统</dt><dd><div class="rule-multi-radio multi-radio"><div class="boxwrap"><a href="javascript:;">苹果（iOS）</a><a href="javascript:;">安卓（Android）</a><a href="javascript:;">微软（WindowsPhone）</a><a href="javascript:;">非智能</a><a href="javascript:;">其他</a><a href="javascript:;">阿里</a></div><span id="field_control_system" style="display: none;"><input id="field_control_system_0" type="radio" name="field_control_system" value="1"><label for="field_control_system_0">苹果（iOS）</label><input id="field_control_system_1" type="radio" name="field_control_system" value="2"><label for="field_control_system_1">安卓（Android）</label><input id="field_control_system_2" type="radio" name="field_control_system" value="3"><label for="field_control_system_2">微软（WindowsPhone）</label><input id="field_control_system_3" type="radio" name="field_control_system" value="5"><label for="field_control_system_3">非智能</label><input id="field_control_system_4" type="radio" name="field_control_system" value="6"><label for="field_control_system_4">其他</label><input id="field_control_system_5" type="radio" name="field_control_system" value="11"><label for="field_control_system_5">阿里</label></span></div><span class="Validform_checktip"></span></dd></dl><dl><dt>核心数</dt><dd><div class="rule-multi-radio multi-radio"><div class="boxwrap"><a href="javascript:;">八核</a><a href="javascript:;">六核</a><a href="javascript:;">双四核</a><a href="javascript:;">四核</a><a href="javascript:;">双核</a><a href="javascript:;">单核</a><a href="javascript:;">非智能</a></div><span id="field_control_core" style="display: none;"><input id="field_control_core_0" type="radio" name="field_control_core" value="1"><label for="field_control_core_0">八核</label><input id="field_control_core_1" type="radio" name="field_control_core" value="5"><label for="field_control_core_1">六核</label><input id="field_control_core_2" type="radio" name="field_control_core" value="2"><label for="field_control_core_2">双四核</label><input id="field_control_core_3" type="radio" name="field_control_core" value="3"><label for="field_control_core_3">四核</label><input id="field_control_core_4" type="radio" name="field_control_core" value="4"><label for="field_control_core_4">双核</label><input id="field_control_core_5" type="radio" name="field_control_core" value="6"><label for="field_control_core_5">单核</label><input id="field_control_core_6" type="radio" name="field_control_core" value="8"><label for="field_control_core_6">非智能</label></span></div><span class="Validform_checktip"></span></dd></dl><dl><dt>屏幕范围</dt><dd><input name="field_control_screen" type="text" value="0.0" id="field_control_screen" class="input txt100"><span>&nbsp;英寸</span><span class="Validform_checktip"></span></dd></dl><dl><dt>容量</dt><dd><div class="rule-multi-checkbox multi-checkbox"><div class="boxwrap"><a href="javascript:;">4GB</a><a href="javascript:;">8GB</a><a href="javascript:;">64GB</a><a href="javascript:;">16GB</a><a href="javascript:;">32GB</a><a href="javascript:;">128GB</a></div><span id="field_control_gb" style="display: none;"><input id="field_control_gb_0" type="checkbox" name="field_control_gb$0"><label for="field_control_gb_0">4GB</label><input id="field_control_gb_1" type="checkbox" name="field_control_gb$1"><label for="field_control_gb_1">8GB</label><input id="field_control_gb_2" type="checkbox" name="field_control_gb$2"><label for="field_control_gb_2">64GB</label><input id="field_control_gb_3" type="checkbox" name="field_control_gb$3"><label for="field_control_gb_3">16GB</label><input id="field_control_gb_4" type="checkbox" name="field_control_gb$4"><label for="field_control_gb_4">32GB</label><input id="field_control_gb_5" type="checkbox" name="field_control_gb$5"><label for="field_control_gb_5">128GB</label></span></div><span class="Validform_checktip"></span></dd></dl><dl><dt>服务</dt><dd><input name="field_control_service" type="text" id="field_control_service" class="input normal"><span></span><span class="Validform_checktip"></span></dd></dl><dl><dt>促销</dt><dd><input name="field_control_cuxiao_title" type="text" id="field_control_cuxiao_title" class="input normal"><span></span><span class="Validform_checktip"></span></dd></dl><dl><dt>明星产品</dt><dd><div class="rule-multi-radio multi-radio"><div class="boxwrap"><a href="javascript:;">是</a><a href="javascript:;" class="selected">否</a></div><span id="field_control_mingxing" style="display: none;"><input id="field_control_mingxing_0" type="radio" name="field_control_mingxing" value="1"><label for="field_control_mingxing_0">是</label><input id="field_control_mingxing_1" type="radio" name="field_control_mingxing" value="0" checked="checked"><label for="field_control_mingxing_1">否</label></span></div><span class="Validform_checktip"></span></dd></dl><dl><dt>配置</dt><dd><input name="field_control_peizhi" type="text" id="field_control_peizhi" class="input normal"><span></span><span class="Validform_checktip"></span></dd></dl></div>
+    <div class="tab-content" style="display: none">
+        <dl>
+            <dt>调用别名</dt>
+            <dd>
+                <input name="txtCallIndex" type="text" id="txtCallIndex" class="input normal" datatype="/^\s*$|^[a-zA-Z0-9\-\_]{2,50}$/" sucmsg=" ">
+                <span class="Validform_checktip">*别名访问，非必填，不可重复</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>URL链接</dt>
+            <dd>
+                <input name="txtLinkUrl" type="text" maxlength="255" id="txtLinkUrl" class="input normal">
+                <span class="Validform_checktip">填写后直接跳转到该网址</span>
+            </dd>
+        </dl>
+        
+        
+        <dl>
+            <dt>内容摘要</dt>
+            <dd>
+                <textarea name="txtZhaiyao" rows="2" cols="20" id="txtZhaiyao" class="input" datatype="*0-255" sucmsg=" "></textarea>
+                <span class="Validform_checktip">不填写则自动截取内容前255字符</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>内容描述</dt>
+        </dl>
+    </div>
+    <div class="tab-content" style="display: none">
+        <dl>
+            <dt>SEO标题</dt>
+            <dd>
+                <input name="txtSeoTitle" type="text" maxlength="255" id="txtSeoTitle" class="input normal" datatype="*0-100" sucmsg=" ">
+                <span class="Validform_checktip">255个字符以内</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>SEO关健字</dt>
+            <dd>
+                <textarea name="txtSeoKeywords" rows="2" cols="20" id="txtSeoKeywords" class="input" datatype="*0-255" sucmsg=" "></textarea>
+                <span class="Validform_checktip">以“,”逗号区分开，255个字符以内</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>SEO描述</dt>
+            <dd>
+                <textarea name="txtSeoDescription" rows="2" cols="20" id="txtSeoDescription" class="input" datatype="*0-255" sucmsg=" "></textarea>
+                <span class="Validform_checktip">255个字符以内</span>
+            </dd>
+        </dl>
+    </div>
+    
+    <div id="color_tab_content" class="tab-content" style="display: none">
+        <dl>
+            <dt>个性颜色</dt>
+            <dd>
+                <a id="ColoritemAddButton" class="icon-btn add"><i></i><span>添加个性颜色</span></a> <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
+        <dl>
+            <dt></dt>
+            <dd>
+                <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
+                    <thead>
+                        <tr>
+                            <th width="6%">
+                                排序
+                            </th>
+                            <th width="20%">
+                                颜色名称
+                            </th>
+                            <th width="8%">
+                                颜色值
+                            </th>
+                            <th width="8%">
+                                颜色小图
+                            </th>
+                            <th width="52%">
+                                颜色组图
+                            </th>
+                            <th width="6%">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="var_box_color">
+                        
+                    </tbody>
+                </table>
+            </dd>
+        </dl>
+    </div>
+
+    <div id="banben_tab_content" class="tab-content" style="display: none">
+        
+        <dl>
+            <dt>个性版本</dt>
+            <dd>
+                <a id="BanBenitemAddButton" class="icon-btn add"><i></i><span>添加个性版本</span></a>
+                <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
+        <dl>
+            <dt></dt>
+            <dd>
+                <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
+                    <thead>
+                        <tr>
+                            <th width="8%">
+                                排序
+                            </th>
+                            <th>
+                                版本名称
+                            </th>
+                            <th width="30%">
+                                网络制式名称
+                            </th>
+                            <th width="12%">
+                                网络制式ID
+                            </th>
+                            <th width="8%">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="var_box_banben">
+                        
+                    </tbody>
+                </table>
+            </dd>
+        </dl>
+        </div>
+    <div id="cxzp_tab_content" class="tab-content" style="display: none">
+        <dl>
+            <dt>促销赠品</dt>
+            <dd>
+                <a id="ZengPinitemAddButton" class="icon-btn add"><i></i><span>添加促销赠品</span></a>
+                <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
+        <dl>
+            <dt></dt>
+            <dd>
+                <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
+                    <thead>
+                        <tr>
+                            <th width="6%">
+                                排序
+                            </th>
+                            <th width="38%">
+                                赠品标题
+                            </th>
+                            <th width="10%">
+                                商品ID
+                            </th>
+                            <th width="30%">
+                                商品名称
+                            </th>
+                            <th width="10%">
+                                商品成本
+                            </th>
+                            <th width="6%">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="var_box_zengpin">
+                        
+                    </tbody>
+                </table>
+            </dd>
+        </dl>
+    </div>
+    <div id="zhpj_tab_content" class="tab-content" style="display: none">
+        <dl>
+            <dt>组合配件</dt>
+            <dd>
+                <a id="PeiJianitemAddButton" class="icon-btn add"><i></i><span>添加组合配件</span></a>
+                <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
+        <dl>
+            <dt></dt>
+            <dd>
+                <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
+                    <thead>
+                        <tr>
+                            <th width="6%">
+                                排序
+                            </th>
+                            <th width="38%">
+                                配件标题
+                            </th>
+                            <th width="10%">
+                                商品ID
+                            </th>
+                            <th width="30%">
+                                商品名称
+                            </th>
+                            <th width="10%">
+                                类别ID
+                            </th>
+                            <th width="10%">
+                                组合价格
+                            </th>
+                            <th width="6%">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="var_box_peijian">
+                        
+                    </tbody>
+                </table>
+            </dd>
+        </dl>
+    </div>
+    <div id="zhprice_tab_content" class="tab-content" style="display: none">
+        <dl>
+            <dt>价格管理</dt>
+            <dd>
+                <a id="ZHPriceitemAddButton" class="icon-btn add"><i></i><span>添加价格</span></a> <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
+        <dl>
+            <dt></dt>
+            <dd>
+                <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
+                    <thead>
+                        <tr>
+                            <th width="13%">
+                                价格编码
+                            </th>
+                            <th width="13%">
+                                颜色
+                            </th>
+                            <th width="13%">
+                                容量
+                            </th>
+                            <th width="13%">
+                                版本
+                            </th>
+                            <th width="10%">
+                                组合价格
+                            </th>
+                            <th width="10%">
+                                市场价格
+                            </th>
+                            <th width="10%">
+                                库存
+                            </th>
+                            <th width="10%">
+                                销量
+                            </th>
+                            <th width="3%">
+                                默认
+                            </th>
+                            <th width="5%">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="var_box_zhprice">
+                        
+                    </tbody>
+                </table>
+            </dd>
+        </dl>
+    </div>
+    <!--/内容-->
+    <!--工具栏-->
+    <div class="page-footer">
+        <div class="btn-list">
+            <input type="submit" name="btnSubmit" value="提交保存" id="btnSubmit" class="btn">
+            <input name="btnReturn" type="button" value="返回上一页" class="btn yellow" onclick="javascript:history.back(-1);">
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <!--/工具栏-->
+    </form>
+
+
+</body></html>
