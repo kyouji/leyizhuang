@@ -50,6 +50,33 @@ $(function () {
         $(".thumb_ImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + txtPic + "' bigsrc='" + txtPic + "' /></div></li></ul>");
         $(".thumb_ImgUrl_show").show();
     }
+    
+    var wxPic = $("#wxImgUrl").val();
+    if (wxPic == "" || wxPic == null) {
+        $(".thumb_wxImgUrl_show").hide();
+    }
+    else {
+        $(".thumb_wxImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + wxPic + "' bigsrc='" + wxPic + "' /></div></li></ul>");
+        $(".thumb_wxImgUrl_show").show();
+    }
+    
+    var iOsPic = $("#iOsImgUrl").val();
+    if (iOsPic == "" || iOsPic == null) {
+        $(".thumb_iOsImgUrl_show").hide();
+    }
+    else {
+        $(".thumb_iOsImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + iOsPic + "' bigsrc='" + iOsPic + "' /></div></li></ul>");
+        $(".thumb_iOsImgUrl_show").show();
+    }
+    
+    var androidPic = $("#androidImgUrl").val();
+    if (androidPic == "" || androidPic == null) {
+        $(".thumb_androidImgUrl_show").hide();
+    }
+    else {
+        $(".thumb_androidImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + androidPic + "' bigsrc='" + androidPic + "' /></div></li></ul>");
+        $(".thumb_androidImgUrl_show").show();
+    }
 });
 </script>
 </head>
@@ -104,12 +131,34 @@ $(function () {
             <div class="upload-box upload-img"></div>
             <span class="Validform_checktip"></span>
             <div class="photo-list thumb_ImgUrl_show">
-                <ul>
-                    <li>
-                        <div class="img-box1"></div>
-                    </li>
-                </ul>
             </div>
+        </dd>
+    </dl>
+    <dl>
+        <dt>微信二维码</dt>
+        <dd>
+            <input id="wxImgUrl" name="wxQrCode" type="text" datatype="*0-100" value="<#if setting??>${setting.wxQrCode!""}</#if>" class="input normal upload-path">
+            <div class="upload-box upload-img"></div>
+            <span class="Validform_checktip"></span>
+            <div class="photo-list thumb_ImgUrl_show thumb_wxImgUrl_show"></div>
+        </dd>
+    </dl>
+    <dl>
+        <dt>苹果App二维码</dt>
+        <dd>
+            <input id="iOsImgUrl" name="iOsQrCode" type="text" datatype="*" value="<#if setting??>${setting.iOsQrCode!""}</#if>" class="input normal upload-path">
+            <div class="upload-box upload-img"></div>
+            <span class="Validform_checktip"></span>
+            <div class="photo-list thumb_ImgUrl_show thumb_iOsImgUrl_show"></div>
+        </dd>
+    </dl>
+    <dl>
+        <dt>安卓App二维码</dt>
+        <dd>
+            <input id="androidImgUrl" name="androidQrCode" type="text" datatype="*" value="<#if setting??>${setting.androidQrCode!""}</#if>" class="input normal upload-path">
+            <div class="upload-box upload-img"></div>
+            <span class="Validform_checktip"></span>
+            <div class="photo-list thumb_ImgUrl_show thumb_androidImgUrl_show"></div>
         </dd>
     </dl>
     <dl>

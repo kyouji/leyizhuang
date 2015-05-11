@@ -391,39 +391,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*标题最多255个字符</span>
             </dd>
         </dl>
-        
-        <dl>
-            <dt>颜色</dt>
-            <dd>
-                <input name="color" type="text" value="<#if goods??>${goods.color!""}</#if>" class="input normal" datatype="*0-10" sucmsg=" ">
-                <span class="Validform_checktip">最多10个字符</span>
-            </dd>
-        </dl>
-        
-        <dl>
-            <dt>版本</dt>
-            <dd>
-                <input name="version" type="text" value="<#if goods??>${goods.version!""}</#if>" class="input normal" datatype="*0-20" sucmsg=" ">
-                <span class="Validform_checktip">最多20个字符</span>
-            </dd>
-        </dl>
-        
-        <dl>
-            <dt>容量</dt>
-            <dd>
-                <input name="capacity" type="text" value="<#if goods??>${goods.capacity!""}</#if>" class="input normal" datatype="*0-10" sucmsg=" ">
-                <span class="Validform_checktip">最多10个字符</span>
-            </dd>
-        </dl>
-        <#--
-        <dl>
-            <dt>销售方式</dt>
-            <dd>
-                <input name="saleType" type="text" value="<#if goods??>${goods.saleType!""}</#if>" class="input normal" datatype="*0-10" sucmsg=" ">
-                <span class="Validform_checktip">最多20个字符</span>
-            </dd>
-        </dl>
-        -->
         <dl>
             <dt>服务</dt>
             <dd>
@@ -544,7 +511,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>销售价</dt>
             <dd>
-                <input id="idComputeSalePrice" name="salePrice" type="text" disabled="disabled" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.##")}<#else>0</#if>" class="input normal" sucmsg=" ">
+                <input id="idComputeSalePrice" name="salePrice" type="text" disabled="disabled" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.##")}<#else>0</#if>" class="input normal" sucmsg="" style="background: #EEEEEE;">
                 <span class="Validform_checktip">系统自动计算 (销售价 = 分销价 + 最高返现额)</span>
             </dd>
         </dl>
@@ -559,7 +526,7 @@ function del_goods_comb(obj) {
             <dt>赠送积分</dt>
             <dd>
                 <input name="returnPoints" type="text" value="<#if goods?? && goods.returnPoints??>${goods.returnPoints?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
-                <span class="Validform_checktip">赠送的积分</span>
+                <span class="Validform_checktip">购买该商品赠送的积分</span>
             </dd>
         </dl>
         <#if warehouse_list??>

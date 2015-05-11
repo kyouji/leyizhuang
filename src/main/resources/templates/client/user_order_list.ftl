@@ -13,6 +13,7 @@
 <script type="text/javascript" src="/client/js/html5.js"></script>
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
+<script src="/client/js/header.js"></script>
 <!--[if IE]>
    <script src="js/html5.js"></script>
 <![endif]-->

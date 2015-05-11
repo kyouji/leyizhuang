@@ -14,11 +14,13 @@ import com.ynyes.rongcheng.entity.TdGoods;
 import com.ynyes.rongcheng.entity.TdProductCategory;
 import com.ynyes.rongcheng.service.TdArticleCategoryService;
 import com.ynyes.rongcheng.service.TdArticleService;
+import com.ynyes.rongcheng.service.TdBrandService;
 import com.ynyes.rongcheng.service.TdGoodsService;
 import com.ynyes.rongcheng.service.TdManagerLogService;
 import com.ynyes.rongcheng.service.TdParameterCategoryService;
 import com.ynyes.rongcheng.service.TdParameterService;
 import com.ynyes.rongcheng.service.TdProductCategoryService;
+import com.ynyes.rongcheng.service.TdProductService;
 import com.ynyes.rongcheng.service.TdWarehouseService;
 
 /**
@@ -54,6 +56,12 @@ public class TdManagerEditController {
     
     @Autowired
     TdParameterService tdParameterService;
+    
+    @Autowired
+    TdProductService tdProductService;
+    
+    @Autowired
+    TdBrandService tdBrandService;
     
     @RequestMapping(value="/category/edit")
     public String categoryEditDialog(Long cid, Long mid, Long id, Long sub, 
@@ -208,12 +216,17 @@ public class TdManagerEditController {
                         }
                         
                         // 查找产品列表
-                        map.addAttribute("product_list", tdArticleService.findByChannelIdAndCategoryId(5L, tdGoods.getCategoryId()));
+                        map.addAttribute("product_list", tdProductService.findByProductCategoryTreeContaining(tdGoods.getCategoryId()));
                     
-                        // 查找品牌列表
-                        map.addAttribute("brand_list", tdArticleService.findByChannelIdAndCategoryId(4L, tdGoods.getCategoryId()));
-                    
+                        // 查找品牌
+                        map.addAttribute("brand_list", tdBrandService.findByProductCategoryTreeContaining(tdGoods.getCategoryId()));
+                        
                         map.addAttribute("warehouse_list", tdWarehouseService.findAll());
+                        
+                        if (null != tdGoods.getProductId())
+                        {
+                            map.addAttribute("product", tdProductService.findOne(tdGoods.getProductId()));
+                        }
                         
                         map.addAttribute("goods", tdGoods);
                     }

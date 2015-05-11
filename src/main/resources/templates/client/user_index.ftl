@@ -77,7 +77,7 @@ DD_belatedPNG.fix('.,img,background');
             <#list order_page.content as order>
                 <#if order_index < 5>
                 <tr>
-                    <th colspan="7">订单编号：<a href="/user/oder?id=${order.id}">${order.orderNumber!''}</a></th>
+                    <th colspan="7">订单编号：<a href="/user/order?id=${order.id}">${order.orderNumber!''}</a></th>
                 </tr>
                 <tr>
                     <td colspan="2" align="left" >
@@ -147,13 +147,17 @@ DD_belatedPNG.fix('.,img,background');
     <div class="mymember_hot_part">
       <h3>会员推荐</h3>
       <ul id="mymember_right_check">
-        <li>
-          <a class="mymember_hot_list" href="javascript:;">
-            <img src="/client/images/mymember/img03.jpg" />
-            <p>11三星手机系列 GALDFTGC S5 盖世 8G</p>
-            <b>￥3520.00</b>
-          </a>
-        </li>
+        <#if recommend_goods_page??>
+            <#list recommend_goods_page.content as item>
+                <li>
+                  <a class="mymember_hot_list" href="/goods/${item.id}">
+                    <img src="${item.coverImageUri!''}" />
+                    <p>${item.title!''}</p>
+                    <b>￥${item.salePrice?string("0.00")}</b>
+                  </a>
+                </li>
+            </#list>
+        </#if>
       </ul>
     </div><!--mymember_hot_part END-->
     

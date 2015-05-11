@@ -1101,6 +1101,49 @@ public class TdUserController {
         return "/client/user_distributor_bankcard";
     }
     
+    /**
+     * 返现商品列表
+     * 
+     * @param req
+     * @param page
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/user/distributor/goods")
+    public String distributorGoodsList(HttpServletRequest req, 
+                        String keywords,
+                        Integer page,
+                        ModelMap map){
+        String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            return "redirect:/login";
+        }
+        
+        tdCommonService.setHeader(map, req);
+        
+        if (null == page)
+        {
+            page = 0;
+        }
+        
+        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+
+        map.addAttribute("user", user);
+        
+        if (null == keywords || keywords.isEmpty())
+        {
+            map.addAttribute("goods_page", tdGoodsService.findByReturnPriceNotZeroAndIsOnSaleTrue(page, ClientConstant.pageSize));
+        }
+        else
+        {
+            map.addAttribute("goods_page", tdGoodsService.findByReturnPriceNotZeroAndSearchAndIsOnSaleTrue(page, ClientConstant.pageSize, keywords));
+        }
+        
+        return "/client/user_distributor_goods";
+    }
+    
     @RequestMapping(value = "/user/info", method=RequestMethod.GET)
     public String userInfo(HttpServletRequest req,
                         ModelMap map){
@@ -1116,6 +1159,8 @@ public class TdUserController {
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
         
         map.addAttribute("user", user);
+        
+        map.addAttribute("recommend_goods_page", tdGoodsService.findByIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(0, ClientConstant.pageSize));
         
         return "/client/user_info";
     }

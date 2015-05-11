@@ -5,7 +5,8 @@
             <div> 
                 <a href="/user/distributor/lower">下级会员管理</a> 
                 <a href="/user/distributor/return">返现记录</a> 
-                <a href="/user/distributor/bankcard">银行卡管理</a> 
+                <a href="/user/distributor/bankcard">银行卡管理</a>
+                <a href="/user/distributor/goods">返现商品列表</a> 
             </div>
         </div>
     </#if>

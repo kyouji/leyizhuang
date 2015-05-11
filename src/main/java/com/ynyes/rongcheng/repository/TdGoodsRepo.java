@@ -81,4 +81,10 @@ public interface TdGoodsRepo extends
             String key3,
             String key4,
             Pageable page);
+    
+    List<TdGoods> findByProductIdAndIsOnSaleTrue(Long productId);
+    
+    Page<TdGoods> findByReturnPriceNotAndIsOnSaleTrue(double returnPrice, Pageable page);
+    
+    Page<TdGoods> findByReturnPriceNotAndTitleContainingAndIsOnSaleTrue(double returnPrice, String keywords, Pageable page);
 }

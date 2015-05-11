@@ -10,27 +10,35 @@
                     <ul class="pizz fl <#if item_index != 0>ml90</#if>">
                         <h5>${item.title!''}</h5>
                         <#if item_index==0>
-                            <#if cat0_help_list??>
-                                <#list cat0_help_list as item>
-                                    <li><a href="/info/content/${item.id}?mid=${help_id}">${item.title!''}</a></li>
+                            <#if help_0_cat_list??>
+                                <#list help_0_cat_list as item>
+                                    <#if item_index<5>
+                                    <li><a href="/info/list/${help_id!''}?catId=${item.id}">${item.title!''}</a></li>
+                                    </#if>
                                 </#list>
                             </#if>
                         <#elseif item_index==1>
-                            <#if cat1_help_list??>
-                                <#list cat1_help_list as item>
-                                    <li><a href="/info/content/${item.id}?mid=${help_id}">${item.title!''}</a></li>
+                            <#if help_1_cat_list??>
+                                <#list help_1_cat_list as item>
+                                    <#if item_index<5>
+                                    <li><a href="/info/list/${help_id!''}?catId=${item.id}">${item.title!''}</a></li>
+                                    </#if>
                                 </#list>
                             </#if>
                         <#elseif item_index==2>
-                            <#if cat2_help_list??>
-                                <#list cat2_help_list as item>
-                                    <li><a href="/info/content/${item.id}?mid=${help_id}">${item.title!''}</a></li>
+                            <#if help_2_cat_list??>
+                                <#list help_2_cat_list as item>
+                                    <#if item_index<5>
+                                    <li><a href="/info/list/${help_id!''}?catId=${item.id}">${item.title!''}</a></li>
+                                    </#if>
                                 </#list>
                             </#if>
                         <#elseif item_index==3>
-                            <#if cat3_help_list??>
-                                <#list cat3_help_list as item>
-                                    <li><a href="/info/content/${item.id}?mid=${help_id}">${item.title!''}</a></li>
+                            <#if help_3_cat_list??>
+                                <#list help_3_cat_list as item>
+                                    <#if item_index<5>
+                                    <li><a href="/info/list/${help_id!''}?catId=${item.id}">${item.title!''}</a></li>
+                                    </#if>
                                 </#list>
                             </#if>
                         </#if>
@@ -42,15 +50,15 @@
         <div class="wx fr mt20">
             <span>
                 <h5>博大生活微信</h5>
-                <img src="/client/images/wx.png" width="115" height="115">
+                <img src="<#if site??>${site.wxQrCode!''}</#if>" width="115" height="115">
              </span>
             <span>
                 <h5>iPhone客户端</h5>
-                <img src="/client/images/wx.png" width="115" height="115">
+                <img src="<#if site??>${site.iOsQrCode!''}</#if>" width="115" height="115">
              </span>
             <span>
                 <h5>Android客户端</h5>
-                <img src="/client/images/wx.png" width="115" height="115">
+                <img src="<#if site??>${site.androidQrCode!''}</#if>" width="115" height="115">
              </span>
         </div>
         

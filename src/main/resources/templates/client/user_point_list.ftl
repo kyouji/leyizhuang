@@ -14,6 +14,7 @@
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
+<script src="/client/js/header.js"></script>
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -46,6 +47,7 @@ DD_belatedPNG.fix('.,img,background');
 		<tr bgcolor="#CCCCCC">
 			<td>日期</td>
 			<td>收入/支出</td>
+			<td>涉及订单号</td>
 			<td>详细说明</td>
 		</tr>
 		<#if point_page??>
@@ -54,6 +56,8 @@ DD_belatedPNG.fix('.,img,background');
                 <td><span class="ftx03">${point.pointTime!''}</span></td>
                 <td>
                     <span class="ftx-02"><#if point.point??><#if point.point gt 0>+</#if>${point.point}</#if></span>                                                            </td>
+                </td>
+                <td>${point.orderNumber!''}</td>
                 <td>${point.detail!''}</td>
               </tr>
 		  </#list>
@@ -85,6 +89,7 @@ DD_belatedPNG.fix('.,img,background');
         </div>
       </div>
       <!--mymember_info END-->
+      <#--
       <div class="mymember_info">
         <h3 id="mymember_likecheck"> <a class="mysel" href="#">&nbsp;</a> <a href="#">&nbsp;</a> <a href="#">&nbsp;</a> <span>积分兑换</span> </h3>
         <ul id="mymember_likelist">
@@ -130,6 +135,7 @@ DD_belatedPNG.fix('.,img,background');
         </ul>
         <div class="myclear"></div>
       </div>
+      -->
       <!--mymember_info END-->
       <script type="text/javascript">
       $(document).ready(function(){

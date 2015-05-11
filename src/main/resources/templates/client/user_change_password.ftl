@@ -15,6 +15,7 @@
 <script type="text/javascript" src="/client/js/Validform_v5.3.2_min.js"></script>
 <script type="text/javascript" src="/client/js/html5.js"></script>
 <script src="/client/js/mymember.js"></script>
+<script src="/client/js/header.js"></script>
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->

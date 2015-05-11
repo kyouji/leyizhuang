@@ -50,6 +50,38 @@ public class TdUserLevelService {
         return repository.findByLevelId(levelId);
     }
     
+    /**
+     * 根据总消费额判断属于哪个用户级别
+     * @param spend
+     * @return
+     */
+    public Long getLevelId(Double spend)
+    {
+        if (null == spend)
+        {
+            return null;
+        }
+        
+        List<TdUserLevel> levelList = repository.findByIsEnableTrueOrderByLevelIdAsc();
+        
+        for (TdUserLevel level : levelList)
+        {
+            if (spend.compareTo(level.getRequiredConsumption()) <= 0)
+            {
+                long levelId = level.getLevelId() - 1L;
+                
+                if (levelId < 1L)
+                {
+                    levelId = 1L;
+                }
+                
+                return levelId;
+            }
+        }
+        
+        return null;
+    }
+    
     public TdUserLevel findByLevelIdAndIdNot(Long levelId, Long id)
     {
         return repository.findByLevelIdAndIdNot(levelId, id);

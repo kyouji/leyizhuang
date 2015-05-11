@@ -73,6 +73,39 @@ $(function () {
         var url = "/admin/product/check?catId=" + $(this).val() + "<#if product??>&id=${product.id}</#if>";
         $("#idProductTitle").attr("ajaxurl", url);
     });
+    
+    
+    // 选择筛选项后需填写筛选项名称
+    $("#totalSelects").change(function(){
+        var countStr = $.trim($(this).val());
+        
+        if (isNaN(countStr) || countStr=="") { countStr = 0 }
+        
+        var count = parseInt(countStr);
+        
+        if (count < 1 || count > 3)
+        {
+            alert("支持的筛选项数量最多为3个");
+            return;
+        }
+        
+        if (1 == count)
+        {
+            $("#selectNameDiv").html('<dl><dt>筛选项一名称</dt><dd><input name="selectOneName" type="text" value="<#if product??>${product.selectOneName!''}</#if>" class="input txt100" datatype="*1-100" sucmsg=""></dd></dl>');
+        }
+        else if (2 == count)
+        {
+            $("#selectNameDiv").html('<dl><dt>筛选项一名称</dt><dd><input name="selectOneName" type="text" value="<#if product??>${product.selectOneName!''}</#if>" class="input txt100" datatype="*1-100" sucmsg=""></dd></dl>');
+            $("#selectNameDiv").append('<dl><dt>筛选项二名称</dt><dd><input name="selectTwoName" type="text" value="<#if product??>${product.selectTwoName!''}</#if>" class="input txt100" datatype="*1-10" sucmsg=""></dd></dl>');
+        }
+        else if (3 == count)
+        {
+            $("#selectNameDiv").html('<dl><dt>筛选项一名称</dt><dd><input name="selectOneName" type="text" value="<#if product??>${product.selectOneName!''}</#if>" class="input txt100" datatype="*1-100" sucmsg=""></dd></dl>');
+            $("#selectNameDiv").append('<dl><dt>筛选项二名称</dt><dd><input name="selectTwoName" type="text" value="<#if product??>${product.selectTwoName!''}</#if>" class="input txt100" datatype="*1-100" sucmsg=""></dd></dl>');
+            $("#selectNameDiv").append('<dl><dt>筛选项三名称</dt><dd><input name="selectThreeName" type="text" value="<#if product??>${product.selectThreeName!''}</#if>" class="input txt100" datatype="*1-100" sucmsg=""></dd></dl>');
+        }
+    });
+    
 });
 </script>
 </head>
@@ -109,8 +142,8 @@ $(function () {
         <dl>
             <dt>所属类别</dt>
             <dd>
-                <div class="rule-single-select single-select">
-                    <select id="proCatId" name="productCategoryId" id="ddlCategoryId" datatype="*" sucmsg=" " nullmsg="请选择！" class="Validform_error" style="display: none;">
+                <div class="rule-single-select">
+                    <select id="proCatId" name="productCategoryId" datatype="*" sucmsg=" " nullmsg="请选择！" class="Validform_error" style="display: none;">
                     	<#if product??>
                     	<#else>
                     	<option value="">请选择类别...</option>
@@ -132,24 +165,73 @@ $(function () {
         <dl>
             <dt>产品名称</dt>
             <dd>
-                <input id="idProductTitle" name="title" type="text" value="<#if product??>${product.title!""}</#if>" ajaxurl="/admin/product/check<#if product??>?id=${product.id}</#if>" class="input normal" datatype="*2-100" sucmsg=" ">
+                <input id="idProductTitle" name="title" type="text" value="<#if product??>${product.title!""}</#if>" ajaxurl="/admin/product/check<#if product??>?id=${product.id}</#if>" class="input normal" datatype="*1-1000" sucmsg=" ">
                 <span class="Validform_checktip">*标题最多100个字符</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>货号</dt>
+            <dd>
+                <input name="productNumber" type="text" value="<#if product??>${product.productNumber!""}</#if>" class="input normal" datatype="*0-255" sucmsg=" ">
+                <span class="Validform_checktip"></span>
             </dd>
         </dl>
         <dl>
             <dt>调用别名</dt>
             <dd>
-                <input name="callIndex" type="text" value="<#if product??>${product.callIndex!""}</#if>" id="txtSortId" class="input normal" datatype="*0-255" sucmsg=" ">
-                <span class="Validform_checktip">*数字，越小越向前</span>
+                <input name="callIndex" type="text" value="<#if product??>${product.callIndex!""}</#if>" class="input normal" datatype="*0-255" sucmsg=" ">
+                <span class="Validform_checktip"></span>
             </dd>
         </dl>
         <dl>
             <dt>排序数字</dt>
             <dd>
-                <input name="sortId" type="text" value="<#if product??>${product.sortId!""}<#else>99</#if>" id="txtSortId" class="input txt100" datatype="n" sucmsg=" ">
+                <input name="sortId" type="text" value="<#if product??>${product.sortId!""}<#else>99</#if>" class="input txt100" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">*数字，越小越向前</span>
             </dd>
         </dl>
+        <dl>
+            <dt>筛选项数量</dt>
+            <dd>
+                <div class="rule-single-select">
+                    <select id="totalSelects" name="totalSelects" datatype="n" sucmsg=" " nullmsg="请选择！" class="Validform_error">
+                        <#if !product?? || !product.totalSelects??>
+                        <option value="">请选择数量...</option>
+                        </#if>
+                        <option value="1" <#if product?? && product.totalSelects?? && product.totalSelects==1>selected="selected"</#if>>1</option>
+                        <option value="2" <#if product?? && product.totalSelects?? && product.totalSelects==2>selected="selected"</#if>>2</option>
+                        <option value="3" <#if product?? && product.totalSelects?? && product.totalSelects==3>selected="selected"</#if>>3</option>
+                    </select>
+                </div>
+                <#if product?? && product.totalSelects??>
+                    <span class="Validform_checktip Validform_right"></span>
+                <#else>
+                    <span class="Validform_checktip">*筛选项用于前台用户点击进行商品筛选</span>
+                </#if>
+            </dd>
+        </dl>
+        <div id="selectNameDiv">
+            <#if product?? && product.totalSelects??>
+                <#list 1..product.totalSelects as index>
+                    <#if index==1>
+                        <dl>
+                            <dt>筛选项一名称</dt>
+                            <dd><input name="selectOneName" type="text" value="${product.selectOneName!''}" class="input txt100" datatype="*1-100" sucmsg=""></dd>
+                        </dl>
+                    <#elseif index==2>
+                        <dl>
+                            <dt>筛选项二名称</dt>
+                            <dd><input name="selectTwoName" type="text" value="${product.selectTwoName!''}" class="input txt100" datatype="*1-100" sucmsg=""></dd>
+                        </dl>
+                    <#elseif index==3>
+                        <dl>
+                            <dt>筛选项三名称</dt>
+                            <dd><input name="selectThreeName" type="text" value="${product.selectThreeName!''}" class="input txt100" datatype="*1-100" sucmsg=""></dd>
+                        </dl>
+                    </#if>
+                </#list>
+            </#if>
+        </div>
     </div>
     <div class="tab-content" style="display: none;">
         <dl>

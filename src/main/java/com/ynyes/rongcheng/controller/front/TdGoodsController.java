@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ynyes.rongcheng.entity.TdGoods;
+import com.ynyes.rongcheng.entity.TdProduct;
 import com.ynyes.rongcheng.entity.TdProductCategory;
 import com.ynyes.rongcheng.entity.TdSetting;
 import com.ynyes.rongcheng.entity.TdUser;
@@ -24,6 +25,7 @@ import com.ynyes.rongcheng.service.TdCommonService;
 import com.ynyes.rongcheng.service.TdGoodsCombinationService;
 import com.ynyes.rongcheng.service.TdGoodsService;
 import com.ynyes.rongcheng.service.TdProductCategoryService;
+import com.ynyes.rongcheng.service.TdProductService;
 import com.ynyes.rongcheng.service.TdSettingService;
 import com.ynyes.rongcheng.service.TdUserCommentService;
 import com.ynyes.rongcheng.service.TdUserConsultService;
@@ -68,6 +70,9 @@ public class TdGoodsController {
     private TdUserService tdUserService;
 
     @Autowired
+    private TdProductService tdProductService;
+    
+    @Autowired
     private TdUserPointService tdUserPointService;
 
     @RequestMapping("/goods/{goodsId}")
@@ -85,7 +90,6 @@ public class TdGoodsController {
         }
 
         // 添加浏览记录
-
         if (null == goodsId) {
             return "error_404";
         }
@@ -135,7 +139,127 @@ public class TdGoodsController {
                 map.addAttribute("category_tree_list", catList);
             }
         }
+        
+        // 获取商品的其他版本
+        if (null != goods.getProductId())
+        {
+            TdProduct product = tdProductService.findOne(goods.getProductId());
+            
+            if (null != product)
+            {
+                List<TdGoods> productGoodsList = tdGoodsService.findByProductIdAndIsOnSaleTrue(goods.getProductId());
+                
+                int totalSelects = product.getTotalSelects();
+                
+                List<String> selectOneList = new ArrayList<String>();
+                List<String> selectTwoList = new ArrayList<String>();
+                List<String> selectThreeList = new ArrayList<String>();
+                
+                List<TdGoods> selectOneGoodsList = new ArrayList<TdGoods>();
+                List<TdGoods> selectTwoGoodsList = new ArrayList<TdGoods>();
+                List<TdGoods> selectThreeGoodsList = new ArrayList<TdGoods>();
+                
+                String sOne = null;
+                String sTwo = null;
+                String sThree = null;
+                
+                map.addAttribute("total_select", totalSelects);
+                
+                switch (totalSelects)
+                {
+                case 1:
+                    sOne = goods.getSelectOneValue().trim();
+                    
+                    for (TdGoods pdtGoods : productGoodsList)
+                    {
+                        String s1 = pdtGoods.getSelectOneValue().trim();
+                        if (!selectOneList.contains(s1))
+                        {
+                            selectOneList.add(s1);
+                            selectOneGoodsList.add(pdtGoods);
+                        }
+                    }
+                    
+                    map.addAttribute("select_one_name", product.getSelectOneName());
+                    map.addAttribute("one_selected", sOne);
+                    map.addAttribute("select_one_goods_list", selectOneGoodsList);
+                    
+                    break;
+                case 2:
+                    sOne = goods.getSelectOneValue().trim();
+                    sTwo = goods.getSelectTwoValue().trim();
+                    
+                    for (TdGoods pdtGoods : productGoodsList)
+                    {
+                        String s1 = pdtGoods.getSelectOneValue().trim();
+                        String s2 = pdtGoods.getSelectTwoValue().trim();
+                        
+                        if (!selectOneList.contains(s1))
+                        {
+                            selectOneList.add(s1);
+                            selectOneGoodsList.add(pdtGoods);
+                        }
+                        
+                        if (!selectTwoList.contains(s2))
+                        {
+                            selectTwoList.add(s2);
+                            selectTwoGoodsList.add(pdtGoods);
+                        }
+                    }
+                    
+                    map.addAttribute("select_one_name", product.getSelectOneName());
+                    map.addAttribute("select_two_name", product.getSelectTwoName());
+                    map.addAttribute("one_selected", sOne);
+                    map.addAttribute("two_selected", sTwo);
+                    map.addAttribute("select_one_goods_list", selectOneGoodsList);
+                    map.addAttribute("select_two_goods_list", selectTwoGoodsList);
+                    break;
+                    
+                case 3:
+                    sOne = goods.getSelectOneValue().trim();
+                    sTwo = goods.getSelectTwoValue().trim();
+                    sThree = goods.getSelectThreeValue().trim();
+                    
+                    for (TdGoods pdtGoods : productGoodsList)
+                    {
+                        String s1 = pdtGoods.getSelectOneValue().trim();
+                        String s2 = pdtGoods.getSelectTwoValue().trim();
+                        String s3 = pdtGoods.getSelectThreeValue().trim();
+                        
+                        if (!selectOneList.contains(s1))
+                        {
+                            selectOneList.add(s1);
+                            selectOneGoodsList.add(pdtGoods);
+                        }
+                        
+                        if (!selectTwoList.contains(s2))
+                        {
+                            selectTwoList.add(s2);
+                            selectTwoGoodsList.add(pdtGoods);
+                        }
+                        
+                        if (!selectThreeList.contains(s3))
+                        {
+                            selectThreeList.add(s3);
+                            selectThreeGoodsList.add(pdtGoods);
+                        }
+                    }
+                    
+                    map.addAttribute("select_one_name", product.getSelectOneName());
+                    map.addAttribute("select_two_name", product.getSelectTwoName());
+                    map.addAttribute("select_three_name", product.getSelectThreeName());
+                    map.addAttribute("one_selected", sOne);
+                    map.addAttribute("two_selected", sTwo);
+                    map.addAttribute("three_selected", sThree);
+                    map.addAttribute("select_one_goods_list", selectOneGoodsList);
+                    map.addAttribute("select_two_goods_list", selectTwoGoodsList);
+                    map.addAttribute("select_three_goods_list", selectThreeGoodsList);
+                    break;
+                }
+            }
+        }
 
+        // 分享时添加积分
         if (null != shareId) {
             TdUser sharedUser = tdUserService.findOne(shareId);
             TdSetting setting = tdSettingService.findTopBy();
@@ -157,8 +281,7 @@ public class TdGoodsController {
                     }
 
                     // 小于积分限额，进行积分
-                    if (sharedUser.getPointGetByShareGoods().compareTo(
-                            setting.getGoodsShareLimits()) < 0) {
+                    if (sharedUser.getPointGetByShareGoods().compareTo(setting.getGoodsShareLimits()) < 0) {
                         TdUserPoint point = new TdUserPoint();
                         point.setDetail("分享商品获得积分");
                         point.setPoint(setting.getGoodsSharePoints());

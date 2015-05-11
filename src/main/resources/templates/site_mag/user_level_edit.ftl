@@ -60,7 +60,7 @@ $(function () {
     <dl>
         <dt>累计消费额度</dt>
         <dd>
-            <input name="requiredConsumption" type="text" value="<#if user_level??>${user_level.requiredConsumption?string("#.##")}</#if>" class="input txt100" datatype="/^[1-9][0-9]*[.]?[0-9]{0,2}$/" sucmsg=" ">
+            <input name="requiredConsumption" type="text" value="<#if user_level??>${user_level.requiredConsumption?string("#.##")}</#if>" class="input txt100" datatype="/^[0-9][0-9]*[.]?[0-9]{0,2}$/" sucmsg=" ">
             <span class="Validform_checktip">*用户累计消费额度到达该值时自动升入该级别</span>
         </dd>
     </dl>

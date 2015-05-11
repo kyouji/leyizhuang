@@ -18,7 +18,7 @@ a img{border:none;}
 header{height:191px;background:url(../images/headerbg.gif) repeat-x;}
 .header1{height:155px;background:url(../images/headerbg1.gif) repeat-x;}
 .top{margin-top:13px;}
-.welcome{width:274px;line-height:31px; display:block; float:left}
+.welcome{width:300px;line-height:31px; display:block; float:left}
 .welcome a.out { float:right}
 .welcome img{ padding:0 5px;}
 .welcome dt{float:right;cursor:pointer;padding-right:5px;}
@@ -158,8 +158,8 @@ footer { height:290px; width:100%; background-color:#f5f5f5; float:left; margin-
 .link { width:1200px; border-top:1px solid #ddd; border-bottom:1px solid #ddd; height:35px; line-height:35px; font-size:14px;}
 .link a { padding:0 7px;}
 .link b { float:right; font-weight:normal;}
-.qipao { background:url(../images/pic.png) no-repeat 0 -520px; width:60px; height:33px; position:absolute; margin-left:150px; top:261px;}
-.qipao span{ line-height:26px; color:#fff; padding-left:7px;}
+.qipao { background:url(../images/pic.png) no-repeat -2px -520px; width:73px; height:33px; position:absolute; margin-left:150px; top:261px;}
+.qipao a{ line-height:26px; color:#fff; padding-left:7px;}
 
 /* 商品详情展示 */
 .proinfo-left{width:401px;height:520px;z-index:5}
@@ -458,9 +458,10 @@ ul.flmenu li h5 span{float:right;font-family:"宋体";color:#fff}
 .firstleft li img,.secondleft li img,.thirdleft li img{margin:5px 15px 5px 10px; width:80px; height:80px;}
 .firstright{width:958px;height:515px; float:right;border-left:none;}
 .firstright ul { float:left; border-bottom:1px dashed #ddd; height:233px; width:958px; padding:12px 0; overflow:hidden; }
-.firstright ul li { width:180px; text-align:center; float:left; margin-left:5px; display:block;}
+.firstright ul li { width:185px; text-align:center; float:left; margin-left:5px; display:block;}
 .firstright ul li img { padding:1px; margin:1px; width:170px; height:170px; float:left;}
-.firstright ul li a { color:#777779; padding:0 5px;height: 40px;overflow: hidden;float: left;}
+.firstright ul li a { color:#777779; padding:0 5px;overflow: hidden;float: left;}
+.firstright ul li dd {width: 100%;display: block; color:#777779; padding:0 5px;height: 40px;overflow: hidden;float: left;}
 .firstright ul li span { color:#f00404; font-family:"微软雅黑"; font-size:15px; padding-left:15px; font-weight:bold;}
 .firstright ul li b{ color:#de1111; font-weight:normal; cursor:pointer;}
 .onepic,.twopic,.threepic{width:1200px;height:120px;float:left;margin-top:12px;}	
@@ -524,10 +525,12 @@ ul.flmenu li h5 span{float:right;font-family:"宋体";color:#fff}
 #Content{width:1200px; margin:10px auto; overflow:hidden; margin-top:15px;}
 .newlistR{float:right; width:958px; background-color:#fff;}
 .newlistL{float:left; width:220px;}
-.newlistnav{border:1px solid #e2e2e2;width:218px; background-color:#fff;}
+.newlistnav{border:1px solid #e2e2e2;width:218px;}
 .newlistnav h1{ border-bottom:1px solid #e2e2e2; width:208px; height:35px; background-color:#f9f9f9;font-size:14px; color:#333333; line-height:35px; padding-left:10px; }
 .newlistnavS li{ width:188px; height:35px; line-height:35px; padding-left:30px; background:url(../images/icq.png) no-repeat; font-size:14px; background-position:10px 12px; border-bottom:1px solid #e2e2e2;}
 .newlistnavS li:hover{ width:188px; height:35px; line-height:35px; padding-left:30px; font-size:14px; background-color:#fdf3f3; background-position:10px 12px; border-bottom:1px solid #e2e2e2;}
+.newlistnavS  ul dd { background-color:#fdf3f3; border-bottom:1px dashed #fcd1d1;}
+.newlistnavS ul dd a{font-weight:100;font-family:"宋体";color:#000;font-size:12px;height:31px;line-height:31px;margin-left:20px;padding-left:15px;background:url(../images/li_bg.gif) no-repeat left;height:auto;}
 .newindexMRFTH{ width:258px; height:29px; font-size:14px; color:#333333; border:
 1px solid #e2e2e2; line-height:29px; padding-left:10px; margin-top:10px;}
 .newindexMRFTM{width:248px; border:1px  solid #e2e2e2; padding:10px; padding-bottom:0;}
@@ -652,3 +655,26 @@ ul.flmenu li h5 span{float:right;font-family:"宋体";color:#fff}
 .xdl dd p a { margin-right: 7px; white-space: nowrap; color: #666;}
 .xdl dd p a::after { content: '|'; margin-left: 7px; color: #000; text-decoration: none !important; }
 
+.service-menu .menu-title-i,.service-menu .menu-i{background:url(../images/pic1.png) no-repeat}
+.service-menu .menu-title-i,.service-menu .menu-i1{background:url(../images/pic1.png) no-repeat}
+.service-menu .menu-p .menu-i{float:left;display:inline;width:16px;height:16px;overflow:hidden;background-position:0 -17px;margin:16px 16px 0 0;border-bottom:1px solid #fefefe}
+.service-menu .menu-p .menu-i1{float:left;display:inline;width:16px;height:16px;overflow:hidden;background-position:0 -34px;margin:16px 16px 0 0;border-bottom:1px solid #fefefe}
+.service-menu{width:228px; border:1px solid #ddd;}
+.service-menu .menu-title{height:40px;line-height:40px;overflow:hidden;font-size:16px;font-family:"\5fae\8f6f\96c5\9ed1","\5b8b\4f53"; background-color:#eee}
+.service-menu .menu-title .menu-title-i{float:left;display:inline;width:31px;height:31px;overflow:hidden;margin:11px 9px 0 13px;background-position:-19px 0}
+.service-menu .menu-title a:link,.service-menu .menu-title a:hover,.service-menu .menu-title a:visited{color:#333;text-decoration:none}
+.service-menu .menu-p{display:block;height:45px;line-height:45px;overflow:hidden;padding-left:19px;border-bottom:solid 1px #e6e6e6;background-repeat:repeat-x;color:#444;font-size:14px;font-weight:normal;cursor:pointer}
+.service-menu .menu-p a:link,.service-menu .menu-p a:visited{color:#666;text-decoration:none;font-size:14px}
+.service-menu .menu-p a:hover{color:#666;text-decoration:none}
+.service-menu .menu-p-hover,.service-menu .menu-p-current{background:#e1e1e1}
+.service-menu .menu-p-hover{-moz-box-shadow:0 1px 0 0 rgba(255,255,255,0.94),0px 1px 0 0 rgba(131,133,135,0.2) inset;-webkit-box-shadow:0 1px 0 0 rgba(255,255,255,0.94),0px 1px 0 0 rgba(131,133,135,0.2) inset;box-shadow:0 1px 0 0 rgba(255,255,255,0.94),0px 1px 0 0 rgba(131,133,135,0.2) inset}
+.service-menu .menu-p-hover .menu-i{background-position:0 -17px}
+.service-menu .menu-p-current .menu-i{background-position:0 -34px}
+.service-menu .menu-p-current a:link,.service-menu .menu-p-current a:visited{font-weight:bold}
+.service-menu .menu-c{display:none;padding:7px 0 7px 53px;background:#f9f9f9}
+.service-menu .menu-c-current{display:block}
+.service-menu .menu-c ul{display:block; padding-right:9px;}
+.service-menu .menu-c li{height:32px;line-height:32px; font-size:13px;overflow:hidden; border-bottom:1px dashed #ddd}
+.service-menu .menu-c .menu-c-ico{font-family:serif,arial;margin-right:6px}
+.service-menu .menu-c a:link,.service-menu .menu-c a:visited{color:#888;text-decoration:none}
+.service-menu .menu-c a:hover{color:#cb0000;text-decoration:none}

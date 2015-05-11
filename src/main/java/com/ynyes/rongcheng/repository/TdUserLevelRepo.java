@@ -1,5 +1,7 @@
 package com.ynyes.rongcheng.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -25,4 +27,6 @@ public interface TdUserLevelRepo extends
     TdUserLevel findByTitle(String title);
     
     TdUserLevel findByTitleAndIdNot(String title, Long id);
+    
+    List<TdUserLevel> findByIsEnableTrueOrderByLevelIdAsc();
 }

@@ -13,6 +13,7 @@
 <script type="text/javascript" src="/client/js/html5.js"></script>
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
+<script src="/client/js/header.js"></script>
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -38,7 +39,7 @@ DD_belatedPNG.fix('.,img,background');
     <div class="mymember_info mymember_info04">
       <h3>订单详细</h3>
       <dl>
-        <dt>订单编号：8768545223&nbsp;&nbsp;&nbsp;&nbsp; 下单时间：${order.orderTime!''}&nbsp;&nbsp;&nbsp;&nbsp;当前进度：
+        <dt>订单编号：${order.orderNumber!''}&nbsp;&nbsp;&nbsp;&nbsp; 下单时间：${order.orderTime!''}&nbsp;&nbsp;&nbsp;&nbsp;当前进度：
             <#if order??>
                 <#if order.statusId==1>
                     待确认
@@ -140,11 +141,18 @@ DD_belatedPNG.fix('.,img,background');
         </tr>
         <tr>
           <th>订单总额</th>
-          <td>总额：<font color="#ff1000">￥<#if order??>${order.totalPrice?string("#.##")}</#if></font>&nbsp;&nbsp;&nbsp;&nbsp;支付方式：${order.payTypeTitle!''}</td>
+          <td>
+            总额:
+            <font color="#ff1000">￥<#if order??>${order.totalPrice?string("0.00")}</#if></font>
+            &nbsp;&nbsp;=&nbsp;&nbsp;商品总金额:￥${order.totalGoodsPrice?string("0.00")}
+            &nbsp;&nbsp;+&nbsp;&nbsp;配送费用:￥${order.deliverTypeFee?string("0.00")}
+            &nbsp;&nbsp;-&nbsp;&nbsp;积分抵扣:￥${order.pointUse!'0'}
+            &nbsp;&nbsp;&nbsp;&nbsp;支付方式：${order.payTypeTitle!''}
+          </td>
         </tr>
         <tr>
           <th>配送详情</th>
-          <td>配送地址：${order.shippingAddress!''}  &nbsp;&nbsp;&nbsp;&nbsp; 配送方式：${order.deliverTypeTitle!''}</td>
+          <td>配送地址：${order.shippingAddress!''}&nbsp;&nbsp;&nbsp;&nbsp; 配送方式：${order.deliverTypeTitle!''}&nbsp;&nbsp;&nbsp;&nbsp;</td>
         </tr>
         <tr>
           <th>联系方式</th>

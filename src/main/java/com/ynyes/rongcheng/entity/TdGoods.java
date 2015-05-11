@@ -141,17 +141,17 @@ public class TdGoods {
     @Column
     private String paramValueCollect;
     
-    // 颜色
+    // 筛选参数一值
     @Column
-    private String color;
+    private String selectOneValue;
     
-    // 版本
+    // 筛选参数二值
     @Column
-    private String version;
+    private String selectTwoValue;
     
-    // 容量
+    // 筛选参数三值
     @Column
-    private String capacity;
+    private String selectThreeValue;
     
     // 销售方式
     @Column
@@ -566,13 +566,6 @@ public class TdGoods {
         this.paramValueCollect = paramValueCollect;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
 
     public String getGroupSaleImage() {
         return groupSaleImage;
@@ -582,20 +575,28 @@ public class TdGoods {
         this.groupSaleImage = groupSaleImage;
     }
 
-    public String getVersion() {
-        return version;
+    public String getSelectOneValue() {
+        return selectOneValue;
     }
 
-    public void setVersion(String version) {
-        this.version = version;
+    public void setSelectOneValue(String selectOneValue) {
+        this.selectOneValue = selectOneValue;
     }
 
-    public String getCapacity() {
-        return capacity;
+    public String getSelectTwoValue() {
+        return selectTwoValue;
     }
 
-    public void setCapacity(String capacity) {
-        this.capacity = capacity;
+    public void setSelectTwoValue(String selectTwoValue) {
+        this.selectTwoValue = selectTwoValue;
+    }
+
+    public String getSelectThreeValue() {
+        return selectThreeValue;
+    }
+
+    public void setSelectThreeValue(String selectThreeValue) {
+        this.selectThreeValue = selectThreeValue;
     }
 
     public String getSaleType() {

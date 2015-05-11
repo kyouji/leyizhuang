@@ -112,6 +112,18 @@ public class TdSetting {
     // 商品分享每日积分奖励限额
     @Column
     private Long goodsShareLimits;
+    
+    // 微信二维码
+    @Column
+    private String wxQrCode;
+    
+    // 苹果二维码
+    @Column
+    private String iOsQrCode;
+    
+    // 安卓二维码
+    @Column
+    private String androidQrCode;
 
     public Long getId() {
         return id;
@@ -303,5 +315,29 @@ public class TdSetting {
 
     public void setGoodsShareLimits(Long goodsShareLimits) {
         this.goodsShareLimits = goodsShareLimits;
+    }
+
+    public String getWxQrCode() {
+        return wxQrCode;
+    }
+
+    public void setWxQrCode(String wxQrCode) {
+        this.wxQrCode = wxQrCode;
+    }
+
+    public String getiOsQrCode() {
+        return iOsQrCode;
+    }
+
+    public void setiOsQrCode(String iOsQrCode) {
+        this.iOsQrCode = iOsQrCode;
+    }
+
+    public String getAndroidQrCode() {
+        return androidQrCode;
+    }
+
+    public void setAndroidQrCode(String androidQrCode) {
+        this.androidQrCode = androidQrCode;
     }
 }

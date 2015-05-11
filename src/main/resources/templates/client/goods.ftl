@@ -58,7 +58,6 @@ $(document).ready(function(){
 function timer()
 {
 <#if goods.isGroupSale && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
-    // var ts = (new Date(2018, 11, 11, 9, 0, 0)) - (new Date());//计算剩余的毫秒数
     var ts = (new Date(${goods.groupSaleStopTime?string("yyyy")}, 
                 parseInt(${goods.groupSaleStopTime?string("MM")}, 10)-1, 
                 ${goods.groupSaleStopTime?string("dd")}, 
@@ -204,6 +203,68 @@ function checkTime(i)
                 <div class="jg_bd pt15">服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：
                     <span>${goods.service!'无'}</span>
                 </div>
+                
+                <#if total_select??>
+                    <#if 1==total_select>
+                        <div class="jg_bd pt15">${select_one_name!''}:
+                            <ul class="ys_xuan">
+                                <#if select_one_goods_list??>
+                                <#list select_one_goods_list as item>
+                                    <li><a href="/goods/${item.id}" <#if item.selectOneValue==one_selected>class="yansecur"</#if>>${item.selectOneValue}</a></li>
+                                </#list>
+                                </#if>
+                            </ul>
+                        </div>
+                    <#elseif 2==total_select>
+                        <div class="jg_bd pt15">${select_one_name!''}:
+                            <ul class="ys_xuan">
+                                <#if select_one_goods_list??>
+                                <#list select_one_goods_list as item>
+                                    <li><a href="/goods/${item.id}" <#if item.selectOneValue==one_selected>class="yansecur"</#if>>${item.selectOneValue}</a></li>
+                                </#list>
+                                </#if>
+                            </ul>
+                        </div>
+                        <div class="jg_bd pt15">${select_two_name!''}:
+                            <ul class="ys_xuan">
+                                <#if select_two_goods_list??>
+                                <#list select_two_goods_list as item>
+                                    <li><a href="/goods/${item.id}" <#if item.selectTwoValue==two_selected>class="yansecur"</#if>>${item.selectTwoValue}</a></li>
+                                </#list>
+                                </#if>
+                            </ul>
+                        </div>
+                    <#elseif 3==total_select>
+                        <div class="jg_bd pt15">${select_one_name!''}:
+                            <ul class="ys_xuan">
+                                <#if select_one_goods_list??>
+                                <#list select_one_goods_list as item>
+                                    <li><a href="/goods/${item.id}" <#if item.selectOneValue==one_selected>class="yansecur"</#if>>${item.selectOneValue}</a></li>
+                                </#list>
+                                </#if>
+                            </ul>
+                        </div>
+                        <div class="jg_bd pt15">${select_two_name!''}:
+                            <ul class="ys_xuan">
+                                <#if select_two_goods_list??>
+                                <#list select_two_goods_list as item>
+                                    <li><a href="/goods/${item.id}" <#if item.selectTwoValue==two_selected>class="yansecur"</#if>>${item.selectTwoValue}</a></li>
+                                </#list>
+                                </#if>
+                            </ul>
+                        </div>
+                        <div class="jg_bd pt15">${select_three_name!''}:
+                            <ul class="ys_xuan">
+                                <#if select_three_goods_list??>
+                                <#list select_three_goods_list as item>
+                                    <li><a href="/goods/${item.id}" <#if item.selectThreeValue==three_selected>class="yansecur"</#if>>${item.selectThreeValue}</a></li>
+                                </#list>
+                                </#if>
+                            </ul>
+                        </div>
+                    </#if>
+                </#if>
+                
                 <div class="jg_bd pt15">
                     <b style="float:left; line-height:35px; font-weight:normal;">购&nbsp;买&nbsp;量：</b>
                     <div class="zy_cm">
@@ -250,8 +311,8 @@ function checkTime(i)
     	<div class="groom bor bor_top mt20 fl">
             <div class="groon_top"><h3>最佳组合</h3></div>
             <ul class="group">
-                <#if goods.comb_list??>
-                    <#list goods.comb_list as item>
+                <#if goods.combList??>
+                    <#list goods.combList as item>
                         <li class="fore0">
                             <a href="/goods/${item.goodsId}"><img width="130" height="130" src="${item.coverImageUri!''}"></a>
                             <dd><a href="/goods/${item.goodsId}">${item.goodsTitle!''}</a></dd>

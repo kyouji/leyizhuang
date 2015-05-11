@@ -194,6 +194,10 @@ public class TdOrder {
     @Column
     private Long sortId;
     
+    // 使用积分数 
+    @Column
+    private Long pointUse;
+    
     // 可获取积分
     @Column
     private Long points;
@@ -537,5 +541,12 @@ public class TdOrder {
     public void setCommentTime(Date commentTime) {
         this.commentTime = commentTime;
     }
-    
+
+    public Long getPointUse() {
+        return pointUse;
+    }
+
+    public void setPointUse(Long pointUse) {
+        this.pointUse = pointUse;
+    }
 }

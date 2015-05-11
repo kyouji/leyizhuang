@@ -67,7 +67,11 @@ var theForm = document.forms['form1'];
   <tr class="odd_bg">
     <th width="8%">选择</th>
     <th align="center">名称</th>
-    <th align="center" width="10%">调用别名</th>
+    <th align="center" width="30%">货号</th>
+    <th align="center" width="10%">筛选项个数</th>
+    <th align="center" width="10%">筛选一</th>
+    <th align="center" width="10%">筛选二</th>
+    <th align="center" width="10%">筛选三</th>
     <th width="8%">排序</th>
     <th width="6%">操作</th>
   </tr>
@@ -82,7 +86,11 @@ var theForm = document.forms['form1'];
                     <input type="hidden" name="listId" id="listId" value="${item.id}">
                 </td>
                 <td align="center"><a href="/admin/product/edit?id=${item.id}">${item.title!""}</a></td>
-                <td align="center">${item.callIndex!''}</td>
+                <td align="center">${item.productNumber!''}</td>
+                <td align="center">${item.totalSelects!'0'}</td>
+                <td align="center">${item.selectOneName!''}</td>
+                <td align="center">${item.selectTwoName!''}</td>
+                <td align="center">${item.selectThreeName!''}</td>
                 <td align="center">
                     <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
                 </td>

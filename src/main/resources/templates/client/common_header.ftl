@@ -2,10 +2,12 @@
     <div id="main">
       <div class="top1">
             <span class="welcome">
-                Hi,欢迎来到博大生活网！
+                Hi,欢迎来到博大生活网!
                 <#if username??>
-                    <a href="/user" class="login">${username}
+                    <a href="/user" class="login">${username}&nbsp;(${user.userLevelTitle!''})
+                        <#--
                         <dd class="vip" title="铁牌会员"></dd>
+                        -->
                     </a>
                     <a href="/logout">退出</a>
                 <#else>

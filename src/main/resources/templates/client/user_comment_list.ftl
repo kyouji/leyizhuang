@@ -40,10 +40,12 @@ DD_belatedPNG.fix('.,img,background');
       <div class="mymember_order_search">
         <a class="a001" href="/user/comment/list">全部评论</a>
         
+        <#--
         <select>
           <option>待评价</option>
           <option>待晒单</option>
         </select>
+        -->
         <div class="clear"></div>
       </div>
       

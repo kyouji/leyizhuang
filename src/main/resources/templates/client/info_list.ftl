@@ -10,6 +10,7 @@
 <link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/master.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/client/js/html5.js"></script>
+<script src="/client/js/header.js"></script>
 </head>
 <body>
 <!-- header开始 -->
@@ -17,7 +18,7 @@
 <!-- header结束 -->
 <article id="main">
     <div class="ipp1 top">
-        <dd>您当前位置：<a href="/">首页</a> > <a href="/info/list/10" class="hover_zy">${menu_name!''}列表</a></dd>
+        <dd>您当前位置：<a href="/">首页</a> > <a href="/info/list/10" class="hover_zy">${menu_name!''}</a></dd>
     </div>
     <div class="clear"></div>
     <!--面包屑结束-->
@@ -34,6 +35,7 @@
                 </#if>
             </ul>
         </div>
+        <#--
         <div class="newindexMRFT">
         <h1 class="newindexMRFTH3"><dl><dd>最近添加</dd><dt></dt></dl></h1>
         <ul class="newindexMRFTM3">
@@ -56,12 +58,11 @@
             </#if>
         </ul>
         </div>
-        
-        
+        -->
         
         </div>
         <div class="newlistR">
-        <h1 class="newlistRT"><img src="/client/images/home.png" width="25" height="25" /> ${menu_name!''}列表 </h1>
+        <h1 class="newlistRT"><img src="/client/images/home.png" width="25" height="25" /> ${menu_name!''} </h1>
         <ul class="newlisttxtB">
             <#if info_page??>
                 <#list info_page.content as item>

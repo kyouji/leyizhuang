@@ -553,6 +553,8 @@ public class TdManagerOrderController {
                 {
                     order.setStatusId(6L);
                     order.setFinishTime(new Date());
+                    
+                    tdUserService.addTotalSpend(order.getUsername(), order.getTotalPrice());
                 }
             }
             // 确认取消

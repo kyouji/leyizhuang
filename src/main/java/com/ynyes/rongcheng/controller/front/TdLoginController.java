@@ -37,6 +37,11 @@ public class TdLoginController {
             return "/client/login";
         }
         
+        if (null == referer)
+        {
+            referer = "/";
+        }
+        
         return "redirect:" + referer;
     }
     

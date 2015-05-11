@@ -1,20 +1,37 @@
-<#if goods??==false>
+<#if !goods??>
 <script type="text/javascript" src="/mag/js/layout.js"></script>
 </#if>
+<script type="text/javascript">
+$(function () {
+    // 根据选择的产品载入筛选项
+    $(".productIdRadio").click(function(){
+        $.ajax({
+            url : '/admin/product/parameter/'+$(this).val() <#if goods??>+"?goodsId=${goods.id}"</#if>,
+            type : 'GET',
+            success : function(res) {
+                $("#productSelectDiv").html(res);
+            }
+        });
+    });
+});
+</script>
 <#if product_list?? && product_list?size gt 0>
 <dl>
-    <dt>产品</dt>
+    <dt>所属产品</dt>
     <dd>
         <div class="rule-multi-radio">
-            <span id="field_control_brand">
+            <span>
                 <#list product_list as product>
-                    <input type="radio" name="productId" value="${product.id!""}" datatype="*0-100" <#if goods?? && goods.productId?? && goods.productId==product.id>checked="checked"</#if>>
+                    <input type="radio" class="productIdRadio" name="productId" value="${product.id!""}" datatype="*0-100" <#if goods?? && goods.productId?? && goods.productId==product.id>checked="checked"</#if>>
                     <label>${product.title!""}</label>
                 </#list>
             </span>
         </div>
     </dd>
 </dl>
+<div id="productSelectDiv">
+<#include "/site_mag/product_param_list.ftl" >
+</div>
 </#if>
 <#if brand_list?? && brand_list?size gt 0>
 <dl>

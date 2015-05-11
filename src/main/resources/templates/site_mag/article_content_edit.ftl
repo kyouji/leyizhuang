@@ -133,9 +133,9 @@
             <dd>
                 <div class="rule-multi-radio multi-radio">
                     <span id="rblStatus" style="display: none;">
-                        <input id="rblStatus_0" type="radio" name="statusId" value="0" <#if article?? && article.statusId==0>checked="checked"</#if> ><label for="rblStatus_0">正常</label>
-                        <input id="rblStatus_1" type="radio" name="statusId" value="1" <#if article?? && article.statusId==1>checked="checked"</#if>><label for="rblStatus_1">待审核</label>
-                        <input id="rblStatus_2" type="radio" name="statusId" value="2" <#if article?? && article.statusId==2>checked="checked"</#if>><label for="rblStatus_2">不显示</label>
+                        <input type="radio" name="statusId" value="0" <#if article?? && article.statusId?? && article.statusId==0>checked="checked"</#if> ><label>正常</label>
+                        <input type="radio" name="statusId" value="1" <#if article?? && article.statusId?? && article.statusId==1>checked="checked"</#if>><label>待审核</label>
+                        <input type="radio" name="statusId" value="2" <#if article?? && article.statusId?? && article.statusId==2>checked="checked"</#if>><label>不显示</label>
                     </span>
                 </div>
             </dd>

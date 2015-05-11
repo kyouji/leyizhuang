@@ -9,7 +9,7 @@
 .s_gwc3{ width:1200px; height:100px; background:url(../img/gwc3.png) center no-repeat;}
 .s_gwc3 span{ font-family:"微软雅黑", "宋体"; font-size:14px; color:#444444; line-height:60px; margin-right:147px; margin-left:160px; _margin-right:160px; _margin-left:160px;}
 
-
+.hide {display: none;}
 .gwc_zn{ text-align:center;}
 .gwc1_lm table{ width:100%;}
 .gwc1_lm table tr{ height:33px; background:#eeeeee;}
@@ -31,9 +31,8 @@
 .gwc_delete:hover{ background:#f10000;transition: all .5s; -moz-transition: all .5s; -ms-transition: all .5s; -o-transition: all .5s;  border-radius:5px; -moz-border-radius:5px; -ms-border-radius:5px; -o-border-radius:5px; -webkit-border-radius:5px;}
 .gw1_zj span{ font-size:14px; font-family:"微软雅黑", "宋体"; color:#da090b; line-height:36px;}
 .gw1_zj span span{font-family:"微软雅黑", "宋体";  font-size:14px; color:#f5422b; font-weight:bold;}
-.content_zj{ height:19px;float: left; width:60px; text-align:center; border:1px solid #ccc;}
-.content_nr_3_jg2 a img{ margin-left:8px; margin-right:8px; float: left;}
-.content_nr_3_jg2 { width:135px}
+.content_zj{ margin-left:11px; height:19px;float: left; margin-left:5px; width:60px; text-align:center; border:1px solid #ccc;}
+.content_nr_3_jg2 { width:112px}
 
 .s_gwc1zj{line-height:45px; }
 .s_gwc1zj p{ font-family:"微软雅黑", "宋体"; font-size:14px; color:#444444; line-height:45px;}

@@ -19,6 +19,7 @@
 <script type="text/javascript" src="/client/js/jquery.cityselect.js"></script>
 <script src="/client/js/lhgdialog.js"></script>
 <script src="/client/js/order_info.js"></script>
+<script src="/client/js/header.js"></script>
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -37,6 +38,41 @@ $(function () {
         <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
         required:false
     }); 
+    
+    $("#idPointUse").change(function(){
+        var point = $.trim($(this).val());
+        if (isNaN(point) || point=="") { point = 0 }
+        
+        var price = $.trim($("#idTotalPriceSteady").val());
+        if (isNaN(price) || price=="") { price = 0 }
+        
+        <#if total_point_limit?? && user.totalPoints?? && total_point_limit gt user.totalPoints>
+        <#assign point_limit=user.totalPoints />
+        <#else>
+        <#assign point_limit=total_point_limit />
+        </#if>
+        
+        if (parseInt(point) > ${point_limit!'0'})
+        {
+            alert("最多可使用(${point_limit!'0'})个积分");
+            $(this).val(0);
+            $("#totalPrice").html(price);
+        }
+        else
+        {
+            var totalPrice = parseFloat(price);
+            var pointPrice = parseFloat(point);
+            
+            if (totalPrice > pointPrice)
+            {
+                $("#totalPrice").html(totalPrice-pointPrice);
+            }
+            else
+            {
+                $("#totalPrice").html(0);
+            }
+        }
+    });
 });
 </script>  
 </head>

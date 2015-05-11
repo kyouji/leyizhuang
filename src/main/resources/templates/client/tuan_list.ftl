@@ -10,6 +10,7 @@
 <link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/master.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/client/js/html5.js"></script>
+<script src="/client/js/header.js"></script>
 </head>
 <body>
 <!-- header开始 -->

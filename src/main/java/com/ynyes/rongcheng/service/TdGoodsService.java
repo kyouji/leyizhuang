@@ -122,6 +122,25 @@ public class TdGoodsService {
         return repository.findByCategoryId(catId, pageRequest);
     }
     
+    public Page<TdGoods> findByReturnPriceNotZeroAndIsOnSaleTrue(int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByReturnPriceNotAndIsOnSaleTrue(0.0, pageRequest);
+    }
+    
+    public Page<TdGoods> findByReturnPriceNotZeroAndSearchAndIsOnSaleTrue(int page, int size, String keywords)
+    {
+        if (null == keywords)
+        {
+            return null;
+        }
+        
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByReturnPriceNotAndTitleContainingAndIsOnSaleTrue(0.0, keywords, pageRequest);
+    }
+    
     public Page<TdGoods> findByIsGroupSaleTrueAndGroupSaleStopTimeAfterAndIsOnSaleTrue(int page, int size)
     {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -1152,6 +1171,16 @@ public class TdGoodsService {
         }
         
         return repository.findByCategoryIdTreeContainingAndBrandIdAndParamValueCollectLikeAndIsOnSaleTrue("["+catId+"]", brandId, paramStr, pageRequest);
+    }
+    
+    public List<TdGoods> findByProductIdAndIsOnSaleTrue(Long productId)
+    {
+        if (null == productId)
+        {
+            return null;
+        }
+        
+        return repository.findByProductIdAndIsOnSaleTrue(productId);
     }
     
     /**

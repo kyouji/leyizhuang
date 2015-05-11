@@ -14,6 +14,7 @@
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
+<script src="/client/js/header.js"></script>
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -23,6 +24,17 @@
 DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#id-money-get").click(function(){
+        <#if !reward_page?? || !reward_page.content[0]?? || reward_page.content[0].totalCashReward < 10>
+            alert("提现金额不足100元时不能进行提现");
+        <#else>
+            alert("提现申请提交成功，请耐心等待!");
+        </#if>
+    });
+});
+</script>
 </head>
 <body>
 <!-- header开始 -->
@@ -43,7 +55,7 @@ DD_belatedPNG.fix('.,img,background');
                 <div class="money fl">
                     <span>钱包总金额：<b>￥<#if reward_page?? && reward_page.content[0]??>${reward_page.content[0].totalCashReward?string("0.00")}<#else>0.00</#if></b></span>
                 </div>
-                <a href="#" class="apply pulse-shrink">申请提现</a>
+                <a id="id-money-get" href="javascript:;" class="apply pulse-shrink">申请提现</a>
             </div>
             <div class="clear"></div> 
              

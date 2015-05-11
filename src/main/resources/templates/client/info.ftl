@@ -10,6 +10,7 @@
 <link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/master.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/client/js/html5.js"></script>
+<script src="/client/js/header.js"></script>
 </head>
 <body>
 <!-- header开始 -->
@@ -17,7 +18,7 @@
 <!-- header结束 -->
 <article id="main">
     <div class="ipp1 top">
-            <dd>您当前位置：<a href="/">首页</a> > <a href="/info/list/${mid!''}" >${menu_name!''}列表</a> > <a href="javascrip:;" class="hover_zy">内容</a></dd>
+            <dd>您当前位置：<a href="/">首页</a> > <a href="/info/list/${mid!''}" >${menu_name!''}</a> > <a href="javascrip:;" class="hover_zy">内容</a></dd>
     </div>
     <div class="clear"></div>
     <!--面包屑结束-->
@@ -34,6 +35,7 @@
             </#if>
         </ul>
         </div>
+        <#--
         <div class="newindexMRFT">
         <h1 class="newindexMRFTH3"><dl><dd>最近添加</dd><dt></dt></dl></h1>
         <ul class="newindexMRFTM3">
@@ -56,7 +58,7 @@
             </#if>
         </ul>
         </div>
-        
+        -->
         
         
         </div>

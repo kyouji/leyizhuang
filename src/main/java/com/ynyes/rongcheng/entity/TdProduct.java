@@ -26,6 +26,10 @@ public class TdProduct {
     @Column
     private String title;
     
+    // 货号
+    @Column
+    private String productNumber;
+    
     // 产品分类ID
     @Column
     private Long productCategoryId;
@@ -33,6 +37,22 @@ public class TdProduct {
     // 产品分类层级
     @Column
     private String productCategoryTree;
+    
+    // 筛选项数量, 最多支持3项
+    @Column
+    private Integer totalSelects;
+    
+    // 筛选项1名称
+    @Column
+    private String selectOneName;
+    
+    // 筛选项2名称
+    @Column
+    private String selectTwoName;
+    
+    // 筛选项3名称
+    @Column
+    private String selectThreeName;
 
     // 排序号
     @Column
@@ -68,6 +88,14 @@ public class TdProduct {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getProductNumber() {
+        return productNumber;
+    }
+
+    public void setProductNumber(String productNumber) {
+        this.productNumber = productNumber;
     }
 
     public Long getProductCategoryId() {
@@ -124,5 +152,37 @@ public class TdProduct {
 
     public void setSeoDescription(String seoDescription) {
         this.seoDescription = seoDescription;
+    }
+
+    public Integer getTotalSelects() {
+        return totalSelects;
+    }
+
+    public void setTotalSelects(Integer totalSelects) {
+        this.totalSelects = totalSelects;
+    }
+
+    public String getSelectOneName() {
+        return selectOneName;
+    }
+
+    public void setSelectOneName(String selectOneName) {
+        this.selectOneName = selectOneName;
+    }
+
+    public String getSelectTwoName() {
+        return selectTwoName;
+    }
+
+    public void setSelectTwoName(String selectTwoName) {
+        this.selectTwoName = selectTwoName;
+    }
+
+    public String getSelectThreeName() {
+        return selectThreeName;
+    }
+
+    public void setSelectThreeName(String selectThreeName) {
+        this.selectThreeName = selectThreeName;
     }
 }

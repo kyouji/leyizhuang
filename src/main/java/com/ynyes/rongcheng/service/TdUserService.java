@@ -83,6 +83,27 @@ public class TdUserService {
         tdUserReturnService.delete(tdUserReturnService.findByUsername(username));
     }
     
+    /**
+     * 清除计数器
+     * 
+     */
+    public void resetCount()
+    {
+        List<TdUser> userList = (List<TdUser>) repository.findAll();
+        
+        if (null == userList)
+        {
+            return;
+        }
+        
+        for (TdUser user : userList)
+        {
+            user.setPointGetByShareGoods(0L);
+        }
+        
+        repository.save(userList);
+    }
+    
     public TdUser addNewUser(String upperUsername, String username, String password, String mobile, String email)
     {
         if (null == username || null == password || username.isEmpty() || password.isEmpty())
@@ -147,6 +168,51 @@ public class TdUserService {
         }
         
         return user;
+    }
+    
+    /**
+     * 增加用户累计消费额
+     * 
+     * @param username
+     * @param spend
+     * @return
+     */
+    public TdUser addTotalSpend(String username, Double spend)
+    {
+        if (null == username || username.isEmpty() || null == spend)
+        {
+            return null;
+        }
+        
+        TdUser user = repository.findByUsername(username);
+        
+        if (null == user)
+        {
+            return null;
+        }
+        
+        Double total = user.getTotalSpendCash();
+        
+        if (null == total)
+        {
+            total = 0.0;
+        }
+        
+        user.setTotalSpendCash(total + spend);
+        
+        Long levelId = tdUserLevelService.getLevelId(user.getTotalSpendCash());
+        
+        if (null != levelId)
+        {
+            TdUserLevel level = tdUserLevelService.findByLevelId(levelId);
+            if (null != level)
+            {
+                user.setUserLevelId(level.getLevelId());
+                user.setUserLevelTitle(level.getTitle());
+            }
+        }
+        
+        return repository.save(user);
     }
     
     /**

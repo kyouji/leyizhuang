@@ -16,6 +16,7 @@
 <script type="text/javascript" src="/client/js/html5.js"></script>
 <script type="text/javascript" src="/client/js/jquery.cityselect.js"></script>
 <script src="/client/js/mymember.js"></script>
+<script src="/client/js/header.js"></script>
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->

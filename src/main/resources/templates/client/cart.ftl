@@ -24,6 +24,7 @@
 DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
+<script src="/client/js/header.js"></script>
 </head>
 <body>
 <!-- header开始 -->

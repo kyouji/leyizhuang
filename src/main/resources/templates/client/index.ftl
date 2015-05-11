@@ -19,10 +19,12 @@
 	<div id="main">
    	  <div class="top1">
             <span class="welcome">
-                Hi,欢迎来到博大生活网！
+                Hi,欢迎来到博大生活网!
                 <#if username??>
-                    <a href="/user" class="login">${username}
+                    <a href="/user" class="login">${username}&nbsp;(${user.userLevelTitle!''})
+                        <#--
                         <dd class="vip" title="铁牌会员"></dd>
+                        -->
                     </a>
                     <a href="/logout">退出</a>
                 <#else>
@@ -299,14 +301,9 @@
             <dt><label for="">面值</label></dt>
             <dd>
                 <select name="" class="select-price-money" >
-                    <option value="10">10元</option>
-                    <option value="20">20元</option>
-                    <option value="30">30元</option>
                     <option value="50">50元</option>
                     <option value="100" selected="selected">100元</option>
                     <option value="200">200元</option>
-                    <option value="300">300元</option>
-                    <option value="500">500元</option>
                 </select>
             </dd>
             <dd>
@@ -319,9 +316,9 @@
         </div>
     </div>
 </div>
-                      </div>
-            </div>
-    </div> 
+      </div>
+    </div>
+</div> 
 </header>
 <!--header结束-->
 <article id="main">
@@ -350,7 +347,45 @@
                             <div class="price"><b>￥${item.groupSalePrice?string("0.00")}</b>
                                 <h4 id="timeLeft${item_index}">倒计时 01:01:35</h4>
                             </div>
-                            
+<script type="text/javascript">
+$(document).ready(function(){
+    setInterval("timer${item_index}()",1000);
+});
+function timer${item_index}()
+{
+<#if item.isGroupSale && item.groupSaleStartTime < .now && item.groupSaleStopTime gt .now>
+    var ts = (new Date(${item.groupSaleStopTime?string("yyyy")}, 
+                parseInt(${item.groupSaleStopTime?string("MM")}, 10)-1, 
+                ${item.groupSaleStopTime?string("dd")}, 
+                ${item.groupSaleStopTime?string("HH")}, 
+                ${item.groupSaleStopTime?string("mm")}, 
+                ${item.groupSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+    if (0 == ts)
+    {
+        window.location.reload();
+    }
+    
+    var date = new Date();
+    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+    dd = checkTime${item_index}(dd);
+    hh = checkTime${item_index}(hh);
+    mm = checkTime${item_index}(mm);
+    ss = checkTime${item_index}(ss);
+    $("#timeLeft${item_index}").html("倒计时：" + dd + "天" + hh + "小时" + mm + "分" + ss +"秒");
+</#if>
+}
+
+function checkTime${item_index}(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+} 
+</script>                   
                             <div class="buyBtn J_buyBtn" style="display: block;">立即抢购</div>
                             <div class="promoIcon promoIconActive J_promoIcon">
                             <div class="promoA">${item.groupSaleLeftNumber!'0'}</div></div>
@@ -365,8 +400,8 @@
 		<!--左边结束-->	
     <div class="right J_rightWrapper pt20">
       <h4>——下期预告——</h4>
-       	<ul>
-        	<input class="bot2 bot2_hover"></input>
+        <ul>
+        	<input type="button" class="bot2 bot2_hover" />
         	<#if next_tuan_page??>
         	   <#list next_tuan_page.content as item>
         	       <li>
@@ -378,7 +413,7 @@
 	               </li>
         	   </#list>
         	</#if>
-           	<input class="bot3"></input>
+           	<input type="button" class="bot3" />
         </ul>
         <div class="flv fl mt20">
             <#if next_ad_list??>
@@ -559,8 +594,8 @@
                         <#list kitchen_page.content as item>
                             <#if item_index gt 2 && item_index < 8>
                             <li>
-                                <img src="${item.coverImageUri!''}" alt="${item.title!''}" width="170" height="170" />
-                                <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a>
+                                <a href="/goods/${item.id}"><img src="${item.coverImageUri!''}" alt="${item.title!''}" width="170" height="170" /></a>
+                                <dd><a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a></dd>
                                 <span>&yen;${item.salePrice?string("0.00")}</span>
                             </li>
                             </#if>
@@ -572,8 +607,8 @@
                         <#list kitchen_page.content as item>
                             <#if item_index gt 7 && item_index < 13>
                             <li>
-                                <img src="${item.coverImageUri!''}" alt="${item.title!''}" width="170" height="170" />
-                                <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a>
+                                <a href="/goods/${item.id}"><img src="${item.coverImageUri!''}" alt="${item.title!''}" width="170" height="170" /></a>
+                                <dd><a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a></dd>
                                 <span>&yen;${item.salePrice?string("0.00")}</span>
                             </li>
                             </#if>

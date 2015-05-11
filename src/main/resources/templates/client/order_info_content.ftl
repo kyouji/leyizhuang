@@ -156,7 +156,13 @@
                                         <p><a href="/goods/${sg.goodsId!''}">${sg.goodsTitle!''}</a></p>
                                     </td>
                                     <td class="gwc1_lm2_b1"><span>￥${sg.price?string("#.##")}</span></td>
-                                    <td class="gwc1_lm2_c1">X${sg.quantity!''}</td>
+                                    <td class="gwc1_lm2_c1">
+                                        <div class="ds content_nr_3_jg2">
+                                        <a class="quantity-plus" href="/order/goods/minus?gid=${sg.goodsId}"><img src="/client/img/slj.png" width="20" height="20"></a>
+                                        <input type="text" class="content_zj" disabled="disabled" value="${sg.quantity!''}">
+                                        <a class="quantity-minus" href="/order/goods/plus?gid=${sg.goodsId}"><img src="/client/img/sljj.png" width="20" height="20"></a>
+                                        </div>
+                                    </td>
                                     <td class="gwc1_lm2_b1"><span>￥${(sg.price*sg.quantity)?string("#.##")}</span></td>
                                 </tr>
                                 <#assign totalQuantity=totalQuantity+sg.quantity>
@@ -173,7 +179,8 @@
     
         <div id="main">
             <div class="s_gwc1zj fr">
-                <p>商品<span> ${totalQuantity!'0'} </span>件  总价：商品价格（<span>¥<b id="currentPrice">${totalPrice?string("#.##")}</b></span>) + 运费（<span>¥<b id="deliveryFee">${delivery_fee!'0'}</b></span>）= 商品总计(含运费)： <span>¥<b id="totalPrice">${(totalPrice+delivery_fee!0)?string("#.##")}</b></span> </p>
+                <input id="idTotalPriceSteady" type="hidden" value="${(totalPrice+delivery_fee!0)?string("#.##")}" />
+                <p>商品<span> ${totalQuantity!'0'} </span>件  总价：商品价格（<span>¥<b id="currentPrice">${totalPrice?string("#.##")}</b></span>) + 运费（<span>¥<b id="deliveryFee">${delivery_fee!'0'}</b></span>）- 积分抵扣（<span>￥<input id="idPointUse" name="pointUse" style="width:30px; text-align:center;" value="0"/></span>）= 商品总计(含运费)： <span>¥<b id="totalPrice">${(totalPrice+delivery_fee!0)?string("#.##")}</b></span> </p>
             </div>
         </div>
         <div class="clear"></div>

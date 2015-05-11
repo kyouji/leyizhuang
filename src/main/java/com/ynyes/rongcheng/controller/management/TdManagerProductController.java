@@ -11,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.rongcheng.entity.TdProduct;
+import com.ynyes.rongcheng.service.TdGoodsService;
 import com.ynyes.rongcheng.service.TdManagerLogService;
 import com.ynyes.rongcheng.service.TdProductCategoryService;
 import com.ynyes.rongcheng.service.TdProductService;
@@ -36,11 +38,33 @@ public class TdManagerProductController {
     TdProductService tdProductService;
     
     @Autowired
+    TdGoodsService tdGoodsService;
+    
+    @Autowired
     TdProductCategoryService tdProductCategoryService;
     
     @Autowired
     TdManagerLogService tdManagerLogService;
     
+    @RequestMapping(value="/parameter/{id}", method = RequestMethod.GET)
+    public String parameter(@PathVariable Long id, Long goodsId, ModelMap map,
+            HttpServletRequest req){
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username) {
+            return "redirect:/admin/login";
+        }
+        
+        TdProduct product = tdProductService.findOne(id);
+        
+        map.addAttribute("product", product);
+        
+        if (null != goodsId)
+        {
+            map.addAttribute("goods", tdGoodsService.findOne(goodsId));
+        }
+        
+        return "/site_mag/product_param_list";
+    }
     
     @RequestMapping(value="/check", method = RequestMethod.POST)
     @ResponseBody

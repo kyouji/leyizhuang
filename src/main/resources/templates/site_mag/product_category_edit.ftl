@@ -123,9 +123,7 @@
     <dd>
       <div class="rule-single-select">
         <select id="categoryParamType" name="paramCategoryId" datatype="n0-100">
-            <#if !cat?? || !cat.paramCategoryId??>
-            <option value="0">请选择</option>
-            </#if>
+            <option value="0">无关联参数</option>
             <#if param_category_list??>
                 <#list param_category_list as c>
                     <option value="${c.id!""}" <#if cat?? && cat.paramCategoryId?? && cat.paramCategoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
