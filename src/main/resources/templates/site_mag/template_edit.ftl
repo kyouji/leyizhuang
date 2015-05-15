@@ -18,15 +18,15 @@ $(function () {
 </script>
 </head>
 <body class="mainbody">
-<form method="post" action="/admin/template/save" id="form1">
+<form method="post" action="/Verwalter/template/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
 <input type="hidden" name="name" value="${name!""}" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
-  <a href="/admin/template/list"><i></i><span>返回列表页</span></a>
-  <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+  <a href="/Verwalter/template/list"><i></i><span>返回列表页</span></a>
+  <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
   <span>模板管理</span>
   <i class="arrow"></i>

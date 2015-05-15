@@ -22,7 +22,7 @@ $(function () {
     //初始化上传控件
     $(".upload-img").each(function () {
         $(this).InitSWFUpload({ 
-            sendurl: "/admin/upload", 
+            sendurl: "/Verwalter/upload", 
             flashurl: "/mag/js/swfupload.swf"
         });
     });
@@ -32,7 +32,7 @@ $(function () {
         width: '98%',
         height: '250px',
         resizeType: 1,
-        uploadJson: '/admin/editor/upload?action=EditorFile',
+        uploadJson: '/Verwalter/editor/upload?action=EditorFile',
         items: [
 			'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
 			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
@@ -41,7 +41,7 @@ $(function () {
     
     // 选择类型后修改ajaxurl
     $("#proCatId").change(function(){
-        var url = "/admin/parameter/category/check?parentId=" + $(this).val() + "<#if cat??>&id=${cat.id}</#if>";
+        var url = "/Verwalter/parameter/category/check?parentId=" + $(this).val() + "<#if cat??>&id=${cat.id}</#if>";
         $("#idCatTitle").attr("ajaxurl", url);
     });
     
@@ -54,7 +54,7 @@ function change2cn(en, cninput) {
    
 </script>
 
-<body class="mainbody"><form method="post" action="/admin/parameter/category/save" id="form1">
+<body class="mainbody"><form method="post" action="/Verwalter/parameter/category/save" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
@@ -63,8 +63,8 @@ function change2cn(en, cninput) {
 <input name="id" type="text" value='<#if cat??>${cat.id!""}</#if>' style="display:none">
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
-  <a href="/admin/parameter/category/list" class="back"><i></i><span>返回列表页</span></a>
-  <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+  <a href="/Verwalter/parameter/category/list" class="back"><i></i><span>返回列表页</span></a>
+  <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
   <span>编辑参数分类</span>
 </div>
@@ -108,7 +108,7 @@ function change2cn(en, cninput) {
   <dl>
     <dt>类别名称</dt>
     <dd>
-        <input id="idCatTitle" name="title" type="text" value="<#if cat??>${cat.title!""}</#if>" class="input normal" datatype="*1-100" sucmsg=" " ajaxurl="/admin/parameter/category/check<#if cat??>?id=${cat.id}<#elseif fatherCat??>?parentId=${fatherCat.id}</#if>" >
+        <input id="idCatTitle" name="title" type="text" value="<#if cat??>${cat.title!""}</#if>" class="input normal" datatype="*1-100" sucmsg=" " ajaxurl="/Verwalter/parameter/category/check<#if cat??>?id=${cat.id}<#elseif fatherCat??>?parentId=${fatherCat.id}</#if>" >
         <span class="Validform_checktip">*类别中文名称，100字符内</span>
     </dd>
   </dl>

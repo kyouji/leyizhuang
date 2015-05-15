@@ -22,7 +22,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/ad/type")
+@RequestMapping(value="/Verwalter/ad/type")
 public class TdManagerAdTypeController {
     
     @Autowired
@@ -45,7 +45,7 @@ public class TdManagerAdTypeController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != __EVENTTARGET)
@@ -98,7 +98,7 @@ public class TdManagerAdTypeController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -118,7 +118,7 @@ public class TdManagerAdTypeController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -138,7 +138,7 @@ public class TdManagerAdTypeController {
         
         tdManagerLogService.addLog(type, "用户修改广告位", req);
         
-        return "redirect:/admin/ad/type/list";
+        return "redirect:/Verwalter/ad/type/list";
     }
 
     @ModelAttribute

@@ -21,7 +21,7 @@ import com.ynyes.rongcheng.service.TdNaviBarItemService;
  */
 
 @Controller
-@RequestMapping(value="/admin/view/navi")
+@RequestMapping(value="/Verwalter/view/navi")
 public class TdManagerNaviBarItemController {
     
     @Autowired
@@ -41,7 +41,7 @@ public class TdManagerNaviBarItemController {
                           HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -74,7 +74,7 @@ public class TdManagerNaviBarItemController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -94,7 +94,7 @@ public class TdManagerNaviBarItemController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -110,7 +110,7 @@ public class TdManagerNaviBarItemController {
         
         tdNaviBarItemService.save(tdNaviBarItem);
         
-        return "redirect:/admin/view/navi/list";
+        return "redirect:/Verwalter/view/navi/list";
     }
 
     @ModelAttribute

@@ -12,7 +12,7 @@
 </head>
 
 <body class="mainbody">
-<form name="form1" method="post" action="/admin/category/list?cid=${cid!""}&mid=${mid!""}" id="form1">
+<form name="form1" method="post" action="/Verwalter/category/list?cid=${cid!""}&mid=${mid!""}" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
@@ -69,13 +69,13 @@ function __doPostBack(eventTarget, eventArgument) {
                     <span class="folder-line"></span>
                 </#if>
                 <span class="folder-open"></span>
-                <a href="/admin/category/edit?cid=${cid!""}&mid=${mid!""}&id=${cat.id!""}">${cat.title!""}</a>
+                <a href="/Verwalter/category/edit?cid=${cid!""}&mid=${mid!""}&id=${cat.id!""}">${cat.title!""}</a>
             </td>
             <td>${cat.callIndex!""}</td>
             <td><input name="listSortId" type="text" value="${cat.sortId!""}" class="sort" onkeydown="return checkNumber(event);"></td>
             <td align="center">
-                <a href="/admin/category/edit?cid=${cid!""}&mid=${mid!""}&id=${cat.id!""}&sub=1&__VIEWSTATE=${__VIEWSTATE!""}">添加子类</a>
-                <a href="/admin/category/edit?cid=${cid!""}&mid=${mid!""}&id=${cat.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">修改</a>
+                <a href="/Verwalter/category/edit?cid=${cid!""}&mid=${mid!""}&id=${cat.id!""}&sub=1&__VIEWSTATE=${__VIEWSTATE!""}">添加子类</a>
+                <a href="/Verwalter/category/edit?cid=${cid!""}&mid=${mid!""}&id=${cat.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">修改</a>
             </td>
         </tr>
     </#list>

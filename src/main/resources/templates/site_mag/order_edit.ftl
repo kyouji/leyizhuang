@@ -35,7 +35,7 @@
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "orderReceive" };
                 //发送AJAX请求
-                sendAjaxUrl(dialog, postData, "/admin/order/param/edit");
+                sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
                 return false;
             });
 
@@ -46,7 +46,7 @@
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "orderReceive" };
                 //发送AJAX请求
-                sendAjaxUrl(dialog, postData, "/admin/order/param/edit");
+                sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
                 return false;
             });
 
@@ -58,7 +58,7 @@
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "orderConfirm" };
                 //发送AJAX请求
-                sendAjaxUrl(dialog, postData, "/admin/order/param/edit");
+                sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
                 return false;
             });
         }
@@ -69,7 +69,7 @@
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "orderPay" };
                 //发送AJAX请求
-                sendAjaxUrl(dialog, postData, "/admin/order/param/edit");
+                sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
                 return false;
             });
         }
@@ -80,7 +80,7 @@
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "orderPayOffline" };
                 //发送AJAX请求
-                sendAjaxUrl(dialog, postData, "/admin/order/param/edit");
+                sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
                 return false;
             });
         }
@@ -89,7 +89,7 @@
             var orderNumber = $.trim($("#spanOrderNumber").text());
             var dialog = $.dialog({
                 title: '确认发货',
-                content: 'url:/admin/order/dialog/delivery?orderNumber=' + orderNumber,
+                content: 'url:/Verwalter/order/dialog/delivery?orderNumber=' + orderNumber,
                 min: false,
                 max: false,
                 lock: true,
@@ -104,7 +104,7 @@
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "orderFinish" };
                 //发送AJAX请求
-                sendAjaxUrl(dialog, postData, "/admin/order/param/edit");
+                sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
                 return false;
             });
         }
@@ -121,10 +121,10 @@
                 button: [{
                     name: '直接取消',
                     callback: function () {
-                        var order_no = $.trim($("#spanOrderNumber").text());
-                        var postData = { "order_no": order_no, "edit_type": "order_cancel", "check_revert": 0 };
+                        var orderNumber = $.trim($("#spanOrderNumber").text());
+                        var postData = { "orderNumber": orderNumber, "type": "orderCancel" };
                         //发送AJAX请求
-                        sendAjaxUrl(dialog, postData, "../../tools/admin_ajax.ashx?action=edit_order_status");
+                        sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
                         return false;
                     },
                     focus: true
@@ -149,7 +149,7 @@
                         var order_no = $.trim($("#spanOrderNumber").text());
                         var postData = { "order_no": order_no, "edit_type": "order_invalid", "check_revert": 1 };
                         //发送AJAX请求
-                        sendAjaxUrl(dialog, postData, "../../tools/admin_ajax.ashx?action=edit_order_status");
+                        sendAjaxUrl(dialog, postData, "../../tools/Verwalter_ajax.ashx?action=edit_order_status");
                         return false;
                     },
                     focus: true
@@ -159,7 +159,7 @@
                         var order_no = $.trim($("#spanOrderNumber").text());
                         var postData = { "order_no": order_no, "edit_type": "order_invalid", "check_revert": 0 };
                         //发送AJAX请求
-                        sendAjaxUrl(dialog, postData, "../../tools/admin_ajax.ashx?action=edit_order_status");
+                        sendAjaxUrl(dialog, postData, "../../tools/Verwalter_ajax.ashx?action=edit_order_status");
                         return false;
                     }
                 }, {
@@ -171,7 +171,7 @@
         function OrderPrint() {
             var dialog = $.dialog({
                 title: '打印订单',
-                content: 'url:/admin/order/dialog/print?orderNumber=' + $.trim($("#spanOrderNumber").text()),
+                content: 'url:/Verwalter/order/dialog/print?orderNumber=' + $.trim($("#spanOrderNumber").text()),
                 min: false,
                 max: false,
                 lock: true,
@@ -183,7 +183,7 @@
         function EditAcceptInfo() {
             var dialog = $.dialog({
                 title: '修改收货信息',
-                content: 'url:/admin/order/dialog/contact',
+                content: 'url:/Verwalter/order/dialog/contact',
                 min: false,
                 max: false,
                 lock: true,
@@ -208,7 +208,7 @@
                     var orderNumber = $.trim($("#spanOrderNumber").text());
                     var postData = { "orderNumber": orderNumber, "type": "editMark", "data": remark };
                     //发送AJAX请求
-                    sendAjaxUrl(dialog, postData, "/admin/order/param/edit");
+                    sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
                     return false;
                 },
                 cancel: true
@@ -225,7 +225,7 @@
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "editTotalGoodsPrice", "data": val };
                 //发送AJAX请求
-                sendAjaxUrl(pop, postData, "/admin/order/param/edit");
+                sendAjaxUrl(pop, postData, "/Verwalter/order/param/edit");
                 return false;
             },
             $.trim($("#spanRealAmountValue").text())
@@ -242,7 +242,7 @@
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "editDeliveryPrice", "data": val };
                 //发送AJAX请求
-                sendAjaxUrl(pop, postData, "/admin/order/param/edit");
+                sendAjaxUrl(pop, postData, "/Verwalter/order/param/edit");
                 return false;
             },
             $.trim($("#spanExpressFeeValue").text())
@@ -259,7 +259,7 @@
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "editPayPrice", "data": val };
                 //发送AJAX请求
-                sendAjaxUrl(pop, postData, "/admin/order/param/edit");
+                sendAjaxUrl(pop, postData, "/Verwalter/order/param/edit");
                 return false;
             },
             $.trim($("#spanPaymentFeeValue").text())
@@ -298,13 +298,13 @@
     </script>
 </head>
 <body class="mainbody"><div style="position: absolute; left: -9999em; top: 236px; visibility: visible; width: auto; z-index: 1976;"><table class="ui_border ui_state_visible ui_state_focus"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;">视窗 </div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0);" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_max" href="javascript:void(0);" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0);" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0);" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon" style="display: none;"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"><div class="ui_loading"><span>loading...</span></div></div></td></tr><tr><td colspan="2"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div>
-<form name="form1" method="post" action="/admin/order/save" id="form1">
+<form name="form1" method="post" action="/Verwalter/order/save" id="form1">
     <!--导航栏-->
     <div class="location" style="position: fixed; top: 0px;">
-        <a href="/admin/order/list/${statusId!"0"}" class="back"><i></i><span>返回列表页</span></a>
-        <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+        <a href="/Verwalter/order/list/${statusId!"0"}" class="back"><i></i><span>返回列表页</span></a>
+        <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
         <i class="arrow"></i>
-        <a href="/admin/order/list/${statusId!"0"}"><span>订单管理</span></a>
+        <a href="/Verwalter/order/list/${statusId!"0"}"><span>订单管理</span></a>
         <i class="arrow"></i><span>订单详细</span>
     </div>
     <div class="line10">
@@ -931,7 +931,9 @@
             <#elseif order.statusId==5>
                 <input type="button" id="btnOrderComplete" value="确认完成" class="btn">
             </#if>
-            <input type="button" id= "btnPrint" value="打印订单" class="btn violet">
+            <#if order.statusId != 7>
+                <input type="button" id= "btnPrint" value="打印订单" class="btn violet">
+            </#if>
             <input type="button" value="返回上一页" class="btn yellow" onclick="javascript:history.back(-1);">
         </div>
         <div class="clear">

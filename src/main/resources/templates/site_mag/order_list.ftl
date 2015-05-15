@@ -11,7 +11,7 @@
 <link href="/mag/style/style.css" rel="stylesheet" type="text/css">
 </head>
 <body class="mainbody">
-<form name="form1" method="post" action="/admin/order/list/${statusId!"0"}" id="form1">
+<form name="form1" method="post" action="/Verwalter/order/list/${statusId!"0"}" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
@@ -34,7 +34,7 @@ function __doPostBack(eventTarget, eventArgument) {
     <!--导航栏-->
     <div class="location">
         <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>
-        <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+        <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
         <i class="arrow"></i>
         <a><span>订单管理</span></a>
         <i class="arrow"></i>
@@ -129,7 +129,7 @@ function __doPostBack(eventTarget, eventArgument) {
                     <input type="hidden" name="listId" id="listId" value="${order.id}">
                 </td>
                 <td>
-                    <a href="/admin/order/edit?id=${order.id}&statusId=${statusId!'0'}">${order.orderNumber!""}</a></td>
+                    <a href="/Verwalter/order/edit?id=${order.id}&statusId=${statusId!'0'}">${order.orderNumber!""}</a></td>
                 <td>${order.username!""}</td>
                 <td>${order.payTypeTitle!""}</td>
                 <td>${order.deliverTypeTitle!""}</td>
@@ -155,7 +155,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <td align="center" width="10%">￥<font color="#C30000">${order.totalPrice?string("#.00")}</font></td>
                 <td>${order.orderTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                 <td align="center">
-                    <a href="/admin/order/edit?id=${order.id}&statusId=${statusId!"0"}">详细</a>
+                    <a href="/Verwalter/order/edit?id=${order.id}&statusId=${statusId!"0"}">详细</a>
                 </td>
             </tr>
         </#list>

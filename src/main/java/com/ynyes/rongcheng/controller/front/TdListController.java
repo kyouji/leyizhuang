@@ -130,7 +130,6 @@ public class TdListController {
         List<Integer> paramIndexList = new ArrayList<Integer>();
         List<String> paramValueList = new ArrayList<String>();
         
-        // TODO: 有bug
         // 参数列表
         if (null != tdProductCategory.getParamCategoryId())
         {

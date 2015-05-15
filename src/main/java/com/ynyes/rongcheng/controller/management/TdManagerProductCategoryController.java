@@ -24,7 +24,7 @@ import com.ynyes.rongcheng.service.TdProductCategoryService;
  */
 
 @Controller
-@RequestMapping(value = "/admin/product/category")
+@RequestMapping(value = "/Verwalter/product/category")
 public class TdManagerProductCategoryController {
 
     @Autowired
@@ -42,7 +42,7 @@ public class TdManagerProductCategoryController {
             Long[] listSortId, ModelMap map, HttpServletRequest req) {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
 
         if (null != __EVENTTARGET) {
@@ -75,7 +75,7 @@ public class TdManagerProductCategoryController {
             HttpServletRequest req) {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
 
         map.addAttribute("__EVENTTARGET", __EVENTTARGET);
@@ -110,7 +110,7 @@ public class TdManagerProductCategoryController {
             HttpServletRequest req) {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
 
         if (null == cat.getId()) {
@@ -121,7 +121,7 @@ public class TdManagerProductCategoryController {
 
         tdProductCategoryService.save(cat);
 
-        return "redirect:/admin/product/category/list";
+        return "redirect:/Verwalter/product/category/list";
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.POST)

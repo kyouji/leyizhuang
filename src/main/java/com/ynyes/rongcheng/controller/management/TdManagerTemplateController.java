@@ -31,7 +31,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value = "/admin/template")
+@RequestMapping(value = "/Verwalter/template")
 public class TdManagerTemplateController {
 
     String filepath = SiteMagConstant.templatePath;
@@ -45,7 +45,7 @@ public class TdManagerTemplateController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
 
         File file = new File(filepath);
@@ -77,12 +77,12 @@ public class TdManagerTemplateController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null == name || name.isEmpty())
         {
-            return "redirect:/admin/template/list";
+            return "redirect:/Verwalter/template/list";
         }
         
         File file = new File(filepath + name);
@@ -123,12 +123,12 @@ public class TdManagerTemplateController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null == name || name.isEmpty() || null == content)
         {
-            return "redirect:/admin/template/list";
+            return "redirect:/Verwalter/template/list";
         }
         
         File file = new File(filepath + name);
@@ -147,6 +147,6 @@ public class TdManagerTemplateController {
             }
         }
 
-        return "redirect:/admin/template?name=" + name + "&status=1";
+        return "redirect:/Verwalter/template?name=" + name + "&status=1";
     }
 }

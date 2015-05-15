@@ -29,7 +29,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/Verwalter")
 public class TdUploadController {
 
     String ImageRoot = SiteMagConstant.imagePath;

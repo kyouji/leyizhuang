@@ -11,7 +11,7 @@
 </head>
 
 <body class="mainbody">
-<form name="form1" method="post" action="/admin/database/backup" id="form1">
+<form name="form1" method="post" action="/Verwalter/database/backup" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}">
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}">
@@ -34,7 +34,7 @@ var theForm = document.forms['form1'];
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
   <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>
-  <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+  <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
   <span>模板管理</span>
   <i class="arrow"></i>
@@ -80,8 +80,8 @@ var theForm = document.forms['form1'];
             <td>${item.title!""}</td>
             <td align="center">${item.modifyTime?string('yyyy-MM-dd HH:mm:ss')}</td>
             <td align="center">
-                <a href="/admin/database/download?name=${item.title}">下载</a>
-                <a href="/admin/database/del?name=${item.title}">删除</a>
+                <a href="/Verwalter/database/download?name=${item.title}">下载</a>
+                <a href="/Verwalter/database/del?name=${item.title}">删除</a>
             </td>
         </tr>
     </#list>

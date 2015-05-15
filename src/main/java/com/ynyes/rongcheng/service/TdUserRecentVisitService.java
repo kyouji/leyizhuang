@@ -105,18 +105,18 @@ public class TdUserRecentVisitService {
         return repository.findAll(pageRequest);
     }
     
-    public Page<TdUserRecentVisit> findByUsername(String username, int page, int size)
+    public Page<TdUserRecentVisit> findByUsernameOrderByVisitTimeDesc(String username, int page, int size)
     {
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByUsernameOrderByIdDesc(username, pageRequest);
+        return repository.findByUsernameOrderByVisitTimeDesc(username, pageRequest);
     }
     
-    public Page<TdUserRecentVisit> findByUsernameAndSearch(String username, String keywords, int page, int size)
+    public Page<TdUserRecentVisit> findByUsernameAndSearchOrderByVisitTimeDesc(String username, String keywords, int page, int size)
     {
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByUsernameAndGoodsTitleContainingOrderByIdDesc(username, keywords, pageRequest);
+        return repository.findByUsernameAndGoodsTitleContainingOrderByVisitTimeDesc(username, keywords, pageRequest);
     }
     
     /**

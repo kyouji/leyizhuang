@@ -16,15 +16,15 @@ $(function () {
 </script>
 </head>
 <body class="mainbody">
-<form method="post" action="/admin/sitelink/save" id="form1">
+<form method="post" action="/Verwalter/sitelink/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
 <input type="hidden" name="id" value="<#if site_link??>${site_link.id!""}</#if>" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
-  <a href="/admin/sitelink/list"><i></i><span>返回列表页</span></a>
-  <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+  <a href="/Verwalter/sitelink/list"><i></i><span>返回列表页</span></a>
+  <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
   <span>友情链接管理</span>
   <i class="arrow"></i>
@@ -46,7 +46,7 @@ $(function () {
     <dl>
         <dt>友情链接名称</dt>
         <dd>
-            <input name="title" type="text" value="<#if site_link??>${site_link.title!""}</#if>" class="input normal" ajaxurl="/admin/sitelink/check<#if site_link??>?id=${site_link.id}</#if>" datatype="s" sucmsg=" ">
+            <input name="title" type="text" value="<#if site_link??>${site_link.title!""}</#if>" class="input normal" ajaxurl="/Verwalter/sitelink/check<#if site_link??>?id=${site_link.id}</#if>" datatype="s" sucmsg=" ">
             <span class="Validform_checktip">*友情链接名称</span>
         </dd>
     </dl>

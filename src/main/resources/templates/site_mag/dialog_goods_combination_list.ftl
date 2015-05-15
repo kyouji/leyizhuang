@@ -44,7 +44,7 @@
             max: false,
             min: false,
             title: "商品组合",
-            content: 'url:/admin/goods/list/dialog/gift',
+            content: 'url:/Verwalter/goods/list/dialog/gift',
             width: 800,
             height: 550
         });

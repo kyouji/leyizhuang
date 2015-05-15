@@ -20,9 +20,9 @@ public interface TdUserRecentVisitRepo extends
 		PagingAndSortingRepository<TdUserRecentVisit, Long>,
 		JpaSpecificationExecutor<TdUserRecentVisit> 
 {
-    Page<TdUserRecentVisit> findByUsernameOrderByIdDesc(String username, Pageable page);
+    Page<TdUserRecentVisit> findByUsernameOrderByVisitTimeDesc(String username, Pageable page);
     
-    Page<TdUserRecentVisit> findByUsernameAndGoodsTitleContainingOrderByIdDesc(String username, String keywords, Pageable page);
+    Page<TdUserRecentVisit> findByUsernameAndGoodsTitleContainingOrderByVisitTimeDesc(String username, String keywords, Pageable page);
     
     List<TdUserRecentVisit> findByUsername(String username);
     

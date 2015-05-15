@@ -26,7 +26,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin")
+@RequestMapping(value="/Verwalter")
 public class TdManagerListController {
     
     @Autowired
@@ -57,7 +57,7 @@ public class TdManagerListController {
                                 HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != __EVENTTARGET)
@@ -126,7 +126,7 @@ public class TdManagerListController {
                             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != __EVENTTARGET)
@@ -167,10 +167,6 @@ public class TdManagerListController {
         {
             map.addAttribute("category_list", tdArticleCategoryService.findByMenuId(mid));
         }
-        else if (cid.equals(2L)) // 商品分类
-        {
-            map.addAttribute("category_list", tdProductCategoryService.findAll());
-        }
         
         // 参数注回
         map.addAttribute("cid", cid);
@@ -200,7 +196,7 @@ public class TdManagerListController {
                                 HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null == page || page < 0)
@@ -223,7 +219,7 @@ public class TdManagerListController {
                 break;
             
             case "btnSave":
-                btnSave(cid, listId, listSortId);
+                btnSave(cid, listId, listSortId, username);
                 tdManagerLogService.addLog("edit", "用户修改文章", req);
                 break;
                 
@@ -271,7 +267,7 @@ public class TdManagerListController {
             }
             else
             {
-                map.addAttribute("content_page", tdGoodsService.findByCategoryIdOrderBySortIdAsc(categoryId, page, size));
+                map.addAttribute("content_page", tdGoodsService.findByCategoryIdTreeContainingOrderBySortIdAsc(categoryId, page, size));
             }
         }
         else // 品牌，产品
@@ -341,7 +337,7 @@ public class TdManagerListController {
                               HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null == page || page < 0)
@@ -364,7 +360,7 @@ public class TdManagerListController {
                 break;
             
             case "btnSave":
-                btnSave(cid, listId, listSortId);
+                btnSave(cid, listId, listSortId, username);
                 tdManagerLogService.addLog("edit", "用户修改文章", req);
                 break;
                 
@@ -411,7 +407,7 @@ public class TdManagerListController {
             }
             else
             {
-                map.addAttribute("content_page", tdGoodsService.findByCategoryIdOrderBySortIdAsc(categoryId, page, size));
+                map.addAttribute("content_page", tdGoodsService.findByCategoryIdTreeContainingOrderBySortIdAsc(categoryId, page, size));
             }
         }
         else // 品牌，产品
@@ -594,7 +590,7 @@ public class TdManagerListController {
      * @param chkIds
      * @param sortIds
      */
-    private void btnSave(Long cid, Long[] ids, Long[] sortIds)
+    private void btnSave(Long cid, Long[] ids, Long[] sortIds, String username)
     {
         if (null == ids || null == sortIds
                 || ids.length < 1 || sortIds.length < 1)
@@ -612,7 +608,7 @@ public class TdManagerListController {
                 if (sortIds.length > i)
                 {
                     goods.setSortId(sortIds[i]);
-                    tdGoodsService.save(goods);
+                    tdGoodsService.save(goods, username);
                 }
             }
             else

@@ -12,7 +12,7 @@
 </head>
 
 <body class="mainbody">
-<form name="form1" method="post" action="/admin/order/setting/delivery/list" id="form1">
+<form name="form1" method="post" action="/Verwalter/order/setting/delivery/list" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}">
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}">
@@ -33,8 +33,8 @@ function __doPostBack(eventTarget, eventArgument) {
 </script>
 <!--导航栏-->
 <div class="location">
-  <a href="/admin/order/setting/delivery/list" class="back"><i></i><span>返回列表页</span></a>
-  <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+  <a href="/Verwalter/order/setting/delivery/list" class="back"><i></i><span>返回列表页</span></a>
+  <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
   <span>配送方式</span>
 </div>
@@ -45,7 +45,7 @@ function __doPostBack(eventTarget, eventArgument) {
   <div id="floatHead" class="toolbar">
     <div class="l-list">
       <ul class="icon-list">
-        <li><a class="add" href="/admin/order/setting/delivery/edit"><i></i><span>新增</span></a></li>
+        <li><a class="add" href="/Verwalter/order/setting/delivery/edit"><i></i><span>新增</span></a></li>
         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
         <li><a id="btnSave" class="save" href="javascript:__doPostBack('btnSave','')"><i></i><span>保存</span></a></li>
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
@@ -82,13 +82,13 @@ function __doPostBack(eventTarget, eventArgument) {
                     </span>
                     <input type="hidden" name="listId" id="listId" value="${item.id}">
                 </td>
-                <td><a href="/admin/order/setting/delivery/edit?id=${item.id}">${item.title!""}</a></td>
+                <td><a href="/Verwalter/order/setting/delivery/edit?id=${item.id}">${item.title!""}</a></td>
                 <td>${item.code!""}</td>
                 <td><#if item.fee??>${item.fee?string("#.##")}</#if> 元</td>
                 <td><input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);"></td>
                 <td align="center"><#if item.isEnable?? && item.isEnable>是<#else>否</#if></td>
                 <td align="center">
-                    <a href="/admin/order/setting/delivery/edit?id=${item.id}">修改</a>
+                    <a href="/Verwalter/order/setting/delivery/edit?id=${item.id}">修改</a>
                 </td>
               </tr>
         </#list>

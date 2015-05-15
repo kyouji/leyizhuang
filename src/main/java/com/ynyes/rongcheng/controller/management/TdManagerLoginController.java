@@ -20,7 +20,7 @@ import com.ynyes.rongcheng.service.TdManagerService;
  * 
  */
 @Controller
-@RequestMapping(value="/admin")
+@RequestMapping(value="/Verwalter")
 public class TdManagerLoginController {
     
     @Autowired
@@ -42,7 +42,7 @@ public class TdManagerLoginController {
         {
             request.getSession().setAttribute("manager", username);
             tdManagerLogService.addLog("login", "用户登录", request);
-            return "redirect:/admin";
+            return "redirect:/Verwalter";
         }
         else
         {
@@ -73,7 +73,7 @@ public class TdManagerLoginController {
                     
                     request.getSession().setAttribute("manager", username);
                     tdManagerLogService.addLog("login", "用户登录", request);
-                    return "redirect:/admin";
+                    return "redirect:/Verwalter";
                 }
             }
             
@@ -89,6 +89,6 @@ public class TdManagerLoginController {
         
         request.getSession().invalidate();
         
-        return "redirect:/admin/login";
+        return "redirect:/Verwalter/login";
     }
 }

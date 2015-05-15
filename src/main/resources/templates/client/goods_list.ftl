@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>博大生活网——网站首页</title>
+<title>博大生活网——商品列表</title>
 <meta name="keywords" content="${seoKeyword!""}">
 <meta name="description" content="${seoDescription!""}">
 <meta name="copyright" content="" />

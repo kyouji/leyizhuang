@@ -124,6 +124,19 @@ public class TdParameterService {
         return repository.findByTitleAndCategoryId(title, categoryId);
     }
     
+    
+    public Page<TdParameter> findByCategoryTreeContainingOrderBySortIdAsc(Long categoryId, int page, int size)
+    {
+        if (null == categoryId)
+        {
+            return null;
+        }
+        
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByCategoryTreeContainingOrderBySortIdAsc("[" + categoryId + "]", pageRequest);
+    }
+    
     public TdParameter findByTitleAndCategoryIdAndIdNot(String title, Long categoryId, Long id)
     {
         if (null == title || null == categoryId || null == id)

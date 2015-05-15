@@ -28,7 +28,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/sitelink")
+@RequestMapping(value="/Verwalter/sitelink")
 public class TdManagerSiteLinkController {
     
     @Autowired
@@ -87,7 +87,7 @@ public class TdManagerSiteLinkController {
                           HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -156,7 +156,7 @@ public class TdManagerSiteLinkController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -176,7 +176,7 @@ public class TdManagerSiteLinkController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -192,7 +192,7 @@ public class TdManagerSiteLinkController {
         
         tdSiteLinkService.save(tdSiteLink);
         
-        return "redirect:/admin/sitelink/list";
+        return "redirect:/Verwalter/sitelink/list";
     }
 
     @ModelAttribute

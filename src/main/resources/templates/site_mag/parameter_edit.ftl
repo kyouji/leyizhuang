@@ -27,15 +27,15 @@ $(function () {
         width: '98%',
         height: '350px',
         resizeType: 1,
-        uploadJson: '/admin/editor/upload?action=EditorFile',
-        fileManagerJson: '/admin/editor/upload?action=EditorFile',
+        uploadJson: '/Verwalter/editor/upload?action=EditorFile',
+        fileManagerJson: '/Verwalter/editor/upload?action=EditorFile',
         allowFileManager: true
     });
     
     //初始化上传控件
     $(".upload-img").each(function () {
         $(this).InitSWFUpload({ 
-            sendurl: "/admin/upload", 
+            sendurl: "/Verwalter/upload", 
             flashurl: "/mag/js/swfupload.swf"
         });
     });
@@ -70,14 +70,14 @@ $(function () {
     
     // 选择类型后修改ajaxurl
     $("#paramCatId").change(function(){
-        var url = "/admin/parameter/check?categoryId=" + $(this).val() + "<#if parameter??>&id=${parameter.id}</#if>";
+        var url = "/Verwalter/parameter/check?categoryId=" + $(this).val() + "<#if parameter??>&id=${parameter.id}</#if>";
         $("#idParamTitle").attr("ajaxurl", url);
     });
 });
 </script>
 </head>
 <body class="mainbody">
-<form method="post" action="/admin/parameter/save" id="form1">
+<form method="post" action="/Verwalter/parameter/save" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
@@ -86,9 +86,9 @@ $(function () {
 <input name="id" type="text" value='<#if parameter??>${parameter.id!""}</#if>' style="display:none">
 <!--导航栏-->
 <div class="location">
-    <a href="/admin/parameter/list" class="back"><i></i><span>
+    <a href="/Verwalter/parameter/list" class="back"><i></i><span>
         返回列表页</span></a> 
-    <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+    <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
     <i class="arrow"></i>
     <span>内容管理</span>
     <i class="arrow"></i><span>编辑信息</span>
@@ -135,7 +135,7 @@ $(function () {
         <dl>
             <dt>参数名称</dt>
             <dd>
-                <input id="idParamTitle" name="title" type="text" ajaxurl="/admin/parameter/check<#if parameter??>?id=${parameter.id!''}&categoryId=${parameter.categoryId!''}</#if>" value="<#if parameter??>${parameter.title!''}</#if>" class="input normal" datatype="*2-100" sucmsg=" ">
+                <input id="idParamTitle" name="title" type="text" ajaxurl="/Verwalter/parameter/check<#if parameter??>?id=${parameter.id!''}&categoryId=${parameter.categoryId!''}</#if>" value="<#if parameter??>${parameter.title!''}</#if>" class="input normal" datatype="*2-100" sucmsg=" ">
                 <span class="Validform_checktip">*名称最多100个字符</span>
             </dd>
         </dl>

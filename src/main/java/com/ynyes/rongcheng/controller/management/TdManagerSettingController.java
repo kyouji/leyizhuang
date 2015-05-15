@@ -21,7 +21,7 @@ import com.ynyes.rongcheng.service.TdSettingService;
  */
 
 @Controller
-@RequestMapping(value="/admin/setting")
+@RequestMapping(value="/Verwalter/setting")
 public class TdManagerSettingController {
     
     @Autowired
@@ -35,7 +35,7 @@ public class TdManagerSettingController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("setting", tdSettingService.findTopBy());
@@ -51,7 +51,7 @@ public class TdManagerSettingController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null == tdSetting.getId())
@@ -65,7 +65,7 @@ public class TdManagerSettingController {
         
         tdSettingService.save(tdSetting);
         
-        return "redirect:/admin/setting?status=1";
+        return "redirect:/Verwalter/setting?status=1";
     }
 
     @ModelAttribute

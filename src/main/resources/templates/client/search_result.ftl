@@ -50,6 +50,7 @@ function setprice() {
                 <ul class="tuij_nr">
                     <#if most_sold_list??>
                         <#list most_sold_list as goods>
+                            <#if goods_index < 5>
                             <li>
                                 <a href="/goods/${goods.id}">
                                     <img src="${goods.coverImageUri!""}"/>
@@ -57,6 +58,7 @@ function setprice() {
                                 <b style="color:#d8000f; font-size:15px; line-height:25px;">￥${goods.salePrice?string("#.##")}</b>
                                 <p><a href="/goods/${goods.id}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a></p>
                             </li>
+                            </#if>
                         </#list>
                     </#if>
                 </ul>         
@@ -67,6 +69,7 @@ function setprice() {
                     <ul>
                         <#if most_sold_list??>
                             <#list most_sold_list as goods>
+                                <#if goods_index < 5>
                                 <li>
                                     <a target="_blank" class="pro_img_small" href="#">
                                         <img src="${goods.coverImageUri!""}" width="70" height="70">
@@ -76,6 +79,7 @@ function setprice() {
                                     <h3 class="name"><a href="#">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a>
                                     </h3>
                                 </li>
+                                </#if>
                             </#list>
                         </#if>               
                    </ul>
@@ -125,7 +129,7 @@ function setprice() {
                     <#if goods_page.number+1 == 1>
                         <a class="pn-prev disabled"><i>&lt;</i><em>上一页</em></a>
                     <#else>
-                        <a href="${categoryId!'0'}-${brand_index+1}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" class="pn-prev disabled"><i>&lt;</i><em>上一页</em></a>
+                        <a href="/search?keywords=${keywords!''}&page=${goods_page.number-1}" class="pn-prev disabled"><i>&lt;</i><em>上一页</em></a>
                     </#if>
                     
                     <#if goods_page.totalPages gt 0>
@@ -134,7 +138,7 @@ function setprice() {
                                 <#if page == goods_page.number+1>
                                     <a href="javascript:;" class="curr">${page}</a>
                                 <#else>
-                                    <a href="${categoryId!'0'}-${brand_index+1}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${page}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" class="hide">${page}</a> <#-- ${page} -->
+                                    <a href="/search?keywords=${keywords!''}&page=${page}" class="hide">${page}</a> <#-- ${page} -->
                                 </#if>
                                 <#assign continueEnter=false>
                             <#else>
@@ -149,7 +153,7 @@ function setprice() {
                     <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
                         <a href="javascript:;" class="pn-next disabled"><em>下一页</em><i>&gt;</i></a>
                     <#else>
-                        <a href="${categoryId!'0'}-${brand_index+1}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" class="pn-next"><em>下一页</em><i>&gt;</i></a>
+                        <a href="/search?keywords=${keywords!''}&page=${goods_page.number+1}" class="pn-next"><em>下一页</em><i>&gt;</i></a>
                     </#if>
                 </#if>
                 </span>

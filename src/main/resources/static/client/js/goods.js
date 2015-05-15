@@ -183,4 +183,31 @@ $(document).ready(function(){
     setInterval("timer()",1000);
 });
 
+function addCollect(goodsId)
+{
+    if (undefined == goodsId)
+    {
+        return;
+    }
+    
+    $.ajax({
+        type:"post",
+        url:"/user/collect/add",
+        data:{"goodsId": goodsId},
+        dataType: "json",
+        success:function(res){
+            
+            alert(res.message);
+            
+            // 需登录
+            if (res.code==1)
+            {
+                setTimeout(function(){
+                    window.location.href = "/login";
+                }, 1000); 
+            }
+        }
+    });
+}
+
  

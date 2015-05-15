@@ -27,15 +27,15 @@ $(function () {
         width: '98%',
         height: '350px',
         resizeType: 1,
-        uploadJson: '/admin/editor/upload?action=EditorFile',
-        fileManagerJson: '/admin/editor/upload?action=EditorFile',
+        uploadJson: '/Verwalter/editor/upload?action=EditorFile',
+        fileManagerJson: '/Verwalter/editor/upload?action=EditorFile',
         allowFileManager: true
     });
     
     //初始化上传控件
     $(".upload-img").each(function () {
         $(this).InitSWFUpload({ 
-            sendurl: "/admin/upload", 
+            sendurl: "/Verwalter/upload", 
             flashurl: "/mag/js/swfupload.swf"
         });
     });
@@ -70,7 +70,7 @@ $(function () {
     
     // 选择类型后修改ajaxurl
     $("#proCatId").change(function(){
-        var url = "/admin/product/check?catId=" + $(this).val() + "<#if product??>&id=${product.id}</#if>";
+        var url = "/Verwalter/product/check?catId=" + $(this).val() + "<#if product??>&id=${product.id}</#if>";
         $("#idProductTitle").attr("ajaxurl", url);
     });
     
@@ -110,7 +110,7 @@ $(function () {
 </script>
 </head>
 <body class="mainbody"><div class="" style="left: 0px; top: 0px; visibility: hidden; position: absolute;"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0);" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_max" href="javascript:void(0);" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0);" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0);" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon" style="display: none;"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div>
-<form method="post" action="/admin/product/save" id="form1">
+<form method="post" action="/Verwalter/product/save" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
@@ -119,9 +119,9 @@ $(function () {
 <input name="id" type="text" value='<#if product??>${product.id!""}</#if>' style="display:none">
     <!--导航栏-->
     <div class="location">
-        <a href="/admin/product/list" class="back"><i></i><span>
+        <a href="/Verwalter/product/list" class="back"><i></i><span>
             返回列表页</span></a> 
-        <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+        <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
         <i class="arrow"></i>
         <span>编辑信息</span>
     </div>
@@ -165,7 +165,7 @@ $(function () {
         <dl>
             <dt>产品名称</dt>
             <dd>
-                <input id="idProductTitle" name="title" type="text" value="<#if product??>${product.title!""}</#if>" ajaxurl="/admin/product/check<#if product??>?id=${product.id}</#if>" class="input normal" datatype="*1-1000" sucmsg=" ">
+                <input id="idProductTitle" name="title" type="text" value="<#if product??>${product.title!""}</#if>" ajaxurl="/Verwalter/product/check<#if product??>?id=${product.id}</#if>" class="input normal" datatype="*1-1000" sucmsg=" ">
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>

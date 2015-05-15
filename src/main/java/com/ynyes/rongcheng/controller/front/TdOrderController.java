@@ -171,10 +171,14 @@ public class TdOrderController {
                         }
 
                         tdCartGoodsService.save(cg);
+                        break;
                     }
                 }
             }
         }
+//        
+//        List<TdCartGoods> selectedGoodsList = tdCartGoodsService.findByUsernameAndIsSelectedTrue(username);
+//        map.addAttribute("selected_goods_list", selectedGoodsList);
 
         return "redirect:/order/info";
     }
@@ -263,7 +267,7 @@ public class TdOrderController {
                             * cartGoods.getQuantity();
 
                     orderGoodsList.add(orderGoods);
-                    tdGoodsService.save(goods);
+                    tdGoodsService.save(goods, username);
                 }
             }
         }

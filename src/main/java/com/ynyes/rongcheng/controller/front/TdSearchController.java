@@ -42,6 +42,7 @@ public class TdSearchController {
         }
         
         map.addAttribute("pageId", page);
+        map.addAttribute("keywords", keywords);
         
         // 热卖推荐
         map.addAttribute("hot_sale_list", tdGoodsService.findByIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(0, 10).getContent());   

@@ -43,7 +43,7 @@
             max: false,
             min: false,
             title: "促销赠品",
-            content: 'url:/admin/goods/list/dialog/gift',
+            content: 'url:/Verwalter/goods/list/dialog/gift',
             width: 800,
             height: 550
         });

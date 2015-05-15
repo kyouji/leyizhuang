@@ -29,7 +29,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/brand")
+@RequestMapping(value="/Verwalter/brand")
 public class TdManagerBrandController {
     
     @Autowired
@@ -113,7 +113,7 @@ public class TdManagerBrandController {
                           HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -182,7 +182,7 @@ public class TdManagerBrandController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("category_list", tdProductCategoryService.findAll());
@@ -204,7 +204,7 @@ public class TdManagerBrandController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -220,7 +220,7 @@ public class TdManagerBrandController {
         
         tdBrandService.save(tdBrand);
         
-        return "redirect:/admin/brand/list";
+        return "redirect:/Verwalter/brand/list";
     }
 
     @ModelAttribute

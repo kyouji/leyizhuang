@@ -35,7 +35,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value = "/admin/database")
+@RequestMapping(value = "/Verwalter/database")
 public class TdManagerDatabaseController {
     
     String filepath = SiteMagConstant.backupPath;
@@ -49,7 +49,7 @@ public class TdManagerDatabaseController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         File file = new File(filepath);
@@ -84,7 +84,7 @@ public class TdManagerDatabaseController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != __EVENTTARGET)
@@ -148,7 +148,7 @@ public class TdManagerDatabaseController {
         }
         
 
-        return "redirect:/admin/database/list";
+        return "redirect:/Verwalter/database/list";
     }
     
     @RequestMapping(value="/download", method = RequestMethod.GET)
@@ -193,12 +193,12 @@ public class TdManagerDatabaseController {
                 HttpServletRequest req) throws IOException {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null == name)
         {
-            return "redirect:/admin/database/list";
+            return "redirect:/Verwalter/database/list";
         }
         
         File file = new File(filepath + name);
@@ -211,6 +211,6 @@ public class TdManagerDatabaseController {
             tdManagerLogService.addLog("delete", "用户删除备份数据库", req);
         }
         
-        return "redirect:/admin/database/list";
+        return "redirect:/Verwalter/database/list";
     }
 }

@@ -31,7 +31,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/product")
+@RequestMapping(value="/Verwalter/product")
 public class TdManagerProductController {
     
     @Autowired
@@ -51,7 +51,7 @@ public class TdManagerProductController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         TdProduct product = tdProductService.findOne(id);
@@ -137,7 +137,7 @@ public class TdManagerProductController {
                           HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -206,7 +206,7 @@ public class TdManagerProductController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("category_list", tdProductCategoryService.findAll());
@@ -228,7 +228,7 @@ public class TdManagerProductController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -244,7 +244,7 @@ public class TdManagerProductController {
         
         tdProductService.save(tdProduct);
         
-        return "redirect:/admin/product/list";
+        return "redirect:/Verwalter/product/list";
     }
 
     @ModelAttribute

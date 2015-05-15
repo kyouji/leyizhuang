@@ -30,7 +30,7 @@ import com.ynyes.rongcheng.service.TdWarehouseService;
  */
 
 @Controller
-@RequestMapping(value="/admin")
+@RequestMapping(value="/Verwalter")
 public class TdManagerEditController {
     
     @Autowired
@@ -72,7 +72,7 @@ public class TdManagerEditController {
                                     HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
 
         map.addAttribute("cid", cid);
@@ -138,7 +138,7 @@ public class TdManagerEditController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null == cat.getId())
@@ -154,7 +154,7 @@ public class TdManagerEditController {
         
         
         
-        return "redirect:/admin/category/list?cid=" + cat.getChannelId() 
+        return "redirect:/Verwalter/category/list?cid=" + cat.getChannelId() 
                 + "&mid=" + cat.getMenuId()
                 + "&__EVENTTARGET=" + __EVENTTARGET
                 + "&__EVENTARGUMENT=" + __EVENTARGUMENT
@@ -170,7 +170,7 @@ public class TdManagerEditController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != id)
@@ -248,7 +248,7 @@ public class TdManagerEditController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         String logType = null;
@@ -264,7 +264,7 @@ public class TdManagerEditController {
         
         tdManagerLogService.addLog(logType, "用户修改文章", req);
         
-        return "redirect:/admin/content/list?cid=" + article.getChannelId() 
+        return "redirect:/Verwalter/content/list?cid=" + article.getChannelId() 
                 + "&mid=" + article.getMenuId()
                 + "&__EVENTTARGET=" + __EVENTTARGET
                 + "&__EVENTARGUMENT=" + __EVENTARGUMENT

@@ -37,19 +37,15 @@ public interface TdGoodsRepo extends
     
     List<TdGoods> findByIdAndIsOnSaleTrue(Iterable<Long> ids);
     
-    Page<TdGoods> findByCategoryId(Long catId, Pageable page);
-    
-    Page<TdGoods> findByCategoryIdOrderBySortIdAsc(Long catId, Pageable page);
-    
-    Page<TdGoods> findByCategoryIdAndIsOnSaleTrue(Long catId, Pageable page);
+    Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueOrderBySortIdAsc(String catId, Pageable page);
     
     Page<TdGoods> findByTitleContainingOrSubTitleContainingOrDetailContainingOrderBySortIdAsc(String keywords1, String keywords2, String keywords3, Pageable page);
     
-    Page<TdGoods> findByCategoryIdAndTitleContainingOrCategoryIdAndSubTitleContainingOrCategoryIdAndDetailContainingOrderBySortIdAsc(Long catId1,
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingOrCategoryIdTreeContainingAndSubTitleContainingOrCategoryIdTreeContainingAndDetailContainingOrderBySortIdAsc(String catId1,
             String keywords1, 
-            Long catId2,
+            String catId2,
             String keywords2, 
-            Long catId3,
+            String catId3,
             String keywords3, Pageable page);
     
     Page<TdGoods> findByCategoryIdTreeContainingAndLeftNumberGreaterThanAndSalePriceBetweenAndParamValueCollectLikeAndIsOnSaleTrue(String categoryId, Long leftNumber, Double priceLow, Double priceHigh, String paramStr, Pageable page);

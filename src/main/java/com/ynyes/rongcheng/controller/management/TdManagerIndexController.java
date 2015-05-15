@@ -34,12 +34,12 @@ public class TdManagerIndexController {
     @Autowired
     TdSettingService tdSettingService;
     
-    @RequestMapping(value="/admin")
+    @RequestMapping(value="/Verwalter")
     public String index(ModelMap map, HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         List<TdNavigationMenu> rootMenuList = tdNavigationMenuService.findByParentIdAndSort(0L);
@@ -81,12 +81,12 @@ public class TdManagerIndexController {
         return "/site_mag/frame";
     }
     
-    @RequestMapping(value="/admin/center")
+    @RequestMapping(value="/Verwalter/center")
     public String center(ModelMap map, HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         Properties props = System.getProperties();
         

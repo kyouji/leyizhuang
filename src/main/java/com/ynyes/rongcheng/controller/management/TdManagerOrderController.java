@@ -37,7 +37,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/order")
+@RequestMapping(value="/Verwalter/order")
 public class TdManagerOrderController {
     
     @Autowired
@@ -80,7 +80,7 @@ public class TdManagerOrderController {
                           HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != __EVENTTARGET)
@@ -184,7 +184,7 @@ public class TdManagerOrderController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -223,7 +223,7 @@ public class TdManagerOrderController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -244,7 +244,7 @@ public class TdManagerOrderController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -254,7 +254,7 @@ public class TdManagerOrderController {
         
         tdManagerLogService.addLog("edit", "修改订单", req);
         
-        return "redirect:/admin/order/list/"+statusId;
+        return "redirect:/Verwalter/order/list/"+statusId;
     }
     
     
@@ -273,7 +273,7 @@ public class TdManagerOrderController {
                                 HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -342,7 +342,7 @@ public class TdManagerOrderController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null == tdPayType.getId())
@@ -355,7 +355,7 @@ public class TdManagerOrderController {
         }
         tdPayTypeService.save(tdPayType);
         
-        return "redirect:/admin/order/setting/pay/list";
+        return "redirect:/Verwalter/order/setting/pay/list";
     }
     
     @RequestMapping(value="/setting/delivery/save", method = RequestMethod.POST)
@@ -365,7 +365,7 @@ public class TdManagerOrderController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null == tdDeliveryType.getId())
@@ -379,7 +379,7 @@ public class TdManagerOrderController {
         
         tdDeliveryTypeService.save(tdDeliveryType);
         
-        return "redirect:/admin/order/setting/delivery/list";
+        return "redirect:/Verwalter/order/setting/delivery/list";
     }
     
     @RequestMapping(value="/dialog/contact")
@@ -387,7 +387,7 @@ public class TdManagerOrderController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         return "/site_mag/dialog_contact";
@@ -398,7 +398,7 @@ public class TdManagerOrderController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != orderNumber && !orderNumber.isEmpty())
@@ -416,7 +416,7 @@ public class TdManagerOrderController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != orderNumber && !orderNumber.isEmpty())

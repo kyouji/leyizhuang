@@ -33,4 +33,6 @@ public interface TdParameterRepo extends
     int countByCategoryTreeContaining(String categoryId);
     
     Page<TdParameter> findByTitleContainingOrderBySortIdAsc(String keywords, Pageable page);
+    
+    Page<TdParameter> findByCategoryTreeContainingOrderBySortIdAsc(String catId, Pageable page);
 }

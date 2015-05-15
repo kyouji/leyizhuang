@@ -22,7 +22,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/keywords")
+@RequestMapping(value="/Verwalter/keywords")
 public class TdManagerKeywordsController {
     
     @Autowired
@@ -44,7 +44,7 @@ public class TdManagerKeywordsController {
                           HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -96,7 +96,7 @@ public class TdManagerKeywordsController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -116,7 +116,7 @@ public class TdManagerKeywordsController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -132,7 +132,7 @@ public class TdManagerKeywordsController {
         
         tdKeywordsService.save(tdKeywords);
         
-        return "redirect:/admin/keywords/list";
+        return "redirect:/Verwalter/keywords/list";
     }
 
     @ModelAttribute

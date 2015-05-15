@@ -341,12 +341,14 @@
                             <img width="260" height="260" alt="" src="${item.coverImageUri!''}">
                             <h5>${item.title!''}</h5>
                             <h6>${item.subTitle!''}</h6>
-                            <span class="description">
-                                <span class="flag flag_39487"></span>
-                            </span>
-                            <div class="price"><b>￥${item.groupSalePrice?string("0.00")}</b>
-                                <h4 id="timeLeft${item_index}">倒计时 01:01:35</h4>
-                            </div>
+                            
+                            <span class="description"><span class="flag flag_0"></span></span>
+                            <div class="price"><h4 id="timeLeft${item_index}"></h4><b>￥${item.groupSalePrice?string("0.00")}</b></div>
+                            
+                            <div class="buyBtn J_buyBtn">立即抢购</div>
+                            <div class="promoIcon promoIconActive J_promoIcon">
+                            <div class="promoA">${item.groupSaleLeftNumber!'0'}</div></div>
+                        </a>
 <script type="text/javascript">
 $(document).ready(function(){
     setInterval("timer${item_index}()",1000);
@@ -385,11 +387,7 @@ function checkTime${item_index}(i)
     }  
     return i;  
 } 
-</script>                   
-                            <div class="buyBtn J_buyBtn" style="display: block;">立即抢购</div>
-                            <div class="promoIcon promoIconActive J_promoIcon">
-                            <div class="promoA">${item.groupSaleLeftNumber!'0'}</div></div>
-                        </a>
+</script>  
                     </div>
                     </#if>
                 </#list>
@@ -450,9 +448,11 @@ function checkTime${item_index}(i)
     <ul class="brand_ri fr">
         <#if brand_big_list??>
             <#list brand_big_list as item>
+                <#if item_index < 2>
                 <li>
-                    <a href="${item.linkUri!''}"><img src="${item.logoUri!''}" width="440" height="442" /></a>
+                    <a href="${item.linkUri!''}"><img src="${item.fileUri!''}" width="440" height="442" /></a>
                 </li>
+                </#if>
             </#list>
         </#if>
     </ul>

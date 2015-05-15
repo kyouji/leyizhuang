@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/master.css" rel="stylesheet" type="text/css" />
+<script src="/client/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/client/js/html5.js"></script>
 <script src="/client/js/header.js"></script>
 </head>

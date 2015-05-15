@@ -24,7 +24,7 @@ $(function () {
     //初始化上传控件
     $(".upload-img").each(function () {
         $(this).InitSWFUpload({ 
-            sendurl: "/admin/upload", 
+            sendurl: "/Verwalter/upload", 
             flashurl: "/mag/js/swfupload.swf"
         });
     });
@@ -59,14 +59,14 @@ $(function () {
     
     // 选择类型后修改ajaxurl
     $("#proCatId").change(function(){
-        var url = "/admin/brand/check?catId=" + $(this).val() + "<#if brand??>&id=${brand.id}</#if>";
+        var url = "/Verwalter/brand/check?catId=" + $(this).val() + "<#if brand??>&id=${brand.id}</#if>";
         $("#idBrandTitle").attr("ajaxurl", url);
     });
 });
 </script>
 </head>
 <body class="mainbody">
-<form method="post" action="/admin/brand/save" id="form1">
+<form method="post" action="/Verwalter/brand/save" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
@@ -77,11 +77,11 @@ $(function () {
 <input name="id" type="text" value='<#if brand??>${brand.id!""}</#if>' style="display:none">
     <!--导航栏-->
     <div class="location">
-        <a href="/admin/brand/list" class="back"><i></i><span>
+        <a href="/Verwalter/brand/list" class="back"><i></i><span>
             返回列表页</span></a> 
-        <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+        <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
         <i class="arrow"></i>
-        <a href="/admin/brand/list"><span>
+        <a href="/Verwalter/brand/list"><span>
             品牌管理</span></a> <i class="arrow"></i><span>编辑品牌</span>
     </div>
     <div class="line10">
@@ -130,7 +130,7 @@ $(function () {
         <dl>
             <dt>品牌名称</dt>
             <dd>
-                <input id="idBrandTitle" name="title" type="text" datatype="*" value="<#if brand??>${brand.title!''}</#if>" ajaxurl="/admin/brand/check<#if brand??>?id=${brand.id}</#if>" class="input normal" sucmsg=" " />
+                <input id="idBrandTitle" name="title" type="text" datatype="*" value="<#if brand??>${brand.title!''}</#if>" ajaxurl="/Verwalter/brand/check<#if brand??>?id=${brand.id}</#if>" class="input normal" sucmsg=" " />
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>

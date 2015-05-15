@@ -58,7 +58,7 @@
             "mobile": $("#txtMobile").val()
         };
         //发送AJAX请求
-        W.sendAjaxUrl(api, postData, "/admin/order/param/edit");
+        W.sendAjaxUrl(api, postData, "/Verwalter/order/param/edit");
         return false;
     }
 </script>

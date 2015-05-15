@@ -19,7 +19,7 @@
         //初始化上传控件
         $(".upload-img").each(function () {
             $(this).InitSWFUpload({ 
-                sendurl: "/admin/upload", 
+                sendurl: "/Verwalter/upload", 
                 flashurl: "/mag/js/swfupload.swf"
             });
         });
@@ -27,7 +27,7 @@
 </script>
 </head>
 <body class="mainbody"><div class="" style="left: 0px; top: 0px; visibility: hidden; position: absolute;"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0);" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_max" href="javascript:void(0);" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0);" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0);" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon" style="display: none;"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div>
-<form name="form1" method="post" action="/admin/order/setting/pay/save" id="form1">
+<form name="form1" method="post" action="/Verwalter/order/setting/pay/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}">
 <input name="payTypeId" type="text" value='<#if pay_type??>${pay_type.id}</#if>' style="display:none">
@@ -35,10 +35,10 @@
 
 <!--导航栏-->
 <div class="location">
-  <a href="/admin/order/setting/pay/list" class="back"><i></i><span>返回列表页</span></a>
-  <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+  <a href="/Verwalter/order/setting/pay/list" class="back"><i></i><span>返回列表页</span></a>
+  <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
-  <a href="/admin/order/setting/pay/list"><span>支付方式</span></a>
+  <a href="/Verwalter/order/setting/pay/list"><span>支付方式</span></a>
   <i class="arrow"></i>
   <span>编辑支付方式</span>
 </div>

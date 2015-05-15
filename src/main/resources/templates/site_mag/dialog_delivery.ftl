@@ -36,7 +36,7 @@
             W.$.dialog.confirm('您确定不填写物流单号吗？',
             function () {
                 //发送AJAX请求
-                W.sendAjaxUrl(api, postData, "/admin/order/param/edit");
+                W.sendAjaxUrl(api, postData, "/Verwalter/order/param/edit");
             },
             function () {
                 $("#expressNumber").focus();
@@ -45,7 +45,7 @@
                 return false;
             } else {
                 //发送AJAX请求
-                W.sendAjaxUrl(api, postData, "/admin/order/param/edit");
+                W.sendAjaxUrl(api, postData, "/Verwalter/order/param/edit");
             }
             return false;
     }

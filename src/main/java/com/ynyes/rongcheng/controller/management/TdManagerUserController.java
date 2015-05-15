@@ -42,7 +42,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/user")
+@RequestMapping(value="/Verwalter/user")
 public class TdManagerUserController {
     
     @Autowired
@@ -124,7 +124,7 @@ public class TdManagerUserController {
                           HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -205,7 +205,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -225,7 +225,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -241,7 +241,7 @@ public class TdManagerUserController {
         
         tdUserService.save(tdUser);
         
-        return "redirect:/admin/user/list/";
+        return "redirect:/Verwalter/user/list/";
     }
     
     @RequestMapping(value="/level/edit")
@@ -252,7 +252,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != id)
@@ -274,7 +274,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -289,7 +289,7 @@ public class TdManagerUserController {
         
         tdUserLevelService.save(tdUserLevel);
         
-        return "redirect:/admin/user/level/list";
+        return "redirect:/Verwalter/user/level/list";
     }
     
     @RequestMapping(value="/level/check/{type}", method = RequestMethod.POST)
@@ -372,7 +372,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != id)
@@ -395,7 +395,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -417,7 +417,7 @@ public class TdManagerUserController {
         
         tdUserConsultService.save(tdUserConsult);
         
-        return "redirect:/admin/user/consult/list?statusId=" + __VIEWSTATE;
+        return "redirect:/Verwalter/user/consult/list?statusId=" + __VIEWSTATE;
     }
     
     @RequestMapping(value="/comment/edit")
@@ -429,7 +429,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != id)
@@ -452,7 +452,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -475,7 +475,7 @@ public class TdManagerUserController {
         
         tdUserCommentService.save(tdUserComment);
         
-        return "redirect:/admin/user/comment/list?statusId=" + __VIEWSTATE;
+        return "redirect:/Verwalter/user/comment/list?statusId=" + __VIEWSTATE;
     }
     
     @RequestMapping(value="/return/edit")
@@ -487,7 +487,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != id)
@@ -510,7 +510,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -527,7 +527,7 @@ public class TdManagerUserController {
         
         tdUserReturnService.save(tdUserReturn);
         
-        return "redirect:/admin/user/return/list?statusId=" + __VIEWSTATE;
+        return "redirect:/Verwalter/user/return/list?statusId=" + __VIEWSTATE;
     }
     
     @RequestMapping(value="/{type}/list")
@@ -548,7 +548,7 @@ public class TdManagerUserController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -647,7 +647,7 @@ public class TdManagerUserController {
                     return "/site_mag/error_404";
                 }
                 
-                map.addAttribute("user_recent_page", tdUserRecentVisitService.findByUsername(user.getUsername(), page, size));
+                map.addAttribute("user_recent_page", tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(user.getUsername(), page, size));
                 return "/site_mag/user_recent_list";
             }
             else if (type.equalsIgnoreCase("reward")) // 返现

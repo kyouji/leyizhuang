@@ -116,7 +116,7 @@ public class TdUserController {
         map.addAttribute("user", tdUser);
         map.addAttribute("order_page", tdOrderService.findByUsername(username, 0, ClientConstant.pageSize));
         map.addAttribute("collect_page", tdUserCollectService.findByUsername(username, 0, ClientConstant.pageSize));
-        map.addAttribute("recent_page", tdUserRecentVisitService.findByUsername(username, 0, ClientConstant.pageSize));
+        map.addAttribute("recent_page", tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(username, 0, ClientConstant.pageSize));
         map.addAttribute("total_unpayed", tdOrderService.countByUsernameAndStatusId(username, 2));
         map.addAttribute("total_undelivered", tdOrderService.countByUsernameAndStatusId(username, 3));
         map.addAttribute("total_unreceived", tdOrderService.countByUsernameAndStatusId(username, 4));
@@ -486,11 +486,11 @@ public class TdUserController {
         
         if (null == keywords || keywords.isEmpty())
         {
-            recentPage = tdUserRecentVisitService.findByUsername(username, page, ClientConstant.pageSize);
+            recentPage = tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(username, page, ClientConstant.pageSize);
         }
         else
         {
-            recentPage = tdUserRecentVisitService.findByUsernameAndSearch(username, keywords, page, ClientConstant.pageSize);
+            recentPage = tdUserRecentVisitService.findByUsernameAndSearchOrderByVisitTimeDesc(username, keywords, page, ClientConstant.pageSize);
         }
         
         map.addAttribute("recent_page", recentPage);

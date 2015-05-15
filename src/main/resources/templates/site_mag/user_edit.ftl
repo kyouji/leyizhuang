@@ -22,7 +22,7 @@ $(function () {
     //初始化上传控件
     $(".upload-img").each(function () {
         $(this).InitSWFUpload({ 
-            sendurl: "/admin/upload", 
+            sendurl: "/Verwalter/upload", 
             flashurl: "/mag/js/swfupload.swf"
         });
     });
@@ -60,15 +60,15 @@ $(function () {
 </head>
 
 <body class="mainbody">
-<form name="form_user" method="post" action="/admin/user/save" id="form_user">
+<form name="form_user" method="post" action="/Verwalter/user/save" id="form_user">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
 <input type="hidden" name="userId" value="<#if user??>${user.id!""}</#if>" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
-  <a href="/admin/user/list?roleId=${roleId!""}"><i></i><span>返回列表页</span></a>
-  <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+  <a href="/Verwalter/user/list?roleId=${roleId!""}"><i></i><span>返回列表页</span></a>
+  <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
   <span>会员管理</span>
   <i class="arrow"></i>
@@ -128,7 +128,7 @@ $(function () {
             <#if user??>
                 <span>${user.username!""}</span>
             <#else>
-                <input name="username" type="text" maxlength="200" class="input normal" datatype="s6-20" ajaxurl="/admin/user/check<#if user??>?id=${user.id}</#if>" sucmsg=" " minlength="2">
+                <input name="username" type="text" maxlength="200" class="input normal" datatype="s6-20" ajaxurl="/Verwalter/user/check<#if user??>?id=${user.id}</#if>" sucmsg=" " minlength="2">
             </#if>
             <span class="Validform_checktip">
         </span></dd>

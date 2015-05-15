@@ -27,15 +27,15 @@ $(function () {
         width: '98%',
         height: '350px',
         resizeType: 1,
-        uploadJson: '/admin/editor/upload?action=EditorFile',
-        fileManagerJson: '/admin/editor/upload?action=EditorFile',
+        uploadJson: '/Verwalter/editor/upload?action=EditorFile',
+        fileManagerJson: '/Verwalter/editor/upload?action=EditorFile',
         allowFileManager: true
     });
     
     //初始化上传控件
     $(".upload-img").each(function () {
         $(this).InitSWFUpload({ 
-            sendurl: "/admin/upload", 
+            sendurl: "/Verwalter/upload", 
             flashurl: "/mag/js/swfupload.swf"
         });
     });
@@ -48,7 +48,7 @@ $(function () {
             water: true, 
             thumbnail: true, 
             filesize: "5120", 
-            sendurl: "/admin/upload", 
+            sendurl: "/Verwalter/upload", 
             flashurl: "/mag/js/swfupload.swf", 
             filetypes: "*.jpg;*.jpge;*.png;*.gif;" 
         });
@@ -106,7 +106,7 @@ $(function () {
     // 根据类型载入参数
     $("#categoryId").change(function(){
         $.ajax({
-            url : '/admin/goods/edit/parameter/'+$(this).val(),
+            url : '/Verwalter/goods/edit/parameter/'+$(this).val(),
             type : 'POST',
             success : function(res) {
                 $("#id-param-sec").html(res);
@@ -134,7 +134,7 @@ $(function () {
             max: false,
             min: false,
             title: "赠品",
-            content: 'url:/admin/goods/list/dialog/gift?total=' + $("#var_box_gift").children("tr").length,
+            content: 'url:/Verwalter/goods/list/dialog/gift?total=' + $("#var_box_gift").children("tr").length,
             width: 800,
             height: 550
         });
@@ -160,7 +160,7 @@ $(function () {
             max: false,
             min: false,
             title: "商品组合",
-            content: 'url:/admin/goods/list/dialog/comb?total=' + $("#var_box_comb").children("tr").length,
+            content: 'url:/Verwalter/goods/list/dialog/comb?total=' + $("#var_box_comb").children("tr").length,
             width: 800,
             height: 550
         });
@@ -219,7 +219,7 @@ function show_goods_gift_dialog(obj) {
         max: false,
         min: false,
         title: "促销赠品",
-        content: 'url:/admin/goods/list/dialog/gift',
+        content: 'url:/Verwalter/goods/list/dialog/gift',
         width: 800,
         height: 550
     });
@@ -238,7 +238,7 @@ function show_goods_comb_dialog(obj) {
         max: false,
         min: false,
         title: "促销赠品",
-        content: 'url:/admin/goods/list/dialog/comb',
+        content: 'url:/Verwalter/goods/list/dialog/comb',
         width: 800,
         height: 550
     });
@@ -263,7 +263,7 @@ function del_goods_comb(obj) {
 </script>
 </head>
 <body class="mainbody">
-<form method="post" action="/admin/goods/save" id="form1">
+<form method="post" action="/Verwalter/goods/save" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />

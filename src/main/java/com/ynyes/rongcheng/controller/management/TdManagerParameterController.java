@@ -28,7 +28,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/parameter")
+@RequestMapping(value="/Verwalter/parameter")
 public class TdManagerParameterController {
     
     @Autowired
@@ -85,6 +85,7 @@ public class TdManagerParameterController {
     public String setting(String __EVENTTARGET,
                           String __EVENTARGUMENT,
                           String __VIEWSTATE,
+                          Long categoryId,
                           String keywords,
                           Integer page,
                           Integer size,
@@ -96,7 +97,7 @@ public class TdManagerParameterController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != __EVENTTARGET)
@@ -133,11 +134,13 @@ public class TdManagerParameterController {
         map.addAttribute("__EVENTTARGET", __EVENTTARGET);
         map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        map.addAttribute("categoryId", categoryId);
         map.addAttribute("keywords", keywords);
         map.addAttribute("page", page);
         map.addAttribute("size", size);
         
-        map.addAttribute("category_list", tdParameterCategoryService.findAll());
+        map.addAttribute("parameter_category_list", tdParameterCategoryService.findAll());
+        
         
         if (null != keywords && !keywords.isEmpty())
         {
@@ -145,7 +148,14 @@ public class TdManagerParameterController {
         }
         else
         {
-            map.addAttribute("parameter_page", tdParameterService.findAllOrderBySortIdAsc(page, size));
+            if (null == categoryId)
+            {
+                map.addAttribute("parameter_page", tdParameterService.findAllOrderBySortIdAsc(page, size));
+            }
+            else
+            {
+                map.addAttribute("parameter_page", tdParameterService.findByCategoryTreeContainingOrderBySortIdAsc(categoryId, page, size));
+            }
         }
         
         return "/site_mag/parameter_list";
@@ -160,7 +170,7 @@ public class TdManagerParameterController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -182,7 +192,7 @@ public class TdManagerParameterController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -202,7 +212,7 @@ public class TdManagerParameterController {
         
         tdManagerLogService.addLog(type, "用户修改参数", req);
         
-        return "redirect:/admin/parameter/list";
+        return "redirect:/Verwalter/parameter/list";
     }
 
     @ModelAttribute

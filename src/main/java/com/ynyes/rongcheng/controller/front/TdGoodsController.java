@@ -269,7 +269,7 @@ public class TdGoodsController {
 
             // 不是来自同一个ip的访问，普通用户
             if (!clientIp.equalsIgnoreCase(oldIp) && sharedUser.getRoleId().equals(0L)) {
-                req.getSession().setAttribute("remote_ip", oldIp);
+                req.getSession().setAttribute("remote_ip", clientIp);
 
                 if (null != sharedUser && null != setting) {
                     if (null == sharedUser.getPointGetByShareGoods()) {

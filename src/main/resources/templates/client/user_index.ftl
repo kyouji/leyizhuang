@@ -42,7 +42,7 @@ DD_belatedPNG.fix('.,img,background');
     <div class="mymember_info mymember_info01">
       <table>
         <tr>
-          <th width="150" rowspan="2"><a class="mymember_header" href="/user/info?id=${user.id}"><img src="${user.headImageUri!''}" /></a></th>
+          <th width="150" rowspan="2"><a class="mymember_header" href="/user/info?id=${user.id}"><img src="${user.headImageUri!'/mag/style/user_avatar.png'}" /></a></th>
           <td><a href="/user/order/list/2"><img src="/client/images/mymember/buy01.png" />待付款：<span>${total_unpayed!'0'}</span></a></td>
           <td><a href="/user/order/list/3"><img src="/client/images/mymember/buy02.png" />待发货：<span>${total_undelivered!'0'}</span></a></td>
           <th rowspan="2" class="mymember_fen">
@@ -127,7 +127,7 @@ DD_belatedPNG.fix('.,img,background');
             <li>
             <#if collect_page??>
                 <#list collect_page.content as cgoods>
-                <a class="mymember_gzlist" href="/goods/${cgoods.goodsTitle!''}">
+                <a class="mymember_gzlist" href="/goods/${cgoods.goodsId!''}">
                     <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" />
                     <p>${cgoods.goodsTitle!''}</p>
                     <h6>￥${cgoods.goodsSalePrice?string("#.##")}</h6>

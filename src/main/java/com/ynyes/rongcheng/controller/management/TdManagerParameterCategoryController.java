@@ -26,7 +26,7 @@ import com.ynyes.rongcheng.service.TdParameterCategoryService;
  */
 
 @Controller
-@RequestMapping(value="/admin/parameter/category")
+@RequestMapping(value="/Verwalter/parameter/category")
 public class TdManagerParameterCategoryController {
     
     @Autowired
@@ -104,7 +104,7 @@ public class TdManagerParameterCategoryController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         if (null != __EVENTTARGET)
@@ -139,7 +139,7 @@ public class TdManagerParameterCategoryController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -168,7 +168,7 @@ public class TdManagerParameterCategoryController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -188,7 +188,7 @@ public class TdManagerParameterCategoryController {
         
         tdManagerLogService.addLog(type, "用户修改参数类型", req);
         
-        return "redirect:/admin/parameter/category/list";
+        return "redirect:/Verwalter/parameter/category/list";
     }
 
     @ModelAttribute

@@ -32,7 +32,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/goods")
+@RequestMapping(value="/Verwalter/goods")
 public class TdManagerGoodsController {
     
     @Autowired
@@ -64,7 +64,7 @@ public class TdManagerGoodsController {
             HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         TdProductCategory tpc = tdProductCategoryService.findOne(categoryId);
@@ -103,7 +103,7 @@ public class TdManagerGoodsController {
                                 HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -156,7 +156,7 @@ public class TdManagerGoodsController {
         {
             if (null == keywords || "".equalsIgnoreCase(keywords))
             {
-                goodsPage = tdGoodsService.findByCategoryIdOrderBySortIdAsc(categoryId, page, size);
+                goodsPage = tdGoodsService.findByCategoryIdTreeContainingOrderBySortIdAsc(categoryId, page, size);
             }
             else
             {
@@ -198,7 +198,7 @@ public class TdManagerGoodsController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         String uris = parsePicUris(hid_photo_name_show360);
@@ -216,11 +216,11 @@ public class TdManagerGoodsController {
             type = "edit";
         }
         
-        tdGoodsService.save(tdGoods);
+        tdGoodsService.save(tdGoods, username);
         
         tdManagerLogService.addLog(type, "用户修改商品", req);
         
-        return "redirect:/admin/content/list?cid=" + channelId
+        return "redirect:/Verwalter/content/list?cid=" + channelId
                 + "&mid=" + menuId
                 + "&__EVENTTARGET=" + __EVENTTARGET
                 + "&__EVENTARGUMENT=" + __EVENTARGUMENT

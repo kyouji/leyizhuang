@@ -27,15 +27,15 @@
             width: '98%',
             height: '350px',
             resizeType: 1,
-            uploadJson: '/admin/editor/upload?action=EditorFile',
-            fileManagerJson: '/admin/editor/upload?action=EditorFile',
+            uploadJson: '/Verwalter/editor/upload?action=EditorFile',
+            fileManagerJson: '/Verwalter/editor/upload?action=EditorFile',
             allowFileManager: true
         });
         
         //初始化上传控件
         $(".upload-img").each(function () {
             $(this).InitSWFUpload({ 
-                sendurl: "/admin/upload", 
+                sendurl: "/Verwalter/upload", 
                 flashurl: "/mag/js/swfupload.swf"
             });
         });
@@ -71,7 +71,7 @@
 </script>
 </head>
 <body class="mainbody">
-<form method="post" action="/admin/article/save" id="form1">
+<form method="post" action="/Verwalter/article/save" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
@@ -82,11 +82,11 @@
 <input name="id" type="text" value='<#if article??>${article.id!""}</#if>' style="display:none">
     <!--导航栏-->
     <div class="location">
-        <a href="/admin/content/list?cid=${cid!""}&mid=${mid!""}" class="back"><i></i><span>
+        <a href="/Verwalter/content/list?cid=${cid!""}&mid=${mid!""}" class="back"><i></i><span>
             返回列表页</span></a> 
-        <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+        <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
         <i class="arrow"></i>
-        <a href="/admin/content/list?cid=${cid!""}&mid=${mid!""}"><span>
+        <a href="/Verwalter/content/list?cid=${cid!""}&mid=${mid!""}"><span>
             内容管理</span></a> <i class="arrow"></i><span>编辑信息</span>
     </div>
     <div class="line10">

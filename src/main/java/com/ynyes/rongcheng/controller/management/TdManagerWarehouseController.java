@@ -28,7 +28,7 @@ import com.ynyes.rongcheng.util.SiteMagConstant;
  */
 
 @Controller
-@RequestMapping(value="/admin/warehouse")
+@RequestMapping(value="/Verwalter/warehouse")
 public class TdManagerWarehouseController {
     
     @Autowired
@@ -87,7 +87,7 @@ public class TdManagerWarehouseController {
                           HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         if (null != __EVENTTARGET)
         {
@@ -156,7 +156,7 @@ public class TdManagerWarehouseController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -176,7 +176,7 @@ public class TdManagerWarehouseController {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
-            return "redirect:/admin/login";
+            return "redirect:/Verwalter/login";
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
@@ -192,7 +192,7 @@ public class TdManagerWarehouseController {
         
         tdWarehouseService.save(tdWarehouse);
         
-        return "redirect:/admin/warehouse/list";
+        return "redirect:/Verwalter/warehouse/list";
     }
 
     @ModelAttribute

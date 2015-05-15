@@ -180,11 +180,11 @@
                   <div class="arrow"></div>
                   <ul class="drop-item">
                     <li><a target="_blank" href="/">预览网站</a></li>
-                    <li><a href="/admin/center" target="mainframe">管理中心</a></li>
+                    <li><a href="/Verwalter/center" target="mainframe">管理中心</a></li>
                     <#--
                     <li><a onclick="linkMenuTree(false, &#39;&#39;);" href="http://localhost:2100/site_mag/manager/manager_pwd.aspx" target="mainframe">修改密码</a></li>
                     -->
-                    <li><a id="lbtnExit" href="/admin/logout">注销登录</a></li>            
+                    <li><a id="lbtnExit" href="/Verwalter/logout">注销登录</a></li>            
                   </ul>
                 </div>
               </div>
@@ -213,7 +213,7 @@
                                                     <#if ("level_"+root_menu_index+lOneMenu_index+"_menu_list")?eval??>
                                                         <#list ("level_"+root_menu_index+lOneMenu_index+"_menu_list")?eval as lSecondMenu>
                                                             <li>
-                                                                <a navid="${lSecondMenu.name}" href="/admin${lSecondMenu.linkUrl}?cid=${lSecondMenu.channelId}&mid=${lSecondMenu.parentId}" target="mainframe" class="item">
+                                                                <a navid="${lSecondMenu.name}" href="/Verwalter${lSecondMenu.linkUrl}?cid=${lSecondMenu.channelId}&mid=${lSecondMenu.parentId}" target="mainframe" class="item">
                                                                 <div class="arrow"></div>
                                                                 <div class="expandable"></div>
                                                                 <div class="folder open"></div>
@@ -237,7 +237,7 @@
         <div class="picBox" id="switchPoint" status="1" title="收起左边导航" style="left: 184px;background:url(mag/style/right.gif) no-repeat center center;cursor:pointer;"></div>
     
         <div class="main-container" id="main_right" style="left: 182px;">
-          <iframe id="mainframe" name="mainframe" frameborder="0" src="/admin/center"></iframe>
+          <iframe id="mainframe" name="mainframe" frameborder="0" src="/Verwalter/center"></iframe>
         </div>
     </form>
 

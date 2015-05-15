@@ -149,7 +149,7 @@ function checkTime(i)
 			<#-- <dd style="float:left">商品编号：1478489559</dd> -->
 			
 			<div class="sc fr">
-                <a href="javascript:void(0);"><i></i>
+                <a href="javascript:void(0);" onclick="this, addCollect(${goods.id})"><i></i>
                   收藏
                 </a>
             </div>
@@ -176,11 +176,11 @@ function checkTime(i)
                         </div>
                     <#else>
                         <div class="fl w600">
-                            <div class="jg_bd pt20">博&nbsp;大&nbsp;价：<b style="color:#f30919; font-size:18px;">￥${goods.salePrice?string("#.##")}</b>
+                            <div class="jg_bd pt20">博&nbsp;大&nbsp;价：<b style="color:#f30919; font-size:18px;">￥${goods.salePrice?string("0.00")}</b>
                                 
                             </div>
                             <div class="jg_bd">市&nbsp;场&nbsp;价：
-                                <del style="color:#b6b6b6; padding-right:10px;">￥${goods.salePrice?string("#.##")}</del>
+                                <del style="color:#b6b6b6; padding-right:10px;">￥${goods.marketPrice?string("0.00")}</del>
                             </div>
                             <#--
                             <div class="jg_bd"><img src="/client/images/star4.gif" width="81" height="17" style=" margin-left:60px;" />

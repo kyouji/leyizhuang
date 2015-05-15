@@ -22,7 +22,7 @@
         //初始化上传控件
         $(".upload-img").each(function () {
             $(this).InitSWFUpload({ 
-                sendurl: "/admin/upload", 
+                sendurl: "/Verwalter/upload", 
                 flashurl: "/mag/js/swfupload.swf"
             });
         });
@@ -32,7 +32,7 @@
             width: '98%',
             height: '250px',
             resizeType: 1,
-            uploadJson: '/admin/editor/upload?action=EditorFile',
+            uploadJson: '/Verwalter/editor/upload?action=EditorFile',
             items: [
 				'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
 				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
@@ -49,7 +49,7 @@
 </script>
 
 <body class="mainbody">
-<form method="post" action="/admin/product/category/save" id="form1">
+<form method="post" action="/Verwalter/product/category/save" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}" />
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
@@ -60,8 +60,8 @@
 <input name="id" type="text" value='<#if cat??>${cat.id!""}</#if>' style="display:none">
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
-  <a href="/admin/product/category/list" class="back"><i></i><span>返回列表页</span></a>
-  <a href="/admin/center" class="home"><i></i><span>首页</span></a>
+  <a href="/Verwalter/product/category/list" class="back"><i></i><span>返回列表页</span></a>
+  <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
   <i class="arrow"></i>
   <span>编辑分类</span>
 </div>
@@ -107,7 +107,7 @@
   <dl>
     <dt>类别名称</dt>
     <dd>
-        <input name="title" type="text" value="<#if cat??>${cat.title!""}</#if>" class="input normal" datatype="*1-100" sucmsg=" " ajaxurl="/admin/product/category/check<#if cat??>?id=${cat.id}</#if>" >
+        <input name="title" type="text" value="<#if cat??>${cat.title!""}</#if>" class="input normal" datatype="*1-100" sucmsg=" " ajaxurl="/Verwalter/product/category/check<#if cat??>?id=${cat.id}</#if>" >
         <span class="Validform_checktip">*类别中文名称，100字符内</span>
     </dd>
   </dl>

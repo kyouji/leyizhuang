@@ -336,7 +336,7 @@ ul.flmenu li h5 span{float:right;font-family:"宋体";color:#fff}
 .promotionWrapper .leftTitle h3,.promotionWrapper .leftTitle h4{display:inline-block;*display:inline}
 .leftTitle h4 { background:url(../images/pic.png) no-repeat}
 .promotionWrapper h3{margin-left:15px;color:#e24151;font-size:24px;margin-top:20px;margin-bottom:10px;font-weight:400;line-height:40px}
-.promotionWrapper h4{margin:0 0 0 5px;color:#e24151;font-size:14px;font-weight:400;margin-bottom:10px;margin-left:5px}
+.promotionWrapper h4{margin:0 0 0 5px;color:#e24151;font-size:14px;font-weight:400;margin-left:5px}
 .promotionWrapper .leftItem{margin-left:15px;}
 .promotionWrapper .leftTabController{position:absolute;left:290px;top:34px;font-size:14px;color:#8a8477}
 .promotionWrapper .leftTabController .current{color:#000;font-weight:700}
@@ -346,7 +346,7 @@ ul.flmenu li h5 span{float:right;font-family:"宋体";color:#fff}
 .promotionWrapper .itemWrapper a{display:block;height:100%}
 .promotionWrapper .itemWrapper a,.promotionWrapper .itemWrapper a:hover,.promotionWrapper .itemWrapper a:visited{text-decoration:none;color:#000}
 .promotionWrapper .itemWrapper h6{font-size:12px;margin:5px;font-weight:400;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
-@media only screen and (min-device-width :768px) and (max-device-width :1024px){.promotionWrapper .itemWrapper h6{font-size:14px}}.promotionWrapper .itemWrapper .buyBtn{display:none;position:absolute;right:15px;bottom:28px}
+@media only screen and (min-device-width :768px) and (max-device-width :1024px){.promotionWrapper .itemWrapper h6{font-size:14px}}.promotionWrapper .itemWrapper .buyBtn{position:absolute;right:15px;bottom:28px}
 .promotionWrapper .buyBtn{background:#d8000f;color:#FFF;font-size:12px;padding:5px 15px;border-radius:3px;width:50px}
 .promotionWrapper .buyBtnDisable{background:#777}
 .promotionWrapper .buyBtn a,.promotionWrapper .buyBtn a:hover,.promotionWrapper .buyBtn a:visited{color:#FFF;text-decoration:none}
@@ -358,7 +358,7 @@ ul.flmenu li h5 span{float:right;font-family:"宋体";color:#fff}
 .promotionWrapper .promoIconSoldout .promoA,.promotionWrapper .promoIconSoldout .promoB,.promotionWrapper .promoIconSoldout .promoB_small{display:none}
 .promotionWrapper .price{color:#C40000;font-size:24px;margin:8px 5px 0 0}
 .promotionWrapper .price b { float:left}
-.promotionWrapper .price h4 { padding-left:15px; float:left; line-height:40px; color:#333}
+.promotionWrapper .price h4 {line-height:30px; color:#333}
 .promotionWrapper .count{display:none;color:#999;font-size:12px;font-weight:400;margin:2px 5px}
 @media only screen and (min-device-width :768px) and (max-device-width :1024px){.promotionWrapper .count{font-size:14px}}.promotionWrapper .countNum{color:#40997B;font-weight:700}
 .promotionWrapper .right{position:absolute;border:1px solid #E5E5E5;border-left:0;right:-10px;top:0;width:309px;height:507px}

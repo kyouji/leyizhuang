@@ -17,7 +17,7 @@
 </head>
 
 <body class="loginbody">
-<form name="form1" method="post" action="/admin/login" id="form1">
+<form name="form1" method="post" action="/Verwalter/login" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="">
 </div>

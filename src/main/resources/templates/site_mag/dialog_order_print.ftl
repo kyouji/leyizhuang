@@ -61,7 +61,7 @@
                         <#list order.orderGoodsList as og>
                             <tr>
                                 <td>
-                                    ${og.goodsTitle!''} ${og.goodsColor!''} ${og.goodsCapacity} ${og.goodsVersion}
+                                    ${og.goodsTitle!''} ${og.goodsColor!''} ${og.goodsCapacity!''} ${og.goodsVersion!''}
                                 </td>
                                 <td>${og.price?string("0.00")}</td>
                                 <td>${og.points!'0'}</td>
