@@ -19,4 +19,6 @@ public interface TdKeywordsRepo extends
 		JpaSpecificationExecutor<TdKeywords> 
 {
     List<TdKeywords> findByIsEnableTrueOrderBySortIdAsc();
+    
+    TdKeywords findTopByTitleIgnoreCase(String title);
 }

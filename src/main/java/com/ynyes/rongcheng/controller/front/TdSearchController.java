@@ -1,5 +1,7 @@
 package com.ynyes.rongcheng.controller.front;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ynyes.rongcheng.entity.TdKeywords;
 import com.ynyes.rongcheng.service.TdCommonService;
 import com.ynyes.rongcheng.service.TdGoodsService;
+import com.ynyes.rongcheng.service.TdKeywordsService;
 import com.ynyes.rongcheng.util.ClientConstant;
 
 /**
@@ -26,6 +30,9 @@ public class TdSearchController {
     @Autowired
     private TdGoodsService tdGoodsService;
     
+    @Autowired
+    private TdKeywordsService tdKeywordsService;
+    
     @RequestMapping(value="/search", method = RequestMethod.GET)
     public String list(String keywords, Integer page, HttpServletRequest req, ModelMap map){
         
@@ -38,6 +45,24 @@ public class TdSearchController {
         
         if (null != keywords)
         {
+            TdKeywords key = tdKeywordsService.findByTitle(keywords);
+            
+            if (null != key)
+            {
+                if (null == key.getTotalSearch())
+                {
+                    key.setTotalSearch(1L);
+                }
+                else
+                {
+                    key.setTotalSearch(key.getTotalSearch() + 1L);
+                }
+                
+                key.setLastSearchTime(new Date());
+                
+                tdKeywordsService.save(key);
+            }
+            
             map.addAttribute("goods_page", tdGoodsService.searchGoods(keywords.trim(), page, ClientConstant.pageSize));
         }
         

@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ynyes.rongcheng.entity.TdArticle;
 import com.ynyes.rongcheng.entity.TdArticleCategory;
-import com.ynyes.rongcheng.entity.TdGoods;
-import com.ynyes.rongcheng.entity.TdProductCategory;
 import com.ynyes.rongcheng.service.TdArticleCategoryService;
 import com.ynyes.rongcheng.service.TdArticleService;
 import com.ynyes.rongcheng.service.TdBrandService;
@@ -81,31 +79,31 @@ public class TdManagerEditController {
         map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
         
-        if (null != cid && cid.equals(2L)) // 商品分类
-        {
-            map.addAttribute("category_list", tdProductCategoryService.findAll());
-            
-            // 参数类型表
-            map.addAttribute("param_category_list", tdParameterCategoryService.findAll());
-            
-            if (null != sub) // 添加子类
-            {
-                if (null != id)
-                {
-                    map.addAttribute("fatherCat", tdProductCategoryService.findOne(id));
-                }
-            }
-            else
-            {
-                if (null != id)
-                {
-                    map.addAttribute("cat", tdProductCategoryService.findOne(id));
-                }
-            }
-            
-            return "/site_mag/product_category_edit";
-        }
-        else
+//        if (null != cid && cid.equals(2L)) // 商品分类
+//        {
+//            map.addAttribute("category_list", tdProductCategoryService.findAll());
+//            
+//            // 参数类型表
+//            map.addAttribute("param_category_list", tdParameterCategoryService.findAll());
+//            
+//            if (null != sub) // 添加子类
+//            {
+//                if (null != id)
+//                {
+//                    map.addAttribute("fatherCat", tdProductCategoryService.findOne(id));
+//                }
+//            }
+//            else
+//            {
+//                if (null != id)
+//                {
+//                    map.addAttribute("cat", tdProductCategoryService.findOne(id));
+//                }
+//            }
+//            
+//            return "/site_mag/product_category_edit";
+//        }
+//        else
         {
             if (null != mid)
             {
@@ -152,8 +150,6 @@ public class TdManagerEditController {
         
         tdArticleCategoryService.save(cat);
         
-        
-        
         return "redirect:/Verwalter/category/list?cid=" + cat.getChannelId() 
                 + "&mid=" + cat.getMenuId()
                 + "&__EVENTTARGET=" + __EVENTTARGET
@@ -184,57 +180,56 @@ public class TdManagerEditController {
         map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
         
-
         if (null != mid)
         {
             map.addAttribute("category_list", tdArticleCategoryService.findByMenuId(mid));
         }
         
-        if (null != cid)
-        {
-            if (cid.equals(5L)) // 产品
-            {
-                map.addAttribute("category_list", tdProductCategoryService.findAll());
-                return "/site_mag/product_edit";
-            }
-            else if (cid.equals(2L)) // 商品
-            {
-                map.addAttribute("category_list", tdProductCategoryService.findAll());
-                
-                if (null != id)
-                {
-                    TdGoods tdGoods = tdGoodsService.findOne(id);
-                    
-                    if (null != tdGoods)
-                    {
-                        // 参数列表
-                        TdProductCategory tpc = tdProductCategoryService.findOne(tdGoods.getCategoryId());
-                        
-                        if (null != tpc && null != tpc.getParamCategoryId())
-                        {
-                            map.addAttribute("param_list", tdParameterService.findByCategoryTreeContaining(tpc.getParamCategoryId()));
-                        }
-                        
-                        // 查找产品列表
-                        map.addAttribute("product_list", tdProductService.findByProductCategoryTreeContaining(tdGoods.getCategoryId()));
-                    
-                        // 查找品牌
-                        map.addAttribute("brand_list", tdBrandService.findByProductCategoryTreeContaining(tdGoods.getCategoryId()));
-                        
-                        map.addAttribute("warehouse_list", tdWarehouseService.findAll());
-                        
-                        if (null != tdGoods.getProductId())
-                        {
-                            map.addAttribute("product", tdProductService.findOne(tdGoods.getProductId()));
-                        }
-                        
-                        map.addAttribute("goods", tdGoods);
-                    }
-                }
-                
-                return "/site_mag/goods_edit";
-            }
-        }
+//        if (null != cid)
+//        {
+//            if (cid.equals(5L)) // 产品
+//            {
+//                map.addAttribute("category_list", tdProductCategoryService.findAll());
+//                return "/site_mag/product_edit";
+//            }
+//            else if (cid.equals(2L)) // 商品
+//            {
+//                map.addAttribute("category_list", tdProductCategoryService.findAll());
+//                
+//                if (null != id)
+//                {
+//                    TdGoods tdGoods = tdGoodsService.findOne(id);
+//                    
+//                    if (null != tdGoods)
+//                    {
+//                        // 参数列表
+//                        TdProductCategory tpc = tdProductCategoryService.findOne(tdGoods.getCategoryId());
+//                        
+//                        if (null != tpc && null != tpc.getParamCategoryId())
+//                        {
+//                            map.addAttribute("param_list", tdParameterService.findByCategoryTreeContaining(tpc.getParamCategoryId()));
+//                        }
+//                        
+//                        // 查找产品列表
+//                        map.addAttribute("product_list", tdProductService.findByProductCategoryTreeContaining(tdGoods.getCategoryId()));
+//                    
+//                        // 查找品牌
+//                        map.addAttribute("brand_list", tdBrandService.findByProductCategoryTreeContaining(tdGoods.getCategoryId()));
+//                        
+//                        map.addAttribute("warehouse_list", tdWarehouseService.findAll());
+//                        
+//                        if (null != tdGoods.getProductId())
+//                        {
+//                            map.addAttribute("product", tdProductService.findOne(tdGoods.getProductId()));
+//                        }
+//                        
+//                        map.addAttribute("goods", tdGoods);
+//                    }
+//                }
+//                
+//                return "/site_mag/goods_edit";
+//            }
+//        }
         
         return "/site_mag/article_content_edit";
     }

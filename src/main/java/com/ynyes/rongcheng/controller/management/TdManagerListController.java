@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ynyes.rongcheng.entity.TdArticle;
 import com.ynyes.rongcheng.entity.TdArticleCategory;
 import com.ynyes.rongcheng.entity.TdGoods;
-import com.ynyes.rongcheng.entity.TdProductCategory;
 import com.ynyes.rongcheng.service.TdArticleCategoryService;
 import com.ynyes.rongcheng.service.TdArticleService;
 import com.ynyes.rongcheng.service.TdGoodsService;
@@ -70,11 +69,11 @@ public class TdManagerListController {
                     articleCategoryBtnSave(listId, listSortId);
                     tdManagerLogService.addLog("edit", "用户修改文章分类", req);
                 }
-                else if (cid.equals(2L)) // 产品分类
-                {
-                    productCategoryBtnSave(listId, listSortId);
-                    tdManagerLogService.addLog("edit", "用户修改产品分类", req);
-                }
+//                else if (cid.equals(2L)) // 产品分类
+//                {
+//                    productCategoryBtnSave(listId, listSortId);
+//                    tdManagerLogService.addLog("edit", "用户修改产品分类", req);
+//                }
                 
                 break;
                 
@@ -84,11 +83,11 @@ public class TdManagerListController {
                     articleCategoryBtnDelete(listId, listChkId);
                     tdManagerLogService.addLog("delete", "用户删除文章分类", req);
                 }
-                else if (cid.equals(2L)) // 产品分类
-                {
-                    productCategoryBtnDelete(listId, listChkId);
-                    tdManagerLogService.addLog("delete", "用户删除产品分类", req);
-                }
+//                else if (cid.equals(2L)) // 产品分类
+//                {
+//                    productCategoryBtnDelete(listId, listChkId);
+//                    tdManagerLogService.addLog("delete", "用户删除产品分类", req);
+//                }
                 
                 break;
             }
@@ -98,10 +97,10 @@ public class TdManagerListController {
         {
             map.addAttribute("category_list", tdArticleCategoryService.findByMenuId(mid));
         }
-        else if (cid.equals(2L)) // 商品
-        {
-            map.addAttribute("category_list", tdProductCategoryService.findAll());
-        }
+//        else if (cid.equals(2L)) // 商品
+//        {
+//            map.addAttribute("category_list", tdProductCategoryService.findAll());
+//        }
         
         // 参数注回
         map.addAttribute("cid", cid);
@@ -139,11 +138,11 @@ public class TdManagerListController {
                     articleCategoryBtnSave(listId, listSortId);
                     tdManagerLogService.addLog("edit", "用户修改文章分类", req);
                 }
-                else if (cid.equals(2L)) // 商品分类
-                {
-                    productCategoryBtnSave(listId, listSortId);
-                    tdManagerLogService.addLog("edit", "用户修改产品分类", req);
-                }
+//                else if (cid.equals(2L)) // 商品分类
+//                {
+//                    productCategoryBtnSave(listId, listSortId);
+//                    tdManagerLogService.addLog("edit", "用户修改产品分类", req);
+//                }
                 
                 break;
                 
@@ -153,11 +152,11 @@ public class TdManagerListController {
                     articleCategoryBtnDelete(listId, listChkId);
                     tdManagerLogService.addLog("delete", "用户删除文章分类", req);
                 }
-                else if (cid.equals(2L)) // 商品分类
-                {
-                    productCategoryBtnDelete(listId, listChkId);
-                    tdManagerLogService.addLog("delete", "用户删除产品分类", req);
-                }
+//                else if (cid.equals(2L)) // 商品分类
+//                {
+//                    productCategoryBtnDelete(listId, listChkId);
+//                    tdManagerLogService.addLog("delete", "用户删除产品分类", req);
+//                }
                 
                 break;
             }
@@ -257,32 +256,32 @@ public class TdManagerListController {
                 map.addAttribute("content_page", tdArticleService.findByMenuIdAndCategoryId(mid, categoryId, page, size));
             }
         }
-        else if (cid.equals(2L)) // 商品
-        {
-            map.addAttribute("category_list", tdProductCategoryService.findAll());
-            
-            if (null == categoryId)
-            {
-                map.addAttribute("content_page", tdGoodsService.findAllOrderBySortIdAsc(page, size));
-            }
-            else
-            {
-                map.addAttribute("content_page", tdGoodsService.findByCategoryIdTreeContainingOrderBySortIdAsc(categoryId, page, size));
-            }
-        }
-        else // 品牌，产品
-        {
-            map.addAttribute("category_list", tdProductCategoryService.findAll());
-            
-            if (null == categoryId)
-            {
-                map.addAttribute("content_page", tdArticleService.findByChannelId(cid, page, size));
-            }
-            else
-            {
-                map.addAttribute("content_page", tdArticleService.findByChannelIdAndCategoryId(cid, categoryId, page, size));
-            }
-        }
+//        else if (cid.equals(2L)) // 商品
+//        {
+//            map.addAttribute("category_list", tdProductCategoryService.findAll());
+//            
+//            if (null == categoryId)
+//            {
+//                map.addAttribute("content_page", tdGoodsService.findAllOrderBySortIdAsc(page, size));
+//            }
+//            else
+//            {
+//                map.addAttribute("content_page", tdGoodsService.findByCategoryIdTreeContainingOrderBySortIdAsc(categoryId, page, size));
+//            }
+//        }
+//        else // 品牌，产品
+//        {
+//            map.addAttribute("category_list", tdProductCategoryService.findAll());
+//            
+//            if (null == categoryId)
+//            {
+//                map.addAttribute("content_page", tdArticleService.findByChannelId(cid, page, size));
+//            }
+//            else
+//            {
+//                map.addAttribute("content_page", tdArticleService.findByChannelIdAndCategoryId(cid, categoryId, page, size));
+//            }
+//        }
 
         // 参数注回
         map.addAttribute("cid", cid);
@@ -397,32 +396,32 @@ public class TdManagerListController {
                 map.addAttribute("content_page", tdArticleService.findByMenuIdAndCategoryId(mid, categoryId, page, size));
             }
         }
-        else if (cid.equals(2L)) // 商品
-        {
-            map.addAttribute("category_list", tdProductCategoryService.findAll());
-            
-            if (null == categoryId)
-            {
-                map.addAttribute("content_page", tdGoodsService.findAllOrderBySortIdAsc(page, size));
-            }
-            else
-            {
-                map.addAttribute("content_page", tdGoodsService.findByCategoryIdTreeContainingOrderBySortIdAsc(categoryId, page, size));
-            }
-        }
-        else // 品牌，产品
-        {
-            map.addAttribute("category_list", tdProductCategoryService.findAll());
-            
-            if (null == categoryId)
-            {
-                map.addAttribute("content_page", tdArticleService.findByChannelId(cid, page, size));
-            }
-            else
-            {
-                map.addAttribute("content_page", tdArticleService.findByChannelIdAndCategoryId(cid, categoryId, page, size));
-            }
-        }
+//        else if (cid.equals(2L)) // 商品
+//        {
+//            map.addAttribute("category_list", tdProductCategoryService.findAll());
+//            
+//            if (null == categoryId)
+//            {
+//                map.addAttribute("content_page", tdGoodsService.findAllOrderBySortIdAsc(page, size));
+//            }
+//            else
+//            {
+//                map.addAttribute("content_page", tdGoodsService.findByCategoryIdTreeContainingOrderBySortIdAsc(categoryId, page, size));
+//            }
+//        }
+//        else // 品牌，产品
+//        {
+//            map.addAttribute("category_list", tdProductCategoryService.findAll());
+//            
+//            if (null == categoryId)
+//            {
+//                map.addAttribute("content_page", tdArticleService.findByChannelId(cid, page, size));
+//            }
+//            else
+//            {
+//                map.addAttribute("content_page", tdArticleService.findByChannelIdAndCategoryId(cid, categoryId, page, size));
+//            }
+//        }
 
         // 参数注回
         map.addAttribute("cid", cid);
@@ -517,26 +516,26 @@ public class TdManagerListController {
         }
     }
     
-    private void productCategoryBtnSave(Long[] ids, Long[] sortIds)
-    {
-        if (null == ids || null == sortIds
-                || ids.length < 1 || sortIds.length < 1)
-        {
-            return;
-        }
-        
-        for (int i = 0; i < ids.length; i++)
-        {
-            Long id = ids[i];
-            TdProductCategory category = tdProductCategoryService.findOne(id);
-                
-            if (sortIds.length > i)
-            {
-                category.setSortId(sortIds[i]);
-                tdProductCategoryService.save(category);
-            }
-        }
-    }
+//    private void productCategoryBtnSave(Long[] ids, Long[] sortIds)
+//    {
+//        if (null == ids || null == sortIds
+//                || ids.length < 1 || sortIds.length < 1)
+//        {
+//            return;
+//        }
+//        
+//        for (int i = 0; i < ids.length; i++)
+//        {
+//            Long id = ids[i];
+//            TdProductCategory category = tdProductCategoryService.findOne(id);
+//                
+//            if (sortIds.length > i)
+//            {
+//                category.setSortId(sortIds[i]);
+//                tdProductCategoryService.save(category);
+//            }
+//        }
+//    }
     
     /**
      * 删除类型
@@ -564,24 +563,24 @@ public class TdManagerListController {
         }
     }
     
-    private void productCategoryBtnDelete(Long[] ids, Integer[] chkIds)
-    {
-        if (null == ids || null == chkIds
-                || ids.length < 1 || chkIds.length < 1)
-        {
-            return;
-        }
-        
-        for (int chkId : chkIds)
-        {
-            if (chkId >=0 && ids.length > chkId)
-            {
-                Long id = ids[chkId];
-                
-                tdProductCategoryService.delete(id);
-            }
-        }
-    }
+//    private void productCategoryBtnDelete(Long[] ids, Integer[] chkIds)
+//    {
+//        if (null == ids || null == chkIds
+//                || ids.length < 1 || chkIds.length < 1)
+//        {
+//            return;
+//        }
+//        
+//        for (int chkId : chkIds)
+//        {
+//            if (chkId >=0 && ids.length > chkId)
+//            {
+//                Long id = ids[chkId];
+//                
+//                tdProductCategoryService.delete(id);
+//            }
+//        }
+//    }
     
     /**
      * 保存文章排序ID

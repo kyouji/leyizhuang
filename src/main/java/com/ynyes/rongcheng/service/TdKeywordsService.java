@@ -78,6 +78,16 @@ public class TdKeywordsService {
         return repository.findOne(id);
     }
     
+    public TdKeywords findByTitle(String title)
+    {
+        if (null == title)
+        {
+            return null;
+        }
+        
+        return repository.findTopByTitleIgnoreCase(title.trim());
+    }
+    
     /**
      * 查找
      * 

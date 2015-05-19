@@ -136,7 +136,7 @@ $(function () {
             title: "赠品",
             content: 'url:/Verwalter/goods/list/dialog/gift?total=' + $("#var_box_gift").children("tr").length,
             width: 800,
-            height: 550
+            height: 350
         });
         
         //如果是修改状态，将对象传进去
@@ -272,9 +272,18 @@ function del_goods_comb(obj) {
 <input name="menuId" type="text" value='${mid!""}' style="display:none;">
 <input name="channelId" type="text" value='${cid!""}' style="display:none">
 <input name="id" type="text" value='<#if goods??>${goods.id}</#if>' style="display:none">
-    <!--导航栏-->
-    <#include "/site_mag/content_edit_navi_bar.ftl" />
-    <!--/导航栏-->
+<!--导航栏-->
+<div class="location">
+    <a href="/Verwalter/goods/list" class="back"><i></i><span>
+        返回列表页</span></a> 
+    <a href="/Verwalter/center" class="home">
+    <i></i><span>首页</span></a>
+    <i class="arrow"></i>
+    <span>编辑信息</span>
+</div>
+<div class="line10">
+</div>
+<!--/导航栏-->
     <!--内容-->
     <div class="content-tab-wrap">
         <div id="floatHead" class="content-tab">
@@ -511,7 +520,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>销售价</dt>
             <dd>
-                <input id="idComputeSalePrice" name="salePrice" type="text" disabled="disabled" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.##")}<#else>0</#if>" class="input normal" sucmsg="" style="background: #EEEEEE;">
+                <input id="idComputeSalePrice" name="salePrice" type="text" disabled="disabled" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="" style="background: #EEEEEE;">
                 <span class="Validform_checktip">系统自动计算 (销售价 = 分销价 + 最高返现额)</span>
             </dd>
         </dl>
