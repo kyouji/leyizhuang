@@ -32,6 +32,7 @@
     function submitForm() {
         //验证表单
         var price = $.trim($('#outFactoryPrice').val());
+        var originPrice = $.trim($('#originPrice').val());
     
         if (isNaN(price) || price=="") {
             W.$.dialog.alert('请设置正确的价格！', function () { $("#outFactoryPrice").focus(); }, api);
@@ -39,6 +40,13 @@
         }
         
         var p1 = parseFloat(price);
+        var p2 = parseFloat(originPrice);
+        
+        if (p1 == p2)
+        {
+            W.$.dialog.alert('请设置不同的价格！', function () { $("#outFactoryPrice").focus(); }, api);
+            return false;
+        }
         
         $.ajax({
             type:"post",
@@ -67,7 +75,7 @@
     <dl>
         <dt>原出厂价</dt>
         <dd>
-            <input disabled="disabled" type="text" value="<#if goods?? && goods.outFactoryPrice??>${goods.outFactoryPrice?string("0.00")}<#else>0</#if>" class="input normal" style="background: #EEEEEE;">
+            <input id="originPrice" disabled="disabled" type="text" value="<#if goods?? && goods.outFactoryPrice??>${goods.outFactoryPrice?string("0.00")}<#else>0</#if>" class="input normal" style="background: #EEEEEE;">
             <span class="Validform_checktip">商品原出厂价</span>
         </dd>
     </dl>

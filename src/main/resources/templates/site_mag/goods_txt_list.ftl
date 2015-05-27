@@ -62,6 +62,20 @@
             height: 200
         });
     }
+    
+    // 改价记录
+    function showDialogPriceLog(goodsId) {
+        $.dialog({
+            id: 'giftDialogId',
+            lock: true,
+            max: false,
+            min: false,
+            title: "改价记录",
+            content: 'url:/Verwalter/goods/price/log?goodsId=' + goodsId,
+            width: 800,
+            height: 500
+        });
+    }
 </script>
 </head>
 
@@ -108,7 +122,7 @@ function __doPostBack(eventTarget, eventArgument) {
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
       </ul>
       <div class="menu-list">
-        <div class="rule-single-select single-select">
+        <div class="rule-single-select">
             <select name="categoryId" onchange="javascript:setTimeout(__doPostBack('categoryId', ''), 0)">
                 <option <#if categoryId??><#else>selected="selected"</#if> value="">所有类别</option>
                 <#if category_list??>
@@ -118,20 +132,12 @@ function __doPostBack(eventTarget, eventArgument) {
                 </#if>
             </select>
         </div>
-        <#--
-        <#if cid?? && cid==1>
-        <div class="rule-single-select single-select">
+        <div class="rule-single-select">
             <select name="property" onchange="javascript:setTimeout(__doPostBack('property',''), 0)">
-                <option selected="selected" value="">所有属性</option>
-                <option value="isMsg">允许评论</option>
-                <option value="isTop">置顶</option>
-                <option value="isRed">推荐</option>
-                <option value="isHot">热门</option>
-                <option value="isSlide">幻灯片</option>
+                <option value="">所有属性</option>
+                <option value="isOnSale" <#if property?? && property=="isOnSale">selected="selected"</#if>>已上架</option>
             </select>
         </div>
-        </#if>
-        -->
       </div>
     </div>
     <div class="r-list">
@@ -187,8 +193,8 @@ function __doPostBack(eventTarget, eventArgument) {
             <td>
               <div class="btn-tools">
                 <a title="上架/下架" class="hot <#if content.isOnSale?? && content.isOnSale>selected</#if>" href="javascript:__doPostBack('btnOnSale','${content.id!''}')"></a>
-                <a title="改价" class="msg selected" href="javascript:showDialogChangePrice('${content.id!""}')"></a>
-                
+                <a title="改价" class="change" href="javascript:showDialogChangePrice('${content.id!""}')"></a>
+                <a title="改价记录" class="record" href="javascript:showDialogPriceLog('${content.id!""}')"></a>
                 <#--
                 <a id="rptList1_ctl01_lbtnIsTop" title="设置置顶" class="top" href="javascript:__doPostBack('rptList1$ctl01$lbtnIsTop','')"></a>
                 <a id="rptList1_ctl01_lbtnIsRed" title="设置推荐" class="red" href="javascript:__doPostBack('rptList1$ctl01$lbtnIsRed','')"></a>

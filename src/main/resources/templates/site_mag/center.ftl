@@ -8,7 +8,7 @@
 </head>
 
 <body class="mainbody">
-<form name="form1" method="post" action="./管理首页_files/管理首页.htm" id="form1">
+<form name="form1" method="post" action="" id="form1">
     <!--导航栏-->
     <div class="location">
       <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>

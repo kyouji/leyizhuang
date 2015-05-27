@@ -147,7 +147,7 @@
     
     
         <div>
-        	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWAgLKv6roBwKk8Z2vB8aR31Cxj8u8z+zTJBKTgP7NzV0G">
+        	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="">
         </div>
         <!--全局菜单-->
     

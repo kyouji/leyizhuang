@@ -4,12 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ynyes</groupId>
-	<artifactId>boda</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<artifactId>huizi</artifactId>
+	<version>1.0</version>
 
-	<name>boda</name>
-	<description>boda project for ynyes</description>
+	<name>huizi</name>
+	<description>huizi project for ynyes</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

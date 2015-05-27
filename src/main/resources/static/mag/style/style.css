@@ -227,6 +227,8 @@ textarea.inputw400_h100{ width:445px; height:100px; }
 		.ltable td .btn-tools a.hot.selected{ background-position:-81px -109px; }
 		.ltable td .btn-tools a.pic{ background-position:-109px -81px; }
 		.ltable td .btn-tools a.pic.selected{ background-position:-109px -109px; }
+		.ltable td .btn-tools a.change{ background-position:-136px -110px; }
+		.ltable td .btn-tools a.record{ background-position:-164px -25px; }
 		.ltable td .folder-open{ display:inline-block; margin-right:2px; width:20px; height:20px; background:url(skin_icons.png) -2px -198px no-repeat; vertical-align:middle; text-indent:-999em; *text-indent:0; }
 		.ltable td .folder-line{display:inline-block; margin-right:2px; width:20px; height:20px; background:url(skin_icons.png) -80px -196px no-repeat; vertical-align:middle; text-indent:-999em; *text-indent:0; }
 	.ltable tr:hover{ background:#F2F7FB; }
@@ -292,6 +294,8 @@ textarea.inputw400_h100{ width:445px; height:100px; }
 		.imglist ul li .details .tools a.hot.selected{ background-position:-77px -105px; }
 		.imglist ul li .details .tools a.pic{ background-position:-105px -77px; }
 		.imglist ul li .details .tools a.pic.selected{ background-position:-105px -105px; }
+		.imglist ul li .details .tools a.change{ background-position:-133px -105px; }
+        .imglist ul li .details .tools a.record{ background-position:-161px -20px; }
 		.imglist ul li .details .tools .sort{ float:right; margin:0; margin-left:-1px; padding:0 2px; border:1px solid #e8e8e8; width:39px; height:28px; line-height:28px; text-align:center; color:#66; font-size:12px; }
 	.imglist ul li .details.nopic h1{ display:block; position:relative; top:0px; padding:17px 20px; border-bottom:1px solid #dbdbdb; }
 		.imglist ul li .details.nopic h1 span{ color:#333; }
