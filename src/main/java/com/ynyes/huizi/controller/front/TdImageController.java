@@ -30,7 +30,7 @@ public class TdImageController{
 	/*
 	 * 返回图片
 	 */
-	@RequestMapping(value="/images/goods/{name:.+}", method = RequestMethod.GET)
+	@RequestMapping(value="/images/{name:.+}", method = RequestMethod.GET)
 	@ResponseBody
 	public void getPic(@PathVariable String name,
 	            HttpServletResponse resp) throws IOException {
@@ -39,7 +39,7 @@ public class TdImageController{
 		    return;
 		}
 		
-		String path = ImageUtil.ImageRoot + "/goods/";
+		String path = ImageUtil.ImageRoot + "/";
 		
 		File file = new File(path + name);
 		

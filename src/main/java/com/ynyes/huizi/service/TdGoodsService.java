@@ -293,6 +293,21 @@ public class TdGoodsService {
                 .findByCategoryIdTreeContainingAndIsOnSaleTrueOrderBySoldNumberDesc(
                         catStr, pageRequest);
     }
+    
+    public Page<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeDesc(
+            Long catId, int page, int size) {
+        if (null == catId) {
+            return null;
+        }
+
+        PageRequest pageRequest = new PageRequest(page, size);
+
+        String catStr = "[" + catId + "]";
+
+        return repository
+                .findByCategoryIdTreeContainingAndIsOnSaleTrueOrderByOnSaleTimeDesc(
+                        catStr, pageRequest);
+    }
 
     public Page<TdGoods> findByIsOnSaleTrueOrderBySoldNumberDesc(int page,
             int size) {

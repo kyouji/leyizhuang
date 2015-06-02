@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.huizi.entity.TdUser;
+import com.ynyes.huizi.service.TdSettingService;
 import com.ynyes.huizi.service.TdUserService;
 import com.ynyes.huizi.util.VerifServlet;
 
@@ -25,12 +27,18 @@ import com.ynyes.huizi.util.VerifServlet;
 public class TdLoginController {
     @Autowired
     private TdUserService tdUserService;
+    
+    @Autowired
+    private TdSettingService tdSettingService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(HttpServletRequest req) {
+    public String login(HttpServletRequest req, ModelMap map) {
         String username = (String) req.getSession().getAttribute("username");
 
         String referer = req.getHeader("referer");
+        
+        // 网站基本信息
+        map.addAttribute("site", tdSettingService.findTopBy());
         
         if (null == username) 
         {
@@ -111,6 +119,5 @@ public class TdLoginController {
         response.setDateHeader("Expire", 0);
         VerifServlet randomValidateCode = new VerifServlet();
         randomValidateCode.getRandcode(request, response);
-
     }
 }

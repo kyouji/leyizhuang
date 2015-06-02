@@ -63,7 +63,7 @@ public class TdSetting {
     
     // 首页标题SEO
     @Column
-    private String titleSeo;
+    private String seoTitle;
     
     // 首页关键词SEO
     @Column
@@ -213,12 +213,12 @@ public class TdSetting {
         this.icpNumber = icpNumber;
     }
 
-    public String getTitleSeo() {
-        return titleSeo;
+    public String getSeoTitle() {
+        return seoTitle;
     }
 
-    public void setTitleSeo(String titleSeo) {
-        this.titleSeo = titleSeo;
+    public void setSeoTitle(String seoTitle) {
+        this.seoTitle = seoTitle;
     }
 
     public String getSeoKeywords() {

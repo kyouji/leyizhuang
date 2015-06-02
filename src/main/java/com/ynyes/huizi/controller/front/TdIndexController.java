@@ -87,7 +87,7 @@ public class TdIndexController {
 
         // 生鲜一级分类列表
         map.addAttribute("fresh_subcategory_list",
-                tdProductCategoryService.findByParentId(cat.getId()));
+                tdProductCategoryService.findByParentIdOrderBySortIdAsc(cat.getId()));
 
         // 品牌
         map.addAttribute("brand_page", tdBrandService
@@ -118,7 +118,7 @@ public class TdIndexController {
 
         // 手机一级分类列表
         map.addAttribute("mobile_subcategory_list",
-                tdProductCategoryService.findByParentId(cat.getId()));
+                tdProductCategoryService.findByParentIdOrderBySortIdAsc(cat.getId()));
 
         // 手机品牌
         map.addAttribute(

@@ -54,14 +54,19 @@ public class TdProductCategoryService {
         return repository.findByTitleAndIdNot(title, id);
     }
     
-    public List<TdProductCategory> findByParentId(Long parentId)
+    public List<TdProductCategory> findByParentIdOrderBySortIdAsc(Long parentId)
     {
         if (null == parentId)
         {
             return null;
         }
         
-        return repository.findByParentId(parentId);
+        return repository.findByParentIdOrderBySortIdAsc(parentId);
+    }
+    
+    public List<TdProductCategory> findByParentIdIsNullOrderBySortIdAsc()
+    {
+        return repository.findByParentIdIsNullOrderBySortIdAsc();
     }
     
     
@@ -74,13 +79,13 @@ public class TdProductCategoryService {
     public List<TdProductCategory> findAll()
     {
         List<TdProductCategory> resList = new ArrayList<TdProductCategory>();
-        List<TdProductCategory> topList = repository.findByParentIdIsNull();
+        List<TdProductCategory> topList = repository.findByParentIdIsNullOrderBySortIdAsc();
         
         for (TdProductCategory top : topList)
         {
             resList.add(top);
             
-            List<TdProductCategory> childList = repository.findByParentId(top.getId());
+            List<TdProductCategory> childList = repository.findByParentIdOrderBySortIdAsc(top.getId());
             
             if (null != childList && childList.size() > 0)
             {
@@ -88,7 +93,7 @@ public class TdProductCategoryService {
                 {
                     resList.add(child);
                     
-                    List<TdProductCategory> grandChildList = repository.findByParentId(child.getId());
+                    List<TdProductCategory> grandChildList = repository.findByParentIdOrderBySortIdAsc(child.getId());
                     
                     if (null != grandChildList && grandChildList.size() > 0)
                     {

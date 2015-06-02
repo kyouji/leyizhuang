@@ -36,7 +36,13 @@ public class TdRegisgerController {
     public String reg(Integer errCode, Integer shareId, HttpServletRequest request, ModelMap map) {
         String username = (String) request.getSession().getAttribute("username");
         
-        map.addAttribute("share_id", shareId);
+        if (null != shareId)
+        {
+            map.addAttribute("share_id", shareId);
+        }
+        
+        // 网站基本信息
+        map.addAttribute("site", tdSettingService.findTopBy());
         
         if (null == username) {
             if (null != errCode)
@@ -89,26 +95,54 @@ public class TdRegisgerController {
         
         if (null == codeBack)
         {
-            return "redirect:/reg?shareId=" + shareId;
+            if (null == shareId)
+            {
+                return "redirect:/reg";
+            }
+            else
+            {
+                return "redirect:/reg?shareId=" + shareId;
+            }
         }
         
         if (!codeBack.equalsIgnoreCase(code))
         {
-            return "redirect:/reg?errCode=1&shareId=" + shareId;
+            if (null == shareId)
+            {
+                return "redirect:/reg?errCode=1";
+            }
+            else
+            {
+                return "redirect:/reg?errCode=1&shareId=" + shareId;
+            }
         }
         
         TdUser user = tdUserService.findByUsername(username);
         
         if (null != user)
         {
-            return "redirect:/reg?errCode=2&shareId=" + shareId;
+            if (null == shareId)
+            {
+                return "redirect:/reg?errCode=2";
+            }
+            else
+            {
+                return "redirect:/reg?errCode=2&shareId=" + shareId;
+            }
         }
         
         user = tdUserService.addNewUser(null, username, password, mobile, email);
         
         if (null == user)
         {
-            return "redirect:/reg?errCode=3&shareId=" + shareId;
+            if (null == shareId)
+            {
+                return "redirect:/reg?errCode=3";
+            }
+            else
+            {
+                return "redirect:/reg?errCode=3&shareId=" + shareId;
+            }
         }
         
         user = tdUserService.save(user);
@@ -158,6 +192,11 @@ public class TdRegisgerController {
         if (null != request.getAttribute("referer"))
         {
             return "redirect:" + referer;
+        }
+        
+        if (null == shareId)
+        {
+            return "redirect:/user";
         }
         
         return "redirect:/user?shareId=" + shareId;

@@ -69,7 +69,7 @@ public class TdUploadController {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
             String fileName = sdf.format(dt) + ext;
 
-            String uri = ImageRoot + "/goods/" + fileName;
+            String uri = ImageRoot + "/" + fileName;
 
             File file = new File(uri);
 
@@ -80,8 +80,8 @@ public class TdUploadController {
 
             res.put("status", 1);
             res.put("msg", "上传文件成功！");
-            res.put("path", "/images/goods/" + fileName);
-            res.put("thumb", "/images/goods/" + fileName);
+            res.put("path", "/images/" + fileName);
+            res.put("thumb", "/images/" + fileName);
             res.put("name", name);
             res.put("size", Filedata.getSize());
             res.put("ext", ext.substring(1));
@@ -124,7 +124,7 @@ public class TdUploadController {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
             String fileName = sdf.format(dt) + ext;
 
-            String uri = ImageRoot + "/goods/" + fileName;
+            String uri = ImageRoot + "/" + fileName;
 
             File file = new File(uri);
 
@@ -135,7 +135,7 @@ public class TdUploadController {
 
             res.put("error", 0);
             res.put("msg", "上传文件成功！");
-            res.put("url", "/images/goods/" + fileName);
+            res.put("url", "/images/" + fileName);
 
         } catch (Exception e) {
             res.put("msg", "上传文件失败！");

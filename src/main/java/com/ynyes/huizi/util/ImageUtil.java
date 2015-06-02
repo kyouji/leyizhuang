@@ -43,7 +43,7 @@ public class ImageUtil {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
                 String   fileName   =   sdf.format(dt);
                 
-                String uri = ImageRoot + "/goods/" + fileName;
+                String uri = ImageRoot + "/" + fileName;
                 
                 File file = new File(uri);
                 

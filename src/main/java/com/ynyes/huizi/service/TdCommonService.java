@@ -44,6 +44,7 @@ public class TdCommonService {
     public void setHeader(ModelMap map, HttpServletRequest req) {
         String username = (String) req.getSession().getAttribute("username");
 
+        // 用户名，购物车
         if (null != username) {
             map.addAttribute("username", username);
             map.addAttribute("user",
@@ -55,9 +56,39 @@ public class TdCommonService {
                     tdCartGoodsService.findByUsername(req.getSession().getId()));
         }
 
+        // 网站基本信息
         map.addAttribute("site", tdSettingService.findTopBy());
         map.addAttribute("keywords_list",
                 tdKeywordsService.findByIsEnableTrueOrderBySortIdAsc());
+
+        // 全部商品分类，取三级
+        List<TdProductCategory> topCatList = tdProductCategoryService
+                .findByParentIdIsNullOrderBySortIdAsc();
+        map.addAttribute("top_cat_list", topCatList);
+
+        if (null != topCatList && topCatList.size() > 0) 
+        {
+            for (int i = 0; i < topCatList.size(); i++) 
+            {
+                TdProductCategory topCat = topCatList.get(i);
+                List<TdProductCategory> secondLevelList = tdProductCategoryService
+                        .findByParentIdOrderBySortIdAsc(topCat.getId());
+                map.addAttribute("second_level_" + i + "_cat_list", secondLevelList);
+
+                if (null != secondLevelList && secondLevelList.size() > 0) 
+                {
+                    for (int j=0; j<secondLevelList.size(); j++)
+                    {
+                        TdProductCategory secondLevelCat = secondLevelList.get(j);
+                        List<TdProductCategory> thirdLevelList = tdProductCategoryService
+                                .findByParentIdOrderBySortIdAsc(secondLevelCat.getId());
+                        map.addAttribute("third_level_" + i + j + "_cat_list", thirdLevelList);
+                    }
+                }
+            }
+        }
+
+        // 导航菜单
         map.addAttribute("navi_item_list",
                 tdNaviBarItemService.findByIsEnableTrueOrderBySortIdAsc());
 
@@ -78,89 +109,6 @@ public class TdCommonService {
                 map.addAttribute("help_" + i + "_cat_list",
                         tdArticleCategoryService.findByMenuIdAndParentId(
                                 helpId, articleCat.getId()));
-            }
-        }
-
-        TdProductCategory freshCat = tdProductCategoryService
-                .findByTitleContaining("生鲜");
-        TdProductCategory kitchenCat = tdProductCategoryService
-                .findByTitleContaining("厨具");
-        TdProductCategory mobileCat = tdProductCategoryService
-                .findByTitleContaining("通讯");
-        TdProductCategory digitCat = tdProductCategoryService
-                .findByTitleContaining("数码");
-        TdProductCategory clothCat = tdProductCategoryService
-                .findByTitleContaining("衣装");
-
-        map.addAttribute("fresh_cat", freshCat);
-
-        if (null != freshCat.getId()) {
-            List<TdProductCategory> freshCatList = tdProductCategoryService
-                    .findByParentId(freshCat.getId());
-
-            map.addAttribute("fresh_cat_list", freshCatList);
-
-            for (int i = 0; i < freshCatList.size(); i++) {
-                map.addAttribute("fresh_sub_list" + i, tdProductCategoryService
-                        .findByParentId(freshCatList.get(i).getId()));
-            }
-        }
-
-        map.addAttribute("kitchen_cat", kitchenCat);
-
-        if (null != kitchenCat) {
-            List<TdProductCategory> kitchenCatList = tdProductCategoryService
-                    .findByParentId(kitchenCat.getId());
-
-            map.addAttribute("kitchen_cat_list", kitchenCatList);
-
-            for (int i = 0; i < kitchenCatList.size(); i++) {
-                map.addAttribute("kitchen_sub_list" + i,
-                        tdProductCategoryService.findByParentId(kitchenCatList
-                                .get(i).getId()));
-            }
-        }
-
-        map.addAttribute("mobile_cat", mobileCat);
-
-        if (null != mobileCat) {
-            List<TdProductCategory> mobileCatList = tdProductCategoryService
-                    .findByParentId(mobileCat.getId());
-
-            map.addAttribute("mobile_cat_list", mobileCatList);
-
-            for (int i = 0; i < mobileCatList.size(); i++) {
-                map.addAttribute("mobile_sub_list" + i,
-                        tdProductCategoryService.findByParentId(mobileCatList
-                                .get(i).getId()));
-            }
-        }
-
-        map.addAttribute("digit_cat", digitCat);
-
-        if (null != digitCat) {
-            List<TdProductCategory> digitCatList = tdProductCategoryService
-                    .findByParentId(digitCat.getId());
-
-            map.addAttribute("digit_cat_list", digitCatList);
-
-            for (int i = 0; i < digitCatList.size(); i++) {
-                map.addAttribute("digit_sub_list" + i, tdProductCategoryService
-                        .findByParentId(digitCatList.get(i).getId()));
-            }
-        }
-
-        map.addAttribute("cloth_cat", clothCat);
-
-        if (null != clothCat) {
-            List<TdProductCategory> clothCatList = tdProductCategoryService
-                    .findByParentId(clothCat.getId());
-
-            map.addAttribute("cloth_cat_list", clothCatList);
-
-            for (int i = 0; i < clothCatList.size(); i++) {
-                map.addAttribute("cloth_sub_list" + i, tdProductCategoryService
-                        .findByParentId(clothCatList.get(i).getId()));
             }
         }
 

@@ -1,3 +1,127 @@
+
+<div class="down1">
+    <section class="index_center">
+      <table>
+        <tr>
+          <td>
+            <a href="#"><img src="/client/images/hzd_36.png" />正品保障<br>正品保障，提供发票</a>
+          </td>
+          <td>
+            <a href="#"><img src="/client/images/hzd_39.png" />极速物流<br>极速物流，极速达人</a>
+          </td>
+          <td>
+            <a href="#"><img src="/client/images/hzd_42.png" />售后无忧<br>15天无理由退换货</a>
+          </td>
+          <td>
+            <a href="#"><img src="/client/images/hzd_45.png" />特色服务<br>自主维修保养预约</a>
+          </td>
+        </tr>
+      </table>
+    </section><!--index_center END-->
+    <div class="clear"></div>
+    <div class="main">
+        <ul>
+            <li class="downli"><a href="#">购物指南</a>
+                <ul>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">发票制度</a></li>
+                    <li><a href="#">账户管理</a></li>
+                    <li><a href="#">会员优惠</a></li>
+                </ul>
+            </li>
+            <li class="downli"><a href="#">支付方式</a>
+                <ul>
+                    <li><a href="#">订单配送查询</a></li>
+                    <li><a href="#">订单状态说明</a></li>
+                    <li><a href="#">自助取消订单</a></li>
+                    <li><a href="#">自助修改订单</a></li>
+                </ul>
+            </li>
+            <li class="downli"><a href="#">订单服务</a>
+                <ul>
+                    <li><a href="#">配送范围及免邮标准</a></li>
+                    <li><a href="#">当日递/次日达</a></li>
+                    <li><a href="#">订单自提</a></li>
+                    <li><a href="#">验货与签收</a></li>
+                </ul>
+            </li>
+            <li class="downli"><a href="#">配送方式</a>
+                <ul>
+                    <li><a href="#">货到付款</a></li>
+                    <li><a href="#">网上支付</a></li>
+                    <li><a href="#">礼品卡支付</a></li>
+                    <li><a href="#">银行转账</a></li>
+                </ul>
+            </li>
+            <li class="downli"><a href="#">退换货</a>
+                <ul>
+                    <li><a href="#">货到付款</a></li>
+                    <li><a href="#">网上支付</a></li>
+                    <li><a href="#">礼品卡支付</a></li>
+                    <li><a href="#">银行转账</a></li>
+                </ul>
+            </li>
+            <li class="downli"><a href="#">商家服务</a>
+                <ul>
+                    <li><a href="#">货到付款</a></li>
+                    <li><a href="#">网上支付</a></li>
+                    <li><a href="#">礼品卡支付</a></li>
+                    <li><a href="#">银行转账</a></li>
+                </ul>
+            </li>
+    
+        </ul>
+    </div>
+</div>
+<div class="down2">
+    <div class=" erweima main">
+        <div class="saoyisao">
+            <img src="/client/images/hzd_55.png" />
+            <h3><a href="#">安卓客户端</a></h3> 
+        </div>
+        <div class="saoyisao">
+            <img src="/client/images/hzd_55.png" />
+            <h3><a href="#">安卓客户端</a></h3> 
+        </div>
+        <div class="saoyisao">
+            <img src="/client/images/hzd_55.png" />
+            <h3><a href="#">安卓客户端</a></h3> 
+        </div>
+        <div class="saoyisao">
+            <img src="/client/images/hzd_55.png" />
+            <h3><a href="#">安卓客户端</a></h3> 
+        </div>
+        <div class="mendian">
+            <img src="/client/images/hzd_52.png" />
+            <h3><a href="#">点击查询</a></h3>
+        </div>
+        <div class="dizhi">
+            <p>
+                <span>红河蒙自店</span><br>
+                <span>地址：</span>蒙自市XX街道XX大楼CX号<br>
+                <span>电话：</span>0871-564531245<br>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="down3">
+    <div class="main">
+          <ul class="downwenzi">
+          <li><a href="#">公司简介</a>丨</li>
+          <li><a href="#">联系我们</a>丨</li>
+          <li><a href="#">招贤纳士</a>丨</li>
+          <li><a href="#">合作伙伴</a>丨</li>
+          <li><a href="#">广告合作</a></li>
+          </ul>
+        <div class="clear"></div>
+        版权所有2015 办公狗网上商城 保留所有权利 <br>
+        Copyright ©  2015 bangonggou.com.cn All Rights Reserved <a style="color:#FFF" href="#">滇ICP备2-20140075</a>
+              <span class="flr"><a title="云南网站建设" href="http://www.ynyes.com" target="_blank">网站建设</a>技术支持：<a title="云南网站建设" href="http://www.ynyes.com" target="_blank">昆明天度网络公司</a></span>
+    </div>
+</div>
+
+
+<#--
 <footer>
     <div id="main">
         <div class="hot_line fl mt20">
@@ -75,3 +199,4 @@
         <div class="foot fl mt20">${site.copyright!''} 网站建设技术支持：<a href="http://www.ynyes.com">昆明天度网络公司</a></div>
     </div>
 </footer>
+-->

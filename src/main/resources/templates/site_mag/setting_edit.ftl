@@ -127,7 +127,7 @@ $(function () {
     <dl>
         <dt>网站LOGO</dt>
         <dd>
-            <input id="txtImgUrl" name="logoUri" type="text" datatype="*" value="<#if setting??>${setting.logoUri!""}</#if>" class="input normal upload-path">
+            <input id="txtImgUrl" name="logoUri" type="text" datatype="*0-255" value="<#if setting??>${setting.logoUri!""}</#if>" class="input normal upload-path">
             <div class="upload-box upload-img"></div>
             <span class="Validform_checktip"></span>
             <div class="photo-list thumb_ImgUrl_show">
@@ -137,7 +137,7 @@ $(function () {
     <dl>
         <dt>微信二维码</dt>
         <dd>
-            <input id="wxImgUrl" name="wxQrCode" type="text" datatype="*0-100" value="<#if setting??>${setting.wxQrCode!""}</#if>" class="input normal upload-path">
+            <input id="wxImgUrl" name="wxQrCode" type="text" datatype="*0-255" value="<#if setting??>${setting.wxQrCode!""}</#if>" class="input normal upload-path">
             <div class="upload-box upload-img"></div>
             <span class="Validform_checktip"></span>
             <div class="photo-list thumb_ImgUrl_show thumb_wxImgUrl_show"></div>
@@ -146,7 +146,7 @@ $(function () {
     <dl>
         <dt>苹果App二维码</dt>
         <dd>
-            <input id="iOsImgUrl" name="iOsQrCode" type="text" datatype="*" value="<#if setting??>${setting.iOsQrCode!""}</#if>" class="input normal upload-path">
+            <input id="iOsImgUrl" name="iOsQrCode" type="text" datatype="*0-255" value="<#if setting??>${setting.iOsQrCode!""}</#if>" class="input normal upload-path">
             <div class="upload-box upload-img"></div>
             <span class="Validform_checktip"></span>
             <div class="photo-list thumb_ImgUrl_show thumb_iOsImgUrl_show"></div>
@@ -155,7 +155,7 @@ $(function () {
     <dl>
         <dt>安卓App二维码</dt>
         <dd>
-            <input id="androidImgUrl" name="androidQrCode" type="text" datatype="*" value="<#if setting??>${setting.androidQrCode!""}</#if>" class="input normal upload-path">
+            <input id="androidImgUrl" name="androidQrCode" type="text" datatype="*0-255" value="<#if setting??>${setting.androidQrCode!""}</#if>" class="input normal upload-path">
             <div class="upload-box upload-img"></div>
             <span class="Validform_checktip"></span>
             <div class="photo-list thumb_ImgUrl_show thumb_androidImgUrl_show"></div>

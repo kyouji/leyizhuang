@@ -1,213 +1,172 @@
-<header>
-    <div id="main">
-      <div class="top1">
-            <span class="welcome">
-                Hi,欢迎来到博大生活网!
-                <#if username??>
-                    <a href="/user" class="login">${username}&nbsp;(${user.userLevelTitle!''})
-                        <#--
-                        <dd class="vip" title="铁牌会员"></dd>
-                        -->
-                    </a>
-                    <a href="/logout">退出</a>
-                <#else>
-                    <a href="/login" class="login">登录</a> <a href="/reg" class="register">免费注册</a>
-                </#if>
-                <#-- 配送：<dt>云南<b></b></dt> -->
-            </span>
-            <ul class="fright">
-              <li><a href="/user/order/list/0" style="padding-left:25px;">我的订单</a></li>
-              <li><a href="#" style="padding-left:35px;">在线客服</a></li>
-              <li><a href="#" style="padding-left:25px;">手机博大</a></li>
-              <li style=" font-size:16px; font-weight:bold; color:#da090b; padding-left:47px; font-family:"微软雅黑""><#if site??>${site.telephone!'400-739-1200'}</#if></li>
-            </ul> 
-        </div>
+<div class="maintop">
+<section class="main">
+    <h1>亲，欢迎来到惠之店网上商城</h1>
+    <p class="p2"><#if site??>${site.telephone!''}</#if></p>
+    <p class="p3">服务热线：</p>
+    <menu id="top_phone">
+      <a class="a1" href="javascript:;">手机惠之店</a>
+      <div class="clear"></div>
+      <ul class="phone_sum" id="top_phonelist">
+        <li style="padding-top:10px;"><a href="<#if site??>${site.touchUri!'/'}</#if>"><span class="phoneico01">触屏版</span></a></li>
+        <li><a href="javascript:;"><span class="phoneico03">iPhone</span></a></li>
+        <li style="border-bottom:1px solid #eee; padding-bottom:10px;"><a href="javascript:;"><span class="phoneico04">Android</span></a></li>
+        <li class="phone_sum_more">
+          <p>
+            <span>扫描二维码下载iPhone客户端</span>
+            <span class="mt5"><img src="<#if site??>${site.iOsQrCode!''}</#if>" /></span>
+          </p>
+          <p>
+            <span>扫描二维码下载Android客户端</span>
+            <span class="mt5"><img src="<#if site??>${site.androidQrCode!''}</#if>" /></span>
+          </p>
+        </li>
+      </ul>
+    </menu>
+    <#if username??>
+        <a class="a" href="/user" style="float:left; color:#ff4040;">${username}<i></i></a>
+        <a class="a" href="/logout" style="float:left;">退出<i></i></a>
+    <#else>
+        <a class="a" href="/login" style="float:left; color:#ff4040;" target="_blank">登陆<i></i></a>
+        <a class="a" href="/reg" style="float:left;" target="_blank">注册<i></i></a>
+    </#if>
+    <a class="a2" href="#">在线咨询</a>
+    <a class="a3" href="/user">会员俱乐部</a>
+    <a class="z-in10" href="/info/list/12">帮助中心</a>
+    <a class="a4" href="/user/order/list/0">我的订单<i></i></a>
+    <div class="clear"></div>
+</section>
+</div>
+<div class="top">
+<div class="main top1">
+<div class="logo"><a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" border="0" /></a></div>
+<div class="ssbox">
+    <div class="clear"></div>
+    <form action="/search" method="get">
+        <input type="text" class="ss_txt" name="keywords"/>
+        <input type="submit" class="ss_btn" value="" />
+    </form>
+    <div class="clear"></div>
+    <p>
+        <#if keywords_list??>
+            <#list keywords_list as item>
+                <a href="${item.linkUri!''}">${item.title}</a>
+            </#list>
+        </#if>
+    </p>
+</div>
         
-        <div class="wt1200">
-        <div class="logo fl mt20"><a href="/" title="博大生活网"><img src="<#if site??>${site.logoUri!''}<#else>/client/images/logo.png</#if>" width="500" height="94"></a></div>
-        
-      <div class="fr mt12">
-          <div class="serach">
-            <form action="/search" method="get">
-                <input class="input1" type="text" name="keywords" onfocus="if(value=='<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title!''}</#if>') {value=''}"size="15" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title!''}</#if>"/>
-                <input class="input2" type="submit" value=" " />
-            </form>
-                <span>
-                    <#if keywords_list??>
-                    <#list keywords_list as item>
-                        <a href="${item.linkUri!''}">${item.title}</a> <#if item_index+1 != keywords_list?size>|</#if>
-                    </#list>
-                    </#if>
-                </span>
-           </div>
-           <div class="shopping fr wobble-top"><a href="/cart/"><b>去购物车结算</b><dd><#if cart_goods_list??>${cart_goods_list?size}</#if></dd></a></div>
-           <div class="clear"></div>
-      </div>
-        </div>
-        <nav class="mt4 fl">
-            <div id="id-all" class="all">全部商品分类
-                <div class="arrow-outer">
-                    <div class="arrow-shadow"></div>
-                </div>
-                <div class="all_postion" style="display:none;">    
-                    <ul class="flmenu listno "><!--商品分类小菜单开始-->
-                      <li index="0">
-                          <h5 class="flmenu">食品生鲜<span>></span></h5>
-                          <#if fresh_cat_list??>
-                            <#list fresh_cat_list as item>
-                                <a href="/list/${item.id}">${item.title}</a>
-                            </#list>
-                          </#if>
-                          <div id="shopsub0" class="shopsub_show" style="display:none;">
-                              <div class="fleft">
-                                <dl class="xdl">
-                                    <#if fresh_cat_list??>
-                                    <#list fresh_cat_list as item>
-                                        <dd> <b><a href="/list/${item.id}" style="font-size:14px; color:#333; width: 56px;">${item.title!''}</a></b>
-                                            <p>
-                                                <#assign list_name = "fresh_sub_list" + item_index />
-                                                <#if list_name?eval??>
-                                                    <#list list_name?eval as subItem>
-                                                        <a title="${subItem.title!''}" href="/list/${subItem.id}">${subItem.title!''}</a> 
-                                                    </#list>
-                                                </#if>
-                                            </p>
-                                        </dd>
-                                    </#list>
-                                    </#if>
-                                </dl>
-                              </div>
-                          </div>
-                      </li>
-                      <li index="1">
-                          <h5 class="flmenu">家装厨具<span>></span></h5>
-                          <#if kitchen_cat_list??>
-                            <#list kitchen_cat_list as item>
-                                <a href="/list/${item.id}">${item.title}</a>
-                            </#list>
-                          </#if>
-                          <div id="shopsub1" class="shopsub_show" style="display:none;">
-                              <div class="fleft">
-                                <dl class="xdl">
-                                  <#if kitchen_cat_list??>
-                                    <#list kitchen_cat_list as item>
-                                        <dd> <b><a href="/list/${item.id}" style="font-size:14px; color:#333; width: 56px;">${item.title!''}</a></b>
-                                            <p>
-                                                <#assign list_name = "kitchen_sub_list" + item_index />
-                                                <#if list_name?eval??>
-                                                    <#list list_name?eval as subItem>
-                                                        <a title="${subItem.title!''}" href="/list/${subItem.id}">${subItem.title!''}</a> 
-                                                    </#list>
-                                                </#if>
-                                            </p>
-                                        </dd>
-                                    </#list>
-                                  </#if>
-                                </dl>
-                              </div>
-                          </div>
-                      </li>
-                      <li index="2">
-                          <h5 class="flmenu">手机通讯<span>></span></h5>
-                          <#if mobile_cat_list??>
-                            <#list mobile_cat_list as item>
-                                <a href="/list/${item.id}">${item.title}</a>
-                            </#list>
-                          </#if>
-                          <div id="shopsub2" class="shopsub_show" style="display:none;">
-                              <div class="fleft">
-                                <dl class="xdl">
-                                  <#if mobile_cat_list??>
-                                    <#list mobile_cat_list as item>
-                                        <dd> <b><a href="/list/${item.id}" style="font-size:14px; color:#333; width: 56px;">${item.title!''}</a></b>
-                                            <p>
-                                                <#assign list_name = "mobile_sub_list" + item_index />
-                                                <#if list_name?eval??>
-                                                    <#list list_name?eval as subItem>
-                                                        <a title="${subItem.title!''}" href="/list/${subItem.id}">${subItem.title!''}</a> 
-                                                    </#list>
-                                                </#if>
-                                            </p>
-                                        </dd>
-                                    </#list>
-                                  </#if>
-                                </dl>
-                              </div>
-                          </div>
-                      </li>
-                      <li index="3">
-                          <h5 class="flmenu">数码产品<span>></span></h5>
-                          <#if digit_cat_list??>
-                            <#list digit_cat_list as item>
-                                <a href="/list/${item.id}">${item.title}</a>
-                            </#list>
-                          </#if>
-                          <div id="shopsub3" class="shopsub_show" style="display:none;">
-                              <div class="fleft">
-                                <dl class="xdl">
-                                  <#if digit_cat_list??>
-                                    <#list digit_cat_list as item>
-                                        <dd> <b><a href="/list/${item.id}" style="font-size:14px; color:#333; width: 56px;">${item.title!''}</a></b>
-                                            <p>
-                                                <#assign list_name = "digit_sub_list" + item_index />
-                                                <#if list_name?eval??>
-                                                    <#list list_name?eval as subItem>
-                                                        <a title="${subItem.title!''}" href="/list/${subItem.id}">${subItem.title!''}</a> 
-                                                    </#list>
-                                                </#if>
-                                            </p>
-                                        </dd>
-                                    </#list>
-                                  </#if>
-                                </dl>
-                              </div>
-                          </div>
-                      </li>
-                      <li index="4">
-                          <h5 class="flmenu">男装女装<span>></span></h5>
-                          <#if cloth_cat_list??>
-                            <#list cloth_cat_list as item>
-                                <a href="/list/${item.id}">${item.title}</a>
-                            </#list>
-                          </#if>
-                          <div id="shopsub4" class="shopsub_show" style="display:none;">
-                              <div class="fleft">
-                                <dl class="xdl">
-                                  <#if cloth_cat_list??>
-                                    <#list cloth_cat_list as item>
-                                        <dd> <b><a href="/list/${item.id}" style="font-size:14px; color:#333; width: 56px;">${item.title!''}</a></b>
-                                            <p>
-                                                <#assign list_name = "cloth_sub_list" + item_index />
-                                                <#if list_name?eval??>
-                                                    <#list list_name?eval as subItem>
-                                                        <a title="${subItem.title!''}" href="/list/${subItem.id}">${subItem.title!''}</a> 
-                                                    </#list>
-                                                </#if>
-                                            </p>
-                                        </dd>
-                                    </#list>
-                                  </#if>
-                                </dl>
-                              </div>
-                          </div>
-                      </li>
-                    </ul> 
-                </div>
-             </div>
-            <div class="menu">
-                 <ul>
-                    <#if navi_item_list??>
-                        <#list navi_item_list as item>
-                            <li>
-                                <img src="${item.iconUri!''}" width="24" height="24" />
-                                <a href="${item.linkUri!''}">${item.title!''}</a>
-                            </li>  
-                        </#list>
-                    </#if> 
-                 </ul>
-                 <div class="aq"></div>
-            </div>
+<div id="shopping_down" class="shopping_box">
+    <span class="sp1"><#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if></span>
+    <a class="a1" href="/cart">去购物车结算<i></i></a>
+    <menu>
+      <#if cart_goods_list?? && cart_goods_list?size gt 0>
+          <h2>最新加入的商品</h2>
+          <h3 class="tit">
+            <span>满减</span>
+            购满1999元，即可享受满减优惠 小计：￥2888.00
+          </h3>
+          <div class="shopping_list">
             <div class="clear"></div>
-        </nav>
-    </div> 
-</header>
+            <a class="a2" href="#"><img src="images/hzd_28.png" /></a>
+            <a class="a3" href="#">索尼KDL-50W700B50英寸 全高清 网络智能WIFI液晶电视</a>
+            <p>￥2888.00 x1<a href="#">删除</a></p>
+            <div class="clear"></div>
+          </div>
+          <div class="shopping_list">
+            <div class="clear"></div>
+            <a class="a2" href="#"><img src="images/hzd_28.png" /></a>
+            <a class="a3" href="#">索尼KDL-50W700B50英寸 全高清 网络智能WIFI液晶电视</a>
+            <p>￥2888.00 x1<a href="#">删除</a></p>
+            <div class="clear"></div>
+          </div><!--shopping_list END-->
+          <h3 class="tit">
+            <span>满减</span>
+            购满1999元，即可享受满减优惠 小计：￥2888.00
+          </h3>
+          <div class="shopping_list">
+            <div class="clear"></div>
+            <a class="a2" href="#"><img src="images/hzd_28.png" /></a>
+            <a class="a3" href="#">索尼KDL-50W700B50英寸 全高清 网络智能WIFI液晶电视</a>
+            <p>￥2888.00 x1<a href="#">删除</a></p>
+            <div class="clear"></div>
+          </div><!--shopping_list END-->
+          <h4 class="shopping_price">
+            共1件商品 &nbsp;&nbsp;共计<span class="fw-b">￥2288.00</span>
+            <a href="#">去结算</a>
+          </h4>
+      <#else>
+        <h3 class="ta-c pa15 fs14 fw400">购物车中还没有商品，赶紧选购吧！</h3>
+      </#if>
+    </menu>
+  </div>
+</div>
+</div>
+<div class="daohang">
+
+<nav class="navbox">
+  <section class="navlist" id="mainnavdown">
+    <a href="javascript:;" class="a2">全部商品分类</a>
+    <ul class="navlistout" id="navdown" style="display:none;">
+        <#if top_cat_list??>
+            <#list top_cat_list as item>
+            <li>
+                <h3 class="shouji"><a href="/list/${item.id}"><img src="${item.imgUrl!''}" />${item.title!''}</a></h3>
+                    <div class="nav_showbox">
+                    <i class="bg"></i>
+                    <div class="clear"></div>
+                    <#--
+                      <table class="nav_right">
+                        <tr>
+                          <td><a href="#"><img src="/client/images/hzd_19.png" /></a></td>
+                          <td><a href="#"><img src="/client/images/hzd_19.png" /></a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="#"><img src="/client/images/hzd_19.png" /></a></td>
+                          <td><a href="#"><img src="/client/images/hzd_19.png" /></a></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" class="pt10"><a href="#"><img src="/client/images/hzd_19.png" /></a></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><a href="#"><img src="/client/images/hzd_19.png" /></a></td>
+                        </tr>
+                    </table>
+                    -->
+                    <#if ("second_level_"+item_index+"_cat_list")?eval?? >
+                        <table class="nav_more">
+                            <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
+                                <tr>
+                                    <th width="90"><span><a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a></span></th>
+                                    <td>
+                                        <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
+                                            <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
+                                                <a href="/list/${thirdLevelItem.id}">${thirdLevelItem.title!''}</a>
+                                            </#list>
+                                        </#if>
+                                    </td>
+                                </tr>
+                            </#list>
+                        </table>
+                    </#if>
+                  <div class="clear"></div>
+                </div>
+            </li>
+            </#list>
+        </#if>
+    </ul><!--navlistout END-->
+    </section>
+    <#if navi_item_list??>
+        <#list navi_item_list as item>
+            <a class="a1" href="${item.linkUri!''}">${item.title!''}</a>
+        </#list>
+    </#if> 
+</nav>
+</div>
+<!-- 浮动 -->
+<aside class="floatbox">
+  <a href="#" title="微信客服"><img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服" /><span><img src="/client/images/hzd_55.png" /></span></a>
+  <a href="#" title="在线咨询"><img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询" /></a>
+  <a href="#" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /></a>
+  <a href="#" title="服务热线"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线" /><span><img src="/client/images/hzd_55.png" /></span></a>
+  <a href="#" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
+</aside>
