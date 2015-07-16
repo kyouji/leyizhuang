@@ -57,7 +57,7 @@ function hideDialog()
           
                 <div class="clear h15"></div>
                 <p class="pb10">
-                    <span class="absolute-r"><a href="javascript:hideDialog();">关闭</a> | <a href="/reg">免费注册</a>| <a href="/login">账号登录</a></span>
+                    <span class="absolute-r"><a href="/reg">免费注册</a> | <a href="/login">账号登录</a></span>
                 </p>
                 <div class="clear h40"></div>
                 <input type="submit" class="sub" value="免费领取" />
@@ -66,6 +66,9 @@ function hideDialog()
         </section>
     </div>
 </div>
+<a class="fr" style="z-index:999999999; margin-top:50px; margin-right:50px;" href="javascript:hideDialog();">
+    <img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="50" height="50" />
+</a>
 <#include "/client/common_header.ftl" />
 
 <div class="main">

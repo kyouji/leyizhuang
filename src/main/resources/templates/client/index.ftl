@@ -1023,18 +1023,6 @@ function timer23${item_index}()
                     <b><i></i></b>
                 </#list>
             </#if>
-        <#--
-            <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
-            <b><i></i></b>
-            <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
-            <b><i></i></b>
-            <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
-            <b><i></i></b>
-            <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
-            <b><i></i></b>
-            <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
-            <b><i></i></b>  
-        -->
     </section>
     
     <section class="index_mt">
