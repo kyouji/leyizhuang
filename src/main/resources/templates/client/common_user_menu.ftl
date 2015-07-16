@@ -22,7 +22,7 @@
         <a class="mymember_menu_tit" href="/user/point/list"><img src="/client/images/mymember/menu03.png" />资产中心</a>
         <div>
             <a href="#">优惠券</a>
-            <a href="/user/point/list">积分</a>
+            <a href="/user/point/list">粮草</a>
         </div>
     </div>
     
@@ -43,5 +43,10 @@
             <a href="/user/password">修改密码</a>
             <a href="/user/address/list">收货地址</a>
         </div>
+    </div>
+    
+    <div class="mymember_menu_part"> 
+        <a class="mymember_menu_tit" href="#"><img src="/client/images/mymember/menu05.png" />加盟商中心</a>
+        <div> <a href="/user/shop">进入加盟商中心</a> </div>
     </div>
 </div>

@@ -2,17 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>博大生活网——网站首页</title>
-<meta name="keywords" content="${seoKeyword!""}">
-<meta name="description" content="${seoDescription!""}">
-<meta name="copyright" content="" />
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/master.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/mag/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="/client/js/html5.js"></script>
-<script type="text/javascript" src="/client/js/header.js"></script>
-<script type="text/javascript" src="/client/js/list.js"></script>
+<title><#if productCategory??>${productCategory.seoTitle!''}-</#if>车有同盟</title>
+<meta name="keywords" content="<#if productCategory??>${productCategory.seoKeywords!''}</#if>" />
+<meta name="description" content="<#if productCategory??>${productCategory.seoDescription!''}</#if>" />
+<meta name="copyright" content="云南车有同盟商贸有限公司 版权所有" /> 
+
+<script src="/client/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/common.js"></script>
+<script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/html5.js"></script>
+<script src="/client/js/list.js"></script>
+
+<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
 <script>
 function setprice() {
     var p1 = $.trim($('#ParamFiltern_price1').val()), p2 = $.trim($('#ParamFiltern_price2').val())
@@ -30,120 +34,160 @@ function setprice() {
 <#include "/client/common_header.ftl" />
 <!-- header结束 -->
 
-<article id="main">
-    <div class="ipp1 top">
-        <dd>您当前位置：<a href="/">首页</a> 
-            > <a href="javascript:;" class="hover_zy">搜索结果</a>
-        </dd>
+<div class="main">
+    <div class="nygg">
+        <div class="bt mt15"><a href="#">通知公告</a></div>
+        <ul>
+            <li><a href="#">【紧急】关于‘以聚会照’诈...</a></li>
+            <li><a href="#">【紧急】关于‘以聚会照’诈...</a></li>
+            <li><a href="#">【紧急】关于‘以聚会照’诈...</a></li>
+            <li><a href="#">【紧急】关于‘以聚会照’诈...</a></li>
+        </ul>
     </div>
-    <!--面包屑结束-->
-    <div class="all_cont mt15">
-        
-    </div>    
-</article>
-<!--品牌分类结束-->
-<article id="main">
-    <!--左边开始-->
-	<div class="left_list fl mt20">
-        <div class="left_n fl">
-            <h4>热卖推荐</h4>
-                <ul class="tuij_nr">
-                    <#if most_sold_list??>
-                        <#list most_sold_list as goods>
-                            <#if goods_index < 5>
-                            <li>
-                                <a href="/goods/${goods.id}">
-                                    <img src="${goods.coverImageUri!""}"/>
-                                </a>
-                                <b style="color:#d8000f; font-size:15px; line-height:25px;">￥${goods.salePrice?string("#.##")}</b>
-                                <p><a href="/goods/${goods.id}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a></p>
-                            </li>
-                            </#if>
-                        </#list>
+    <menu class="column_qg main border-df">
+        <div class="bt">热卖商品</div>
+        <div class="clear10"></div>
+        <#if most_sold_list??>
+            <#list most_sold_list as item>
+                <#if item_index < 3>
+                    <a class="list" href="/goods/${item.id}">
+                        <img src="${item.coverImageUri!''}" title="${item.title!''} ${item.subTitle!''}"/>
+                        <p class="pt10 pb10 h30 overflow">${item.title!""} ${item.version!""} ${item.color!""} ${item.capacity!""}</p>
+                        <p class="red fs16">￥${item.salePrice?string("0.00")}</p>
+                        <span>立即抢购</span>
+                    </a>
+                </#if>
+            </#list>
+        </#if>
+    </menu>
+    <div class="clear30"></div>  
+    
+    <section class="column_left">
+        <ul class="xcjly">
+            <div class="nyltbt">
+                <h4 class="nylt"><a href="#"><img src="/client/images/nylt_03.png" />行车记录仪</a></h4>
+            </div>
+            <li><a href="#">车载空气净化</a></li>
+            <li><a href="#">车载空气净化</a></li>
+        </ul>
+        <ul class="xcjly">
+            <div class="nyltbt">
+                <h4 class="nylt"><a href="#"><img src="/client/images/nylt_06.png" />行车记录仪</a></h4>
+            </div>
+        </ul>
+    
+        <h3 class="tit">热卖排行</h3>
+
+        <menu class="border-df">
+            <#if hot_sale_list??>
+                <#list hot_sale_list as item>
+                    <#if item_index < 5>
+                        <a class="scan" href="/goods/${item.id}">
+                            <img src="${item.coverImageUri!''}" title="${item.title!''} ${item.subTitle!''}"/>
+                            <div class="num1">${item_index+1}</div>
+                            <p class=" h40 overflow">${item.title!""} ${item.version!""} ${item.color!""} ${item.capacity!""}</p>
+                            <p class="red">￥${item.salePrice?string("0.00")}</p>
+                        </a>
                     </#if>
-                </ul>         
-        </div>
-        <div class="left_n fl mt20">
-             <h4>销量排行榜</h4>
-             <div class="sidlist_box sidlist_slide">
-                    <ul>
-                        <#if most_sold_list??>
-                            <#list most_sold_list as goods>
-                                <#if goods_index < 5>
-                                <li>
-                                    <a target="_blank" class="pro_img_small" href="#">
-                                        <img src="${goods.coverImageUri!""}" width="70" height="70">
-                                        <sup class="nub${goods_index+1}"></sup>
-                                    </a>
-                                    <p class="price"><span class="color_red"><em>￥</em>${goods.salePrice?string("#.##")}</span></p>
-                                    <h3 class="name"><a href="#">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a>
-                                    </h3>
-                                </li>
-                                </#if>
-                            </#list>
-                        </#if>               
-                   </ul>
-              </div>
-        </div>
-    </div>
-    <!--左边结束-->
-    <div class="right_list fr mt20">
-        <div class="shuaixuan">
-        </div> 
-        <!--筛选结束-->
-        <#-- 商品列表开始 -->
-        <div class="b_pro">
-            <#if goods_page??>
-                <#list goods_page.content as goods>
-                    <dl class="prod">
-                    <dt><a href="/goods/${goods.id}"><img src="${goods.coverImageUri!""}"></a></dt>
-                    <dd>
-                        <font class="shop_s">￥${goods.salePrice?string("#.##")}</font>
-                        <p><a href="/goods/${goods.id}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a></p>
-                    </dd>
-                    <dl>
-                        <a href="/cart/init?id=${goods.id}" target="_blank"><b class="quer wobble-top"></b></a>
-                        <a href="javascript:void(0);" onclick="this, addCollect(${goods.id})"><b class="quer1 wobble-top"></b></a>
-                        <dd class="qipao" id="dd_${goods.id}" style="display:none;"><span>请登录</span></dd>
-                    </dl>
-                    <p class="pl11">
-                        <a href="/goods/${goods.id}#comment">${goods.totalComments!"0"}条评论</a><#if goods.leftNumber?? && goods.leftNumber gt 0><b>云南有货</b><#else><b style="color: #ccc;">暂时缺货</b></#if>
-                    </p>
-                    </dl>
                 </#list>
             </#if>
-        </div>
-        <#-- 商品列表结束 --> 
-         
-        <#-- 分页开始 -->
-        <div class="page clearfix mt20 fr">
-            <span class="p-skip">
-                <#if goods_page??>
-                <em>共<b>${goods_page.totalElements!'0'}</b>条记录&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<#if goods_page.totalPages gt 0>${goods_page.number+1}<#else>0</#if>/${goods_page.totalPages}页</em>
+        </menu>
+        
+        <h3 class="tit">浏览记录</h3>
+        
+        <menu class="border-df">
+            <#if recent_page??>
+                <#list recent_page.content as item>
+                    <a class="scan" href="/goods/${item.goodsId}">
+                        <img src="${item.goodsCoverImageUri!''}" title="${item.goodsTitle!''}"/>
+                        <p class=" h40 overflow">${item.goodsTitle!''}</p>
+                        <p class="red"><#if item.goodsSalePrice??>￥${item.goodsSalePrice?string("0.00")}</#if></p>
+                    </a>
+                </#list>
+            </#if>
+        </menu>
+    </section>
+  
+    <div class="column_right">
+        
+        
+        <div class="clear h20"></div>
+        
+        <section class="column_px">
+            
+            <div class="fr">
+                <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
+                    <a href="javascript:;"><img src="/client/images/page_n.png" height="11" /></a>
+                <#else>
+                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_n.png" height="11" /></a> <#-- goods_page.number+1 -->
                 </#if>
-            </span>
-            <div id="J_bottomPage" class="p-wrap">
-                <span class="p-num">
+                        
+                <#if goods_page.number+1 == 1>
+                    <a href="javascript:;"><img src="/client/images/page_l.png" height="11" /></a>
+                <#else>
+                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_l.png" height="11" /></a> <#-- goods_page.number-1 -->
+                </#if>
+                <span><font class="fc"><#if goods_page.totalPages==0>0<#else>${goods_page.number+1}</#if></font>/${goods_page.totalPages!"0"}页</span>
+            </div>
+          <div class="clear"></div>
+        </section>
+        
+        <div class="clear"></div>
+        
+        <ul class="column_sum">
+            <#if goods_page??>
+            <#list goods_page.content as goods>
+                <li>
+                    <a class="a1" href="/goods/${goods.id}"><img src="${goods.coverImageUri!''}" title="${goods.title!''} ${goods.subTitle!''}"/></a>
+                    <p class="fs20 jiage lh35 red">￥${goods.salePrice?string("0.00")}</p><del class="yuanjia">¥${goods.marketPrice?string("0.00")}</del>
+                    
+                    <div class="clear"></div>
+        
+                    <a class="block h20 overflow" href="/goods/${goods.id}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a>
+                    <a class="block fs12 blue h20 overflow" href="/goods/${goods.id}">${goods.subTitle!""}</a>
+                    <p class="fs14 w84 fl">关注：<span class="blue">523</span>人</p>
+                    <div class="yh fr">
+                        <p><a href="/goods/${goods.id}">送粮草</a></p>
+                    </div>
+                    <div class="yh fr">
+                        <p><a href="/goods/${goods.id}">赠品</a></p>
+                    </div>
+                    
+                    <div class="clear5"></div>
+                    
+                    <div class="goumai">
+                        <a class="a8" href="/cart/init?id=${goods.id}" target="_blank"><img src="/client/images/liebiao_31.png" />加入购物车</a>
+                        <a class="a7" href="javascript:addCollect(${goods.id});"><img src="/client/images/liebiao_34.png" />关注</a>
+                        <p class="clear"></p>
+                    </div>
+                </li>
+            </#list>
+            </#if> 
+        </ul>
+        <div class="clear h20"></div>
+        
+        <div class="pagebox">
+            <div class="num">
                 <#if goods_page??>
                     <#assign continueEnter=false>
                     <#if goods_page.number+1 == 1>
-                        <a class="pn-prev disabled"><i>&lt;</i><em>上一页</em></a>
+                        <a class="a1 a0" href="javascript:;"><span>上一页</span></a>
                     <#else>
-                        <a href="/search?keywords=${keywords!''}&page=${goods_page.number-1}" class="pn-prev disabled"><i>&lt;</i><em>上一页</em></a>
+                        <a class="a1 a0" href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>上一页</span></a>
                     </#if>
                     
                     <#if goods_page.totalPages gt 0>
                         <#list 1..goods_page.totalPages as page>
                             <#if page <= 3 || (goods_page.totalPages-page) < 3 || (goods_page.number+1-page)?abs<3 >
                                 <#if page == goods_page.number+1>
-                                    <a href="javascript:;" class="curr">${page}</a>
+                                    <a class="sel" href="javascript:;">${page}</a>
                                 <#else>
-                                    <a href="/search?keywords=${keywords!''}&page=${page}" class="hide">${page}</a> <#-- ${page} -->
+                                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${page-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>">${page}</a> <#-- ${page} -->
                                 </#if>
                                 <#assign continueEnter=false>
                             <#else>
                                 <#if !continueEnter>
-                                    <b class="pn-break">&hellip;</b>
+                                    <span> ... </span>
                                     <#assign continueEnter=true>
                                 </#if>
                             </#if>
@@ -151,56 +195,27 @@ function setprice() {
                     </#if>
                     
                     <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
-                        <a href="javascript:;" class="pn-next disabled"><em>下一页</em><i>&gt;</i></a>
+                        <a class="a2" href="javascript:;"><span>下一页</span></a>
                     <#else>
-                        <a href="/search?keywords=${keywords!''}&page=${goods_page.number+1}" class="pn-next"><em>下一页</em><i>&gt;</i></a>
+                        <a class="a2" href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>下一页</span></a>
                     </#if>
                 </#if>
-                </span>
+                <span> 共<b>${goods_page.totalPages}</b>页 </span>
             </div>
-        </div>  
-        <#-- 分页结束 -->
-        
-                
+            <div class="page">
+                <input class="sub" type="submit" onclick="javascript:btnPageSubmit();" value="确定" />
+                <span>页</span>
+                <input class="text" type="text" value="${pageId + 1}" id="iPageNum"/>
+                <span>到第</span>
+            </div>
+            <div class="clear"></div>
+        </div><!--pagebox END-->
     </div>
-    <!--右边结束-->
-    <div class="clear"></div>
-</article>
-<!--主体结束-->
-<article id="main">
-<#--
-  <div class="look fl mt20">
-    	<h4><b>|</b>大家都在看</h4>
-      <ul class="mt15">
-       	  <li>
-          <a href="#"><img src="/client/images/img3.jpg" width="220" height="220"></a>
-          <dd>￥99.00<del>￥198.00</del></dd>
-          <p><a href="#">蕾丝连衣裙女2015春装新款韩版修身气质裙子娃娃领雪纺短袖连衣裙 粉紫色 XL</a></p>
-          </li>
-       	  <li>
-          <a href="#"><img src="/client/images/img3.jpg" width="220" height="220"></a>
-          <dd>￥99.00<del>￥198.00</del></dd>
-          <p><a href="#">蕾丝连衣裙女2015春装新款韩版修身气质裙子娃娃领雪纺短袖连衣裙 粉紫色 XL</a></p>
-          </li>
-       	  <li>
-          <a href="#"><img src="/client/images/img3.jpg" width="220" height="220"></a>
-          <dd>￥99.00<del>￥198.00</del></dd>
-          <p><a href="#">蕾丝连衣裙女2015春装新款韩版修身气质裙子娃娃领雪纺短袖连衣裙 粉紫色 XL</a></p>
-          </li>
-       	  <li>
-          <a href="#"><img src="/client/images/img3.jpg" width="220" height="220"></a>
-          <dd>￥99.00<del>￥198.00</del></dd>
-          <p><a href="#">蕾丝连衣裙女2015春装新款韩版修身气质裙子娃娃领雪纺短袖连衣裙 粉紫色 XL</a></p>
-          </li>
-       	  <li>
-          <a href="#"><img src="/client/images/img3.jpg" width="220" height="220"></a>
-          <dd>￥99.00<del>￥198.00</del></dd>
-          <p><a href="#">蕾丝连衣裙女2015春装新款韩版修身气质裙子娃娃领雪纺短袖连衣裙 粉紫色 XL</a></p>
-          </li>
-      </ul>
-    </div>
--->
-</article>
+</div>
+
+
+
+<div class="clear30"></div>
 <!--大家都在看结束-->
 <#include "/client/common_footer.ftl" />
 <!--底部结束-->

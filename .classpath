@@ -27,5 +27,17 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/cebmerchant.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/log4j.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/jsse.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/bcprov-jdk14-127.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/jce.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/jcert.jar"/>
+	<classpathentry kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/jnet.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,0 +1,50 @@
+.top{height:30px; font-size:14px; line-height:30px; background:#eeeeee;}
+.huanyin{float:left; margin-left:20px;}
+.wdbgg{ float:right; font-size:14px;}
+.wdbgg a{ margin-left:25px; color:#222222;}
+.wdbgg a:hover{color:#e8323d;}
+.top2{height:100px; position:relative; z-index:99;}
+.logo{width:200px; height:100px; float:left;}
+.ssbox{ float: left;margin-top:28px;margin-left:55px;}
+.ss_txt{width:532px;height:42px;border: 2px solid #222222;float:left;padding-left:10px;font-size:14px;line-height: 38px; display:block;}
+.ss_btn{width:97px;height:46px;float:left;font-size: 16px;text-align: center;line-height: 42px;color: #fff; cursor: pointer;background:url(../images/sousuo_03.png) no-repeat ; display:block; border:none;}
+.ss_btn:hover{width:97px;height:46px;float:left;font-size: 16px;text-align: center;line-height: 42px;color: #fff; cursor: pointer;background:url(../images/sousuohover_03.png) ; display:block; border:none;}
+.tpgg{float:left; width:70px; height:38px; float:left; margin-top:33px;}
+
+.nygg{width:202px; float:left; height:175px; border:solid 1px #eeeeee;}
+.nygg ul{line-height:33px;}
+.nygg li{height:33px; overflow:hidden;}
+.bt{padding-left:20px; font-size:14px; font-weight:bold;} 
+
+.nyltbt{ background:#f7f7f7; height:35px; line-height:35px; border-top:#FFF solid 1px;}
+.nyltbt h4{margin-left:20px;}
+.xcjly li{line-height:30px; margin-left:20px; width:202px;}
+
+.nylt img{margin-right:20px;}
+
+.num1 { width: 18px; height: 21px; background:url(../images/hzd_23.png) no-repeat; position: absolute; left: 0; top: 0; color: #fff; text-align: left; padding-left: 3px; line-height: 14px; font-family: Arial, Helvetica, sans-serif; font-size: 10px; -webkit-text-size-adjust: none; font-weight: bold; }
+.num2 { width: 18px; height: 21px; background:url(../images/hzd_26.png) no-repeat; position: absolute; left: 0; top: 0; color: #fff; text-align: left; padding-left: 3px; line-height: 14px; font-family: Arial, Helvetica, sans-serif; font-size: 10px; -webkit-text-size-adjust: none; font-weight: bold; }
+.pl{width:17px; height:13px; float:left;}
+
+.jiage{ width:130px; float:left;}
+.yuanjia{width:77px; line-height:35px; float:right;}
+.yh{height:20px; border-left:1px solid #FFF;}
+.yh p{font-size:12px; line-height:20px;padding-left:10px; padding-right:10px; color:#FFF; background:#ff3535;} 
+.yh p a{color:#FFF;}
+.yh p a:hover{color:#FFF;}
+
+.jgqj_txt { width: 48px; height: 20px; border: 1px solid #ccc; background: #fff; margin-top: 9px; text-align: center;}
+.sxtj span { float: left; display: inline; margin: 0 5px; }
+.jgqj_btn { width: 50px; height: 22px; line-height: 22px; text-align: center; cursor: pointer; background: #2b3243; color: #fff; text-align: center; margin-top: 9px; margin-left: 10px; border:none; }
+.jgqj_btn:hover{ background:#ff3535;}
+.sxtjBox { overflow: hidden; padding-left: 15px; float:left;}
+.sxtjBox span{ font-family:"微软雅黑", "宋体"; font-size:12px; color:#444444; margin-right:10px; line-height:39px;}
+
+.down{height:113px;}
+.down2{height:188px; background:#2b3243; text-align:center; color:#FFF; line-height:37px;}
+.youqin{margin-left:25px;}
+.down2 li{width:133px; float:left;}
+.down2 a{color:#FFF;}
+.down2 a:hover{color:#ff3535;}
+
+.sousuohuise a{color:#ccc;}

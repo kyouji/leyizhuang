@@ -86,7 +86,7 @@ var theForm = document.forms['form1'];
                 <td align="center">${item.startTime!""}</td>
                 <td align="center">${item.endTime!""}</td>
                 <td align="center"><a target="_blank" href="${item.linkUri!""}">广告链接</a></td>
-                <td align="center"><#if item.isEnable?? && item.isEnable><font color="#009900">正常</font><#else>待审核</#if></td>
+                <td align="center"><#if item.isEnable?? && item.isEnable><#if item.endTime?? && item.endTime gt .now><font color="#009900">正常</font><#else><font color="#990000">过期</font></#if><#else>待审核</#if></td>
                 <td align="center">${item.createTime!""}</td>
                 <td align="center">
                     <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">

@@ -80,7 +80,7 @@ var theForm = document.forms['form1'];
                 <input type="hidden" name="listId" value="${item.id}">
             </td>
             <td align="center"><a href="/Verwalter/view/navi/edit?id=${item.id}">${item.title!""}</a></td>
-            <td align="center"><img src="${item.iconUri!""}" width="25 height="25"/></td>
+            <td align="center"><img src="${item.iconUri!''}" width="25 height="25"/></td>
             <td align="center">${item.linkUri!""}</td>
             <td align="center"><#if item.isEnable?? && item.isEnable>是<#else>否</#if></td>
             <td align="center">

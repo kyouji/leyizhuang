@@ -48,7 +48,7 @@
   <div id="floatHead" class="content-tab">
     <div class="content-tab-ul-wrap">
       <ul>
-        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑分类信息</a></li>
+        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑信息</a></li>
       </ul>
     </div>
   </div>
@@ -172,7 +172,7 @@
   <dl>
     <dt>配送费用</dt>
     <dd>
-      <input name="fee" type="text" value="<#if delivery_type??>${delivery_type.fee?string("#.##")}</#if>" class="input small" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+      <input name="fee" type="text" value="<#if delivery_type??>${delivery_type.fee?string("0.00")}<#else>0</#if>" class="input small" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
       <span class="Validform_checktip">*货币格式，单位为元</span>
     </dd>
   </dl>
@@ -181,9 +181,9 @@
     <dd>
       <div class="rule-multi-radio multi-radio">
         <span id="rblStatus" style="display: none;">
-            <input type="radio" name="isEnable" value="1" <#if delivery_type?? && delivery_type.isEnable?? && delivery_type.isEnable>checked="checked"</#if>>
+            <input type="radio" name="isEnable" value="1" <#if delivery_type?? && delivery_type.isEnable?? && !delivery_type.isEnable><#else>checked="checked"</#if>>
             <label>是</label>
-            <input type="radio" name="isEnable" value="0" <#if !delivery_type?? || !delivery_type.isEnable?? || !delivery_type.isEnable>checked="checked"</#if>>
+            <input type="radio" name="isEnable" value="0" <#if delivery_type?? && delivery_type.isEnable?? && !delivery_type.isEnable>checked="checked"</#if>>
             <label>否</label>
       </div>
       <span class="Validform_checktip">*不启用则不显示该支付方式</span>

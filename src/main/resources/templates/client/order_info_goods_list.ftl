@@ -14,9 +14,9 @@
                     <td class="gwc1_lm2_b1"><span>￥${sg.price?string("0.00")}</span></td>
                     <td class="gwc1_lm2_c1">
                         <div class="ds content_nr_3_jg2">
-                        <a class="quantity-minus" href="/order/goods/minus?gid=${sg.goodsId}"><img src="/client/img/slj.png" width="20" height="20"></a>
+                        <a class="quantity-minus" href="/order/goods/minus?gid=${sg.goodsId}"><img src="/client/images/slj.png" width="20" height="20"></a>
                         <input type="text" class="content_zj" disabled="disabled" value="${sg.quantity!''}">
-                        <a class="quantity-plus" href="/order/goods/plus?gid=${sg.goodsId}"><img src="/client/img/sljj.png" width="20" height="20"></a>
+                        <a class="quantity-plus" href="/order/goods/plus?gid=${sg.goodsId}"><img src="/client/images/sljj.png" width="20" height="20"></a>
                         </div>
                     </td>
                     <td class="gwc1_lm2_b1"><span>￥${(sg.price*sg.quantity)?string("0.00")}</span></td>

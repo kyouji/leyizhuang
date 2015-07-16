@@ -213,7 +213,7 @@ $(function () {
     <dl>
         <dt>首页标题(SEO)</dt>
         <dd>
-            <textarea name="titleSeo" rows="2" cols="20" class="input" datatype="*1-255" sucmsg=" "><#if setting??>${setting.titleSeo!""}</#if></textarea>
+            <textarea name="seoTitle" rows="2" cols="20" class="input" datatype="*1-255" sucmsg=" "><#if setting??>${setting.seoTitle!""}</#if></textarea>
             <span class="Validform_checktip">*自定义的首页标题</span>
         </dd>
     </dl>

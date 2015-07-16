@@ -38,7 +38,7 @@ $(function () {
 });
 </script>
 </head>
-<body class="mainbody"><div class="" style="left: 0px; top: 0px; visibility: hidden; position: absolute;"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0);" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_max" href="javascript:void(0);" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0);" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0);" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon" style="display: none;"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div>
+<body class="mainbody">
 <form method="post" action="/Verwalter/ad/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
@@ -86,10 +86,10 @@ $(function () {
         <dd>
             <div class="rule-multi-radio multi-radio">
                 <span>
-                    <input type="radio" name="isEnable" value="1" <#if ad?? && ad.isEnable>checked="checked"</#if>>
+                    <input type="radio" name="isEnable" value="1" <#if !ad?? || ad?? && ad.isEnable>checked="checked"</#if>>
                     <label>正常</label>
-                    <input type="radio" name="isEnable" value="0" <#if !ad?? || !ad.isEnable>checked="checked"</#if>>
-                    <label>暂停</label>
+                    <input type="radio" name="isEnable" value="0" <#if ad?? && ad.isEnable?? && !ad.isEnable>checked="checked"</#if>>
+                    <label>下架</label>
                 </span>
             </div>
         </dd>

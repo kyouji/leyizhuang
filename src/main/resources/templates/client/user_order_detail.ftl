@@ -2,18 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>博大生活网——会员中心首页</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="copyright" content="" />
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/master.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/mymember.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/client/js/html5.js"></script>
+<title><#if site??>${site.seoTitle!''}-</#if>云南车有同盟商贸有限公司</title>
+<meta name="keywords" content="${site.seoKeywords!''}" />
+<meta name="description" content="${site.seoDescription!''}" />
+<meta name="copyright" content="云南车有同盟商贸有限公司" />
+<link href="/client/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/cytm.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
-<script src="/client/js/header.js"></script>
+<script src="/client/js/common.js"></script>
+<script src="/client/js/ljs-v1.01.js"></script>
+
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -23,6 +26,16 @@
 DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
+<script type="text/javascript">
+  $(document).ready(function(){
+    menuDownList("top_phone","#top_phonelist",".a1","sel");
+    phoneListMore();//单独下拉
+    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+    navDownList("navdown","li",".nav_showbox");
+    menuDownList("mainnavdown","#navdown",".a2","sel");
+    checkNowHover("shopping_down","shopping_sel");
+});
+</script>
 </head>
 <body>
 <!-- header开始 -->
@@ -62,7 +75,7 @@ DD_belatedPNG.fix('.,img,background');
                 <#if order.statusId==1>
                     请稍等，我们将尽快确认您的订单。
                 <#elseif order.statusId==2>
-                    亲爱的客户，请付款。
+                    亲爱的客户，<a href="/order/dopay/${order.id}" style="color: #F00;"">去支付</a>。
                 <#elseif order.statusId==3>
                     亲爱的客户，我们将尽快为您发货。
                 <#elseif order.statusId==4>
@@ -145,7 +158,9 @@ DD_belatedPNG.fix('.,img,background');
             总额:
             <font color="#ff1000">￥<#if order??>${order.totalPrice?string("0.00")}</#if></font>
             &nbsp;&nbsp;=&nbsp;&nbsp;商品总金额:￥${order.totalGoodsPrice?string("0.00")}
+            <#if order.deliverTypeFee??>
             &nbsp;&nbsp;+&nbsp;&nbsp;配送费用:￥${order.deliverTypeFee?string("0.00")}
+            </#if>
             &nbsp;&nbsp;-&nbsp;&nbsp;积分抵扣:￥${order.pointUse!'0'}
             &nbsp;&nbsp;&nbsp;&nbsp;支付方式：${order.payTypeTitle!''}
           </td>
@@ -193,15 +208,6 @@ DD_belatedPNG.fix('.,img,background');
 </div>
 <!--主体结束-->
 <#include "/client/common_footer.ftl" />
-<!--底部结束-->
-<script type="text/javascript">
-      $(document).ready(function(){
-         mymemberMenuCheck("mymember_right_menu","a","mymember_right_check","li","mysel");
-		 mymemberRightMove("mymember_storybox",70,90,"mymember_story_next",15,3,"a");
-		 mymemberRightMove("mymember_gzbox",205,241,"mymember_gznext",15,3,"a");
-		 mymemberRightMove("mymember_shinebox",205,310,"mymember_shinenext",15,3,"div");
-      });
-</script>
 </body>
 </html>
 <!--结束-->

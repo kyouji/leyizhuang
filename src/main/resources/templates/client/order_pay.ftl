@@ -2,89 +2,67 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>博大生活网——支付中心</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="copyright" content="" />
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/master.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/mymember.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/html5.js"></script>
-<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
-<script src="/client/js/jquery-1.9.1.min.js"></script>
-<script src="/client/js/mymember.js"></script>
-<script src="/client/js/header.js"></script>
+<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<meta name="keywords" content="${site.seoKeywords!''}">
+<meta name="description" content="${site.seoDescription!''}">
+<meta name="copyright" content="${site.copyright!''}" />
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/client/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
+<script src="/client/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
+<script src="/client/js/common.js"></script>
+<script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/cart.js"></script>
+<script src="/client/js/order_info.js"></script>
+<script src="/client/js/jquery.cityselect.js"></script>
+
+<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    menuDownList("top_phone","#top_phonelist",".a1","sel");
+    phoneListMore();//单独下拉
+    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+    searchTextClear(".toptext","请输入品牌或商品名称","#999","#666");
+    searchTextClear(".bottext","查看所有门店","#fff","#fff");
+    checkNowHover("shopping_down","shopping_sel");
+    navDownList("navdown","li",".nav_showbox");
+    menuDownList("mainnavdown","#navdown",".a2","sel");
+    
+    $("#form1").Validform({
+        tiptype: 1
+    });
+    
+    $("#address").citySelect({
+        nodata:"none",
+        <#if address?? && address.province??>prov: "${address.province!''}",</#if>
+        <#if address?? && address.city??>city: "${address.city!''}",</#if>
+        <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
+        required:false
+    }); 
+});
 </script>
-<![endif]-->
 </head>
 <body>
-<!-- header开始 -->
 <#include "/client/common_header.ftl" />
-<!-- header结束 -->
-<article id="main" class="mt20">
-      <div class="order bor fl">
-            <div class="o-left">
-            	<b style="float:left; margin:10px 15px 0 0"><img src="/client/images/ok.png" width="32" height="32" /></b>
-                <h3 class="o-title">
-                  订单提交成功，请您尽快付款！订单号：9113280707
-                </h3>
-                <p class="o-tips">
-                    请您在提交订单后<span class="font-red">24小时</span>内完成支付，否则订单会自动取消。
-                                                                             博大生活网提供
-                        <span class="pay-safeguard j_uiPop">
-                        <em class="ps-title j_uiBaozhangPop">在线支付保障</em>
-                        </span>
-                        请您放心购买。
-              </p>
-            </div>
-            <div class="o-right">
-                <div class="o-price">
-                    <em>应付金额</em><strong>55.00</strong><em>元</em>
-                </div>
-    			<div class="o-detail" id="orderDetail"><a href="#">订单详情 ></a></div>
-                
-            </div>
-            <div class="clr"></div>
-     </div>
-        
-			<div class="w1198 bor fl mt20 bank">
-           	  <div class="fl pd">
-              		<div class="fl w300 mt15">
-                        <b class="zy-hover"></b><dd class="bank_1">银行卡</dd>
-                    </div>
-                    <div class="w600 bor fr bra mt15">
-                        <dd class="img_zy"><img src="/client/images/bank-logo.gif" width="125" height="31" /></dd>
-                        <span class="wenzi_zy"><b>快捷</b>信用卡 | 尾号8380 | 单笔限额2万 单日限额2万</span>
-                    </div>
-                </div>
-                    <a href="#" style="float:right; color:#098eda; margin:35px 160px 0 0;">使用最新银行卡</a>
-            </div>
-				
-			<div class="mt20 fl bor_bot mima">
-            		<input type="password" placeholder="请输入博大生活网支付密码" id="payPwd" name="payPwd" class="ui-input pv-input-password">
-                    <a href="#" class="ml20" target="_blank">忘记支付密码？</a>
-                    <dd><a href="#">立即支付</a></dd>
-            </div>
-</article>
-<!--主体结束-->
+
+<div class="main">
+   
+    <div class="car_success">
+        <p class="fc fs30 lh40 pb10">订单提交成功! </p>
+        <p> 订单号：<a href="/user/order?id=${order.id!''}">${order.orderNumber!''}</a></p>
+        <p>应付金额￥${order.totalPrice?string('0.00')} <a class="blue" href="/order/dopay/${order.id}">点击支付</a></p>
+        <p>您还可以 <a class="blue" href="/user/order/list/0">查看订单</a></p>
+    </div>
+  
+    <div class="clear"></div> 
+</div>
+
 <#include "/client/common_footer.ftl" />
-<!--底部结束-->
-<script type="text/javascript">
-      $(document).ready(function(){
-         mymemberMenuCheck("mymember_right_menu","a","mymember_right_check","li","mysel");
-		 mymemberRightMove("mymember_storybox",70,90,"mymember_story_next",15,3,"a");
-		 mymemberRightMove("mymember_gzbox",205,241,"mymember_gznext",15,3,"a");
-		 mymemberRightMove("mymember_shinebox",205,310,"mymember_shinenext",15,3,"div");
-      });
-</script>
 </body>
 </html>
 <!--结束-->

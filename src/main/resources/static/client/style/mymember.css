@@ -6,8 +6,8 @@ body {margin: 0px;padding: 0px;color: #555;font-family:"微软雅黑", Arial, He
 img {border:0;}
 .myclear {height:0px;line-height: 0px;font-size: 0px;clear: both;visibility: hidden;overflow:hidden;padding:0;margin:0;}
 div,ul,dl,dd,dt,li,td,tr,table,p,span,h1,h2,h3,h4,h5,h6,form{ margin:0px;  padding:0px; list-style:none; list-style-type: none; word-wrap:break-word;border:none;}
-a {color:#555;text-decoration: none;cursor:pointer;}
-a:hover {color:#ff8800;}
+a {color:#222222;text-decoration: none;cursor:pointer;}
+a:hover {color:#e8323d;}
 textarea { resize:none;}
 .mycenter { margin-right:auto; margin-left:auto; width:94%;}
 
@@ -98,8 +98,8 @@ textarea { resize:none;}
 	position:absolute;
 	left:10px;
 	top:10px;}
-.mymember_menu_tit:hover {color:#ff8800; background-image:url(../images/mymember/arrow05.png);}
-.mymember_menu_part a.sel01 {color:#ff8800; background-image:url(../images/mymember/arrow05.png);}
+.mymember_menu_tit:hover {color:#e8323d; background-image:url(../images/mymember/arrow05.png);}
+.mymember_menu_part a.sel01 {color:#e8323d; background-image:url(../images/mymember/arrow05.png);}
 .mymember_menu_part div a {
 	display:block;
 	line-height:20px;
@@ -113,10 +113,10 @@ textarea { resize:none;}
     -o-transition: all 0.2s ease-in-out 0.01s;
     -ms-transition: all 0.2s ease-in-out 0.01s;
     transition: all 0.2s ease-in-out 0.01s;
-	color:#ff8800;
+	color:#e8323d;
 	text-indent:1em;}
 .leftmenu {display:inline;}
-.leftmenu a.sel { color:#ff8800;}
+.leftmenu a.sel { color:#e8323d;}
 .leftmenu_bot {
 	margin-top:25px;
 	display:block;
@@ -241,8 +241,8 @@ textarea { resize:none;}
 	position:absolute;
 	right:70%;
 	top:-10px;}
-.mymember_info01 td a span {color:#ff8800;}
-.mymember_info01 td a:hover {color:#ff8800;}
+.mymember_info01 td a span {color:#e8323d;}
+.mymember_info01 td a:hover {color:#e8323d;}
 .mymember_info02 h3 {
 	position:relative;
 	width:100%;
@@ -286,7 +286,7 @@ textarea { resize:none;}
 .mymember_info02 td.td001 a img {width:50px;height:50px;}
 .mymember_info02 td.td002 {border-left:none; text-align:left;}
 .mymember_info02 td.td003 p,.mymember_info02 td.td003 a{color:#989898; display:inline-block; margin:0 3px;}
-.mymember_info02 td.td003 a:hover{color:#ff8800;}
+.mymember_info02 td.td003 a:hover{color:#e8323d;}
 .mymember_info02 td h4 {color:#ff1000;}
 .mymember_infotab_show { background:url(../images/mymember/arrow05.gif) no-repeat right center;display:inline-block; padding-right:15px;}
 .mymember_info_show {
@@ -316,7 +316,7 @@ textarea { resize:none;}
 	display:inline-block;
 	width:140px;}
 .mymember_info_show p {line-height:20px; padding-top:5px;}
-.mymember_info02 a:hover {color:#ff8800;}
+.mymember_info02 a:hover {color:#e8323d;}
 .mymember_botad { margin:0 12px;}
 #mymember_right_check {
 	position:relative;
@@ -424,12 +424,12 @@ textarea { resize:none;}
 	line-height:30px;
 	position:relative;
 	margin-bottom:10px;}
-.mymember_order_search a.a001 { color:#ff8800; font-size:18px; float:left; margin-left:3%;}
+.mymember_order_search a.a001 { color:#e8323d; font-size:18px; float:left; margin-left:3%;}
 .mymember_order_search a.a002 {
 	float:right;
 	margin-right:3%;
 	font-size:14px;
-	color:#ff8800;
+	color:#e8323d;
 	display:inline-block;
 	background:url(../images/mymember/menu04.png) no-repeat right center;
 	margin-left:40px;
@@ -444,10 +444,10 @@ textarea { resize:none;}
 	color:#fff;}
 .mymember_order_search a.a003:hover { background:#e83928;}
 .mymember_order_search a.a004 {
-	color:#ff8800;
+	color:#e8323d;
 	float:right;
 	margin-right:2%;}
-.mymember_order_search a.a004:hover { color:#e83928;}
+.mymember_order_search a.a004:hover { color:#222222;}
 .mymember_order_search .mytext {
 	width:230px;
 	border:1px solid #eee;
@@ -497,7 +497,7 @@ textarea { resize:none;}
 	position:absolute;
 	left:3%;
 	top:0;
-	color:#ff8800;
+	color:#e8323d;
 	font-size:18px;}
 #mymember_likecheck span.sp1 {
 	left:auto;
@@ -990,9 +990,11 @@ textarea { resize:none;}
 	text-align:center;
 	padding:20px 0;}
 .attention_tab td.td01 {text-align:left;}
-.attention_tab td.td01 a { color:#0070b7;}
+.attention_tab td.td01 a { color:#222222;}
+.attention_tab td.td01 a:hover { color:#e8323d;}
+
 .attention_tab a.a1 {
-	background:#ff8800 url(../images/member/pro_buy.png) no-repeat 5px center;
+	background:#222222 url(../images/pro_buy.png) no-repeat 5px center;
 	border-radius:3px;
 	color:#fff;
 	padding:0 10px 0 30px;
@@ -1044,9 +1046,9 @@ textarea { resize:none;}
 .myback_tab td {
 	border-bottom:1px solid #eee;}
 .myback_tab td a.a1 {
-	color:#ff8800;
+	color:#222222;
 	display:block;}
-.myback_tab td a.a1:hover { color:#e83928;}
+.myback_tab td a.a1:hover { color:#e8323d;}
 .mymember_info02 table.myinfo_tab,.myinfo_tab {
 	width:80%;
 	margin:0 auto;}
@@ -1069,11 +1071,11 @@ textarea { resize:none;}
 	margin:20px auto;
 	width:150px;
 	height:35px;
-	background:#ff8800;
+	background:#222222;
 	color:#fff;
 	font-size:16px;
 	border-radius:3px;}
-.myinfo_tab .sub:hover { background:#e83928;}
+.myinfo_tab .sub:hover { background:#e8323d;}
 .myinfo_tab .text {
 	border:1px solid #ddd;
 	height:30px;
@@ -1148,8 +1150,8 @@ textarea { resize:none;}
 	color:#fff;
 	font-size:16px;
 	border-radius:3px;
-	background:#ff8800;}
-.myself_tab .sub:hover { background:#e83928;}
+	background:#222222;}
+.myself_tab .sub:hover { background:#e8323d;}
 .myself_menu {
 	width:94%;
 	margin:0 auto 10px;
@@ -1186,9 +1188,4 @@ textarea { resize:none;}
 	float:right;
 	padding:4px 0;
 	width:225px;}
-
-
-
-
-
 

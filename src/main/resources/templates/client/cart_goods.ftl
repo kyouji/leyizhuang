@@ -1,80 +1,67 @@
 <#if cart_goods_list?? && cart_goods_list?size gt 0>
-<div class="gwc1_lm mt20">
-    <table border="0" cellpadding="0" cellspacing="0">
-    <tbody><tr>
-    <td>商品信息</td>
-    <td>单价</td>
-    <td>数量</td>
-    <td>合计</td>
-    <td>操作</td>
-    </tr>
-    </tbody></table>
-</div>
-<#assign allChecked=true >
-<#assign totalGoods=0>
-<#assign totalPrice=0>
-<div class="gwc1_lm2">
-    <table>
-    <tbody>
-    <#list cart_goods_list as cg>
-    <tr>
-        <td class="gwc1_lm2_a">
-            <input type="checkbox" class="fl duoxuank" cgid="${cg.id}" <#if cg.isSelected>checked="checked"<#else><#assign allChecked=false></#if>>
-            <span>
-            <a href="/goods/${cg.goodsId}"><img src="${cg.goodsCoverImageUri!''}" width="76" height="76"></a>
-            </span>
-            <p><a href="/goods/${cg.goodsId}"></a></p>
-            <p><a href="/goods/${cg.goodsId}">${cg.goodsTitle!''}</a></p>
-        </td>
-        <td class="gwc1_lm2_b"><span>￥${cg.price?string("#.##")}</span></td>
-        <td class="gwc1_lm2_c">
-            <div class="ds content_nr_3_jg2">
-                <#if cg.quantity==1>
-                    <span class="fl"><img src="/client/img/slj.png" width="20" height="20"></span>
-                <#else>
-                    <a href="javascript:void(0);" class="fl num_minus" cgid="${cg.id}"><img src="/client/img/slj.png" width="20" height="20"></a>
+    <table class="car_list">
+        <tr>
+            <th colspan="3">商品信息</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>合计</th>
+            <th>操作</th>
+        </tr>
+        
+        <#assign allChecked=true >
+        <#assign totalGoods=0>
+        <#assign totalPrice=0>
+        
+        <#list cart_goods_list as cg>
+            <tr>
+                <td width="20">
+                    <input type="checkbox" onclick="javascript:toggleSelect(${cg.id});" <#if cg.isSelected>checked="checked"<#else><#assign allChecked=false></#if>/>
+                </td>
+                <td width="110">
+                    <a href="/goods/${cg.goodsId}"><img src="${cg.goodsCoverImageUri!''}" width="100" /></a>
+                </td>
+                <td width="400" style="text-align:left;"><a href="/goods/${cg.goodsId}">${cg.goodsTitle!''}</a></td>
+                <td class="red">￥${cg.price?string("0.00")}</td>
+                <td width="150" class="num">
+                    <a href="javascript:minusNum(${cg.id});"> - </a>
+                    <input class="text" type="text" value="${cg.quantity!''}" />
+                    <a href="javascript:addNum(${cg.id});"> + </a>
+                </td>
+                <td class="red">￥${(cg.price*cg.quantity)?string("0.00")}</td>
+                <td><a class="del" href="javascript:delCartItem(${cg.id});">删除</a></td>
+                <#if cg.isSelected>
+                    <#assign totalGoods=totalGoods+cg.quantity>
+                    <#assign totalPrice=totalPrice+cg.price*cg.quantity>
                 </#if>
-                <input type="text" class="content_zj" value="${cg.quantity!''}">
-                <a href="javascript:void(0);" class="fr num_add" cgid="${cg.id}">
-                    <img src="/client/img/sljj.png" width="20" height="20">
-                </a>
-            </div>
-        </td>
-        <td class="gwc1_lm2_b"><span>￥${(cg.price*cg.quantity)?string("#.##")}</span></td>
-        <td class="gwc1_lm2_d"><input type="button" class="gwc_delete" cgid="${cg.id}" value="删除"></td>
-        <#if cg.isSelected>
-            <#assign totalGoods=totalGoods+cg.quantity>
-            <#assign totalPrice=totalPrice+cg.price*cg.quantity>
-        </#if>
-    </tr>
-    </#list>
-    </tbody>
+            </tr>
+        </#list>
+        
+    
+        <tr>
+          <td width="20"><input type="checkbox" <#if allChecked>checked="checked" onclick="javascript:toggleAllSelect(1);"<#else>onclick="javascript:toggleAllSelect(0);"</#if>/></td>
+          <td colspan="2" style="text-align:left;">
+            <span class="mr20">全选</span>
+            <#--<a class="c9" href="#">删除选中的商品</a>-->
+          </td>
+          <td colspan="4" style="text-align:right; font-size:16px; line-height:35px;">
+            商品<span class="fc fw-b"><#if cart_goods_list??>${totalGoods!'0'}</#if></span>件&nbsp;&nbsp;
+            总价：<span class="fc fw-b">￥<#if cart_goods_list??>${totalPrice?string("0.00")}</#if></span>&nbsp;&nbsp;
+            商品总计（不含运费）：<span class="fc fw-b">￥<#if cart_goods_list??>${totalPrice?string("0.00")}</#if></span>
+          </td>
+        </tr>
     </table>
-</div>
-<div class="s_gwc1zj_left fl mt12">
-    <p id="p-all-select"><input id="all-select" type="checkbox" class="fl" <#if allChecked>checked="checked" sid="1"<#else>sid="0"</#if>>全选</p>
-</div>
-
-<div class="s_gwc1zj fr">
-    <p>商品
-        <span> <#if cart_goods_list??>${totalGoods!'0'}</#if> </span>件  总价：
-        <span>¥<#if cart_goods_list??>${totalPrice?string("#.##")}</#if></span>  商品总计(不含运费)： 
-        <span>¥<#if cart_goods_list??>${totalPrice?string("#.##")}</#if></span> 
-    </p>
-</div>
-<div class="clear"></div>
-<div class="s_gwc1zja">
-    <div class="fl s_gwc1zja_1"></div>
-    <div class="fr s_gwc1zja_2"><a onclick="goNext(${totalGoods!0})" href="javascript:void(0);" title="去结算">去结算 </a></div>
-</div>
-
+    
+    <div class="clear"></div>
+    
+    <div class="car_btn">
+        <a class="ml20 fc" href="/">继续购物</a>
+        <input class="sub" type="submit" onclick="javascript:goNext(${totalGoods!0});" value="去结算" />
+    </div>
+    
+    <div class="clear"></div>
 <#else>
-<div class="buy_ok">
-  <div class="fl mt40 mr20"> <img src="/client/img/gwd.png" width="64" height="64"></div>
-  <div class="fl">
-    <div class="pt10 font17">您的购物袋暂时还没有商品哦~</div>
-    <div class="pt10 font13">看看 <a href="#" style=" color:#da090b">已买到商品</a> </div>
-    <div class="pt10 font13">看看 <a href="#" style=" color:#da090b">我的收藏夹</a> </div>
-  </div>
-</div>
+    <div class="car_kong">
+        <p class="fc fs18 pb10">购物车空空的哦，去看看心意的商品吧！</p>
+        <p class="pt20"><a class="blue" href="/">马上去购物>>  </a></p>
+    </div>
 </#if>

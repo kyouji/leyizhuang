@@ -2,46 +2,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>博大生活网——会员中心首页</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="copyright" content="" />
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/master.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cart.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/client/js/html5.js"></script>
-<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
-<script src="/client/js/jquery-1.9.1.min.js"></script>
-<script src="/client/js/mymember.js"></script>
-<script src="/client/js/gwc.js"></script>
+<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<meta name="keywords" content="${site.seoKeywords!''}">
+<meta name="description" content="${site.seoDescription!''}">
+<meta name="copyright" content="${site.copyright!''}" />
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/client/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
+<script src="/client/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/common.js"></script>
+<script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/cart.js"></script>
+
+<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    menuDownList("top_phone","#top_phonelist",".a1","sel");
+    phoneListMore();//单独下拉
+    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+    searchTextClear(".toptext","请输入品牌或商品名称","#999","#666");
+    searchTextClear(".bottext","查看所有门店","#fff","#fff");
+    checkNowHover("shopping_down","shopping_sel");
+    navDownList("navdown","li",".nav_showbox");
+    menuDownList("mainnavdown","#navdown",".a2","sel");
+        
+});
 </script>
-<![endif]-->
-<script src="/client/js/header.js"></script>
 </head>
 <body>
-<!-- header开始 -->
 <#include "/client/common_header.ftl" />
-<!-- header结束 -->
-<div class="gwcbg">
-<div id="main" class="mt12">
-<div class="place"> <span>您现在的位置：</span><a href="#">首页</a>&gt;<a href="#">购物车</a>&gt;<a href="#" style="color:#e20000">我的购物车</a> </div>
-<div class="s_gwc1"><span id="colorfff">1、我的购物车</span><span>2、我的订单信息</span><span>3、支付成功</span></div>
-</div>
 
-<div id="main" class="page-main">
-    <#include "/client/cart_goods.ftl" />
-</div>
-<!--主体结束-->
+<div class="main">
+    <menu class="car_top">
+        <p class="sel" style="z-index:10; width:34%;">我的购物车<i></i></p>
+        <p style="z-index:8;">我的订单信息<i></i></p>
+        <p>支付成功</p>
+        <div class="clear"></div>
+    </menu>
+    <div class="clear h30"></div>
+    
+    <div id="main" class="page-main">
+        <#include "/client/cart_goods.ftl" />
+    </div>
+    
+</div><!--main END-->
+
 <#include "/client/common_footer.ftl" />
-<!--底部结束-->
 </body>
 </html>
-<!--结束-->

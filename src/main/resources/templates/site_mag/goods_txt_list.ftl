@@ -136,6 +136,7 @@ function __doPostBack(eventTarget, eventArgument) {
             <select name="property" onchange="javascript:setTimeout(__doPostBack('property',''), 0)">
                 <option value="">所有属性</option>
                 <option value="isOnSale" <#if property?? && property=="isOnSale">selected="selected"</#if>>已上架</option>
+                <option value="isNotOnSale" <#if property?? && property=="isNotOnSale">selected="selected"</#if>>已下架</option>
             </select>
         </div>
       </div>

@@ -2,30 +2,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>博大生活网——商品详情 ${goods.seoKeywords!''}</title>
+<title><#if goods??>${goods.seoTitle!''}-</#if>云南车有同盟商贸有限公司</title>
 <meta name="keywords" content="${goods.seoKeywords!''}">
 <meta name="description" content="${goods.seoDescription!''}">
-<meta name="copyright" content="" />
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/master.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/css.css" type="text/css" rel="stylesheet">  
-<script type="text/javascript" src="/client/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="/client/js/html5.js"></script>
+<meta name="copyright" content="${site.copyright!''}" />
+<!--[if IE]>
+   <script src="/client/js/html5.js"></script>
+<![endif]-->
 
-<script src="/client/js/jquery-1.2.6.pack.js" type="text/javascript"></script>
-<script src="/client/js/header.js"></script>
+<script src="/client/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
+<script src="/client/js/common.js"></script>
+<script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/goods.js"></script>
+<script src="/client/js/goods_comment_consult.js"></script>
 
-<SCRIPT src="/client/js/base.js" type="text/javascript"></SCRIPT>
-<script type="text/javascript" src="/client/js/goods.js"></script>
-<script src="/client/js/lib.js" type="text/javascript"></script>
-<script src="/client/js/zzsc.js" type="text/javascript"></script>
+<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+
 
 <script type="text/javascript">
-$(document).ready(function(){
-    setInterval("timer()",1000);
-    
-    $("#id-minus").click(function(){
+  $(document).ready(function(){
+	menuDownList("top_phone","#top_phonelist",".a1","sel");
+	phoneListMore();//单独下拉
+    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+	searchTextClear(".toptext","请输入品牌或商品名称","#999","#666");
+	searchTextClear(".bottext","查看所有门店","#fff","#fff");
+	checkNowHover("shopping_down","shopping_sel");
+	navDownList("navdown","li",".nav_showbox");
+	menuDownList("mainnavdown","#navdown",".a2","sel");
+	
+	productImgShow("proshowimg","li","proshowmenu","sel",396,396);
+	checkBoxShow("assort_menu","a","assort_sum","li","sel");
+	//productBoxShow("assort_menu","a","assort_ol","li","assort_sum","ul","sel");
+	productBoxWidth(".partside");
+	topTitFloat("detail_tit",1100,"detail_tit_sel");
+	
+	$("#id-minus").click(function(){
         var q = parseInt($("#quantity").val());
         
         if (q > 1)
@@ -33,14 +48,14 @@ $(document).ready(function(){
             $("#quantity").val(q-1);
         }
         
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if goods.isGroupSale && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>&qiang=1</#if>");
+        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
     });
     
     $("#id-plus").click(function(){
         var q = parseInt($("#quantity").val());
         
         <#if goods.leftNumber??>
-            if (q < ${goods.leftNumber})
+            if (q < ${goods.leftNumber!'0'})
             {
                 $("#quantity").val(q+1);
             }
@@ -51,472 +66,502 @@ $(document).ready(function(){
         <#else>
             $("#quantity").val(q+1);
         </#if>
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if goods.isGroupSale && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>&qiang=1</#if>");
+        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
     
     });
-});
-function timer()
-{
-<#if goods.isGroupSale && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
-    var ts = (new Date(${goods.groupSaleStopTime?string("yyyy")}, 
-                parseInt(${goods.groupSaleStopTime?string("MM")}, 10)-1, 
-                ${goods.groupSaleStopTime?string("dd")}, 
-                ${goods.groupSaleStopTime?string("HH")}, 
-                ${goods.groupSaleStopTime?string("mm")}, 
-                ${goods.groupSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
-    if (0 == ts)
-    {
-        window.location.reload();
-    }
     
-    var date = new Date();
-    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
-    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
-    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
-    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
-    dd = checkTime(dd);
-    hh = checkTime(hh);
-    mm = checkTime(mm);
-    ss = checkTime(ss);
-    $("#timeLeft").html("距离本次团购结束时间：" + dd + "天" + hh + "小时" + mm + "分" + ss +"秒");
-</#if>
+    $("#zhAddCart").click(function(){
+        var str = "";
+        $(".comboCheckBox:checked").each(function(){
+            str += $(this).attr("zpid");
+            str += ",";
+        });
+        var href = "/cart/init?id=" + ${goods.id} + "&zpid=" + str;
+        
+        window.location = href;
+        
+    });
+    
+});
+
+function combSelect(self, price, originPrice)
+{
+    var count = parseInt($("#combCount").html());
+    var currentPrice = parseFloat($("#combCurrentPrice").html());
+    var combOriginPrice = parseFloat($("#combOriginPrice").html());
+    var combSavePrice = parseFloat($("#combSave").html());
+    
+    // 选中
+    if (self.checked)
+    {
+        $("#combCount").html(count+1);
+        $("#combCurrentPrice").html(currentPrice + price);
+        $("#combOriginPrice").html(combOriginPrice + originPrice);
+        $("#combSave").html(combSavePrice + originPrice - price);
+    }
+    // 取消选中
+    else
+    {
+        $("#combCount").html(count-1);
+        $("#combCurrentPrice").html(currentPrice - price);
+        $("#combOriginPrice").html(combOriginPrice - originPrice);
+        $("#combSave").html(combSavePrice - originPrice + price);
+    }
 }
 
-function checkTime(i)  
-{  
-    if (i < 10) {  
-        i = "0" + i;  
-    }  
-    return i;  
-} 
+function clearSelect()
+{
+    $("#combCount").html(0);
+    $("#combCurrentPrice").html(${goods.salePrice?string("0.00")});
+    $("#combOriginPrice").html(${goods.salePrice?string("0.00")});
+    $("#combSave").html(0);
+    
+    $(".comboCheckBox").attr("checked", false);
+}
+
 </script>
-
 </head>
-<body>
-<!-- header开始 -->
-<#include "/client/common_header.ftl" />
-<!-- header结束 -->
 
-<article id="main">
-<div class="ipp1 top">
-    <dd>您当前位置：<a href="/">首页</a> 
-        <#if category_tree_list??>
-            <#list category_tree_list as category>
-                > <a href="/list/${category.id}" <#if category_index+1==category_tree_list?size></#if>>${category.title!""}</a>
+<body>
+<#include "/client/common_header.ftl" />
+
+<div class="pro_info"> 
+  <h2 class="main pro_tit">
+    <a class="a1" href="/">首页</a>
+    <#if category_tree_list??>
+        <#list category_tree_list as category>
+            <span> > </span><a class="a2" href="/list/${category.id}">${category.title!""}</a>
+        </#list>
+    </#if>
+    <span> > ${goods.name!''}</span>
+  </h2>
+    <div class="pro_box">
+    <section class="proinfo_left">
+        <menu id="proshowimg">
+            <#if goods.showPictures??>
+                <#list goods.showPictures?split(",") as uri>
+                    <#if ""!=uri && uri_index < 4>
+                        <li><img src="${uri!''}" /></li>
+                    </#if>
+                </#list>
+            </#if>
+        </menu>
+        <div class="clear h15"></div>
+        <#if goods.code??>
+        <p class="pro_num">商品编码：${goods.code!''}<#--<a href="#">点击分享</a>--></p>
+        </#if>
+        <div class="clear h15"></div>
+        <menu id="proshowmenu"></menu>
+        <div class="clear"></div>
+
+    </section>
+    
+        
+    <section class="proinfo_right">
+      <h3>${goods.title!''}</h3>
+      <h4 class="red">${goods.subTitle!''}</h4>
+      <div class="pro_price">
+        <p class="p1">
+          <span class="mr10">同盟价</span>
+          <span class="red fs24 lh30 mr20">￥：<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></span>
+          <span class="unl-th c9">￥：<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span>
+        </p>
+        <#if goods.returnPoints?? && goods.returnPoints != 0>
+        <p class="p1 red">
+          可获得粮草 ￥${goods.returnPoints!'0'}
+        </p>
+        </#if>
+        <p class="p1">
+          车友口碑 <span class="red ml10">${goods.totalComments!'0'}</span>人评价
+        </p>
+        <#if goods.giftList?? && goods.giftList?size gt 0>
+            <p class="p">
+                <span style="color:#666;" class="red">赠品</span>
+                <#list goods.giftList as gitem>
+                    <a class="red ml20" title="点击查看详情" href="/goods/${gitem.goodsId!''}">${gitem.goodsTitle!''}</a>
+                </#list>
+            </p>
+        </#if>
+      </div><!--pro_price END-->
+      <table class="pro_choose">
+        <#if diy_site_list?? && diy_site_list?size gt 0>
+            <tr>
+              <td colspan="2"><span>线下同盟店</span>
+                <select>
+                    <option value="">请选择...</option>
+                    <#list diy_site_list as item>
+                        <option value="${item.id}">${item.title!''}</option>
+                    </#list>
+                </select>
+              </td>
+            </tr>
+        </#if>
+        <#if total_select??>
+            <#if 1==total_select>
+                <tr>
+                    <th width="60">${select_one_name!''}</th>
+                    <td>
+                        <#if select_one_goods_list??>
+                        <#list select_one_goods_list as item>
+                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
+                        </#list>
+                        </#if>
+                    </td>
+                </tr>
+            <#elseif 2==total_select>
+                <tr>
+                    <th width="60">${select_one_name!''}</th>
+                    <td>
+                        <#if select_one_goods_list??>
+                        <#list select_one_goods_list as item>
+                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
+                        </#list>
+                        </#if>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="60">${select_two_name!''}</th>
+                    <td>
+                        <#if select_two_goods_list??>
+                        <#list select_two_goods_list as item>
+                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+                        </#list>
+                        </#if>
+                    </td>
+                </tr>
+            <#elseif 3==total_select>
+                <tr>
+                    <th width="60">${select_one_name!''}</th>
+                    <td>
+                        <#if select_one_goods_list??>
+                        <#list select_one_goods_list as item>
+                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
+                        </#list>
+                        </#if>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="60">${select_two_name!''}</th>
+                    <td>
+                        <#if select_two_goods_list??>
+                        <#list select_two_goods_list as item>
+                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+                        </#list>
+                        </#if>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="60">${select_three_name!''}</th>
+                    <td>
+                        <#if select_three_goods_list??>
+                        <#list select_three_goods_list as item>
+                            <a <#if item.selectThreeValue==three_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectThreeValue}</a>
+                        </#list>
+                        </#if>
+                    </td>
+                </tr>
+            </#if>
+        </#if>
+        <tr>
+            <th>数量</th>
+            <td>
+                <input name="quantity" type="text" id="quantity" value="1" class="text" />
+                <div class="plus">
+                    <a id="id-plus" href="javascript:;"></a>
+                    <a id="id-minus" class="down" href="javascript:;"></a>
+                </div>
+                <span class="fl ml10">库存${goods.leftNumber!'0'}件</span>
+                <div class="clear"></div>
+            </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="border-top:1px solid #eee;border-bottom:1px solid #eee; padding:10px 0;">
+            <span class="fl">服务承诺</span>
+            <a class="a1" href="javascript:;" title="免运费">免运费</a>
+            <a class="a1 a2" href="javascript:;" title="正品保障">正品保障</a>
+            <a class="a1 a3" href="javascript:;" title="免费施工">免费施工</a>
+            <a class="a1 a4" href="javascript:;" title="无忧售后">无忧售后</a>
+            <div class="clear"></div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <a id="addCart" href="/cart/init?id=${goods.id}<#if qiang??>&qiang=${qiang}</#if>" class="sub sub01">加入购物车</a>
+            <div class="buy_share">
+              <a class="buy_share_a" href="javascript:addCollect(${goods.id});">关注商品</a>
+              <p>关注人数：<span class="red">${total_collects!'0'}</span>人</p>
+            </div>
+            <div class="clear"></div>
+          </td>
+        </tr>
+      </table>
+      
+    </section><!--proinfo_right END-->
+    <div class="clear h20"></div>
+  </div><!--pro_box END--> 
+  <div class="clear"></div>
+</div><!--pro_info END-->
+
+<div class="main pt20">
+  <section class="pro_assort">
+    <menu id="assort_menu">
+      <a class="sel" href="javascript:;">推荐配套</a>
+      <div class="clear"></div>
+    </menu>
+    
+    <div>
+      <ul id="assort_sum">
+      <li>
+        <div class="part">
+          <a href="/goods/${goods.id}"><img src="${goods.coverImageUri!''}" width="114" height="114" /></a>
+          <p style="height: 33px; overflow: hidden;">${goods.title!''}</p>
+          <p class="p1"><span>￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></span></p>
+        </div>
+        
+        <p class="part"><img src="/client/images/content/pro_plus.png" /></p>
+        
+        <aside class="partside">
+            <div class="partside_out">
+            
+            <#if goods.combList?? && goods.combList?size gt 0>
+                <#list goods.combList as item>
+                    <div class="part">
+                        <a href="/goods/${item.goodsId}"><img src="${item.coverImageUri!''}" width="114" height="114"/></a>
+                        <p style="height: 35px; overflow: hidden;">${item.goodsTitle!''}</p>
+                        <p class="p1">
+                            <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
+                            <span>${item.currentPrice?string("0.00")}</span>
+                        </p>原价：<del>¥<#if item.goodsPrice??>${item.goodsPrice?string("0.00")}</#if></del>
+                    </div>
+                    <#if item_index+1 < comb_list?size>
+                        <p class="part"><img src="/client/images/content/pro_plus.png" /></p>
+                    </#if>
+                </#list>
+            </#if>
+        
+          </div>
+        </aside>
+        <p class="part"><img src="/client/images/content/pro_eq.png" width="30" /></p>
+        <div class="part01">
+            <p>已选择：<span class="red" id="combCount">0</span>个组合<a href="javascript:clearSelect();">[清除选择]</a></p>
+            <p>组合价：￥<span class="red" id="combCurrentPrice">${goods.salePrice?string("0.00")}</span></p>
+            <p>原价：￥<span class="unl-th" id="combOriginPrice">${goods.salePrice?string("0.00")}</span></p>
+            <p>已节省：￥<span id="combSave">0.00</span></p>
+            <input id="zhAddCart" class="sub" type="submit" value="加入购物车" />
+        </div>
+        <div class="clear"></div>
+      </li>
+    </ul>
+    </div>
+    <div class="clear"></div>
+  </section><!--pro_assort END-->
+  
+  <div class="clear h20"></div>
+  
+  <section class="column_left">
+    <#--
+     <menu class="leftpart mb10">
+      <h4 class="tit">相关分类</h4>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <p class="clear"></p>
+     </menu>
+     <menu class="leftpart">
+      <h4 class="tit">相关品牌</h4>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <a href="#">行车记录仪</a>
+      <a href="#">便捷导航仪</a>
+      <p class="clear"></p>
+     </menu>
+     
+    <menu class="hot_list mt20">
+        <h5 class="tit">浏览了该商品的客户最终购买</h5>
+        <a class="scan" href="#">
+            <img src="/client/images/photo/img02.png" />
+            <p style="overflow: hidden; height: 61px;">苹果iPhone 6 Plus/A1524 5.5英寸特惠版苹果iPhone 6 Plus/A1524 5.5英寸特惠版苹果iPhone 6 Plus/A1524 5.5英寸特惠版苹果iPhone 6 Plus/A1524 5.5英寸特惠版</p>
+            <p class="red">￥5498.00</p>
+        </a>
+    </menu>
+    -->
+    <menu class="hot_list mt20">
+        <h5 class="tit">热卖排行</h5>
+        <#if hot_list??>
+            <#list hot_list as item>
+                <#if item_index < 5>
+                    <a class="scan" href="/goods/${item.id}">
+                        <img src="${item.coverImageUri!''}" title="${item.title!''} ${item.subTitle!''}"/>
+                        <p style="overflow: hidden; height: 61px;">${item.title!""}</p>
+                        <p class="red">￥${item.salePrice?string("0.00")}</p>
+                    </a>
+                </#if>
             </#list>
         </#if>
-        > &nbsp;${goods.title!''}
-    </dd>
-</div>
-<!--面包屑结束-->
-<div class="w1198 fl mt15 bor">
-    <div class="proinfo-left fl">    
-           
-        <div id=preview>
-            <div class="jqzoom" id="spec-n1">
-                
-                <#if goods.showPictures??>
-                    <#list goods.showPictures?split(",") as uri>
-                        <#if ""!=uri>
-                            <img height=350 src="${uri!''}" jqimg="${uri!''}" width=350>
-                            <#break>
-                        </#if>
-                    </#list>
-                </#if>
-            </div>
-            <div id="spec-n5">
-                <div class="control" id="spec-left">
-                    <img src="/client/images/left.gif" />
-                </div>
-                <div id="spec-list">
-                    <ul class="list-h">
-                        <#if goods.showPictures??>
-                            <#list goods.showPictures?split(",") as uri>
-                                <#if ""!=uri>
-                                    <li><img src="${uri!''}"></li>
-                                </#if>
-                            </#list>
-                        </#if>
-                    </ul>
-                </div>
-                <div class="control" id="spec-right">
-                    <img src="/client/images/right.gif" />
-                </div>
-            </div>
-        </div>
-                
-		<div class="imgzoom-memo">
-			<#-- <dd style="float:left">商品编号：1478489559</dd> -->
-			
-			<div class="sc fr">
-                <a href="javascript:void(0);" onclick="this, addCollect(${goods.id})"><i></i>
-                  收藏
+    </menu>
+    
+    <menu class="hot_list mt20">
+        <h5 class="tit">浏览记录</h5>
+        <#if recent_page??>
+            <#list recent_page.content as item>
+                <a class="scan" href="/goods/${item.goodsId}">
+                    <img src="${item.goodsCoverImageUri!''}" title="${item.goodsTitle!''}"/>
+                    <p style="overflow: hidden; height: 61px;">${item.goodsTitle!''}</p>
+                    <p class="red">￥<#if item.goodsSalePrice??>${item.goodsSalePrice?string("0.00")}</#if></p>
                 </a>
-            </div>
-	   </div>
-    </div>    	
-        <div class="neir_right fr">    
-            <div class="proinfo-title">
-                <h1 id="itemDisplayName">${goods.title!''}</h1><h2 id="promotionDesc">${goods.subTitle!''}</h2>
-            </div>   
-            <!--大标题名称结束--> 
-            <div class="title">
-                <div class="app">
-                    <input type="hidden" id="goodsId" value=${goods.id} />
-                    <#if goods.isGroupSale && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
-                        <div class="fl w600">
-                            <div class="jg_bd pt20">
-                                <b style="color:#f30919; font-size:25px;">￥${goods.groupSalePrice?string("0.00")}</b>
-                                <b style="font-weight:normal; font-size:12px; padding-left:15px; color:#999">原价：<del>￥${goods.salePrice?string("0.00")}</del></b>
-                                <b class="cux">限时秒杀</b>
-                            </div>
-                            <div class="jg_bd">
-                                <span class="miaos mt15" id="timeLeft"></span>
-                            </div>
-                        </div>
-                    <#else>
-                        <div class="fl w600">
-                            <div class="jg_bd pt20">博&nbsp;大&nbsp;价：<b style="color:#f30919; font-size:18px;">￥${goods.salePrice?string("0.00")}</b>
-                                
-                            </div>
-                            <div class="jg_bd">市&nbsp;场&nbsp;价：
-                                <del style="color:#b6b6b6; padding-right:10px;">￥${goods.marketPrice?string("0.00")}</del>
-                            </div>
-                            <#--
-                            <div class="jg_bd"><img src="/client/images/star4.gif" width="81" height="17" style=" margin-left:60px;" />
-                                <b style="color:#ec0010; font-size:13px; font-weight:normal;">4.0分 <a href="#comment">共有${goods.totalComments!'0'}条评价</a></b>
-                            </div>
-                            -->
-                        </div>
-                    </#if>
-                    <span class="code fr mt20"><img src="/client/images/ewm.png" width="97" height="97" /><dd>扫描下载手机客户端</dd></span>
-                </div>
-                <!--灰色背景结束-->
-                <#--
-                <div class="jg_bd pt20">赠&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品：
-                    <span class="stock"></span>
-                </div>
-                -->
-                <div class="jg_bd pt20">积&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分：
-                    <span>${goods.points!'0'}</span>
-                </div>
-                <div class="jg_bd pt15">服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：
-                    <span>${goods.service!'无'}</span>
-                </div>
-                
-                <#if total_select??>
-                    <#if 1==total_select>
-                        <div class="jg_bd pt15">${select_one_name!''}:
-                            <ul class="ys_xuan">
-                                <#if select_one_goods_list??>
-                                <#list select_one_goods_list as item>
-                                    <li><a href="/goods/${item.id}" <#if item.selectOneValue==one_selected>class="yansecur"</#if>>${item.selectOneValue}</a></li>
-                                </#list>
+            </#list>
+        </#if>
+        <div class="ta-r" style="border-top:1px dotted #ddd;"><a class="blue fs12 lh30" href="#">清空浏览记录</a></div>
+    </menu>
+    
+    
+  </section><!--column_left END-->
+  
+    <div class="column_right">
+        <div class="detail_tit" id="detail_tit">
+          <div class="out">
+            <menu>
+              <a href="#detail_tit" tid="0" class="sel stab">商品介绍</a>
+              <a href="#detail_tit" tid="1" class="stab">规格参数</a>
+              <a href="#detail_tit" tid="2" class="stab">售后服务</a>
+              <a href="#detail_tit" tid="3" class="stab">商品评价</a>
+              <a href="#consult-sec" tid="4" class="stab">商品咨询</a>
+              <div class="clear"></div>
+            </menu>
+          </div>
+        </div><!--detail_tit END-->
+        
+        <div class="clear h10"></div>
+        
+        <div id="tab0" class="php_z">
+            ${goods.detail!''}
+        </div>
+        
+        <div id="tab1" class="php_z" style="display:none;">
+            <table class="detail_tab">
+                <#if goods.paramList??>
+                    <#list goods.paramList as param>
+                        <#if param_index % 3 == 0 >
+                            <tr>
+                                <td>${param.paramName!''}: ${param.value!''}</td>
+                                <#if goods.paramList?size gt param_index+1 >
+                                    <td>${goods.paramList[param_index+1].paramName!''}: ${goods.paramList[param_index+1].value!''}</td>
                                 </#if>
-                            </ul>
-                        </div>
-                    <#elseif 2==total_select>
-                        <div class="jg_bd pt15">${select_one_name!''}:
-                            <ul class="ys_xuan">
-                                <#if select_one_goods_list??>
-                                <#list select_one_goods_list as item>
-                                    <li><a href="/goods/${item.id}" <#if item.selectOneValue==one_selected>class="yansecur"</#if>>${item.selectOneValue}</a></li>
-                                </#list>
+                                <#if goods.paramList?size gt param_index+2 >
+                                    <td>${goods.paramList[param_index+2].paramName!''}: ${goods.paramList[param_index+2].value!''}</td>
                                 </#if>
-                            </ul>
-                        </div>
-                        <div class="jg_bd pt15">${select_two_name!''}:
-                            <ul class="ys_xuan">
-                                <#if select_two_goods_list??>
-                                <#list select_two_goods_list as item>
-                                    <li><a href="/goods/${item.id}" <#if item.selectTwoValue==two_selected>class="yansecur"</#if>>${item.selectTwoValue}</a></li>
-                                </#list>
-                                </#if>
-                            </ul>
-                        </div>
-                    <#elseif 3==total_select>
-                        <div class="jg_bd pt15">${select_one_name!''}:
-                            <ul class="ys_xuan">
-                                <#if select_one_goods_list??>
-                                <#list select_one_goods_list as item>
-                                    <li><a href="/goods/${item.id}" <#if item.selectOneValue==one_selected>class="yansecur"</#if>>${item.selectOneValue}</a></li>
-                                </#list>
-                                </#if>
-                            </ul>
-                        </div>
-                        <div class="jg_bd pt15">${select_two_name!''}:
-                            <ul class="ys_xuan">
-                                <#if select_two_goods_list??>
-                                <#list select_two_goods_list as item>
-                                    <li><a href="/goods/${item.id}" <#if item.selectTwoValue==two_selected>class="yansecur"</#if>>${item.selectTwoValue}</a></li>
-                                </#list>
-                                </#if>
-                            </ul>
-                        </div>
-                        <div class="jg_bd pt15">${select_three_name!''}:
-                            <ul class="ys_xuan">
-                                <#if select_three_goods_list??>
-                                <#list select_three_goods_list as item>
-                                    <li><a href="/goods/${item.id}" <#if item.selectThreeValue==three_selected>class="yansecur"</#if>>${item.selectThreeValue}</a></li>
-                                </#list>
-                                </#if>
-                            </ul>
-                        </div>
-                    </#if>
-                </#if>
-                
-                <div class="jg_bd pt15">
-                    <b style="float:left; line-height:35px; font-weight:normal;">购&nbsp;买&nbsp;量：</b>
-                    <div class="zy_cm">
-                        <a id="id-minus" href="javascript:;"><img src="/client/images/zyc.png" width="14" height="21"/></a>
-                        <input name="quantity" type="text" id="quantity" value="1" size="10" class="input_kc" />
-                        <a id="id-plus" href="javascript:;"><img src="/client/images/zycc.png" width="14" height="21"/></a>
-                    </div>
-                </div>
-                
-                 
-                <div class="tb-action tm-clear">
-                    <div class="tb-btn-basket tb-btn-sku ">
-                        <a id="addCart" href="/cart/init?id=${goods.id}<#if goods.isGroupSale && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>&qiang=1</#if>">加入购物车</a>
-                    </div>
-                    <div class="tb-btn-buy tb-btn-sku">
-                        <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt" target="_blank">分享获取积分</a>
-                    </div>
-                    <script type="text/javascript" >
-                        var jiathis_config={
-                            data_track_clickback:true,
-                            url:"http://${server_ip!'www.kmboda.com'}:${server_port?c!'80'}/goods/${goods.id}<#if user??>?shareId=${user.id}</#if>",
-                            summary:"",
-                            shortUrl:false,
-                            hideMore:false
-                        }
-                    </script>
-                    <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
-                </div>
-                
-                <div class="ensure fl">
-                    <dd>100%样品检验</dd>
-                    <dd>按时发货</dd>
-                    <dd>礼品卡</dd>
-                    <dd style="margin-left:38px;">正品保障</dd>
-                    <dd style="margin-left:38px;">不支持无理由退换货</dd>
-                </div>    
-                                    
-            </div>        
-		</div>
-    </div>
-<!--放大效果结束-->    
-<div id="main">
-    <#if !goods.isGroupSale || goods.groupSaleStartTime gt .now || goods.groupSaleStopTime < .now>
-    	<div class="groom bor bor_top mt20 fl">
-            <div class="groon_top"><h3>最佳组合</h3></div>
-            <ul class="group">
-                <#if goods.combList??>
-                    <#list goods.combList as item>
-                        <li class="fore0">
-                            <a href="/goods/${item.goodsId}"><img width="130" height="130" src="${item.coverImageUri!''}"></a>
-                            <dd><a href="/goods/${item.goodsId}">${item.goodsTitle!''}</a></dd>
-                            <span style="display:block; padding:5px 0; color:#999">原价：￥<del class="comb-origin-price">${item.goodsPrice?string("0.00")}</del></span>
-                            <input type="checkbox" class="comb-checkbox" zpid="${item.id}"/>
-                            <strong class="itemCurrentPrice comb-current-price">${item.currentPrice?string("0.00")}</strong>
-                            <#if item_index+1 < comb_list?size>
-                                <span class="xtiein_symbol">+</span>
-                            </#if>
-                        </li>
+                            </tr>  
+                        </#if>
                     </#list>
                 </#if>
-                <div class="zy_zlw">
-                    <div class="xtiein_col4"><span class="xtiein_symbo2">=</span></div>
-                    <div class="xtiein_col5">
-                        <div class="xtiein_total">
-                            <div class="xtiein_total_list">
-                                <dd class="xtiein_total_price">
-                                    <span class="xtiein_total_list_tit">已选择：</span>
-                                    <span class="xtiein_total_ist_con"><span id="combCount">0</span>个组合
-                                    <#--
-                                        <a href="javascript:;" class="xtiein_total_reset" id="clearComb">[清除选择]</a>
-                                    -->
-                                    </span>
-                                </dd>
-                                <dd class="xtiein_total_price">
-                                    <span class="xtiein_total_list_tit">套餐价：</span>
-                                    <span class="xtiein_total_ist_con">￥<span class="mod_price" id="combCurrentPrice">${goods.salePrice?string("0.##")}</span></span>
-                                </dd>
-                                <dd>
-                                    <span class="xtiein_total_list_tit">原&nbsp;&nbsp;&nbsp;价：</span>
-                                    <span class="xtiein_total_list_con">
-                                        ￥<del id="combOriginPrice">${goods.salePrice?string("0.##")}</del>
-                                    </span>
-                                </dd>
-                                <dd>
-                                    <span class="xtiein_total_list_tit">已节省：</span>
-                                    <span class="xtiein_total_list_con">￥<span id="combSave">0.00</span></span>
-                                </dd>
-                                <a href="javascript:;" class="zy_xx" id="zhAddCart" target="_blank">加入购物车</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-        </div>
-    </div>
-    </#if>
-<!--强烈推荐结束-->
-<article id="main">
-	<div class="left_list fl mt20">
-        <div class="left_n fl">
-             <h4>热卖推荐</h4>
-                <ul class="tuij_nr">
-                    <#if hot_list??>
-                        <#list hot_list as item>  
-                        <#if item_index < 10>
-                          <li>
-                            <a href="/goods/${item.id}"><img src="${item.coverImageUri}" width="162" height="134"  /></a>
-                            <b style="color:#d8000f; font-size:15px; line-height:25px;">￥${item.salePrice?string("0.00")}</b>
-                            <p><a href="/goods/${item.id}">${item.title!''}</a></p>
-                          </li>
-                        </#if>
-                        </#list>
-                    </#if>
-                </ul>         
-        </div>
-        <#--
-        <div class="left_n fl mt20">
-         <h4>一周销量排行榜</h4>
-            <div class="sidlist_box sidlist_slide">
-                <ul>
-                    <li>
-                        <a target="_blank" class="pro_img_small" href="#"><img src="images/img.jpg" width="70" height="70"><sup class="nub1"></sup></a>
-                        <p class="price"><span class="color_red"><em>￥</em>139</span></p>
-                        <h3 class="name"><a href="#">品鲜猫 法国进口新鲜银鳕鱼切片 宝宝孕妇专用雪鱼片 500g </a>
-                        </h3>
-                    </li>             
-               </ul>
-            </div>
-        </div>
-        -->
-    </div>
-    <!--左边结束-->
-    <div class="right_list bor fr mt20">
-    	<ul class="explicit_top">
-        	<li><a href="javascript:;" tid="0" class="stab hover_xx">商品详情</a></li>
-        	<li><a href="javascript:;" tid="1" class="stab">包装及参数</a></li>
-        	<li><a href="#commentDiv" tid="2" class="stab">评论（${goods.totalComments!'0'}）</a></li>
-        	<li><a href="#consultDiv" tid="3" class="stab">资讯（${goods.totalConsults!'0'}）</a></li>
-        	<li><a href="javascript:;" tid="4" class="stab">售后服务</a></li>
-        </ul>
-        <div id="tab0" class="php_z">
-        	${goods.detail!''}
-        </div>
-        <div id="tab1" class="php_z" style="display:none;">
-            <table border="0" width="100%" cellpadding="0" cellspacing="1" class="product">
-            <tbody>
-                <#if goods.paramList??>
-                <#list goods.paramList as param>
-                    <tr>
-                        <th width="14%" bgcolor="#FFFFFF">${param.paramName!''}</th>
-                        <td width="86%" bgcolor="#FFFFFF" style="text-align:left"><span>${param.value!''}</span></td>
-                    </tr>  
-                </#list>
-                </#if>
-            </tbody>
             </table>
         </div>
-        <div id="tab4" class="php_z" style="display:none;">
+        
+        <div id="tab2" class="php_z" style="display:none;">
             ${goods.afterMarketService!''}
         </div>
-    </div>
-    <div id="commentDiv" class="right_list bor fr mt20" style="display:block;">
-        <div class="right_list bor_bot1 fl">
-            <div class="discuss_top">
-                <h3>商品评论（共${goods.totalComments!'0'}条评论）</h3>综合评分<img src="/client/images/pingf.png" width="68" height="12" />
-            </div>
-            <#--
-            <dd class="eval-item shop-positive">
-                <p class="positive-score">98<i class="positive-sign">%</i></p>
-                <p class="positive-des">好评度</p>
-            </dd>
-            <div class="satisfy">
-                <img src="/client/images/satisfy.png" width="438" height="35" />
-                <b class="hot_zy">4.5</b>
-            </div>
-            -->
-        </div>
-        <div id="commentList" class="eval-list comment-show codeHover" style="display: block;">
-            <#include "/client/goods_comment.ftl" />
-        </div>
         
-        <div class="pinlunbox fbpn">
-            <ul>
-                <#if username??>
-                    <li class="pyts">
-                        欢迎您<a href="/user"><strong>${username!''}</strong></a>，请发表问答/评论! 
-                    </li>
-                    <li class="title mt12">内容：</li>
-                    <li class="texta mt12">
-                      <label>
-                        <textarea id="taComment" cols="100" rows="5" class="inp"></textarea>
-                      </label>
-                    </li>
-                    <li class="title mt12">验证码：</li>
-                    <li class="yzminp mt12"><input type="text" id="commentCode" /></li>
-                    <li class="yzmimg mt12"><img onclick="this.src = '/code?date='+Math.random();" src="/code" width="96" height="21" alt="验证码" /></li>
-                    <li class="tijiaobox mt12">
-                        <input id="idSubmitComment" type="button" value="提交" class="an5"/>
-                    </li>
-                <#else>
-                    <li class="pyts">
-                        欢迎您访客，您在<a href="/login">登录</a>后才能发表问答/评论，如果没有帐户请<a href="/reg">注册</a>！  
-                    </li>
-                </#if>
-            </ul>
-        </div>      
-    </div>
-    
-    <div id="consultDiv" class="right_list bor fr mt20" style="display:block;">
-        <div class="right_list bor_bot1 fl">
-            <div class="discuss_top">
-                <h3>购买咨询</h3>
-            </div>
-        </div>
-        <div id="consultList" class="eval-list comment-show codeHover" style="display: block;">
-            <#include "/client/goods_consult.ftl" />
-        </div>
+        <div class="clear h20"></div>
         
-        <div class="pinlunbox fbpn">
-            <ul>
-                <#if username??>
-                    <li class="pyts">
-                        欢迎您<a href="/user"><strong>${username!''}</strong></a>，请发表咨询! 
-                    </li>
-                    <li class="title mt12">内容：</li>
-                    <li class="texta mt12">
-                      <label>
-                        <textarea id="taConsult" cols="100" rows="5" class="inp"></textarea>
-                      </label>
-                    </li>
-                    <li class="title mt12">验证码：</li>
-                    <li class="yzminp mt12"><input type="text" id="consultCode" /></li>
-                    <li class="yzmimg mt12"><img onclick="this.src = '/code?date='+Math.random();" src="/code" width="96" height="21" alt="验证码" /></li>
-                    <li class="tijiaobox mt12">
-                        <input id="idSubmitConsult" type="button" value="提交" class="an5"/>
-                    </li>
-                <#else>
-                    <li class="pyts">
-                        欢迎您访客，您在<a href="/login">登录</a>后才能发表咨询，如果没有帐户请<a href="/reg">注册</a>！  
-                    </li>
-                </#if>
-            </ul>
-        </div>      
-    </div>
-    
-    <!--右边结束-->
+        <section class="pro_mytext" id="pro_mytext">
+            <#if username??>
+                <form id="commentForm" action="javascript:submitComment();">
+                    <input type="hidden" name="goodsId" value=${goods.id} />
+                    <div class="pb20 lh25">
+                        <span class="sp1">我要评论</span>
+                        <input class="ml20" type="radio" name="stars" value="3" datatype="n" nullmsg="请点击进行评价"/><span class="mr20"> 好评</span>
+                        <input type="radio" name="stars" value="2" datatype="n" nullmsg="请点击进行评价"/><span class="mr20"> 中评</span>
+                        <input type="radio" name="stars" value="1" datatype="n" nullmsg="请点击进行评价"/><span class="mr20"> 差评</span>
+                    </div>
+                    <div class="area">
+                        <textarea name="content" datatype="*5-255" nullmsg="请输入评价内容"></textarea>
+                    </div>
+                    <div class="pt10 pb10">
+                        <div class="clear h5"></div>
+                        <span class="fl">同盟店商品质量：</span>
+                        <input id="goodsStar" name="goodsStar" type="hidden" value="1" />
+                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 1);"><img src="/client/images/content/start01.png" /></a>
+                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 2);"><img src="/client/images/content/start03.png" /></a>
+                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 3);"><img src="/client/images/content/start03.png" /></a>
+                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 4);"><img src="/client/images/content/start03.png" /></a>
+                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 5);"><img src="/client/images/content/start03.png" /></a>
+                         
+                        <span class="fl ml20">同盟店专业技能：</span>
+                        <input id="skillStar" name="skillStar" type="hidden" value="1" />
+                        <a class="skillStar fl" href="javascript:starChange('skillStar', 1);"><img src="/client/images/content/start01.png" /></a>
+                        <a class="skillStar fl" href="javascript:starChange('skillStar', 2);"><img src="/client/images/content/start03.png" /></a>
+                        <a class="skillStar fl" href="javascript:starChange('skillStar', 3);"><img src="/client/images/content/start03.png" /></a>
+                        <a class="skillStar fl" href="javascript:starChange('skillStar', 4);"><img src="/client/images/content/start03.png" /></a>
+                        <a class="skillStar fl" href="javascript:starChange('skillStar', 5);"><img src="/client/images/content/start03.png" /></a>
+                          
+                        <span class="fl ml20">同盟店服务态度：</span>
+                        <input id="serviceStar" name="serviceStar" type="hidden" value="1" />
+                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 1);"><img src="/client/images/content/start01.png" /></a>
+                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 2);"><img src="/client/images/content/start03.png" /></a>
+                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 3);"><img src="/client/images/content/start03.png" /></a>
+                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 4);"><img src="/client/images/content/start03.png" /></a>
+                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 5);"><img src="/client/images/content/start03.png" /></a>
+                        
+                        <div class="clear h10"></div>
+                    </div>
+                    <input class="sub fr" type="submit" value="提交评价" />
+                </form>
+            <#else>
+                <div>请 <a href="/login">登录</a> 以发表评论</div>
+            </#if>
+            <div class="clear"></div>
+        </section>
+        
+        <div class="clear h20"></div>
+        
+        <#include "/client/goods_comment.ftl" />
+        
+        <div id="consult-sec" class="clear h20"></div>
+        
+        <section class="pro_myseek">
+            <#if username??>
+                <form id="consultForm" action="javascript:submitConsult();">
+                    <input type="hidden" name="goodsId" value=${goods.id} />
+                    <h3 class="lh30 fs18 fw400 pb10"><span class="circle_tit">我要咨询</span></h3>
+                    <menu>
+                        <textarea name="content" datatype="*5-255" nullmsg="请输入咨询内容"></textarea>
+                    </menu>
+                    <p>温馨提示：我们将尽快回复您的咨询。</p>
+                    <div class="clear"></div>
+                    <input class="sub" type="submit" value="马上提问" />
+                </form>
+            <#else>
+                <div>请 <a href="/login">登录</a> 以进行咨询</div>
+            </#if>
+        </section>
+        
+        <#include "/client/goods_consult.ftl" />
+        
+    </div><!--column_right END-->
+  
     <div class="clear"></div>
-</article>
-    
-</article>
-<!--主体结束-->
+</div><!--main END-->
 <#include "/client/common_footer.ftl" />
-<!--底部结束-->
 </body>
 </html>

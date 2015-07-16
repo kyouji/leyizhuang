@@ -75,6 +75,27 @@ $(function () {
         }
     });
     
+    //（抢拍缩略图）
+    var flashPic = $("#flashSaleImage").val();
+    if (flashPic == "" || flashPic == null) {
+        $("#thumb_ImgUrl_show3").hide();
+    }
+    else {
+        $("#thumb_ImgUrl_show3").html("<ul><li><div class='img-box1'><img src='" + groupPic + "' bigsrc='" + groupPic + "' /></div></li></ul>");
+        $("#thumb_ImgUrl_show3").show();
+    }
+
+    $("#flashSaleImage").blur(function () {
+        var flashPic = $("#flashSaleImage").val();
+        if (flashPic == "" || flashPic == null) {
+            $("#thumb_ImgUrl_show3").hide();
+        }
+        else {
+            $("#thumb_ImgUrl_show3").html("<ul><li><div class='img-box1'><img src='" + groupPic + "' bigsrc='" + groupPic + "' /></div></li></ul>");
+            $("#thumb_ImgUrl_show3").show();
+        }
+    });
+    
     //（团购缩略图）
     var groupPic = $("#groupSaleImage").val();
     if (groupPic == "" || groupPic == null) {
@@ -195,7 +216,7 @@ $(function () {
         $("#idComputeSalePrice").val((parseFloat(p1) + parseFloat(p2)));
     });
     
-    // 判断积分购买限额不能大于最高返现额
+    // 判断粮草购买限额不能大于最高返现额
     $("#pointLimited").change(function(){
         var point = $.trim($('#pointLimited').val());
         var price = $.trim($('#returnPrice').val())
@@ -204,7 +225,7 @@ $(function () {
         
         if (parseFloat(price) < parseFloat(point))
         {
-            alert("购买积分限额不能大于最高返现额!");
+            alert("购买粮草限额不能大于最高返现额!");
             $(this).val("0");
         }
     });
@@ -305,7 +326,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>所属类别</dt>
             <dd>
-                <div class="rule-single-select single-select">
+                <div class="rule-single-select">
                     <select name="categoryId" id="categoryId" datatype="*" sucmsg=" ">
                         <#if !goods??>
                         <option value="">请选择类别...</option>
@@ -396,8 +417,15 @@ function del_goods_comb(obj) {
         <dl>
             <dt>商品副标题</dt>
             <dd>
-                <input name="subTitle" type="text" value="<#if goods??>${goods.subTitle!""}</#if>" class="input normal" datatype="*2-255" sucmsg=" ">
+                <input name="subTitle" type="text" value="<#if goods??>${goods.subTitle!""}</#if>" class="input normal" datatype="*1-255" sucmsg=" ">
                 <span class="Validform_checktip">*标题最多255个字符</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>商品编码</dt>
+            <dd>
+                <input name="code" type="text" value="<#if goods??>${goods.code!""}</#if>" class="input normal" datatype="*0-255" sucmsg=" ">
+                <span class="Validform_checktip">*编码最多255个字符</span>
             </dd>
         </dl>
         <dl>
@@ -483,7 +511,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>市场价</dt>
             <dd>
-                <input name="marketPrice" type="text" value="<#if goods?? && goods.marketPrice??>${goods.marketPrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <input name="marketPrice" type="text" value="<#if goods?? && goods.marketPrice??>${goods.marketPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
                 <span class="Validform_checktip">市场价格</span>
             </dd>
         </dl>
@@ -502,7 +530,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">商品组合销售时的价格</span>
             </dd>
         </dl>
-        -->
         <dl>
             <dt>出厂价</dt>
             <dd>
@@ -510,32 +537,33 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*商品出厂价</span>
             </dd>
         </dl>
+        -->
         <dl>
-            <dt>最高返现额</dt>
+            <dt>返现额</dt>
             <dd>
                 <input id="returnPrice" name="returnPrice" type="text" value="<#if goods?? && goods.returnPrice??>${goods.returnPrice?string("0.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">*返还分销商的最高可能金额，不填时为0</span>
+                <span class="Validform_checktip">*返还同盟店的金额，不填时为0</span>
             </dd>
         </dl>
         <dl>
             <dt>销售价</dt>
             <dd>
-                <input id="idComputeSalePrice" name="salePrice" type="text" disabled="disabled" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="" style="background: #EEEEEE;">
-                <span class="Validform_checktip">系统自动计算 (销售价 = 分销价 + 最高返现额)</span>
+                <input id="idComputeSalePrice" name="salePrice" type="text" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <span class="Validform_checktip">销售价</span>
             </dd>
         </dl>
         <dl>
-            <dt>积分购买限额</dt>
+            <dt>粮草购买限额</dt>
             <dd>
                 <input id="pointLimited" name="pointLimited" type="text" value="<#if goods?? && goods.pointLimited??>${goods.pointLimited?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
-                <span class="Validform_checktip">购买时可使用的积分限额，必须小于最高返现额</span>
+                <span class="Validform_checktip">购买时可使用的粮草限额，必须小于最高返现额</span>
             </dd>
         </dl>
         <dl>
-            <dt>赠送积分</dt>
+            <dt>赠送粮草</dt>
             <dd>
                 <input name="returnPoints" type="text" value="<#if goods?? && goods.returnPoints??>${goods.returnPoints?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
-                <span class="Validform_checktip">购买该商品赠送的积分</span>
+                <span class="Validform_checktip">购买该商品赠送的粮草</span>
             </dd>
         </dl>
         <#if warehouse_list??>
@@ -570,21 +598,19 @@ function del_goods_comb(obj) {
     </div>
     
     <div class="tab-content" style="display: none;">
-        <#--
         <dl>
-            <dt>支持限时抢购</dt>
+            <dt>支持一元抢拍</dt>
             <dd>
                 <div class="rule-multi-radio multi-radio">
                     <span>
                         <input type="radio" name="isFlashSale" value="1" <#if goods?? && goods.isFlashSale?? && goods.isFlashSale==true>checked="checked"</#if> >
                         <label>是</label>
-                        <input type="radio" name="isFlashSale" value="0" <#if goods??==false || goods.isFlashSale??==false || goods.isFlashSale==false>checked="checked"</#if>>
+                        <input type="radio" name="isFlashSale" value="0" <#if !goods?? || goods.isFlashSale??==false || goods.isFlashSale==false>checked="checked"</#if>>
                         <label>否</label>
                     </span>
                 </div>
             </dd>
         </dl>
-        
         <dl>
             <dt>开始时间</dt>
             <dd>
@@ -595,7 +621,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">不选择默认为当前时间</span>
             </dd>
         </dl>
-        
         <dl>
             <dt>结束时间</dt>
             <dd>
@@ -606,9 +631,18 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">不选择默认为当前时间</span>
             </dd>
         </dl>
+        <dl>
+            <dt>一元抢拍展示图片</dt>
+            <dd>
+                <input id="flashSaleImage" name="flashSaleImage" type="text" value="<#if goods??>${goods.flashSaleImage!""}</#if>" class="input normal upload-path">
+                <div class="upload-box upload-img"></div>
+                <div id="thumb_ImgUrl_show3" class="photo-list thumb_ImgUrl_show">
+                </div>
+            </dd>
+        </dl>
         
         <dl>
-            <dt>限时抢购价</dt>
+            <dt>一元抢拍价</dt>
             <dd>
                 <input name="flashSalePrice" type="text" value="<#if goods?? && goods.flashSalePrice??>${goods.flashSalePrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
                 <span class="Validform_checktip">商品限时抢购价格</span>
@@ -616,20 +650,19 @@ function del_goods_comb(obj) {
         </dl>
         
         <dl>
-            <dt>限时抢购剩余数量</dt>
+            <dt>一元抢拍剩余数量</dt>
             <dd>
                 <input name="flashSaleLeftNumber" type="text" value="<#if goods??>${goods.flashSaleLeftNumber!''}</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
                 <span class="Validform_checktip">为0时抢购结束</span>
             </dd>
         </dl>
         <dl>
-            <dt>限时抢购销量</dt>
+            <dt>一元抢拍销量</dt>
             <dd>
                 <input name="flashSaleSoldNumber" type="text" value="<#if goods??>${goods.flashSaleSoldNumber!''}</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
-                <span class="Validform_checktip">已抢购商品数量</span>
+                <span class="Validform_checktip">已销售商品数量</span>
             </dd>
         </dl>
-        -->
         
         <dl>
             <dt>支持团购</dt>
@@ -675,10 +708,51 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
-            <dt>团购价</dt>
+            <dt>预付定金</dt>
             <dd>
-                <input name="groupSalePrice" type="text" value="<#if goods?? && goods.groupSalePrice??>${goods.groupSalePrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">商品团购价格</span>
+                <input name="groupSalePrice" type="text" value="<#if goods?? && goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">预付定金额度</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>三人团价格</dt>
+            <dd>
+                <input name="groupSaleThreePrice" type="text" value="<#if goods?? && goods.groupSaleThreePrice??>${goods.groupSaleThreePrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">三人团商品团购价格</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>七人团价格</dt>
+            <dd>
+                <input name="groupSaleSevenPrice" type="text" value="<#if goods?? && goods.groupSaleSevenPrice??>${goods.groupSaleSevenPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">七人团商品团购价格</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>十人团价格</dt>
+            <dd>
+                <input name="groupSaleTenPrice" type="text" value="<#if goods?? && goods.groupSaleTenPrice??>${goods.groupSaleTenPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">十人团商品团购价格</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>开启百人团</dt>
+            <dd>
+                <div class="rule-multi-radio">
+                    <span>
+                        <input type="radio" name="isGroupSaleHundred" value="1" <#if goods?? && goods.isGroupSaleHundred?? && goods.isGroupSaleHundred==true>checked="checked"</#if>>
+                        <label>是</label>
+                        <input type="radio" name="isGroupSaleHundred" value="0" <#if goods??==false || goods.isGroupSaleHundred??==false || goods.isGroupSaleHundred==false>checked="checked"</#if>>
+                        <label>否</label>
+                    </span>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>百人团价格</dt>
+            <dd>
+                <input name="groupSaleHundredPrice" type="text" value="<#if goods?? && goods.groupSaleHundredPrice??>${goods.groupSaleHundredPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">十人团商品团购价格</span>
             </dd>
         </dl>
         <dl>

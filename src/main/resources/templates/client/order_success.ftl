@@ -1,35 +1,50 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>博大生活网——订单提交成功</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="copyright" content="" />
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/master.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/mymember.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/client/js/html5.js"></script>
-<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
+<meta charset="utf-8">
+<title>${site.seoTitle!''}-支付成功</title>
+<meta name="keywords" content="${site.seoKeywords!''}" />
+<meta name="description" content="${site.seoDescription!''}" />
+<meta name="copyright" content="${site.copyright!''}" />
+<link href="/client/css/layout.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/gwc.css" rel="stylesheet" type="text/css" />
 <script src="/client/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
+<script src="/client/js/common.js"></script>
+<script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/mymember.js"></script>
-<script src="/client/js/header.js"></script>
-<!--[if IE]>
-   <script src="/client/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/client/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
+<script src="/client/js/jquery.cityselect.js"></script>
+<script src="/client/js/lhgdialog.js"></script>
+<script src="/client/js/order_info.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    menuDownList("top_phone","#top_phonelist",".a1","sel");
+    phoneListMore();//单独下拉
+    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+    searchTextClear(".toptext","请输入品牌或商品名称","#999","#666");
+    searchTextClear(".bottext","查看所有门店","#fff","#fff");
+    checkNowHover("shopping_down","shopping_sel");
+    navDownList("navdown","li",".nav_showbox");
+    menuDownList("mainnavdown","#navdown",".a2","sel");
+    
+    chooseMoreShow();
+    
+});
 </script>
-<![endif]-->
 </head>
 <body>
 <!-- header开始 -->
 <#include "/client/common_header.ftl" />
 <!-- header结束 -->
-<article id="main" class="mt20">
+
+<!--mymember-->
+<div class="myclear"></div>
+
+<div class="mymember_out">
+    <div class="gwcbg">
+    <article id="main" class="mt20">
       <div class="order bor fl">
             <div class="o-left">
                 <b style="float:left; margin:10px 15px 0 0"><img src="/client/images/ok.png" width="32" height="32" /></b>
@@ -37,7 +52,7 @@ DD_belatedPNG.fix('.,img,background');
                   感谢您，订单提交成功！订单号：<#if order??>${order.orderNumber!''}</#if>
                 </h3>
                 <p class="o-tips">
-                    博大生活网提供
+                    车有同盟提供
                         <span class="pay-safeguard j_uiPop">
                         <em class="ps-title j_uiBaozhangPop">在线支付保障</em>
                         </span>
@@ -53,18 +68,13 @@ DD_belatedPNG.fix('.,img,background');
             </div>
             <div class="clr"></div>
         </div>
-</article>
+    </article>
+    </div>
 <!--主体结束-->
+
 <#include "/client/common_footer.ftl" />
-<!--底部结束-->
-<script type="text/javascript">
-      $(document).ready(function(){
-         mymemberMenuCheck("mymember_right_menu","a","mymember_right_check","li","mysel");
-         mymemberRightMove("mymember_storybox",70,90,"mymember_story_next",15,3,"a");
-         mymemberRightMove("mymember_gzbox",205,241,"mymember_gznext",15,3,"a");
-         mymemberRightMove("mymember_shinebox",205,310,"mymember_shinenext",15,3,"div");
-      });
-</script>
+
+</div>
 </body>
 </html>
 <!--结束-->

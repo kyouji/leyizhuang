@@ -149,6 +149,23 @@
             </div>
         </div>
     
+        <#--
+        <div class="main mt15">
+            <div class="s_gwc3_1">
+                <div class="s_gwc3_1_a"><p><span>我的优惠劵</span></p></div>
+                <div class="invoice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <select>
+                        <option>优惠抵用券</option>
+                        <option>红包抵用</option>
+                        <option>优惠卡</option>
+                    </select>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="orange">抵用金额：￥55.22元</span>
+                </div>
+            </div>
+        </div>
+        -->
+
         <div id="main">
             <div class="s_gwc1zj fr">
                 <input id="idTotalPriceSteady" type="hidden" value="${(totalPrice+delivery_fee!0)?string("#.##")}" />
