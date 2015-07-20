@@ -154,7 +154,7 @@ public class PaymentChannelCEB implements PaymentChannel{
                     orderId.substring(0, orderId.length() - 6);
                 TdPayRecordService payRecordService = context.getBean(TdPayRecordService.class);
                 TdOrder order = orderService.findByOrderNumber(orderId);
-                List<TdPayRecord> payRecords = payRecordService.getAll4OrderId(order.getId());
+                List<TdPayRecord> payRecords = payRecordService.getAllByOrderId(order.getId());
                 
                 Long status = order.getStatusId();
                 if(SUCCESSED.equals(payResult) || "".equals(payResult)) {

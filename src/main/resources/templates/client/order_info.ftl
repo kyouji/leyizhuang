@@ -164,7 +164,7 @@
                     </#list>
                 </#if>
             </select>&nbsp;&nbsp;
-            <span class="red">抵用金额：￥10.00</span>
+            <span class="red">抵用金额：￥0.00</span>
         </div>
         
         <div class="clear h20"></div>

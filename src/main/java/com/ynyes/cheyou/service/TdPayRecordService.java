@@ -48,12 +48,12 @@ public class TdPayRecordService {
     }
     
     /**
-     * 取得订单相关的所有哦支付记录
+     * 取得订单相关的所有支付记录
      * @param orderId订单Id
      * @return
      */
-    public List<TdPayRecord> getAll4OrderId(Long orderId) {
-        return repository.findByOrderIdOrderByCreateTimeAsc(orderId);
+    public List<TdPayRecord> getAllByOrderId(Long orderId) {
+        return repository.findByOrderIdOrderByCreateTimeDesc(orderId);
     }
     
     /**
@@ -62,7 +62,7 @@ public class TdPayRecordService {
      * @return
      */
     public TdPayRecord getByOrderId(Long orderId) {
-        List<TdPayRecord> payRecords = repository.findByOrderIdOrderByCreateTimeAsc(orderId);
+        List<TdPayRecord> payRecords = repository.findByOrderIdOrderByCreateTimeDesc(orderId);
         if(payRecords.isEmpty()) {
             return null;
         } else {

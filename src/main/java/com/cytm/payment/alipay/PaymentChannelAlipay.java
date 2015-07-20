@@ -149,7 +149,7 @@ public class PaymentChannelAlipay implements PaymentChannel {
                 TdOrderService orderService = context.getBean(TdOrderService.class);
                 TdPayRecordService payRecordService = context.getBean(TdPayRecordService.class);
                 TdOrder order = orderService.findByOrderNumber(orderNo);
-                List<TdPayRecord> payRecords = payRecordService.getAll4OrderId(order.getId());
+                List<TdPayRecord> payRecords = payRecordService.getAllByOrderId(order.getId());
                 if (OrderStatus.WAIT_PAY.equals(trade_status)) {
                     // 该判断表示买家已在支付宝交易管理中产生了交易记录，但没有付款
 
