@@ -16,7 +16,7 @@
     </#if>
 </#if>
 <#if pay_type.info??>
-    <#assign payadInfo=pay_type.info />
+    <#assign payadInfo=pay_type.info?eval />
 </#if>
 <span class="paymethod" title="<#if pay_type.info??>${payadInfo[1]!''}<#else>${pay_type.title!''}</#if>">
     <input class="pay_type_chk" name="payTypeId" type="radio" datatype="n" value="${pay_type.id!''}" fee="${pay_type.fee!'0'}" nullmsg="请选择支付方式!" />

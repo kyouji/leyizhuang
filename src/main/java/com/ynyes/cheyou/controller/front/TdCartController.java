@@ -1,5 +1,6 @@
 package com.ynyes.cheyou.controller.front;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -60,11 +61,42 @@ public class TdCartController {
         if (null == qiang) {
             qiang = 0;
         }
-
+        
         if (null != id) {
             TdGoods goods = tdGoodsService.findOne(id);
 
             if (null != goods) {
+                
+                // 计算抢拍价
+                Double qiangPrice = null;
+                Date curr = new Date();
+                
+                if (qiang.equals(1))
+                {
+                    if (null != goods.getIsFlashSale() 
+                            && null != goods.getFlashSaleStartTime()
+                            && null != goods.getFlashSaleStopTime()
+                            && null != goods.getFlashSalePrice()
+                            && goods.getIsFlashSale()
+                            && goods.getFlashSaleStopTime().after(curr)
+                            && goods.getFlashSaleStartTime().before(curr))
+                    {
+                        // 剩余毫秒数
+                        long ts = goods.getFlashSaleStopTime().getTime() - curr.getTime();
+                        // 总共毫秒数
+                        long allts = goods.getFlashSaleStopTime().getTime() - goods.getFlashSaleStartTime().getTime();
+                        
+                        qiangPrice = goods.getFlashSalePrice() * ts / allts;
+                        
+                        BigDecimal b = new BigDecimal(qiangPrice);
+                        
+                        qiangPrice = b.setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    }
+                    else
+                    {
+                        qiang = 0;
+                    }
+                }
                 
                 List<TdCartGoods> oldCartGoodsList = null;
                 
@@ -76,7 +108,7 @@ public class TdCartController {
                             && goods.getFlashSaleStartTime().before(new Date())) 
                     {
                         oldCartGoodsList = tdCartGoodsService
-                                .findByGoodsIdAndPriceAndUsername(id, goods.getFlashSalePrice(), username);
+                                .findByGoodsIdAndPriceAndUsername(id, qiangPrice, username);
                     }
                 }
                 // 团购
@@ -126,7 +158,7 @@ public class TdCartController {
                                 && goods.getFlashSaleStopTime().after(new Date())
                                 && goods.getFlashSaleStartTime().before(new Date())) 
                         {
-                            cartGoods.setPrice(goods.getFlashSalePrice());
+                            cartGoods.setPrice(qiangPrice);
                         }
                     }
                     // 团购
@@ -243,10 +275,11 @@ public class TdCartController {
             tdCartGoodsService.save(cartUserGoodsList);
 
             for (TdCartGoods cg1 : cartUserGoodsList) {
+                
                 List<TdCartGoods> findList = tdCartGoodsService
                         .findByGoodsIdAndPriceAndUsername(cg1.getGoodsId(), cg1.getPrice(), username);
 
-                if (findList.size() > 1) {
+                if (null != findList && findList.size() > 1) {
                     tdCartGoodsService.delete(findList.subList(1,
                             findList.size()));
                 }

@@ -160,29 +160,121 @@ function clearSelect()
     <section class="proinfo_right">
       <h3>${goods.title!''}</h3>
       <h4 class="red">${goods.subTitle!''}</h4>
-      <div class="pro_price">
-        <p class="p1">
-          <span class="mr10">同盟价</span>
-          <span class="red fs24 lh30 mr20">￥：<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></span>
-          <span class="unl-th c9">￥：<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span>
-        </p>
-        <#if goods.returnPoints?? && goods.returnPoints != 0>
-        <p class="p1 red">
-          可获得粮草 ${goods.returnPoints!'0'} 担
-        </p>
-        </#if>
-        <p class="p1">
-          车友口碑 <span class="red ml10">${goods.totalComments!'0'}</span>人评价
-        </p>
-        <#if goods.giftList?? && goods.giftList?size gt 0>
-            <p class="p">
-                <span style="color:#666;" class="red">赠品</span>
-                <#list goods.giftList as gitem>
-                    <a class="red ml20" title="点击查看详情" href="/goods/${gitem.goodsId!''}">${gitem.goodsTitle!''}</a>
-                </#list>
+      
+      <#if qiang?? && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
+<script>
+$(document).ready(function(){
+    setInterval("timer()",1000);
+});
+
+function timer()
+{
+    var ts = (new Date(${goods.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${goods.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${goods.flashSaleStopTime?string("dd")}, 
+                ${goods.flashSaleStopTime?string("HH")}, 
+                ${goods.flashSaleStopTime?string("mm")}, 
+                ${goods.flashSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+                
+    var allts = (new Date(${goods.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${goods.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${goods.flashSaleStopTime?string("dd")}, 
+                ${goods.flashSaleStopTime?string("HH")}, 
+                ${goods.flashSaleStopTime?string("mm")}, 
+                ${goods.flashSaleStopTime?string("ss")}))
+               - (new Date(${goods.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${goods.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${goods.flashSaleStartTime?string("dd")}, 
+                ${goods.flashSaleStartTime?string("HH")}, 
+                ${goods.flashSaleStartTime?string("mm")}, 
+                ${goods.flashSaleStartTime?string("ss")}));//总共的毫秒数
+                
+    if (0 == ts)
+    {
+        window.location.reload();
+    }
+    
+    var date = new Date();
+    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+    dd = checkTime(dd);
+    hh = checkTime(hh);
+    mm = checkTime(mm);
+    ss = checkTime(ss);
+    
+    $("#lday").html(dd);
+    $("#lhour").html(hh);
+    $("#lmin").html(mm);
+    $("#lsec").html(ss);
+                    
+    var price = ${goods.flashSalePrice?string("0.00")} * ts / allts;
+    
+    var s_x = Math.round(price).toString();
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    $("#currPrice").html("￥：" + s_x);
+}
+
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
+</script>
+          <div class="pro_price">
+          <p class="p1">
+              <span class="mr10">市场价</span>
+              <span class="mr20">￥：${goods.salePrice?string("0.00")}</span>
             </p>
-        </#if>
-      </div><!--pro_price END-->
+          <p class="p1">
+              <span class="mr10">起拍价</span>
+              <span class="mr20">￥：${goods.flashSalePrice?string("0.00")}</span>
+            </p>
+            <p class="p1">
+              <span class="mr10">实时价格</span>
+              <span class="red fs24 lh30 mr20" id="currPrice">￥：0.00</span>
+            </p>
+            <p class="p1">
+              <span class="mr10">剩余时间</span>
+              <span class="red mr10 ml10" id="lday">0</span>天<span class="red mr10 ml10" id="lhour">0</span>时<span class="red ml10 mr10" id="lmin">0</span>分<span class="red ml10 mr10" id="lsec">0</span>秒
+            </p>
+          </div>
+      <#else>
+          <div class="pro_price">
+            <p class="p1">
+              <span class="mr10">同盟价</span>
+              <span class="red fs24 lh30 mr20">￥：<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></span>
+              <span class="unl-th c9">￥：<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span>
+            </p>
+            <#if goods.returnPoints?? && goods.returnPoints != 0>
+            <p class="p1 red">
+              可获得粮草 ${goods.returnPoints!'0'} 担
+            </p>
+            </#if>
+            <p class="p1">
+              车友口碑 <span class="red ml10">${goods.totalComments!'0'}</span>人评价
+            </p>
+            <#if goods.giftList?? && goods.giftList?size gt 0>
+                <p class="p">
+                    <span style="color:#666;" class="red">赠品</span>
+                    <#list goods.giftList as gitem>
+                        <a class="red ml20" title="点击查看详情" href="/goods/${gitem.goodsId!''}">${gitem.goodsTitle!''}</a>
+                    </#list>
+                </p>
+            </#if>
+          </div><!--pro_price END-->
+      </#if>
       <table class="pro_choose">
         <#if diy_site_list?? && diy_site_list?size gt 0>
             <tr>

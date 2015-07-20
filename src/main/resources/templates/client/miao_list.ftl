@@ -69,7 +69,21 @@ function timer${item_index}()
                 ${item.flashSaleStopTime?string("HH")}, 
                 ${item.flashSaleStopTime?string("mm")}, 
                 ${item.flashSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
-    if (0 == ts)
+    
+    var allts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")}))
+               - (new Date(${item.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStartTime?string("dd")}, 
+                ${item.flashSaleStartTime?string("HH")}, 
+                ${item.flashSaleStartTime?string("mm")}, 
+                ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数
+                
+    if (0 >= ts)
     {
         window.location.reload();
     }
@@ -84,7 +98,20 @@ function timer${item_index}()
     mm = checkTime(mm);
     ss = checkTime(ss);
     $("#timeLeft${item_index}").html("<span>"+dd+"</span><span>"+hh+"</span><span>"+mm+"</span><span>"+ss+"</span>");
-                    
+    
+    var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
+    
+    var s_x = Math.round(price).toString();
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    $("#flashPrice${item_index}").html("￥" + s_x);              
 </#if>
 }
 </script>
@@ -105,7 +132,7 @@ function timer${item_index}()
                     
                     <div class="clear"></div>
                     
-                    <div class="yiyuqiangpailiebiao_rt_jg">起拍价：<span>¥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}<#else>0.00</#if></span></div>
+                    <div class="yiyuqiangpailiebiao_rt_jg">抢拍价：<span id="flashPrice${item_index}">¥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}<#else>0.00</#if></span></div>
                     
                     <div class="yiyuqiangpailiebiao_rt_anniu">
                         <a href="/cart/init?id=${item.id}&qiang=1">立即购买</a>

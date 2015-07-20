@@ -105,8 +105,13 @@ public class TdCartGoodsService {
         return repository.findTopByGoodsIdAndPriceAndUsername(goodsId, price, username);
     }
     
-    public List<TdCartGoods> findByGoodsIdAndPriceAndUsername(long goodsId, double price, String username)
+    public List<TdCartGoods> findByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username)
     {
+        if (null == goodsId || null == price || null == username)
+        {
+            return null;
+        }
+        
         return repository.findByGoodsIdAndPriceAndUsername(goodsId, price, username);
     }
     

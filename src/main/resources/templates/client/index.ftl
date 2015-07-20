@@ -453,7 +453,13 @@ function delItem(id)
                         <#list miao_cur_8_page.content as item>
 <script>
 $(document).ready(function(){
-    setInterval("timer8${item_index}()",1000);
+    <#if item.flashSaleStartTime gt .now>
+        $("#timeLeft8${item_index}").html("尚未开始");
+    <#elseif item.flashSaleStopTime < .now>
+        $("#timeLeft8${item_index}").html("已经结束");
+    <#else>
+        setInterval("timer8${item_index}()",1000);
+    </#if>
 });
 
 function timer8${item_index}()
@@ -465,7 +471,21 @@ function timer8${item_index}()
                 ${item.flashSaleStopTime?string("HH")}, 
                 ${item.flashSaleStopTime?string("mm")}, 
                 ${item.flashSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
-    if (0 == ts)
+                
+    var allts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")}))
+               - (new Date(${item.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStartTime?string("dd")}, 
+                ${item.flashSaleStartTime?string("HH")}, 
+                ${item.flashSaleStartTime?string("mm")}, 
+                ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数
+                
+    if (0 >= ts)
     {
         window.location.reload();
     }
@@ -480,6 +500,20 @@ function timer8${item_index}()
     mm = checkTime(mm);
     ss = checkTime(ss);
     $("#timeLeft8${item_index}").html(dd+"天"+hh+":"+mm+":"+ss);
+    
+    var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
+    
+    var s_x = Math.round(price).toString();
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    $("#flashPrice8${item_index}").html(s_x);
                     
 </#if>
 }
@@ -489,8 +523,8 @@ function timer8${item_index}()
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20">${item.subTitle!''}</p>
-                                    <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft8${item_index}" class="sc fw-b fs20">06:22:45</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
-                                    <a class="a1" href="/goods/${item.id}?qiang=1">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
+                                    <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft8${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                    <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice8${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
                                     <div class="qgtime">
                                         <a>实时查询</a>
@@ -520,7 +554,13 @@ function timer8${item_index}()
                         <#list miao_cur_15_page.content as item>
 <script>
 $(document).ready(function(){
-    setInterval("timer15${item_index}()",1000);
+    <#if item.flashSaleStartTime gt .now>
+        $("#timeLeft15${item_index}").html("尚未开始");
+    <#elseif item.flashSaleStopTime < .now>
+        $("#timeLeft15${item_index}").html("已经结束");
+    <#else>
+        setInterval("timer15${item_index}()",1000);
+    </#if>
 });
 
 function timer15${item_index}()
@@ -532,6 +572,20 @@ function timer15${item_index}()
                 ${item.flashSaleStopTime?string("HH")}, 
                 ${item.flashSaleStopTime?string("mm")}, 
                 ${item.flashSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+                
+    var allts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")}))
+               - (new Date(${item.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStartTime?string("dd")}, 
+                ${item.flashSaleStartTime?string("HH")}, 
+                ${item.flashSaleStartTime?string("mm")}, 
+                ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数
+                
     if (0 == ts)
     {
         window.location.reload();
@@ -547,6 +601,20 @@ function timer15${item_index}()
     mm = checkTime(mm);
     ss = checkTime(ss);
     $("#timeLeft15${item_index}").html(dd+"天"+hh+":"+mm+":"+ss);
+    
+    var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
+    
+    var s_x = Math.round(price).toString();
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    $("#flashPrice15${item_index}").html(s_x);
                     
 </#if>
 }
@@ -556,8 +624,8 @@ function timer15${item_index}()
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20">${item.subTitle!''}</p>
-                                    <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft15${item_index}" class="sc fw-b fs20">06:22:45</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
-                                    <a class="a1" href="/goods/${item.id}?qiang=1">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
+                                    <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft15${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                    <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice15${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
                                     <div class="qgtime">
                                         <a>实时查询</a>
@@ -587,7 +655,13 @@ function timer15${item_index}()
                         <#list miao_cur_23_page.content as item>
 <script>
 $(document).ready(function(){
-    setInterval("timer23${item_index}()",1000);
+    <#if item.flashSaleStartTime gt .now>
+        $("#timeLeft23${item_index}").html("尚未开始");
+    <#elseif item.flashSaleStopTime < .now>
+        $("#timeLeft23${item_index}").html("已经结束");
+    <#else>
+        setInterval("timer23${item_index}()",1000);
+    </#if>
 });
 
 function timer23${item_index}()
@@ -599,6 +673,20 @@ function timer23${item_index}()
                 ${item.flashSaleStopTime?string("HH")}, 
                 ${item.flashSaleStopTime?string("mm")}, 
                 ${item.flashSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+                
+    var allts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")}))
+               - (new Date(${item.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStartTime?string("dd")}, 
+                ${item.flashSaleStartTime?string("HH")}, 
+                ${item.flashSaleStartTime?string("mm")}, 
+                ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数
+                
     if (0 == ts)
     {
         window.location.reload();
@@ -615,6 +703,19 @@ function timer23${item_index}()
     ss = checkTime(ss);
     $("#timeLeft23${item_index}").html(dd+"天"+hh+":"+mm+":"+ss);
                     
+    var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
+    
+    var s_x = Math.round(price).toString();
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    $("#flashPrice23${item_index}").html(s_x);
 </#if>
 }
 </script>
@@ -623,8 +724,8 @@ function timer23${item_index}()
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20">${item.subTitle!''}</p>
-                                    <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft23${item_index}" class="sc fw-b fs20">06:22:45</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
-                                    <a class="a1" href="/goods/${item.id}?qiang=1">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
+                                    <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft23${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                    <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice23${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
                                     <div class="qgtime">
                                         <a>实时查询</a>
