@@ -104,7 +104,7 @@ public class TdUserService {
         repository.save(userList);
     }
     
-    public TdUser addNewUser(String upperUsername, String username, String password, String mobile, String email)
+    public TdUser addNewUser(String upperUsername, String username, String password, String mobile, String email, String carCode)
     {
         if (null == username || null == password || username.isEmpty() || password.isEmpty())
         {
@@ -122,6 +122,7 @@ public class TdUserService {
         user.setPassword(password);
         user.setMobile(mobile);
         user.setEmail(email);
+        user.setCarCode(carCode);
         user.setRegisterTime(new Date());
         user.setLastLoginTime(new Date());
         user.setStatusId(0L); // 待审核

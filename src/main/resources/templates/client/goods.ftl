@@ -168,7 +168,7 @@ function clearSelect()
         </p>
         <#if goods.returnPoints?? && goods.returnPoints != 0>
         <p class="p1 red">
-          可获得粮草 ￥${goods.returnPoints!'0'}
+          可获得粮草 ${goods.returnPoints!'0'} 担
         </p>
         </#if>
         <p class="p1">

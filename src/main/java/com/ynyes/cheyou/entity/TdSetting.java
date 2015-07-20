@@ -117,6 +117,10 @@ public class TdSetting {
     @Column
     private String wxQrCode;
     
+    // 微博二维码
+    @Column
+    private String weiboQrCode;
+    
     // 苹果二维码
     @Column
     private String iOsQrCode;
@@ -364,4 +368,13 @@ public class TdSetting {
     public void setTotalOnlines(Long totalOnlines) {
         this.totalOnlines = totalOnlines;
     }
+
+    public String getWeiboQrCode() {
+        return weiboQrCode;
+    }
+
+    public void setWeiboQrCode(String weiboQrCode) {
+        this.weiboQrCode = weiboQrCode;
+    }
+    
 }

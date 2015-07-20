@@ -131,11 +131,38 @@ public class TdCouponService {
         return repository.findTypeIdDistinctByIsDistributtedFalse();
     }
     
+    public List<TdCoupon> findByTypeIdAndIsDistributtedFalse(Long typeId)
+    {
+        return repository.findByTypeIdAndIsDistributtedFalse(typeId);
+    }
+    
+    public List<TdCoupon> findByTypeIdAndIsDistributtedTrueOrderByIdDesc(Long typeId)
+    {
+        return repository.findByTypeIdAndIsDistributtedTrueOrderByIdDesc(typeId);
+    }
+    
     public Page<TdCoupon> findByIsDistributtedFalseOrderBySortIdAsc(int page, int size)
     {
         PageRequest pageRequest = new PageRequest(page, size);
         
         return repository.findByIsDistributtedFalseOrderBySortIdAsc(pageRequest);
+    }
+    
+    public Page<TdCoupon> findByIsDistributtedTrueOrderBySortIdAsc(int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByIsDistributtedTrueOrderBySortIdAsc(pageRequest);
+    }
+    
+    public TdCoupon findByTypeIdAndMobileAndIsDistributtedTrue(Long typeId, String mobile)
+    {
+        if (null == typeId || null == mobile)
+        {
+            return null;
+        }
+        
+        return repository.findTopByTypeIdAndMobileAndIsDistributtedTrue(typeId, mobile);
     }
     
     /**

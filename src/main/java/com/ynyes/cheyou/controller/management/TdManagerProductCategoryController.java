@@ -136,19 +136,19 @@ public class TdManagerProductCategoryController {
             return res;
         }
 
-        if (null == id) // 新增分类，查找所有
-        {
-            if (null != tdProductCategoryService.findByTitle(param)) {
-                res.put("info", "已存在同名分类");
-                return res;
-            }
-        } else // 修改，查找除当前ID的所有
-        {
-            if (null != tdProductCategoryService.findByTitleAndIdNot(param, id)) {
-                res.put("info", "已存在同名分类");
-                return res;
-            }
-        }
+//        if (null == id) // 新增分类，查找所有
+//        {
+//            if (null != tdProductCategoryService.findByTitle(param)) {
+//                res.put("info", "已存在同名分类");
+//                return res;
+//            }
+//        } else // 修改，查找除当前ID的所有
+//        {
+//            if (null != tdProductCategoryService.findByTitleAndIdNot(param, id)) {
+//                res.put("info", "已存在同名分类");
+//                return res;
+//            }
+//        }
 
         res.put("status", "y");
 

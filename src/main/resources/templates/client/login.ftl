@@ -57,7 +57,7 @@ $(document).ready(function(){
 <body>
 <header class="logintop">
   <div class="main pt20">
-    <a class="fl" href="#"><img src="/client/images/liebiao_03.png" /></a>
+    <a class="fl" href="/"><img src="/client/images/liebiao_03.png" /></a>
     <p class="p3">售后保障</p>
     <p class="p2">100%品牌制造商</p>
     <p class="p1">100%正品保障</p>

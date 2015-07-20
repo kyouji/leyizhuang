@@ -79,6 +79,14 @@ public class TdCoupon {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date expireTime;
     
+    // 手机号
+    @Column
+    private String mobile;
+    
+    // 车牌号
+    @Column
+    private String carCode;
+    
     // 排序号
     @Column
     private Long sortId;
@@ -203,4 +211,19 @@ public class TdCoupon {
         this.diySiteTitle = diySiteTitle;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getCarCode() {
+        return carCode;
+    }
+
+    public void setCarCode(String carCode) {
+        this.carCode = carCode;
+    }
 }

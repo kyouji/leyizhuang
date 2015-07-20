@@ -28,7 +28,7 @@ DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
 <script type="text/javascript">
-  $(document).ready(function(){
+$(document).ready(function(){
     menuDownList("top_phone","#top_phonelist",".a1","sel");
     phoneListMore();//单独下拉
     menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉

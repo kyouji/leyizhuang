@@ -254,6 +254,70 @@ public class TdManagerCouponController {
         return "/site_mag/coupon_edit";
     }
     
+    @RequestMapping(value="/distributed/list")
+    public String distributedList(Integer page,
+                          Integer size,
+                          String __EVENTTARGET,
+                          String __EVENTARGUMENT,
+                          String __VIEWSTATE,
+                          Long[] listId,
+                          Integer[] listChkId,
+                          Long[] listSortId,
+                          ModelMap map,
+                          HttpServletRequest req){
+        
+        String username = (String) req.getSession().getAttribute("manager");
+        
+        if (null == username) {
+            return "redirect:/Verwalter/login";
+        }
+        
+        if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                } 
+            }
+            else if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
+            {
+                btnDelete(listId, listChkId);
+                tdManagerLogService.addLog("delete", "删除优惠券", req);
+            }
+            else if (__EVENTTARGET.equalsIgnoreCase("btnSave"))
+            {
+                btnSave(listId, listSortId);
+                tdManagerLogService.addLog("edit", "修改优惠券", req);
+            }
+        }
+        
+        if (null == page || page < 0)
+        {
+            page = 0;
+        }
+        
+        if (null == size || size <= 0)
+        {
+            size = SiteMagConstant.pageSize;;
+        }
+        
+        map.addAttribute("page", page);
+        map.addAttribute("size", size);
+        map.addAttribute("__EVENTTARGET", __EVENTTARGET);
+        map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+
+        Page<TdCoupon> couponPage = null;
+        
+        couponPage = tdCouponService.findByIsDistributtedTrueOrderBySortIdAsc(page, size);
+        
+        map.addAttribute("coupon_page", couponPage);
+        
+        return "/site_mag/coupon_distributed_list";
+    }
+    
     @RequestMapping(value="/save")
     public String orderEdit(TdCoupon tdCoupon,
                         String __VIEWSTATE,

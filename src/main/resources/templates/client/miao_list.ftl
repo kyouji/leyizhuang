@@ -89,9 +89,9 @@ function timer${item_index}()
 }
 </script>
             <div class="yiyuqiangpailiebiao">
-                <#if type?? && type==ongoing>
+                <#if type?? && type=="ongoing">
                     <i class="yiyuanjijiang"></i> 
-                <#elseif type?? && type==passwd>
+                <#elseif type?? && type=="passed">
                     <i class="yiyuanjieshu"></i> 
                 </#if>
                 <div class="yiyuqiangpailiebiao_lt">

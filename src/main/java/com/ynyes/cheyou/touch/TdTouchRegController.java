@@ -83,15 +83,18 @@ public class TdTouchRegController {
      */
     @RequestMapping(value="/touch/reg",method=RequestMethod.POST)
     public String reg(String username,
-                String mobile,
-                String password,
-                String email,
-                String code,
-                Long shareId,
-                HttpServletRequest request){
+                    String mobile,
+                    String password,
+                    String email,
+                    String smsCode,
+                    String code,
+                    String carCode,
+                    Long shareId,
+                    HttpServletRequest request){
         String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
+        String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
         
-        if (null == codeBack)
+        if (null == codeBack || null == smsCodeSave)
         {
             if (null == shareId)
             {
@@ -115,6 +118,18 @@ public class TdTouchRegController {
             }
         }
         
+        if (!smsCodeSave.equalsIgnoreCase(smsCode))
+        {
+            if (null == shareId)
+            {
+                return "redirect:/reg?errCode=4";
+            }
+            else
+            {
+                return "redirect:/reg?errCode=4&shareId=" + shareId;
+            }
+        }
+        
         TdUser user = tdUserService.findByUsername(username);
         
         if (null != user)
@@ -129,7 +144,7 @@ public class TdTouchRegController {
             }
         }
         
-        user = tdUserService.addNewUser(null, username, password, mobile, email);
+        user = tdUserService.addNewUser(null, username, password, mobile, email, carCode);
         
         if (null == user)
         {

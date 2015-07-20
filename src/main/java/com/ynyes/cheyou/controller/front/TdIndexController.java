@@ -62,6 +62,7 @@ public class TdIndexController {
 
     @RequestMapping
     public String index(HttpServletRequest req, Device device, ModelMap map) {
+        
         tdCommonService.setHeader(map, req);
 
         // 商城快报
@@ -69,22 +70,28 @@ public class TdIndexController {
                 .findByMenuId(10L);
 
         if (null != catList && catList.size() > 0) {
-            Long catId = catList.get(0).getId();
-
-            map.addAttribute("news_page", tdArticleService
-                    .findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(10L,
-                            catId, 0, ClientConstant.pageSize));
+            for (TdArticleCategory tdCat : catList)
+            {
+                if (null != tdCat.getTitle() && tdCat.getTitle().equals("商城快报"))
+                {
+                    map.addAttribute("news_page", tdArticleService
+                            .findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(10L,
+                                    tdCat.getId(), 0, ClientConstant.pageSize));
+                    break;
+                }
+                
+            }
         }
 
         // 养车宝典
-        catList = tdArticleCategoryService.findByMenuId(11L);
+//        catList = tdArticleCategoryService.findByMenuId(11L);
 
         if (null != catList && catList.size() > 0) {
-            Long catId = catList.get(0).getId();
+//            Long catId = catList.get(0).getId();
 
             map.addAttribute("curing_page", tdArticleService
-                    .findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(11L,
-                            catId, 0, ClientConstant.pageSize));
+                    .findByMenuIdAndIsEnableOrderByIdDesc(11L, 0, ClientConstant.pageSize));
+//                    .findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(11L, catId, 0, ClientConstant.pageSize));
         }
 
         // 一级分类

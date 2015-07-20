@@ -119,13 +119,13 @@ function setprice() {
                 <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
                     <a href="javascript:;"><img src="/client/images/page_n.png" height="11" /></a>
                 <#else>
-                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_n.png" height="11" /></a> <#-- goods_page.number+1 -->
+                    <a href="${categoryId!'0'}-${brandIndex!0}<#if param_index_list??><#list param_index_list as pindex>-${pindex!'0'}</#list></#if>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_n.png" height="11" /></a> <#-- goods_page.number+1 -->
                 </#if>
                         
                 <#if goods_page.number+1 == 1>
                     <a href="javascript:;"><img src="/client/images/page_l.png" height="11" /></a>
                 <#else>
-                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_l.png" height="11" /></a> <#-- goods_page.number-1 -->
+                    <a href="${categoryId!'0'}-${brandIndex!0}<#if param_index_list??><#list param_index_list as pindex>-${pindex!'0'}</#list></#if>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_l.png" height="11" /></a> <#-- goods_page.number-1 -->
                 </#if>
                 <span><font class="fc"><#if goods_page.totalPages==0>0<#else>${goods_page.number+1}</#if></font>/${goods_page.totalPages!"0"}页</span>
             </div>

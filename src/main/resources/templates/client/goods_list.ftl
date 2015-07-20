@@ -142,7 +142,7 @@ function btnPageSubmit()
                 <a <#if brandIndex==0>class="sel"</#if> href="${categoryId!'0'}-0<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>">全部</a>
                 
                 <#list brand_list as brand>
-                    <td><a href="${categoryId!'0'}-${brand_index+1}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" <#if brandIndex==brand_index+1>class="flhover"</#if>>${brand.title?trim!''}</a>
+                    <td><a href="${categoryId!'0'}-${brand_index+1}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" <#if brandIndex==brand_index+1>class="sel"</#if>>${brand.title?trim!''}</a>
                 </#list>
             </#if>
             </menu>
@@ -214,14 +214,17 @@ function btnPageSubmit()
         
                     <a class="block h20 overflow" href="/goods/${goods.id}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a>
                     <a class="block fs12 blue h20 overflow" href="/goods/${goods.id}">${goods.subTitle!""}</a>
-                    <p class="fs14 w84 fl">关注：<span class="blue">523</span>人</p>
-                    <div class="yh fr">
-                        <p><a href="/goods/${goods.id}">送粮草</a></p>
-                    </div>
-                    <div class="yh fr">
-                        <p><a href="/goods/${goods.id}">赠品</a></p>
-                    </div>
-                    
+                    <p class="fs14 w84 fl">评论：<span class="blue">${goods.totalComments!'0'}</span>人</p>
+                    <#if goods.returnPoints?? && goods.returnPoints gt 0>
+                        <div class="yh fr">
+                            <p><a href="/goods/${goods.id}">送粮草</a></p>
+                        </div>
+                    </#if>
+                    <#if goods.giftList?? && goods.giftList?size gt 0>
+                        <div class="yh fr">
+                            <p><a href="/goods/${goods.id}">赠品</a></p>
+                        </div>
+                    </#if>
                     <div class="clear5"></div>
                     
                     <div class="goumai">

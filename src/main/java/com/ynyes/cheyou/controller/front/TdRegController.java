@@ -1,13 +1,18 @@
 package com.ynyes.cheyou.controller.front;
 
+import java.util.Map;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdSetting;
 import com.ynyes.cheyou.entity.TdUser;
@@ -16,6 +21,7 @@ import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.util.SMSUtil;
 import com.ynyes.cheyou.util.VerifServlet;
 
 /**
@@ -92,12 +98,15 @@ public class TdRegController {
                 String mobile,
                 String password,
                 String email,
+                String smsCode,
                 String code,
+                String carCode,
                 Long shareId,
                 HttpServletRequest request){
         String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
+        String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
         
-        if (null == codeBack)
+        if (null == codeBack || null == smsCodeSave)
         {
             if (null == shareId)
             {
@@ -121,6 +130,18 @@ public class TdRegController {
             }
         }
         
+        if (!smsCodeSave.equalsIgnoreCase(smsCode))
+        {
+            if (null == shareId)
+            {
+                return "redirect:/reg?errCode=4";
+            }
+            else
+            {
+                return "redirect:/reg?errCode=4&shareId=" + shareId;
+            }
+        }
+        
         TdUser user = tdUserService.findByUsername(username);
         
         if (null != user)
@@ -135,7 +156,7 @@ public class TdRegController {
             }
         }
         
-        user = tdUserService.addNewUser(null, username, password, mobile, email);
+        user = tdUserService.addNewUser(null, username, password, mobile, email, carCode);
         
         if (null == user)
         {
@@ -214,6 +235,20 @@ public class TdRegController {
         response.setDateHeader("Expire", 0);
         VerifServlet randomValidateCode = new VerifServlet();
         randomValidateCode.getRandcode(request, response);
+    }
+    
+    @RequestMapping(value = "/reg/smscode",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> smsCode(String mobile, HttpServletResponse response, HttpServletRequest request) {
+        Random random = new Random();
+        
+        String smscode = String.format("%04d", random.nextInt(9999));
+        
+        HttpSession session = request.getSession();
+        
+        session.setAttribute("SMSCODE", smscode);
+       
+        return SMSUtil.send(mobile, "15612" ,new String[]{smscode});
     }
     
 }

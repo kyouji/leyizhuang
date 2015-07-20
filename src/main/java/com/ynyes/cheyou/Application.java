@@ -19,6 +19,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
+import com.ynyes.cheyou.entity.TdSetting;
+import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserService;
 
 @Configuration
@@ -27,6 +29,9 @@ import com.ynyes.cheyou.service.TdUserService;
 public class Application extends SpringBootServletInitializer implements CommandLineRunner {
     @Autowired
     private TdUserService tdUserService;
+    
+    @Autowired
+    private TdSettingService tdSettingService;
     
 	@Bean
 	public CharacterEncodingFilter encodingFilter() {
@@ -66,6 +71,14 @@ public class Application extends SpringBootServletInitializer implements Command
             @Override
             public void run() {
                 tdUserService.resetCount();
+                
+                TdSetting setting = tdSettingService.findTopBy();
+                
+                if (null != setting)
+                {
+                    setting.setTotalOnlines(0L);
+                    tdSettingService.save(setting);
+                }
             }
         };
         

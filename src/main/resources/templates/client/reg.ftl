@@ -19,13 +19,73 @@
 <link href="/client/style/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
+var seed=60;    //60秒  
+var t1=null; 
+
 $(document).ready(function(){
     //初始化表单验证
     $("#form1").Validform({
         tiptype: 3
     });
+     
+    $("#smsCodeBtn").bind("click", function() {  
+        
+        var mob = $('#mobileNumber').val();
+        
+        var re = /^1\d{10}$/;
+        
+        if (!re.test(mob)) {
+            alert("请输入正确的手机号");
+            return;
+        }
+        
+        $("#smsCodeBtn").attr("disabled","disabled"); 
+        
+        $.ajax({  
+            url : "/reg/smscode",  
+            async : true,  
+            type : 'GET',  
+            data : {"mobile": mob},  
+            success : function(data) {  
+                
+                if(data.statusCode == '000000')
+                {  
+                    t1 = setInterval(tip, 1000);  
+                }
+                else
+                {
+                    $("#smsCodeBtn").removeAttr("disabled");
+                }
+            },  
+            error : function(XMLHttpRequest, textStatus,  
+                    errorThrown) {  
+                alert("error");
+            }  
+  
+        });
+        
+    }); 
 
 });
+
+function enableBtn()
+{  
+    $("#smsCodeBtn").removeAttr("disabled");   
+} 
+
+function tip() 
+{  
+    seed--;  
+    if (seed < 1) 
+    {  
+        enableBtn();  
+        seed = 60;  
+        $("#smsCodeBtn").val('点击获取短信验证码');  
+        var t2 = clearInterval(t1);  
+    } else {  
+        $("#smsCodeBtn").val(seed + "秒后重新获取");  
+    }  
+} 
 </script>
 </head>
 
@@ -41,10 +101,20 @@ $(document).ready(function(){
 </header>
 <div class="logingbg">
     <section class="loginbox">
-        <span style="color: #F00">${error!''}</span>
+        <span style="color: #F00"><#if errCode??>
+            <#if errCode==1>
+                验证码错误
+            <#elseif errCode==2>
+                该用户已存在
+            <#elseif errCode==3>
+                注册用户失败
+            <#elseif errCode==4>
+                短信验证码错误
+            </#if>
+        </#if></span>
         <form id="form1" method="post" action="/reg">
             <div>
-                <p>请输入用户名/邮箱/车牌号码</p>
+                <p><b style="color: #FF0000;">*</b> 请输入用户名 </p>
                 <input class="text" name="username" type="text" datatype="s6-20"/>
             </div>
             <div>
@@ -52,25 +122,31 @@ $(document).ready(function(){
                 <input class="text" name="carCode" type="text" />
             </div>
             <div>
-                <p>请输入密码</p>
+                <p><b style="color: #FF0000;">*</b> 请输入密码</p>
                 <input class="text" name="password" type="password" datatype="s6-20"/>
             </div>
             <div>
-                <p>请确认密码</p>
+                <p><b style="color: #FF0000;">*</b> 请确认密码</p>
                 <input class="text" type="password" recheck="password"/>
             </div>
             <div>
-                <p>请输入验证码</p>
+                <p><b style="color: #FF0000;">*</b> 手机验证 </p>
+                <input id="mobileNumber" class="text" name="mobile" type="text" datatype="m"/>
+            </div>
+            <div>
+                <p><b style="color: #FF0000;">*</b> 短信验证码</p>
+                <input class="text fl" type="text" name="smsCode" style="width:35%;" />
+                <input id="smsCodeBtn" onclick="javascript:;" readOnly="true" class="sub" style="text-align:center;width: 50%; border-radius: 3px; margin-left:55px; background: #1c2b38; color: #fff; line-height: 35px; height: 35px;" value="点击获取短信验证码" />
+                <div class="clear h15"></div>
+            </div>
+            <div>
+                <p><b style="color: #FF0000;">*</b> 验证码</p>
                 <div class="clear"></div>
                 <input class="text fl" name="code" type="text" style="width:35%;" datatype="s4-4" errormsg="请填写4位字符"/>
-                <img src="/code" onclick="this.src = '/code?date='+Math.random();" id="yzm" height="37"/>
+                <img src="/code" onclick="this.src = '/code?date='+Math.random();" id="yzm" height="37" style="padding-left: 55px;"/>
             </div>
             <div class="clear h15"></div>
-            <p class="pb10">
-                <input type="checkbox" name="" value="1" datatype="*"/>
-                <span>我已阅读并同意<a href="javascript:;">《车友同盟用户协议》</a></span>
-                <span class="absolute-r">已有账号？<a href="/login">点击登录</a></span>
-            </p>
+            
             <input type="submit" class="sub" value="注册" />
         </form>
         <div class="clear h15"></div>

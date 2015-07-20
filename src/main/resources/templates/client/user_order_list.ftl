@@ -122,7 +122,8 @@ DD_belatedPNG.fix('.,img,background');
                                     <#if order.statusId==1>
                                         待确认
                                     <#elseif order.statusId==2>
-                                        待付款
+                                        <p>待付款</p>
+                                        <a href="/order/dopay/${order.id}">立即支付</a>
                                     <#elseif order.statusId==3>
                                         待发货
                                     <#elseif order.statusId==4>

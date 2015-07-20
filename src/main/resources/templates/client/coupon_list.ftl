@@ -10,9 +10,9 @@
    <script src="/client/js/html5.js"></script>
 <![endif]-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
-
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
@@ -26,10 +26,42 @@ $(document).ready(function(){
     navDownList("navdown","li",".nav_showbox");
     menuDownList("mainnavdown","#navdown",".a2","sel");
     checkNowHover("shopping_down","shopping_sel");
+    
+    // 优惠券切换店铺
+    $(".couponSel").change(function(){
+        $(this).siblings(".mt5").eq(0).children(".red").eq(0).html($(this).find("option:selected").attr("tn"));
+    });
+    
+    //初始化表单验证
+    $("#form1").Validform({
+        tiptype: 3,
+        ajaxPost:true,
+        callback: function(data) {
+            if (data.code==0)
+            {
+                alert("领取优惠券成功");
+                window.location.reload();
+            }
+            else
+            {
+                alert(data.message);
+            }
+        }
+    });
 });
 
-function showDialog()
+function showDialog(id)
 {
+    var cid = $(".mianfeilingqu").eq(id).find(".couponSel").eq(0).find("option:selected").attr("cid");
+    
+    if (null == cid)
+    {
+        alert("请选择同盟店");
+        return;
+    }
+    
+    $("#couponId").val(cid);
+    
     $("#checkDialog").css("display", "block");
 }
 
@@ -40,24 +72,27 @@ function hideDialog()
 </script>
 </head>
 <body>
-<div id="checkDialog" class="mianfeilingqutanchu" style="display: none;">
+<div id="checkDialog" class="mianfeilingqutanchu" style="display: none;position: fixed; top: 0px; left: 0px;">
     <div class="mianfeilingqutanchu_dl">
         <section class="loginbox">
-            <form>
-                <p>请输入姓名</p>
-                <input class="text" type="text" />
+            <a class="fr" style="z-index:999999999; /* margin-top:50px; */ margin-left: 410px;position: absolute;" href="javascript:hideDialog();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="25" height="25"></a>
+            <form id="form1" action="/coupon/request" method="post">
+                <span class="Validform_checktip">请填写领取信息</span>
+                <input id="couponId" name="couponId" class="text" type="hidden" value="" datatype="n"/>
+                <p><b style="color: #FF0000;">*</b> 请输入姓名</p>
+                <input class="text" name="username" type="text" datatype="*"  nullmsg="请输入姓名"/>
                 <p>请输入车牌</p>
-                <input class="text" type="text" />
-                  <p>请输入电话</p>
-                <input class="text" type="text" />
-                <p>请输入验证码</p>
+                <input class="text" name="carCode" type="text" />
+                <p><b style="color: #FF0000;">*</b> 请输入手机</p>
+                <input class="text" name="mobile" type="text" datatype="m" nullmsg="请输入手机号" errormsg="请输入正确的手机号"/>
+                <p><b style="color: #FF0000;">*</b> 请输入验证码</p>
                 <div class="clear"></div>
-                <input class="text fl" type="text" style="width:35%;" />
+                <input class="text fl" name="code" type="text" style="width:35%;" datatype="*4-4" nullmsg="请输入验证码" errormsg="验证码为4位字符"/>
                 <img src="/code" onclick="this.src = '/code?date='+Math.random();" id="yzm" height="37"/>
           
                 <div class="clear h15"></div>
                 <p class="pb10">
-                    <span class="absolute-r"><a href="/reg">免费注册</a> | <a href="/login">账号登录</a></span>
+                    <span class="absolute-r"><a href="/reg">免费注册</a> | <a href="/login">登录</a></span>
                 </p>
                 <div class="clear h40"></div>
                 <input type="submit" class="sub" value="免费领取" />
@@ -66,51 +101,48 @@ function hideDialog()
         </section>
     </div>
 </div>
-<a class="fr" style="z-index:999999999; margin-top:50px; margin-right:50px;" href="javascript:hideDialog();">
-    <img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="50" height="50" />
-</a>
 <#include "/client/common_header.ftl" />
 
 <div class="main">
-    <#if coupon_list??>
-        <#list coupon_list as item>
+    
+    <#if coupon_type_list??>
+        <#list coupon_type_list as item>
             <div class="mianfeilingqu">
                 <div class="mianfeilingqu_left">
-                    <img src="${item.typePicUri!''}" width="874" height="350">
+                    <img src="${item.picUri!''}" width="874" height="350">
                     <div class="mendian">
                         <span>同盟店:</span>
-                        <select disabled="disabled">
-                            <option value="">请选择</option>
-                            <#if shop_list??>
-                                <#list shop_list as shop>
-                                    <option value="${shop.id}" <#if item.diySiteId==shop.id>selected="selected"</#if>>${shop.title!''}</option>
+                        <select class="couponSel">
+                            <#assign couponCount=0>
+                            <#if ("coupon_" + item.id + "_list")?eval?? >
+                                <#list ("coupon_" + item.id + "_list")?eval as coupon>
+                                    <option value="${coupon.diySiteId}" cid="${coupon.id}" tn="${coupon.leftNumber?c!'0'}">${coupon.diySiteTitle!''}</option>
+                                    <#assign couponCount=couponCount+coupon.leftNumber>
                                 </#list>
                             </#if>
                         </select>
                         <div class="clear"></div>
-                        <p class="mt5">剩余：<span class="red">${item.leftNumber?c!'0'}</span>张</p>
+                        <p class="mt5">剩余：<span class="red">${("coupon_" + item.id + "_list")?eval[0].leftNumber?c!'0'}</span>张</p>
                     </div>
                     <div class="clear"></div>
-                    <#--
                     <div class="zongshushengyu">
-                        <p class="mt5">总数剩余：<span class="red">14855</span>张</p>
+                        <p class="mt5">总数剩余：<span class="red">${couponCount?c!'0'}</span>张</p>
                     </div>
-                    -->
                     <div class="clear"></div>
                     <div class="linquanniu">
-                        <a href="javascript:showDialog();">点击领取</a> 
+                        <a href="javascript:showDialog(${item_index});">点击领取</a> 
                     </div>
                 </div>
                 <div class="mianfeilingqu_right">
                     <h3>领取车友</h3>
                     <ul>
-                        <#--
-                        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-                        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-                        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-                        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-                        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-                        -->
+                        <#if ("distributed_coupon_" + item.id + "_list")?eval?? >
+                            <#list ("distributed_coupon_" + item.id + "_list")?eval as distributedCoupon>
+                                <#if distributedCoupon_index < 10>
+                                <li><span class="red"><#if distributedCoupon.mobile??>${distributedCoupon.mobile?substring(0, 7)}****</#if></span><span class="fr">${distributedCoupon.getTime?string("yyyy.MM.dd")}</span></li>
+                                </#if>
+                            </#list>
+                        </#if> 
                     </ul>
                 </div>
             </div>

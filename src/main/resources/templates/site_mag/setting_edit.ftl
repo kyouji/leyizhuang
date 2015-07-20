@@ -144,14 +144,15 @@ $(function () {
         </dd>
     </dl>
     <dl>
-        <dt>苹果App二维码</dt>
+        <dt>微博二维码</dt>
         <dd>
-            <input id="iOsImgUrl" name="iOsQrCode" type="text" datatype="*0-255" value="<#if setting??>${setting.iOsQrCode!""}</#if>" class="input normal upload-path">
+            <input id="iOsImgUrl" name="weiboQrCode" type="text" datatype="*0-255" value="<#if setting??>${setting.weiboQrCode!""}</#if>" class="input normal upload-path">
             <div class="upload-box upload-img"></div>
             <span class="Validform_checktip"></span>
             <div class="photo-list thumb_ImgUrl_show thumb_iOsImgUrl_show"></div>
         </dd>
     </dl>
+    <#--
     <dl>
         <dt>安卓App二维码</dt>
         <dd>
@@ -161,6 +162,7 @@ $(function () {
             <div class="photo-list thumb_ImgUrl_show thumb_androidImgUrl_show"></div>
         </dd>
     </dl>
+    -->
     <dl>
         <dt>公司名称</dt>
         <dd>

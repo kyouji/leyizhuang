@@ -8,7 +8,7 @@
                 <a href="/user">${username}<i></i></a>
                 <a href="/logout">退出<i></i></a>
             <#else>
-                <a href="/login" target="_blank">登陆<i></i></a>
+                <a href="/login" target="_blank">登录<i></i></a>
                 <a href="/reg" target="_blank">免费注册<i></i></a>
             </#if>
             <a href="/user/order/list/0">我的订单</a>
@@ -145,7 +145,7 @@ function delItem(id)
 <aside class="floatbox">
     <a href="javascript:;" title="微信客服"><img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服" /><span><img src="${site.wxQrCode!''}" width="84" height="84"/></span></a>
     <a href="javascript:;" title="在线咨询"><img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询" /></a>
-    <a href="javascript:;" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /></a>
+    <a href="javascript:;" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /><span><img src="${site.weiboQrCode!''}" width="84" height="84"/></span></a>
     <a href="javascript:;" title="服务热线"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线" /><span><img src="/client/images/sys02.png" width="84" height="84"/></span></a>
     <a href="javascript:$('html,body').animate({scrollTop:0},500);" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
 </aside>

@@ -160,3 +160,10 @@ height: 104px;}
     width:50%;
     height:8px;
     background:#ff4454;}
+    
+.left_gundong{ position:absolute; z-index:9999;margin-top:150px; width:30px; height:50px; margin-left:20px;}
+.right_gundong{ position:absolute; z-index:99999; margin-top:150px;width:30px; height:50px; margin-left:510px;}
+.leftb_gundong{ position:absolute; z-index:9999;margin-top:150px; width:30px; height:50px; margin-left:20px;}
+.rightb_gundong{ position:absolute; z-index:99999; margin-top:150px;width:30px; height:50px; margin-left:227px;}
+.lefta_gundong{ position:absolute; z-index:9999;margin-top:190px; width:30px; height:50px; margin-left:20px;}
+.righta_gundong{ position:absolute; z-index:99999; margin-top:190px;width:30px; height:50px; margin-left:280px;}

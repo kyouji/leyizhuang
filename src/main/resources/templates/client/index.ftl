@@ -32,16 +32,18 @@
 	
 	//左右单张滚动
     var the_one = {
-      "boxid":"onebox", //最外层id
-      "sumid":"onesum", //包裹列表的id
-      "stylename":"onepart",//内部滚动的标签class
-      "boxwidth":570,//外层宽
-      "boxheight":375,//外层高
-      "objwidth":570,//单个个体宽度
-      "objheight":375,//单个个体高度
-      "autogo":true,//是否开启自动滚动
-      "gospeed":2000,//滚动速度
-      "speed":200, // 滚动间隔速度
+      "boxid":"onebox",         //最外层id
+      "sumid":"onesum",         //包裹列表的id
+      "stylename":"onepart",    //内部滚动的标签class
+      "boxwidth":570,           //外层宽
+      "boxheight":375,          //外层高
+      "objwidth":570,           //单个个体宽度
+      "objheight":375,          //单个个体高度
+      "autogo":true,            //是否开启自动滚动
+      "gospeed":2000,           //滚动速度
+      "speed":600,              // 滚动间隔速度
+      "leftid":"oneboxLeft",    //左箭头id
+      "rightid":"oneboxRight"   //右箭头id
     };//the_one END
     $.ljs_gundong.oneLeft(the_one);
     
@@ -56,10 +58,29 @@
       "objheight":375,//单个个体高度
       "autogo":true,//是否开启自动滚动
       "gospeed":2000,//滚动速度
-      "speed":300, // 滚动间隔速度
+      "speed":1500,             // 滚动间隔速度
+      "leftid":"onebox2Left",   //左箭头id
+      "rightid":"onebox2Right"  //右箭头id
     };//the_one END
     $.ljs_gundong.oneLeft(the_one2);
-	
+    
+    
+    //左右单张滚动
+    var the_one3 = {
+      "boxid":"onebox3", //最外层id
+      "sumid":"onesum3", //包裹列表的id
+      "stylename":"onepart3",//内部滚动的标签class
+      "boxwidth":335,//外层宽
+      "boxheight":323,//外层高
+      "objwidth":335,//单个个体宽度
+      "objheight":323,//单个个体高度
+      "autogo":true,//是否开启自动滚动
+      "gospeed":2000,//滚动速度
+      "speed":300, // 滚动间隔速度
+      "leftid":"onebox3Left",//左箭头id
+      "rightid":"onebox3Right"//右箭头id
+    };//the_one END
+    $.ljs_gundong.oneLeft(the_one3);
 });
 function checkTime(i)  
 {  
@@ -173,12 +194,12 @@ $(function(){
                 <a href="/user">${username}<i></i></a>
                 <a href="/logout">退出<i></i></a>
             <#else>
-                <a href="/login" target="_blank">登陆<i></i></a>
+                <a href="/login" target="_blank">登录<i></i></a>
                 <a href="/reg" target="_blank">免费注册<i></i></a>
             </#if>
             <a href="/user/order/list/0">我的订单</a>
             <a href="/user">会员中心</a>
-            <a href="#">在线咨询</a>
+            <a href="javascript:;">在线咨询</a>
             服务热线：<#if site??>${site.telephone!''}</#if>
         </div>
     </div>
@@ -191,6 +212,7 @@ $(function(){
                 <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
                     <img src="${item.fileUri!''}" width="70" height="38"/>
                 </a>
+                <#break>
             </#list>
         </#if>
     </div>
@@ -311,7 +333,7 @@ function delItem(id)
 <aside class="floatbox">
     <a href="javascript:;" title="微信客服"><img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服" /><span><img src="${site.wxQrCode!''}" width="84" height="84"/></span></a>
     <a href="javascript:;" title="在线咨询"><img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询" /></a>
-    <a href="javascript:;" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /></a>
+    <a href="javascript:;" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /><span><img src="${site.weiboQrCode!''}" width="84" height="84"/></span></a>
     <a href="javascript:;" title="服务热线"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线" /><span><img src="/client/images/sys02.png" width="84" height="84"/></span></a>
     <a href="javascript:$('html,body').animate({scrollTop:0},500);" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
 </aside>
@@ -335,10 +357,12 @@ function delItem(id)
             <a class="fr" href="javascript:;">免费安装</a>
             <div class="clear"></div>
         </div>
-        <h3 class="lh30 fs16 w100">商城快报<a href="/info/list/10" class="absolute-r fw400 fs14">更多 ></a></h3>
+        <h3 class="lh30 fs16 w100">商城快报<a href="/info/list/10?catId=9" class="absolute-r fw400 fs14">更多 ></a></h3>
         <#if news_page??>
             <#list news_page.content as item>
-                <a class="block mt5" href="/info/content/${item.id}?mid=12">${item.title!''}</a>
+                <#if item_index < 7>
+                <a class="block mt5" href="/info/content/${item.id}?mid=12" style="height:20px; overflow:hidden;">${item.title!''}</a>
+                </#if>
             </#list>
         </#if>
     </section>
@@ -480,9 +504,9 @@ function timer8${item_index}()
                             <#else>
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
-                                        <img src="${item.coverImageUri!''}" width="150" />
-                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
-                                        <p class="c9 pb20">${item.subTitle!''}</p>
+                                        <img src="${item.coverImageUri!''}" width="110" height="110"/>
+                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     </a>
@@ -547,9 +571,9 @@ function timer15${item_index}()
                             <#else>
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
-                                        <img src="${item.coverImageUri!''}" width="150" />
-                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
-                                        <p class="c9 pb20">${item.subTitle!''}</p>
+                                        <img src="${item.coverImageUri!''}" width="110" height="110"/>
+                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     </a>
@@ -614,9 +638,9 @@ function timer23${item_index}()
                             <#else>
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
-                                        <img src="${item.coverImageUri!''}" width="150" />
-                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
-                                        <p class="c9 pb20">${item.subTitle!''}</p>
+                                        <img src="${item.coverImageUri!''}" width="110" height="110"/>
+                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     </a>
@@ -643,7 +667,7 @@ function timer23${item_index}()
                         <#list miao_next_8_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" />
+                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -661,9 +685,9 @@ function timer23${item_index}()
                             <#else>
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
-                                        <img src="${item.coverImageUri!''}" width="150" />
-                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
-                                        <p class="c9 pb20">${item.subTitle!''}</p>
+                                        <img src="${item.coverImageUri!''}" width="110" height="110"/>
+                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     </a>
@@ -677,7 +701,7 @@ function timer23${item_index}()
                         <#list miao_next_15_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" />
+                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -695,9 +719,9 @@ function timer23${item_index}()
                             <#else>
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
-                                        <img src="${item.coverImageUri!''}" width="150" />
-                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
-                                        <p class="c9 pb20">${item.subTitle!''}</p>
+                                        <img src="${item.coverImageUri!''}" width="110" height="110"/>
+                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     </a>
@@ -711,7 +735,7 @@ function timer23${item_index}()
                         <#list miao_next_23_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" />
+                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -729,9 +753,9 @@ function timer23${item_index}()
                             <#else>
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
-                                        <img src="${item.coverImageUri!''}" width="150" />
-                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
-                                        <p class="c9 pb20">${item.subTitle!''}</p>
+                                        <img src="${item.coverImageUri!''}" width="110" height="110"/>
+                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     </a>
@@ -758,7 +782,7 @@ function timer23${item_index}()
                         <#list miao_prev_8_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" />
+                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -776,9 +800,9 @@ function timer23${item_index}()
                             <#else>
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
-                                        <img src="${item.coverImageUri!''}" width="150" />
-                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
-                                        <p class="c9 pb20">${item.subTitle!''}</p>
+                                        <img src="${item.coverImageUri!''}" width="110" height="110"/>
+                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     </a>
@@ -792,7 +816,7 @@ function timer23${item_index}()
                         <#list miao_prev_15_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" />
+                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -810,9 +834,9 @@ function timer23${item_index}()
                             <#else>
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
-                                        <img src="${item.coverImageUri!''}" width="150" />
-                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
-                                        <p class="c9 pb20">${item.subTitle!''}</p>
+                                        <img src="${item.coverImageUri!''}" width="110" height="110"/>
+                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     </a>
@@ -826,7 +850,7 @@ function timer23${item_index}()
                         <#list miao_prev_23_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" />
+                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -844,9 +868,9 @@ function timer23${item_index}()
                             <#else>
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
-                                        <img src="${item.coverImageUri!''}" width="150" />
-                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
-                                        <p class="c9 pb20">${item.subTitle!''}</p>
+                                        <img src="${item.coverImageUri!''}" width="110" height="110"/>
+                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     </a>
@@ -1048,6 +1072,12 @@ function timer23${item_index}()
     <div class="clear h30"></div> 
   
     <section class="indextit">
+        <div class="lefta_gundong fl">
+            <a id="onebox3Left" href="javascript:void(0);"><img src="/client/images/20150330051733397_easyicon_net_125.465346535.png" width="30" height="50" /></a>
+        </div>
+        <div class="righta_gundong fr">
+            <a id="onebox3Right" href="javascript:void(0);"><img src="/client/images/20150408033704325_easyicon_net_121.900990099.png" width="30" height="50" /></a>
+        </div>
         <h3>商品分类</h3>
         <div class="clear"></div>
     </section>
@@ -1057,15 +1087,19 @@ function timer23${item_index}()
     <div id="shopadbox">
         <ul id="shopadsum">
             <li id="shopli01">
+                <div id="onebox3">
+                    <div id="onesum3">
                 <#if type_scroll_ad_list??>
                     <#list type_scroll_ad_list as item>
                         <#if item_index < 3>
-                            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
+                            <a class="onepart3" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
                                 <img src="${item.fileUri!''}" width="335" height="323"/>
                             </a>
                         </#if>
                     </#list>
                 </#if>
+                    </div>
+                </div>
             </li>
             <li id="shopli02"></li>
         </ul>
@@ -1208,19 +1242,31 @@ function timer23${item_index}()
     </section>
     
     <section class="index_botad01">
+        <div class="left_gundong fl">
+            <a id="oneboxLeft" href="javascript:void(0);"><img src="/client/images/20150330051733397_easyicon_net_125.465346535.png" width="30" height="50" /></a>
+        </div>
+        <div class="right_gundong fr">
+            <a id="oneboxRight" href="javascript:void(0);"><img src="/client/images/20150408033704325_easyicon_net_121.900990099.png" width="30" height="50" /></a>
+        </div>
         <#if bottom_big_ad_list??>
             <div id="onebox">
                 <div id="onesum">
-            <#list bottom_big_ad_list as item>
-                <a class="onepart" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
-                    <img src="${item.fileUri!''}" width="570" height="375">
-                </a>
-            </#list>
+                <#list bottom_big_ad_list as item>
+                    <a class="onepart" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
+                        <img src="${item.fileUri!''}" width="570" height="375">
+                    </a>
+                </#list>
                 </div>
             </div>
         </#if>
     </section>
     <section class="index_botad02">
+        <div class="leftb_gundong fl">
+            <a id="onebox2Left" href="javascript:void(0);"><img src="/client/images/20150330051733397_easyicon_net_125.465346535.png" width="30" height="50" /></a>
+        </div>
+        <div class="rightb_gundong fr">
+            <a id="onebox2Right" href="javascript:void(0);"><img src="/client/images/20150408033704325_easyicon_net_121.900990099.png" width="30" height="50" /></a>
+        </div>
         <#if bottom_small_ad_list??>
             <div id="onebox2">
                 <div id="onesum2">
