@@ -1,26 +1,38 @@
 package com.cytm.payment.alipay;
 
+import static com.cytm.payment.util.PaymentUtil.getServerPath;
+import static com.cytm.payment.util.PaymentUtil.post;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspWriter;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.cytm.payment.PaymentChannel;
 import com.cytm.payment.alipay.core.AlipayConfirmGoods;
 import com.cytm.payment.alipay.core.AlipayConfirmGoodsHandler;
 import com.cytm.payment.alipay.core.AlipayNotify;
 import com.cytm.payment.alipay.core.AlipaySubmit;
-import com.cytm.payment.util.PaymentUtil;
+import com.ynyes.cheyou.entity.TdOrder;
+import com.ynyes.cheyou.entity.TdPayRecord;
+import com.ynyes.cheyou.service.TdOrderService;
+import com.ynyes.cheyou.service.TdPayRecordService;
 
 public class PaymentChannelAlipay implements PaymentChannel {
-    private static final String ORDER_NO_PARA = "out_trade_no";
+    private static final String OUT_TRADE_NO_PARA = "out_trade_no";
     private static final String ORDER_NO_TB_PARA = "trade_no";
     private static final String ORDER_STATUS_PARA = "trade_status";
     private static final String ISO_ENCODING = "ISO-8859-1";
@@ -34,47 +46,43 @@ public class PaymentChannelAlipay implements PaymentChannel {
      * 
      */
     private static final Logger paymentLogger = Logger.getLogger("paymentApi");
+    
+    @Autowired
+    private TdOrderService orderService;
 
     @Override
     public String getPayFormData(HttpServletRequest request) {
         Map<String, String> requestParameters = new HashMap<String, String>();
-        requestParameters.put(Constants.KEY_SERVICE,
-                AlipayConfig.CREATE_TRADE_SERVICE);
+        requestParameters.put(Constants.KEY_SERVICE, AlipayConfig.CREATE_TRADE_SERVICE);
         requestParameters.put(Constants.KEY_PARTNER, AlipayConfig.PARTNER);
         requestParameters.put(Constants.KEY_CHARSET, AlipayConfig.CHARSET);
-        String serverPath = PaymentUtil.getServerPath(request);
-        requestParameters.put(Constants.KEY_NOTIFY_URL, serverPath
-                + "order/pay/notify");
-        requestParameters.put(Constants.KEY_RETURN_URL, serverPath
-                + "order/pay/success");
-
-        // 订单ID取得方式需要修改建议当前支付的订单号+支付记录号。以区分同一个订单的重新支付和直接支付String orderId =
-        requestParameters.put(Constants.KEY_OUT_TRADE_NO, (String) request.getAttribute("orderNumber"));
-
-        requestParameters.put(Constants.KEY_SUBJECT, AlipayConfig.SUBJECT);
-        requestParameters.put(Constants.KEY_PAYMENT_TYPE,
-                AlipayConfig.PAYMENT_TYPE);
-        requestParameters.put(Constants.KEY_LOGISTICS_TYPE,
-                AlipayConfig.DEFAULT_EXPRESS);
-        requestParameters.put(Constants.KEY_LOGISTICS_FEE,
-                AlipayConfig.LOGISTICS_FREE);
-        requestParameters.put(Constants.KEY_LOGISTICS_PAYMENT,
-                AlipayConfig.SELLER_PAY);
+        String serverPath = getServerPath(request);
+        requestParameters.put(Constants.KEY_NOTIFY_URL, serverPath + "order/pay/notify_alipay");
+        requestParameters.put(Constants.KEY_RETURN_URL, serverPath + "order/pay/result_alipay");
+        
+        //支付记录号码
+        String payRecordId = (String) request.getAttribute("payRecordId");
+        // 订单ID
+        String orderId = (String) request.getAttribute("orderNumber");
+        requestParameters.put(Constants.KEY_SUBJECT, orderId);
+        
+        requestParameters.put(Constants.KEY_OUT_TRADE_NO, orderId + payRecordId);
+        requestParameters.put(Constants.KEY_PAYMENT_TYPE, AlipayConfig.PAYMENT_TYPE);
+        requestParameters.put(Constants.KEY_LOGISTICS_TYPE, AlipayConfig.DEFAULT_EXPRESS);
+        requestParameters.put(Constants.KEY_LOGISTICS_FEE, AlipayConfig.LOGISTICS_FREE);
+        requestParameters.put(Constants.KEY_LOGISTICS_PAYMENT, AlipayConfig.SELLER_PAY);
 
         // 订单金额取得
         String orderAmount = (String) request.getAttribute("totalPrice");
         requestParameters.put(Constants.KEY_PRICE, orderAmount);
-        requestParameters.put(Constants.KEY_QUANTITY,
-                AlipayConfig.DEFAULT_QUANTITY);
-        requestParameters.put(Constants.KEY_SELLER_EMAIL,
-                AlipayConfig.SELLER_EMAIL);
+        requestParameters.put(Constants.KEY_QUANTITY, AlipayConfig.DEFAULT_QUANTITY);
+        requestParameters.put(Constants.KEY_SELLER_EMAIL, AlipayConfig.SELLER_EMAIL);
         requestParameters.put(Constants.KEY_SELLER_ID, AlipayConfig.SELLER_ID);
-        requestParameters.put(Constants.KEY_SELLER_ACCOUNT_NAME,
-                AlipayConfig.SELLER_EMAIL);
+        requestParameters.put(Constants.KEY_SELLER_ACCOUNT_NAME, AlipayConfig.SELLER_EMAIL);
         
         // TODO：
         // 此字段要修改
-        requestParameters.put(Constants.KEY_BODY, "支付测试");
+        //requestParameters.put(Constants.KEY_BODY, "支付测试");
         requestParameters.put(Constants.KEY_TOTAL_FEE, orderAmount);
                 // requestParameters.put(Constants.KEY_TBREC_POST,
                 // AlipayConfig.RECORD_POST);
@@ -84,13 +92,13 @@ public class PaymentChannelAlipay implements PaymentChannel {
     }
 
     @Override
-    public void doResponse(HttpServletRequest request, JspWriter out) {
+    public void doResponse(HttpServletRequest request, HttpServletResponse resp) {
         // 获取支付宝POST过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = request.getParameterMap();
         StringBuilder loggeMessage = new StringBuilder();
-        for (Iterator<String> iter = requestParams.keySet().iterator(); iter
-                .hasNext();) {
+        for (Iterator<String> iter = requestParams.keySet().iterator(); 
+                iter.hasNext();) {
             String name = iter.next();
             String[] values = requestParams.get(name);
             String valueStr = "";
@@ -108,7 +116,7 @@ public class PaymentChannelAlipay implements PaymentChannel {
 
         // 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
         // 商户订单号
-        String out_trade_no = null;
+        String orderNo = null;
 
         // 支付宝交易号
         String trade_no = null;
@@ -116,8 +124,10 @@ public class PaymentChannelAlipay implements PaymentChannel {
         // 交易状态
         String trade_status = null;
         try {
-            out_trade_no = new String(request.getParameter(ORDER_NO_PARA)
+            orderNo = new String(request.getParameter(OUT_TRADE_NO_PARA)
                     .getBytes(ISO_ENCODING), AlipayConfig.CHARSET);
+            orderNo = orderNo == null ? "" : 
+                orderNo.substring(0, orderNo.length() - 6);
             trade_no = new String(request.getParameter(ORDER_NO_TB_PARA)
                     .getBytes(ISO_ENCODING), AlipayConfig.CHARSET);
             trade_status = new String(request.getParameter(ORDER_STATUS_PARA)
@@ -126,14 +136,20 @@ public class PaymentChannelAlipay implements PaymentChannel {
             e.printStackTrace();
             return;
         }
-
+        
+        PrintWriter out = null;
         try {
-            paymentLogger.info(String.format("AlipayNotify:{%s}.",
-                    loggeMessage.toString()));
-            // TODO:此部分需要根据状态调用何时接口操作订单状态
+            paymentLogger.info(String.format("AlipayNotify:{%s}.", loggeMessage.toString()));
             // 获取支付宝的通知返回参数
+            // 根据状态调用何时接口操作订单状态
+            out = resp.getWriter();
             if (AlipayNotify.verify(params)) {// 验证成功
                 paymentLogger.info("AlipayNotify:Accepted!");
+                WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+                TdOrderService orderService = context.getBean(TdOrderService.class);
+                TdPayRecordService payRecordService = context.getBean(TdPayRecordService.class);
+                TdOrder order = orderService.findByOrderNumber(orderNo);
+                List<TdPayRecord> payRecords = payRecordService.getAll4OrderId(order.getId());
                 if (OrderStatus.WAIT_PAY.equals(trade_status)) {
                     // 该判断表示买家已在支付宝交易管理中产生了交易记录，但没有付款
 
@@ -141,17 +157,39 @@ public class PaymentChannelAlipay implements PaymentChannel {
                     // 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                     // 如果有做过处理，不执行商户的业务程序
                     paymentLogger.info(String.format(
-                            "AlipayNotify:{%s}֧�����Ѿ���¼֧������,���δ����!",
-                            out_trade_no));
+                            "AlipayNotify:{%s}支付宝订单已经生成,用户未付款!",
+                            orderNo));
+                    if(order != null && order.getStatusId() == 1) {
+                        order.setStatusId(2l);
+                        orderService.save(order);
+                    }
                 } else if (OrderStatus.WAIT_SEND_GOODS.equals(trade_status)) {
                     // 该判断表示买家已在支付宝交易管理中产生了交易记录且付款成功，但卖家没有发货
 
                     // 判断该笔订单是否在商户网站中已经做过处理
                     // 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                     // 如果有做过处理，不执行商户的业务程序
-                    paymentLogger.info(String.format(
-                            "AlipayNotify:{%s}����Ѹ���,ϵͳ�Զ�����!",
-                            out_trade_no));
+                    paymentLogger.info(String.format("AlipayNotify:{%s}用户已经付款给支付宝,系统自动发货!",
+                            orderNo));
+                    if(order != null && (order.getStatusId() == 2 || order.getStatusId() == 8)) {
+                        order.setStatusId(3l);
+                        order.setPayTime(new Date());
+                        orderService.save(order);
+                    }
+                    
+                    if(!payRecords.isEmpty()) {
+                        int i = 0;
+                        for(TdPayRecord record : payRecords) {
+                            if(i == 0) {
+                                record.setStatusCode(2);
+                            } else {
+                                record.setStatusCode(3);
+                            }
+                            i++;
+                        }
+                        payRecordService.save(payRecords);
+                    }
+                    
                     sendConfirmGoods(FIRST_TIME, trade_no);
                 } else if (OrderStatus.WAIT_ONFIRM_GOODS.equals(trade_status)) {
                     // 该判断表示卖家已经发了货，但买家还没有做确认收货的操作
@@ -159,22 +197,41 @@ public class PaymentChannelAlipay implements PaymentChannel {
                     // 判断该笔订单是否在商户网站中已经做过处理
                     // 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                     // 如果有做过处理，不执行商户的业务程序
-                    paymentLogger.info(String.format(
-                            "AlipayNotify:{%s}�ȴ����ȷ���ջ�!", out_trade_no));
+                    paymentLogger.info(String.format("AlipayNotify:{%s}等待买家确认收货!", 
+                            orderNo));
+                    if(order != null && (order.getStatusId() == 3 || order.getStatusId() == 8)) {
+                        order.setStatusId(4l);
+                        order.setDeliveryTime(new Date());
+                        orderService.save(order);
+                    }
                 } else if (OrderStatus.FINISHED.equals(trade_status)) {
                     // 该判断表示买家已经确认收货，这笔交易完成
 
                     // 判断该笔订单是否在商户网站中已经做过处理
                     // 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                     // 如果有做过处理，不执行商户的业务程序
-                    paymentLogger
-                            .info(String
-                                    .format("AlipayNotify:{%s}�������������,�����ɹ�����,֧������ɻ���!",
-                                            out_trade_no));
+                    paymentLogger.info(String.format("AlipayNotify:{%s}用户确认收货完毕,支付款入帐门订单成功!", 
+                            orderNo));
+                    if(order != null && (order.getStatusId() == 4 || order.getStatusId() == 8)) {
+                        order.setStatusId(5l);
+                        order.setFinishTime(new Date());
+                        orderService.save(order);
+                    }
                 } else {
                     // 交易中途结束
-                    paymentLogger.info(String.format(
-                            "AlipayNotify:{%s}������;����!", out_trade_no));
+                    paymentLogger.info(String.format("AlipayNotify:{%s}订单中途取消,支付失败S", orderNo));
+                    if(order != null && (order.getStatusId() != 8)) {
+                        order.setStatusId(8l);
+                        order.setCancelTime(new Date());
+                        orderService.save(order);
+                    }
+                    
+                    if(!payRecords.isEmpty()) {
+                        for(TdPayRecord record : payRecords) {
+                            record.setStatusCode(3);
+                        }
+                        payRecordService.save(payRecords);
+                    }
                 }
                 out.println("success");// 请不要修改或删除
             } else {// 验证失败
@@ -183,17 +240,20 @@ public class PaymentChannelAlipay implements PaymentChannel {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if(out != null) {
+                out.close();
+            }
         }
     }
 
     private boolean sendConfirmGoods(int timeCount, String trade_no) {
         try {
             @SuppressWarnings({ "unchecked", "rawtypes" })
-            String result = PaymentUtil.post(AlipayConfig.REAUESTURL,
+            String result = post(AlipayConfig.REAUESTURL,
                     AlipayConfirmGoods.generatNameValuePair(trade_no),
                     new AlipayConfirmGoodsHandler(), AlipayConfig.CHARSET);
-            paymentLogger.info(String.format("AlipayConfirmGoods:%s%s!",
-                    NEW_LINE, result));
+            paymentLogger.info(String.format("AlipayConfirmGoods:%s%s!", NEW_LINE, result));
 
         } catch (ClientProtocolException e) {
             e.printStackTrace();

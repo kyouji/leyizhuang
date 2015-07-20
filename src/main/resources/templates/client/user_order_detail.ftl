@@ -12,10 +12,14 @@
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
+<link href="/client/style/bankLogo.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/change_paymethod.css" rel="stylesheet" type="text/css" />
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/jquery.cookie.js"></script>
+<script src="/client/js/jquery.leanModal.min.js"></script>
 
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
@@ -64,28 +68,34 @@ DD_belatedPNG.fix('.,img,background');
                     待收货
                 <#elseif order.statusId==6>
                     已完成
+                <#elseif order.statusId==8>
+                    支付失败
                 </#if>
             </#if>
         </dt>
         <dt>
-            支付总额：<span>￥<#if order??>${order.totalPrice?string("#.##")}</#if></span>
+                     支付方式：<#if order??>${order.payTypeTitle!''}</#if>&nbsp;&nbsp;&nbsp;&nbsp;支付总额：<span>￥<#if order??>${order.totalPrice?string("#.##")}</#if></span>
         </dt>
         <dd>
             <#if order??>
                 <#if order.statusId==1>
                     请稍等，我们将尽快确认您的订单。
                 <#elseif order.statusId==2>
-                    亲爱的客户，<a href="/order/dopay/${order.id}" style="color: #F00;"">去支付</a>。
+                    亲爱的客户，此订单还未支付您可以<a href="/order/dopay/${order.id}" style="color: #F00;"">去支付</a>或者<a id="change_paytype" data-order_id="${order.id}" href="javascrpit:void();" style="color: #F00;"">修改支付方式</a>。
                 <#elseif order.statusId==3>
                     亲爱的客户，我们将尽快为您发货。
                 <#elseif order.statusId==4>
                     亲爱的客户，商品已发出，请检查商品包装完整。
                 <#elseif order.statusId==6>
                     亲爱的客户，此订单已交易成功。
+                <#elseif order.statusId==8>
+                    亲爱的客户，此订单支付失败,已取消。
                 </#if>
             </#if>
         </dd>
       </dl>
+      <#include "/client/paybox_common.ftl" />
+      <script type="text/javascript" src="/client/js/change_paymethod.js"></script>
       <div class="mymember_green">
         <#if order??>
             <#if order.statusId==2>

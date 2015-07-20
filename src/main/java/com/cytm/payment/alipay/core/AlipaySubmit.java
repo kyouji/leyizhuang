@@ -27,14 +27,13 @@ public class AlipaySubmit {
         for (int i = 0; i < keys.size(); i++) {
             String name = keys.get(i);
             String value = sPara.get(name);
-
             sbHtml.append("<input type=\"hidden\" name=\"" + name + "\" value=\"" + value + "\"/>");
         }
 
         //submit按钮控件请不要含有name属性
         //sbHtml.append("<input type=\"submit\" value=\"" + strButtonName + "\" style=\"display:none;\"></form>");
         sbHtml.append("</form>");
-        sbHtml.append("<script>document.forms[\"alipaysubmit\"].submit();</script>");
+        sbHtml.append("<script>$(\"#alipaysubmit\").submit();</script>");
 
         return sbHtml.toString();
     }

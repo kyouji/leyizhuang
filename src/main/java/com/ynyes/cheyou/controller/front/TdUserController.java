@@ -1,10 +1,12 @@
 package com.ynyes.cheyou.controller.front;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cytm.payment.ceb.CEBPayConfig;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdOrderGoods;
+import com.ynyes.cheyou.entity.TdPayType;
 import com.ynyes.cheyou.entity.TdShippingAddress;
 import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.entity.TdUserCollect;
@@ -52,7 +56,7 @@ import com.ynyes.cheyou.util.ClientConstant;
  *
  */
 @Controller
-public class TdUserController {
+public class TdUserController extends AbstractPaytypeService {
     
     @Autowired
     private TdUserService tdUserService;
@@ -339,6 +343,9 @@ public class TdUserController {
         {
             map.addAttribute("order", tdOrderService.findOne(id));
         }
+        
+        // 支付方式列表
+        setPayTypes(map);
         
         return "/client/user_order_detail";
     }

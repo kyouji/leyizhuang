@@ -52,6 +52,10 @@ public class TdPayType {
     // 描述说明
     @Column
     private String info;
+    
+    // 支付代码
+    @Column
+    private String code;
 
     public Long getId() {
         return id;
@@ -123,5 +127,13 @@ public class TdPayType {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+    
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

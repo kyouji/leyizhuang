@@ -1,14 +1,22 @@
 package com.ynyes.cheyou.controller.front;
 
+import static org.apache.commons.lang3.StringUtils.leftPad;
+
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +25,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.csii.payment.client.core.CebMerchantSignVerify;
+import com.cytm.payment.alipay.AlipayConfig;
+import com.cytm.payment.alipay.Constants;
 import com.cytm.payment.alipay.PaymentChannelAlipay;
+import com.cytm.payment.alipay.core.AlipayNotify;
+import com.cytm.payment.ceb.CEBPayConfig;
 import com.cytm.payment.ceb.PaymentChannelCEB;
 import com.ynyes.cheyou.entity.TdCartGoods;
 import com.ynyes.cheyou.entity.TdCoupon;
@@ -27,6 +40,7 @@ import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdOrderGoods;
+import com.ynyes.cheyou.entity.TdPayRecord;
 import com.ynyes.cheyou.entity.TdPayType;
 import com.ynyes.cheyou.entity.TdShippingAddress;
 import com.ynyes.cheyou.entity.TdUser;
@@ -40,7 +54,7 @@ import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdOrderGoodsService;
 import com.ynyes.cheyou.service.TdOrderService;
-import com.ynyes.cheyou.service.TdPayTypeService;
+import com.ynyes.cheyou.service.TdPayRecordService;
 import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserService;
 
@@ -50,7 +64,9 @@ import com.ynyes.cheyou.service.TdUserService;
  */
 @Controller
 @RequestMapping("/order")
-public class TdOrderController {
+public class TdOrderController extends AbstractPaytypeService {
+    
+    private static final String PAYMENT_ALI = "ALI";
 
     @Autowired
     private TdCartGoodsService tdCartGoodsService;
@@ -60,9 +76,6 @@ public class TdOrderController {
 
     @Autowired
     private TdGoodsService tdGoodsService;
-
-    @Autowired
-    private TdPayTypeService tdPayTypeService;
 
     @Autowired
     private TdOrderGoodsService tdOrderGoodsService;
@@ -87,6 +100,9 @@ public class TdOrderController {
     
     @Autowired
     private TdDiySiteService tdDiySiteService;
+    
+    @Autowired
+    private TdPayRecordService payRecordService;
 
     @RequestMapping(value = "/info")
     public String orderInfo(HttpServletRequest req, HttpServletResponse resp,
@@ -143,8 +159,8 @@ public class TdOrderController {
         // 线下同盟店
         map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());
         
-        // 支付类型
-        map.addAttribute("pay_type_list", tdPayTypeService.findByIsEnableTrue());
+        // 支付方式列表
+        setPayTypes(map);
         
         // 配送方式
         map.addAttribute("delivery_type_list",
@@ -363,7 +379,8 @@ public class TdOrderController {
         tdOrder.setOrderTime(current);
         
         // 订单号
-        tdOrder.setOrderNumber("P" + curStr + random.nextInt(999));
+        tdOrder.setOrderNumber("P" + curStr + 
+                leftPad(Integer.toString(random.nextInt(999)), 3, "0"));
 
         // 收货地址
         if (null != address)
@@ -572,24 +589,46 @@ public class TdOrderController {
             return "/client/error_404";
         }
         
-        req.setAttribute("orderNumber", order.getOrderNumber());
         String amount = order.getTotalPrice().toString();
         req.setAttribute("totalPrice", amount);
         
-        String payForm = null;
+        String payForm = "";
         
-        if (order.getPayTypeTitle().equals("支付宝"))
-        {
-            PaymentChannelAlipay channelAlipay = new PaymentChannelAlipay();
-            payForm = channelAlipay.getPayFormData(req);
-            map.addAttribute("charset", "UTF-8");
-        }
-        else if (order.getPayTypeTitle().equals("光大银行"))
-        {
-            req.setAttribute("payMethod", "CEB");
-            PaymentChannelCEB channelCEB = new PaymentChannelCEB();
-            payForm = channelCEB.getPayFormData(req);
-            map.addAttribute("charset", "GBK");
+        Long payId = order.getPayTypeId();
+        TdPayType payType = tdPayTypeService.findOne(payId);
+        if (payType != null) {
+            TdPayRecord record = new TdPayRecord();
+            record.setCreateTime(new Date());
+            record.setOrderId(order.getId());
+            record.setPayTypeId(payType.getId());
+            record.setStatusCode(1);
+            record.setCreateTime(new Date());
+            record = payRecordService.save(record);
+            
+            String payRecordId = record.getId().toString();
+            int recordLength = payRecordId.length();
+            if(recordLength > 6) {
+                payRecordId = payRecordId.substring(recordLength - 6);
+            } else {
+                payRecordId = leftPad(payRecordId, 6, "0");
+            }
+            req.setAttribute("payRecordId", payRecordId);
+            
+            req.setAttribute("orderNumber", order.getOrderNumber());
+
+            String payCode = payType.getCode();
+            if(PAYMENT_ALI.equals(payCode)) {
+                PaymentChannelAlipay channelAlipay = new PaymentChannelAlipay();
+                payForm = channelAlipay.getPayFormData(req);
+                map.addAttribute("charset", AlipayConfig.CHARSET);
+            } else if(CEBPayConfig.INTER_B2C_BANK_CONFIG.keySet().contains(payCode)) {
+                req.setAttribute("payMethod", payCode);
+                PaymentChannelCEB channelCEB = new PaymentChannelCEB();
+                payForm = channelCEB.getPayFormData(req);
+                map.addAttribute("charset", "GBK");
+            } else {
+                //
+            }
         }
 
         map.addAttribute("payForm", payForm);
@@ -609,7 +648,7 @@ public class TdOrderController {
 
         return "/client/order_pay_success";
     }
-    
+
     @RequestMapping(value = "/pay/notify")
     public String payNotify(ModelMap map, HttpServletRequest req) {
 //        String username = (String) req.getSession().getAttribute("username");
@@ -621,5 +660,127 @@ public class TdOrderController {
         tdCommonService.setHeader(map, req);
 
         return "/client/order_pay";
+    }
+    
+    /*
+     * 
+     */
+    @RequestMapping(value = "/pay/notify_alipay")
+    public void payNotifyAlipay(ModelMap map, HttpServletRequest req, HttpServletResponse resp) {
+        new PaymentChannelAlipay().doResponse(req, resp);
+    }
+    
+    /*
+     * 
+     */
+    @RequestMapping(value = "/pay/notify_cebpay")
+    public void payNotifyCEBPay(ModelMap map, HttpServletRequest req, HttpServletResponse resp) {
+        new PaymentChannelCEB().doResponse(req, resp);
+    }
+    
+    /*
+     * 
+     */
+    @RequestMapping(value = "/pay/result_alipay")
+    public String payResultAlipay(ModelMap map, HttpServletRequest req, HttpServletResponse resp) {       
+        Map<String, String> params = new HashMap<String, String>();
+        Map<String,String[]> requestParams = req.getParameterMap();
+        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+            String name = iter.next();
+            String[] values = requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i]
+                        : valueStr + values[i] + ",";
+            }
+            //乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
+            try {
+                valueStr = new String(valueStr.getBytes("ISO-8859-1"), AlipayConfig.CHARSET);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            params.put(name, valueStr);
+        }
+
+        //获取支付宝的返回参数
+        String orderNo = "";
+        String trade_status = "";
+        try {
+            //商户订单号
+            orderNo = new String(req.getParameter(Constants.KEY_OUT_TRADE_NO).getBytes("ISO-8859-1"), 
+                    AlipayConfig.CHARSET);
+            //交易状态
+            trade_status = new String(req.getParameter("trade_status").getBytes("ISO-8859-1"), 
+                    AlipayConfig.CHARSET);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        //计算得出通知验证结果
+        boolean verify_result = AlipayNotify.verify(params);
+        
+        tdCommonService.setHeader(map, req);
+        map.put("orderNo", orderNo.substring(0, orderNo.length() - 6));
+        map.put("methodName", "支付宝");
+        if(verify_result){//验证成功
+            if("WAIT_SELLER_SEND_GOODS".equals(trade_status)){
+                //订单支付成功
+                return "/client/order_pay_success";
+            }
+        }
+        
+        //验证失败或者支付失败
+        return "/client/order_pay_failed";
+    }
+    
+    /*
+     * 
+     */
+    @RequestMapping(value = "/pay/result_cebpay")
+    public String payResultCEBPay(ModelMap map, HttpServletRequest req, HttpServletResponse resp) {        
+        tdCommonService.setHeader(map, req);
+        
+        String plainData = req.getParameter("Plain");
+        String signature = req.getParameter("Signature");
+
+        //计算得出通知验证结果
+        boolean verify_result = CebMerchantSignVerify.merchantVerifyPayGate_ABA(signature, plainData);
+        String plainObjectStr = "";
+
+        if(plainData.endsWith("~|~")) {
+            plainObjectStr = plainData.substring(0, plainData.length() - 3);
+        }
+
+        plainObjectStr = plainObjectStr.replaceAll("=", "\":\"").replaceAll("~\\|~", "\",\"");
+        plainObjectStr = "{\"" + plainObjectStr + "\"}";
+
+        JSONObject paymentResult = JSONObject.fromObject(plainObjectStr);        
+        String payment_channel_name = "光大银行";
+
+        String [] msgExt = paymentResult.getString("msgExt").split("\\|", 2);
+        String paybank_no = msgExt[1];
+        
+        String orderNo = msgExt[0];
+        orderNo = (null == orderNo) ? "" : orderNo.trim();
+        for(Iterator<String[]> bankConfigs = CEBPayConfig.INTER_B2C_BANK_CONFIG.values().iterator(); bankConfigs.hasNext();) {
+            String [] bankNoAndName = bankConfigs.next();
+            if(bankNoAndName[0].equals(paybank_no)) {
+                payment_channel_name = bankNoAndName[1];
+                break;
+            }
+        }
+        
+        map.put("orderNo", orderNo);
+        map.put("methodName", payment_channel_name);
+        if(verify_result){//验证成功
+            String trade_status = paymentResult.getString("respCode");
+            if("".equals(trade_status) || "AAAAAAA".equals(trade_status)){
+                //订单支付成功
+                return "/client/order_pay_success";
+            }
+
+        }
+        //验证失败或者支付失败
+        return "/client/order_pay_failed";
     }
 }

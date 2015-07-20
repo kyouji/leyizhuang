@@ -16,12 +16,14 @@
 <script src="/client/js/cart.js"></script>
 <script src="/client/js/order_info.js"></script>
 <script src="/client/js/jquery.cityselect.js"></script>
+<script src="/client/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
 
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/bankLogo.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -144,30 +146,14 @@
                 </#if>
             </select>
         </section>
-        
         <section class="order_check fr" style="width:40%;">
             <h3>选择预约安装时间</h3>
             <input name="appointmentTime" type="text" value="" datatype="*" class="text input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" errormsg="请选择预约安装时间" nullmsg="请选择预约安装时间">
             <a href="javascript:;"><img src="/client/images/content/rl.png" /></a>
         </section>
-        
-        <div class="clear h20"></div>
-        
-        <section class="paybox">
-            <h3>选择支付方式</h3>
-            <#if pay_type_list??>
-                <#list pay_type_list as pay_type>
-                    <div class="pay_style">
-                        <input name="payTypeId" onclick="" type="radio" datatype="n" value="${pay_type.id!''}" fee="${pay_type.fee!'0'}" nullmsg="请选择支付方式!" />
-                        <span>${pay_type.title!''}</span>
-                    </div>
-                </#list>
-            </#if>
-            <div class="clear"></div>
-        </section>
-        
-        <div class="clear h20"></div>
-        
+        <div class="clear h20"></div>        
+        <#include "/client/paybox_common.ftl" />
+        <div class="clear h10"></div>
         <div class="car_pay">
             <span class="mr10 inblock" style="width:100px;">优惠券</span>
             <select id="couponSelect" name="couponId" onchange="couponChange();">
