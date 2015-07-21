@@ -18,6 +18,7 @@ import com.ynyes.cheyou.entity.TdGoodsGift;
 import com.ynyes.cheyou.entity.TdGoodsParameter;
 import com.ynyes.cheyou.entity.TdPriceChangeLog;
 import com.ynyes.cheyou.entity.TdProductCategory;
+import com.ynyes.cheyou.entity.TdProvider;
 import com.ynyes.cheyou.entity.TdWarehouse;
 import com.ynyes.cheyou.repository.TdGoodsRepo;
 
@@ -51,6 +52,9 @@ public class TdGoodsService {
 
     @Autowired
     TdWarehouseService tdWarehouseService;
+    
+    @Autowired
+    TdProviderService tdProviderService;
 
     @Autowired
     TdGoodsGiftService tdGoodsGiftService;
@@ -1661,6 +1665,15 @@ public class TdGoodsService {
 
             if (null != w) {
                 e.setWarehouseTitle(w.getTitle());
+            }
+        }
+        
+        // 供应商名
+        if (null != e.getProductId()) {
+            TdProvider p = tdProviderService.findOne(e.getProductId());
+
+            if (null != p) {
+                e.setProviderTitle(p.getTitle());
             }
         }
 

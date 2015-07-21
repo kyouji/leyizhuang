@@ -568,6 +568,21 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">购买该商品赠送的粮草</span>
             </dd>
         </dl>
+        <#if provider_list??>
+        <dl>
+            <dt>供应商</dt>
+            <dd>
+                <div class="rule-single-select">
+                    <select name="providerId" datatype="*0-100" sucmsg=" ">
+                        <option value="" <#if !provider_list??>selected="selected"</#if>>请选择类别...</option>
+                        <#list provider_list as w>
+                            <option value="${w.id!""}" <#if goods?? && goods.providerId?? && goods.providerId==w.id>selected="selected"</#if>>${w.title!""}</option>
+                        </#list>
+                    </select>
+                </div>
+            </dd>
+        </dl>
+        </#if>
         <#if warehouse_list??>
         <dl>
             <dt>所在仓库</dt>
@@ -576,7 +591,7 @@ function del_goods_comb(obj) {
                     <select name="warehouseId" datatype="*0-100" sucmsg=" ">
                         <option value="" <#if !warehouse_list??>selected="selected"</#if>>请选择类别...</option>
                         <#list warehouse_list as w>
-                            <option value="${w.id!""}" <#if goods.warehouseId?? && goods.warehouseId==w.id>selected="selected"</#if>>${w.title!""}</option>
+                            <option value="${w.id!""}" <#if goods?? && goods.warehouseId?? && goods.warehouseId==w.id>selected="selected"</#if>>${w.title!""}</option>
                         </#list>
                     </select>
                 </div>

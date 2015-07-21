@@ -125,7 +125,7 @@ function hideDialog()
                         <p class="mt5">剩余：<span class="red"><#if ("coupon_" + item.id + "_list")?eval[0]??>${("coupon_" + item.id + "_list")?eval[0].leftNumber?c!'0'}</#if></span>张</p>
                     </div>
                     <div class="clear"></div>
-                    <div class="zongshushengyu">p
+                    <div class="zongshushengyu">
                         <p class="mt5">总数剩余：<span class="red">${couponCount?c!'0'}</span>张</p>
                     </div>
                     <div class="clear"></div>

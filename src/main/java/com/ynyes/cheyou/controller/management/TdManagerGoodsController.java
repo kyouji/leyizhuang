@@ -29,6 +29,7 @@ import com.ynyes.cheyou.service.TdParameterService;
 import com.ynyes.cheyou.service.TdPriceChangeLogService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.service.TdProductService;
+import com.ynyes.cheyou.service.TdProviderService;
 import com.ynyes.cheyou.service.TdWarehouseService;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
@@ -53,6 +54,9 @@ public class TdManagerGoodsController {
     
     @Autowired
     TdWarehouseService tdWarehouseService;
+    
+    @Autowired
+    TdProviderService tdProviderService;
     
     @Autowired
     TdManagerLogService tdManagerLogService;
@@ -664,8 +668,12 @@ public class TdManagerGoodsController {
         map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
         
-        
         map.addAttribute("category_list", tdProductCategoryService.findAll());
+        
+        map.addAttribute("warehouse_list", tdWarehouseService.findAll());
+        
+        map.addAttribute("provider_list", tdProviderService.findAll());
+        
                 
         if (null != id)
         {
@@ -686,8 +694,6 @@ public class TdManagerGoodsController {
             
                 // 查找品牌
                 map.addAttribute("brand_list", tdBrandService.findByProductCategoryTreeContaining(tdGoods.getCategoryId()));
-                
-                map.addAttribute("warehouse_list", tdWarehouseService.findAll());
                 
                 if (null != tdGoods.getProductId())
                 {

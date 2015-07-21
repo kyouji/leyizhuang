@@ -171,18 +171,20 @@ DD_belatedPNG.fix('.,img,background');
             <#if order.deliverTypeFee??>
             &nbsp;&nbsp;+&nbsp;&nbsp;配送费用:￥${order.deliverTypeFee?string("0.00")}
             </#if>
-            &nbsp;&nbsp;-&nbsp;&nbsp;积分抵扣:￥${order.pointUse!'0'}
+            &nbsp;&nbsp;-&nbsp;&nbsp;粮草抵扣:￥${order.pointUse!'0'}
             &nbsp;&nbsp;&nbsp;&nbsp;支付方式：${order.payTypeTitle!''}
           </td>
         </tr>
         <tr>
-          <th>配送详情</th>
-          <td>配送地址：${order.shippingAddress!''}&nbsp;&nbsp;&nbsp;&nbsp; 配送方式：${order.deliverTypeTitle!''}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <th>安装信息</th>
+          <td>同盟店：${order.shopTitle!''}&nbsp;&nbsp;&nbsp;&nbsp; 预约时间：<#if order.appointmentTime??>${order.appointmentTime?string("yyyy-MM-dd HH:mm:ss")}</#if>&nbsp;&nbsp;&nbsp;&nbsp;</td>
         </tr>
+        <#--
         <tr>
           <th>联系方式</th>
           <td>联系人：<#if order??>${order.shippingName!''}</#if> &nbsp;&nbsp;&nbsp;&nbsp; 联系电话：${order.shippingPhone!''}</td>
         </tr>
+        -->
       </tbody></table>
     </div><!--mymember_info END-->
     

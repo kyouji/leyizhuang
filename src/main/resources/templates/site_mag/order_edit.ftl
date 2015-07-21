@@ -814,10 +814,40 @@
         </dl>
         
         <dl>
+            <dt>安装信息</dt>
+            <dd>
+                <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
+                <tbody>
+                    <tr>
+                        <th width="20%">
+                            同盟店
+                        </th>
+                        <td>
+                            <span id="spanArea"></span> 
+                            <span id="spanAddress">${order.shopTitle!""}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            预约时间
+                        </th>
+                        <td>
+                            <span></span> 
+                            <span><#if order.appointmentTime??>${order.appointmentTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </dd>
+        </dl>
+        
+        <#--
+        <dl>
             <dt>收货信息</dt>
             <dd>
                 <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
-                    <tbody><tr>
+                    <tbody>
+                    <tr>
                         <th width="20%">
                             收件人
                         </th>
@@ -870,6 +900,7 @@
                 </tbody></table>
             </dd>
         </dl>
+        -->
         
         <dl>
             <dt>支付配送</dt>

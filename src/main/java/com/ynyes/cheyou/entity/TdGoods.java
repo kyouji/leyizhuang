@@ -192,6 +192,14 @@ public class TdGoods {
     // 仓库名
     @Column
     private String warehouseTitle;
+    
+    // 供应商ID
+    @Column
+    private Long providerId;
+    
+    // 供应商名
+    @Column
+    private String providerTitle;
 
     // 库存数量
     @Column
@@ -1034,4 +1042,22 @@ public class TdGoods {
     public void setGroupSaleHundredPrice(Double groupSaleHundredPrice) {
         this.groupSaleHundredPrice = groupSaleHundredPrice;
     }
+
+    public Long getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(Long providerId) {
+        this.providerId = providerId;
+    }
+
+    public String getProviderTitle() {
+        return providerTitle;
+    }
+
+    public void setProviderTitle(String providerTitle) {
+        this.providerTitle = providerTitle;
+    }
+    
+    
 }
