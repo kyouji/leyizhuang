@@ -20,10 +20,10 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.cytm.payment.PaymentChannel;
 import com.cytm.payment.util.PaymentUtil;
-import com.ynyes.cheyou.entity.TdOrder;
-import com.ynyes.cheyou.entity.TdPayRecord;
-import com.ynyes.cheyou.service.TdOrderService;
-import com.ynyes.cheyou.service.TdPayRecordService;
+import com.ynyes.zphk.entity.TdOrder;
+import com.ynyes.zphk.entity.TdPayRecord;
+import com.ynyes.zphk.service.TdOrderService;
+import com.ynyes.zphk.service.TdPayRecordService;
 
 public class PaymentChannelCEB implements PaymentChannel{
     /*

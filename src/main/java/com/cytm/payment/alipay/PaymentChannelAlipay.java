@@ -26,10 +26,10 @@ import com.cytm.payment.alipay.core.AlipayConfirmGoods;
 import com.cytm.payment.alipay.core.AlipayConfirmGoodsHandler;
 import com.cytm.payment.alipay.core.AlipayNotify;
 import com.cytm.payment.alipay.core.AlipaySubmit;
-import com.ynyes.cheyou.entity.TdOrder;
-import com.ynyes.cheyou.entity.TdPayRecord;
-import com.ynyes.cheyou.service.TdOrderService;
-import com.ynyes.cheyou.service.TdPayRecordService;
+import com.ynyes.zphk.entity.TdOrder;
+import com.ynyes.zphk.entity.TdPayRecord;
+import com.ynyes.zphk.service.TdOrderService;
+import com.ynyes.zphk.service.TdPayRecordService;
 
 public class PaymentChannelAlipay implements PaymentChannel {
     private static final String OUT_TRADE_NO_PARA = "out_trade_no";
