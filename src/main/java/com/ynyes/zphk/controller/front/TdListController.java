@@ -54,7 +54,7 @@ public class TdListController {
     @Autowired
     private TdArticleCategoryService tdArticleCategoryService;
     
-    // 组成：typeID-brandIndex-[paramIndex]-[排序字段]-[销量排序标志]-[价格排序标志]-[上架时间排序标志]-[页号]_[价格低值]-[价格高值]
+    // 组成：typeID-brandIndex-[paramIndex]-[排序字段]-[销量排序标志]-[价格排序标志]-[上架时间排序标志]-[页号]-[是否有货标志位]_[价格低值]-[价格高值]
     @RequestMapping("/list/{listStr}")
     public String list(@PathVariable String listStr, ModelMap map, HttpServletRequest req){
         
@@ -65,18 +65,12 @@ public class TdListController {
             return "/client/error_404";
         }
         
-        // 商城资讯
-        List<TdArticleCategory> articleCatList = tdArticleCategoryService
-                .findByMenuId(10L);
-
-        if (null != articleCatList && articleCatList.size() > 0) {
-            Long articleCatId = articleCatList.get(0).getId();
-
-            map.addAttribute("news_page", tdArticleService
-                    .findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(10L,
-                            articleCatId, 0, ClientConstant.pageSize));
-        }
         
+        
+        
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+//////////////////////////////////////////////////////////////////////////////////////////////////////
         Integer priceLow = null; // 价格低值
         Integer priceHigh = null; // 价格高值
         

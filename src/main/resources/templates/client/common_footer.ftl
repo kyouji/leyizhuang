@@ -1,45 +1,70 @@
-<div class="down">
-    <section class="index_center">
-        <table>
-            <#if service_item_list??>
-                <tr>
-                    <#list service_item_list as item>
-                        <td>
-                            <a href="javascript:;"><img src="${item.logo!''}" />${item.title!''}<br>${item.description!''}</a>
-                        </td>
-                    </#list>
-                </tr>
-            </#if>
-        </table>
-    </section><!--index_center END-->
-</div>
-<div class="down2">
-    <div class="main">
-        <ul style="height:30px;">
-            <#if help_level0_cat_list??>
-                <#list help_level0_cat_list as item>
-                    <li><a href="/info/list/${help_id!'0'}?catId=${item.id!''}">${item.title!''}</a></li>
-                </#list>
-            </#if>
-        </ul>
-        
-        <div class="clear"></div>
-        
-        <p>
-        友情链接： 
-        <#if site_link_list??>
-            <#list site_link_list as item>
-                <span class="youqin"><a href="${item.linkUri!''}">${item.title!''}</a></span>
-            </#list>
-        </#if>
-        <br />
-        ${site.copyright!''}
-        <br />
-        ${site.address!''} 电话：${site.telephone!''}
-        <br />
-        <span class="flr"><a title="天度网络信息技术有限公司" href="http://www.ynyes.com" target="_blank">网站建设</a>技术支持：<a title="天度网络信息技术有限公司" href="http://www.ynyes.com" target="_blank">昆明天度网络公司</a></span>
-            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254586643'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254586643%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
-    
-        </p>
+<div class="footerall">
+    <div class="footer_iconsall">
+        <div class="footer_icons">
+            <dl>
+                <dt><img src="/client/images/icons-footer1.png" /></dt>
+                <dd>闪电发货</dd>
+            </dl>
+            <dl>
+                <dt><img src="/client/images/icons-footer2.png" /></dt>
+                <dd>闪电发货</dd>
+            </dl>
+            <dl>
+                <dt><img src="/client/images/icons-footer3.png" /></dt>
+                <dd>闪电发货</dd>
+            </dl>
+            <dl>
+                <dt><img src="/client/images/icons-footer4.png" /></dt>
+                <dd>闪电发货</dd>
+            </dl>
+            <dl>
+                <dt><img src="/client/images/icons-footer5.png" /></dt>
+                <dd>闪电发货</dd>
+            </dl>
+            <dl>
+                <dt><img src="/client/images/icons-footer6.png" /></dt>
+                <dd>闪电发货</dd>
+            </dl>
+            <dl>
+                <dt><img src="/client/images/icons-footer7.png" /></dt>
+                <dd>闪电发货</dd>
+            </dl>
+            <dl>
+                <dt><img src="/client/images/icons-footer7.png" /></dt>
+                <dd>闪电发货</dd>
+            </dl>
+        </div>    
     </div>
+
+    <div class="footer_link">
+        <ul>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们们们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+        </ul>
+        <ul>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+        </ul>
+        <ul>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+            <li><a href="#" title="">关于我们</a></li>
+        </ul>
+    </div>
+    
+
+    <div class="footerall_copyall">
+        <div class="footerall_copy">
+            友情链接：<a href="#" title="">曲靖信息港</a><a href="#" title="">宝善街网</a> <br />
+            <span>Copyright©2006-2014 All Rights Reserved 丫丫网 版权所有 滇ICP备07004173号</span>
+        </div>
+    </div> 
 </div>

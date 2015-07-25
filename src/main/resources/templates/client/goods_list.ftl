@@ -1,35 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<title><#if productCategory??>${productCategory.seoTitle!''}-</#if>正品惠客</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if productCategory??>${productCategory.seoTitle!''}-</#if>车有同盟</title>
 <meta name="keywords" content="<#if productCategory??>${productCategory.seoKeywords!''}</#if>" />
 <meta name="description" content="<#if productCategory??>${productCategory.seoDescription!''}</#if>" />
 <meta name="copyright" content="<#if site??>${site.copyright!''}</#if>" /> 
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
-<script src="/client/js/common.js"></script>
-<script src="/client/js/ljs-v1.01.js"></script>
-<script src="/client/js/html5.js"></script>
+<script src="/client/js/index.js"></script>
 <script src="/client/js/list.js"></script>
-
-<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/index.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-$(document).ready(function(){
-	menuDownList("top_phone","#top_phonelist",".a1","sel");
-	phoneListMore();//单独下拉
-    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-	checkNowHover("shopping_down","shopping_sel");
-	navDownList("navdown","li",".nav_showbox");
-	menuDownList("mainnavdown","#navdown",".a2","sel");
-	
-	chooseMoreShow();
-});
-
 function setprice() {
     var p1 = $.trim($('#ParamFiltern_price1').val()), p2 = $.trim($('#ParamFiltern_price2').val())
     if (isNaN(p1) || p1=="") { p1 = 0 }
@@ -39,7 +24,6 @@ function setprice() {
     if (price != "0-0") { url += "_" + price; }
     location.href = url;
 }
-
 function btnPageSubmit() 
 {
     window.location.href = "${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-"
@@ -48,204 +32,168 @@ function btnPageSubmit()
 }
 </script>
 </head>
+
 <body>
+<!--顶部ad大小：1920 90-->
+<div class="top_ad"><img src="/client/images/topad.png" /></div>
 
 <#include "/client/common_header.ftl" />
 
-<div class="main">
-    <div class="nygg">
-        <div class="bt mt15"><a href="#">通知公告</a></div>
-        <ul>
-            <#if news_page??>
-                <#list news_page.content as item>
-                    <li><a href="/info/content/${item.id}?mid=12" style="margin-left: 12px;">${item.title!''}</a></li>
-                </#list>
-            </#if>
-        </ul>
-    </div>
-    <menu class="column_qg main border-df">
-        <div class="bt">热卖商品</div>
-        <div class="clear10"></div>
-        <#if most_sold_list??>
-            <#list most_sold_list as item>
-                <#if item_index < 3>
-                    <a class="list" href="/goods/${item.id}">
-                        <img src="${item.coverImageUri!''}" title="${item.title!''} ${item.subTitle!''}"/>
-                        <p class="pt10 pb10 h30 overflow">${item.title!""} ${item.version!""} ${item.color!""} ${item.capacity!""}</p>
-                        <p class="red fs16">￥${item.salePrice?string("0.00")}</p>
-                        <span>立即抢购</span>
-                    </a>
-                </#if>
-            </#list>
-        </#if>
-    </menu>
-    <div class="clear30"></div>  
-        
-    <section class="column_left">
-        <#--
-        <ul class="xcjly">
-            <div class="nyltbt">
-                <h4 class="nylt"><a href="#"><img src="/client/images/nylt_03.png" />行车记录仪</a></h4>
-            </div>
-            <li><a href="#">车载空气净化</a></li>
-            <li><a href="#">车载空气净化</a></li>
-        </ul>
-        <ul class="xcjly">
-            <div class="nyltbt">
-                <h4 class="nylt"><a href="#"><img src="/client/images/nylt_06.png" />行车记录仪</a></h4>
-            </div>
-        </ul>
-        -->
-    
-        <h3 class="tit">热卖排行</h3>
+<!--面包屑导航-->
+<div class="crumb">
+	<a href="#" title="">首页</a>
+	<#if category_tree_list??>
+        <#list category_tree_list as item>
+            &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
+            <a href="/list/${item.id}" title="${item.title!''}">${item.title!''}</a>
+        </#list>
+	</#if>
+</div>
 
-        <menu class="border-df">
-            <#if hot_sale_list??>
+
+<!--中部整体-->
+<div class="wrapper">
+	<!--中部左边-->
+	<div class="c_l">
+    	<!--热卖推荐100*100-->
+    	<#if hot_sale_list?? && hot_sale_list?size gt 0>       
+    	<div class="c_l_hotsale">
+        	<div class="c_l_hotsale_title">热卖推荐</div>
+            <div class="c_l_hotsale_cont">
+            <ul>
                 <#list hot_sale_list as item>
-                    <#if item_index < 5>
-                        <a class="scan" href="/goods/${item.id}">
-                            <img src="${item.coverImageUri!''}" title="${item.title!''} ${item.subTitle!''}"/>
-                            <div class="num1">${item_index+1}</div>
-                            <p class=" h40 overflow">${item.title!""} ${item.version!""} ${item.color!""} ${item.capacity!""}</p>
-                            <p class="red">￥${item.salePrice?string("0.00")}</p>
-                        </a>
+                    <#if item_index < 4>
+                        <li>
+                            <a href="/goods/${item.id}" title="${item.title!''}" class="img100">
+                                <img src="${item.coverImageUri!''}" height="100" width="100"/>
+                            </a>
+                            <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a>
+                            <p  class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
+                            <a href="/cart/init?id=${item.id}" title="加入购物车" class="btn_cart23">加入购物车</a>
+                        </li>
                     </#if>
                 </#list>
-            </#if>
-        </menu>
-        
-        <h3 class="tit">浏览记录</h3>
-        
-        <menu class="border-df">
-            <#if recent_page??>
-                <#list recent_page.content as item>
-                    <a class="scan" href="/goods/${item.goodsId}">
-                        <img src="${item.goodsCoverImageUri!''}" title="${item.goodsTitle!''}"/>
-                        <p class=" h40 overflow">${item.goodsTitle!''}</p>
-                        <p class="red"><#if item.goodsSalePrice??>￥${item.goodsSalePrice?string("0.00")}</#if></p>
-                    </a>
-                </#list>
-            </#if>
-        </menu>
-    </section>
-  
-    <div class="column_right">
-        <h3 class="screen_clear">
-            商品筛选
-            <a class="a1" href="${categoryId!'0'}-0<#list param_index_list as pindex>-0</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-0">清空筛选条件</a>
-        </h3>
-    
-        <section class="choose_box">
-            <menu>
-            <#if brand_list??>
-                <h4>品牌：</h4>
-                <a <#if brandIndex==0>class="sel"</#if> href="${categoryId!'0'}-0<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>">全部</a>
-                
-                <#list brand_list as brand>
-                    <td><a href="${categoryId!'0'}-${brand_index+1}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" <#if brandIndex==brand_index+1>class="sel"</#if>>${brand.title?trim!''}</a>
-                </#list>
-            </#if>
-            </menu>
-            
-            <#-- 参数开始 -->
-            <#if param_list??>
-                <#list param_list as param>
-                    <menu>
-                        <h4>${param.title!""}：</h4>
-                        <a href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex><#if param_index==pindex_index>-0<#else>-${pindex!'0'}</#if></#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" <#if param_index_list[param_index]==0>class="sel"</#if>>全部</a>
-                        <#if param.valueList??>
-                            <#list param.valueList?split(",") as value>
-                                <#if value!="">
-                                    <a href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex><#if param_index==pindex_index>-${value_index+1}<#else>-${pindex!'0'}</#if></#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" <#if param_index_list[param_index]==value_index+1>class="sel"</#if>>${value?trim!""}</a>
-                                </#if>
-                            </#list>
-                        </#if>
-                    </menu>
-                </#list>
-            </#if>
-            <#-- 参数结束 -->
-            <#if param_list?? && param_list?size gt 4>
-                <div class="choose_more"><a href="javascript:chooseMoreDown();">下拉，更多选项<img src="/client/images/content/arrow01.png" /></a></div>
-            </#if>
-        </section><!--choose_box-->
-        
-        <div class="clear h20"></div>
-        
-        <section class="column_px">
-            <menu>
-                <a <#if orderId==0><#if soldId==0>class="sel01"<#else>class="sel02"</#if></#if> href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex>-${pindex!'0'}</#list>-0-<#if orderId!=0 || soldId==1>0<#else>1</#if>-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>销量</span></a>
-                <a <#if orderId==1><#if priceId==0>class="sel01"<#else>class="sel02"</#if></#if> href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex>-${pindex!'0'}</#list>-1-${soldId!'0'}-<#if orderId!=1 || priceId==1>0<#else>1</#if>-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>价格</span></a>
-                <a <#if orderId==2><#if timeId==0>class="sel01"<#else>class="sel02"</#if></#if> href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex>-${pindex!'0'}</#list>-2-${soldId!'0'}-${priceId!'0'}-<#if orderId!=2 || timeId==1>0<#else>1</#if>-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>上架时间</span></a>
-                <div class="sxtjBox">
-                    <span>价格范围：</span>
-                    <input type="text" id="ParamFiltern_price1" class="jgqj_txt" value="<#if priceLow??>${priceLow?string("#.##")}</#if>"/>
-                    <span>--</span>
-                    <input type="text" id="ParamFiltern_price2" class="jgqj_txt" value="<#if priceHigh??>${priceHigh?string("#.##")}</#if>"/>
-                    <input type="submit" class="jgqj_btn" onclick="setprice()" value="确定" />
-                </div>
-            </menu>
-            <div class="fr">
-                <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
-                    <a href="javascript:;"><img src="/client/images/page_n.png" height="11" /></a>
-                <#else>
-                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_n.png" height="11" /></a> <#-- goods_page.number+1 -->
-                </#if>
-                        
-                <#if goods_page.number+1 == 1>
-                    <a href="javascript:;"><img src="/client/images/page_l.png" height="11" /></a>
-                <#else>
-                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_l.png" height="11" /></a> <#-- goods_page.number-1 -->
-                </#if>
-                <span><font class="fc"><#if goods_page.totalPages==0>0<#else>${goods_page.number+1}</#if></font>/${goods_page.totalPages!"0"}页</span>
+            </ul>
             </div>
-          <div class="clear"></div>
-        </section>
+        </div>
+        </#if>
         
-        <div class="clear"></div>
-        
-        <ul class="column_sum">
-            <#if goods_page??>
-            <#list goods_page.content as goods>
-                <li>
-                    <a class="a1" href="/goods/${goods.id}"><img src="${goods.coverImageUri!''}" width="210" height="210" title="${goods.title!''} ${goods.subTitle!''}"/></a>
-                    <p class="fs20 jiage lh35 red">￥${goods.salePrice?string("0.00")}</p><del class="yuanjia">¥${goods.marketPrice?string("0.00")}</del>
+        <!--属性选择-->
+        <div class="select">
+        	<div class="select_title">
+            	<p class="select_title_p1">
+                	<strong>${productCategory.title!''}</strong>
+                    找到<b>2655</b>件相关产品
+                </p>
+                <a href="#" title="">重新筛选</a>
+            </div>
+            
+            <div class="select_cont">
+            	
+                
+                <#if brand_list??>
+                    <dl>
+                        <dt>品牌：</dt>
+                        <dd style=" height:80px;" class="select_cont_brand">
+                            <a <#if brandIndex==0>class="select_cont_choiced"</#if> href="${categoryId!'0'}-0<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>">全部</a>
                     
-                    <div class="clear"></div>
+                            <#list brand_list as brand>
+                                <a href="${categoryId!'0'}-${brand_index+1}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" <#if brandIndex==brand_index+1>class="select_cont_choiced"</#if>>${brand.title?trim!''}</a>
+                            </#list>
+                        </dd>
+                    </dl>
+                </#if>
+                
+                <#-- 参数开始 -->
+                <#if param_list??>
+                    <#list param_list as param>
+                        <dl>
+                            <dt>${param.title!""}：</dt>
+                            <dd class="select_cont_brand">
+                                <a href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex><#if param_index==pindex_index>-0<#else>-${pindex!'0'}</#if></#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" <#if param_index_list[param_index]==0>class="select_cont_choiced"</#if>>全部</a>
+                                <#if param.valueList??>
+                                    <#list param.valueList?split(",") as value>
+                                        <#if value!="">
+                                            <a href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex><#if param_index==pindex_index>-${value_index+1}<#else>-${pindex!'0'}</#if></#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" <#if param_index_list[param_index]==value_index+1>class="select_cont_choiced"</#if>>${value?trim!""}</a>
+                                        </#if>
+                                    </#list>
+                                </#if>
+                            </dd>
+                        </dl>
+                    </#list>
+                </#if>
+                <#-- 参数结束 -->
+            </div>
+            <#if param_list?? && param_list?size gt 4>
+                <div class="choose_more"><a href="javascript:chooseMoreDown();">下拉，更多选项<img src="/client/images/arrow01.png" /></a></div>
+            </#if>
+        </div>
         
-                    <a class="block h20 overflow" href="/goods/${goods.id}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a>
-                    <a class="block fs12 blue h20 overflow" href="/goods/${goods.id}">${goods.subTitle!""}</a>
-                    <p class="fs14 w84 fl">评论：<span class="blue">${goods.totalComments!'0'}</span>人</p>
-                    <#if goods.returnPoints?? && goods.returnPoints gt 0>
-                        <div class="yh fr">
-                            <p><a href="/goods/${goods.id}">送粮草</a></p>
-                        </div>
-                    </#if>
-                    <#if goods.giftList?? && goods.giftList?size gt 0>
-                        <div class="yh fr">
-                            <p><a href="/goods/${goods.id}">赠品</a></p>
-                        </div>
-                    </#if>
-                    <div class="clear5"></div>
-                    
-                    <div class="goumai">
-                        <a class="a8" href="/cart/init?id=${goods.id}" target="_blank"><img src="/client/images/liebiao_31.png" />加入购物车</a>
-                        <a class="a7" href="javascript:addCollect(${goods.id});"><img src="/client/images/liebiao_34.png" />关注</a>
-                        <p class="clear"></p>
-                    </div>
-                </li>
-            </#list>
-            </#if> 
-        </ul>
-        <div class="clear h20"></div>
+        <!--排序-->
+        <div class="sort">
+        	<a href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex>-${pindex!'0'}</#list>-0-<#if orderId!=0 || soldId==1>0<#else>1</#if>-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" title="按销量排序" class="sort_a <#if orderId==0>sort_choiced</#if>">销量</a>
+        	
+        	<a href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex>-${pindex!'0'}</#list>-1-${soldId!'0'}-<#if orderId!=1 || priceId==1>0<#else>1</#if>-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" title="按价格排序" class="sort_a <#if orderId==1>sort_choiced</#if>">价格</a>
+            <a href="${categoryId!'0'}-${brandIndex!'0'}<#list param_index_list as pindex>-${pindex!'0'}</#list>-2-${soldId!'0'}-${priceId!'0'}-<#if orderId!=2 || timeId==1>0<#else>1</#if>-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" title="按上架时间排序" class="sort_a <#if orderId==2>sort_choiced</#if>">上架时间</a>
+            
+            <span class="sort_spangoods"><input type="checkbox"  />仅限有货</span>
+            
+            <div class="sort_pricesselect">
+            	<span>价格区间</span>
+                <input id="ParamFiltern_price1" type="text" value="<#if priceLow??>${priceLow?string("#.##")}</#if>"/>
+                <span>-</span>
+                <input id="ParamFiltern_price2" type="text" value="<#if priceHigh??>${priceHigh?string("#.##")}</#if>"/>
+                <a href="javascript:setprice();" title="">确定</a>
+            </div>
+                
+            <div class="sort_page">
+            	<#if goods_page.number+1 == 1>
+                    <a href="javascript:;" title="上一页">&lt;</a>
+                <#else>
+                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" title="上一页">&lt;</a>
+                </#if>
+                
+                <span><#if goods_page.totalPages==0>0<#else>${goods_page.number+1}</#if>/${goods_page.totalPages!"0"}</span>
+                
+                <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
+                    <a href="javascript:;" title="下一页">&gt;</a>
+                <#else>
+                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" title="下一页">&gt;</a>
+                </#if>
+            </div>
+        </div>
         
+        <!--产品列表-->
+        <div class="piclist">
+            <#if goods_page?? && goods_page.content?size gt 0>
+                <#list goods_page.content as item>
+                    <dl>
+                        <dt><img src="${item.coverImageUri!''}" with="210" height="210"/></dt>
+                        <dd class="piclist_title">
+                            <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
+                        </dd>
+                        <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
+                            <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> </dd>
+                        <dd class="piclist_ie">
+                            <a href="/cart/init?id=${item.id}" title="加入购物车" target="_blank" class="piclist_cart">加入购物车</a>
+                            <a href="javascript:addCollect(${item.id});" title="" class="piclist_like">关注</a>
+                        </dd>
+                    </dl>  
+                </#list>
+            <#else>
+                <div style="text-align: center; padding: 15px;">此类商品正在扩充中，敬请期待！</div>
+            </#if>     
+        </div> 
+        
+        <!--分页-->
         <div class="pagebox">
             <div class="num">
                 <#if goods_page??>
                     <#assign continueEnter=false>
-                    <#if goods_page.number+1 == 1>
+                    <#if goods_page.number == 0>
                         <a class="a1 a0" href="javascript:;"><span>上一页</span></a>
                     <#else>
-                        <a class="a1 a0" href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>上一页</span></a>
+                        <a class="a2" href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>上一页</span></a>
                     </#if>
                     
                     <#if goods_page.totalPages gt 0>
@@ -267,7 +215,7 @@ function btnPageSubmit()
                     </#if>
                     
                     <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
-                        <a class="a2" href="javascript:;"><span>下一页</span></a>
+                        <a class="a2 a0" href="javascript:;"><span>下一页</span></a>
                     <#else>
                         <a class="a2" href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>下一页</span></a>
                     </#if>
@@ -281,13 +229,30 @@ function btnPageSubmit()
                 <span>到第</span>
             </div>
             <div class="clear"></div>
-        </div><!--pagebox END-->
+        </div> 
+              
+    </div>
+    
+    <!--中部右边-->
+    <div class="c_r">
+    	<p>热销排行</p>
+    	<#if most_sold_list??>
+    	   <#list most_sold_list as item>
+    	       <dl>
+                    <dt><img src="${item.coverImageUri!''}" /></dt>
+                    <dd class="c_r_title">
+                        <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
+                    </dd>
+                    <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
+                        <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> </dd>
+                </dl>
+    	   </#list>
+    	</#if>
     </div>
 </div>
 
-<div class="clear30"></div>
 
+<!--底部footer-->
 <#include "/client/common_footer.ftl" />
-
 </body>
 </html>
