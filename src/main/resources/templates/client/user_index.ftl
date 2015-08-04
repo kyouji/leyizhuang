@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>云南车有同盟商贸有限公司</title>
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
+<#--
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
 <meta name="copyright" content="${site.copyright!''}" />
-<link href="/client/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+-->
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
+<link rel="stylesheet" type="text/css" href="/client/css/mycenter.css"/>
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
@@ -36,67 +36,117 @@ DD_belatedPNG.fix('.,img,background');
 	checkNowHover("shopping_down","shopping_sel");
 });
 </script>
+<script>
+//关注商品控制   @by zhangji
+$(document).ready(function(){ 
+     $(".tp").mouseover(function(){   
+     
+        $(".tp").css({"box-shadow":"10px 10px 5px #888888",
+                                        "background-color":"#f7f7f7"});        
+    });
+        
+     $(".tp").mouseout(function(){    
+       
+        $(".tp").css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
+     });
+     
+     $(".shadow_add2").mouseover(function(){   
+         var index = $(this).index();
+         $(".shadow_add2").eq(index).css({"box-shadow":"10px 10px 5px #888888",
+                                         "background-color":"#f7f7f7"});        
+     });
+         
+      $(".shadow_add2").mouseout(function(){    
+         var index = $(this).index();
+         $(".shadow_add2").eq(index).css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
+      });
+}); 
+</script>
+
 </head>
 <body>
+<!--顶部-->
 <#include "/client/common_header.ftl" />
 
-<!--mymember-->
-<div class="myclear"></div>
-<div class="mymember_out">
-<div class="mymember_main">
-    <!--mymember_head END-->
-    <div class="myclear" style="height:20px;"></div>
-  
-    <#include "/client/common_user_menu.ftl" />
-  
-    <div class="mymember_center">
-        <div class="mymember_info mymember_info01">
-            <table>
-                <tr>
-                    <th width="150" rowspan="2">
-                        <a class="mymember_header" href="/user"><img src="${user.headImageUri!'/mag/style/user_avatar.png'}" /></a>
-                    </th>
-                    <td><a href="/user/order/list/2"><img src="/client/images/mymember/buy01.png" />待付款：<span>${total_unpayed!0}</span></a></td>
-                    <td><a href="/user/order/list/3"><img src="/client/images/mymember/buy02.png" />待发货：<span>${total_undelivered!0}</span></a></td>
-                    <th rowspan="2" class="mymember_fen">
-                        <a href="/user/point/list"><img src="/client/images/mymember/buy05.png" /><p>积分：<span>${user.totalPoints!0}</span></p></a>
-                    </th>
-                </tr>
-                <tr>
-                    <td><a href="/user/order/list/4"><img src="/client/images/mymember/buy03.png" />待收货：<span>${total_unreceived!'0'}</span></a></td>
-                    <td><a href="/user/order/list/6"><img src="/client/images/mymember/buy04.png" />已完成：<span>${total_finished!'0'}</span></a></td>
-                </tr>
-            </table>
+
+<!-- 内容 -->
+<div class="content"> 
+  <!-- 左侧 -->
+  <#include "/client/common_user_menu.ftl" />
+  <!-- 中间 -->
+  <div class="content_2"> 
+    <!-- 中上 -->
+    <div class="content_2_1">
+      <div class="content_2_1_1"><a href="/user/info" title="编辑基本信息"><img src="${user.headImageUri!'/mag/style/user_avatar.png'}"  /></a></div>
+      <div class="content_2_1_2">
+        <div class="content_2_1_2_top">
+          <dl>
+            <dt><a href="/user/order/list/2"><img src="/client/images/icon-3.png" />
+                <dd>待付款：</dd>
+                <dd class="red" style="width:15px;">${total_unpayed!'0'}</dd>
+                </a>
+            </dt>
+          </dl>
+          <dl>
+            <dt><a href="/user/order/list/3"><img src="/client/images/icon-4.png" />
+                <dd>待发货：</dd>
+                <dd class="red">${total_undelivered!'0'}</dd>
+                <a/>
+            </dt>
+          </dl>
         </div>
-    
-        <div class="mymember_info mymember_info02">
-            <h3>我的订单<a href="/user/order/list/0">查看全部订单</a></h3>
-            <table width="100%">
-            <#if order_page??>
-                <#list order_page.content as order>
-                    <#if order_index < 5>
-                    <tr>
-                        <th colspan="7">订单编号：<a href="/user/order?id=${order.id}">${order.orderNumber!''}</a></th>
-                    </tr>
-                    <tr>
-                        <td align="left"  colspan="2">
-                            <#if order.orderGoodsList??>
-                                <#list order.orderGoodsList as og>
+        <div class="content_2_1_2_tobbon">
+          <dl>
+            <dt><a href="/user/order/list/4"><img src="/client/images/icon-5.png" width="33px;" height="32px;"/>
+                <dd>待收货：</dd>
+                <dd class="red">${total_unreceived!'0'}</dd>
+                </a>
+            </dt>
+          </dl>
+          <dl>
+            <dt><a href="/user/order/list/6"><img src="/client/images/icon-6.png" />
+                <dd>已完成：</dd>
+                <dd class="red">${total_finished!'0'}</dd>
+                </a>
+            </dt>
+          </dl>
+        </div>
+      </div>
+      <div class="content_2_1_3">
+        <dl>
+          <dt><a href="/user/point/list"><img src="/client/images/icon-7.png" />
+          <dd>积分：</dd>
+          <dd class="red">${user.totalPoints!0}</dd>
+          </a>
+          </dt>
+        </dl>
+      </div>
+    </div>
+    <!-- 中中 -->
+  <div class="content_2_2">
+      <div class="content_2_2_1">
+          <span>我的订单</span>
+          <label> <a href="/user/order/list/0">查看全部订单</a> </label>
+      </div>
+      <div class="content_2_2_2">         
+        <#if order_page??>
+          <#list order_page.content as order>
+             <#if order_index < 5>
+                 <dl>
+                     <dt>订单编号：<span><a href="/user/order?id=${order.id}">${order.orderNumber!''}</a></span></dt>
+                     <dd>                                                      
+                         <ul>
+                             <li class="li_1">
+                                 <#if order.orderGoodsList??>
+                                    <#list order.orderGoodsList as og>  
                                     <a href="/goods/${og.goodsId}"><img src="${og.goodsCoverImageUri!''}" alt="${og.goodsTitle!''}" width="50" align="left" /></a>
-                                </#list>
-                            </#if>
-                        </td>
-                    
-                        <td>${order.shippingName!''}</td>
-                        <td>
-                            <p>￥${order.totalPrice?string("#.##")}</p>
-                            <p>${order.payTypeTitle!''}</p>          
-                        </td>
-                        <td class="td003">
-                            ${order.orderTime!''}      
-                        </td>
-                        <td>
-                            <p>
+                                    </#list>
+                                 </#if>
+                             </li>
+                             <li class="li_2">${order.shippingName!''}</li>
+                             <li class="li_3">￥${order.totalPrice?string("#.##")}</li>
+                             <li class="li_4"> ${order.orderTime!''}</li>
+                             <li class="li_7">
                                 <#if order.statusId==2>
                                     待付款
                                 <#elseif order.statusId==3>
@@ -106,92 +156,80 @@ DD_belatedPNG.fix('.,img,background');
                                 <#elseif order.statusId==6>
                                     已完成
                                 </#if>
-                            </p>          
-                        </td>
-                        <td class="td003">
-                            <a href="/user/order?id=${order.id}">查看</a>          
-                        </td>
-                    </tr>
-                    </#if>
-                </#list>
-            </#if>  
-            </table>
-        </div>
-    
-        <div class="mymember_info mymember_info02">
-            <h3>我关注的商品</h3>
-            <div id="mymember_gzbox">
-                <#if collect_page??>
-                    <#list collect_page.content as cgoods>
-                    <a class="mymember_gzlist" href="/goods/${cgoods.goodsId!''}">
-                        <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" />
-                        <p>${cgoods.goodsTitle!''}</p>
-                        <h6>￥${cgoods.goodsSalePrice?string("#.##")}</h6>
-                    </a>
-                    </#list>
-                </#if>
-                <div class="myclear"></div>
-                <a id="mymember_gznext" href="#"><img src="/client/images/mymember/arrow02.jpg" /></a>
-            </div>
-        </div><!--mymember_info END-->
-    
-    </div><!--mymember_center END-->
-  
-    <div class="mymember_hot">
-        <div class="mymember_hot_part">
-        <h3>会员推荐</h3>
-        <ul id="mymember_right_check">
-            <li>
-            <#if recommend_goods_page??>
-                <#list recommend_goods_page.content as item>
-                    <a class="mymember_hot_list" href="/goods/${item.id}">
-                        <img src="${item.coverImageUri!''}" />
-                        <p>${item.title!''}</p>
-                        <b>￥${item.salePrice?string("0.00")}</b>
-                    </a>
-                </#list>
-            </#if>
-            </li>
-        </ul>
-    </div><!--mymember_hot_part END-->
-    
-    <div class="mymember_hot_part">
-        <h3>浏览历史</h3>
-        <div id="mymember_storybox">
-            <ul>
-                <li>
-                <#if recent_page??>
-                    <#list recent_page.content as rgoods>
-                        <a class="mymember_hot_story" href="/goods/${rgoods.goodsId}">
-                            <img src="${rgoods.goodsCoverImageUri!''}" />
-                            <p>￥${rgoods.goodsSalePrice?string("#.##")}</p>
-                        </a>
-                    </#list>
-                </#if>
-                </li>
-            </ul>
-            <div class="myclear"></div>
-            <a id="mymember_story_next" href="javascript:;"><img src="/client/images/mymember/arrow02.jpg" /></a>
-        </div>
-      
-        <div class="myclear"></div>
-    </div><!--mymember_hot_part END-->
-</div><!--mymember_hot END-->
-<div class="myclear"></div>
-</div><!--mymember_main END-->
-<div class="myclear"></div>
+                             </li>
+                             <li class="li_5">
+                                <#if order.statusId==2>
+                                    <a href="#" title="">取消订单</a>
+                                <#elseif order.statusId==3>
+                                    <a href="#" title="">&nbsp;</a>                    
+                                <#elseif order.statusId==4>
+                                    <a href="#" title="">查看物流</a>
+                                <#elseif order.statusId==6>
+                                    <a href="#" title="">申请退货</a>
+                                </#if>
+                             </li>
+                             <li class="li_6">
+                                <#if order.statusId==2>
+                                    <a href="#" title="">付款</a>
+                                <#elseif order.statusId==3>
+                                    <a href="#" title="">查看</a>                    
+                                <#elseif order.statusId==4>
+                                   <a href="#" title=""> 确认收货</a>
+                                <#elseif order.statusId==6>
+                                   <a href="#" title=""> 评价</a>
+                                </#if>
+                             </li>
+                         </ul>
+                     </dd>
+                 </dl>
+             </#if>
+          </#list>
+        </#if>        
+     </div>
+ </div>
+    <!-- 中下 -->
+    <div class="content_2_3">
+       <div class="content_2_3_1"><a href="/user/collect/list" title="">我关注的商品</a></div>
+       <div class="content_2_3_2">
+           <div class="tb_1">
+               <a href="javascript:reduceIndex;" title=""><img src="/client/images/icon-8.png" /><br/> </a>
+           </div>
+           <#if collect_page??>
+               <#list collect_page.content as cgoods>
+                    <#if cgoods_index lt 3>   
+                       <div class="tp" > 
+                           <a  href="/goods/${cgoods.goodsId!''}" title=""> <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" /> <span>${cgoods.goodsTitle!''} </span>
+                           <label>￥${cgoods.goodsSalePrice?string("#.##")}</label>
+                           </a> 
+                       </div>
+                    </#if> 
+               </#list>
+           </#if>          
+           <div class="tb_2">
+               <a href="javascript:addIndex;" title=""><img src="/client/images/icon-9.png" /><br/></a>
+           </div>
+      </div>
+    </div>
+ </div>
+  <!-- 右侧 -->
+  <div class="content_3">
+    <div class="content_3_1">小商品推荐</div>
+    <div class="content_3_2">
+     
+          <#if recommend_goods_page??>
+             <#list recommend_goods_page.content as item>
+                <dl>
+                <dt><a href="" title=""><img src="${item.coverImageUri!''}" /></a></dt>
+                <dd><a href="" title=""><label>${item.title!''}</label></a><br/>
+                <span class="red1">￥${item.salePrice?string("0.00")}</span></dd>
+                <dd class="red"><a href="/goods/${item.id}" title="">购买</a></dd>
+                </dl>
+             </#list>
+          </#if>   
+    </div>
+  </div>
 </div>
-<!--mymember END-->
-
+<!--底部footer-->
 <#include "/client/common_footer.ftl" />
-
-<script type="text/javascript">
-      $(document).ready(function(){
-         mymemberMenuCheck("mymember_right_menu","a","mymember_right_check","li","mysel");
-		 mymemberRightMove("mymember_storybox",70,90,"mymember_story_next",15,3,"a");
-		 mymemberRightMove("mymember_gzbox",205,241,"mymember_gznext",15,3,"a");
-		 mymemberRightMove("mymember_shinebox",205,310,"mymember_shinenext",15,3,"div");
-      });
-</script>
 </body>
 </html>

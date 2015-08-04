@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<title><#if site??>${site.seoTitle!''}-</#if>${site.company!''}</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -19,9 +19,22 @@
 <link href="/client/style/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-$(document).ready(function(){
+    $(function(){
     
-    $("#btn_login").click(function(){
+        $("#btn_login").click(function(){
+            login();
+        });
+         
+    });
+
+
+   document.onkeydown = function(event){
+    if((event.keyCode || event.which) == 13){
+        login();
+    }
+   }
+   
+   function login(){
         var username = $("#txt_loginId").val();
         var password = $("#txt_loginPwd").val();
         
@@ -30,15 +43,18 @@ $(document).ready(function(){
             alert("用户名或密码长度输入不足");
             return;
         }
-        
         $.ajax({
                 type: "post",
                 url: "login",
                 data: { "username": username, "password": password },
                 dataType: "json",
-                success: function (data) {
-                    if (data.code == 0) {
-                        var url = document.referrer;
+                success: function (data) { 
+                <!-- 修改 -->
+                    if (data.role == 2){
+                        window.location.href="/user/diysite/order/list/0";
+                    }    
+                    else if (data.code == 0) {
+                        var url = document.referrer;          
                         if(undefined==url || ""==url){
                             window.location.href="/";
                         }else{
@@ -49,18 +65,7 @@ $(document).ready(function(){
                     }
                 }
             });
-    });
-});
-
-function toLogin()
-{
-   //以下为按钮点击事件的逻辑。注意这里要重新打开窗口
-   //否则后面跳转到QQ登录，授权页面时会直接缩小当前浏览器的窗口，而不是打开新窗口
-   var A=window.open("oauth/index.php","TencentLogin", 
-                    "width=450,height=320,menubar=0,scrollbars=1,
-                    resizable=1,
-                    status=1,titlebar=0,toolbar=0,location=1");
-} 
+    }
 </script>
 </head>
 
@@ -89,12 +94,12 @@ function toLogin()
         <span>合作账号登录</span>
         <p>
             <span>
-                <a href="javascript:toLogin();" title="QQ登录">
+                <a href="/qq/login" title="QQ登录">
                     <img src="/client/images/20150619110939448_easyicon_net_72.png" width="30" height="30" />
                 </a>
             </span>
             <span class="ml20">
-                <a href="#" title="支付宝登录">
+                <a href="/login/alipay_login" title="支付宝登录">
                     <img src="/client/images/20150619110924540_easyicon_net_72.png" width="30" height="30" />
                 </a>
             </span>

@@ -6,11 +6,16 @@
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
 <meta name="copyright" content="云南车有同盟商贸有限公司" />
+<#-- cheyou @zhangji -->
 <link href="/client/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+<#-- cheyou end -->
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
+<link rel="stylesheet" type="text/css" href="/client/css/mycenter.css"/>
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
@@ -41,14 +46,13 @@ DD_belatedPNG.fix('.,img,background');
 <body>
 <#include "/client/common_header.ftl" />
 
-<!--mymember-->
-<div class="myclear"></div>
-<div class="mymember_out">
-    <div class="mymember_main">
-    <div class="myclear" style="height:20px;"></div>
-    <#include "/client/common_user_menu.ftl" />
-  
-    <form name="form1" action="/user/order/list/${status_id}" method="POST">
+<!-- 内容 -->
+<div class="content"> 
+  <!-- 左侧 -->
+  <#include "/client/common_user_menu.ftl" />
+  <!-- 中间 -->
+  <div class="content_2"> 
+      <form name="form1" action="/user/order/list/${status_id}" method="POST">
         <script type="text/javascript">
             var theForm = document.forms['form1'];
             if (!theForm) {
@@ -74,6 +78,8 @@ DD_belatedPNG.fix('.,img,background');
                             待发货订单
                         <#elseif status_id==4>
                             待收货订单
+                        <#elseif status_id==5>
+                            待评价订单
                         <#elseif status_id==6>
                             已完成订单
                         <#elseif status_id==7>
@@ -128,6 +134,9 @@ DD_belatedPNG.fix('.,img,background');
                                         待发货
                                     <#elseif order.statusId==4>
                                         待收货
+                                    <#elseif order.statusId==5>
+                                        <p>待评价</p>
+                                        <a href="/user/comment/list">发表评论</a>
                                     <#elseif order.statusId==6>
                                         已完成
                                     </#if>
@@ -135,8 +144,9 @@ DD_belatedPNG.fix('.,img,background');
                               </td>
                               <td class="td003"> 
                                 <p><a href="/user/order?id=${order.id}">查看</a></p>
-                                <#if order.statusId==6>
-                                    <p><a href="/user/comment?orderId=${order.id}">评价晒单</a></p>
+                                <#if order.statusId==5>
+                                    <p><a href="/user/comment/list">评价</a></p>
+                                <#elseif order.statusId==6>
                                     <p><a href="/user/return/${order.id}">申请返修/退换货</a></p>
                                 </#if>
                               </td>
@@ -173,11 +183,11 @@ DD_belatedPNG.fix('.,img,background');
         </div><!--mymember_center END-->
         
     </form>
-    <div class="myclear"></div>
-    </div><!--mymember_main END-->
-    <div class="myclear"></div>
+  
+  
+ </div>
+ 
 </div>
-<!--mymember END-->
 <#include "/client/common_footer.ftl" />
 
 <script type="text/javascript">

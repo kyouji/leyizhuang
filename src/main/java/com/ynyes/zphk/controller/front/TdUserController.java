@@ -97,6 +97,7 @@ public class TdUserController extends AbstractPaytypeService {
     @Autowired
     private TdCommonService tdCommonService;
     
+
     @RequestMapping(value = "/user")
     public String user(HttpServletRequest req, ModelMap map) {
         String username = (String) req.getSession().getAttribute("username");
@@ -126,8 +127,15 @@ public class TdUserController extends AbstractPaytypeService {
         map.addAttribute("total_unreceived", tdOrderService.countByUsernameAndStatusId(username, 4));
         map.addAttribute("total_finished", tdOrderService.countByUsernameAndStatusId(username, 6));
         
+        /**
+         *加载推荐商品 
+         * @author Zhangji
+         * 2015年8月4日14:43:23
+         */
+        map.addAttribute("recommend_goods_page", tdGoodsService.findByIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(0, ClientConstant.pageSize));
         return "/client/user_index";
     }
+      
     
     @RequestMapping(value = "/user/order/list/{statusId}")
     public String orderList(@PathVariable Integer statusId, 
