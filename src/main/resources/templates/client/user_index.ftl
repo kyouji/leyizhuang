@@ -205,7 +205,7 @@ $(document).ready(function(){
                     </#if> 
                </#list>
            </#if>          
-           <div class="tb_2">
+           <div class="tb_2" style="float:right;">
                <a href="javascript:addIndex;" title=""><img src="/client/images/icon-9.png" /><br/></a>
            </div>
       </div>

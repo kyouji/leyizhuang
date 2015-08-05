@@ -19,7 +19,7 @@
       </ul>
       <ul>
         <li class="content_trade"><a href="/user/info" title="">我的账户</a></li>
-        <li><a href="#" title="">会员等级</a></li>
+        <li><a href="/user/level/list" title="">会员等级</a></li>
         <li><a href="/user/point/list" title="">我的积分</a></li>
         <li><a href="/user/info" title="">基本信息</a></li>
         <li><a href="/user/password" title="">修改密码</a></li>

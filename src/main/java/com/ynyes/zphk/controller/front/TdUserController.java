@@ -35,6 +35,7 @@ import com.ynyes.zphk.entity.TdUserConsult;
 import com.ynyes.zphk.entity.TdUserPoint;
 import com.ynyes.zphk.entity.TdUserRecentVisit;
 import com.ynyes.zphk.entity.TdUserReturn;
+import com.ynyes.zphk.entity.TdUserLevel;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdGoodsService;
 import com.ynyes.zphk.service.TdOrderGoodsService;
@@ -44,6 +45,7 @@ import com.ynyes.zphk.service.TdUserCashRewardService;
 import com.ynyes.zphk.service.TdUserCollectService;
 import com.ynyes.zphk.service.TdUserCommentService;
 import com.ynyes.zphk.service.TdUserConsultService;
+import com.ynyes.zphk.service.TdUserLevelService;
 import com.ynyes.zphk.service.TdUserPointService;
 import com.ynyes.zphk.service.TdUserRecentVisitService;
 import com.ynyes.zphk.service.TdUserReturnService;
@@ -96,6 +98,14 @@ public class TdUserController extends AbstractPaytypeService {
     
     @Autowired
     private TdCommonService tdCommonService;
+    
+    /**
+     * 会员等级
+     * @author Zhangji
+     * 2015年8月4日15:18:08
+     */
+    @Autowired
+    private TdUserLevelService tdUserLevelService;
     
 
     @RequestMapping(value = "/user")
@@ -517,6 +527,45 @@ public class TdUserController extends AbstractPaytypeService {
         map.addAttribute("keywords", keywords);
         
         return "/client/user_recent_list";
+    }
+    
+    /**
+     * 会员等级页面
+     * @author Zhangji
+     * 2015年8月4日15:25:53
+     * @param req
+     * @param page
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/user/level/list")
+    public String levelList(HttpServletRequest req, Integer page,
+                        ModelMap map){
+        String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            return "redirect:/login";
+        }
+        
+        tdCommonService.setHeader(map, req);
+        
+        if (null == page)
+        {
+            page = 0;
+        }
+        
+        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        map.addAttribute("user", tdUser);
+        
+        Page<TdUserLevel> levelPage = null;
+        
+        levelPage = tdUserLevelService.findAllOrderBySortIdAsc(page, ClientConstant.pageSize);
+        
+        map.addAttribute("level_page", levelPage);
+        
+        return "/client/user_level_list";
     }
     
     @RequestMapping(value = "/user/point/list")

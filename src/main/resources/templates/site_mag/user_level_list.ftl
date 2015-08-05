@@ -66,7 +66,12 @@ var theForm = document.forms['form1'];
     <th align="center" width="6%">用户等级</th>
     <th align="center" width="6%">等级名称</th>
     <th align="center" width="12%">要求累计消费额度</th>
+ <#-- 把“优惠比例”换成了“特权” zhangji-->
+   <#--
     <th width="6%">优惠比例</th>
+    -->
+    <th width="6%">特权</th>
+ <#-- 把“优惠比例”换成了“特权” zhangji end -->
     <th width="8%">是否启用</th>
     <th width="8%">排序号</th>
     <th width="6%">操作</th>
@@ -88,7 +93,12 @@ var theForm = document.forms['form1'];
                   <a href="/Verwalter/user/level/edit?id=${level.id}">${level.title!""}</a>
                 </td>
                 <td align="center"><#if level.requiredConsumption??>${level.requiredConsumption?string("#.##")}</#if> 元</td>
+                   <#-- 把“优惠比例”换成了“特权” zhangji-->
+              <#--
                 <td align="center"><#if level.discountRatio??>${level.discountRatio?string("#.##")}</#if></td>
+              -->
+                  <#-- 把“优惠比例”换成了“特权” zhangji  end -->
+                <td align="center"><#if level.privilege??>${level.privilege}<#else>无</#if></td>
                 <td align="center"><#if level.isEnable?? && level.isEnable>是<#else>否</#if></td>
                 <td align="center">
                     <input name="listSortId" type="text" value="${level.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
