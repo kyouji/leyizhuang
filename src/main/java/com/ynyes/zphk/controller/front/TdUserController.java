@@ -1,5 +1,7 @@
 package com.ynyes.zphk.controller.front;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -491,6 +494,8 @@ public class TdUserController extends AbstractPaytypeService {
     
     @RequestMapping(value = "/user/recent/list")
     public String recentList(HttpServletRequest req, 
+			    		String __EVENTTARGET,
+			            String __EVENTARGUMENT,
                         Integer page,
                         String keywords,
                         ModelMap map){
@@ -502,6 +507,18 @@ public class TdUserController extends AbstractPaytypeService {
         }
         
         tdCommonService.setHeader(map, req);
+        
+        if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                } 
+            }
+            
+        }
         
         if (null == page)
         {
@@ -516,11 +533,11 @@ public class TdUserController extends AbstractPaytypeService {
         
         if (null == keywords || keywords.isEmpty())
         {
-            recentPage = tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(username, page, ClientConstant.pageSize);
+            recentPage = tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(username, page, ClientConstant.recentPageSize);
         }
         else
         {
-            recentPage = tdUserRecentVisitService.findByUsernameAndSearchOrderByVisitTimeDesc(username, keywords, page, ClientConstant.pageSize);
+            recentPage = tdUserRecentVisitService.findByUsernameAndSearchOrderByVisitTimeDesc(username, keywords, page, ClientConstant.recentPageSize);
         }
         
         map.addAttribute("recent_page", recentPage);
@@ -1227,13 +1244,24 @@ public class TdUserController extends AbstractPaytypeService {
         return "/client/user_info";
     }
     
-    @RequestMapping(value = "/user/info", method=RequestMethod.POST)
+    /**
+     * 个人信息
+     * @author Zhangji
+     * @param req
+     * @param nickname
+     * @param sex
+     * @param birthday
+     * @param detailAddress
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/user/info/save", method=RequestMethod.POST)
     public String userInfo(HttpServletRequest req,
-                        String realName,
+                        String nickname,
                         String sex,
-                        String email,
-                        String mobile,
-                        ModelMap map){
+                        @DateTimeFormat(pattern="yyyy-MM-dd") Date birthday,
+                        String detailAddress,
+                        ModelMap map) {
         String username = (String) req.getSession().getAttribute("username");
         
         if (null == username)
@@ -1243,16 +1271,54 @@ public class TdUserController extends AbstractPaytypeService {
         
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
         
-        if (null != email && null != mobile)
-        {
-            user.setRealName(realName);
+        if (null != birthday && null != detailAddress)
+        {         
+            user.setNickname(nickname);
             user.setSex(sex);
-            user.setEmail(email);
-            user.setMobile(mobile);
+            user.setBirthday(birthday);
+            user.setDetailAddress(detailAddress);
             user = tdUserService.save(user);
         }
         
         return "redirect:/user/info";
+    }
+    
+    @RequestMapping(value = "/user/info/ajax/save")
+    @ResponseBody
+    public Map<String, Object> saveInfo(String nickname,
+                                    String sex,
+                                    Date birthday,
+                                    String detailAddress,                               
+                                    HttpServletRequest req) {
+        Map<String, Object> res = new HashMap<String, Object>();
+        
+        res.put("code", 1);
+        
+        String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            res.put("message", "请先登录");
+            return res;
+        }
+        
+        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        if (null == user)
+        {
+            res.put("message", "该用户不存在");
+            return res;
+        }
+        
+        user.setNickname(nickname);
+        user.setSex(sex);
+        user.setBirthday(birthday);
+        user.setDetailAddress(detailAddress);
+        tdUserService.save(user);
+        
+        res.put("code", 0);
+        
+        return res;
     }
     
     @RequestMapping(value = "/user/password", method=RequestMethod.GET)
