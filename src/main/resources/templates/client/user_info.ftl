@@ -2,21 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>云南车有同盟商贸有限公司</title>
+<title><#if site??>${site.seoTitle!''}-</#if>个人信息</title>
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
 <meta name="copyright" content="云南车有同盟商贸有限公司" />
-<link href="/client/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
+<link rel="stylesheet" type="text/css" href="/client/css/news.css"/>
+
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
-<script src="/client/js/mymember.js"></script>
-<script src="/client/js/common.js"></script>
-<script src="/client/js/ljs-v1.01.js"></script>
 
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
@@ -27,90 +23,176 @@
 DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
-<script type="text/javascript">
-  $(document).ready(function(){
-    menuDownList("top_phone","#top_phonelist",".a1","sel");
-    phoneListMore();//单独下拉
-    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-    navDownList("navdown","li",".nav_showbox");
-    menuDownList("mainnavdown","#navdown",".a2","sel");
-    checkNowHover("shopping_down","shopping_sel");
+
+<script>
+//提交个人信息
+function submitInfo()
+{
+    var nickname = $("#nickname").val();     
+    var checkresult = $("input:radio[name='sex']:checked").val();
+    var y = $("#year").val();     
+    var m = $("#month").val(); 
+    var d = $("#day").val(); 
+    var detailAddress = $("#detailAddress").val();
+    var birthday = y+"/"+m+"/"+d;
+
+
+    if (undefined == nickname || "" == nickname)
+    {
+        alert("昵称不能为空");
+        $("#nickname").focus();
+        return;
+    }
+ 
+    if (undefined == y || "" == y||undefined == m || "" == m||undefined == d || "" == d)
+    {
+        alert("请选择生日");        
+        return;
+    }
+    if (undefined == detailAddress || "" == detailAddress)
+    {
+        alert("所在地不能为空");
+        $("#detailAddress").focus();
+        return;
+    }
     
-    //初始化表单验证
-    $("#form1").Validform({
-        tiptype: 3
+    $.ajax({
+        type:"post",
+        url:"/user/info/ajax/save",
+        data:{
+            "nickname": nickname, 
+            "sex": checkresult, 
+            "birthday":birthday,     
+            "detailAddress":detailAddress     
+        },
+        
+        
+        success:function(res) {
+            if (0 == res.code)
+            {
+                
+                window.location.reload();
+                alert("个人信息已修改！")
+            }
+            else
+            {
+                alert(res.message);
+            }
+        }
     });
-});
+}
 </script>
+
+
+
 </head>
-<body>
+<body onload="YearMonthDay();">
 <!-- header开始 -->
 <#include "/client/common_header.ftl" />
 <!-- header结束 -->
-<div class="mymember_out">
-  <div class="mymember_main">
-    <div class="myclear" style="height:20px;"></div>
-    <#include "/client/common_user_menu.ftl" />
-    <#-- 左侧菜单结束 -->
-    <div class="mymember_mainbox">
-      <div class="mymember_info mymember_info02">
-            <div class="usermain04">
-                <div class="separationInfo sepBasic">
-                 <h5>
-                     基本信息<span id="TellToUser"></span>
-                 </h5>
-                </div>
-                <form id="form1" action="/user/info" method="post">
-                <div class="zhanghao_dlxx main2">
-                    <ul>
-                      <li class="title">真实姓名：</li>
-                      <li class="xxlr">
-                        <input name="realName" type="text"  class="xxinp" id="textfield" value="${user.realName!''}" size="33"/>
-                        <span class="Validform_checktip">真实姓名</span>
-                      </li>
-                      <li class="title">性别：</li>
-                      <li class="xxlr">
-                        <input type="radio" id="pcUserman" name="sex" class="pcUserRaman" value="男" <#if user.sex?? && user.sex=="男">checked="checked" </#if>/>
-                        <label for="pcUserman">&nbsp;男</label>
-                        
-                        <input type="radio" id="pcUserwoman" name="sex" value="男" <#if user.sex?? && user.sex=="女">checked="checked" </#if>/>
-                        <label for="pcUserwoman">&nbsp;女</label>
-                        
-                        <span class="Validform_checktip"></span>
-                      </li>
-                      <li class="title">电子邮箱：</li>
-                      <li class="xxlr">
-                        <input type="text" name="email" datatype="e" class="xxinp" id="textfield2" value="${user.email!''}"/>
-                        <span class="Validform_checktip">*邮箱地址</span>
-                      </li>
-                      <li class="title">手机：</li>
-                      <li class="xxlr">
-                        <input type="text" name="mobile" datatype="m" class="xxinp" id="textfield" value="${user.mobile!''}"/>
-                        <span class="Validform_checktip">*手机号码</span>
-                      </li>
-                      <li class="title2 gray">注册时间：</li>
-                      <li class="xxlr2 gray">${user.registerTime!''}</li>
-                      <li class="title2 gray">最后登录时间：</li>
-                      <li class="xxlr2 gray">${user.lastLoginTime!''}</li>
-                      <li class="title main2">&nbsp;</li>
-                      <li class="xxlr3 main2"><span class="tijiaobox">
-                        <input type="submit" value="确认"  class="btn_07 pulse-shrink"/>
-                      </span></li>
-                    </ul>
-                    <div style="clear:both;"></div>
-                </div>
-                </form>
-          </div>
-      </div>
-      <!--mymember_info END-->
-      
+<div class="content"> 
+  <!-- 左侧 -->
+  <#include "/client/common_user_menu.ftl" />
+  <!-- 右侧 -->
+  <div class="content_2">
+    <div class="content_2_1">基本信息</div>
+    <div class="content_2_2">     
+      <ul>
+        <li><span>昵称：</span>
+          <input id="nickname" type="text" name="nickname" datatype="*1-16" nullmsg="请输入昵称" errormsg="最多16个字符" class="textInput" value="${user.nickname!'' }" />
+        </li>
+        <li><span>性别：</span>
+          <input id="RadioGroup1_0" type="radio" checked="checked" value="男" name="sex" <#if user.sex?? && user.sex=="男">checked="checked" </#if>/>
+          男
+          <input id="RadioGroup1_1" type="radio" value="女" name="sex"<#if user.sex?? && user.sex=="女">checked="checked" </#if>/>
+          女</li>
+          <#-- 生日的初始化未实现！！ zhangji -->
+          <form id="form1" name="form1">          
+		        <li><span>生日：</span>
+					<select id="year" name="YYYY" onchange="YYYYMM(this.value)">  
+					   <option value="${user.birthday?string("yyyy")!''}">年</option>  
+					</select>  
+					<select id="month" name="MM"onchange="MMDD(this.value)">  
+					   <option value="{user.birthday?string("MM")!''}">月</option>  
+					</select>  
+					<select id="day" name="DD">  
+					   <option value="{user.birthday?string("dd")!''}">日</option>  
+					</select> 
+		        </li>
+          </form>
+          <#-- 生日的初始化未实现！！ zhangji  end-->
+        <li><span>所在地：</span>
+          <input id="detailAddress" type="text" name="detailAddress" datatype="*" class="Input" value="${user.detailAddress!''}" />
+        </li>
+        
+        <li>
+          <input type="button" value="保存" onclick="javascript:submitInfo();" id="button" name="btnChange" />
+        </li>
+        
+      </ul>
+
     </div>
-    <!--mymember_center END-->
-    <div class="myclear"></div>
   </div>
-  <!--mymember_main END-->
-  <div class="myclear"></div>
 </div>
+
+<script language="JavaScript">  
+window.onload = function(){  
+strYYYY = document.form1.YYYY.outerHTML;  
+strMM = document.form1.MM.outerHTML;  
+strDD = document.form1.DD.outerHTML;  
+MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];  
+  
+//先给年下拉框赋内容  
+var y = new Date().getFullYear();  
+var str = strYYYY.substring(0, strYYYY.length - 9);  
+for (var i = (y-30); i < (y+30); i++) //以今年为准，前30年，后30年  
+{  
+str += "<option value='" + i + "'> " + i + "</option>\r\n";  
+}  
+document.form1.YYYY.outerHTML = str +"</select>";  
+  
+//赋月份的下拉框  
+var str = strMM.substring(0, strMM.length - 9);  
+for (var i = 1; i < 13; i++)  
+{  
+str += "<option value='" + i + "'> " + i + "</option>\r\n";  
+}  
+document.form1.MM.outerHTML = str +"</select>";  
+  
+document.form1.YYYY.value = y;  
+document.form1.MM.value = new Date().getMonth() + 1;  
+var n = MonHead[new Date().getMonth()];  
+if (new Date().getMonth() ==1 && IsPinYear(YYYYvalue)) n++;  
+writeDay(n); //赋日期下拉框  
+document.form1.DD.value = new Date().getDate();  
+}  
+function YYYYMM(str) //年发生变化时日期发生变化(主要是判断闰平年)  
+{  
+var MMvalue = document.form1.MM.options[document.form1.MM.selectedIndex].value;  
+if (MMvalue == ""){DD.outerHTML = strDD; return;}  
+var n = MonHead[MMvalue - 1];  
+if (MMvalue ==2 && IsPinYear(str)) n++;  
+writeDay(n)  
+}  
+function MMDD(str) //月发生变化时日期联动  
+{  
+var YYYYvalue = document.form1.YYYY.options[document.form1.YYYY.selectedIndex].value;  
+if (str == ""){DD.outerHTML = strDD; return;}  
+var n = MonHead[str - 1];  
+if (str ==2 && IsPinYear(YYYYvalue)) n++;  
+writeDay(n)  
+}  
+function writeDay(n) //据条件写日期的下拉框  
+{  
+var s = strDD.substring(0, strDD.length - 9);  
+for (var i=1; i<(n+1); i++)  
+s += "<option value='" + i + "'> " + i + "</option>\r\n";  
+document.form1.DD.outerHTML = s +"</select>";  
+}  
+function IsPinYear(year)//判断是否闰平年  
+{ return(0 == year%4 && (year%100 !=0 || year%400 == 0))}   
+</script> 
+
 <!--主体结束-->
 <#include "/client/common_footer.ftl" />
 </body>

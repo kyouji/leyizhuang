@@ -47,7 +47,7 @@ $(function () {
         <dt>用户等级</dt>
         <dd>
             <input name="levelId" type="text" value="<#if user_level??>${user_level.levelId!""}</#if>" ajaxurl="/Verwalter/user/level/check/levelId<#if user_level??>?id=${user_level.id}</#if>" class="input txt100" datatype="n1-2" sucmsg=" ">
-            <span class="Validform_checktip">*数字表示的用户等级，从1开始，熟悉越高等级越高</span>
+            <span class="Validform_checktip">*数字表示的用户等级，从0开始，熟悉越高等级越高</span>
         </dd>
     </dl>
     <dl>
@@ -65,11 +65,24 @@ $(function () {
         </dd>
     </dl>
     <dl>
+    
+       <#-- 把“优惠比例”换成了“特权” zhangji-->
+       <#--
         <dt>价格百分比</dt>
         <dd>
             <input name="discountRatio" type="text" value="<#if user_level??>${user_level.discountRatio!""}</#if>" class="input txt100" datatype="/(^[1][.]?[0]{0,2}$)|(^[0][.]?[0-9]{0,2}$)/" sucmsg=" ">
             <span class="Validform_checktip">*商品优惠百分比，小于或等译1，为1时表示不优惠</span>
         </dd>
+        -->
+        <dt>特权</dt>
+        <dd>
+            <#if user_level?? && user_level.levelId gt 0>
+            <input name="privilege" type="text" value="<#if user_level??>${user_level.privilege!""}</#if>" class="input txt100" datatype="*0-100" sucmsg=" ">
+            </#if>
+            <span class="Validform_checktip"><#if user_level?? && user_level.levelId = 0>*用户对应等级特权，用户等级为0时默认无特权<#else>*用户对应等级特权</#if></span>
+        </dd>
+         <#-- 把“优惠比例”换成了“特权” zhangji end-->
+         
     </dl>
     <dl>
         <dt>是否开启</dt>

@@ -39,6 +39,14 @@ public class TdUserLevel {
     @Column(scale=2)
     private Double discountRatio;
     
+    //特权 @zhangji
+    @Column
+    private String privilege;
+    
+    //特权id @zhangji
+    @Column(unique=true) 
+    private Long privilegeId;
+    
     // 是否默认
     @Column
     private Boolean isEnable;
@@ -102,4 +110,22 @@ public class TdUserLevel {
     public void setSortId(Long sortId) {
         this.sortId = sortId;
     }
+
+	public String getPrivilege() {
+		return privilege;
+	}
+
+	public void setPrivilege(String privilege) {
+		this.privilege = privilege;
+	}
+
+	public Long getPrivilegeId() {
+		return privilegeId;
+	}
+
+	public void setPrivilegeId(Long privilegeId) {
+		this.privilegeId = privilegeId;
+	}
+	
+    
 }
