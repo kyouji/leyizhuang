@@ -192,5 +192,12 @@ public class TdUserConsult {
     public void setUserHeadImageUri(String userHeadImageUri) {
         this.userHeadImageUri = userHeadImageUri;
     }
+
+	@Override
+	public String toString() {
+		return "TdUserConsult [id=" + id + ", content=" + content + ", type=" + type + ", username=" + username
+				+ ", isReplied=" + isReplied + ", reply=" + reply + ", goodsId=" + goodsId + ", goodsTitle="
+				+ goodsTitle + ", statusId=" + statusId + ", sortId=" + sortId + "]";
+	}
     
 }

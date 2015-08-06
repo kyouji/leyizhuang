@@ -807,27 +807,28 @@ public class TdUserController extends AbstractPaytypeService {
     @RequestMapping(value = "/user/consult/add", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> consultAdd(HttpServletRequest req, 
-                        TdUserConsult tdConsult,
                         String code,
+                        String content,
+                        Long goodsId,
                         ModelMap map){
         Map<String, Object> res = new HashMap<String, Object>();
         res.put("code", 1);
         
         String username = (String) req.getSession().getAttribute("username");
-        
+
         if (null == username)
         {
             res.put("message", "请先登录！");
             return res;
         }
         
-        if (null == tdConsult.getGoodsId())
+        if (null == goodsId)
         {
             res.put("message", "商品ID不能为空！");
             return res;
         }
         
-        TdGoods goods = tdGoodsService.findOne(tdConsult.getGoodsId());
+        TdGoods goods = tdGoodsService.findOne(goodsId);
         
         if (null == goods)
         {
@@ -843,6 +844,9 @@ public class TdUserController extends AbstractPaytypeService {
 //            return res;
 //        }
         
+        TdUserConsult tdConsult = new TdUserConsult();
+        tdConsult.setContent(content);
+        tdConsult.setGoodsId(goodsId);
         tdConsult.setConsultTime(new Date());
         tdConsult.setGoodsCoverImageUri(goods.getCoverImageUri());
         tdConsult.setGoodsTitle(goods.getTitle());

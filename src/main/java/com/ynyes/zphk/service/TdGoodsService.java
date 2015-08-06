@@ -1069,8 +1069,8 @@ public class TdGoodsService {
                 Direction.DESC, "id"));
 
         return repository
-                .findByTitleContainingAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(
-                        keywords, keywords, keywords, keywords, pageRequest);
+                .findByTitleContainingAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrueOrNameContainingAndIsOnSaleTrue(
+                        keywords, keywords, keywords, keywords,keywords, pageRequest);
     }
 
     public Page<TdGoods> findByCategoryIdAndSalePriceBetweenAndParamsLikeAndIsOnSaleTrueOrderBySalePriceAsc(

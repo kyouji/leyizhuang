@@ -131,6 +131,11 @@ public class TdGoodsController {
         // 商品
         map.addAttribute("goods", goods);
         
+        //商品参数
+        if(goods.getParamList().size()>0){
+        	map.addAttribute("param_list",goods.getParamList());
+        }
+        
         // 商品组合
         map.addAttribute("comb_list",
                 tdGoodsCombinationService.findByGoodsId(goodsId));
@@ -172,7 +177,9 @@ public class TdGoodsController {
         // 查找类型
         TdProductCategory tdProductCategory = tdProductCategoryService
                 .findOne(goods.getCategoryId());
-
+        //查询所有品牌
+        map.addAttribute("product_list",tdProductService.findAll());
+        
         // 获取该类型所有父类型
         if (null != tdProductCategory) {
             if (null != tdProductCategory.getParentTree()
@@ -216,6 +223,7 @@ public class TdGoodsController {
                 List<TdGoods> selectOneGoodsList = new ArrayList<TdGoods>();
                 List<TdGoods> selectTwoGoodsList = new ArrayList<TdGoods>();
                 List<TdGoods> selectThreeGoodsList = new ArrayList<TdGoods>();
+//                List<TdGoods> selectGoodsList = new ArrayList<TdGoods>();
                 
                 String sOne = null;
                 String sTwo = null;
@@ -365,7 +373,7 @@ public class TdGoodsController {
         map.addAttribute("server_ip", req.getLocalName());
         map.addAttribute("server_port", req.getLocalPort());
 
-        return "/client/goods";
+        return "/client/content";
     }
 
     @RequestMapping("/goods/comment/{goodsId}")
@@ -392,7 +400,7 @@ public class TdGoodsController {
         // 全部评论数
         map.addAttribute("comment_count", tdUserCommentService
                 .countByGoodsIdAndIsShowable(goodsId));
-        
+
         // 好评数
         map.addAttribute("three_star_comment_count", tdUserCommentService
                 .countByGoodsIdAndStarsAndIsShowable(goodsId, 3L));
@@ -421,7 +429,7 @@ public class TdGoodsController {
         map.addAttribute("stars", stars);
         map.addAttribute("goodsId", goodsId);
         
-        return "/client/goods_comment";
+        return "/client/goods_content_comment";
     }
     
     @RequestMapping("/goods/consult/{goodsId}")
@@ -448,6 +456,6 @@ public class TdGoodsController {
         map.addAttribute("page", page);
         map.addAttribute("goodsId", goodsId);
         
-        return "/client/goods_consult";
+        return "/client/content";
     }
 }

@@ -1,15 +1,18 @@
 package com.ynyes.zphk.controller.front;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ynyes.zphk.entity.TdGoods;
 import com.ynyes.zphk.entity.TdKeywords;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdGoodsService;
@@ -62,10 +65,8 @@ public class TdSearchController {
                 
                 tdKeywordsService.save(key);
             }
-            
             map.addAttribute("goods_page", tdGoodsService.searchGoods(keywords.trim(), page, ClientConstant.pageSize));
         }
-        
         map.addAttribute("pageId", page);
         map.addAttribute("keywords", keywords);
         
@@ -76,6 +77,6 @@ public class TdSearchController {
         map.addAttribute("most_sold_list", tdGoodsService.findByIsOnSaleTrueOrderBySoldNumberDesc(0, 10).getContent());   
         
         
-        return "/client/search_result";
+        return "/client/search_list";
     }
 }

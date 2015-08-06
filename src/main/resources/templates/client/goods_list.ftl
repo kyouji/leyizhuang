@@ -12,7 +12,7 @@
 <script src="/client/js/index.js"></script>
 <script src="/client/js/list.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/list.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
 function setprice() {

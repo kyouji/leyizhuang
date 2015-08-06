@@ -405,7 +405,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>
-        <#--
         <dl>
             <dt>商品标题</dt>
             <dd>
@@ -413,7 +412,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>
-        -->
         <dl>
             <dt>商品副标题</dt>
             <dd>
@@ -428,7 +426,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*编码最多255个字符</span>
             </dd>
         </dl>
-        <#--
         <dl>
             <dt>服务</dt>
             <dd>
@@ -436,6 +433,8 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">255个字符以内</span>
             </dd>
         </dl>
+        <#--
+        
         <dl>
             <dt>促销</dt>
             <dd>
@@ -443,6 +442,8 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">255个字符以内</span>
             </dd>
         </dl>
+        
+        -->
         <dl>
             <dt>配置</dt>
             <dd>
@@ -450,7 +451,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">255个字符以内</span>
             </dd>
         </dl>
-        -->
         <dl>
             <dt>上架时间</dt>
             <dd>
