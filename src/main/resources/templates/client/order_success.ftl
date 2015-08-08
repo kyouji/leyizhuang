@@ -52,7 +52,7 @@ $(document).ready(function(){
                   感谢您，订单提交成功！订单号：<#if order??>${order.orderNumber!''}</#if>
                 </h3>
                 <p class="o-tips">
-                    车有同盟提供
+                    正品惠客提供
                         <span class="pay-safeguard j_uiPop">
                         <em class="ps-title j_uiBaozhangPop">在线支付保障</em>
                         </span>

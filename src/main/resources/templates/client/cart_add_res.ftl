@@ -2,60 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<title>正品惠客-购物车</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
-<!--[if IE]>
-   <script src="/client/js/html5.js"></script>
-<![endif]-->
-<script src="/client/js/jquery-1.9.1.min.js"></script>
-<script src="/client/js/common.js"></script>
-<script src="/client/js/ljs-v1.01.js"></script>
 
-<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    menuDownList("top_phone","#top_phonelist",".a1","sel");
-    phoneListMore();//单独下拉
-    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-    searchTextClear(".toptext","请输入品牌或商品名称","#999","#666");
-    searchTextClear(".bottext","查看所有门店","#fff","#fff");
-    checkNowHover("shopping_down","shopping_sel");
-    navDownList("navdown","li",".nav_showbox");
-    menuDownList("mainnavdown","#navdown",".a2","sel");
-        
-});
-</script>
+<link href="/client/css/Successfully_joined.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-<!-- header开始 -->
+<!--顶部-->
 <#include "/client/common_header.ftl" />
-<!-- header结束 -->
 
-
-<div class="main">
-    <menu class="car_top">
-        <p style="z-index:10; width:34%;">我的购物车<i></i></p>
-        <p style="z-index:8;">我的订单信息<i></i></p>
-        <p>支付成功</p>
-        <div class="clear"></div>
-    </menu>
-    <div class="clear h30"></div>
-  
-    <div class="car_success">
-        <p class="fc fs30 lh40 pb10">加入购物车成功</p>
-        <p> <a href="/cart">去购物车结算</a></p>
-        <p>您还可以 <a class="blue" href="/">继续购物</a></p>
+<!--完成支付-->
+<div class="complete_payment">
+	<div class="success_join">
+        <img src="/client/images/correct_1.png" />
+        <p class="pay">该商品<br />
+			加入购物车成功
+        </p>
+	</div>
+    <div class="acceptable">
+    	<p>您还可以： 返回&nbsp;<a href="#">商品详情</a>&nbsp;查看&nbsp;
+    	<a href="/cart">购物车</a>&nbsp;或者&nbsp;
+    	   <a href="/">继续购物</a></p>
     </div>
-  
-    <div class="clear"></div> 
+    <div class="now_settlement">
+    	<a href="#">立即去结算</a>
+    </div>
 </div>
 
+<!--底部footer-->
 <#include "/client/common_footer.ftl" />
 </body>
 </html>

@@ -291,11 +291,11 @@ public class TdCartController {
 
         tdCommonService.setHeader(map, req);
 
-        if (null == resList || resList.size() == 0) {
-            return "/client/cart_null";
-        }
+//        if (null == resList || resList.size() == 0) {
+//            return "/client/cart_null";
+//        }
 
-        return "/client/cart";
+        return "/client/Shopping_cart";
     }
 
     @RequestMapping(value = "/cart/toggleSelect", method = RequestMethod.POST)
@@ -322,7 +322,7 @@ public class TdCartController {
 
         map.addAttribute("cart_goods_list", cartGoodsList);
 
-        return "/client/cart_goods";
+        return "/client/Shopping_cart";
     }
 
     @RequestMapping(value = "/cart/toggleAll", method = RequestMethod.POST)
@@ -355,7 +355,7 @@ public class TdCartController {
 
         map.addAttribute("cart_goods_list", cartGoodsList);
 
-        return "/client/cart_goods";
+        return "/client/Shopping_cart";
     }
 
     @RequestMapping(value = "/cart/numberAdd", method = RequestMethod.POST)
@@ -380,7 +380,7 @@ public class TdCartController {
         map.addAttribute("cart_goods_list",
                 tdCartGoodsService.findByUsername(username));
 
-        return "/client/cart_goods";
+        return "/client/Shopping_cart";
     }
 
     @RequestMapping(value = "/cart/numberMinus", method = RequestMethod.POST)
@@ -408,7 +408,7 @@ public class TdCartController {
         map.addAttribute("cart_goods_list",
                 tdCartGoodsService.findByUsername(username));
 
-        return "/client/cart_goods";
+        return "/client/Shopping_cart";
     }
 
     @RequestMapping(value = "/cart/del", method = RequestMethod.POST)
@@ -431,6 +431,6 @@ public class TdCartController {
         map.addAttribute("cart_goods_list",
                 tdCartGoodsService.findByUsername(username));
 
-        return "/client/cart_goods";
+        return "/client/Shopping_cart";
     }
 }

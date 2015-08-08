@@ -28,7 +28,6 @@ public class AbstractPaytypeService {
                 pay_type_list_third.add(payType);
             }
         }
-        
         // 网上银行
         map.addAttribute("pay_type_list_bank", pay_type_list_bank);
         
