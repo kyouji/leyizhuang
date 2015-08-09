@@ -1,5 +1,6 @@
 package com.ynyes.zphk.controller.front;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ynyes.zphk.entity.TdAdType;
 import com.ynyes.zphk.entity.TdArticleCategory;
+import com.ynyes.zphk.entity.TdBrand;
 import com.ynyes.zphk.entity.TdProductCategory;
 import com.ynyes.zphk.service.TdAdService;
 import com.ynyes.zphk.service.TdAdTypeService;
@@ -65,14 +67,14 @@ public class TdIndexController {
         
         tdCommonService.setHeader(map, req);
 
-        // 商城快报
+        // 公告
         List<TdArticleCategory> catList = tdArticleCategoryService
                 .findByMenuId(10L);
 
         if (null != catList && catList.size() > 0) {
             for (TdArticleCategory tdCat : catList)
             {
-                if (null != tdCat.getTitle() && tdCat.getTitle().equals("商城快报"))
+                if (null != tdCat.getTitle() && tdCat.getTitle().equals("公告"))
                 {
                     map.addAttribute("news_page", tdArticleService
                             .findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(10L,
@@ -112,7 +114,34 @@ public class TdIndexController {
                 }
             }
         }
+        //品牌
+        List<TdBrand> brand_list = tdBrandService.findAll();
+        if(null != brand_list){
+        	map.addAttribute("brand_list",brand_list);
+        }
 
+        //分类热卖品牌
+        for (int i = 0; i < topCatList.size(); i++) {
+        	//热卖手机
+        	if(0 == i ){
+        		map.addAttribute("first_brand_list", tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
+        	} 
+        	//热卖平板/笔记本
+        	if(1 ==i ){
+        		map.addAttribute("second_brand_list",tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
+        	}
+        	//热卖数码穿戴
+        	if(2 == i ){
+        		map.addAttribute("third_brand_list", tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
+        	}
+        	//热卖数码配件
+        	if(3 == i ){
+        		map.addAttribute("fourth_brand_list", tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
+        	}
+		}
+        
+        
+        
         // 首页大图轮播广告
         TdAdType adType = tdAdTypeService.findByTitle("首页轮播大图广告");
 
