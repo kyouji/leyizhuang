@@ -2,21 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>云南车有同盟商贸有限公司</title>
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
-<meta name="copyright" content="云南车有同盟商贸有限公司" />
-<link href="/client/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+<meta name="copyright" content="正品惠客" />
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
+<link rel="stylesheet" type="text/css" href="/client/css/return_1.css"/>
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/client/js/Validform_v5.3.2_min.js"></script>
-<script src="/client/js/mymember.js"></script>
-<script src="/client/js/common.js"></script>
-<script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
+<script src="/client/js/jquery.cityselect.js"></script>
 
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
@@ -29,122 +25,119 @@ DD_belatedPNG.fix('.,img,background');
 <![endif]-->
 <script type="text/javascript">
   $(document).ready(function(){
-    menuDownList("top_phone","#top_phonelist",".a1","sel");
-    phoneListMore();//单独下拉
-    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-    navDownList("navdown","li",".nav_showbox");
-    menuDownList("mainnavdown","#navdown",".a2","sel");
-    checkNowHover("shopping_down","shopping_sel");
+  //  menuDownList("top_phone","#top_phonelist",".a1","sel");
+  //  phoneListMore();//单独下拉
+ //   menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+//    navDownList("navdown","li",".nav_showbox");
+//    menuDownList("mainnavdown","#navdown",".a2","sel");
+//    checkNowHover("shopping_down","shopping_sel");
+    
     //初始化表单验证
     $("#form1").Validform({
         tiptype: 3
     });
+    
+    $("#address").citySelect({
+        nodata:"none",
+        <#if address?? && address.province??>prov: "${address.province!''}",</#if>
+        <#if address?? && address.city??>city: "${address.city!''}",</#if>
+        <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
+        required:false
+    }); 
+    
+
 });
 </script>
+
 </head>
 <body>
-<!-- header开始 -->
 <#include "/client/common_header.ftl" />
-<!-- header结束 -->
-<div class="mymember_out">
-  <div class="mymember_main">
-    <div class="myclear" style="height:20px;"></div>
-    <#include "/client/common_user_menu.ftl" />
-    <#-- 左侧菜单结束 -->
-    <div class="mymember_mainbox">
-    <div class="mymember_info mymember_info02">
-        退换货——服务单明细
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <thead>
-        <tr>
-            <th width="260">商品名称</th>
-            <th width="170">赠送清单</th>
-            <th width="105">购买数量</th>
-        </tr>
-        </thead>
-        <tbody>
-        <#if order_goods??>
-        <tr>
-            <td>
-                <ul class="list-proinfo" id="removeTheSingleGife">
-                    <li class="fore1">
-                        <a href="/goods/${order_goods.goodsId!''}" target="_blank">
-                            <img height="50" width="50" title="${order_goods.goodsTitle!''}" src="${order_goods.goodsCoverImageUri!''}" data-img="1" alt="${order_goods.goodsTitle!''}">
-                        </a>
-                        <div class="p-info">
-                            <a href="/goods/${order_goods.goodsId!''}" target="_blank">${order_goods.goodsTitle!''}</a>
-                        </div>
-                    </li>
-                </ul>
-            </td>                  
-            <td>-</td>
-            <td>${order_goods.quantity}</td>
-        </tr>
-        </#if>
-        </tbody>
-    </table>
-    <#if order_goods??>
-    <form method="post" action="/user/return/save" id="form1">
-    <table width="100%" border="0">
-      <tbody>
-          <tr>
-            <td> 
-                <span style="position:absolute;right:88px;top:-13px;">
-                <img src="/client/images/mymember/arrow06.gif"></span>
-                <input type="hidden" name="goodsId" value="${order_goods.goodsId!''}" />
-                <input type="hidden" name="id" value="${order.id!''}" />
-                <div class="mymember_eva_div">
-                  <b><font>* </font>问题描述：</b>
-                  <textarea name="reason" datatype="*5-255" errormsg="问题描述必须大于5个字符，小于255个字符" <#if has_returned??>disabled</#if>></textarea>
-                  <span class="Validform_checktip">*问题描述</span>
-                </div>
-                
-                <div class="mymember_eva_div">
-                    <b><font>* </font>联系电话：</b>
-                    <input type="text" name="telephone" datatype="n8-20" errormsg="请输入正确的电话格式" />
-                    <span class="Validform_checktip">*联系电话</span>
-                </div>
-                
-                
-                <#if !has_returned??>
-                <div class="mymember_eva_div">
-                  <input class="mysub" type="submit" value="提交">
-                </div>
-                </#if>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-    </form>
-    </#if>
-    <div class="myclear" style="height:10px;"></div>
-        
-  </div>
-      <!--mymember_info END-->
-      
-      <script type="text/javascript">
-      $(document).ready(function(){
-         mymemberMenuCheck("mymember_likecheck","a","mymember_likelist","li","mysel");
-    });
-    </script>
-    </div>
-    <!--mymember_center END-->
-    <div class="myclear"></div>
-  </div>
-  <!--mymember_main END-->
-  <div class="myclear"></div>
+<!-- 内容 -->
+<div class="content"> 
+  <!-- 左侧 -->
+  <#include "/client/common_user_menu.ftl" />
+  <!-- 右侧 -->
+  <div class="content_2">
+		<div class="content_2_1">
+		  <ul>
+		    <li class="li_1">买家申请退货 </li>
+		    <li class="li_2">商家处理退货申请</li>
+		    <li class="li_3">退货成功</li>
+		  </ul>
+		</div>
+		<div class="content_2_2">
+			<div class="content_2_2_1">
+				  <div class="l_1">退货商品信息</div>
+				  <#if order_goods??>
+				  <div class="l_2"> 
+				    <dl>
+				      <dt><img src="${order_goods.goodsCoverImageUri!''}" title="${order_goods.goodsTitle!''}"/></dt>
+				      <dd><a href="/goods/${order_goods.goodsId!''}" target="_blank">${order_goods.goodsTitle!''}</a></dd>
+				    </dl>
+				  </div>
+				  <div class="l_3">
+				    <dl>
+				      <dt>单  价：${order_goods.price}元       ×${order_goods.quantity}(数量)</dt>
+				      <dd>小计：<span>${order_goods.quantity * order_goods.price}</span>元</dd>
+				    </dl>
+				  </div>
+				  </#if>
+				  <#if order_info??>
+				      <div class="l_4">订单信息</div>
+					  <div class="l_5">
+					    <ul>
+					      <li>订单编号：<span class="sp_1"><a href="/user/order?id=${order.id}">${order.orderNumber!''}</a></span> </li>
+					      <li>运费：${order_info.deliverTypeFee!0.00}元</li>
+					      <li>总计：<span class="sp_2">${order_info.totalPrice!'' }</span>元</li>
+					      <li>成交时间： ${order_info.orderTime!''}</li>
+					    </ul>
+					  </div>
+				  </#if>
+			</div>
+			<div class="content_2_2_2">
+				<div class="y_1"><span>我要换货</span>
+				  <label>我要退货</label>
+				</div>
+				<div class="y_2"></div>
+				<form method="post" action="/user/return/save" id="form1">
+					<div class="y_3">
+					       <input type="hidden" name="goodsId" value="${order_goods.goodsId!''}" />
+					       <input type="hidden" name="id" value="${order.id!''}" />					
+							<#--
+							<ul>
+							  <li><span>退货原因：</span>
+							  <select class="year" onchange="getday()" name="year">
+							    <option class="job_1">请选择退货原因</option>
+							    <option>已开封</option>
+							    <option>质量不好</option>
+							  </select>
+							-->
+							  <ul>
+							    <li><span>手机号码：</span>
+							      <input type="text" name="telephone" datatype="m" class="textInput" value="" />      
+							      <label class=" wz_1">*请填写您的联系方式</label>
+							    </li>
+							    <li><span class="l1">退货说明：</span>
+							      <textarea class="area" rows="" cols="" name="reason" datatype="*1-255"></textarea>
+							       <label class=" wz_1">*最多输入200字</label>
+							    </li>
+							  <#--  <li><span class="sc">上传凭证：</span><a href="#" title="">上传图片</a>
+							    </li> 
+							    <li class="zs">每张图片大小不超过5M，最多3张，支持JPG、PNG、GIF格式</li>
+							  -->
+							    <#if !has_returned??>
+							        <input class="zs_1" type="submit" value="提交">
+							    </#if>
+							  </ul>
+					  
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 <!--主体结束-->
 <#include "/client/common_footer.ftl" />
-<!--底部结束-->
-<script type="text/javascript">
-      $(document).ready(function(){
-         mymemberMenuCheck("mymember_right_menu","a","mymember_right_check","li","mysel");
-		 mymemberRightMove("mymember_storybox",70,90,"mymember_story_next",15,3,"a");
-		 mymemberRightMove("mymember_gzbox",205,241,"mymember_gznext",15,3,"a");
-		 mymemberRightMove("mymember_shinebox",205,310,"mymember_shinenext",15,3,"div");
-      });
-</script>
 </body>
 </html>
 <!--结束-->

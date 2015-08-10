@@ -5,7 +5,7 @@
 <title><#if site??>${site.seoTitle!''}-</#if>个人信息</title>
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
-<meta name="copyright" content="云南车有同盟商贸有限公司" />
+<meta name="copyright" content="正品惠客" />
 <link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/news.css"/>

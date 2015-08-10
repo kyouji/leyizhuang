@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ynyes.zphk.entity.TdUserCollect;
 import com.ynyes.zphk.entity.TdUserReturn;
 import com.ynyes.zphk.repository.TdUserReturnRepo;
 
@@ -82,7 +83,17 @@ public class TdUserReturnService {
      * 
      * @param ids
      * @return
-     */
+     */   
+    public TdUserReturn findByUsernameAndGoodsId(String username, Long goodsId)
+    {
+        if (null == username || null == goodsId)
+        {
+            return null;
+        }
+        
+        return repository.findByUsernameAndGoodsId(username, goodsId);
+    }
+    
     public List<TdUserReturn> findAll(Iterable<Long> ids)
     {
         return (List<TdUserReturn>) repository.findAll(ids);
