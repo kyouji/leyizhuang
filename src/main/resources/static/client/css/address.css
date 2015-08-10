@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+.content_2 .content_2_1 { width:970px; height:28px; *+height:12px;  margin-top:30px; _margin-top:38px; }
+.content_2 .content_2_1 span{font-size:16px; color:#333333; font-weight:bold; float:left; display:block; padding-bottom:10px; margin-left:5px; _margin-left:5px; }
+.content_2_1 label{ margin-top:2px; margin-left:30px; float:left; display:block; padding-bottom:10px;}
+.content_2 .content_2_1 a{ background:#0e5baa; color:#fff; width:100px; height:30px; float:right; border-radius:3px; text-align:center; line-height:30px; margin-top:-5px; margin-right:20px;}
+.content_2 .content_2_2{ border-bottom:1px solid #e0dddd; width:970px; }
+.content_2 .content_2_3{ width:970px; margin-top:20px;  display:block; overflow:hidden;}
+.content_2 .content_2_3 .dz_1,.content_2 .content_2_3 .dz_2{ float:left; width:470px; height:130px;}
+.content_2 .content_2_3 .dz_1{ background:url(../images/dzk.png); }
+.content_2 .content_2_3 .dz_2{ margin-left:30px;}
+.content_2 .content_2_3 .dz_1 .dz_1_1{ width:420px; height:25px; margin-top:15px; background:url(../images/icon-10.png) no-repeat scroll 0 0; display: block;   border-bottom: 1px dotted #dcdcdc; }
+.content_2 .content_2_3 .dz_1 .dz_1_1 strong{font-weight:400; color:#333; padding-top:20px; padding-bottom: 3px; padding-left:20px; }
+.content_2 .content_2_3 .dz_1 .dz_1_1 span{ margin-left:295px;}
+.content_2 .content_2_3 .dz_1 .dz_1_2{ width:401px; height:25px; margin-top:15px; background:url(../images/icon-11.png) no-repeat scroll 0 0;  border-bottom: 1px dotted #dcdcdc; white-space:normal; text-averflow:ellipsis; overflow:hidden; padding-bottom: 3px; padding-left:20px; }

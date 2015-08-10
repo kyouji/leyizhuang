@@ -1,0 +1,21 @@
+li{ list-style:none;}
+a:hover{ text-decoration:none;}
+
+
+.article_box{ width:970px; margin-left:20px; float:left;}
+
+.article_nav *{ float:left;}
+.article_nav{ margin-top:36px; float:left; border-bottom:#e0dddd 1px dashed; *+padding-bottom:20px; *+margin-top:50px; }
+.article_nav div{ margin-left:10px; margin-bottom:20px;}
+
+.article_box_01{ float:left; margin:10px 0; *+width:970px}
+
+
+.article_page{ width:970px; float:left; margin-top:60px;}
+.article_page_01{  height:20px; width:100px; border-top:#ef7c00 1px solid; float:left;}
+.article_page_02{  height:20px; width:100px; border-top:#0e5baa 1px solid; float:right;}
+
+.nav_submenu1 p{ margin-left:6px;}
+.nav_submenu1 *{ float:left;}
+.nav_submenu1 img{ margin-top:14px; margin-left:23px;}
+
