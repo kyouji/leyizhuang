@@ -239,7 +239,7 @@ function btnPageSubmit()
         <!--参数设置-->
         <div class="de_parameter">
            <#if goods.configuration??>
-        	<div class="de_parameter_list">
+        	<div class="de_parameter_list_pz">
             	<span>配 置</span>             
                 <label>${goods.configuration}</label>
             </div>
@@ -278,24 +278,23 @@ function btnPageSubmit()
                     </p>
                </div>  
             <#elseif 3==total_select>
-            		<div class="top20"></div>
-                    <div class="de_parameter_list">
-                    <span>${select_one_name!''}</span>
-                       </p>
+                    	<div class="de_parameter_list">
+                    	<span>${select_one_name!''}</span>
+                      	<p>
                         <#if select_one_goods_list??>
-                        <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
-                        </#list>
+                        	<#list select_one_goods_list as item>
+                            	<a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
+                       		</#list>
                         </#if>
-                       </p>
-                       </div>
-                       <div class="de_parameter_list">
-                    <span>${select_two_name!''}</span>
-                       <p>
+                       	</p>
+                       	</div>
+                       	<div class="de_parameter_list">
+                    	<span>${select_two_name!''}</span>
+                       	<p>
                         <#if select_two_goods_list??>
-                        <#list select_two_goods_list as item>
-                            <a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
-                        </#list>
+                        	<#list select_two_goods_list as item>
+                            	<a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+                        	</#list>
                         </#if>
                         </p>
                         </div>
