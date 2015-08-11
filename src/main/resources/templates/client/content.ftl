@@ -6,11 +6,13 @@
 <title>正品惠客</title>
 <script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.jqzoom.js"></script>
+<script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
 <script type="text/javascript" src="/client/js/common.js"></script>
-<script type="text/javascript" src="/client/js/base.js"></script>
+<script type="text/javascript" src="/client/js/goods.js"></script>
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/client/js/base.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
 
@@ -392,66 +394,6 @@ function btnPageSubmit()
 	                    <a href="/goods/${item.goodsId}" title="">￥${item.currentPrice?string("0.00")}</a>
 	                    <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
 	                 </li>
-	                 <li>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <img src="${item.coverImageUri!''}" />
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <span>${item.title!''}</span>
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">￥${item.currentPrice?string("0.00")}</a>
-	                    <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
-	                 </li>
-	                 <li>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <img src="${item.coverImageUri!''}" />
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <span>${item.title!''}</span>
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">￥${item.currentPrice?string("0.00")}</a>
-	                    <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
-	                 </li>
-	                 <li>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <img src="${item.coverImageUri!''}" />
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <span>${item.title!''}</span>
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">￥${item.currentPrice?string("0.00")}</a>
-	                    <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
-	                 </li>
-	                 <li>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <img src="${item.coverImageUri!''}" />
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <span>${item.title!''}</span>
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">￥${item.currentPrice?string("0.00")}</a>
-	                    <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
-	                 </li>
-	                 <li>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <img src="${item.coverImageUri!''}" />
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <span>${item.title!''}</span>
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">￥${item.currentPrice?string("0.00")}</a>
-	                    <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
-	                 </li>
-	                 <li>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <img src="${item.coverImageUri!''}" />
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">
-	                        <span>${item.title!''}</span>
-	                    </a>
-	                    <a href="/goods/${item.goodsId}" title="">￥${item.currentPrice?string("0.00")}</a>
-	                    <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
-	                 </li>
 	             </ul>
 	          </#list>
 	       </#if>
@@ -596,10 +538,10 @@ function btnPageSubmit()
         <div class="c_R_comment top20">
         <div class="c_R_comment_title">
             
-                <a href="javascript:getCommentByStars(${goodsId}, 0, 0);" title="" class="c_R_comment_title_choiced">全部评价（${comment_page.content?size!'0'}）</a>
-                <a href="javascript:getCommentByStars(${goodsId}, 3, 0);" title="">好评（${three_star_comment_count!'0'}）</a>
-                <a href="javascript:getCommentByStars(${goodsId}, 2, 0);" title="">中评（${two_star_comment_count!'0'}）</a>
-                <a href="javascript:getCommentByStars(${goodsId}, 1, 0);" title="">差评（${one_star_comment_count!'0'}）</a>
+                <a href="javascript:getCommentByStars(${goodsId}, 0, 0);" id="star0" title="" class="c_R_comment_title_choiced">全部评价（${comment_page.content?size!'0'}）</a>
+                <a href="javascript:getCommentByStars(${goodsId}, 3, 0);" id="star3" title="">好评（${three_star_comment_count!'0'}）</a>
+                <a href="javascript:getCommentByStars(${goodsId}, 2, 0);" id="star2" title="">中评（${two_star_comment_count!'0'}）</a>
+                <a href="javascript:getCommentByStars(${goodsId}, 1, 0);" id="star1" title="">差评（${one_star_comment_count!'0'}）</a>
             </div>
         <#include "/client/goods_content_comment.ftl" />
         </div>

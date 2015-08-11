@@ -8,6 +8,11 @@ function getCommentByStars(goodsId, stars, page)
         return;
     }
     
+    /**
+     * 点击不同评论类型（好评、中评等），改变标签字体样式
+     * @author dengxiao
+     */
+    
     $.ajax({
         type:"post",
         url:"/goods/comment/" + goodsId + "?stars=" + stars + "&page=" + page,
