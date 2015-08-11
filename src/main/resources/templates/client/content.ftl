@@ -10,9 +10,9 @@
 
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
-<!--
+<!---->
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
--->
+
 <script type="text/javascript" src="/client/js/jquery.jqzoom.js"></script>
 <script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
@@ -283,10 +283,10 @@ function btnPageSubmit()
                     </#if>
                     </p>
                </div>  
-            <#elseif 3==total_select>324
+            <#elseif 3==total_select>
                     <div class="de_parameter_list">
                     <span>${select_one_name!''}</span>
-                       </p>
+                       <p>
                         <#if select_one_goods_list??>
                         <#list select_one_goods_list as item>
                             <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
@@ -378,7 +378,7 @@ function btnPageSubmit()
             	      <img src="${goods.coverImageUri!''}" />
             	   </a>
             	   <a href="#" title="">
-            	      <span>${goods.name!''}</span>
+            	      <span>${goods.title!''}</span>
             	   </a>
             	   <a href="#" title="">￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></a>
                 </li>

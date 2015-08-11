@@ -114,11 +114,7 @@ public class TdIndexController {
                 }
             }
         }
-        //品牌
-        List<TdBrand> brand_list = tdBrandService.findAll();
-        if(null != brand_list){
-        	map.addAttribute("brand_list",brand_list);
-        }
+       
 
         //分类热卖品牌
         for (int i = 0; i < topCatList.size(); i++) {
@@ -141,6 +137,8 @@ public class TdIndexController {
 		}
         
         
+        //特价商品
+        map.addAttribute("speciaPrice_list",tdGoodsService.findByIsSpecialPriceTrueAndIsOnSaleTrue());
         
         // 首页大图轮播广告
         TdAdType adType = tdAdTypeService.findByTitle("首页轮播大图广告");
@@ -159,7 +157,7 @@ public class TdIndexController {
         }
 
         // 商品分类底部广告
-        adType = tdAdTypeService.findByTitle("商品分类底部广告");
+        adType = tdAdTypeService.findByTitle("一楼商品中部广告");
 
         if (null != adType) {
             map.addAttribute("cat_bottom_ad_list", tdAdService
@@ -167,7 +165,7 @@ public class TdIndexController {
         }
 
         // 页面中部轮播广告
-        adType = tdAdTypeService.findByTitle("页面中部轮播广告");
+        adType = tdAdTypeService.findByTitle("二楼商品中部广告");
 
         if (null != adType) {
             map.addAttribute("mid_scroll_ad_list", tdAdService
@@ -175,7 +173,7 @@ public class TdIndexController {
         }
 
         // 页面中部大图广告
-        adType = tdAdTypeService.findByTitle("页面中部大图广告");
+        adType = tdAdTypeService.findByTitle("三楼商品中部广告");
 
         if (null != adType) {
             map.addAttribute("mid_big_ad_list", tdAdService
@@ -183,7 +181,7 @@ public class TdIndexController {
         }
 
         // 商品分类轮播广告
-        adType = tdAdTypeService.findByTitle("商品分类轮播广告");
+        adType = tdAdTypeService.findByTitle("四楼商品中部广告");
 
         if (null != adType) {
             map.addAttribute("type_scroll_ad_list", tdAdService

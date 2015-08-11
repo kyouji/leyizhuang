@@ -1781,5 +1781,14 @@ public class TdGoodsService {
         
         return e;
     }
+    
+    /**
+     * 查找特价商品
+     * @author libiao
+     * @return
+     */
+    public List<TdGoods> findByIsSpecialPriceTrueAndIsOnSaleTrue(){
+    	return repository.findByIsSpecialPriceTrueAndIsOnSaleTrue();
+    }
 
 }

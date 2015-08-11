@@ -10,13 +10,27 @@
 .advertising .advertising_content .advertising_ifm{float:left;color:#fefefe;}
 .advertising .advertising_content .advertising_ifm a{float:left;color:#fefefe;margin-right:15px;margin-top:5px;}
 .advertising .advertising_content .adver_left{width:190px;height:439px;background-color:#043a84;}
-.advertising .advertising_content .adver_middle{width:750px;height:439px;margin:0px 29px;_margin:0px 22px;}
-.advertising .advertising_content .adver_middle img{width:750px;height:439px;}
+.advertising .advertising_content .adver_middle{width:809px;height:439px;}
+.advertising .advertising_content .adver_middle img{width:809px;height:439px;}
 .advertising .advertising_content .adver_right{width:201px;height:433px;margin-top:3px;color:#333333;background-color:#ffffff;}
 
 /*banner产品分类*/
 .advertising .advertising_content .advertising_ifm .product_categories{padding-top:10px;padding-bottom:10px;padding-left:10px;_padding-bottom:30px;overflow:hidden;}
 .advertising .advertising_content .advertising_ifm .phone_1,.phone_3{background:#0e5baa;}
+/*banner动态*/
+.product_nav_01{ position:absolute; left:190px;; top:0; z-index:9999; width:300px; height:300px; background:#0e5baa; padding-left:20px; padding-top:8px;}
+.product_nav_02{ position:absolute; left:190px;; top:108px; z-index:9999; width:300px; height:300px; background:#043A84; padding-left:20px; padding-top:8px;}
+.product_nav_03{ position:absolute; left:190px;; top:214px; z-index:9999; width:300px; height:300px; background:#0e5baa; padding-left:20px; padding-top:8px;}
+.product_nav_04{ position:absolute; left:190px;; top:322px; z-index:9999; width:300px; height:120px; background:#043A84; padding-left:20px; padding-top:8px;}
+.phone_box{ float:left; padding-top:10px;}
+.phone p{ float:left; white;}
+.ipad p{ float:left; padding-top:10px;}
+/*banner广告*/
+.scroll{ width:809px; }
+.adv_box{float:left; position:relative; width:809px; height:439px; overflow:hidden;}
+.scroll_box img{ width:809px; height:439px; float:left;}
+.scroll_box{ position:absolute; z-index:999; left:0px;; top:0;  width:2427px; height:439px;}
+/*banner动态end*/
 
 /*banner服务与公告*/
 .advertising .advertising_content .adver_right .dedication{font-size:14px;height:40px;margin-left:10px;line-height:40px;}
@@ -26,15 +40,12 @@
 .advertising .advertising_content .adver_right .special_service .li_1{border-right:solid 1px #FFFFFF;}
 .advertising .advertising_content .adver_right .special_service .li_3{border-top:solid 1px #FFFFFF;border-right:solid 1px #FFFFFF;}
 .advertising .advertising_content .adver_right .special_service .li_4{border-top:solid 1px #FFFFFF;}
-.advertising .advertising_content .adver_right .special_service li .icon_1{background:url(../images/sdfh.png) no-repeat center 0;}
-.advertising .advertising_content .adver_right .special_service li .icon_2{background:url(../images/qczp.png) no-repeat center 0;}
-.advertising .advertising_content .adver_right .special_service li .icon_3{background:url(../images/wlyth.png) no-repeat center 0;}
-.advertising .advertising_content .adver_right .special_service li .icon_4{background:url(../images/qcby.png) no-repeat center 0;}
+.advertising .advertising_content .adver_right .special_service li .icon_1{background: no-repeat center 0;}
 
 /*banner公告*/
 .advertising .advertising_content .adver_right .announcement{font-size:14px;height:40px;margin-left:10px;line-height:40px;}
 .advertising .advertising_content .adver_right .announcement_list{padding:10px;_padding:0px;height:178px;*+height:160px;_height:178px;background-color:#ffeae6;}
-.advertising .advertising_content .adver_right .announcement_list a{display:block;color:#666666;}
+.advertising .advertising_content .adver_right .announcement_list a{display:block;color:#666666;width:160px;height:18px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
 
 /*团购*/
 .group_buy{width:1204px;overflow:hidden;margin-top:20px;}
@@ -44,9 +55,18 @@
 
 /*今日特价*/
 .today_specials{width:1204px;overflow:hidden;border-top:solid 1px #f2f8ff;padding-bottom:20px;}
-.today_specials a{display:block;float:left;border-right:solid 1px #f2f8ff;width:201px;}
-.today_specials .tj_1{width:190px;}
+.today_specials a{display:block;float:left;width:201px;height:164px;border-right:solid 1px #f2f8ff;text-decoration:none;_text-decoration:none;background:#FFF;}
+.today_specials a:hover .tj .tj_right{color:#f00;}
+.today_specials .tj_1{width:190px;height:164px;}
 .today_specials .tj_6{border-right:none;}
+.today_specials .tj{overflow:hidden;}
+.today_specials .tj h3{width:170px;height:18px;*+font-size:16px;_font-size:16px;padding:10px;padding-bottom:0;text-align:center;white-space:nowrap;text-overflow:ellipsis;overflow:hidden; }
+.today_specials .tj .tj_left{float:left;display:block;}
+.today_specials .tj .tj_right{float:right;padding:10px;}
+.today_specials .tj .tj_right div{width:76px;height:19px;line-height:19px;margin-top:10px;margin-bottom:10px;border:solid 1px #f5704f;color:#f5704f;text-align:center;}
+.today_specials .tj .tj_right p{width:92px;height:20px;line-height:20px;text-align:center; white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.today_specials .tj .tj_right .price_1{font-size:18px;font-weight:700;text-align:right;padding:10px 0;color:#fd5741;}
+
 
 /*1F手机大全*/
 .phone_encyclopedia{width:1204px;padding-bottom:20px;}
@@ -66,7 +86,7 @@
 .phone_encyclopedia .phone_brand .phones_logo .mi{}
 .phone_encyclopedia .phone_brand .phones_logo .apple{}
 .phone_encyclopedia .phone_brand .phones_logo .zte{}
-.phone_encyclopedia .phone_brand .phones_photo{width:404px;height:470px;background:url(../images/phones_photo.png) no-repeat;}
+.phone_encyclopedia .phone_brand .phones_photo{width:404px;height:470px; no-repeat;}
 .phone_encyclopedia .phone_brand .phones_photo a{display:block;}
 .phone_encyclopedia .phone_brand .phones_details{width:610px;overflow:hidden;}
 .phone_encyclopedia .phone_brand .phones_details li{position:relative;float:left;width:202px;height:272px;border-left:solid 1px #dddddd;border-bottom:solid 1px #dddddd;}
@@ -82,10 +102,13 @@
             -moz-transition-delay: 0.2s;
             transition-delay: 0.2s;
 }
-.phone_encyclopedia .phone_brand .phones_details li dl .feature{font-size:18px;font-weight:700;width:150px;margin-left:40px;height:22px;}
-.phone_encyclopedia .phone_brand .phones_details li dl .introduction{width:160px;margin-left:40px;margin-top:5px;}
-.phone_encyclopedia .phone_brand .phones_details li dl .discount{width:160px;margin-left:40px;margin-top:5px;font-size:14px;font-weight:700;color:#ef0000;}
-.phone_encyclopedia .phone_brand .phones_details li dl .discount del{font-size:12px;font-weight:normal;color:#666666;margin-left:20px;}
+.phone_encyclopedia .phone_brand .phones_details li dl .feature{font-size:18px;font-weight:700;width:150px;margin-left:40px;_margin-left:20px;height:22px;}
+.phone_encyclopedia .phone_brand .phones_details li dl dd{widht:170px;float:left;margin-left:20px;_margin-left:10px;}
+.phone_encyclopedia .phone_brand .phones_details li dl .introduction a{display:block;width:170px;height:36px;
+float:left;text-overflow:ellipsis;overflow:hidden;text-decoration:none;}
+.phone_encyclopedia .phone_brand .phones_details li dl .introduction a:hover{color:#f00;}
+.phone_encyclopedia .phone_brand .phones_details li dl .discount{width:160px;margin-left:40px;_margin-left:20px;margin-top:5px;font-size:14px;font-weight:700;color:#ef0000;}
+.phone_encyclopedia .phone_brand .phones_details li dl .discount del{font-size:12px;font-weight:normal;color:#666666;margin-left:5px;}
 .phone_encyclopedia .phone_brand .phones_details .photo_4{height:197px;_padding-top:10px;border-bottom:none;}
 .phone_encyclopedia .phone_brand .phones_details .photo_5{height:197px;_padding-top:10px;border-bottom:none;}
 .phone_encyclopedia .phone_brand .phones_details .photo_6{height:197px;_padding-top:10px;border-bottom:none;}
@@ -124,9 +147,12 @@
             -moz-transition-delay: 0.2s;
             transition-delay: 0.2s;
 }
-.phone_encyclopedia .pc_com .pc_photo li dl .feature{font-size:18px;font-weight:700;width:150px;margin-left:40px;height:22px;}
-.phone_encyclopedia .pc_com .pc_photo li dl .introduction{width:160px;margin-left:40px;}
-.phone_encyclopedia .pc_com .pc_photo li dl .discount{width:160px;margin-left:40px;font-size:14px;font-weight:700;color:#ef0000;}
+.phone_encyclopedia .pc_com .pc_photo li dl .feature{font-size:18px;font-weight:700;width:150px;margin-left:40px;_margin-left:20px;height:22px;}
+.phone_encyclopedia .pc_com .pc_photo li dl dd{widht:170px;float:left;margin-left:20px;_margin-left:10px;}
+.phone_encyclopedia .pc_com .pc_photo li dl .introduction a{display:block;width:170px;height:36px;
+float:left;text-overflow:ellipsis;overflow:hidden;text-decoration:none;}
+.phone_encyclopedia .pc_com .pc_photo li dl .introduction a:hover{color:#f00;}
+.phone_encyclopedia .pc_com .pc_photo li dl .discount{width:160px;margin-left:40px;_margin-left:20px;font-size:14px;font-weight:700;color:#ef0000;}
 .phone_encyclopedia .pc_com .pc_photo li dl .discount del{font-size:12px;font-weight:normal;color:#666666;margin-left:20px;}
 
 /*底部*/
