@@ -38,4 +38,16 @@ public interface TdUserRepo extends
     TdUser findByUsernameAndIdNot(String username, Long id);
     
     Page<TdUser> findByUpperUsernameAndStatusIdOrderByIdDesc(String upperUsername, Long statusId, Pageable page);
+    
+    /**
+     * 通过手机号码查找到用户的方法
+     * @author dengxiao
+     */
+    TdUser findByMobile(String mobile);
+    
+    /**
+     * 通过邮箱查找用户的方法
+     * @author dengxiao
+     */
+    TdUser findByEmail(String email);
 }

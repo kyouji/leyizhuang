@@ -8,9 +8,12 @@
 <link href="/client/css/register.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/client/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/client/js/regist.js"></script>
 <script>
-$(".regist_form").Validform({
-	
+$(document).ready(function(){
+	$("#regist_form").Validform({
+	 	tiptype: 3
+	 });
 });
 </script>
 </head>
@@ -42,44 +45,56 @@ $(".regist_form").Validform({
 <!--注册内容-->
 <div class="register_content">
 	<div class="content">
-    	<ul class="register_mode">
-        	<li>
-            	<input name="regist_method" type="radio" value="" checked="checked" />手机注册
-            </li>
-            <li>
-            	<input name="regist_method" type="radio" value="" />邮箱注册
-            </li>
-        </ul>
-        <form class="regist_form">
-	        <div class="input_information phone_number">
-	            	&nbsp;&nbsp;&nbsp;手机号：
-	            	<input name="username" datatype="*m" sucmsg="用户名验证通过" ajaxurl value="请输入您的手机号" />
-	                <span>*手机号输入有误</span>
-	        </div>
+		<form id="regist_form" action="/reg" method="post">
+	    	<ul class="register_mode">
+	    		<#if type??&&type=="email">
+		        	<li>
+		            	<input name="regist_method" type="radio" value="phone" onclick="phoneMethod()"/>手机注册
+		            </li>
+		            <li>
+		            	<input name="regist_method" type="radio" value="email" onclick="emailMethod()" checked="checked"/>邮箱注册
+		            </li>
+	            <#else>
+		            <li>
+		            	<input name="regist_method" type="radio" value="phone" onclick="phoneMethod()" checked="checked"/>手机注册
+		            </li>
+		            <li>
+		            	<input name="regist_method" type="radio" value="email" onclick="emailMethod()"/>邮箱注册
+		            </li>
+	            </#if>
+	        </ul>
+        	<#if type??&&type=="email">
+	        	<div class="input_information phone_number">
+					用户邮箱：
+					<input name="email" datatype="e" ajaxurl="/reg/check/email" value="请输入您的邮箱" />
+		        </div>
+        	<#else>
+	        	<div class="input_information phone_number">
+					手机号码：
+					<input name="mobile" datatype="m" ajaxurl="/reg/check/mobile" value="请输入您的手机号" />
+		        </div>
+        	</#if>
 	        <div class="input_information password">
-	            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：
-	            	<input name="password" value="请输入6-12位密码" />
-	                <span>*密码数不满足要求</span>
+				用户密码：
+				<input name="password" type="password" datatype="*6-12" value="请输入6-12位密码" />
 	        </div>
 	        <div class="input_information repeat_password">
-	            	重复密码：
-	            	<input name="repassword" value="请重复输入密码" />
-	                <span>*两次密码输入不同</span>
+				重复密码：
+				<input name="repassword" type="password" datatype="*6-12" recheck="password" value="请重复输入密码" />
 	        </div>
 	        <div class="input_information security_code">
-	            	&nbsp;&nbsp;&nbsp;验证码：
-	            	<input name="yzm" value="见右图" />
-	                <img src="/client/images/security_code.png" />
-	                <a href="#" class="another">看不清，换一张？</a>
-	                <span>*验证码输入有误</span>
+	        	&nbsp;&nbsp;&nbsp;验证码：
+		        <input name="yzm" type="text" datatype="s4-4" errormsg="请填写4位字符！" value="见右图" />
+		        <img id="yzm_image" src="/client/images/security_code.png" />
+		        <a href="javascript:changeYzm()" class="another">看不清，换一张？</a>
 	        </div>
         </form>
         <div class="agree">
-        	<a class="btn" href="#">同意协议并注册</a>
+        	<a class="btn" href="javascript:submitRegistForm()">同意协议并注册</a>
             <a href="#">《正品惠客协议》</a>
         </div>
         <div class="agree_1">
-            已经注册，马上
+           	 已经注册，马上
             <a href="#">登录</a>
         </div>
     </div>
