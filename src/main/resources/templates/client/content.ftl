@@ -3,13 +3,20 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if goods??>${goods.seoTitle!''}-</#if>正品惠客</title>
-
-<meta name="keywords" content="${goods.seoKeywords!''}">
-<meta name="description" content="${goods.seoDescription!''}">
+<title>正品惠客</title>
+<script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/client/js/jquery.jqzoom.js"></script>
+<script type="text/javascript" src="/client/js/common.js"></script>
+<script type="text/javascript" src="/client/js/base.js"></script>
+<script type="text/javascript" src="/client/js/innerpage.js"></script>
+<script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
+<script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
 
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
+
 <!---->
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
 
@@ -20,8 +27,23 @@
 <script type="text/javascript" src="/client/js/goods.js"></script>
 <script src="/client/js/list.js"></script>
 
-<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
+<script src="/client/js/common.js"></script>
+
+
+<!--放大镜-->
+<script type="text/javascript">
+  $(document).ready(function(){
+	
+	productImgShow("proshowimg","li","proshowmenu","sel",396,396);
+
+});
+</script>
+<!--弹窗-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".c_pop_boxbg").hide()
+    })
+</script>
 </head>
 
 <script type="text/javascript">
@@ -160,46 +182,29 @@ function btnPageSubmit()
 <!--中上部参数-->
 <div class="wrapper">
 	<!--图片展示-->
-	<div class="details_pic">
-    	<div class="right-extra" style="margin:0px;">
-        <!--产品参数开始-->
-        <div>
-		<div id="preview" class="spec-preview">
-		  <#if goods??>
-		      <span class="jqzoom"><img src="${goods.coverImageUri!''}" /></span>
-		  </#if>
-		</div>
-        <!--缩图开始-->
-        <div class="spec-scroll">
-        	<a class="prev">&lt;</a>
-            <a class="next">&gt;</a>
-            <div class="items">
-                 <ul>
-                     <#if goods.showPictures??>
-                          <#list goods.showPictures?split(",") as uri>
-                             <#if ""!=uri && uri_index < 8>
-                                <li><img  src="${uri!''}" onmousemove="preview(this);"></li>
-                             </#if>
-                         </#list>
-                     </#if>
-                </ul>
+	<div class="wrapper" style="width:410px; float:left; overflow:inherit;">
+	   <div class="scrool_box">
+          <menu id="proshowimg">
+            <li><img src="${goods.coverImageUri!''}" /></li>
+			<#if goods.showPictures??>
+                <#list goods.showPictures?split(",") as uri>
+                	<#if ""!=uri && uri_index < 8>
+                    	<li><img  src="${uri!''}" onmousemove="preview(this);"></li>
+                    </#if>
+                </#list>
+            </#if>
+          </menu>
+          
+          <menu id="proshowmenu"></menu>
+          <div class="details_pic_wrapper">
+                <#-- <div class="details_pic_wrapper_share">分享</div> -->
+                
+                <a href="#" title="" class="details_pic_wrapper_like">关注</a>
+                
+                <#-- <a href="#" title="" class="details_pic_wrapper_remind">低价提醒</a> -->
             </div>
-        </div>
-        <!--缩图结束-->
+		</div>
 	</div>
-    <!--产品参数结束-->
-</div> 
-		
-        <div class="details_pic_wrapper">
-        	<div class="details_pic_wrapper_share">分享</div>
-            
-            <a href="javascript:addCollect(${goods.id});" title="" class="details_pic_wrapper_like">关注</a>
-            
-            <a href="#" title="" class="details_pic_wrapper_remind">低价提醒</a>
-        </div>
-		
-    
-    </div>
     
     <!--中部信息-->
     <div class="details_details">
@@ -218,7 +223,7 @@ function btnPageSubmit()
         	<div class="de_promotion_title">促销信息</div>
           </#if>
         	<div class="de_promotion_info">
-         <#if goods.giftList?? && goods.giftList?size gt 0>
+         	<#if goods.giftList?? && goods.giftList?size gt 0>
                 <ul>
                     <li>
                     <span>赠品</span>
@@ -245,7 +250,7 @@ function btnPageSubmit()
         <!--参数设置-->
         <div class="de_parameter">
            <#if goods.configuration??>
-        	<div class="de_parameter_list">
+        	<div class="de_parameter_list_pz">
             	<span>配 置</span>             
                 <label>${goods.configuration}</label>
             </div>
@@ -284,23 +289,25 @@ function btnPageSubmit()
                     </p>
                </div>  
             <#elseif 3==total_select>
-                    <div class="de_parameter_list">
-                    <span>${select_one_name!''}</span>
-                       <p>
+
+                    	<div class="de_parameter_list">
+                    	<span>${select_one_name!''}</span>
+                      	<p>
+
                         <#if select_one_goods_list??>
-                        <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
-                        </#list>
+                        	<#list select_one_goods_list as item>
+                            	<a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
+                       		</#list>
                         </#if>
-                       </p>
-                       </div>
-                       <div class="de_parameter_list">
-                    <span>${select_two_name!''}</span>
-                       <p>
+                       	</p>
+                       	</div>
+                       	<div class="de_parameter_list">
+                    	<span>${select_two_name!''}</span>
+                       	<p>
                         <#if select_two_goods_list??>
-                        <#list select_two_goods_list as item>
-                            <a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
-                        </#list>
+                        	<#list select_two_goods_list as item>
+                            	<a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+                        	</#list>
                         </#if>
                         </p>
                         </div>
@@ -369,39 +376,40 @@ function btnPageSubmit()
 <!--推荐组合-->
 <div class="c_combination">
 	<div class="c_combination_title">推荐组合</div>
-    <div class="c_combination_btm">
+    	<div class="c_combination_btm">
     	<!--最多添加4个，第一个为默认产品-->
-    	<div class="c_combination_btm_list">
-        	<ul>
-            	<li>
-            	   <a href="/goods/${goods.id}" title="">
-            	      <img src="${goods.coverImageUri!''}" />
-            	   </a>
-            	   <a href="#" title="">
-            	      <span>${goods.title!''}</span>
-            	   </a>
-            	   <a href="#" title="">￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></a>
-                </li>
-            </ul>
-            
-          <#if goods.combList?? && goods.combList?size gt 0>
-            <#list goods.combList as item>
-             <ul>
-                <s></s>
-                <li>
-                    <a href="/goods/${item.goodsId}" title="">
-                        <img src="${item.coverImageUri!''}" />
-                    </a>
-                    <a href="/goods/${item.goodsId}" title="">
-                        <span>${item.title!''}</span>
-                    </a>
-                    <a href="/goods/${item.goodsId}" title="">￥${item.currentPrice?string("0.00")}</a>
-                    <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
-                 </li>
-             </ul>
-          </#list>
-       </#if>
-     </div>
+	    	<div class="c_combination_btm_list">
+	        	<ul>
+	            	<li>
+	            	   <a href="/goods/${goods.id}" title="">
+	            	      <img src="${goods.coverImageUri!''}" />
+	            	   </a>
+	            	   <a href="#" title="">
+	            	      <span>${goods.name!''}</span>
+	            	   </a>
+	            	   <a href="#" title="">￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></a>
+	                </li>
+	            </ul>
+	            
+	          <#if goods.combList?? && goods.combList?size gt 0>
+	            <#list goods.combList as item>
+	             <ul>
+	                <s></s>
+	                <li>
+	                    <a href="/goods/${item.goodsId}" title="">
+	                        <img src="${item.coverImageUri!''}" />
+	                    </a>
+	                    <a href="/goods/${item.goodsId}" title="">
+	                        <span>${item.title!''}</span>
+	                    </a>
+	                    <a href="/goods/${item.goodsId}" title="">￥${item.currentPrice?string("0.00")}</a>
+	                    <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
+	                 </li>
+	             </ul>
+	          </#list>
+	       </#if>
+	     </div>
+
         
         <div class="c_combination_btm_all">
             <ul>
@@ -411,7 +419,7 @@ function btnPageSubmit()
                 <li class="c_combination_btm_all_li2">已节省：￥<strong id="combSave">0.00</strong></li>
                 <li><a href="javascript:clearSelect();">全部清空</a></li>
             </ul>
-            <a href="javascript:;"  id="zhAddCart" title="" class="addcartorange" style=" margin:10px 0 0 83px; background:#0e5baa; text-decoration:none;">加入购物车</a>
+            <a href="javascript:;"  id="zhAddCart" title="" class="addcartorange" style=" margin:10px 0 0 83px; background:#0e5baa; text-decoration:none;">立即购买</a>
             
         </div>
     </div>
@@ -622,6 +630,7 @@ function btnPageSubmit()
         
         <!--动态咨询-->
         <div id="tab3" class="c_R_consult top20">
+        <form>
         <input type="hidden" id="goodsId" name="goodsId" value=${goods.id} />
         	<h3>商品咨询</h3>
             <p>声明：您可在购买前对产品包装、颜色、运输、库存等方面进行咨询，我们有专人进行回复！因厂家随时会更改一些产品的包装、颜色、产地等参数，所以该回复仅在当时
@@ -632,7 +641,7 @@ function btnPageSubmit()
                 <li><textarea id="consult" name="" cols="" rows=""></textarea></li>
             </ul>
             <a href="javascript:submitConsult();" title="">提 交</a>
-            
+        </form> 	
         </div>
         
          

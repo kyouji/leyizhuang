@@ -4,14 +4,14 @@
     <div class="top">
         <div class="top_left">
             <div class="top_left_welcome">欢迎光临正品惠客</div>
-            <a href="#" title="" >请登录</a>
+            <a href="/login" title="登录" >请登录</a>
             
-            <a href="#" title="" >免费注册</a>
+            <a href="/reg" title="免费注册" >免费注册</a>
         </div>
         <div class="top_right">
-            <a href="#" title="">我的惠客</a>
-            <a class="top_right_like" href="#" title="">我的关注</a>
-            <a class="top_right_hk" href="#" title="">我的惠客</a>
+            <a href="/user" title="">我的惠客</a>
+            <a class="top_right_like" href="/user/collect/list" >我的关注</a>
+            <a class="top_right_hk" href="/user">我的惠客</a>
         </div>
     </div>
     
@@ -20,9 +20,18 @@
 <!--头部-->
 <div class="header">
     <!--logo大小：190 58-->
-    <div class="header_logo"><img src="/client/images/logo.png" /></div>
+    <div class="header_logo"><a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a></div>
     <!--广告语大小：183 58-->
-    <div class="header_ad"><img src="/client/images/headerad.png" /></div>
+    <div class="header_ad">
+        <#if top_small_ad_list??>
+            <#list top_small_ad_list as item>
+                <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
+                    <img src="${item.fileUri!''}" />
+                </a>
+                <#break>
+            </#list>
+        </#if>
+    </div>
     
     <div class="header_search">
         <div class="header_search_top">
@@ -31,18 +40,18 @@
         </div>
         <div class="header_search_bot">
         热门搜索：
-            <a href="#" title="">盖世6iPhone</a>
-            <a href="#" title="">6苹果ipad</a>
-            <a href="#" title="">三星Note4</a>
-            <a href="#" title="">魅族魅蓝</a>
-            <a href="#" title="">华硕K455LD4210</a>
-            <a href="#" title="">OPPO R7</a>
-  
+             <#if keywords_list??>
+                <#list keywords_list as item>
+                    <#if item_index gt 0>
+                    <a href="${item.linkUri!''}">${item.title}</a>
+                    </#if>
+                </#list>
+            </#if>
         </div>
     </div>
     
     <div class="header_cart">
-        <a href="#" title="" class="header_cart_btn">购物车（0）</a>
+        <a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
     </div>
 </div>
 
@@ -63,6 +72,6 @@
             </ul>
         </div>
         
-        <div class="nav_num">全国服务热线：400-023-4567</div>
+        <div class="nav_num"><#if site??>全国服务热线：${site.telephone!''}</#if></div>
     </div>
 </div>

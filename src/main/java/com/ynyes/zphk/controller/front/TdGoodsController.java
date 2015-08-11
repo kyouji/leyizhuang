@@ -136,29 +136,34 @@ public class TdGoodsController {
         	map.addAttribute("param_list",goods.getParamList());
         }
         
+        /**
+         * 修改以下所有有关评价的方法，将传入的商品ID改成产品ID
+         * @author dengxiao
+         */
+        
         // 商品组合
         map.addAttribute("comb_list",
-                tdGoodsCombinationService.findByGoodsId(goodsId));
+                tdGoodsCombinationService.findByGoodsId(goods.getProductId()));
         
         // 全部评论
         map.addAttribute("comment_page", tdUserCommentService
-                .findByGoodsIdAndIsShowable(goodsId, 0, ClientConstant.pageSize));
+                .findByGoodsIdAndIsShowable(goods.getProductId(), 0, ClientConstant.pageSize));
         
         // 全部评论数
         map.addAttribute("comment_count", tdUserCommentService
-                .countByGoodsIdAndIsShowable(goodsId));
+                .countByGoodsIdAndIsShowable(goods.getProductId()));
         
         // 好评数
         map.addAttribute("three_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 3L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 3L));
         
         // 中评数
         map.addAttribute("two_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 2L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 2L));
         
         // 差评数
         map.addAttribute("one_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 1L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 1L));
         
         // 咨询
         map.addAttribute("consult_page", consultPage);
