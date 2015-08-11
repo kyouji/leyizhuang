@@ -403,31 +403,34 @@ public class TdGoodsController {
             stars = 0L;
         }
         
+        //获取指定商品的信息
+        TdGoods goods = tdGoodsService.findOne(goodsId);
+        
         // 全部评论数
         map.addAttribute("comment_count", tdUserCommentService
-                .countByGoodsIdAndIsShowable(goodsId));
+                .countByGoodsIdAndIsShowable(goods.getProductId()));
 
         // 好评数
         map.addAttribute("three_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 3L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 3L));
         
         // 中评数
         map.addAttribute("two_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 2L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 2L));
         
         // 差评数
         map.addAttribute("one_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 1L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 1L));
         
         if (stars.equals(0L))
         {
             map.addAttribute("comment_page", tdUserCommentService
-                    .findByGoodsIdAndIsShowable(goodsId, page, ClientConstant.pageSize));
+                    .findByGoodsIdAndIsShowable(goods.getProductId(), page, ClientConstant.pageSize));
         }
         else
         {
              map.addAttribute("comment_page", tdUserCommentService
-                    .findByGoodsIdAndStarsAndIsShowable(goodsId, stars, page, ClientConstant.pageSize));
+                    .findByGoodsIdAndStarsAndIsShowable(goods.getProductId(), stars, page, ClientConstant.pageSize));
         }
         
         // 评论

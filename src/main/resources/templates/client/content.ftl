@@ -129,12 +129,12 @@ function btnPageSubmit()
 </script>
 
 <body>
-<!--
-<div class="c_pop_boxbg">
-	<div class="c_pop_box">
+
+<div id="collectGoods" class="c_pop_boxbg">
+	<div id="collectWindow" class="c_pop_box">
     	<div class="c_pop_box_top">
         	<span>提 示</span>
-            <a href="#"></a>
+            <a href="javascript:close()"></a>
         </div>
         <div class="c_pop_box_success">
         	<p>您已成功关注该商品！</p>
@@ -150,7 +150,7 @@ function btnPageSubmit()
         </div>
     </div>
 </div>
--->
+
 <div class="w100">
 <!--顶部ad大小：1920 90-->
 <div class="top_ad"><img src="/client/images/topad.png" /></div>
@@ -166,6 +166,10 @@ function btnPageSubmit()
             &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
             <a href="/list/${item.id}" title="${item.title!''}">${item.title!''}</a>
         </#list>
+    </#if>
+    <#if goods??>
+    	&nbsp;&nbsp;&gt;&nbsp;&nbsp; 
+        <a href="/goods/${goods.id}" title="${goods.name!''}">${goods.name!''}</a>
     </#if>
 </div>
 
@@ -190,7 +194,7 @@ function btnPageSubmit()
           <div class="details_pic_wrapper">
                 <#-- <div class="details_pic_wrapper_share">分享</div> -->
                 
-                <a href="#" title="" class="details_pic_wrapper_like">关注</a>
+                <a href="javascript:addCollect(${goods.id})" title="" class="details_pic_wrapper_like">关注</a>
                 
                 <#-- <a href="#" title="" class="details_pic_wrapper_remind">低价提醒</a> -->
             </div>
@@ -543,7 +547,9 @@ function btnPageSubmit()
                 <a href="javascript:getCommentByStars(${goodsId}, 2, 0);" id="star2" title="">中评（${two_star_comment_count!'0'}）</a>
                 <a href="javascript:getCommentByStars(${goodsId}, 1, 0);" id="star1" title="">差评（${one_star_comment_count!'0'}）</a>
             </div>
-        <#include "/client/goods_content_comment.ftl" />
+        	<div id="the_comment">
+       			<#include "/client/goods_content_comment.ftl" />
+        	</div>
         </div>
          
         <!--咨询-->

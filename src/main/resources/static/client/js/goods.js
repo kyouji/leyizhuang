@@ -66,9 +66,19 @@ function addCollect(goodsId)
         data:{"goodsId": goodsId},
         dataType: "json",
         success:function(res){
-            
-            alert(res.message);
-            
+    		/**
+    		 * 修改了原来的代码
+    		 * 根据res中message的值判断是否关注成功，关注成功则显示出成功提示的DIV
+    		 * （原来的代码是通过alert语句弹出成功提示）
+    		 * @author dengxiao
+    		 */
+        	if(res.message!="添加成功"){
+        		alert(res.message);
+        	}else{
+        		document.getElementById("collectGoods").style.display="block";
+        		document.getElementById("collectWindow").style.display="block";
+        	}
+        	
             // 需登录
             if (res.code==1)
             {
@@ -79,5 +89,15 @@ function addCollect(goodsId)
         }
     });
 }
+
+/**
+ * 隐藏关注成功窗口的函数
+ * @author dengxiao
+ */
+function close(){
+	document.getElementById("collectWindow").style.display="none";
+	document.getElementById("collectGoods").style.display="none";
+}
+
 
  
