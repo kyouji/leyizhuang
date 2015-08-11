@@ -38,10 +38,12 @@
                             </p>
                             <span>${content!''}</span>
                         </div>
+                      	
                         <div class="c_R_comment_con_R_info_M">
                             <p>颜色：白</p>
                             <p>规格：移动联通双4G(16GB ROM)</p>
                         </div>
+                       
                         <div class="c_R_comment_con_R_info_R">${item.commentTime}</div>
                     </div>
                     
