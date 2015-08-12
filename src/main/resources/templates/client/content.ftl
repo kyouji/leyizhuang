@@ -356,7 +356,7 @@ function btnPageSubmit()
             <#list hot_list as hot_good>
                 <ul>
                     <li><img src="${hot_good.coverImageUri!''}" /></li>
-                    <li class="details_goods_opacity"><a href="/goods/${hot_good.id!''}" title="">${hot_good.title}</a>￥${goods.salePrice?string("0.00")}</li>
+                    <li class="details_goods_opacity"><a href="/goods/${hot_good.id?c}" title="">${hot_good.title!''}</a>￥${goods.salePrice?string("0.00")}</li>
                  </ul>
             </#list>
         </#if>

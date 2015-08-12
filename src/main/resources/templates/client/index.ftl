@@ -7,57 +7,54 @@
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
-<meta property="qc:admins" content="274143415163145116375" />
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 
 <script type="text/javascript">
-    $(function(){
-        <!-- 检索start -->
-        $("#search").click(function(){
-            
-            var keywords = $("#keywords").val();
-            console.debug(keywords)
-            $.get("/search",{keywords:keywords},
-            function (data) { 
-                <!-- 修改 -->
-                    if (data.role == 2){
+$(function(){
+    <!-- 检索start -->
+    $("#search").click(function(){
+        
+        var keywords = $("#keywords").val();
+        console.debug(keywords)
+        $.get("/search",{keywords:keywords},
+        function (data) { 
+            <!-- 修改 -->
+                if (data.role == 2){
+                    window.location.href="/";
+                }    
+                else if (data.code == 0) {
+                    var url = document.referrer;          
+                    if(undefined==url || ""==url){
                         window.location.href="/";
-                    }    
-                    else if (data.code == 0) {
-                        var url = document.referrer;          
-                        if(undefined==url || ""==url){
-                            window.location.href="/";
-                        }else{
-                            window.location.href = url; 
-                        }
-                    } else {
-                        alert(data.msg);
+                    }else{
+                        window.location.href = url; 
                     }
+                } else {
+                    alert(data.msg);
                 }
-            );
-        })；
+            }
+        );
+    })；
     <!-- 检索end -->
 
     
-})
+});
 
 
 </script>
 </head>
 
 <body>
-<!--顶部ad大小：1920 90-->
-<div class="top_ad">
 <#if index_top_ad_list?? && index_top_ad_list?size gt 0>
-    <#list index_top_ad_list as item>
-        <a class="w100 block ta-c" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}" style=" background:url(${item.fileUri!''}) no-repeat top center; height:100px;"></a>
-    </#list>
+    <div class="top_ad">
+        <#list index_top_ad_list as item>
+            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}"><img src="${item.fileUri!''}" /></a>
+        </#list>
+    </div>
 </#if>
-<img src="images/topad.png" />
-</div>
 
 <!--顶部-->
 <div class="top_all">
@@ -84,7 +81,10 @@
 <!--头部-->
 <div class="header">
 	<!--logo大小：190 58-->
-	<div class="header_logo"><a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a></div>
+	<div class="header_logo">
+	   <a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a>
+    </div>
+    
     <!--广告语大小：183 58-->
     <div class="header_ad">
         <#if top_small_ad_list??>
@@ -98,12 +98,14 @@
     </div>
     
     <div class="header_search">
-    	<div class="header_search_top">
-        	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="${keywords!keywords_list[0].title}"/>
-            <a href="#" title="" id="search" class="header_search_top_btn">搜 索</a>
+	   <div class="header_search_top">
+    	    <form action="/search" method="get">
+            	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title}</#if>"/>
+                <input type="submit" value="搜索" />
+            </form>
         </div>
         <div class="header_search_bot">
-        热门搜索：
+            热门搜索：
             <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
@@ -114,12 +116,14 @@
         </div>
     </div>
     
+    <#-- 设计要改，增加下拉显示 -->
     <div class="header_cart">
     	<a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
     </div>
 </div>
 
 <!--导航-->
+<#-- 导航读3级分类 -->
 <div class="navigation">
 	<div class="nav">
         <div class="nav_submenu">全部商品分类</div>
@@ -210,32 +214,34 @@
         
         <div class="advertising_ifm adver_right">
         	<div class="dedication">竭诚服务</div>
-            <ul class="special_service">
-            	<li class="li_1">
-                	<a class="icon_1" href="#">闪电发货</a>
-                </li>
-                <li>
-                	<a class="icon_2" href="#">闪电发货</a>
-                </li>
-                <li class="li_3">
-                	<a class="icon_3" href="#">无理由退货</a>
-                </li>
-                <li class="li_4">
-                	<a class="icon_4" href="#">闪电发货</a>
-                </li>
-            </ul>
+                <ul class="special_service">
+                	<li class="li_1">
+                    	<a class="icon_1">闪电发货</a>
+                    </li>
+                    <li>
+                    	<a class="icon_2" href="#">闪电发货</a>
+                    </li>
+                    <li class="li_3">
+                    	<a class="icon_3" href="#">无理由退货</a>
+                    </li>
+                    <li class="li_4">
+                    	<a class="icon_4" href="#">闪电发货</a>
+                    </li>
+                </ul>
             
             
-            <div class="announcement">公告</div>
-            <div class="announcement_list">
-             <#if news_page??>
-            <#list news_page.content as item>
-                <#if item_index < 7>
-                <a class="block mt5" href="/info/content/${item.id}?mid=12" style="height:20px; overflow:hidden;">【公告】${item.title!''}</a>
-                </#if>
-            </#list>
-        </#if>
-            </div>
+                <div class="announcement">公告</div>
+                    <div class="announcement_list">
+                    <#if news_page??>
+                        <#list news_page.content as item>
+                            <#if item_index < 7>
+                            <a class="block mt5" href="/info/content/${item.id}?mid=12" style="height:20px; overflow:hidden;">【公告】${item.title!''}</a>
+                            </#if>
+                        </#list>
+                    </#if>
+                    </div>
+                    
+                    <#-- 看是不是少个/div -->
         </div>
     </div>
 </div>
