@@ -168,7 +168,11 @@ function btnPageSubmit()
             <#if goods_page?? && goods_page.content?size gt 0>
                 <#list goods_page.content as item>
                     <dl>
-                        <dt><img src="${item.coverImageUri!''}" with="210" height="210"/></dt>
+                        <dt>
+                            <a href="/goods/${item.id?c}">
+                            <img src="${item.coverImageUri!''}" with="210" height="210"/>
+                            </a>
+                        </dt>
                         <dd class="piclist_title">
                             <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
                         </dd>

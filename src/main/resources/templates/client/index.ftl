@@ -13,37 +13,6 @@
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(function(){
-        <!-- 检索start -->
-        $("#search").click(function(){
-            
-            var keywords = $("#keywords").val();
-            console.debug(keywords)
-            $.get("/search",{keywords:keywords},
-            function (data) { 
-                <!-- 修改 -->
-                    if (data.role == 2){
-                        window.location.href="/";
-                    }    
-                    else if (data.code == 0) {
-                        var url = document.referrer;          
-                        if(undefined==url || ""==url){
-                            window.location.href="/";
-                        }else{
-                            window.location.href = url; 
-                        }
-                    } else {
-                        alert(data.msg);
-                    }
-                }
-            );
-        });
-    <!-- 检索end -->
-
-    
-})
-</script>
-<script>
 $(function(){
         
     /*广告滑动*/    
@@ -135,13 +104,12 @@ $(function(){
 </head>
 
 <body>
-<!--顶部ad大小：1920 90-->
 <#if index_top_ad_list?? && index_top_ad_list?size gt 0>
-<div class="top_ad">
-    <#list index_top_ad_list as item>
-        <a class="w100 block ta-c" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}" style=" background:url(${item.fileUri!''}) no-repeat top center; height:100px;"></a>
-    </#list>
-</div>
+    <div class="top_ad">
+        <#list index_top_ad_list as item>
+            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}"><img src="${item.fileUri!''}" /></a>
+        </#list>
+    </div>
 </#if>
 
 <!--顶部-->
@@ -169,7 +137,10 @@ $(function(){
 <!--头部-->
 <div class="header">
 	<!--logo大小：190 58-->
-	<div class="header_logo"><a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a></div>
+	<div class="header_logo">
+	   <a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a>
+    </div>
+    
     <!--广告语大小：183 58-->
     <div class="header_ad">
         <#if top_small_ad_list??>
@@ -183,12 +154,14 @@ $(function(){
     </div>
     
     <div class="header_search">
-    	<div class="header_search_top">
-        	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="${keywords!keywords_list[0].title}"/>
-            <a href="#" title="" id="search" class="header_search_top_btn">搜 索</a>
+	   <div class="header_search_top">
+    	    <form action="/search" method="get">
+            	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title}</#if>"/>
+                <input type="submit" value="搜索" />
+            </form>
         </div>
         <div class="header_search_bot">
-        热门搜索：
+            热门搜索：
             <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
@@ -199,12 +172,14 @@ $(function(){
         </div>
     </div>
     
+    <#-- 设计要改，增加下拉显示 -->
     <div class="header_cart">
     	<a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
     </div>
 </div>
 
 <!--导航-->
+<#-- 导航读3级分类 -->
 <div class="navigation">
 	<div class="nav">
         <div class="nav_submenu">全部商品分类</div>
@@ -295,7 +270,6 @@ $(function(){
                 </li> 
             </#if>  
             </ul>
-            
             
             <div class="announcement">公告</div>
             <div class="announcement_list">

@@ -12,7 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ynyes.zphk.entity.TdArticleCategory;
 import com.ynyes.zphk.entity.TdBrand;
 import com.ynyes.zphk.entity.TdGoods;
 import com.ynyes.zphk.entity.TdParameter;
