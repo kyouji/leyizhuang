@@ -78,7 +78,7 @@ function timer${item_index}()
 </#if>
 }
 </script>
-    <a href="/goods/${item.id!''}?qiang=<#if item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 3>3<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 7>7<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber gt 6>10</#if>">
+    <a href="/touch/goods/${item.id!''}?qiang=<#if item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 3>3<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 7>7<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber gt 6>10</#if>">
         <b><img src="${item.groupSaleImage!''}" /></b>
         <p class="p1">${item.title!''}</p>
         <p class="p2">已售：<span class="red">${item.groupSaleSoldNumber!'0'}</span>份</p>

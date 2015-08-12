@@ -6,7 +6,7 @@ function toggleSelect(id)
         url:"/cart/toggleSelect",
         data:{"id":id},
         success:function(data){
-            $(".wrapper").html(data);
+            $("#cart-main").html(data);
         }
     });
 }
@@ -19,7 +19,7 @@ function toggleAllSelect(sid)
         url:"/cart/toggleAll",
         data:{"sid":sid},
         success:function(data){
-            $(".wrapper").html(data);
+            $("#cart-main").html(data);
         }
     });
 }
@@ -33,20 +33,20 @@ function addNum(id)
         url:"/cart/numberAdd",
         data:{"id":id},
         success:function(data){
-            $(".cart_details").html(data);
+            $("#cart-main").html(data);
         }
     });
 }
 
 // 商品数量减1
-function minusNum(id)
+function minusNum(cartId)
 {
     $.ajax({
         type:"post",
         url:"/cart/numberMinus",
-        data:{"id":id},
+        data:{"id":cartId},
         success:function(data){
-            $(".cart_details").html(data);
+            $("#cart-main").html(data);
         }
     });
 }
@@ -63,7 +63,7 @@ function delCartItem(id)
         url:"/cart/del",
         data:{"id": id},
         success:function(data){
-            $(".wrapper").html(data);
+            $("#cart-main").html(data);
         }
     });
 }

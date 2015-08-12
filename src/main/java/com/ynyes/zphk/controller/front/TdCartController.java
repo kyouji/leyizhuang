@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -294,8 +295,8 @@ public class TdCartController {
 //        if (null == resList || resList.size() == 0) {
 //            return "/client/cart_null";
 //        }
-
-        return "/client/Shopping_cart";
+        
+        return "/client/cart";
     }
 
     @RequestMapping(value = "/cart/toggleSelect", method = RequestMethod.POST)
@@ -322,7 +323,7 @@ public class TdCartController {
 
         map.addAttribute("cart_goods_list", cartGoodsList);
 
-        return "/client/Shopping_cart";
+        return "/client/cart_goods";
     }
 
     @RequestMapping(value = "/cart/toggleAll", method = RequestMethod.POST)
@@ -355,7 +356,7 @@ public class TdCartController {
 
         map.addAttribute("cart_goods_list", cartGoodsList);
 
-        return "/client/Shopping_cart";
+        return "/client/cart_goods";
     }
 
     @RequestMapping(value = "/cart/numberAdd", method = RequestMethod.POST)
@@ -380,7 +381,7 @@ public class TdCartController {
         map.addAttribute("cart_goods_list",
                 tdCartGoodsService.findByUsername(username));
 
-        return "/client/Shopping_cart";
+        return "/client/cart_goods";
     }
 
     @RequestMapping(value = "/cart/numberMinus", method = RequestMethod.POST)
@@ -401,14 +402,14 @@ public class TdCartController {
                 quantity = quantity > 1 ? quantity - 1 : quantity;
 
                 cartGoods.setQuantity(quantity);
-                tdCartGoodsService.save(cartGoods);
+                cartGoods = tdCartGoodsService.save(cartGoods);
             }
         }
 
         map.addAttribute("cart_goods_list",
                 tdCartGoodsService.findByUsername(username));
 
-        return "/client/Shopping_cart";
+        return "/client/cart_goods";
     }
 
     @RequestMapping(value = "/cart/del", method = RequestMethod.POST)
@@ -431,6 +432,6 @@ public class TdCartController {
         map.addAttribute("cart_goods_list",
                 tdCartGoodsService.findByUsername(username));
 
-        return "/client/Shopping_cart";
+        return "/client/cart_goods";
     }
 }

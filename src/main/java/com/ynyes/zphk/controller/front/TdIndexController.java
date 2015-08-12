@@ -134,7 +134,6 @@ public class TdIndexController {
         	}
 		}
         
-        
         //特价商品
         map.addAttribute("speciaPrice_list",tdGoodsService.findByIsSpecialPriceTrueAndIsOnSaleTrue());
         

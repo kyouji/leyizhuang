@@ -17,18 +17,16 @@
 <!--完成支付-->
 <div class="complete_payment">
 	<div class="success_join">
-        <img src="/client/images/correct_1.png" />
-        <p class="pay">该商品<br />
-			加入购物车成功
+        <img src="/client/images/correct.png" />
+        <p class="pay">
+			商品加入购物车成功
         </p>
 	</div>
     <div class="acceptable">
-    	<p>您还可以： 返回&nbsp;<a href="#">商品详情</a>&nbsp;查看&nbsp;
-    	<a href="/cart">购物车</a>&nbsp;或者&nbsp;
-    	   <a href="/">继续购物</a></p>
+    	<p><a href="/">继续购物</a></p>
     </div>
     <div class="now_settlement">
-    	<a href="#">立即去结算</a>
+    	<a href="/cart">立即去结算</a>
     </div>
 </div>
 
