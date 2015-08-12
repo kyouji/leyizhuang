@@ -10,9 +10,6 @@
 // mail: renzi.mrc@gmail.com
 //**************************************************************
 
-
-
-//放大效果
 (function($){
 
 		$.fn.jqueryzoom = function(options){

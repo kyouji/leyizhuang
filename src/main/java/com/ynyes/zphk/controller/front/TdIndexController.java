@@ -113,11 +113,7 @@ public class TdIndexController {
                 }
             }
         }
-        //品牌
-        List<TdBrand> brand_list = tdBrandService.findAll();
-        if(null != brand_list){
-        	map.addAttribute("brand_list",brand_list);
-        }
+       
 
         //分类热卖品牌
         for (int i = 0; i < topCatList.size(); i++) {
@@ -140,6 +136,8 @@ public class TdIndexController {
 		}
         
         
+        //特价商品
+        map.addAttribute("speciaPrice_list",tdGoodsService.findByIsSpecialPriceTrueAndIsOnSaleTrue());
         
         // 首页大图轮播广告
         TdAdType adType = tdAdTypeService.findByTitle("首页轮播大图广告");
@@ -158,7 +156,7 @@ public class TdIndexController {
         }
 
         // 商品分类底部广告
-        adType = tdAdTypeService.findByTitle("商品分类底部广告");
+        adType = tdAdTypeService.findByTitle("一楼商品中部广告");
 
         if (null != adType) {
             map.addAttribute("cat_bottom_ad_list", tdAdService
@@ -166,7 +164,7 @@ public class TdIndexController {
         }
 
         // 页面中部轮播广告
-        adType = tdAdTypeService.findByTitle("页面中部轮播广告");
+        adType = tdAdTypeService.findByTitle("二楼商品中部广告");
 
         if (null != adType) {
             map.addAttribute("mid_scroll_ad_list", tdAdService
@@ -174,7 +172,7 @@ public class TdIndexController {
         }
 
         // 页面中部大图广告
-        adType = tdAdTypeService.findByTitle("页面中部大图广告");
+        adType = tdAdTypeService.findByTitle("三楼商品中部广告");
 
         if (null != adType) {
             map.addAttribute("mid_big_ad_list", tdAdService
@@ -182,7 +180,7 @@ public class TdIndexController {
         }
 
         // 商品分类轮播广告
-        adType = tdAdTypeService.findByTitle("商品分类轮播广告");
+        adType = tdAdTypeService.findByTitle("四楼商品中部广告");
 
         if (null != adType) {
             map.addAttribute("type_scroll_ad_list", tdAdService
@@ -190,7 +188,7 @@ public class TdIndexController {
         }
 
         // 昆明自驾游大图广告
-        adType = tdAdTypeService.findByTitle("昆明自驾游大图广告");
+        adType = tdAdTypeService.findByTitle("竭诚服务广告");
 
         if (null != adType) {
             map.addAttribute("tour_km_big_ad_list", tdAdService
@@ -198,18 +196,18 @@ public class TdIndexController {
         }
 
         // 省内自驾游大图广告
-        adType = tdAdTypeService.findByTitle("省内自驾游大图广告");
+        adType = tdAdTypeService.findByTitle("团购标题图");
 
         if (null != adType) {
-            map.addAttribute("tour_province_big_ad_list", tdAdService
+            map.addAttribute("tuan_title_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
         // 国内自驾游大图广告
-        adType = tdAdTypeService.findByTitle("国内自驾游大图广告");
+        adType = tdAdTypeService.findByTitle("团购广告图片");
 
         if (null != adType) {
-            map.addAttribute("tour_country_big_ad_list", tdAdService
+            map.addAttribute("tuan_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
