@@ -13,37 +13,6 @@
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(function(){
-        <!-- 检索start -->
-        $("#search").click(function(){
-            
-            var keywords = $("#keywords").val();
-            console.debug(keywords)
-            $.get("/search",{keywords:keywords},
-            function (data) { 
-                <!-- 修改 -->
-                    if (data.role == 2){
-                        window.location.href="/";
-                    }    
-                    else if (data.code == 0) {
-                        var url = document.referrer;          
-                        if(undefined==url || ""==url){
-                            window.location.href="/";
-                        }else{
-                            window.location.href = url; 
-                        }
-                    } else {
-                        alert(data.msg);
-                    }
-                }
-            );
-        });
-    <!-- 检索end -->
-
-    
-})
-</script>
-<script>
 $(function(){
         
     /*广告滑动*/    
@@ -135,13 +104,12 @@ $(function(){
 </head>
 
 <body>
-<!--顶部ad大小：1920 90-->
 <#if index_top_ad_list?? && index_top_ad_list?size gt 0>
-<div class="top_ad">
-    <#list index_top_ad_list as item>
-        <a class="w100 block ta-c" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}" style=" background:url(${item.fileUri!''}) no-repeat top center; height:100px;"></a>
-    </#list>
-</div>
+    <div class="top_ad">
+        <#list index_top_ad_list as item>
+            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}"><img src="${item.fileUri!''}" /></a>
+        </#list>
+    </div>
 </#if>
 
 <!--顶部-->
@@ -169,7 +137,10 @@ $(function(){
 <!--头部-->
 <div class="header">
 	<!--logo大小：190 58-->
-	<div class="header_logo"><a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a></div>
+	<div class="header_logo">
+	   <a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a>
+    </div>
+    
     <!--广告语大小：183 58-->
     <div class="header_ad">
         <#if top_small_ad_list??>
@@ -183,28 +154,32 @@ $(function(){
     </div>
     
     <div class="header_search">
-    	<div class="header_search_top">
-        	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="${keywords!keywords_list[0].title}"/>
-            <a href="#" title="" id="search" class="header_search_top_btn">搜 索</a>
+	   <div class="header_search_top">
+    	    <form action="/search" method="get">
+            	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title}</#if>"/>
+                <input type="submit" value="搜索" />
+            </form>
         </div>
         <div class="header_search_bot">
-        热门搜索：
+            热门搜索：
             <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
-                    <a href="${item.linkUri!''}">${item.title}</a>
+                        <a href="${item.linkUri!''}">${item.title}</a>
                     </#if>
                 </#list>
             </#if>
         </div>
     </div>
     
+    <#-- 设计要改，增加下拉显示 -->
     <div class="header_cart">
     	<a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
     </div>
 </div>
 
 <!--导航-->
+<#-- 导航读3级分类 -->
 <div class="navigation">
 	<div class="nav">
         <div class="nav_submenu">全部商品分类</div>
@@ -261,41 +236,40 @@ $(function(){
     	<!-- 首页大广告    -->
         <div class="advertising_ifm adver_middle">
             <div class="scroll">
-            <div class="adv_box">   
-            <div class="scroll_box">
-            <#if big_scroll_ad_list??>
-                 <#list big_scroll_ad_list as item>
-                    <img src="${item.fileUri!''}" />
-                 </#list>
-            </#if>
-            </div>
-            </div>
+                <div class="adv_box">   
+                    <div class="scroll_box">
+                        <#if big_scroll_ad_list??>
+                             <#list big_scroll_ad_list as item>
+                                <img src="${item.fileUri!''}" />
+                             </#list>
+                        </#if>
+                    </div>
+                </div>
             </div>
         </div>
         
         <div class="advertising_ifm adver_right">
         	<div class="dedication">竭诚服务</div>
-            <ul class="special_service">
-            <#if tour_km_big_ad_list??>
-        	<li class="li_1">
-                    <img src="${tour_km_big_ad_list[0].fileUri!''}" height="43px;" width="40px;"/>
-                    <a class="icon_1">${tour_km_big_ad_list[0].title!''}</a>
-                </li>
-                <li>
-                    <img src="${tour_km_big_ad_list[1].fileUri!''}" />
-                    <a class="icon_2">${tour_km_big_ad_list[1].title!''}</a>
-                </li>
-                <li class="li_3">
-                    <img src="${tour_km_big_ad_list[2].fileUri!''}" />
-                    <a class="icon_3">${tour_km_big_ad_list[2].title!''}</a>
-                </li>
-                <li class="li_4">
-                    <img src="${tour_km_big_ad_list[3].fileUri!''}" />
-                    <a class="icon_4">${tour_km_big_ad_list[3].title!''}</a>
-                </li> 
-            </#if>  
-            </ul>
-            
+                <ul class="special_service">
+                    <#if tour_km_big_ad_list??>
+                    	<li class="li_1">
+                            <img src="${tour_km_big_ad_list[0].fileUri!''}" height="43px;" width="40px;"/>
+                            <a class="icon_1">${tour_km_big_ad_list[0].title!''}</a>
+                        </li>
+                        <li>
+                            <img src="${tour_km_big_ad_list[1].fileUri!''}" />
+                            <a class="icon_2">${tour_km_big_ad_list[1].title!''}</a>
+                        </li>
+                        <li class="li_3">
+                            <img src="${tour_km_big_ad_list[2].fileUri!''}" />
+                            <a class="icon_3">${tour_km_big_ad_list[2].title!''}</a>
+                        </li>
+                        <li class="li_4">
+                            <img src="${tour_km_big_ad_list[3].fileUri!''}" />
+                            <a class="icon_4">${tour_km_big_ad_list[3].title!''}</a>
+                        </li> 
+                     </#if>  
+                </ul>
             
             <div class="announcement">公告</div>
             <div class="announcement_list">
@@ -329,15 +303,15 @@ $(function(){
 <div class="today_specials">
     <#list speciaPrice_list as item>
         <a class="tj_1" href="/goods/${item.id?c}">
-        <div class="tj">
-            <h3>${item.title!""}</h3>
-            <img class="tj_left" src="${item.coverImageUri!""}" width="74px" height="131px" />
-            <div class="tj_right">
-                <div>店家推荐</div>
-                <p>${item.subTitle!""}</p>
-                <p class="price_1">￥<span>${item.salePrice?string('0.00')}</span></p>
+            <div class="tj">
+                <h3>${item.title!""}</h3>
+                <img class="tj_left" src="${item.coverImageUri!""}" width="74px" height="131px" />
+                <div class="tj_right">
+                    <div>店家推荐</div>
+                    <p>${item.subTitle!""}</p>
+                    <p class="price_1">￥<span>${item.salePrice?string('0.00')}</span></p>
+                </div>
             </div>
-        </div>
         </a>
     </#list>
 </div>
@@ -412,13 +386,13 @@ $(function(){
                     <#if item_index gt 3 && item_index < 6 >
                     <li class="photo_1 photo_4">
                          <dl>
-                          <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                          <dd class="feature">性价比之王</dd>
-                          <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                          <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                          <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                              <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                              <dd class="feature">性价比之王</dd>
+                              <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                              <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                              <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                    <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
                      </li>
                      </#if>
                 </#list>

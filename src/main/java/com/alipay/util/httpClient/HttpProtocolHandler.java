@@ -23,45 +23,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* *
- *ç±»åï¼šHttpProtocolHandler
- *åŠŸèƒ½ï¼šHttpClientæ–¹å¼è®¿é—®
- *è¯¦ç»†ï¼šè·å–è¿œç¨‹HTTPæ•°æ®
- *ç‰ˆæœ¬ï¼š3.3
- *æ—¥æœŸï¼š2012-08-17
- *è¯´æ˜ï¼š
- *ä»¥ä¸‹ä»£ç åªæ˜¯ä¸ºäº†æ–¹ä¾¿å•†æˆ·æµ‹è¯•è€Œæä¾›çš„æ ·ä¾‹ä»£ç ï¼Œå•†æˆ·å¯ä»¥æ ¹æ®è‡ªå·±ç½‘ç«™çš„éœ€è¦ï¼ŒæŒ‰ç…§æŠ€æœ¯æ–‡æ¡£ç¼–å†™,å¹¶éä¸€å®šè¦ä½¿ç”¨è¯¥ä»£ç ã€‚
- *è¯¥ä»£ç ä»…ä¾›å­¦ä¹ å’Œç ”ç©¶æ”¯ä»˜å®æ¥å£ä½¿ç”¨ï¼Œåªæ˜¯æä¾›ä¸€ä¸ªå‚è€ƒã€‚
+ *ÀàÃû£ºHttpProtocolHandler
+ *¹¦ÄÜ£ºHttpClient·½Ê½·ÃÎÊ
+ *ÏêÏ¸£º»ñÈ¡Ô¶³ÌHTTPÊı¾İ
+ *°æ±¾£º3.3
+ *ÈÕÆÚ£º2012-08-17
+ *ËµÃ÷£º
+ *ÒÔÏÂ´úÂëÖ»ÊÇÎªÁË·½±ãÉÌ»§²âÊÔ¶øÌá¹©µÄÑùÀı´úÂë£¬ÉÌ»§¿ÉÒÔ¸ù¾İ×Ô¼ºÍøÕ¾µÄĞèÒª£¬°´ÕÕ¼¼ÊõÎÄµµ±àĞ´,²¢·ÇÒ»¶¨ÒªÊ¹ÓÃ¸Ã´úÂë¡£
+ *¸Ã´úÂë½ö¹©Ñ§Ï°ºÍÑĞ¾¿Ö§¸¶±¦½Ó¿ÚÊ¹ÓÃ£¬Ö»ÊÇÌá¹©Ò»¸ö²Î¿¼¡£
  */
 
 public class HttpProtocolHandler {
 
     private static String              DEFAULT_CHARSET                     = "GBK";
 
-    /** è¿æ¥è¶…æ—¶æ—¶é—´ï¼Œç”±bean factoryè®¾ç½®ï¼Œç¼ºçœä¸º8ç§’é’Ÿ */
+    /** Á¬½Ó³¬Ê±Ê±¼ä£¬ÓÉbean factoryÉèÖÃ£¬È±Ê¡Îª8ÃëÖÓ */
     private int                        defaultConnectionTimeout            = 8000;
 
-    /** å›åº”è¶…æ—¶æ—¶é—´, ç”±bean factoryè®¾ç½®ï¼Œç¼ºçœä¸º30ç§’é’Ÿ */
+    /** »ØÓ¦³¬Ê±Ê±¼ä, ÓÉbean factoryÉèÖÃ£¬È±Ê¡Îª30ÃëÖÓ */
     private int                        defaultSoTimeout                    = 30000;
 
-    /** é—²ç½®è¿æ¥è¶…æ—¶æ—¶é—´, ç”±bean factoryè®¾ç½®ï¼Œç¼ºçœä¸º60ç§’é’Ÿ */
+    /** ÏĞÖÃÁ¬½Ó³¬Ê±Ê±¼ä, ÓÉbean factoryÉèÖÃ£¬È±Ê¡Îª60ÃëÖÓ */
     private int                        defaultIdleConnTimeout              = 60000;
 
     private int                        defaultMaxConnPerHost               = 30;
 
     private int                        defaultMaxTotalConn                 = 80;
 
-    /** é»˜è®¤ç­‰å¾…HttpConnectionManagerè¿”å›è¿æ¥è¶…æ—¶ï¼ˆåªæœ‰åœ¨è¾¾åˆ°æœ€å¤§è¿æ¥æ•°æ—¶èµ·ä½œç”¨ï¼‰ï¼š1ç§’*/
+    /** Ä¬ÈÏµÈ´ıHttpConnectionManager·µ»ØÁ¬½Ó³¬Ê±£¨Ö»ÓĞÔÚ´ïµ½×î´óÁ¬½ÓÊıÊ±Æğ×÷ÓÃ£©£º1Ãë*/
     private static final long          defaultHttpConnectionManagerTimeout = 3 * 1000;
 
     /**
-     * HTTPè¿æ¥ç®¡ç†å™¨ï¼Œè¯¥è¿æ¥ç®¡ç†å™¨å¿…é¡»æ˜¯çº¿ç¨‹å®‰å…¨çš„.
+     * HTTPÁ¬½Ó¹ÜÀíÆ÷£¬¸ÃÁ¬½Ó¹ÜÀíÆ÷±ØĞëÊÇÏß³Ì°²È«µÄ.
      */
     private HttpConnectionManager      connectionManager;
 
     private static HttpProtocolHandler httpProtocolHandler                 = new HttpProtocolHandler();
 
     /**
-     * å·¥å‚æ–¹æ³•
+     * ¹¤³§·½·¨
      * 
      * @return
      */
@@ -70,10 +70,10 @@ public class HttpProtocolHandler {
     }
 
     /**
-     * ç§æœ‰çš„æ„é€ æ–¹æ³•
+     * Ë½ÓĞµÄ¹¹Ôì·½·¨
      */
     private HttpProtocolHandler() {
-        // åˆ›å»ºä¸€ä¸ªçº¿ç¨‹å®‰å…¨çš„HTTPè¿æ¥æ± 
+        // ´´½¨Ò»¸öÏß³Ì°²È«µÄHTTPÁ¬½Ó³Ø
         connectionManager = new MultiThreadedHttpConnectionManager();
         connectionManager.getParams().setDefaultMaxConnectionsPerHost(defaultMaxConnPerHost);
         connectionManager.getParams().setMaxTotalConnections(defaultMaxTotalConn);
@@ -86,66 +86,66 @@ public class HttpProtocolHandler {
     }
 
     /**
-     * æ‰§è¡ŒHttpè¯·æ±‚
+     * Ö´ĞĞHttpÇëÇó
      * 
-     * @param request è¯·æ±‚æ•°æ®
-     * @param strParaFileName æ–‡ä»¶ç±»å‹çš„å‚æ•°å
-     * @param strFilePath æ–‡ä»¶è·¯å¾„
+     * @param request ÇëÇóÊı¾İ
+     * @param strParaFileName ÎÄ¼şÀàĞÍµÄ²ÎÊıÃû
+     * @param strFilePath ÎÄ¼şÂ·¾¶
      * @return 
      * @throws HttpException, IOException 
      */
     public HttpResponse execute(HttpRequest request, String strParaFileName, String strFilePath) throws HttpException, IOException {
         HttpClient httpclient = new HttpClient(connectionManager);
 
-        // è®¾ç½®è¿æ¥è¶…æ—¶
+        // ÉèÖÃÁ¬½Ó³¬Ê±
         int connectionTimeout = defaultConnectionTimeout;
         if (request.getConnectionTimeout() > 0) {
             connectionTimeout = request.getConnectionTimeout();
         }
         httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(connectionTimeout);
 
-        // è®¾ç½®å›åº”è¶…æ—¶
+        // ÉèÖÃ»ØÓ¦³¬Ê±
         int soTimeout = defaultSoTimeout;
         if (request.getTimeout() > 0) {
             soTimeout = request.getTimeout();
         }
         httpclient.getHttpConnectionManager().getParams().setSoTimeout(soTimeout);
 
-        // è®¾ç½®ç­‰å¾…ConnectionManageré‡Šæ”¾connectionçš„æ—¶é—´
+        // ÉèÖÃµÈ´ıConnectionManagerÊÍ·ÅconnectionµÄÊ±¼ä
         httpclient.getParams().setConnectionManagerTimeout(defaultHttpConnectionManagerTimeout);
 
         String charset = request.getCharset();
         charset = charset == null ? DEFAULT_CHARSET : charset;
         HttpMethod method = null;
 
-        //getæ¨¡å¼ä¸”ä¸å¸¦ä¸Šä¼ æ–‡ä»¶
+        //getÄ£Ê½ÇÒ²»´øÉÏ´«ÎÄ¼ş
         if (request.getMethod().equals(HttpRequest.METHOD_GET)) {
             method = new GetMethod(request.getUrl());
             method.getParams().setCredentialCharset(charset);
 
-            // parseNotifyConfigä¼šä¿è¯ä½¿ç”¨GETæ–¹æ³•æ—¶ï¼Œrequestä¸€å®šä½¿ç”¨QueryString
+            // parseNotifyConfig»á±£Ö¤Ê¹ÓÃGET·½·¨Ê±£¬requestÒ»¶¨Ê¹ÓÃQueryString
             method.setQueryString(request.getQueryString());
         } else if(strParaFileName.equals("") && strFilePath.equals("")) {
-        	//postæ¨¡å¼ä¸”ä¸å¸¦ä¸Šä¼ æ–‡ä»¶
+        	//postÄ£Ê½ÇÒ²»´øÉÏ´«ÎÄ¼ş
             method = new PostMethod(request.getUrl());
             ((PostMethod) method).addParameters(request.getParameters());
             method.addRequestHeader("Content-Type", "application/x-www-form-urlencoded; text/html; charset=" + charset);
         }
         else {
-        	//postæ¨¡å¼ä¸”å¸¦ä¸Šä¼ æ–‡ä»¶
+        	//postÄ£Ê½ÇÒ´øÉÏ´«ÎÄ¼ş
             method = new PostMethod(request.getUrl());
             List<Part> parts = new ArrayList<Part>();
             for (int i = 0; i < request.getParameters().length; i++) {
             	parts.add(new StringPart(request.getParameters()[i].getName(), request.getParameters()[i].getValue(), charset));
             }
-            //å¢åŠ æ–‡ä»¶å‚æ•°ï¼ŒstrParaFileNameæ˜¯å‚æ•°åï¼Œä½¿ç”¨æœ¬åœ°æ–‡ä»¶
+            //Ôö¼ÓÎÄ¼ş²ÎÊı£¬strParaFileNameÊÇ²ÎÊıÃû£¬Ê¹ÓÃ±¾µØÎÄ¼ş
             parts.add(new FilePart(strParaFileName, new FilePartSource(new File(strFilePath))));
             
-            // è®¾ç½®è¯·æ±‚ä½“
+            // ÉèÖÃÇëÇóÌå
             ((PostMethod) method).setRequestEntity(new MultipartRequestEntity(parts.toArray(new Part[0]), new HttpMethodParams()));
         }
 
-        // è®¾ç½®Http Headerä¸­çš„User-Agentå±æ€§
+        // ÉèÖÃHttp HeaderÖĞµÄUser-AgentÊôĞÔ
         method.addRequestHeader("User-Agent", "Mozilla/4.0");
         HttpResponse response = new HttpResponse();
 
@@ -173,7 +173,7 @@ public class HttpProtocolHandler {
     }
 
     /**
-     * å°†NameValuePairsæ•°ç»„è½¬å˜ä¸ºå­—ç¬¦ä¸²
+     * ½«NameValuePairsÊı×é×ª±äÎª×Ö·û´®
      * 
      * @param nameValues
      * @return

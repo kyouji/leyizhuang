@@ -20,7 +20,7 @@ a:hover{ text-decoration:none;}
 .evaluate_nav a{  color:#333333;}
 .evaluate_nav *{ float:left;}
 
-.evaluate_img a{ line-height:70px; }
+.evaluate_img a{ line-height:70px; width:350px; }
 .evaluate_img img{ width:24px; height:40px; margin-top:15px; padding-left:29px; padding-right:22px;}
 .evaluate_date_01{padding-left:120px; padding-right:96px; line-height:70px;}
 .evaluate_date_02{padding:0 106px; line-height:70px;}
@@ -47,6 +47,7 @@ a:hover{ text-decoration:none;}
 .evaluat_take{overflow:hidden; margin-left:60px; margin-top:5px; *+margin-top:14px; width:790px;}
 .evaluat_take *{ float:left;}
 .evaluat_take input{ width:500px; height:100px; margin-left:11px; *+margin-left:6px;  _margin-left:10px;}
+.evaluat_take textarea{ width:500px; height:100px; margin-left:11px; *+margin-left:6px;  _margin-left:10px;}
 .evaluat_take a{ margin-top:100px; margin-left:10px;}
 
 .evaluat_take_02{ margin-left:14px; margin-bottom:10px; *+margin-left:10px;  _margin-left:12px;}
@@ -68,4 +69,5 @@ a:hover{ text-decoration:none;}
 .evaluate_nav_03{overflow:hidden; height:70px; border:#e6e6e6 1px solid; width:968px; }
 .evaluate_nav_03 *{ float:left;}
 
+.hide{display:none;}
 /*IE9已下  hack、*/

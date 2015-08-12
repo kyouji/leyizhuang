@@ -13,9 +13,7 @@
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter.css"/>
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
-<script src="/client/js/mymember.js"></script>
-<script src="/client/js/common.js"></script>
-<script src="/client/js/ljs-v1.01.js"></script>
+
 
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
@@ -26,42 +24,7 @@
 DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
-<script type="text/javascript">
-  $(document).ready(function(){
-	menuDownList("top_phone","#top_phonelist",".a1","sel");
-	phoneListMore();//单独下拉
-    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-	navDownList("navdown","li",".nav_showbox");
-	menuDownList("mainnavdown","#navdown",".a2","sel");
-	checkNowHover("shopping_down","shopping_sel");
-});
-</script>
-<script>
-//关注商品控制   @by zhangji
-$(document).ready(function(){ 
-     $(".tp").mouseover(function(){   
-     
-        $(".tp").css({"box-shadow":"10px 10px 5px #888888",
-                                        "background-color":"#f7f7f7"});        
-    });
-        
-     $(".tp").mouseout(function(){    
-       
-        $(".tp").css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
-     });
-     
-     $(".shadow_add2").mouseover(function(){   
-         var index = $(this).index();
-         $(".shadow_add2").eq(index).css({"box-shadow":"10px 10px 5px #888888",
-                                         "background-color":"#f7f7f7"});        
-     });
-         
-      $(".shadow_add2").mouseout(function(){    
-         var index = $(this).index();
-         $(".shadow_add2").eq(index).css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
-      });
-}); 
-</script>
+  
 
 </head>
 <body>

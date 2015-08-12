@@ -38,7 +38,7 @@ var theForm = document.forms['form1'];
   <!-- 左侧 -->
  <#include "/client/common_user_menu.ftl" />
   <!-- 右侧 -->
- <div class="content_2">
+ <div class="content_2" style="overflow:visible;">
     <div class="content_2_1">浏览历史</div>
     <div class="content_2_2">
       <ul >

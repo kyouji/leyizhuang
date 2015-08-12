@@ -37,4 +37,6 @@ public interface TdUserReturnRepo extends
     Page<TdUserReturn> findByUsernameOrderByIdDesc(String username, Pageable page);
     
     Page<TdUserReturn> findByUsernameAndGoodsTitleContainingOrderByIdDesc(String username, String keywords, Pageable page);
+
+	TdUserReturn findByUsernameAndGoodsId(String username, Long goodsId);
 }

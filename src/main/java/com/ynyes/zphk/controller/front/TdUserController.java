@@ -344,6 +344,73 @@ public class TdUserController extends AbstractPaytypeService {
         return "/client/user_order_list";
     }
     
+    /**
+     * 正品惠客 我的订单
+     * @author Zhangji
+     * @param req
+     * @param __EVENTTARGET
+     * @param __EVENTARGUMENT
+     * @param page
+     * @param keywords
+     * @param map
+     * @return
+     */
+   
+    @RequestMapping(value = "/user/order/list")
+    public String orderList(HttpServletRequest req, 
+			    		String __EVENTTARGET,
+			            String __EVENTARGUMENT,
+                        Integer page,
+                        String keywords,
+                        ModelMap map){
+        String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            return "redirect:/login";
+        }
+        
+        tdCommonService.setHeader(map, req);
+        
+        if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                } 
+            }
+            
+        }
+        
+        if (null == page)
+        {
+            page = 0;
+        }
+        
+        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        map.addAttribute("user", tdUser);
+        
+        Page<TdOrder> orderPage = null;
+        
+        if (null == keywords || keywords.isEmpty())
+        {
+        	orderPage = tdOrderService.findByUsername(username, page, ClientConstant.recentPageSize);
+        }
+        else
+        {
+        	orderPage = tdOrderService.findByUsername(username, page, ClientConstant.recentPageSize);
+        }
+        
+        map.addAttribute("order_page", orderPage);
+        map.addAttribute("keywords", keywords);
+        
+        return "/client/user_order_list";      
+    }
+    
+    
     @RequestMapping(value = "/user/order")
     public String order(Long id,
                         HttpServletRequest req, 
@@ -587,6 +654,9 @@ public class TdUserController extends AbstractPaytypeService {
     
     @RequestMapping(value = "/user/point/list")
     public String pointList(HttpServletRequest req, Integer page,
+			    		String __EVENTTARGET,
+			            String __EVENTARGUMENT,           
+			            String keywords,
                         ModelMap map){
         String username = (String) req.getSession().getAttribute("username");
         
@@ -597,6 +667,17 @@ public class TdUserController extends AbstractPaytypeService {
         
         tdCommonService.setHeader(map, req);
         
+        if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                } 
+            }
+            
+        }
         if (null == page)
         {
             page = 0;
@@ -607,10 +688,17 @@ public class TdUserController extends AbstractPaytypeService {
         map.addAttribute("user", tdUser);
         
         Page<TdUserPoint> pointPage = null;
-        
-        pointPage = tdUserPointService.findByUsername(username, page, ClientConstant.pageSize);
+        if (null == keywords || keywords.isEmpty())
+        {
+            pointPage =  tdUserPointService.findByUsername(username, page, ClientConstant.pageSize);
+        }
+        else
+        {
+            pointPage = tdUserPointService.findByUsername(username, page, ClientConstant.pageSize);
+        }        
         
         map.addAttribute("point_page", pointPage);
+        map.addAttribute("keywords", keywords);
         
         return "/client/user_point_list";
     }
@@ -650,7 +738,7 @@ public class TdUserController extends AbstractPaytypeService {
                         {
                             map.addAttribute("has_returned", true);
                         }
-
+                        map.addAttribute("order_info",tdOrder);  //订单信息 zhangji
                         map.addAttribute("order_goods", tog);
                         
                         return "/client/user_return_edit";
@@ -681,7 +769,7 @@ public class TdUserController extends AbstractPaytypeService {
         if (null != id && null != goodsId)
         {
             TdOrder order = tdOrderService.findOne(id);
-            
+            TdOrderGoods goods = tdOrderGoodsService.findOne(goodsId);   //查找退货商品信息  zhangji
             if (null != order)
             {
                 for (TdOrderGoods tog : order.getOrderGoodsList())
@@ -711,7 +799,7 @@ public class TdUserController extends AbstractPaytypeService {
                         tdReturn.setReturnNumber(1L);
                         
                         // 保存
-                        tdUserReturnService.save(tdReturn);
+                        tdUserReturnService.save(tdReturn);                                         
                         
                         // 该商品已经退换货
                         tog.setIsReturnApplied(true);
@@ -720,13 +808,92 @@ public class TdUserController extends AbstractPaytypeService {
                     }
                 }
             }
+            
+            map.addAttribute("order_info",order);  //订单信息 zhangji
+            map.addAttribute("order_goods", goods);
         }
+     
+      
         
-        return "redirect:/user/return/list";
+        return "client/user_return_handling"; // 返回等待处理页面 zhangji
     }
     
+    /**
+     * 从订单记录跳转到待审核页面
+     * @author Zhangji
+     * @param req
+     * @param orderId
+     * @param id
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/user/return/handling/{orderId}")
+    public String userReturnHandling(HttpServletRequest req, 
+                        @PathVariable Long orderId,
+                        Long id,     
+                        ModelMap map){
+        String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            return "redirect:/login";
+        }
+        
+        tdCommonService.setHeader(map, req);
+        
+        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        map.addAttribute("user", tdUser);
+        TdOrderGoods tdOrderGoods = tdOrderGoodsService.findOne(id);
+        TdUserReturn tdReturn = tdUserReturnService.findByUsernameAndGoodsId(username, tdOrderGoods.getGoodsId());      
+        Long statusId = tdReturn.getStatusId();
+        
+        //根据退货处理状态statusId 跳转页面 zhangji
+        if(0 == statusId){      
+	        if (null != orderId && null!= id )
+	        {          
+	             TdOrder order = tdOrderService.findOne(orderId);
+	             TdOrderGoods goods = tdOrderGoodsService.findOne(id);   //查找退货商品信息  zhangji
+	             
+	             map.addAttribute("order_info",order);  //订单信息 zhangji            
+		         map.addAttribute("order_goods", goods);
+	        }
+	       
+                 return "/client/user_return_handling";
+        }
+        if(1== statusId){
+        	 if (null != orderId && null!= id )
+ 	        {          
+ 	             TdOrder order = tdOrderService.findOne(orderId);
+ 	             TdOrderGoods goods = tdOrderGoodsService.findOne(id);   //查找退货商品信息  zhangji
+ 	             
+ 	             map.addAttribute("order_info",order);  //订单信息 zhangji            
+ 		         map.addAttribute("order_goods", goods);
+ 	        }
+ 	       
+                 return "/client/user_return_success"; 
+         }
+         if(2 == statusId){
+        	 if (null != orderId && null!= id )
+ 	        {          
+ 	             TdOrder order = tdOrderService.findOne(orderId);
+ 	             TdOrderGoods goods = tdOrderGoodsService.findOne(id);   //查找退货商品信息  zhangji
+ 	             
+ 	             map.addAttribute("order_info",order);  //订单信息 zhangji            
+ 		         map.addAttribute("order_goods", goods);
+ 	        }
+ 	       
+                 return "/client/user_return_fail";
+         }
+         return "/client/user_return_handling";
+      }
+    
+    
+    
     @RequestMapping(value = "/user/return/list")
-    public String returnList(HttpServletRequest req, 
+    public String returnList(HttpServletRequest req,
+			    		String __EVENTTARGET,
+			            String __EVENTARGUMENT,
                         Integer page,
                         String keywords,
                         ModelMap map){
@@ -739,11 +906,23 @@ public class TdUserController extends AbstractPaytypeService {
         
         tdCommonService.setHeader(map, req);
         
+        if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                } 
+            }
+            
+        }      
         if (null == page)
         {
             page = 0;
         }
         
+       
         TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
         
         map.addAttribute("user", tdUser);
@@ -764,6 +943,75 @@ public class TdUserController extends AbstractPaytypeService {
         
         return "/client/user_return_list";
     }
+    
+    @RequestMapping(value = "/user/return/list/del{id}")
+    public String returnDel(HttpServletRequest req, 
+    		@PathVariable Long id,
+            ModelMap map){
+        String username = (String) req.getSession().getAttribute("username");
+
+        if (null == username) {
+            return "redirect:/login";
+        }
+        
+        if (null != id)
+        {
+
+                tdUserReturnService.delete(id);
+           
+        }
+        
+        return "redirect:/user/return/list";
+    }
+    
+    /**
+     * 评论详情
+     *@author Zhangji    
+     * @return
+     */
+    @RequestMapping(value = "/user/comment/edit/{orderId}")
+    public String userCommentEdit(HttpServletRequest req, 
+                        @PathVariable Long orderId,
+                        Long id,     
+                        ModelMap map){
+    	String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            return "redirect:/login";
+        }
+        
+        tdCommonService.setHeader(map, req);
+        
+        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        map.addAttribute("user", tdUser);
+        
+        if (null != orderId)
+        {
+            TdOrder tdOrder = tdOrderService.findOne(orderId);
+            map.addAttribute("order", tdOrder);
+            
+            if (null != tdOrder && null != id)
+            {
+                for (TdOrderGoods tog : tdOrder.getOrderGoodsList())
+                {
+                    if (tog.getId().equals(id))
+                    {
+                        
+                        map.addAttribute("order_info",tdOrder);  //订单信息 zhangji
+                        map.addAttribute("order_goods", tog);
+                        
+                        return "/client/user_comment_edit";
+                    }
+                }
+            }
+        }
+        
+        return "/client/user_comment_edit";
+      }
+    
+    
     
     @RequestMapping(value = "/user/comment/add", method=RequestMethod.POST)
     @ResponseBody
@@ -821,8 +1069,7 @@ public class TdUserController extends AbstractPaytypeService {
         
         tdComment.setStatusId(0L);
         
-        tdUserCommentService.save(tdComment);
-        
+        tdUserCommentService.save(tdComment);        
 
         if (null == goods.getTotalComments())
         {
@@ -836,6 +1083,7 @@ public class TdUserController extends AbstractPaytypeService {
         res.put("code", 0);
         
         return res;
+      
     }
     
     @RequestMapping(value = "/user/comment/list")
@@ -862,7 +1110,9 @@ public class TdUserController extends AbstractPaytypeService {
         map.addAttribute("user", tdUser);
         
         Page<TdUserComment> commentPage = null;
+        Page<TdOrder> orderPage = null;
         
+        orderPage = tdOrderService.findByUsername(username, page, ClientConstant.pageSize);
         if (null == keywords || keywords.isEmpty())
         {
             commentPage = tdUserCommentService.findByUsername(username, page, ClientConstant.pageSize);
@@ -872,6 +1122,7 @@ public class TdUserController extends AbstractPaytypeService {
             commentPage = tdUserCommentService.findByUsernameAndSearch(username, keywords, page, ClientConstant.pageSize);
         }
         
+        map.addAttribute("order_page",orderPage);
         map.addAttribute("comment_page", commentPage);
         map.addAttribute("keywords", keywords);
         
@@ -1096,7 +1347,7 @@ public class TdUserController extends AbstractPaytypeService {
                     }
                     // 新增
                     else
-                    {
+                    {                   	
                         addressList.add(tdShippingAddressService.save(tdShippingAddress));
                         user.setShippingAddressList(addressList);
                         tdUserService.save(user);
@@ -1104,6 +1355,30 @@ public class TdUserController extends AbstractPaytypeService {
                     
                     return "redirect:/user/address/list";
                 }
+                
+                //设为默认地址 zhangji
+                else if (method.equalsIgnoreCase("default"))
+                {
+                	 if (null != id)
+                     {
+                         //map.addAttribute("address", s)
+                         for (TdShippingAddress add : addressList)
+                         {
+                             if (add.getId().equals(id))
+                             {
+                            	 add.setIsDefaultAddress(true);
+                            	 tdShippingAddressService.save(add);
+                             }
+                             else if (!add.getId().equals(id))
+                             {
+                            	 add.setIsDefaultAddress(false);
+                            	 tdShippingAddressService.save(add);
+                             }
+                         }
+                     }
+                	 
+                }
+
             }
             
             map.addAttribute("address_list", user.getShippingAddressList());

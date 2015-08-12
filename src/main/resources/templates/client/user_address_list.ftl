@@ -2,21 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>云南车有同盟商贸有限公司</title>
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
-<meta name="copyright" content="云南车有同盟商贸有限公司" />
-<link href="/client/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+<meta name="copyright" content="正品惠客" />
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
+<link rel="stylesheet" type="text/css" href="/client/css/address.css"/>
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
-<script src="/client/js/mymember.js"></script>
-<script src="/client/js/common.js"></script>
-<script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/jquery.cityselect.js"></script>
 
 <!--[if IE]>
@@ -30,12 +25,12 @@ DD_belatedPNG.fix('.,img,background');
 <![endif]-->
 <script type="text/javascript">
   $(document).ready(function(){
-    menuDownList("top_phone","#top_phonelist",".a1","sel");
-    phoneListMore();//单独下拉
-    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-    navDownList("navdown","li",".nav_showbox");
-    menuDownList("mainnavdown","#navdown",".a2","sel");
-    checkNowHover("shopping_down","shopping_sel");
+  //  menuDownList("top_phone","#top_phonelist",".a1","sel");
+  //  phoneListMore();//单独下拉
+ //   menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+//    navDownList("navdown","li",".nav_showbox");
+//    menuDownList("mainnavdown","#navdown",".a2","sel");
+//    checkNowHover("shopping_down","shopping_sel");
     
     //初始化表单验证
     $("#form1").Validform({
@@ -49,119 +44,79 @@ DD_belatedPNG.fix('.,img,background');
         <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
         required:false
     }); 
+    
+
 });
 </script>
 
 </head>
 <body>
-<!-- header开始 -->
 <#include "/client/common_header.ftl" />
-<!-- header结束 -->
-<div class="mymember_out">
-  <div class="mymember_main">
-    <div class="myclear" style="height:20px;"></div>
-    <#include "/client/common_user_menu.ftl" />
-    <#-- 左侧菜单结束 -->
-    <!--mymember_menu END-->
-    
-    <div class="mymember_mainbox">
-      <div class="mymember_info mymember_info02">
-        <h3>收货地址</h3>
-        
-		
-		<div class="haoh pt15 geren_rig">
-        <table class="center_tab">
-          <tbody>
-          <tr>
-            <th>收货人</th>
-            <th>地区</th>
-            <th>邮政编码</th>
-            <th>联系电话</th>
-            <th>详细地址</th>
-            <th>操作</th>
-          </tr>
-          
-          <#if address_list??>
-            <#list address_list as address>
-                <tr>
-                    <td>${address.receiverName!''}</td>
-                    <td>${address.province!''}${address.city!''}${address.disctrict!''}</td>
-                    <td>${address.postcode!''}</td>
-                    <td>${address.receiverMobile!''}</td>
-                    <td>${address.detailAddress!''}</td>
-                    <td>
-                      <p><a href="/user/address/update?id=${address.id}">修改</a></p>
-                      <p><a href="/user/address/delete?id=${address.id}">删除</a></p>
-                    </td>
-                  </tr>
-            </#list>
-          </#if>
-        </tbody></table>
-        
-    <div class="h20"></div>
-    <form method="post" action="/user/address/save" id="form1">
-    <table class="mymember_address">
+<!-- 内容 -->
+<div class="content"> 
+  <!-- 左侧 -->
+  <#include "/client/common_user_menu.ftl" />
+  <!-- 右侧 -->
+  <div class="content_2">
+    <div class="content_2_1"><span>已经保存的收货地址</span><label>您已创建${address_list?size}个收货地址，最多可创建10个</label></div>
+    <div class="content_2_2"></div>
+    <div class="content_2_3">
+     <#if address_list??>
+         <#list address_list as address>            
+		      <div class="dz_2 <#if address.isDefaultAddress> dz_1</#if>">
+		        <div class="dz_1_1"><strong>${address.receiverName!''}</strong><span><a href="/user/address/update?id=${address.id}" title="">修改</a> 
+		                                                                             <a href="/user/address/delete?id=${address.id}" title="">删除</a>  
+		                                                                             <a href="/user/address/default?id=${address.id}" title="">默认</a>  
+		                                                                         </span>
+		        </div>
+		        <div class="dz_1_2">${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</div>
+		        <div class="dz_1_3">${address.receiverMobile!''}</div>
+		      </div>
+          </#list>
+     </#if>    
+
+    </div>
+    <div class="content_2_4">编辑收货地址 </div>
+    <div class="content_2_5">
+    <ul>
+    <form method="post" action="/user/address/save" id="form1">    
       <input class="mytext" name="addressId" type="hidden" value="<#if address??>${address.id}</#if>">
-      <tbody>
-      <tr>
-        <th>收货人：</th>
-        <td>
-            <input class="mytext" name="receiverName" datatype="*2-128" errormsg="最少两个字符！" value="<#if address??>${address.receiverName}</#if>" type="text">
-            <span class="Validform_checktip">*收货人姓名</span>
-        </td>
-      </tr>
-      <tr>
-        <th>地区：</th>
-        <td>
-          <div id="address">
-          <select name="province" class="prov" style="width: 100px;" datatype="*"></select>
-          <select name="city" class="city" style="width: 100px;" datatype="*"></select>
-          <select name="disctrict" class="dist" style="width: 100px;" datatype="*0-10"></select>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th>详细地址：</th>
-        <td>
-            <input class="mytext" name="detailAddress" datatype="*2-128" errormsg="最少两个字符！" value="<#if address??>${address.detailAddress}</#if>" type="text">
-            <span class="Validform_checktip">*详细地址</span>
-        </td>
-      </tr>
-      <tr>
-        <th>邮政编码：</th>
-        <td>
-            <input class="mytext" name="postcode" datatype="p" errormsg="邮政编码为6位数字！" value="<#if address??>${address.postcode}</#if>" type="text">
-            <span class="Validform_checktip">*邮政编码</span>
-        </td>
-      </tr>
-      <tr>
-        <th>联系电话：</th>
-        <td>
-            <input class="mytext" name="receiverMobile" datatype="n8-12" errormsg="请输入正确的电话号码格式！" value="<#if address??>${address.receiverMobile}</#if>" type="text">
-            <span class="Validform_checktip">*电话号码</span>
-        </td>
-      </tr>
-      <tr>
-        <th></th>
-        <td><input class="mysub" type="submit" value="保存"></td>
-      </tr>
-    </tbody>
-    </table>
-    
+      <input class="mytext" name="isDefaultAddress" type="hidden" value="false">
+        <li><span>收货人：</span>
+            <input id="receiverName" type="text" name="receiverName"  datatype="*2-128" errormsg="最少两个字符！" value="<#if address??>${address.receiverName}</#if>" class="textInput" value="" />
+            <span style="float:none;" class="Validform_checktip">*收货人姓名</span>
+        </li> 
+        <li><span>所在地：</span>
+              <div id="address">
+		          <select name="province" class="prov" style="width: 100px;" datatype="*"></select>
+		          <select name="city" class="city" style="width: 100px;" datatype="*"></select>
+		          <select name="disctrict" class="dist" style="width: 100px;" datatype="*0-10"></select>
+		          <span style="float:none;" class="Validform_checktip">*收货人姓名</span>
+	          </div>	         
+        </li>
+        <li class="li_a">
+            <span>详细地址：</span>
+            <input class="mytext" name="detailAddress" datatype="*2-128" errormsg="最少两个字符！" value="<#if address??>${address.detailAddress!''}</#if>" type="text">
+            </input>
+            <span style="float:none;" class="Validform_checktip">*详细地址</span> 
+        <li>
+            <span>联系电话：</span>
+            <input class="mytext" name="receiverMobile" datatype="m" errormsg="请输入正确的电话号码格式！" value="<#if address??>${address.receiverMobile!''}</#if>" type="text">
+            <span style="float:none;" class="Validform_checktip">*手机号码</span>
+        </li>
+        <li>
+            <span>邮编：</span>
+            <input class="mytext" name="postcode" datatype="p" errormsg="邮政编码为6位数字！" value="<#if address??>${address.postcode!''}</#if>" type="text">
+            <span style="float:none;" class="Validform_checktip">*邮政编码</span>
+        </li>
+        <li>
+          <input id="button" class="mysub" type="submit" value="保存">
+        </li>  
     </form>
-    </div>
-	  
-	  
-	  
-      </div>
-      <!--mymember_info END-->
     
+      
     </div>
-    <!--mymember_center END-->   
-    <div class="myclear"></div>
-  </div>
-  <!--mymember_main END-->
-  <div class="myclear"></div>
+</div>
 </div>
 <!--主体结束-->
 <#include "/client/common_footer.ftl" />
