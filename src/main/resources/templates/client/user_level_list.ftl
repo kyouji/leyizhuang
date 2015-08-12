@@ -26,7 +26,7 @@
          <#list level_page.content as item>
                 <#if item_index = 0>
                    <li class="dj_0">
-                   <#if user.userLevelTitle = item.title>
+                   <#if user.userLevelTitle == item.title>
                      <p style="color:#ef7c00;">${item.title!''}</p>
                     <#else>           
                       ${item.title!''}

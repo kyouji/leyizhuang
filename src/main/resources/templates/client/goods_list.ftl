@@ -11,6 +11,7 @@
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/index.js"></script>
 <script src="/client/js/list.js"></script>
+<script src="/client/js/goods.js" type="text/javascript"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/list.css" rel="stylesheet" type="text/css" />
 
@@ -242,14 +243,16 @@ function btnPageSubmit()
     	<p>热销排行</p>
     	<#if most_sold_list??>
     	   <#list most_sold_list as item>
+    	       <#if item_index < 6 >
     	       <dl>
-                    <dt><img src="${item.coverImageUri!''}" /></dt>
+                    <dt><img src="${item.coverImageUri!''}" width="210px" height="210px"/></dt>
                     <dd class="c_r_title">
                         <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
                     </dd>
                     <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
                         <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> </dd>
                 </dl>
+                </#if>
     	   </#list>
     	</#if>
     </div>

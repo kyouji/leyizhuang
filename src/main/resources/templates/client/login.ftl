@@ -75,9 +75,9 @@
             <a href="/reg" title="" >免费注册</a>
         </div>
         <div class="top_right">
-        	<a href="#" title="">我的惠客</a>
-            <a class="top_right_my_collection" href="#" title="">我的收藏</a>
-            <a class="top_right_hk" href="#" title="">手机惠客</a>
+        	<a href="/user" title="">我的惠客</a>
+            <a class="top_right_my_collection" href="/user/collect/list" title="">我的收藏</a>
+            <a class="top_right_hk" href="/user" title="">手机惠客</a>
         </div>
     </div>
 </div>	
@@ -85,7 +85,7 @@
 <div class="header">
 	<!--logo大小：190 58-->
 	<div class="header_logo">
-    	<img src="images/logo_1.png" />
+    	<img src="<#if site??>${site.logoUri!''}</#if>" />
     </div>
     <div class="user_registration">用户登录</div>
 </div>
@@ -133,14 +133,15 @@
             </#list>
         </#if>
     </div>
-    <div class="bottom_footer">
+    <div class="bottom_footer" style="text-align:center">
     	<span>友情链接：</span>
         <#if site_link_list??>
         <#list site_link_list as item>
-            <a href="${item.linkUri!''}">${item.title!''}</a> |
+            |&emsp;&emsp;<a href="${item.linkUri!''}">${item.title!''}</a> 
         </#list>
          </#if>
-        <span>Copyright©2006-2014 All Rights Reserved 丫丫网 版权所有 滇ICP备07004173号 </span>
+         <br>
+        <span> ${site.copyright!''}</span>
     </div>
 </div>
 </body>

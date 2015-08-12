@@ -1,14 +1,10 @@
 package com.ynyes.zphk.controller.front;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,20 +21,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cytm.payment.ceb.CEBPayConfig;
 import com.ynyes.zphk.entity.TdGoods;
 import com.ynyes.zphk.entity.TdOrder;
 import com.ynyes.zphk.entity.TdOrderGoods;
-import com.ynyes.zphk.entity.TdPayType;
 import com.ynyes.zphk.entity.TdShippingAddress;
 import com.ynyes.zphk.entity.TdUser;
 import com.ynyes.zphk.entity.TdUserCollect;
 import com.ynyes.zphk.entity.TdUserComment;
 import com.ynyes.zphk.entity.TdUserConsult;
+import com.ynyes.zphk.entity.TdUserLevel;
 import com.ynyes.zphk.entity.TdUserPoint;
 import com.ynyes.zphk.entity.TdUserRecentVisit;
 import com.ynyes.zphk.entity.TdUserReturn;
-import com.ynyes.zphk.entity.TdUserLevel;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdGoodsService;
 import com.ynyes.zphk.service.TdOrderGoodsService;
@@ -1376,10 +1370,8 @@ public class TdUserController extends AbstractPaytypeService {
                              }
                          }
                      }
-                	 
                 }
-
-            }
+            } 
             
             map.addAttribute("address_list", user.getShippingAddressList());
         }
@@ -1515,7 +1507,7 @@ public class TdUserController extends AbstractPaytypeService {
         tdCommonService.setHeader(map, req);
         
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
-        
+        System.err.println(user.getBirthday());
         map.addAttribute("user", user);
         
         map.addAttribute("recommend_goods_page", tdGoodsService.findByIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(0, ClientConstant.pageSize));

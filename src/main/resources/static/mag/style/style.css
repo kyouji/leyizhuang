@@ -39,8 +39,8 @@ a:active{ color:#EA5D0E; text-decoration:none; }
 /*顶部菜单*/
 .nav{ display:block; float:left; height:100%; border-right:2px solid #2A2B2D; }
 	.nav li{ display:block; float:left; margin:0; padding:0px 15px; border-left:2px solid #2A2B2D; color:#fff; cursor:pointer; font-size:16px; height:49px; line-height:42px; vertical-align:middle; }
-	.nav li:hover{ background:#FF0F00; }
-	.nav .selected{ background:#FF0F00; }
+	.nav li:hover{ background:#0e5baa; }
+	.nav .selected{ background:#0e5baa; }
 	.nav .icon-0,.nav .icon-1,.nav .icon-2,.nav .icon-3,.nav .icon-4,.nav .icon-5,
 	.nav .icon-6,.nav .icon-7{ display:block; background:url(skin_icons.png) no-repeat; float:left; height:49px; width:20px; }
 	.nav .icon-0{ background-position:2px -301px;  }

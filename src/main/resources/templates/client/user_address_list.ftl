@@ -64,10 +64,11 @@ DD_belatedPNG.fix('.,img,background');
      <#if address_list??>
          <#list address_list as address>            
 		      <div class="dz_2 <#if address.isDefaultAddress> dz_1</#if>">
-		        <div class="dz_1_1"><strong>${address.receiverName!''}</strong><span><a href="/user/address/update?id=${address.id}" title="">修改</a> 
-		                                                                             <a href="/user/address/delete?id=${address.id}" title="">删除</a>  
-		                                                                             <a href="/user/address/default?id=${address.id}" title="">默认</a>  
-		                                                                         </span>
+		        <div class="dz_1_1"><strong>${address.receiverName!''}</strong>
+		        <span><a href="/user/address/update?id=${address.id}" title="">修改</a> 
+                      <a href="/user/address/delete?id=${address.id}" title="">删除</a>  
+                      <a href="/user/address/default?id=${address.id}" title="">默认</a>  
+                 </span>
 		        </div>
 		        <div class="dz_1_2">${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</div>
 		        <div class="dz_1_3">${address.receiverMobile!''}</div>

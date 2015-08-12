@@ -9,9 +9,14 @@
 <meta name="copyright" content="${site.copyright!''}" />
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/main.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/index_smallad_scroll.css" rel="stylesheet" type="text/css" />
+
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/jquery1.42.min.js"></script>
+<script src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script src="/client/js/common.js" type="text/javascript"></script>
+<script src="/client/js/goods.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
         
@@ -101,6 +106,9 @@ $(function(){
     floatBoxQQ();
 });
 </script>
+<script type="text/javascript">
+     jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true});
+ </script>
 </head>
 
 <body>
@@ -376,7 +384,7 @@ $(function(){
                              <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                              <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                          </dl>
-                        <div class="gz_dh"><a href="#"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                     </li>
                     </#if>
                 </#list>
@@ -392,7 +400,7 @@ $(function(){
                               <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                               <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                        <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                      </li>
                      </#if>
                 </#list>
@@ -482,7 +490,7 @@ $(function(){
                            <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                            <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                    <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                     </li>
                     </#if>
                 </#list>
@@ -500,7 +508,7 @@ $(function(){
                           <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                           <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                    <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                     </li>
                     </#if>
                 </#list>
@@ -516,7 +524,7 @@ $(function(){
                            <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                            <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                    <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                     </li>
                     </#if>
                 </#list>
@@ -600,7 +608,7 @@ $(function(){
                           <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                           <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                    <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                      </li>
                      </#if>
                 </#list>
@@ -650,7 +658,7 @@ $(function(){
         </ul>
         <ul class="pc_photo">
         	 <#if type_scroll_ad_list?? && type_scroll_ad_list?size gt 0 >
-                <img src="${type_scroll_ad_list[0].fileUri!""}" width="404px" height="272px"/>
+        	   <img src="${type_scroll_ad_list[0].fileUri!""}" width="404px" height="272px"/>
             </#if>
             <#if top_cat_goods_page3?? && top_cat_goods_page3.content?size gt 0 >
                 <#list top_cat_goods_page3.content as item>
@@ -663,7 +671,7 @@ $(function(){
                            <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                            <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                    <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                     </li>
                     </#if>
                 </#list>
@@ -681,7 +689,7 @@ $(function(){
                           <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                           <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                    <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                     </li>
                     </#if>
                 </#list>
@@ -697,7 +705,7 @@ $(function(){
                            <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                            <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                    <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                     </li>
                     </#if>
                 </#list>

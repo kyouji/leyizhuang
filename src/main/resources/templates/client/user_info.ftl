@@ -107,17 +107,17 @@ function submitInfo()
           <input id="RadioGroup1_1" type="radio" value="女" name="sex"<#if user.sex?? && user.sex=="女">checked="checked" </#if>/>
           女</li>
           <#-- 生日的初始化未实现！！ zhangji -->
-          <form id="form1" name="form1">          
+          <form id="form1" name="form1">
 		        <li><span>生日：</span>
-					<select id="year" name="YYYY" onchange="YYYYMM(this.value)">  
-					   <option value="${user.birthday?string("yyyy")!''}">年</option>  
-					</select>  
+					<select id="year" name="YYYY" onchange="YYYYMM(this.value)">
+					   <option value="<#if user.birthday?? >${user.birthday?string("yyyy")!''}</#if>"></option> 
+					</select>年  
 					<select id="month" name="MM"onchange="MMDD(this.value)">  
-					   <option value="{user.birthday?string("MM")!''}">月</option>  
-					</select>  
+					   <option value="<#if user.birthday?? >${user.birthday?string("MM")!''}</#if>"></option>  
+					</select>月  
 					<select id="day" name="DD">  
-					   <option value="{user.birthday?string("dd")!''}">日</option>  
-					</select> 
+					   <option value="<#if user.birthday?? >${user.birthday?string("dd")!''}</#if>" ></option>  
+					</select>日 
 		        </li>
           </form>
           <#-- 生日的初始化未实现！！ zhangji  end-->
