@@ -131,10 +131,11 @@ public interface TdGoodsRepo extends
     // 全部秒杀
     Page<TdGoods> findByIsFlashSaleTrueAndIsOnSaleTrueOrderByFlashSaleStartTimeAsc(Pageable page);
 
-    Page<TdGoods> findByTitleContainingAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(String key1,
+    Page<TdGoods> findByTitleContainingAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrueOrNameContainingAndIsOnSaleTrue(String key1,
             String key2,
             String key3,
             String key4,
+            String key5,
             Pageable page);
 
     List<TdGoods> findByProductIdAndIsOnSaleTrue(Long productId);
@@ -142,4 +143,6 @@ public interface TdGoodsRepo extends
     Page<TdGoods> findByReturnPriceNotAndIsOnSaleTrue(double returnPrice, Pageable page);
     
     Page<TdGoods> findByReturnPriceNotAndTitleContainingAndIsOnSaleTrue(double returnPrice, String keywords, Pageable page);
+    
+    List<TdGoods> findByIsSpecialPriceTrueAndIsOnSaleTrue();
 }

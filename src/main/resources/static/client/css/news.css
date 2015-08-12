@@ -1,0 +1,8 @@
+@charset "utf-8";
+/* CSS Document */
+.content_2 .content_2_1{ height:30px;  margin-top:30px; _margin-top:35px; _line-height:25px; font-size:18px; color:#333333; font-weight:bold; border-bottom:2px solid #043a84; text-indent:20px; }
+.content_2 .content_2_2 ul li{margin-top:20px; }
+.content_2 .content_2_2 ul li .textInput,.content_2 .content_2_2 ul li .Input{ width:160px; height:30px;}
+.content_2 .content_2_2 ul li select{ width:80px; height:30px;}
+.content_2 .content_2_2 ul li label{ margin-left:5px;}
+.content_2 .content_2_2 ul li #button{ background:#0e5baa; border:0 none; color:#ffffff; height:30px; width:50px;  border-radius:2px; font-size:14px; margin-left:50px; cursor: pointer;}

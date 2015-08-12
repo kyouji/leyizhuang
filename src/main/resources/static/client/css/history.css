@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+/* 右侧内容*/
+.content_2 .content_2_1{ height:30px;  margin-top:30px; _margin-top:35px; _line-height:25px; font-size:18px; color:#333333; font-weight:bold; border-bottom:2px solid #043a84; text-indent:20px; }
+.content_2 .content_2_2{ margin-top:20px; width:970px; height:200px;}
+.content_2 .content_2_2 dl dt img{ width:155px; _width:150px;  height:155px; border:1px solid #e0dddd;}
+.content_2 .content_2_2 dl{ float:left; width:155px; text-align:center; margin-left:7px;}
+.content_2 .content_2_2 .dl_1{margin-left:1px;}
+.content_2 .content_2_2 dl dt img{ width:155px; _width:150px;  height:155px; border:1px solid #e0dddd;}
+.content_2 .content_2_2 dl .dd_1{width:145px; padding-left:5px; padding-right:5px; height:20px; text-align:center; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; display:block; padding-top:5px;}
+.content_2 .content_2_2 dl .dd_2 a{ color:#ef0000; height:20px; }
+

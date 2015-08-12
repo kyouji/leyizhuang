@@ -1069,8 +1069,8 @@ public class TdGoodsService {
                 Direction.DESC, "id"));
 
         return repository
-                .findByTitleContainingAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(
-                        keywords, keywords, keywords, keywords, pageRequest);
+                .findByTitleContainingAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrueOrNameContainingAndIsOnSaleTrue(
+                        keywords, keywords, keywords, keywords,keywords, pageRequest);
     }
 
     public Page<TdGoods> findByCategoryIdAndSalePriceBetweenAndParamsLikeAndIsOnSaleTrueOrderBySalePriceAsc(
@@ -1780,6 +1780,15 @@ public class TdGoodsService {
         }
         
         return e;
+    }
+    
+    /**
+     * 查找特价商品
+     * @author libiao
+     * @return
+     */
+    public List<TdGoods> findByIsSpecialPriceTrueAndIsOnSaleTrue(){
+    	return repository.findByIsSpecialPriceTrueAndIsOnSaleTrue();
     }
 
 }

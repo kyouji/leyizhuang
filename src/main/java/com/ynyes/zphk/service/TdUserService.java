@@ -370,4 +370,26 @@ public class TdUserService {
         
         return (List<TdUser>) repository.save(entities);
     }
+    
+    /**
+     * 通过手机号码查找到用户的方法
+     * @author dengxiao
+     */
+    public TdUser findByMobile(String mobile){
+    	if(null ==mobile){
+    		return null;
+    	}
+    	return repository.findByMobile(mobile);
+    }
+    
+    /**
+     * 通过邮箱查找到用户的方法
+     * @author dengxiao
+     */
+    public TdUser findByEmail(String email){
+    	if(null == email){
+    		return null;
+    	}
+    	return repository.findByEmail(email);
+    }
 }

@@ -222,4 +222,17 @@ public class TdBrandService {
         
         return (List<TdBrand>) repository.save(entities);
     }
+    /**
+     * 查找热销品牌
+     * @param productCategoryId
+     * @param statusId
+     * @return
+     */
+    public List<TdBrand> findByProductCategoryIdDesc(Long productCategoryId, Long statusId){
+    	if(null ==statusId){
+    		return null;
+    	}
+    	return repository.findByProductCategoryIdAndStatusIdOrderByTotalViewsDesc(productCategoryId, statusId);
+    }
+    
 }

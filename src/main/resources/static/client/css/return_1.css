@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+.content_2 .content_2_1{ width:970px;  float:left; margin-top:30px; _margin-top:38px;}
+.content_2 .content_2_1 ul li{height:30px; float:left; width:320px; _width:305px; text-align:center; line-height:30px; font-weight:bold;}
+.content_2 .content_2_1 ul .li_1{ background:url(../images/icon-13.png) no-repeat; _background-image:url(../images/icon-13.png) no-repeat; color:#fff; }
+.content_2 .content_2_1 ul .li_2{ background:url(../images/icon-14.png) no-repeat; margin-left:-15px;  _margin-left:0px; width:365px; _width:355px;  }
+.content_2 .content_2_1 ul .li_3{ background:url(../images/icon-15.png) no-repeat; margin-left:-20px; _margin-left:0px;  }
+.content_2 .content_2_2{width:968px;  float:left; margin-top:10px; border:1px solid #e6e6e6; display:block; overflow:hidden;  }
+.content_2 .content_2_2 .content_2_2_1,.content_2 .content_2_2 .content_2_2_2{ float:left;}
+.content_2 .content_2_2 .content_2_2_1{ width:300px; border-right:1px solid #e6e6e6; display:block; overflow:hidden;}
+.content_2 .content_2_2 .content_2_2_1 .l_1{ height:30px; background:#f7f7f7; padding-left:10px; line-height:30px;}
+.content_2 .content_2_2 .content_2_2_1 .l_2{ border-bottom:1px dashed  #f7f7f7; padding:10px; display:block; overflow:hidden; float:left; }
+.content_2 .content_2_2 .content_2_2_1 .l_2 dl{ height:90px;}
+.content_2 .content_2_2 .content_2_2_1 .l_2 dl dt,.content_2 .content_2_2 .content_2_2_1 .l_2 dl dd{ float:left;}
+.content_2 .content_2_2 .content_2_2_1 .l_2 dl dt{ width:89px; height:89px; margin-right:10px;}
+.content_2 .content_2_2 .content_2_2_1 .l_2 dl dt img{ width:89px; height:89px; border:1px solid #e6e6e6;}
+.content_2 .content_2_2 .content_2_2_1 .l_2 dl dd{ width:180px; _width:175px; height:89px; overflow:hidden;}
+.content_2 .content_2_2 .content_2_2_1 .l_3{ width:280px; padding:10px; float:left;}
+.content_2 .content_2_2 .content_2_2_1 .l_3 dl dt,.content_2 .content_2_2 .content_2_2_1 .l_3 dl dd{ height:15px;}
+.content_2_2 .content_2_2_1 .l_3 dl dd{ margin-top:5px;}
+.content_2 .content_2_2 .content_2_2_1 .l_3 dl dd span{ color:#fe0000;}
+.content_2 .content_2_2 .content_2_2_1 .l_4{ background:#f7f7f7; border-top:1px solid #e6e6e6; height:30px; width:300px; float:left; padding-left:10px; line-height:30px; }
+.content_2 .content_2_2 .content_2_2_1 .l_5 ul{ padding:10px; float:left; }
+.content_2 .content_2_2 .content_2_2_1 .l_5 ul li .sp_1{ color:#0e5baa; width:260px;}
+.content_2 .content_2_2 .content_2_2_1 .l_5 ul li .sp_2{ color:#ef0000;}
+.content_2 .content_2_2 .content_2_2_2{ margin-left:20px; margin-top:10px; display:block; overflow:hidden; }
+.content_2 .content_2_2 .content_2_2_2 .y_2{ width:647px; _width:647px;   border-bottom:2px solid #043a84; float:left; _margin-top:-20px; *+margin-top:-20px;}
+.content_2 .content_2_2 .content_2_2_2 .y_1{ text-align:center; line-height:20px; width:647px; height:20px; }
+.content_2 .content_2_2 .content_2_2_2 .y_1 span{ color:#333; background:#efefef; width:70px; height:20px; float:left;}
+.content_2 .content_2_2 .content_2_2_2 .y_1 label{ color:#fff; background:#043a84; float:left; width:70px; height:20px;}
+.content_2 .content_2_2 .content_2_2_2 .y_3 li{ margin-top:10px;}
+.content_2 .content_2_2 .content_2_2_2 .y_3 li .year{ height:30px;  width:120px;}
+.content_2 .content_2_2 .content_2_2_2 .y_3 ul{  width:647px;}
+.content_2 .content_2_2 .content_2_2_2 .y_3 ul li .textInput{ width:120px; height:30px;}
+.content_2 .content_2_2 .content_2_2_2 .y_3 ul li .area{ width:400px; height:80px;}
+.content_2 .content_2_2 .content_2_2_2 .y_3 ul .l1 { float:left;}
+.content_2 .content_2_2 .content_2_2_2 .y_3 ul li .wz_2,.content_2 .content_2_2 .content_2_2_2 .y_3 ul li .wz_1{ color:#999999;}
+.content_2 .content_2_2 .content_2_2_2 .y_3 ul li .sc,.content_2 .content_2_2 .content_2_2_2 .y_3 ul li a{ display:block; float:left;}
+.content_2 .content_2_2 .content_2_2_2 .y_3 ul li a{ background:url(../images/bottom.png) no-repeat scroll 0 0; height:30px; width:130px; float:left; text-align:center; line-height:30px;}.content_2 .content_2_2 .content_2_2_2 .y_3 ul .zs{ float:left; width:647px; _width:570px; margin-top:-1px; padding-left:60px; color:#999999;}
+.content_2_2 .content_2_2_2 .y_3 ul .zs_1{float:left; background:#0e5baa; height:30px; width:50px; border-radius:3px; text-align:center; line-height:30px; color:#fff; font-size:14px; margin-left:60px;  _margin-left:30px; }

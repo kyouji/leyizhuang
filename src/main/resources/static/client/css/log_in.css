@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+/* CSS Document */
+input{ vertical-align:middle;}
+body{background:#f7f7f7;}
+/* 顶部 */
+.top_all .top{width:930px;}
+.top_right_my_collection{ margin-left:20px; display:block; width:48px; background:url(../images/five-pointed_star.png) no-repeat 0px 6px;; padding-left:23px;}
+.top_all .top .top_right{_width:253px;}
+
+/* 头部 */
+.header{width:930px;}
+.header .user_registration{float:left;font-size:18px;font-weight:700;color:#4c4c4c;margin-left:20px;margin-top:40px;}
+
+/* 注册内容 */
+.register_content{margin:0 auto;width:930px;height:544px;font-size:14px; background:#fff;box-shadow:3px 3px 8px #d9d9d9;}
+.register_content .content{padding-top:90px;}
+.register_content .content .input_information{padding-top:20px;margin-left:220px;}
+.register_content .content .input_information input{width:225px;height:40px;line-height:40px;padding-left:10px;color:#b5b5b5;}
+.register_content .content .input_information span{margin-left:20px;color:#ef0000;}
+.register_content .register_mode{width:260px;margin-left:270px;padding-top:84px;overflow:hidden;}
+.register_content .register_mode li{float:left;margin-left:40px;*+margin-left:30px;_margin-left:20px;}
+.register_content .register_mode li input{margin-right:10px;}
+.register_content .content .phone_number input{ background:url(../images/user_name.png) no-repeat 5px center;padding-left:25px;}
+.register_content .content .password input{background:url(../images/password.png) no-repeat 5px center;padding-left:25px;}
+.register_content .content .repeat_password{}
+.register_content .content .security_code{}
+.register_content .content .security_code input{width:100px;}
+.register_content .content .security_code img{ vertical-align:middle;margin-left:20px;}
+.register_content .content .security_code .another{color:#666;}
+
+/* 记住用户名 */
+.register_content .content .agree{margin-top:20px;margin-left:295px;overflow:hidden;}
+.register_content .content .agree a{float:left;line-height:39px;color:#0e5baa;}
+.register_content .content .agree .btn{display:block; width:124px;height:40px;background:#ef7c00;border:solid 1px #c56701;color:#FFF; text-decoration:none; text-align:center;margin-right:20px;}
+.register_content .content .remeber,.agree_1,.agree_2{margin-top:20px;margin-left:300px;_margin-top:40px;_margin-left:300px;}
+.register_content .content .remeber .forget{margin-left:40px;}
+.register_content .content .agree_1{color:#999999;}
+.register_content .content .agree_2 a{margin-right:30px;}
+
+/* 底部 */
+.register_footer{margin:0 auto;padding-bottom:20px;}
+.register_footer .top_footer,.bottom_footer{width:930px;margin-top:20px;}
+.register_footer .top_footer a{margin-left:45px; text-decoration:none;}
+.register_footer .bottom_footer{width:730px;}
+.register_footer .bottom_footer a,span{margin-right:20px;}

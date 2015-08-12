@@ -232,15 +232,10 @@ public class TdOrderController extends AbstractPaytypeService {
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public String submit(Long addressId,    // 送货地址
-                    Long shopId,
                     Long payTypeId,         // 支付方式ID
                     Long deliveryTypeId,    // 配送方式ID
                     Long pointUse,          // 使用积分
-                    Boolean isNeedInvoice,  // 是否需要发票
-                    String invoiceTitle,    // 发票抬头
                     String userMessage,     // 用户留言
-                    Long couponId,          // 优惠券ID
-                    String appointmentTime,
                     HttpServletRequest req, 
                     ModelMap map) {
         String username = (String) req.getSession().getAttribute("username");
@@ -359,20 +354,6 @@ public class TdOrderController extends AbstractPaytypeService {
         String curStr = sdf.format(current);
         Random random = new Random();
         
-        // 预约时间
-        if (null != appointmentTime)
-        {
-            sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 小写的mm表示的是分钟
-            
-            try {
-                Date appTime = sdf.parse(appointmentTime);
-                
-                tdOrder.setAppointmentTime(appTime);
-                
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
         
         // 基本信息
         tdOrder.setUsername(username);
@@ -420,17 +401,6 @@ public class TdOrderController extends AbstractPaytypeService {
             deliveryTypeFee = deliveryType.getFee();
         }
         
-        // 线下同盟店
-        if (null != shopId)
-        {
-            TdDiySite shop = tdDiySiteService.findOne(shopId);
-            
-            if (null != shop)
-            {
-                tdOrder.setShopId(shop.getId());
-                tdOrder.setShopTitle(shop.getTitle());
-            }
-        }
         
         // 使用积分
         tdOrder.setPointUse(pointUse);
@@ -438,33 +408,11 @@ public class TdOrderController extends AbstractPaytypeService {
         // 用户留言
         tdOrder.setUserRemarkInfo(userMessage);
         
-        // 优惠券
-        if (null != couponId)
-        {
-            TdCoupon coupon = tdCouponService.findOne(couponId);
-            
-            if (null != coupon)
-            {
-                TdCouponType couponType = tdCouponTypeService.findOne(coupon.getId());
-                
-                couponFee = couponType.getPrice();
-            }
-        }
         
         pointFee = pointUse * 1;
         
         tdOrder.setTotalPrice(totalPrice + payTypeFee + deliveryTypeFee - pointFee - couponFee);
         
-        // 发票
-        if (null != isNeedInvoice)
-        {
-            tdOrder.setIsNeedInvoice(isNeedInvoice);
-            tdOrder.setInvoiceTitle(invoiceTitle);
-        }
-        else
-        {
-            tdOrder.setIsNeedInvoice(false);
-        }
 
         // 订单商品
         tdOrder.setOrderGoodsList(orderGoodsList);
@@ -477,17 +425,6 @@ public class TdOrderController extends AbstractPaytypeService {
         tdOrderGoodsService.save(orderGoodsList);
         tdOrder = tdOrderService.save(tdOrder);
         
-        // 优惠券
-        if (null != couponId)
-        {
-            TdCoupon coupon = tdCouponService.findOne(couponId);
-            
-            if (null != coupon)
-            {
-                coupon.setIsUsed(true);
-                tdCouponService.save(coupon);
-            }
-        }
 
         if (null != user) {
             if (pointUse.compareTo(0L) >= 0

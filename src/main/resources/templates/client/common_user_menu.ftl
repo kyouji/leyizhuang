@@ -22,6 +22,7 @@
         <li><a href="/user/point/list" title="">我的积分</a></li>
         <li><a href="/user/info" title="">基本信息</a></li>
         <li><a href="/user/password" title="">修改密码</a></li>
+
       </ul>
     </div>
   </div>

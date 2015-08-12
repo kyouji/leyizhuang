@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.zphk.entity.TdGoods;
 import com.ynyes.zphk.entity.TdProduct;
@@ -131,29 +132,39 @@ public class TdGoodsController {
         // 商品
         map.addAttribute("goods", goods);
         
+        //商品参数
+        if(goods.getParamList().size()>0){
+        	map.addAttribute("param_list",goods.getParamList());
+        }
+        
+        /**
+         * 修改以下所有有关评价的方法，将传入的商品ID改成产品ID
+         * @author dengxiao
+         */
+        
         // 商品组合
         map.addAttribute("comb_list",
-                tdGoodsCombinationService.findByGoodsId(goodsId));
+                tdGoodsCombinationService.findByGoodsId(goods.getProductId()));
         
         // 全部评论
         map.addAttribute("comment_page", tdUserCommentService
-                .findByGoodsIdAndIsShowable(goodsId, 0, ClientConstant.pageSize));
+                .findByGoodsIdAndIsShowable(goods.getProductId(), 0, ClientConstant.pageSize));
         
         // 全部评论数
         map.addAttribute("comment_count", tdUserCommentService
-                .countByGoodsIdAndIsShowable(goodsId));
+                .countByGoodsIdAndIsShowable(goods.getProductId()));
         
         // 好评数
         map.addAttribute("three_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 3L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 3L));
         
         // 中评数
         map.addAttribute("two_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 2L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 2L));
         
         // 差评数
         map.addAttribute("one_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 1L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 1L));
         
         // 咨询
         map.addAttribute("consult_page", consultPage);
@@ -172,7 +183,9 @@ public class TdGoodsController {
         // 查找类型
         TdProductCategory tdProductCategory = tdProductCategoryService
                 .findOne(goods.getCategoryId());
-
+        //查询所有品牌
+        map.addAttribute("product_list",tdProductService.findAll());
+        
         // 获取该类型所有父类型
         if (null != tdProductCategory) {
             if (null != tdProductCategory.getParentTree()
@@ -216,6 +229,7 @@ public class TdGoodsController {
                 List<TdGoods> selectOneGoodsList = new ArrayList<TdGoods>();
                 List<TdGoods> selectTwoGoodsList = new ArrayList<TdGoods>();
                 List<TdGoods> selectThreeGoodsList = new ArrayList<TdGoods>();
+//                List<TdGoods> selectGoodsList = new ArrayList<TdGoods>();
                 
                 String sOne = null;
                 String sTwo = null;
@@ -365,7 +379,7 @@ public class TdGoodsController {
         map.addAttribute("server_ip", req.getLocalName());
         map.addAttribute("server_port", req.getLocalPort());
 
-        return "/client/goods";
+        return "/client/content";
     }
 
     @RequestMapping("/goods/comment/{goodsId}")
@@ -389,31 +403,34 @@ public class TdGoodsController {
             stars = 0L;
         }
         
+        //获取指定商品的信息
+        TdGoods goods = tdGoodsService.findOne(goodsId);
+        
         // 全部评论数
         map.addAttribute("comment_count", tdUserCommentService
-                .countByGoodsIdAndIsShowable(goodsId));
-        
+                .countByGoodsIdAndIsShowable(goods.getProductId()));
+
         // 好评数
         map.addAttribute("three_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 3L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 3L));
         
         // 中评数
         map.addAttribute("two_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 2L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 2L));
         
         // 差评数
         map.addAttribute("one_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 1L));
+                .countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 1L));
         
         if (stars.equals(0L))
         {
             map.addAttribute("comment_page", tdUserCommentService
-                    .findByGoodsIdAndIsShowable(goodsId, page, ClientConstant.pageSize));
+                    .findByGoodsIdAndIsShowable(goods.getProductId(), page, ClientConstant.pageSize));
         }
         else
         {
              map.addAttribute("comment_page", tdUserCommentService
-                    .findByGoodsIdAndStarsAndIsShowable(goodsId, stars, page, ClientConstant.pageSize));
+                    .findByGoodsIdAndStarsAndIsShowable(goods.getProductId(), stars, page, ClientConstant.pageSize));
         }
         
         // 评论
@@ -421,7 +438,7 @@ public class TdGoodsController {
         map.addAttribute("stars", stars);
         map.addAttribute("goodsId", goodsId);
         
-        return "/client/goods_comment";
+        return "/client/goods_content_comment";
     }
     
     @RequestMapping("/goods/consult/{goodsId}")
@@ -448,6 +465,6 @@ public class TdGoodsController {
         map.addAttribute("page", page);
         map.addAttribute("goodsId", goodsId);
         
-        return "/client/goods_consult";
+        return "/client/content";
     }
 }

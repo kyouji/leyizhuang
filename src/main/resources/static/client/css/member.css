@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+.content_2 .content_2_1{  margin-top:30px; font-size:18px; color:#333333; font-weight:bold;  }
+.content_2 .content_2_2{ margin-top:10px;}
+.content_2  .content_2_2 ul { width:970px; height:21px; *+height:40px; background:url(../images/jdt.png)  no-repeat; color:#333333;}
+.content_2 .content_2_2 ul li{ float:left; margin-top:25px; _margin-top:25px; height:21px; *+height:30px;}
+.content_2  .content_2_2 ul .dj_0{ width:168px;}
+.content_2  .content_2_2 ul .dj_1,.dj_2,.dj_3{ width:195px;}
+.content_2  .content_2_2 ul .dj_4{ width:185px; *+width:182px;}
+.content_2  .content_2_2 .djt_1 {  width: 20%; background:url(../images/jdt_2.png); height:21px; position: absolute; top:0;}
+.content_2 .content_2_2 ul .dj_1 span{ color:#ef7c00;}
+.content_2 .content_2_3{ line-height:30px;  *+line-height:45px; _line-height:15px;  *+font-size:12px; _font-size:12px;}
+.content_2 .content_2_4{ margin-top:20px;}
+.content_2 .content_2_4 dl{ float:left; text-align:center; line-height:60px; color:#333333; font-size:14px;}
+.content_2 .content_2_4 dl dt,.content_2 .content_2_4 dl dd{width:160px; height:60px; border-bottom:1px solid #dddddd; border-right:1px solid #dddddd;}
+.content_2 .content_2_4 .dl_1{ border-left:1px solid #dddddd;}
+.content_2 .content_2_4 dl dt{border-top:1px solid #dddddd;}
+.content_2 .content_2_4 .dl_1 .dt_1{ background-image:url(../images/xx.png); line-height:35px; display:block;}
+.content_2 .content_2_4 .dl_1 .dt_1 span{ padding-left:20px; padding-top:20px; display:block; float:left;}
+.content .content_2 .content_2_4 dl dd img{ padding-top:25px; *+padding-top:5px; _padding-top:25px;}

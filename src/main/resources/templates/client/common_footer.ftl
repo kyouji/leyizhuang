@@ -1,38 +1,14 @@
 <div class="footerall">
     <div class="footer_iconsall">
         <div class="footer_icons">
+             <#if service_item_list??>
+             <#list service_item_list as item>
             <dl>
-                <dt><img src="/client/images/icons-footer1.png" /></dt>
-                <dd>闪电发货</dd>
+                <dt><img src="${item.logo!''}" width="60px;"/></dt>
+                <dd>${item.title!''}</dd>
             </dl>
-            <dl>
-                <dt><img src="/client/images/icons-footer2.png" /></dt>
-                <dd>闪电发货</dd>
-            </dl>
-            <dl>
-                <dt><img src="/client/images/icons-footer3.png" /></dt>
-                <dd>闪电发货</dd>
-            </dl>
-            <dl>
-                <dt><img src="/client/images/icons-footer4.png" /></dt>
-                <dd>闪电发货</dd>
-            </dl>
-            <dl>
-                <dt><img src="/client/images/icons-footer5.png" /></dt>
-                <dd>闪电发货</dd>
-            </dl>
-            <dl>
-                <dt><img src="/client/images/icons-footer6.png" /></dt>
-                <dd>闪电发货</dd>
-            </dl>
-            <dl>
-                <dt><img src="/client/images/icons-footer7.png" /></dt>
-                <dd>闪电发货</dd>
-            </dl>
-            <dl>
-                <dt><img src="/client/images/icons-footer7.png" /></dt>
-                <dd>闪电发货</dd>
-            </dl>
+            </#list>
+            </#if>
         </div>    
     </div>
 
@@ -63,7 +39,13 @@
 
     <div class="footerall_copyall">
         <div class="footerall_copy">
-            友情链接：<a href="#" title="">曲靖信息港</a><a href="#" title="">宝善街网</a> <br />
+            友情链接：
+            <#if site_link_list??>
+            <#list site_link_list as item>
+                <a href="${item.linkUri!''}">${item.title!''}</a>
+            </#list>
+        </#if>
+            <br />
             <span>Copyright©2006-2014 All Rights Reserved 丫丫网 版权所有 滇ICP备07004173号</span>
         </div>
     </div> 

@@ -1,22 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>${site.company!''}</title>
+<title>正品惠客-登录</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
-<!--[if IE]>
-   <script src="/client/js/html5.js"></script>
-<![endif]-->
+
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/client/js/Validform_v5.3.2_min.js"></script>
-<script src="/client/js/common.js"></script>
-<script src="/client/js/ljs-v1.01.js"></script>
 
-<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/log_in.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
     $(function(){
@@ -67,68 +63,85 @@
             });
     }
 </script>
+
 </head>
-
 <body>
-<header class="logintop">
-  <div class="main pt20">
-    <a class="fl" href="/"><img src="/client/images/liebiao_03.png" /></a>
-    <p class="p3">售后保障</p>
-    <p class="p2">100%品牌制造商</p>
-    <p class="p1">100%正品保障</p>
-    <div class="clear"></div>
-  </div>
-</header>
-<div class="logingbg">
-    <section class="loginbox">
-        <p>请输入用户名/邮箱/车牌号码</p>
-        <input id="txt_loginId" class="text" type="text" />
-        <p>请输入密码</p>
-        <input id="txt_loginPwd" class="text" type="password" />
-        <div class="clear h15"></div>
-        <p class="pb10">
-            <input type="checkbox" />
-            <span>记住密码</span>
-            <span class="absolute-r"><a href="javascript:;">忘记密码</a> | <a href="/reg">免费注册</a></span>
-        </p>
-        <span>合作账号登录</span>
-        <p>
-            <span>
-                <a href="/qq/login" title="QQ登录">
-                    <img src="/client/images/20150619110939448_easyicon_net_72.png" width="30" height="30" />
-                </a>
-            </span>
-            <span class="ml20">
-                <a href="/login/alipay_login" title="支付宝登录">
-                    <img src="/client/images/20150619110924540_easyicon_net_72.png" width="30" height="30" />
-                </a>
-            </span>
-        </p>
-        <div class="clear h40"></div>
-        <input id="btn_login" type="submit" class="sub" value="登录" />
-        <div class="clear h20"></div>
-    </section>
-</div><!--logingbg END-->
+<!--顶部-->
+<div class="top_all">
+	<div class="top">
+    	<div class="top_left">    
+        	<div class="top_left_welcome">欢迎光临正品惠客</div>
+            <a href="/login" title="" >请登录</a>
+            <a href="/reg" title="" >免费注册</a>
+        </div>
+        <div class="top_right">
+        	<a href="#" title="">我的惠客</a>
+            <a class="top_right_my_collection" href="#" title="">我的收藏</a>
+            <a class="top_right_hk" href="#" title="">手机惠客</a>
+        </div>
+    </div>
+</div>	
+<!--头部-->
+<div class="header">
+	<!--logo大小：190 58-->
+	<div class="header_logo">
+    	<img src="images/logo_1.png" />
+    </div>
+    <div class="user_registration">用户登录</div>
+</div>
 
-<footer class="loginfoot">
-    <nav>
-        <#if help_level0_cat_list??>
+<!--注册内容-->
+<div class="register_content">
+	<div class="content">
+        <div class="input_information phone_number">
+            	&nbsp;&nbsp;&nbsp;用户名：
+            	<input id="txt_loginId" class="text" type="text"/>
+               <!-- <span>*用户名不存在</span> -->
+        </div>
+        <div class="input_information password">
+            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：
+            	<input id="txt_loginPwd" class="text" type="password" />
+             <!--   <span>*密码错误</span>  -->
+        </div>
+        <div class="agree">
+        	<a class="btn" href="javascript:;" id="btn_login">登录</a>
+        </div>
+        <div class="remeber">
+            <input name="" type="checkbox" value="" />&nbsp;&nbsp;记住用户名
+            <a class="forget" href="#">忘记密码</a>
+            <a>丨</a>
+            <a href="/reg">立即注册</a>
+        </div>
+        <div class="agree_1">
+            您还可以使用以下正品惠客合作伙伴登录：
+        </div>
+        <div class="agree_2">
+            <a href="#"><img src="/client/images/weixin.png" /></a>
+            <a href="#"><img src="/client/images/qq.png" /></a>
+            <a href="#"><img src="/client/images/weibo.png" /></a>
+            <a href="#"><img src="/client/images/zhifubao.png" /></a>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<div class="register_footer">
+	<div class="top_footer">
+    	<#if help_level0_cat_list??>
             <#list help_level0_cat_list as item>
                 <a href="/info/list/${item.id!''}">${item.title!''}</a>
             </#list>
         </#if>
-    </nav>
-    <p>友情链接：
-    <#if site_link_list??>
+    </div>
+    <div class="bottom_footer">
+    	<span>友情链接：</span>
+        <#if site_link_list??>
         <#list site_link_list as item>
             <a href="${item.linkUri!''}">${item.title!''}</a> |
         </#list>
-    </#if>
-    </p>
-    <p>${site.copyright!''}</p>
-    <p>${site.address!''} 电话：${site.telephone!''} </p>
-  <p><a title="云南网站建设" href="http://www.ynyes.com" target="_blank">网站建设</a>技术支持：<a title="云南网站建设" href="http://www.ynyes.com" target="_blank">昆明天度网络公司</a>
-</p>
-</footer>
+         </#if>
+        <span>Copyright©2006-2014 All Rights Reserved 丫丫网 版权所有 滇ICP备07004173号 </span>
+    </div>
+</div>
 </body>
 </html>
