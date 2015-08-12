@@ -18,6 +18,11 @@
 <script src="/client/js/common.js" type="text/javascript"></script>
 <script src="/client/js/goods.js" type="text/javascript"></script>
 <script type="text/javascript">
+function submitSearch(){
+		var search = document.getElementById("search_form");
+		search.submit();
+	}
+	
 $(function(){
         
     /*广告滑动*/    
@@ -163,9 +168,9 @@ $(function(){
     
     <div class="header_search">
 	   <div class="header_search_top">
-    	    <form action="/search" method="get">
+    	    <form action="/search" method="get" id="search_form" >
             	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title}</#if>"/>
-                <input type="submit" value="搜索" />
+               	<a href="javascript:submitSearch()" title="" class="header_search_top_btn">搜 索</a>
             </form>
         </div>
         <div class="header_search_bot">
