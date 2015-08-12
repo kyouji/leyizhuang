@@ -424,7 +424,7 @@ public class TdGoodsController {
         
         if (stars.equals(0L))
         {
-            map.addAttribute("comment_page", tdUserCommentService
+          map.addAttribute("comment_page", tdUserCommentService
                     .findByGoodsIdAndIsShowable(goods.getProductId(), page, ClientConstant.pageSize));
         }
         else

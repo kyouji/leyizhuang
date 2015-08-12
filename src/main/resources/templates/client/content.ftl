@@ -133,7 +133,28 @@ function clearSelect()
  
 function btnPageSubmit() 
 {
+	<#--
     window.location.href = "goods/${goods.id}/"+(parseInt($('#iPageNum').val()) - 1);
+    -->
+    var pageNum = document.getElementById("iPageNum").value;
+    
+    <#-- 判断是否为数字的正则表达式 -->
+    
+    if(isNaN(pageNum)){
+    	return;
+    }
+    
+    <#-- 判断是否大于最大页数+1 -->
+    if(pageNum>${comment_page.totalPages}){
+    	return;
+    }
+    
+    <#-- 判断是否小于1 -->
+    if(pageNum<1){
+    	return;
+    }
+    
+    getCommentByStars(${goodsId},${stars!'0'},pageNum-1);
 }   
 
  
