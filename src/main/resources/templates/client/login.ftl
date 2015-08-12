@@ -85,7 +85,7 @@
 <div class="header">
 	<!--logo大小：190 58-->
 	<div class="header_logo">
-    	<img src="images/logo_1.png" />
+    	<img src="/client/images/logo_1.png" />
     </div>
     <div class="user_registration">用户登录</div>
 </div>

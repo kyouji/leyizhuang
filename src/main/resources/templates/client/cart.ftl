@@ -1,56 +1,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
-<meta name="keywords" content="${site.seoKeywords!''}">
-<meta name="description" content="${site.seoDescription!''}">
-<meta name="copyright" content="${site.copyright!''}" />
-<!--[if IE]>
-   <script src="/client/js/html5.js"></script>
-<![endif]-->
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客-购物车</title>
+
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/Shopping_cart.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
+<link rel="stylesheet" type="text/css" href="/client/css/mycenter.css"/>
+
+<link href="/client/css/Shopping_cart_empty.css" rel="stylesheet" type="text/css" />
 <script src="/client/js/jquery-1.9.1.min.js"></script>
-<script src="/client/js/common.js"></script>
-<script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/cart.js"></script>
-
-<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    menuDownList("top_phone","#top_phonelist",".a1","sel");
-    phoneListMore();//单独下拉
-    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-    searchTextClear(".toptext","请输入品牌或商品名称","#999","#666");
-    searchTextClear(".bottext","查看所有门店","#fff","#fff");
-    checkNowHover("shopping_down","shopping_sel");
-    navDownList("navdown","li",".nav_showbox");
-    menuDownList("mainnavdown","#navdown",".a2","sel");
-        
-});
-</script>
 </head>
+
 <body>
-<#include "/client/common_header.ftl" />
+<!--顶部-->
+<#include "/client/common_user_header.ftl" />
 
-<div class="main">
-    <menu class="car_top">
-        <p class="sel" style="z-index:10; width:34%;">我的购物车<i></i></p>
-        <p style="z-index:8;">我的订单信息<i></i></p>
-        <p>支付成功</p>
-        <div class="clear"></div>
-    </menu>
-    <div class="clear h30"></div>
-    
-    <div id="main" class="page-main">
-        <#include "/client/cart_goods.ftl" />
-    </div>
-    
-</div><!--main END-->
+<!--购物车进度条-->
+<div class="progress_bar">
+	<div class="bar_1">1、购物车</div>
+    <div class="bar_2">2、订单信息</div>
+    <div class="bar_3">3、支付完成</div>
+</div>
+<div class="product_information">
+    <a class="merchandise">商品</a>
+    <a class="unit_price">单价（元）</a>
+    <a class="quantity">数量</a>
+    <a class="total_price">总价（元）</a>
+    <a class="operating">操作</a>
+</div>
 
+<div id="cart-main">
+    <#include "/client/cart_goods.ftl" />
+</div>
+
+<!--底部footer-->
 <#include "/client/common_footer.ftl" />
 </body>
 </html>
