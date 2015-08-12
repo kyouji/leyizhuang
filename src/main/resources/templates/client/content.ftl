@@ -15,11 +15,11 @@
 <script type="text/javascript" src="/client/js/base.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
-
+<script type="text/javascript" src="/client/js/list.js"></script>
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 
-<!---->
+<!--
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
 
 <script type="text/javascript" src="/client/js/jquery.jqzoom.js"></script>
@@ -27,10 +27,10 @@
 <script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
 <script type="text/javascript" src="/client/js/goods.js"></script>
-<script src="/client/js/list.js"></script>
+
 
 <script src="/client/js/common.js"></script>
-
+-->
 
 <!--放大镜-->
 <script type="text/javascript">
@@ -133,7 +133,28 @@ function clearSelect()
  
 function btnPageSubmit() 
 {
+	<#--
     window.location.href = "goods/${goods.id}/"+(parseInt($('#iPageNum').val()) - 1);
+    -->
+    var pageNum = document.getElementById("iPageNum").value;
+    
+    <#-- 判断是否为数字的正则表达式 -->
+    
+    if(isNaN(pageNum)){
+    	return;
+    }
+    
+    <#-- 判断是否大于最大页数+1 -->
+    if(pageNum>${comment_page.totalPages}){
+    	return;
+    }
+    
+    <#-- 判断是否小于1 -->
+    if(pageNum<1){
+    	return;
+    }
+    
+    getCommentByStars(${goodsId},${stars!'0'},pageNum-1);
 }   
 
  

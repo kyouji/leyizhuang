@@ -71,23 +71,23 @@
                     -->
                     <!--已回复的-->
                     <#if item.isReplied>
-                    <div class="c_R_comment_con_R_reply2">
-                        <span>店家回复：${item.reply}</span>
-                    </div>
+	                    <div class="c_R_comment_con_R_reply2">
+	                        <span>店家回复：${item.reply}</span>
+	                    </div>
                     </#if>
                     
                 </div>
              </div>
            </#list>
-             </#if>
+         </#if>
          <div class="pagebox" style="float:left; padding:15px 0;">
-          <div class="num">
+          	<div class="num">
             <#if comment_page??>
                 <#assign continueEnter=false>
                 <#if comment_page.number == 0>
                    <a class="a1 a0" href="javascript:;"><span>上一页</span></a>
                  <#else>
-                   <a class="a2" href="#"><span>上一页</span></a>
+                   <a class="a2" href="javascript:getCommentByStars(${goodsId},${stars!'0'},${page!'0'}-1)"><span>上一页</span></a>
                 </#if>
                 <#if comment_page.totalPages gt 0>
                     <#list 1..comment_page.totalPages as page>
@@ -95,7 +95,7 @@
                              <#if page == comment_page.number+1>
                                  <a class="sel" href="javascript:;">${page}</a>
                              <#else>
-                                 <a href="#">${page}</a> <#-- ${page} -->
+                                 <a href="javascript:getCommentByStars(${goodsId},${stars!'0'},${page-1})">${page}</a> <#-- ${page} -->
                              </#if>
                                 <#assign continueEnter=false>
                               <#else>
@@ -109,7 +109,7 @@
                  <#if comment_page.number+1 == comment_page.totalPages || comment_page.totalPages==0>
                         <a class="a2 a0" href="javascript:;"><span>下一页</span></a>
                     <#else>
-                        <a class="a2" href=""><span>下一页</span></a>
+                        <a class="a2" href="javascript:getCommentByStars(${goodsId},${stars!'0'},${page!'0'}+1)"><span>下一页</span></a>
                     </#if>
                 </#if>
             <span> 共<b>${comment_page.totalPages}</b>页 </span>
@@ -117,7 +117,7 @@
           <div class="page">
             <input class="sub" type="submit" value="确定" onclick="javascript:btnPageSubmit();" style=" *+border:none;" />
             <span>页</span>
-            <input class="text" type="text" value="${comment_page.number}" id="iPageNum"/>
+            <input class="text" type="text" value="${comment_page.number+1}" id="iPageNum"/>
             <span>到第</span>
           </div>
           <div class="clear"></div>
