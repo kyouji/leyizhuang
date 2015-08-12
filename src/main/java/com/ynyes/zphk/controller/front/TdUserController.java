@@ -527,6 +527,9 @@ public class TdUserController extends AbstractPaytypeService {
         
         res.put("code", 0);
         
+        TdUserCollect findByUsernameAndGoodsId = tdUserCollectService.findByUsernameAndGoodsId(username, goodsId);
+        System.out.println(findByUsernameAndGoodsId);
+        
         // 没有收藏
         if (null == tdUserCollectService.findByUsernameAndGoodsId(username, goodsId))
         {
@@ -550,7 +553,6 @@ public class TdUserController extends AbstractPaytypeService {
             tdUserCollectService.save(collect);
             
             res.put("message", "添加成功");
-            
             return res;
         }
         

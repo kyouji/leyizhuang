@@ -11,6 +11,8 @@
 <script type="text/javascript" src="/client/js/regist.js"></script>
 <script>
 $(document).ready(function(){
+	changeYzm();
+
 	$("#regist_form").Validform({
 	 	tiptype: 3
 	 });
@@ -23,13 +25,19 @@ $(document).ready(function(){
 	<div class="top">
     	<div class="top_left">    
         	<div class="top_left_welcome">欢迎光临正品惠客</div>
-            <a href="#" title="" >请登录</a>
-            <a href="#" title="" >免费注册</a>
+             <#if username??>
+                <a href="/user">${username}<i></i></a>
+                <a href="/logout">退出<i></i></a>
+            <#else>
+                <a href="/login" target="_blank">登录<i></i></a>
+                <a href="/reg" target="_blank">免费注册<i></i></a>
+            </#if>
         </div>
         <div class="top_right">
-        	<a href="#" title="">我的惠客</a>
-            <a class="top_right_my_collection" href="#" title="">我的收藏</a>
-            <a class="top_right_hk" href="#" title="">手机惠客</a>
+        	<div class="top_right">
+        	<a href="/user" title="">我的惠客</a>
+            <a class="top_right_like" href="/user/collect/list" title="">我的关注</a>
+            <a class="top_right_hk" href="/user" title="">手机惠客</a>
         </div>
     </div>
 </div>	
@@ -66,26 +74,29 @@ $(document).ready(function(){
         	<#if type??&&type=="email">
 	        	<div class="input_information phone_number">
 					用户邮箱：
-					<input name="email" datatype="e" ajaxurl="/reg/check/email" value="请输入您的邮箱" />
+					<input name="email" datatype="e" ajaxurl="/reg/check/email" value="" />
 		        </div>
         	<#else>
 	        	<div class="input_information phone_number">
 					手机号码：
-					<input name="mobile" datatype="m" ajaxurl="/reg/check/mobile" value="请输入您的手机号" />
+					<input name="mobile" datatype="m" ajaxurl="/reg/check/mobile" value="" />
 		        </div>
         	</#if>
 	        <div class="input_information password">
 				用户密码：
-				<input name="password" type="password" datatype="*6-12" value="请输入6-12位密码" />
+				<input name="password" type="password" datatype="*6-12" value="" />
 	        </div>
 	        <div class="input_information repeat_password">
 				重复密码：
-				<input name="repassword" type="password" datatype="*6-12" recheck="password" value="请重复输入密码" />
+				<input name="repassword" type="password" datatype="*6-12" recheck="password" value="" />
 	        </div>
 	        <div class="input_information security_code">
 	        	&nbsp;&nbsp;&nbsp;验证码：
-		        <input name="yzm" type="text" datatype="s4-4" errormsg="请填写4位字符！" value="见右图" />
+		        <input name="yzm" type="text" datatype="s4-4" errormsg="请填写4位字符！" value="" />
+		        <#--
 		        <img id="yzm_image" src="/client/images/security_code.png" />
+		        -->
+		        <img id="yzm_image" src="" />
 		        <a href="javascript:changeYzm()" class="another">看不清，换一张？</a>
 	        </div>
         </form>
@@ -95,7 +106,7 @@ $(document).ready(function(){
         </div>
         <div class="agree_1">
            	 已经注册，马上
-            <a href="#">登录</a>
+            <a href="/login">登录</a>
         </div>
     </div>
 </div>
@@ -103,23 +114,33 @@ $(document).ready(function(){
 <!--底部-->
 <div class="register_footer">
 	<div class="top_footer">
-    	<a href="#">关于我们</a>
-        <a class="shu">丨</a>
-        <a href="#">特色服务</a>
-        <a class="shu">丨</a>
-        <a href="#">支付方式</a>
-        <a class="shu">丨</a>
-        <a href="#">配送方式</a>
-        <a class="shu">丨</a>
-        <a href="#">售后服务</a>
-        <a class="shu">丨</a>
-        <a href="#">帮助中心</a>
+		<#if help_level0_cat_list??>
+            <#list help_level0_cat_list as item>
+            <#-- 超过6个会显示两排，所以最多只能显示6个 -->
+            	<#if item_index lt 6>
+    				<a href="/info/list/${help_id!'0'}?catId=${item.id!''}">${item.title!''}</a>
+    				<#-- 最后一个标签不以“|”结尾 -->
+        			<#if item_index lt 5>
+        				<a class="shu">|</a>
+        			</#if>
+        		</#if>
+             </#list>
+        </#if>
     </div>
     <div class="bottom_footer">
-    	<span>友情链接：</span>
-        <a href="#">曲靖信息港</a>
-        <a href="#">宝善街网</a>
-        <span>Copyright©2006-2014 All Rights Reserved 丫丫网 版权所有 滇ICP备07004173号 </span>
+    	<center>
+	    	<span>友情链接：</span>
+		       	<#if site_link_list??>
+					<#list site_link_list as item>
+						<#--感觉超过9个会导致错位-->
+						<#if item_index lt 9>
+							<a href="${item.linkUri!''}">${item.title!''}</a>
+						</#if>
+					</#list>
+		        </#if>
+	        <br/><br/>
+	        <span>${site.copyright!''}</span>
+        </center>
     </div>
 </div>
 </body>

@@ -9,9 +9,13 @@
     <div class="top">
         <div class="top_left">
             <div class="top_left_welcome">欢迎光临正品惠客</div>
-            <a href="/login" title="登录" >请登录</a>
-            
-            <a href="/reg" title="免费注册" >免费注册</a>
+            <#if username??>
+                <a href="/user">${username}<i></i></a>
+                <a href="/logout">退出<i></i></a>
+            <#else>
+                <a href="/login" target="_blank">登录<i></i></a>
+                <a href="/reg" target="_blank">免费注册<i></i></a>
+            </#if>
         </div>
         <div class="top_right">
             <a href="/user" title="">我的惠客</a>
@@ -45,7 +49,7 @@
 	            	<input name="keywords" type="text" class="header_search_top_text" value="${keywords}">
 	            <#else>
 	            	<input name="keywords" type="text" class="header_search_top_text" value="<#if keywords_list??&&keywords_list[0]??>${keywords_list[0].title}</#if>">
-	             </#if>
+	            </#if>
 	            
 	            <a href="javascript:submitSearch()" title="" class="header_search_top_btn">搜 索</a>
 	    	</form>
