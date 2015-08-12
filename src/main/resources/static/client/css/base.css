@@ -64,7 +64,7 @@ div{ margin:0 auto;}
 .header .header_search{ width:609px; height:58px; float:left;}
 .header .header_search .header_search_top{ height:28px; border:3px #0e5baa solid; line-height:27px;}
 .header .header_search .header_search_top a{ text-decoration:none;}
-.header .header_search .header_search_top .header_search_top_text{ width:496px; float:left; border:none; height:28px; line-height:28px; padding:0 10px;}
+.header .header_search .header_search_top .header_search_top_text{ width:500px; float:left; border:none; height:28px; line-height:28px; padding:0 10px;}
 .header .header_search .header_search_top .header_search_top_btn{ display:block; width:83px; height:28px;line-height:28px; float:right; text-align:center; font-size:16px; background:#0e5baa;color:#ffffff;border:none; }
 .header .header_search .header_search_bot{ height:24px; line-height:24px; overflow:hidden;}
 .header .header_search .header_search_bot a{ color:#999999; margin-right:16px;}

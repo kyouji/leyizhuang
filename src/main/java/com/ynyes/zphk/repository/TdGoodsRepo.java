@@ -131,7 +131,7 @@ public interface TdGoodsRepo extends
     // 全部秒杀
     Page<TdGoods> findByIsFlashSaleTrueAndIsOnSaleTrueOrderByFlashSaleStartTimeAsc(Pageable page);
 
-    Page<TdGoods> findByTitleContainingAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrueOrNameContainingAndIsOnSaleTrue(String key1,
+    Page<TdGoods> findByTitleContainingIgnoreCaseAndIsOnSaleTrueOrSubTitleContainingIgnoreCaseAndIsOnSaleTrueOrParamValueCollectContainingIgnoreCaseAndIsOnSaleTrueOrDetailContainingIgnoreCaseAndIsOnSaleTrueOrNameContainingIgnoreCaseAndIsOnSaleTrue(String key1,
             String key2,
             String key3,
             String key4,

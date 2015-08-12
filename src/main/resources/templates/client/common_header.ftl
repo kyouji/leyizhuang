@@ -1,4 +1,9 @@
-
+<script>
+	function submitSearch(){
+		var search = document.getElementById("search_form");
+		search.submit();
+	}
+</script>
 <!--顶部-->
 <div class="top_all">
     <div class="top">
@@ -35,15 +40,22 @@
     
     <div class="header_search">
         <div class="header_search_top">
-            <input type="text" class="header_search_top_text">
-            <a href="#" title="" class="header_search_top_btn">搜 索</a>
+	    	<form action="/search" method="get" id="search_form" >
+	            <#if keywords??>
+	            	<input name="keywords" type="text" class="header_search_top_text" value="${keywords}">
+	            <#else>
+	            	<input name="keywords" type="text" class="header_search_top_text" value="<#if keywords_list??&&keywords_list[0]??>${keywords_list[0].title}</#if>">
+	             </#if>
+	            
+	            <a href="javascript:submitSearch()" title="" class="header_search_top_btn">搜 索</a>
+	    	</form>
         </div>
         <div class="header_search_bot">
         热门搜索：
              <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
-                    <a href="${item.linkUri!''}">${item.title}</a>
+                    	<a href="${item.linkUri!''}">${item.title}</a>
                     </#if>
                 </#list>
             </#if>
@@ -62,13 +74,23 @@
         
         <div class="nav_nav">
             <ul>
-                <li><a href="#" title="" class="nav_choiced">首页</a></li>
-                <li><a href="#" title="">惠客秒杀</a></li>
-                <li><a href="#" title="">惠客团购</a></li>
-                <li><a href="#" title="">惠客众筹</a></li>
-                <li><a href="#" title="">惠客积分</a></li>
-                <li><a href="#" title="">生活服务</a></li>
-                <li><a href="#" title="">售后服务</a></li>
+                <#if navi_item_list??&&navi_item_list?size gt 0>
+	                <#list navi_item_list as item>
+	                <#-- 如果导航标签超过了7个会产生两排标签 -->
+	                	<#if item_index lt 7>
+	                		<li><a href="${item.linkUri}" title="${item.title}">${item.title}</a></li>
+	                	</#if>
+	                </#list>
+                </#if>
+                
+                <#--
+	                <li><a href="#" title="">惠客秒杀</a></li>
+	                <li><a href="#" title="">惠客团购</a></li>
+	                <li><a href="#" title="">惠客众筹</a></li>
+	                <li><a href="#" title="">惠客积分</a></li>
+	                <li><a href="#" title="">生活服务</a></li>
+	                <li><a href="#" title="">售后服务</a></li>
+                -->
             </ul>
         </div>
         

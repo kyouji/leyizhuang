@@ -1069,7 +1069,7 @@ public class TdGoodsService {
                 Direction.DESC, "id"));
 
         return repository
-                .findByTitleContainingAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrueOrNameContainingAndIsOnSaleTrue(
+                .findByTitleContainingIgnoreCaseAndIsOnSaleTrueOrSubTitleContainingIgnoreCaseAndIsOnSaleTrueOrParamValueCollectContainingIgnoreCaseAndIsOnSaleTrueOrDetailContainingIgnoreCaseAndIsOnSaleTrueOrNameContainingIgnoreCaseAndIsOnSaleTrue(
                         keywords, keywords, keywords, keywords,keywords, pageRequest);
     }
 

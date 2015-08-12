@@ -65,6 +65,8 @@ public class TdSearchController {
                 
                 tdKeywordsService.save(key);
             }
+            //将关键字信息再次传到页面，已便于显示----@author dengxiao
+            map.addAttribute("keywords",keywords);
             map.addAttribute("goods_page", tdGoodsService.searchGoods(keywords.trim(), page, ClientConstant.pageSize));
         }
         map.addAttribute("pageId", page);
