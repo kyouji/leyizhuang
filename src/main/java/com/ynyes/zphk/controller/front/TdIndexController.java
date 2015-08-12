@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ynyes.zphk.entity.TdAdType;
 import com.ynyes.zphk.entity.TdArticleCategory;
-import com.ynyes.zphk.entity.TdBrand;
 import com.ynyes.zphk.entity.TdProductCategory;
 import com.ynyes.zphk.service.TdAdService;
 import com.ynyes.zphk.service.TdAdTypeService;
@@ -147,7 +146,7 @@ public class TdIndexController {
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
         
-        // 商品分类底部广告
+        // 首页顶部横幅广告
         adType = tdAdTypeService.findByTitle("首页顶部横幅广告");
 
         if (null != adType) {
@@ -155,7 +154,7 @@ public class TdIndexController {
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
-        // 商品分类底部广告
+        // 一楼商品中部广告
         adType = tdAdTypeService.findByTitle("一楼商品中部广告");
 
         if (null != adType) {
@@ -163,7 +162,7 @@ public class TdIndexController {
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
-        // 页面中部轮播广告
+        // 二楼商品中部广告
         adType = tdAdTypeService.findByTitle("二楼商品中部广告");
 
         if (null != adType) {
@@ -171,7 +170,7 @@ public class TdIndexController {
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
-        // 页面中部大图广告
+        // 三楼商品中部广告
         adType = tdAdTypeService.findByTitle("三楼商品中部广告");
 
         if (null != adType) {
@@ -179,7 +178,7 @@ public class TdIndexController {
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
-        // 商品分类轮播广告
+        // 四楼商品中部广告
         adType = tdAdTypeService.findByTitle("四楼商品中部广告");
 
         if (null != adType) {
@@ -187,7 +186,7 @@ public class TdIndexController {
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
-        // 昆明自驾游大图广告
+        // 竭诚服务广告
         adType = tdAdTypeService.findByTitle("竭诚服务广告");
 
         if (null != adType) {
@@ -195,7 +194,7 @@ public class TdIndexController {
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
-        // 省内自驾游大图广告
+        // 团购标题图
         adType = tdAdTypeService.findByTitle("团购标题图");
 
         if (null != adType) {
@@ -203,7 +202,7 @@ public class TdIndexController {
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
-        // 国内自驾游大图广告
+        // 团购广告图片
         adType = tdAdTypeService.findByTitle("团购广告图片");
 
         if (null != adType) {

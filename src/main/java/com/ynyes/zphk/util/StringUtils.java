@@ -2,8 +2,6 @@ package com.ynyes.zphk.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import sun.misc.BASE64Encoder;
 /**
  * 常用字符串工具类
  * （小郭封装）
@@ -40,12 +38,6 @@ public class StringUtils {
      } catch (NumberFormatException e) {
       return false;
      }
-    }
-    public static String base64Encode(byte[] b) {
-        if (b == null) {
-            return null;
-        }
-        return new BASE64Encoder().encode(b);
     }
     
     /**

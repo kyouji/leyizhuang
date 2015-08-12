@@ -165,7 +165,7 @@ $(function(){
             <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
-                    <a href="${item.linkUri!''}">${item.title}</a>
+                        <a href="${item.linkUri!''}">${item.title}</a>
                     </#if>
                 </#list>
             </#if>
@@ -236,40 +236,40 @@ $(function(){
     	<!-- 首页大广告    -->
         <div class="advertising_ifm adver_middle">
             <div class="scroll">
-            <div class="adv_box">   
-            <div class="scroll_box">
-            <#if big_scroll_ad_list??>
-                 <#list big_scroll_ad_list as item>
-                    <img src="${item.fileUri!''}" />
-                 </#list>
-            </#if>
-            </div>
-            </div>
+                <div class="adv_box">   
+                    <div class="scroll_box">
+                        <#if big_scroll_ad_list??>
+                             <#list big_scroll_ad_list as item>
+                                <img src="${item.fileUri!''}" />
+                             </#list>
+                        </#if>
+                    </div>
+                </div>
             </div>
         </div>
         
         <div class="advertising_ifm adver_right">
         	<div class="dedication">竭诚服务</div>
-            <ul class="special_service">
-            <#if tour_km_big_ad_list??>
-        	<li class="li_1">
-                    <img src="${tour_km_big_ad_list[0].fileUri!''}" height="43px;" width="40px;"/>
-                    <a class="icon_1">${tour_km_big_ad_list[0].title!''}</a>
-                </li>
-                <li>
-                    <img src="${tour_km_big_ad_list[1].fileUri!''}" />
-                    <a class="icon_2">${tour_km_big_ad_list[1].title!''}</a>
-                </li>
-                <li class="li_3">
-                    <img src="${tour_km_big_ad_list[2].fileUri!''}" />
-                    <a class="icon_3">${tour_km_big_ad_list[2].title!''}</a>
-                </li>
-                <li class="li_4">
-                    <img src="${tour_km_big_ad_list[3].fileUri!''}" />
-                    <a class="icon_4">${tour_km_big_ad_list[3].title!''}</a>
-                </li> 
-            </#if>  
-            </ul>
+                <ul class="special_service">
+                    <#if tour_km_big_ad_list??>
+                    	<li class="li_1">
+                            <img src="${tour_km_big_ad_list[0].fileUri!''}" height="43px;" width="40px;"/>
+                            <a class="icon_1">${tour_km_big_ad_list[0].title!''}</a>
+                        </li>
+                        <li>
+                            <img src="${tour_km_big_ad_list[1].fileUri!''}" />
+                            <a class="icon_2">${tour_km_big_ad_list[1].title!''}</a>
+                        </li>
+                        <li class="li_3">
+                            <img src="${tour_km_big_ad_list[2].fileUri!''}" />
+                            <a class="icon_3">${tour_km_big_ad_list[2].title!''}</a>
+                        </li>
+                        <li class="li_4">
+                            <img src="${tour_km_big_ad_list[3].fileUri!''}" />
+                            <a class="icon_4">${tour_km_big_ad_list[3].title!''}</a>
+                        </li> 
+                     </#if>  
+                </ul>
             
             <div class="announcement">公告</div>
             <div class="announcement_list">
@@ -303,15 +303,15 @@ $(function(){
 <div class="today_specials">
     <#list speciaPrice_list as item>
         <a class="tj_1" href="/goods/${item.id?c}">
-        <div class="tj">
-            <h3>${item.title!""}</h3>
-            <img class="tj_left" src="${item.coverImageUri!""}" width="74px" height="131px" />
-            <div class="tj_right">
-                <div>店家推荐</div>
-                <p>${item.subTitle!""}</p>
-                <p class="price_1">￥<span>${item.salePrice?string('0.00')}</span></p>
+            <div class="tj">
+                <h3>${item.title!""}</h3>
+                <img class="tj_left" src="${item.coverImageUri!""}" width="74px" height="131px" />
+                <div class="tj_right">
+                    <div>店家推荐</div>
+                    <p>${item.subTitle!""}</p>
+                    <p class="price_1">￥<span>${item.salePrice?string('0.00')}</span></p>
+                </div>
             </div>
-        </div>
         </a>
     </#list>
 </div>
@@ -386,13 +386,13 @@ $(function(){
                     <#if item_index gt 3 && item_index < 6 >
                     <li class="photo_1 photo_4">
                          <dl>
-                          <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                          <dd class="feature">性价比之王</dd>
-                          <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                          <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                          <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                              <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                              <dd class="feature">性价比之王</dd>
+                              <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                              <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                              <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                         </dl>
-                    <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        <div class="gz_dh"><a href="/"><img src="/client/images/dh_gz_1.png" /></a></div>
                      </li>
                      </#if>
                 </#list>

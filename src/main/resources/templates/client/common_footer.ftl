@@ -2,38 +2,24 @@
     <div class="footer_iconsall">
         <div class="footer_icons">
              <#if service_item_list??>
-             <#list service_item_list as item>
-            <dl>
-                <dt><img src="${item.logo!''}" width="60px;"/></dt>
-                <dd>${item.title!''}</dd>
-            </dl>
-            </#list>
+                 <#list service_item_list as item>
+                    <dl>
+                        <dt><img src="${item.logo!''}" width="60px;"/></dt>
+                        <dd>${item.title!''}</dd>
+                    </dl>
+                </#list>
             </#if>
         </div>    
     </div>
 
     <div class="footer_link">
-        <ul>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们们们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-        </ul>
-        <ul>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-        </ul>
-        <ul>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-            <li><a href="#" title="">关于我们</a></li>
-        </ul>
+        <#if help_level0_cat_list??>
+            <#list help_level0_cat_list as item>
+                <ul>
+                    <li><a href="/info/list/${help_id!'0'}?catId=${item.id!''}">${item.title!''}</a></li>
+                </ul>
+            </#list>
+        </#if>
     </div>
     
 
@@ -41,12 +27,12 @@
         <div class="footerall_copy">
             友情链接：
             <#if site_link_list??>
-            <#list site_link_list as item>
-                <a href="${item.linkUri!''}">${item.title!''}</a>
-            </#list>
-        </#if>
+                <#list site_link_list as item>
+                     <a href="${item.linkUri!''}">${item.title!''}</a>
+                </#list>
+           </#if>
             <br />
-            <span>Copyright©2006-2014 All Rights Reserved 丫丫网 版权所有 滇ICP备07004173号</span>
+            <span> ${site.copyright!''}</span>
         </div>
     </div> 
 </div>
