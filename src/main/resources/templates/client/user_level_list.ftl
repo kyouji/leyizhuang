@@ -27,7 +27,7 @@
                 <#if item_index = 0>
                    <li class="dj_0">
                    <#if user.userLevelTitle = item.title>
-                     <p style="color:#ef7c00;">${item.title!''}</p>
+                     <b style="color:#ef7c00;">${item.title!''}</b>
                     <#else>           
                       ${item.title!''}
                     </#if>          
@@ -36,7 +36,7 @@
                 <#if item_index gt 0 && item_index lt 4>             
                     <li class="dj_1">           
                       <#if user.userLevelTitle = item.title>
-                        <p style="color:#ef7c00;">${item.title!''}</p>
+                        <b style="color:#ef7c00;">${item.title!''}</b>
                        <#else>           
                          ${item.title!''}
                        </#if>          
@@ -45,7 +45,7 @@
                 <#if item_index = 4>
                       <li class="dj_4">           
                          <#if user.userLevelTitle = item.title>
-                     <p style="color:#ef7c00;">${item.title!''}</p>
+                     <b style="color:#ef7c00;">${item.title!''}</b>
                     <#else>           
                       ${item.title!''}
                     </#if>            
@@ -54,7 +54,7 @@
                 <#if item_index = 5>
                       <li class="dj_5">           
                          <#if user.userLevelTitle = item.title>
-                     <p style="color:#ef7c00;">${item.title!''}</p>
+                     <b style="color:#ef7c00;">${item.title!''}</b>
                     <#else>           
                       ${item.title!''}
                     </#if>            
