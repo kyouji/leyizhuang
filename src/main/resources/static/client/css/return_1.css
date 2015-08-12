@@ -38,3 +38,16 @@
 .content_2 .content_2_2 .content_2_2_2 .y_3 ul li .sc,.content_2 .content_2_2 .content_2_2_2 .y_3 ul li a{ display:block; float:left;}
 .content_2 .content_2_2 .content_2_2_2 .y_3 ul li a{ background:url(../images/bottom.png) no-repeat scroll 0 0; height:30px; width:130px; float:left; text-align:center; line-height:30px;}.content_2 .content_2_2 .content_2_2_2 .y_3 ul .zs{ float:left; width:647px; _width:570px; margin-top:-1px; padding-left:60px; color:#999999;}
 .content_2_2 .content_2_2_2 .y_3 ul .zs_1{float:left; background:#0e5baa; height:30px; width:50px; border-radius:3px; text-align:center; line-height:30px; color:#fff; font-size:14px; margin-left:60px;  _margin-left:30px; }
+/*评价*/
+.evaluate_star{ overflow:hidden; margin-left:84px; margin-top:10px; _margin-left:72px; _clear:both; width:500px;}
+.evaluate_star *{ float:left;}
+.evaluate_star a{ display:block;}
+.evaluate_star img{ margin-top:2px;  margin-left:6px; margin-right:3px;  }
+.evaluat_take{overflow:hidden; margin-left:60px; margin-top:5px; *+margin-top:14px; width:500px;}
+.evaluat_take *{ float:left;}
+.evaluat_take input{ width:500px; height:100px; margin-left:11px; *+margin-left:6px;  _margin-left:10px;}
+.evaluat_take textarea{ width:400px; height:120px; margin-left:11px; *+margin-left:6px;  _margin-left:10px;}
+.evaluat_take a{ margin-top:100px; margin-left:10px;}
+.evaluat_take span{float:right;}
+.evaluat_sure{ width:50px; height:30px; margin-left:123px; margin-top:10px; display:block; background-image:url(../images/evaluate_sure.png); background-repeat:no-repeat; color:white; font-size:14px; text-align:center; line-height:30px; margin-bottom:12px; _clear:both; _margin-left:94px; _padding-bottom:10px; }
+/*评价 end */
