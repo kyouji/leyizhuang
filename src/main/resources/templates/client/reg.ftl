@@ -12,7 +12,6 @@
 <script>
 $(document).ready(function(){
 	changeYzm();
-
 	$("#regist_form").Validform({
 	 	tiptype: 3
 	 });
