@@ -136,15 +136,19 @@ function btnPageSubmit(type)
     window.location.href = "goods/${goods.id}/"+(parseInt($('#iPageNum').val()) - 1);
     -->
     
-    var pageNum;<#-- 表示页数的变量 -->
-    var totalPages;<#-- 表示总页数的变量 -->
+    var pageNum = 0;<#-- 表示页数的变量 -->
+    var totalPages = 0;<#-- 表示总页数的变量 -->
     
     if(type == "comment"){
     	pageNum = document.getElementById("commentPageNum").value;
-    	totalPages = ${comment_page.totalPages}
+    	<#if comment_page??>
+    		totalPages = ${comment_page.totalPages}
+    	</#if>
     }else{
     	pageNum = document.getElementById("consultPageNum").value;
-    	totalPages = ${consult_page.totalPages}
+    	<#if consult_page??>
+    		totalPages = ${consult_page.totalPages!'0'}
+    	</#if>
     }
     
     <#-- 判断是否为数字 -->
@@ -562,8 +566,17 @@ function buyConbination(){
         	<ul>                                                        
             	<li><a href="#detail_tit" tid="0" class="sel stab">商品介绍</a></li>
                 <li><a href="#detail_tit" tid="1" class="stab">参数规格</a></li>
-                <li><a href="#detail_tit" tid="2" class="stab">评价（${comment_page.content?size!'0'}）</a></li>
-                <li><a href="#detail_tit" tid="3" class="stab">咨询（${consult_page.content?size!'0'}）</a></li>
+                <#if comment_page??>
+                	<li><a href="#detail_tit" tid="2" class="stab">评价（${comment_page.content?size!'0'}） </a></li>
+                <#else>
+                	<li><a href="#detail_tit" tid="2" class="stab">评价（0） </a></li>
+                </#if>
+      			<#if comment_page??>
+                	<li><a href="#detail_tit" tid="3" class="stab">咨询（${consult_page.content?size!'0'}） </a></li>
+                <#else>
+                	<li><a href="#detail_tit" tid="3" class="stab">咨询（0） </a></li>
+                </#if>          
+               
                 <li><a href="#detail_tit" tid="4" class="stab">售后保障</a></li>
             </ul>
             <a href="/cart/init?id=${goods.id}" title="" class="addcartorange" style="float:right; border-radius:0; text-decoration:none;">加入购物车</a>
@@ -611,11 +624,17 @@ function buyConbination(){
         <!--评价-->
         <div class="c_R_comment top20">
         <div class="c_R_comment_title">
-            
+        	<#if comment_page??>
                 <a href="javascript:getCommentByStars(${goodsId}, 0, 0);" id="star0" title="" class="c_R_comment_title_choiced">全部评价（${comment_page.content?size!'0'}）</a>
                 <a href="javascript:getCommentByStars(${goodsId}, 3, 0);" id="star3" title="">好评（${three_star_comment_count!'0'}）</a>
                 <a href="javascript:getCommentByStars(${goodsId}, 2, 0);" id="star2" title="">中评（${two_star_comment_count!'0'}）</a>
                 <a href="javascript:getCommentByStars(${goodsId}, 1, 0);" id="star1" title="">差评（${one_star_comment_count!'0'}）</a>
+            <#else>
+            	<a href="javascript:;" id="star0" title="" class="c_R_comment_title_choiced">全部评价（0）</a>
+                <a href="javascript:;" id="star3" title="">好评（0）</a>
+                <a href="javascript:;" id="star2" title="">中评（0）</a>
+                <a href="javascript:;" id="star1" title="">差评（0）</a>
+            </#if>
             </div>
         	<div id="the_comment">
        			<#include "/client/goods_content_comment.ftl" />
