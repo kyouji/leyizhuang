@@ -5,6 +5,15 @@
 	}
 </script>
 <!--顶部-->
+
+<#if index_top_ad_list?? && index_top_ad_list?size gt 0>
+    <div class="top_ad">
+        <#list index_top_ad_list as item>
+            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}"><img src="${item.fileUri!''}" /></a>
+        </#list>
+    </div>
+</#if>
+
 <div class="top_all">
     <div class="top">
         <div class="top_left">

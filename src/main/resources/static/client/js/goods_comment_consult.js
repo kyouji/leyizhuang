@@ -8,6 +8,30 @@ function getCommentByStars(goodsId, stars, page)
         return;
     }
     
+    //移除所有评价标签的class
+    $("#star0").removeClass();
+    $("#star1").removeClass();
+    $("#star2").removeClass();
+    $("#star3").removeClass();
+    
+    if(stars == 0){
+    	$("#star0").addClass("c_R_comment_title_choiced");
+    }
+    
+    if(stars == 1){
+    	$("#star1").addClass("c_R_comment_title_choiced");
+    }
+    
+    if(stars == 2){
+    	$("#star2").addClass("c_R_comment_title_choiced");
+    }
+    
+    if(stars == 3){
+    	$("#star3").addClass("c_R_comment_title_choiced");
+    }
+    
+    
+    
     $.ajax({
         type:"post",
         url:"/goods/comment/" + goodsId + "?stars=" + stars + "&page=" + page,

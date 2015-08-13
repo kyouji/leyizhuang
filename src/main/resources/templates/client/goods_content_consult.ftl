@@ -2,7 +2,11 @@
 	<div class="slideTxtBox">
 		<div class="hd">
 			<ul>
-				<li>全部咨询(${consult_page.content?size!'0'})</li>
+				<#if consult_page??>
+					<li>全部咨询(${consult_page.content?size!'0'})</li>
+				<#else>
+					<li>全部咨询(0)</li>
+				</#if>
 			</ul>
 		</div>
 		<div class="bd">
@@ -50,15 +54,23 @@
 					<#if consult_page.number+1 == consult_page.totalPages || consult_page.totalPages==0>
 						<a class="a2 a0" href="javascript:;"><span>下一页</span></a>
 					<#else> 
-						<a class="a2" href="javascript:getConsult(${goodsId},(${page!'0'}+1))"><span>下一页</span></a> 
+						<a class="a2" href="javascript:getConsult(${goodsId},(${page!'0'}+1))"><span>123123下一页</span></a> 
 					</#if> 
 				</#if> 
+				<#if consult_page??>
 					<span>共<b>${consult_page.totalPages}</b>页
+				<#else>
+					<span>共<b>0</b>页 </span>
+				</#if>
 				</span>
 			</div>
 			<div class="page">
 				<input class="sub" type="submit" value="确定" onclick="javascript:btnPageSubmit('consult');" style="border: none;" /> <span>页</span>
-				<input class="text" type="text" value="${consult_page.number+1}" id="consultPageNum" /> <span>到第</span>
+				<#if consult_page??>
+					<input class="text" type="text" value="${consult_page.number+1}" id="consultPageNum" /> <span>到第</span>
+				<#else>
+					<input class="text" type="text" value="0" id="consultPageNum" /> <span>到第</span>
+				</#if>
 			</div>
 			<div class="clear"></div>
 		</div>
