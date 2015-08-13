@@ -210,7 +210,7 @@ public class TdIndexController {
         }
 
         // 昆明自驾游列表广告
-        adType = tdAdTypeService.findByTitle("昆明自驾游列表广告");
+        adType = tdAdTypeService.findByTitle("搜索框左侧小广告");
 
         if (null != adType) {
             map.addAttribute("tour_km_list_ad_list", tdAdService

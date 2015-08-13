@@ -20,10 +20,14 @@
 
 <!--面包屑导航-->
 <div class="crumb">
-	<a href="#" title="">首页</a>
-    &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
-    <a href="#" title="">手机大全</a>
-</div>
+    <a href="/" title="">首页</a>
+    <#if category_tree_list??>
+        <#list category_tree_list as item>
+            &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
+            <a href="/list/${item.id}" title="${item.title!''}">${item.title!''}</a>
+        </#list>
+    </#if>
+    </div>
 
 <!--中部整体-->
 <div class="wrapper">

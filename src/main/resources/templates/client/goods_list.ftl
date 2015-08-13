@@ -42,7 +42,7 @@ function btnPageSubmit()
 
 <!--面包屑导航-->
 <div class="crumb">
-	<a href="#" title="">首页</a>
+	<a href="/" title="">首页</a>
 	<#if category_tree_list??>
         <#list category_tree_list as item>
             &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
