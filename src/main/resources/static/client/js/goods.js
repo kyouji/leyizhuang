@@ -135,23 +135,7 @@ function close(){
 	document.getElementById("collectGoods").style.display="none";
 }
 
-/**
- * 立即购买商品组合的方法
- * @author dengxiao
- */
-function buyConbination(){
-	var selectNum = document.getElementById("combCount").innerHTML;
-	if(selectNum == 0){
-		alert("请至少选择一件组合商品");
-		return;
-	}
-	var str = "";
-	$(".comboCheckBox:checked").each(function(){
-		str += $(this).attr("zpid");
-		str += ",";
-	});
-	     var href = "/order/buyCombination?id=" + ${goods.id} + "&zpid=" + str;
-}
+
 
 
  

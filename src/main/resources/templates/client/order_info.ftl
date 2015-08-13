@@ -100,8 +100,10 @@
 
 <!--购物车详情-->
 <div class="cart_details">
+<#--
 <#assign totalQuantity=0>
 <#assign totalPrice=0>
+-->
 <#if selected_goods_list??>
     <#list selected_goods_list as sg>
 	<div class="category">

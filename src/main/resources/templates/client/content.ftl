@@ -94,7 +94,6 @@ $("#zhAddCart").click(function(){
  -->         
 });   
       
- });  
 <!-- 组合商品选择-->   
 function combSelect(self, price, originPrice)
 {
@@ -170,7 +169,29 @@ function btnPageSubmit(type)
     }
     
 }   
-
+<#--
+ * 立即购买商品组合的方法
+ * @author dengxiao
+-->
+function buyConbination(){
+	var selectNum = document.getElementById("combCount").innerHTML;
+	if(selectNum == 0){
+		alert("请至少选择一件组合商品");
+		return;
+	}
+	var str = "";
+	$(".comboCheckBox:checked").each(function(){
+		str += $(this).attr("zpid");
+		str += ",";
+	});
+	
+	if(${goods.id} == null||${goods.id} == ""||${goods.id} == 0){
+		alert("商品信息有误");
+		return;
+	}
+	var href = "/order/buyCombination?id=" + ${goods.id} + "&zpid=" + str;
+	window.location.href=href;
+}
  
 </script>
 
