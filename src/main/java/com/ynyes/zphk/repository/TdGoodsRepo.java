@@ -21,6 +21,8 @@ public interface TdGoodsRepo extends
 		PagingAndSortingRepository<TdGoods, Long>,
 		JpaSpecificationExecutor<TdGoods> 
 {
+	TdGoods findById(Long Id);
+	
     Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrue(String categoryId, Pageable page);
     
     Page<TdGoods> findByCategoryIdTreeContainingAndIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(String categoryId, Pageable page);
@@ -39,37 +41,113 @@ public interface TdGoodsRepo extends
     
     Page<TdGoods> findByIsOnSaleTrue(Pageable page);
     
+    Page<TdGoods> findByIsOnSaleTrueAndIsFlashSaleTrue(Pageable page);
+    
+    Page<TdGoods> findByIsOnSaleTrueAndIsGroupSaleTrue(Pageable page);
+    
+    Page<TdGoods> findByIsFlashSaleTrue(Pageable page);
+    
+    Page<TdGoods> findByIsGroupSaleTrue(Pageable page);
+    
     Page<TdGoods> findByIsOnSaleFalse(Pageable page);
+    
+    Page<TdGoods> findByIsOnSaleFalseAndIsFlashSaleTrue(Pageable page);
+    
+    Page<TdGoods> findByIsOnSaleFalseAndIsGroupSaleTrue(Pageable page);
     
     List<TdGoods> findByIdAndIsOnSaleTrue(Iterable<Long> ids);
     
-    Page<TdGoods> findByCategoryIdTreeContainingOrderBySortIdAsc(String catId, Pageable page);
+    Page<TdGoods> findByCategoryIdTreeContaining(String catId, Pageable page);
     
-    Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueOrderBySortIdAsc(String catId, Pageable page);
+    Page<TdGoods> findByCategoryIdTreeContainingAndIsFlashSaleTrue(String catId, Pageable page);
     
-    Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalseOrderBySortIdAsc(String catId, Pageable page);
+    Page<TdGoods> findByCategoryIdTreeContainingAndIsGroupSaleTrue(String catId, Pageable page);
     
-    Page<TdGoods> findByTitleContainingOrSubTitleContainingOrDetailContainingOrderBySortIdAsc(String keywords1, String keywords2, String keywords3, Pageable page);
+    Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrue(String catId, Pageable page);
     
-    Page<TdGoods> findByTitleContainingOrSubTitleContainingOrDetailContainingAndIsOnSaleTrueOrderBySortIdAsc(String keywords1, String keywords2, String keywords3, Pageable page);
+    Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsFlashSaleTrue(String catId, Pageable page);
     
-    Page<TdGoods> findByTitleContainingOrSubTitleContainingOrDetailContainingAndIsOnSaleFalseOrderBySortIdAsc(String keywords1, String keywords2, String keywords3, Pageable page);
+    Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalse(String catId, Pageable page);
     
-    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingOrCategoryIdTreeContainingAndSubTitleContainingOrCategoryIdTreeContainingAndDetailContainingOrderBySortIdAsc(String catId1,
+    Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsFlashSaleTrue(String catId, Pageable page);
+    
+    Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleTrue(String catId, Pageable page);
+    
+    Page<TdGoods> findByTitleContainingOrSubTitleContainingOrDetailContaining(String keywords1, String keywords2, String keywords3, Pageable page);
+    
+    Page<TdGoods> findByTitleContainingAndIsFlashSaleTrueOrSubTitleContainingAndIsFlashSaleTrueOrDetailContainingAndIsFlashSaleTrue(String keywords1, String keywords2, String keywords3, Pageable page);
+    
+    Page<TdGoods> findByTitleContainingAndIsGroupSaleTrueOrSubTitleContainingAndIsGroupSaleTrueOrDetailContainingAndIsGroupSaleTrue(String keywords1, String keywords2, String keywords3, Pageable page);
+    
+    Page<TdGoods> findByTitleContainingAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(String keywords1, String keywords2, String keywords3, Pageable page);
+    
+    Page<TdGoods> findByTitleContainingAndIsOnSaleTrueAndIsFlashSaleTrueOrSubTitleContainingAndIsOnSaleTrueAndIsFlashSaleTrueOrDetailContainingAndIsOnSaleTrueAndIsFlashSaleTrue(String keywords1, String keywords2, String keywords3, Pageable page);
+    
+    Page<TdGoods> findByTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrue(String keywords1, String keywords2, String keywords3, Pageable page);
+    
+    Page<TdGoods> findByTitleContainingAndIsOnSaleFalseOrSubTitleContainingAndIsOnSaleFalseOrDetailContainingAndIsOnSaleFalse(String keywords1, String keywords2, String keywords3, Pageable page);
+    
+    Page<TdGoods> findByTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrSubTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrDetailContainingAndIsOnSaleFalseAndIsGroupSaleTrue(String keywords1, String keywords2, String keywords3, Pageable page);
+    
+    Page<TdGoods> findByTitleContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrSubTitleContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrDetailContainingAndIsOnSaleFalseAndIsFlashSaleTrue(String keywords1, String keywords2, String keywords3, Pageable page);
+    
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingOrCategoryIdTreeContainingAndSubTitleContainingOrCategoryIdTreeContainingAndDetailContaining(String catId1,
             String keywords1, 
             String catId2,
             String keywords2, 
             String catId3,
             String keywords3, Pageable page);
     
-    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueOrderBySortIdAsc(String catId1,
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsGroupSaleTrue(String catId1,
             String keywords1, 
             String catId2,
             String keywords2, 
             String catId3,
             String keywords3, Pageable page);
     
-    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueOrderBySortIdAsc(String catId1,
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsFlashSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsFlashSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsFlashSaleTrue(String catId1,
+            String keywords1, 
+            String catId2,
+            String keywords2, 
+            String catId3,
+            String keywords3, Pageable page);
+    
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrue(String catId1,
+            String keywords1, 
+            String catId2,
+            String keywords2, 
+            String catId3,
+            String keywords3, Pageable page);
+    
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrue(String catId1,
+            String keywords1, 
+            String catId2,
+            String keywords2, 
+            String catId3,
+            String keywords3, Pageable page);
+    
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleTrueAndIsFlashSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsFlashSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsFlashSaleTrue(String catId1,
+            String keywords1, 
+            String catId2,
+            String keywords2, 
+            String catId3,
+            String keywords3, Pageable page);
+    
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrue(String catId1,
+            String keywords1, 
+            String catId2,
+            String keywords2, 
+            String catId3,
+            String keywords3, Pageable page);
+    
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsFlashSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsFlashSaleTrue(String catId1,
+            String keywords1, 
+            String catId2,
+            String keywords2, 
+            String catId3,
+            String keywords3, Pageable page);
+    
+    Page<TdGoods> findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrue(String catId1,
             String keywords1, 
             String catId2,
             String keywords2, 
@@ -92,6 +170,7 @@ public interface TdGoodsRepo extends
     
     Page<TdGoods> findByCategoryIdTreeContainingAndBrandIdAndParamValueCollectLikeAndIsOnSaleTrue(String categoryId, Long brandId, String paramStr, Pageable page);
 
+    List<TdGoods> findByIsSpecialPriceTrueAndIsOnSaleTrue();
     // 正在
     //Page<TdGoods> findByIsGroupSaleTrueAndIsOnSaleTrueAndGroupSaleStopTimeAfterAndGroupSaleStartTimeBeforeOrderByGroupSaleStartTimeAsc(Date current, Pageable page);
     
@@ -131,11 +210,10 @@ public interface TdGoodsRepo extends
     // 全部秒杀
     Page<TdGoods> findByIsFlashSaleTrueAndIsOnSaleTrueOrderByFlashSaleStartTimeAsc(Pageable page);
 
-    Page<TdGoods> findByTitleContainingIgnoreCaseAndIsOnSaleTrueOrSubTitleContainingIgnoreCaseAndIsOnSaleTrueOrParamValueCollectContainingIgnoreCaseAndIsOnSaleTrueOrDetailContainingIgnoreCaseAndIsOnSaleTrueOrNameContainingIgnoreCaseAndIsOnSaleTrue(String key1,
+    Page<TdGoods> findByTitleContainingIgnoreCaseAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(String key1,
             String key2,
             String key3,
             String key4,
-            String key5,
             Pageable page);
 
     List<TdGoods> findByProductIdAndIsOnSaleTrue(Long productId);
@@ -144,5 +222,5 @@ public interface TdGoodsRepo extends
     
     Page<TdGoods> findByReturnPriceNotAndTitleContainingAndIsOnSaleTrue(double returnPrice, String keywords, Pageable page);
     
-    List<TdGoods> findByIsSpecialPriceTrueAndIsOnSaleTrue();
+    
 }

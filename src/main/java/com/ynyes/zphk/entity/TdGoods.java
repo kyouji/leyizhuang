@@ -181,9 +181,13 @@ public class TdGoods {
     @Column(scale=2)
     private Double includePrice;
     
-    // 组合销售时的价格
-    @Column(scale=2)
-    private Double combPrice;
+    // 站点ID
+    @Column
+    private Long siteId;
+    
+    // 站点名
+    @Column
+    private String siteTitle;
     
     // 仓库ID
     @Column
@@ -204,10 +208,6 @@ public class TdGoods {
     // 库存数量
     @Column
     private Long leftNumber;
-    
-    // 库存信息
-    @Column
-    private Long storehouseId;
  
     // 该版本的已售数量
     @Column
@@ -322,6 +322,22 @@ public class TdGoods {
     @Column
     private Boolean isGroupSaleHundred;
     
+    // 百人团开始时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date groupSaleHundredStartTime;
+    
+    // 百人团结束时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date groupSaleHundredStopTime;
+    
+    // 百人团预付定金
+    @Column(scale=2)
+    private Double groupSalePrePayPrice;
+    
     // 百人团价格
     @Column(scale=2)
     private Double groupSaleHundredPrice;
@@ -330,13 +346,21 @@ public class TdGoods {
     @Column
     private String groupSaleImage;
     
-    // 限时抢购剩余数量
+    // 团购剩余数量
     @Column
     private Long groupSaleLeftNumber;
     
-    // 限时抢购已售数量
+    // 团购已售数量
     @Column
     private Long groupSaleSoldNumber;
+    
+    // 百人团剩余数量
+    @Column
+    private Long groupSaleHundredLeftNumber;
+    
+    // 百人团已售数量
+    @Column
+    private Long groupSaleHundredSoldNumber;
     
     // 品牌
     @Column
@@ -377,6 +401,22 @@ public class TdGoods {
     // 评论数
     @Column
     private Long totalComments;
+    
+    // 关注数
+    @Column
+    private Long totalCollects;
+    
+    // 同盟店返利比例
+    @Column(scale=2)
+    private Double shopReturnRation;
+    
+    // 平台服务费比例
+    @Column(scale=2)
+    private Double platformServiceReturnRation;
+    
+    // 培训服务费比例
+    @Column(scale=2)
+    private Double trainServiceReturnRation;
     
     public Long getId() {
         return id;
@@ -674,15 +714,7 @@ public class TdGoods {
     public void setIncludePrice(Double includePrice) {
         this.includePrice = includePrice;
     }
-
-    public Double getCombPrice() {
-        return combPrice;
-    }
-
-    public void setCombPrice(Double combPrice) {
-        this.combPrice = combPrice;
-    }
-
+    
     public Long getLeftNumber() {
         return leftNumber;
     }
@@ -706,15 +738,7 @@ public class TdGoods {
     public void setWarehouseTitle(String warehouseTitle) {
         this.warehouseTitle = warehouseTitle;
     }
-
-    public Long getStorehouseId() {
-        return storehouseId;
-    }
-
-    public void setStorehouseId(Long storehouseId) {
-        this.storehouseId = storehouseId;
-    }
-
+    
     public Long getSoldNumber() {
         return soldNumber;
     }
@@ -1058,6 +1082,97 @@ public class TdGoods {
     public void setProviderTitle(String providerTitle) {
         this.providerTitle = providerTitle;
     }
-    
-    
+
+    public Double getShopReturnRation() {
+        return shopReturnRation;
+    }
+
+    public void setShopReturnRation(Double shopReturnRation) {
+        this.shopReturnRation = shopReturnRation;
+    }
+
+    public Double getPlatformServiceReturnRation() {
+        return platformServiceReturnRation;
+    }
+
+    public void setPlatformServiceReturnRation(Double platformServiceReturnRation) {
+        this.platformServiceReturnRation = platformServiceReturnRation;
+    }
+
+    public Double getTrainServiceReturnRation() {
+        return trainServiceReturnRation;
+    }
+
+    public void setTrainServiceReturnRation(Double trainServiceReturnRation) {
+        this.trainServiceReturnRation = trainServiceReturnRation;
+    }
+
+	public Long getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(Long siteId) {
+        this.siteId = siteId;
+    }
+
+    public String getSiteTitle() {
+        return siteTitle;
+    }
+
+    public void setSiteTitle(String siteTitle) {
+        this.siteTitle = siteTitle;
+    }
+
+    public Date getGroupSaleHundredStartTime() {
+        return groupSaleHundredStartTime;
+    }
+
+    public void setGroupSaleHundredStartTime(Date groupSaleHundredStartTime) {
+        this.groupSaleHundredStartTime = groupSaleHundredStartTime;
+    }
+
+    public Date getGroupSaleHundredStopTime() {
+        return groupSaleHundredStopTime;
+    }
+
+    public void setGroupSaleHundredStopTime(Date groupSaleHundredStopTime) {
+        this.groupSaleHundredStopTime = groupSaleHundredStopTime;
+    }
+
+    public Double getGroupSalePrePayPrice() {
+        return groupSalePrePayPrice;
+    }
+
+    public void setGroupSalePrePayPrice(Double groupSalePrePayPrice) {
+        this.groupSalePrePayPrice = groupSalePrePayPrice;
+    }
+
+    public Long getGroupSaleHundredLeftNumber() {
+        return groupSaleHundredLeftNumber;
+    }
+
+    public void setGroupSaleHundredLeftNumber(Long groupSaleHundredLeftNumber) {
+        this.groupSaleHundredLeftNumber = groupSaleHundredLeftNumber;
+    }
+
+    public Long getGroupSaleHundredSoldNumber() {
+        return groupSaleHundredSoldNumber;
+    }
+
+    public void setGroupSaleHundredSoldNumber(Long groupSaleHundredSoldNumber) {
+        this.groupSaleHundredSoldNumber = groupSaleHundredSoldNumber;
+    }
+
+    public Long getTotalCollects() {
+        return totalCollects;
+    }
+
+    public void setTotalCollects(Long totalCollects) {
+        this.totalCollects = totalCollects;
+    }
+
+    @Override
+	public String toString() {
+		return "TdGoods [id=" + id + ", productId=" + productId + ", name=" + name + "]";
+	}
 }
