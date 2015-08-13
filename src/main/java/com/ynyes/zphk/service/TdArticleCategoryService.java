@@ -196,5 +196,13 @@ public class TdArticleCategoryService {
         
         return repository.save(e);
     }
+    /**
+     * @author libiao
+     * 查找所有类型
+     * @return
+     */
+    public List<TdArticleCategory> findAll(){
+    	return (List<TdArticleCategory>) repository.findAll();
+    }
     
 }

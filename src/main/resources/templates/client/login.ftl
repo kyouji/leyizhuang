@@ -112,6 +112,7 @@
             <a>丨</a>
             <a href="/reg">立即注册</a>
         </div>
+        <#--
         <div class="agree_1">
             您还可以使用以下正品惠客合作伙伴登录：
         </div>
@@ -121,6 +122,7 @@
             <a href="#"><img src="/client/images/weibo.png" /></a>
             <a href="#"><img src="/client/images/zhifubao.png" /></a>
         </div>
+        -->
     </div>
 </div>
 

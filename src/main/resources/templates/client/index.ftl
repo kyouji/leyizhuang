@@ -9,7 +9,6 @@
 <meta name="copyright" content="${site.copyright!''}" />
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/main.css" rel="stylesheet" type="text/css" />
-<link href="/client/css/index_smallad_scroll.css" rel="stylesheet" type="text/css" />
 
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
@@ -109,11 +108,10 @@ $(function(){
     checkBoxShow("teamadmenu","a","teamadsum","a","sel");
     
     floatBoxQQ();
+    <!-- 二四楼图片轮播 -->
+   jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true});
 });
 </script>
-<script type="text/javascript">
-     jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true});
- </script>
 </head>
 
 <body>
@@ -156,8 +154,8 @@ $(function(){
     
     <!--广告语大小：183 58-->
     <div class="header_ad">
-        <#if top_small_ad_list??>
-            <#list top_small_ad_list as item>
+        <#if tour_km_list_ad_list??>
+            <#list tour_km_list_ad_list as item>
                 <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
                     <img src="${item.fileUri!''}" />
                 </a>
@@ -185,10 +183,12 @@ $(function(){
         </div>
     </div>
     
-    <#-- 设计要改，增加下拉显示 -->
+    <#-- 设计要改，增加下拉显示  -->
     <div class="header_cart">
     	<a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
     </div>
+   
+    
 </div>
 
 <!--导航-->
@@ -264,7 +264,7 @@ $(function(){
         <div class="advertising_ifm adver_right">
         	<div class="dedication">竭诚服务</div>
                 <ul class="special_service">
-                    <#if tour_km_big_ad_list??>
+                    <#if tour_km_big_ad_list?? && tour_km_big_ad_list?size gt 0>
                     	<li class="li_1">
                             <img src="${tour_km_big_ad_list[0].fileUri!''}" height="43px;" width="40px;"/>
                             <a class="icon_1">${tour_km_big_ad_list[0].title!''}</a>
@@ -358,15 +358,28 @@ $(function(){
     	   <#if top_category_list?? && top_category_list?size gt 0>
                 <#list top_category_list as item>
                      <#if item_index == 0> 
-                     <#if ("second_level_"+item_index+"_cat_list")?eval?? >
-                        <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                           <#if secondLevelItem_index < 5 >
-                                <div class="lg">
-                                    <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
-                                </div>
-                            </#if>
-                        </#list>
-                   </#if>
+                         <#if ("second_level_"+item_index+"_cat_list")?eval?? >
+                            <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
+                                 <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
+                                    <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
+                                        <div class="lg">
+                                            <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}"></a>
+                                        </div>
+                                    </#list>
+                                <#elseif secondLevelItem_index < 5>
+                                     <div class="lg">
+                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
+                                    </div>
+                                </#if>
+                            <#--
+                               <#if secondLevelItem_index < 5 >
+                                    <div class="lg">
+                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
+                                    </div>
+                                </#if>
+                               -->
+                            </#list>
+                       </#if>
                    </#if>
                 </#list>
             </#if>
@@ -481,9 +494,22 @@ $(function(){
             </div>
         </ul>
         <ul class="pc_photo">
-            <#if mid_scroll_ad_list?? && mid_scroll_ad_list?size gt 0 >
-                <img src="${mid_scroll_ad_list[0].fileUri!""}" width="404px" height="272px"/>
-            </#if>
+            <div id="slideBox" class="slideBox">
+                <div class="bd">
+                    <ul>
+                    <#if mid_scroll_ad_list?? >
+                        <#list mid_scroll_ad_list as item>
+                       
+                        <li><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
+                        </#list>
+                    </#if>  
+                   
+                    </ul>
+                </div>
+                <a class="prev" href="javascript:void(0)"></a>
+                <a class="next" href="javascript:void(0)"></a>
+            </div>
+        
             <#if top_cat_goods_page1?? && top_cat_goods_page1.content?size gt 0 >
                 <#list top_cat_goods_page1.content as item>
                     <#if item_index < 2 >
@@ -662,9 +688,21 @@ $(function(){
             </#if>
         </ul>
         <ul class="pc_photo">
-        	 <#if type_scroll_ad_list?? && type_scroll_ad_list?size gt 0 >
-        	   <img src="${type_scroll_ad_list[0].fileUri!""}" width="404px" height="272px"/>
-            </#if>
+        	 <div id="slideBox" class="slideBox">
+                <div class="bd">
+                    <ul>
+                    <#if type_scroll_ad_list?? >
+                        <#list type_scroll_ad_list as item>
+                       
+                        <li><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
+                        </#list>
+                    </#if>  
+                   
+                    </ul>
+                </div>
+                <a class="prev" href="javascript:void(0)"></a>
+                <a class="next" href="javascript:void(0)"></a>
+            </div>
             <#if top_cat_goods_page3?? && top_cat_goods_page3.content?size gt 0 >
                 <#list top_cat_goods_page3.content as item>
                     <#if item_index < 2 >

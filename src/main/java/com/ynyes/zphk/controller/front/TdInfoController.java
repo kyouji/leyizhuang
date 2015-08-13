@@ -90,6 +90,9 @@ public class TdInfoController {
 	        map.addAttribute("info_page", tdArticleService.findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(mid, catId, page, ClientConstant.pageSize));
 	    }
         
+	    map.addAttribute("artice_Category_list", tdArticleCategoryService.findAll());
+	    
+	    
 	    map.addAttribute("catId", catId);
 	    map.addAttribute("mid", mid);
 	    map.addAttribute("info_category_list", catList);
