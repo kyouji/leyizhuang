@@ -131,21 +131,30 @@ function clearSelect()
     $(".comboCheckBox").attr("checked", false);
 }
  
-function btnPageSubmit() 
+function btnPageSubmit(type) 
 {
 	<#--
     window.location.href = "goods/${goods.id}/"+(parseInt($('#iPageNum').val()) - 1);
     -->
-    var pageNum = document.getElementById("iPageNum").value;
     
-    <#-- 判断是否为数字的正则表达式 -->
+    var pageNum;<#-- 表示页数的变量 -->
+    var totalPages;<#-- 表示总页数的变量 -->
     
+    if(type == "comment"){
+    	pageNum = document.getElementById("commentPageNum").value;
+    	totalPages = ${comment_page.totalPages}
+    }else{
+    	pageNum = document.getElementById("consultPageNum").value;
+    	totalPages = ${consult_page.totalPages}
+    }
+    
+    <#-- 判断是否为数字 -->
     if(isNaN(pageNum)){
     	return;
     }
     
     <#-- 判断是否大于最大页数+1 -->
-    if(pageNum>${comment_page.totalPages}){
+    if(pageNum>(totalPages+1)){
     	return;
     }
     
@@ -154,7 +163,12 @@ function btnPageSubmit()
     	return;
     }
     
-    getCommentByStars(${goodsId},${stars!'0'},pageNum-1);
+    if(type == "comment"){
+    	getCommentByStars(${goodsId},${stars!'0'},pageNum-1);
+    }else{
+    	getConsult(${goodsId},pageNum-1);
+    }
+    
 }   
 
  
@@ -588,74 +602,9 @@ function btnPageSubmit()
         </div>
          
         <!--咨询-->
-        <div id="tab3" class="c_R_consultation top20">
-        	<div class="slideTxtBox">
-			<div class="hd">
-				<ul><li>全部咨询(${consult_page.content?size!'0'})</li></ul>
-			</div>
-			<div class="bd">
-				<dl>
-                    <dd>
-                    <#if consult_page?? && consult_page.content?size gt 0>  
-                        <#list consult_page.content as item>	
-                    	<ul>
-                        	<li><b>?</b><span>${item.username}</span><label>${item.content}</label></li>
-                            <#if item.isReplied>
-                            <li><strong>!</strong><span>店家回复</span><label>${item.reply}</label></li>
-                            </#if>
-                        </ul>
-                         </#list>
-                    </#if>      
-                    </dd>
-                </dl>
-			</div>
-         <div class="pagebox" style="float:left; padding:15px 0;">
-          <div class="num">
-            <#if consult_page??>
-                <#assign continueEnter=false>
-                <#if consult_page.number == 0>
-                   <a class="a1 a0" href="javascript:;"><span>上一页</span></a>
-                 <#else>
-                   <a class="a2" href="#"><span>上一页</span></a>
-                </#if>
-                <#if consult_page.totalPages gt 0>
-                    <#list 1..consult_page.totalPages as page>
-                         <#if page <= 3 || (consult_page.totalPages-page) < 3 || (consult_page.number+1-page)?abs<3 >
-                             <#if page == consult_page.number+1>
-                                 <a class="sel" href="javascript:;">${page}</a>
-                             <#else>
-                                 <a href="">${page}</a> <#-- ${page} -->
-                             </#if>
-                                <#assign continueEnter=false>
-                              <#else>
-                              <#if !continueEnter>
-                                  <span> ... </span>
-                                  <#assign continueEnter=true>
-                               </#if>
-                           </#if>
-                     </#list>
-                 </#if>
-                 <#if consult_page.number+1 == consult_page.totalPages || consult_page.totalPages==0>
-                        <a class="a2 a0" href="javascript:;"><span>下一页</span></a>
-                    <#else>
-                        <a class="a2" href=""><span>下一页</span></a>
-                    </#if>
-                </#if>
-            <span> 共<b>${consult_page.totalPages}</b>页 </span>
-          </div>
-          <div class="page">
-            <input class="sub" type="submit" value="确定" onclick="javascript:btnPageSubmit();" style=" *+border:none;" />
-            <span>页</span>
-            <input class="text" type="text" value="${consult_page.number}" id="iPageNum"/>
-            <span>到第</span>
-          </div>
-          <div class="clear"></div>
-        </div>
+		<div  id="the_consult">
+			<#include "/client/goods_content_consult.ftl">
 		</div>
-	<!--	<script type="text/javascript">jQuery(".slideTxtBox").slide();</script>     -->
-        
-        
-        </div>
         
         <!--动态咨询-->
         <div id="tab3" class="c_R_consult top20">

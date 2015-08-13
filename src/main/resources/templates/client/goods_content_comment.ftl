@@ -115,9 +115,9 @@
             <span> 共<b>${comment_page.totalPages}</b>页 </span>
           </div>
           <div class="page">
-            <input class="sub" type="submit" value="确定" onclick="javascript:btnPageSubmit();" style=" *+border:none;" />
+            <input class="sub" type="submit" value="确定" onclick="javascript:btnPageSubmit('comment');" style=" *+border:none;" />
             <span>页</span>
-            <input class="text" type="text" value="${comment_page.number+1}" id="iPageNum"/>
+            <input class="text" type="text" value="${comment_page.number+1}" id="commentPageNum"/>
             <span>到第</span>
           </div>
           <div class="clear"></div>

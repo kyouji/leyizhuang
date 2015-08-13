@@ -464,6 +464,6 @@ public class TdGoodsController {
         map.addAttribute("page", page);
         map.addAttribute("goodsId", goodsId);
         
-        return "/client/content";
+        return "/client/goods_content_consult";
     }
 }

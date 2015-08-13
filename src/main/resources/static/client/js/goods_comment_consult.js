@@ -30,7 +30,8 @@ function getConsult(goodsId, page)
         type:"post",
         url:"/goods/consult/" + goodsId + "?page=" + page,
         success:function(res){
-            $("#consult-list").html(res);
+//            $("#consult-list").html(res);
+        	$("#the_consult").html(res);
         }
     });
 }
