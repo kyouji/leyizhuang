@@ -21,6 +21,7 @@ import com.ynyes.zphk.entity.TdUser;
 import com.ynyes.zphk.entity.TdUserComment;
 import com.ynyes.zphk.entity.TdUserConsult;
 import com.ynyes.zphk.entity.TdUserPoint;
+import com.ynyes.zphk.entity.TdUserRecentVisit;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdDiySiteService;
 import com.ynyes.zphk.service.TdGoodsCombinationService;

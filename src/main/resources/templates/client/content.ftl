@@ -427,10 +427,12 @@ function buyConbination(){
 
         <#if hot_list??>
             <#list hot_list as hot_good>
-                <ul>
-                    <li><img src="${hot_good.coverImageUri!''}" /></li>
-                    <li class="details_goods_opacity"><a href="/goods/${hot_good.id?c}" title="">${hot_good.title!''}</a>￥${goods.salePrice?string("0.00")}</li>
-                 </ul>
+ 				<#if hot_good_index lt 3>
+	                <ul>
+		                <li><img src="${hot_good.coverImageUri!''}" /></li>
+		                <li class="details_goods_opacity"><a href="/goods/${hot_good.id?c}" title="">${hot_good.title!''}</a>￥${goods.salePrice?string("0.00")}</li>
+	                </ul>
+                </#if>
             </#list>
         </#if>
     </div>
@@ -440,10 +442,10 @@ function buyConbination(){
 
 
 <!--推荐组合-->
+<#if goods.combList?? && goods.combList?size gt 0>
 <div class="c_combination">
 	<div class="c_combination_title">推荐组合</div>
     	<div class="c_combination_btm">
-    	<!--最多添加4个，第一个为默认产品-->
 	    	<div class="c_combination_btm_list">
 	        	<ul>
 	            	<li>
@@ -457,7 +459,7 @@ function buyConbination(){
 	                </li>
 	            </ul>
 	            
-	          <#if goods.combList?? && goods.combList?size gt 0>
+	          
 	            <#list goods.combList as item>
 	             <ul>
 	                <s></s>
@@ -473,7 +475,7 @@ function buyConbination(){
 	                 </li>
 	             </ul>
 	          </#list>
-	       </#if>
+	       
 	     </div>
 
         
@@ -490,7 +492,7 @@ function buyConbination(){
         </div>
     </div>
 </div>
-
+</#if>
 
 <!--中下部详情-->
 <div class="wrapper top20">
@@ -535,7 +537,6 @@ function buyConbination(){
             </div>
         </div>
         
-        <!--看了还看-->
         <div class="c_L_frame top20">
         	<div class="c_L_frame_title">浏览记录</div>
             <div class="c_L_frame_line"></div>
@@ -546,7 +547,7 @@ function buyConbination(){
                     <dt><a href="/goods/${item.goodsId}" title=""><img src="${item.goodsCoverImageUri!''}" /></a></dt>
                     
                     <dd>
-                    	<a href="/goods/${item.goodsId}" title="">${item.title!''}</a>
+                    	<a href="/goods/${item.goodsId}" title="">${item.goodsTitle!''}</a>
                         <b>惠客价：￥<#if item.goodsSalePrice??>${item.goodsSalePrice?string("0.00")}</#if></b>
                     </dd>
           
@@ -579,7 +580,6 @@ function buyConbination(){
                
                 <li><a href="#detail_tit" tid="4" class="stab">售后保障</a></li>
             </ul>
-            <a href="/cart/init?id=${goods.id}" title="" class="addcartorange" style="float:right; border-radius:0; text-decoration:none;">加入购物车</a>
         </div>
         
         <!--商品介绍 -->
