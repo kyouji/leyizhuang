@@ -7,10 +7,10 @@
 
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/Shopping_cart.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
-<link rel="stylesheet" type="text/css" href="/client/css/mycenter.css"/>
-
+<link href="/client/css/mycenter_base.css" rel="stylesheet" type="text/css"/>
+<link href="/client/css/mycenter.css" rel="stylesheet" type="text/css"/>
 <link href="/client/css/Shopping_cart_empty.css" rel="stylesheet" type="text/css" />
+
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/cart.js"></script>
 </head>

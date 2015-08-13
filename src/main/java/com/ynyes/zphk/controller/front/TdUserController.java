@@ -546,11 +546,11 @@ public class TdUserController extends AbstractPaytypeService {
             
             tdUserCollectService.save(collect);
             
-            res.put("message", "添加成功");
+            res.put("message", "关注成功");
             return res;
         }
         
-        res.put("message", "您已收藏了该商品");
+        res.put("message", "您已关注了该商品");
         
         return res;
     }

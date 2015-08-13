@@ -720,4 +720,8 @@ public class TdOrderController extends AbstractPaytypeService {
         //验证失败或者支付失败
         return "/client/order_pay_failed";
     }
+    
+    /**
+     * 处理商品详情页中立即购买组合的方法
+     */
 }

@@ -13,9 +13,10 @@
 <script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/client/js/base.js"></script>
+<script type="text/javascript" src="/client/js/list.js"></script>
+<script type="text/javascript" src="/client/js/cart.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/client/js/list.js"></script>
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 
@@ -81,7 +82,7 @@ $("#id-plus").click(function(){
     
 });         
        
-        
+<#--    
 $("#zhAddCart").click(function(){
      var str = "";
      $(".comboCheckBox:checked").each(function(){
@@ -89,11 +90,10 @@ $("#zhAddCart").click(function(){
          str += ",";
      });
      var href = "/cart/init?id=" + ${goods.id} + "&zpid=" + str;
-        
-    window.location = href;
-        
+     window.location = href;
+ -->         
 });   
-        
+      
  });  
 <!-- 组合商品选择-->   
 function combSelect(self, price, originPrice)
@@ -153,8 +153,8 @@ function btnPageSubmit(type)
     	return;
     }
     
-    <#-- 判断是否大于最大页数+1 -->
-    if(pageNum>(totalPages+1)){
+    <#-- 判断是否大于最大页数 -->
+    if(pageNum>(totalPages)){
     	return;
     }
     
@@ -240,7 +240,7 @@ function btnPageSubmit(type)
           <div class="details_pic_wrapper">
                 <#-- <div class="details_pic_wrapper_share">分享</div> -->
                 
-                <a href="javascript:addCollect(${goods.id})" title="" class="details_pic_wrapper_like">关注</a>
+                <a href="javascript:userAddCollect(${goods.id})" title="" class="details_pic_wrapper_like">关注</a>
                 
                 <#-- <a href="#" title="" class="details_pic_wrapper_remind">低价提醒</a> -->
             </div>
@@ -460,7 +460,7 @@ function btnPageSubmit(type)
                 <li class="c_combination_btm_all_li2">已节省：￥<strong id="combSave">0.00</strong></li>
                 <li><a href="javascript:clearSelect();">全部清空</a></li>
             </ul>
-            <a href="javascript:;"  id="zhAddCart" title="" class="addcartorange" style=" margin:10px 0 0 83px; background:#0e5baa; text-decoration:none;">立即购买</a>
+            <a href="javascript:buyConbination();"  id="zhAddCart" title="" class="addcartorange" style=" margin:10px 0 0 83px; background:#0e5baa; text-decoration:none;">立即购买</a>
             
         </div>
     </div>

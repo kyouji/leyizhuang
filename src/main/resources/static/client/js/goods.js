@@ -53,6 +53,38 @@ $(document).ready(function(){
 //    });
 });
 
+/**
+ * 之前的关注方法（addCollect）在未知情况下不能使用了，重新定义新的方法以实现关注功能
+ * @author dengxiao
+ */
+function userAddCollect(goodsId){
+	
+	//判断传入的商品ID是否未空
+	if (undefined == goodsId)
+    {
+        return;
+    }
+	
+	//将goodsId通过异步请求发送至后台
+	$.post("/user/collect/add",{"goodsId":goodsId},function(data){
+		//根据message的信息判断用户是否关注成功
+		if(data.message!="关注成功"){
+				alert(data.message);
+    	}else{
+    		document.getElementById("collectGoods").style.display="block";
+    		document.getElementById("collectWindow").style.display="block";
+    	}
+		
+		//在没有用户登陆的情况下跳转到登陆页面
+		if (data.code==1){
+			setTimeout(function(){
+				window.location.href = "/login";
+			}, 1000); 
+		}
+		  
+	});
+}
+
 function addCollect(goodsId)
 {
     if (undefined == goodsId)
@@ -60,34 +92,38 @@ function addCollect(goodsId)
         return;
     }
     
-    $.ajax({
-        type:"post",
-        url:"/user/collect/add",
-        data:{"goodsId": goodsId},
-        dataType: "json",
-        success:function(res){
-    		/**
-    		 * 修改了原来的代码
-    		 * 根据res中message的值判断是否关注成功，关注成功则显示出成功提示的DIV
-    		 * （原来的代码是通过alert语句弹出成功提示）
-    		 * @author dengxiao
-    		 */
-        	if(res.message!="添加成功"){
-        		alert(res.message);
-        	}else{
-        		document.getElementById("collectGoods").style.display="block";
-        		document.getElementById("collectWindow").style.display="block";
-        	}
-        	
-            // 需登录
-            if (res.code==1)
-            {
-                setTimeout(function(){
-                    window.location.href = "/login";
-                }, 1000); 
-            }
-        }
-    });
+//    $.post("/user/collect/add",{"goodsId":goodsId},function(data){
+//    	alert(data.message);
+//    });
+    
+//    $.ajax({
+//        type:"post",
+//        url:"/user/collect/add",
+//        data:{"goodsId": goodsId},
+//        dataType: "json",
+//        success:function(res){
+//    		/**
+//    		 * 修改了原来的代码
+//    		 * 根据res中message的值判断是否关注成功，关注成功则显示出成功提示的DIV
+//    		 * （原来的代码是通过alert语句弹出成功提示）
+//    		 * @author dengxiao
+//    		 */
+//        	if(res.message!="添加成功"){
+//        		alert(res.message);
+//        	}else{
+//        		document.getElementById("collectGoods").style.display="block";
+//        		document.getElementById("collectWindow").style.display="block";
+//        	}
+//        	
+//            // 需登录
+//            if (res.code==1)
+//            {
+//                setTimeout(function(){
+//                    window.location.href = "/login";
+//                }, 1000); 
+//            }
+//        }
+//    });
 }
 
 /**
@@ -97,6 +133,24 @@ function addCollect(goodsId)
 function close(){
 	document.getElementById("collectWindow").style.display="none";
 	document.getElementById("collectGoods").style.display="none";
+}
+
+/**
+ * 立即购买商品组合的方法
+ * @author dengxiao
+ */
+function buyConbination(){
+	var selectNum = document.getElementById("combCount").innerHTML;
+	if(selectNum == 0){
+		alert("请至少选择一件组合商品");
+		return;
+	}
+	var str = "";
+	$(".comboCheckBox:checked").each(function(){
+		str += $(this).attr("zpid");
+		str += ",";
+	});
+	     var href = "/order/buyCombination?id=" + ${goods.id} + "&zpid=" + str;
 }
 
 
