@@ -38,8 +38,8 @@ public class TdSearchController {
     
     @RequestMapping(value="/search", method = RequestMethod.GET)
     public String list(String keywords, Integer page, HttpServletRequest req, ModelMap map){
-        System.err.println(keywords);
-        tdCommonService.setHeader(map, req);
+
+    	tdCommonService.setHeader(map, req);
         
         if (null == page || page < 0)
         {

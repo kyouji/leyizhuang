@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>正品惠客</title>
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.jqzoom.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
@@ -18,7 +18,6 @@
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
 
-<script src="/client/js/jquery-1.9.1.min.js"></script>
 
 <!--
 <script type="text/javascript" src="/client/js/innerpage.js"></script>

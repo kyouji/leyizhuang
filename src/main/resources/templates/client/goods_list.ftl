@@ -245,7 +245,7 @@ function btnPageSubmit()
     	   <#list most_sold_list as item>
     	       <#if item_index < 6 >
     	       <dl>
-                    <dt><img src="${item.coverImageUri!''}" width="210px" height="210px"/></dt>
+                    <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!''}" width="210px" height="210px"/></a></dt>
                     <dd class="c_r_title">
                         <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
                     </dd>

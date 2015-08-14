@@ -104,7 +104,7 @@
 
 /*banner产品分类*/
 .advertising .advertising_content .advertising_ifm .product_categories{padding-top:10px;padding-bottom:10px;padding-left:10px;_padding-bottom:30px;overflow:hidden;}
-.advertising .advertising_content .advertising_ifm .phone_1,.phone_3{background:#0e5baa;}
+
 /*banner动态*/
 .product_nav_01{ position:absolute; left:190px;; top:0; z-index:9999; width:300px; height:300px; background:#0e5baa; padding-left:20px; padding-top:8px;}
 .product_nav_02{ position:absolute; left:190px;; top:108px; z-index:9999; width:300px; height:300px; background:#043A84; padding-left:20px; padding-top:8px;}

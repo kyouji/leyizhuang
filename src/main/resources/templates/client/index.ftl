@@ -21,6 +21,7 @@ function submitSearch(){
 		var search = document.getElementById("search_form");
 		search.submit();
 	}
+
 	
 $(function(){
         
@@ -176,7 +177,7 @@ $(function(){
             <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
-                        <a href="${item.linkUri!''}">${item.title}</a>
+                        <a href="/search?keywords=${item.title}"  >${item.title}</a>
                     </#if>
                 </#list>
             </#if>
@@ -472,6 +473,7 @@ $(function(){
                     </#if>
                  </#list>
             </#if>
+            <#--
             <div class="pc">
             	<h4>平板</h4>
                 <a href="#">苹果</a>
@@ -492,6 +494,7 @@ $(function(){
                 <a href="#">华硕</a>
                 <a href="#">戴尔</a>
             </div>
+            -->
         </ul>
         <ul class="pc_photo">
             <div id="slideBox" class="slideBox">
@@ -659,7 +662,7 @@ $(function(){
             </#list>
         </div>
         <div class="phones_right">
-        	<a href="#">热门:</a>&nbsp;&nbsp;
+        	<a >热门:</a>&nbsp;&nbsp;
             <#if fourth_brand_list??>
                 <#list fourth_brand_list as item >
                     <#if item_index lt 6>

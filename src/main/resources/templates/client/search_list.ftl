@@ -3,9 +3,10 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>正品惠客</title>
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/index.js"></script>
+<script src="/client/js/goods.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/list.css" rel="stylesheet" type="text/css" />
 
@@ -58,7 +59,7 @@
             <#if goods_page?? && goods_page.content?size gt 0>
                 <#list goods_page.content as item>
                     <dl>
-                        <dt><img src="${item.coverImageUri!''}" with="210" height="210"/></dt>
+                        <dt><a href="/goods/${item.id}" title="${item.title!''}"><img src="${item.coverImageUri!''}" with="210" height="210"/></a></dt>
                         <dd class="piclist_title">
                             <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
                         </dd>
@@ -128,13 +129,15 @@
         <p>热销排行</p>
         <#if most_sold_list??>
            <#list most_sold_list as item>
-           <dl>
-                <dt><img src="${item.coverImageUri!''}" style="width:200px" /></dt>
-                <dd class="c_r_title">
-                    <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> </dd>
-                    <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
-                    <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> </dd>
-                </dl>
+                <#if item_index < 10 >
+                    <dl>
+                        <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!''}" style="width:200px" /></a></dt>
+                        <dd class="c_r_title">
+                            <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> </dd>
+                        <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
+                            <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> </dd>
+                    </dl>
+                </#if>
            </#list>
         </#if>
     </div>
