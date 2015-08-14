@@ -29,6 +29,7 @@ body{background:#f7f7f7;}
 .register_content .content .security_code img{ vertical-align:middle;margin-left:20px;}
 .register_content .content .security_code .another{color:#666;}
 
+
 /* 同意注册 */
 .register_content .content .agree{margin-top:20px;margin-left:290px;overflow:hidden;}
 .register_content .content .agree a{float:left;line-height:39px;color:#0e5baa;}

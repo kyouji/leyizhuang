@@ -50,17 +50,16 @@
 </head>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $(".c_pop_boxbg").hide()
+$(document).ready(function(){
+    $(".c_pop_boxbg").hide()
         
-$("#id-minus").click(function(){
-   var q = parseInt($("#quantity").val());
+	$("#id-minus").click(function(){
+   		var q = parseInt($("#quantity").val());
         
-     if (q > 1)
-     {
-        $("#quantity").val(q-1);
-     }
-     $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+	if (q > 1){
+		$("#quantity").val(q-1);
+	}
+	$("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
 });
     
 $("#id-plus").click(function(){
