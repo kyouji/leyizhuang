@@ -25,4 +25,4 @@ a:hover{ text-decoration:none;}
 .nav_submenu1 p{ height:30px; overflow:hidden; margin-left:6px;}
 .nav_submenu1 *{ float:left;}
 .nav_submenu1 img{ margin-top:14px; margin-left:23px;}
-
+.article_title top30{width:970px; height:20px; float:left; text-align:center;font-size:18px;}

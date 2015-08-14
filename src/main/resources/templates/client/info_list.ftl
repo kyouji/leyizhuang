@@ -30,7 +30,7 @@
     </div>
   </div>
   <!-- 右侧 -->
-<div class="article_box">
+	<div class="article_box">
     <div class="crumb">
     <#if category_tree_list??>
         <#list category_tree_list as item>
