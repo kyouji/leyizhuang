@@ -41,7 +41,7 @@
     </div>
     <#if info_page??>
        <#list info_page.content as item>
-            <a href="#" title="" target="_blank">
+            <a href="/info/content/${item.id?c}" title="" target="_blank">
                 <div class="article_box_01">
                     <div>${item.title!''}</div>
                      <p>${item.brief!''}</p> 
@@ -50,13 +50,15 @@
         </#list>
     </#if>
 	<div class="article_page">
+    	
     	<div class="article_page_01">
-        <a href="#" title="">上一篇：惠客秒杀</a>
+        <a href="/info/list/${mid}?catId=${info_page.number+1}" title="">上一页</a>
         </div>
+        
         <div class="article_page_02">
-        <a href="#" title="">下一篇：惠客秒杀</a>
+        <a href="/info/list/${mid}?catId=${info_page.number+1}" title="">下一页</a>
         </div>
-    
+        
     </div>
 
 
