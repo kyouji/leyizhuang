@@ -429,8 +429,8 @@ function buyConbination(){
             <#list hot_list as hot_good>
  				<#if hot_good_index lt 3>
 	                <ul>
-		                <li><img src="${hot_good.coverImageUri!''}" /></li>
-		                <li class="details_goods_opacity"><a href="/goods/${hot_good.id?c}" title="">${hot_good.title!''}</a>￥${goods.salePrice?string("0.00")}</li>
+		                <a href="/goods/${hot_good.id?c}" title=""><li><img src="${hot_good.coverImageUri!''}" /></li>
+		                <li class="details_goods_opacity">${hot_good.title!''}￥${goods.salePrice?string("0.00")}</li></a>
 	                </ul>
                 </#if>
             </#list>
