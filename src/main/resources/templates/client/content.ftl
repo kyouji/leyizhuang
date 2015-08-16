@@ -6,12 +6,12 @@
 <title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.jqzoom.js"></script>
-<script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
-<script type="text/javascript" src="/client/js/common.js"></script>
-<script type="text/javascript" src="/client/js/goods.js"></script>
-<script type="text/javascript" src="/client/js/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
+<script type="text/javascript" src="/client/js/common.js"></script>
+<script type="text/javascript" src="/client/js/goods.js"><="/client//script>
+<script type="text/javascript" srcjs/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/base.js"></script>
 <script type="text/javascript" src="/client/js/list.js"></script>
 <script type="text/javascript" src="/client/js/cart.js"></script>
@@ -41,11 +41,13 @@
 });
 </script>
 <!--弹窗-->
-<script type="text/javascript">
+<!-- 不明白为什么突然不起作用了-->
+<!-- <script type="text/javascript">
     $(document).ready(function(){
-        $(".c_pop_boxbg").hide()
+        $(".c_pop_boxbg").hide();
     })
-</script>
+</script> -->
+
 </head>
 
 <script type="text/javascript">
@@ -199,8 +201,8 @@ function buyConbination(){
 
 <body>
 
-<div id="collectGoods" class="c_pop_boxbg">
-	<div id="collectWindow" class="c_pop_box">
+<div id="collectGoods" class="c_pop_boxbg" style="display:none">
+	<div id="collectWindow" class="c_pop_box" style="display:none">
     	<div class="c_pop_box_top">
         	<span>提 示</span>
             <a href="javascript:close()"></a>
