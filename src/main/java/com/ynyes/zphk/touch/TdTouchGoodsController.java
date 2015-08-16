@@ -18,6 +18,7 @@ import com.ynyes.zphk.entity.TdProduct;
 import com.ynyes.zphk.entity.TdProductCategory;
 import com.ynyes.zphk.entity.TdSetting;
 import com.ynyes.zphk.entity.TdUser;
+import com.ynyes.zphk.entity.TdUserComment;
 import com.ynyes.zphk.entity.TdUserConsult;
 import com.ynyes.zphk.entity.TdUserPoint;
 import com.ynyes.zphk.service.TdCommonService;
@@ -86,287 +87,279 @@ public class TdTouchGoodsController {
     public String product(@PathVariable Long goodsId, Long shareId, Integer qiang,
             ModelMap map, HttpServletRequest req) {
 
-        tdCommonService.setHeader(map, req);
+    	tdCommonService.setHeader(map, req);
 
-        String username = (String) req.getSession().getAttribute("username");
+		String username = (String) req.getSession().getAttribute("username");
 
-        // 添加浏览记录
-        if (null != username) {
-            tdUserRecentVisitService.addNew(username, goodsId);
-            map.addAttribute("user",
-                    tdUserService.findByUsernameAndIsEnabled(username));
-        }
-        else
-        {
-            tdUserRecentVisitService.addNew(req.getSession().getId(), goodsId);
-        }
-        
-        // 促销标志位
-        map.addAttribute("qiang", qiang);
-        
-        // 读取浏览记录
-        if (null == username)
-        {
-            map.addAttribute("recent_page", tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(req.getSession().getId(), 0, ClientConstant.pageSize));
-        }
-        else
-        {
-            map.addAttribute("recent_page", tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(username, 0, ClientConstant.pageSize));
-        }
-        
-        if (null == goodsId) {
-            return "error_404";
-        }
+		// 添加浏览记录
+		if (null != username) {
+			tdUserRecentVisitService.addNew(username, goodsId);
+			map.addAttribute("user", tdUserService.findByUsernameAndIsEnabled(username));
+		} else {
+			tdUserRecentVisitService.addNew(req.getSession().getId(), goodsId);
+		}
 
-        TdGoods goods = tdGoodsService.findOne(goodsId);
-        
-        if (null == goods)
-        {
-            return "error_404";
-        }
+		// 促销标志位
+		map.addAttribute("qiang", qiang);
 
-        Page<TdUserConsult> consultPage = tdUserConsultService
-                .findByGoodsIdAndIsShowable(goodsId, 0, ClientConstant.pageSize);
+		// 读取浏览记录
+		if (null == username) {
+			map.addAttribute("recent_page", tdUserRecentVisitService
+					.findByUsernameOrderByVisitTimeDesc(req.getSession().getId(), 0, ClientConstant.pageSize));
+		} else {
+			map.addAttribute("recent_page",
+					tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(username, 0, ClientConstant.pageSize));
+		}
 
-        // 商品
-        map.addAttribute("goods", goods);
-        
-        // 商品组合
-        map.addAttribute("comb_list",
-                tdGoodsCombinationService.findByGoodsId(goodsId));
-        
-        // 全部评论
-        map.addAttribute("comment_page", tdUserCommentService
-                .findByGoodsIdAndIsShowable(goodsId, 0, ClientConstant.pageSize));
-        
-        // 全部评论数
-        map.addAttribute("comment_count", tdUserCommentService
-                .countByGoodsIdAndIsShowable(goodsId));
-        
-        // 好评数
-        map.addAttribute("three_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 3L));
-        
-        // 中评数
-        map.addAttribute("two_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 2L));
-        
-        // 差评数
-        map.addAttribute("one_star_comment_count", tdUserCommentService
-                .countByGoodsIdAndStarsAndIsShowable(goodsId, 1L));
-        
-        // 咨询
-        map.addAttribute("consult_page", consultPage);
+		if (null == goodsId) {
+			return "error_404";
+		}
 
-        // 热卖
-        map.addAttribute("hot_list",
-                tdGoodsService.findTop10ByIsOnSaleTrueOrderBySoldNumberDesc());
-        
-        // 同盟店
-        map.addAttribute("diy_site_list",
-                        tdDiySiteService.findByIsEnableTrue());
-        
-        // 收藏总数
-        map.addAttribute("total_collects", tdUserCollectService.countByGoodsId(goods.getId()));
+		TdGoods goods = tdGoodsService.findOne(goodsId);
 
-        // 查找类型
-        TdProductCategory tdProductCategory = tdProductCategoryService
-                .findOne(goods.getCategoryId());
+		if (null == goods) {
+			return "error_404";
+		}
 
-        // 获取该类型所有父类型
-        if (null != tdProductCategory) {
-            if (null != tdProductCategory.getParentTree()
-                    && !"".equals(tdProductCategory.getParentTree())) {
-                List<TdProductCategory> catList = new ArrayList<TdProductCategory>();
+//		Page<TdUserConsult> consultPage = tdUserConsultService.findByGoodsIdAndIsShowable(goodsId, 0,
+//				ClientConstant.pageSize);
 
-                for (String cid : tdProductCategory.getParentTree().split(",")) {
-                    if (!"".equals(cid)) {
-                        // 去除方括号
-                        cid = cid.replace("[", "");
-                        cid = cid.replace("]", "");
+		// 商品
+		map.addAttribute("goods", goods);
 
-                        TdProductCategory tpc = tdProductCategoryService
-                                .findOne(Long.parseLong(cid));
+		// 商品参数
+		if (goods.getParamList().size() > 0) {
+			map.addAttribute("param_list", goods.getParamList());
+		}
 
-                        if (null != tpc) {
-                            catList.add(tpc);
-                        }
-                    }
-                }
+		/**
+		 * 修改以下所有有关评价的方法，将传入的商品ID改成产品ID
+		 * 
+		 * @author dengxiao
+		 */
 
-                map.addAttribute("category_tree_list", catList);
-            }
-        }
-        
-        // 获取商品的其他版本
-        if (null != goods.getProductId())
-        {
-            TdProduct product = tdProductService.findOne(goods.getProductId());
-            
-            if (null != product)
-            {
-                List<TdGoods> productGoodsList = tdGoodsService.findByProductIdAndIsOnSaleTrue(goods.getProductId());
-                
-                int totalSelects = product.getTotalSelects();
-                
-                List<String> selectOneList = new ArrayList<String>();
-                List<String> selectTwoList = new ArrayList<String>();
-                List<String> selectThreeList = new ArrayList<String>();
-                
-                List<TdGoods> selectOneGoodsList = new ArrayList<TdGoods>();
-                List<TdGoods> selectTwoGoodsList = new ArrayList<TdGoods>();
-                List<TdGoods> selectThreeGoodsList = new ArrayList<TdGoods>();
-                
-                String sOne = null;
-                String sTwo = null;
-                String sThree = null;
-                
-                map.addAttribute("total_select", totalSelects);
-                
-                switch (totalSelects)
-                {
-                case 1:
-                    sOne = goods.getSelectOneValue().trim();
-                    
-                    for (TdGoods pdtGoods : productGoodsList)
-                    {
-                        String s1 = pdtGoods.getSelectOneValue().trim();
-                        if (!selectOneList.contains(s1))
-                        {
-                            selectOneList.add(s1);
-                            selectOneGoodsList.add(pdtGoods);
-                        }
-                    }
-                    
-                    map.addAttribute("select_one_name", product.getSelectOneName());
-                    map.addAttribute("one_selected", sOne);
-                    map.addAttribute("select_one_goods_list", selectOneGoodsList);
-                    
-                    break;
-                case 2:
-                    sOne = goods.getSelectOneValue().trim();
-                    sTwo = goods.getSelectTwoValue().trim();
-                    
-                    for (TdGoods pdtGoods : productGoodsList)
-                    {
-                        String s1 = pdtGoods.getSelectOneValue().trim();
-                        String s2 = pdtGoods.getSelectTwoValue().trim();
-                        
-                        if (!selectOneList.contains(s1))
-                        {
-                            selectOneList.add(s1);
-                            selectOneGoodsList.add(pdtGoods);
-                        }
-                        
-                        if (!selectTwoList.contains(s2))
-                        {
-                            selectTwoList.add(s2);
-                            selectTwoGoodsList.add(pdtGoods);
-                        }
-                    }
-                    
-                    map.addAttribute("select_one_name", product.getSelectOneName());
-                    map.addAttribute("select_two_name", product.getSelectTwoName());
-                    map.addAttribute("one_selected", sOne);
-                    map.addAttribute("two_selected", sTwo);
-                    map.addAttribute("select_one_goods_list", selectOneGoodsList);
-                    map.addAttribute("select_two_goods_list", selectTwoGoodsList);
-                    break;
-                    
-                case 3:
-                    sOne = goods.getSelectOneValue().trim();
-                    sTwo = goods.getSelectTwoValue().trim();
-                    sThree = goods.getSelectThreeValue().trim();
-                    
-                    for (TdGoods pdtGoods : productGoodsList)
-                    {
-                        String s1 = pdtGoods.getSelectOneValue().trim();
-                        String s2 = pdtGoods.getSelectTwoValue().trim();
-                        String s3 = pdtGoods.getSelectThreeValue().trim();
-                        
-                        if (!selectOneList.contains(s1))
-                        {
-                            selectOneList.add(s1);
-                            selectOneGoodsList.add(pdtGoods);
-                        }
-                        
-                        if (!selectTwoList.contains(s2))
-                        {
-                            selectTwoList.add(s2);
-                            selectTwoGoodsList.add(pdtGoods);
-                        }
-                        
-                        if (!selectThreeList.contains(s3))
-                        {
-                            selectThreeList.add(s3);
-                            selectThreeGoodsList.add(pdtGoods);
-                        }
-                    }
-                    
-                    map.addAttribute("select_one_name", product.getSelectOneName());
-                    map.addAttribute("select_two_name", product.getSelectTwoName());
-                    map.addAttribute("select_three_name", product.getSelectThreeName());
-                    map.addAttribute("one_selected", sOne);
-                    map.addAttribute("two_selected", sTwo);
-                    map.addAttribute("three_selected", sThree);
-                    map.addAttribute("select_one_goods_list", selectOneGoodsList);
-                    map.addAttribute("select_two_goods_list", selectTwoGoodsList);
-                    map.addAttribute("select_three_goods_list", selectThreeGoodsList);
-                    break;
-                }
-            }
-        }
+		// 商品组合
+		map.addAttribute("comb_list", tdGoodsCombinationService.findByGoodsId(goods.getProductId()));
 
-        // 分享时添加积分
-        if (null != shareId) {
-            TdUser sharedUser = tdUserService.findOne(shareId);
-            TdSetting setting = tdSettingService.findTopBy();
+		Page<TdUserComment> comment_page = tdUserCommentService.findByGoodsIdAndIsShowable(goods.getProductId(), 0, ClientConstant.pageSize);
+		Page<TdUserConsult> consult_page = tdUserConsultService.findByGoodsIdAndIsShowable(goods.getProductId(), 0, ClientConstant.pageSize);
+		
+		// 全部评论
+		map.addAttribute("comment_page",
+				comment_page);
 
-            String clientIp = req.getRemoteHost();
-            String oldIp = (String) req.getSession().getAttribute("remote_ip");
+		map.addAttribute("consult_page",
+				consult_page);
 
-            // 不是来自同一个ip的访问，普通用户
-            if (!clientIp.equalsIgnoreCase(oldIp) && sharedUser.getRoleId().equals(0L)) {
-                req.getSession().setAttribute("remote_ip", clientIp);
+		// 全部评论数
+		map.addAttribute("comment_count", tdUserCommentService.countByGoodsIdAndIsShowable(goods.getProductId()));
 
-                if (null != sharedUser && null != setting) {
-                    if (null == sharedUser.getPointGetByShareGoods()) {
-                        sharedUser.setPointGetByShareGoods(0L);
-                    }
+		// 好评数
+		map.addAttribute("three_star_comment_count",
+				tdUserCommentService.countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 3L));
 
-                    if (null == setting.getGoodsShareLimits()) {
-                        setting.setGoodsShareLimits(50L); // 设定一个默认值
-                    }
+		// 中评数
+		map.addAttribute("two_star_comment_count",
+				tdUserCommentService.countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 2L));
 
-                    // 小于积分限额，进行积分
-                    if (sharedUser.getPointGetByShareGoods().compareTo(setting.getGoodsShareLimits()) < 0) {
-                        TdUserPoint point = new TdUserPoint();
-                        point.setDetail("分享商品获得积分");
-                        point.setPoint(setting.getGoodsSharePoints());
-                        point.setPointTime(new Date());
-                        point.setUsername(sharedUser.getUsername());
+		// 差评数
+		map.addAttribute("one_star_comment_count",
+				tdUserCommentService.countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 1L));
 
-                        if (null != sharedUser.getTotalPoints()) {
-                            point.setTotalPoint(sharedUser.getTotalPoints()
-                                    + point.getPoint());
-                        } else {
-                            point.setTotalPoint(point.getPoint());
-                        }
+		// 热卖
+		map.addAttribute("hot_list", tdGoodsService.findTop10ByIsOnSaleTrueOrderBySoldNumberDesc());
 
-                        point = tdUserPointService.save(point);
+		// 同盟店
+		map.addAttribute("diy_site_list", tdDiySiteService.findByIsEnableTrue());
 
-                        sharedUser.setTotalPoints(point.getTotalPoint()); // 积分
-                        tdUserService.save(sharedUser);
-                    }
-                }
-            }
-        }
+		// 收藏总数
+		map.addAttribute("total_collects", tdUserCollectService.countByGoodsId(goods.getId()));
 
-        map.addAttribute("server_ip", req.getLocalName());
-        map.addAttribute("server_port", req.getLocalPort());
+		// 查找类型
+		TdProductCategory tdProductCategory = tdProductCategoryService.findOne(goods.getCategoryId());
+		// 查询所有品牌
+		map.addAttribute("product_list", tdProductService.findAll());
 
-        return "/touch/goods";
-    }
+		// 获取该类型所有父类型
+		if (null != tdProductCategory) {
+			if (null != tdProductCategory.getParentTree() && !"".equals(tdProductCategory.getParentTree())) {
+				List<TdProductCategory> catList = new ArrayList<TdProductCategory>();
+
+				for (String cid : tdProductCategory.getParentTree().split(",")) {
+					if (!"".equals(cid)) {
+						// 去除方括号
+						cid = cid.replace("[", "");
+						cid = cid.replace("]", "");
+
+						TdProductCategory tpc = tdProductCategoryService.findOne(Long.parseLong(cid));
+
+						if (null != tpc) {
+							catList.add(tpc);
+						}
+					}
+				}
+
+				map.addAttribute("category_tree_list", catList);
+			}
+		}
+
+		// 获取商品的其他版本
+		if (null != goods.getProductId()) {
+			TdProduct product = tdProductService.findOne(goods.getProductId());
+
+			if (null != product) {
+				List<TdGoods> productGoodsList = tdGoodsService.findByProductIdAndIsOnSaleTrue(goods.getProductId());
+
+				int totalSelects = product.getTotalSelects();
+
+				List<String> selectOneList = new ArrayList<String>();
+				List<String> selectTwoList = new ArrayList<String>();
+				List<String> selectThreeList = new ArrayList<String>();
+
+				List<TdGoods> selectOneGoodsList = new ArrayList<TdGoods>();
+				List<TdGoods> selectTwoGoodsList = new ArrayList<TdGoods>();
+				List<TdGoods> selectThreeGoodsList = new ArrayList<TdGoods>();
+				// List<TdGoods> selectGoodsList = new ArrayList<TdGoods>();
+
+				String sOne = null;
+				String sTwo = null;
+				String sThree = null;
+
+				map.addAttribute("total_select", totalSelects);
+
+				switch (totalSelects) {
+				case 1:
+					sOne = goods.getSelectOneValue().trim();
+
+					for (TdGoods pdtGoods : productGoodsList) {
+						String s1 = pdtGoods.getSelectOneValue().trim();
+						if (!selectOneList.contains(s1)) {
+							selectOneList.add(s1);
+							selectOneGoodsList.add(pdtGoods);
+						}
+					}
+
+					map.addAttribute("select_one_name", product.getSelectOneName());
+					map.addAttribute("one_selected", sOne);
+					map.addAttribute("select_one_goods_list", selectOneGoodsList);
+
+					break;
+				case 2:
+					sOne = goods.getSelectOneValue().trim();
+					sTwo = goods.getSelectTwoValue().trim();
+
+					for (TdGoods pdtGoods : productGoodsList) {
+						String s1 = pdtGoods.getSelectOneValue().trim();
+						String s2 = pdtGoods.getSelectTwoValue().trim();
+
+						if (!selectOneList.contains(s1)) {
+							selectOneList.add(s1);
+							selectOneGoodsList.add(pdtGoods);
+						}
+
+						if (!selectTwoList.contains(s2)) {
+							selectTwoList.add(s2);
+							selectTwoGoodsList.add(pdtGoods);
+						}
+					}
+
+					map.addAttribute("select_one_name", product.getSelectOneName());
+					map.addAttribute("select_two_name", product.getSelectTwoName());
+					map.addAttribute("one_selected", sOne);
+					map.addAttribute("two_selected", sTwo);
+					map.addAttribute("select_one_goods_list", selectOneGoodsList);
+					map.addAttribute("select_two_goods_list", selectTwoGoodsList);
+					break;
+
+				case 3:
+					sOne = goods.getSelectOneValue().trim();
+					sTwo = goods.getSelectTwoValue().trim();
+					sThree = goods.getSelectThreeValue().trim();
+
+					for (TdGoods pdtGoods : productGoodsList) {
+						String s1 = pdtGoods.getSelectOneValue().trim();
+						String s2 = pdtGoods.getSelectTwoValue().trim();
+						String s3 = pdtGoods.getSelectThreeValue().trim();
+
+						if (!selectOneList.contains(s1)) {
+							selectOneList.add(s1);
+							selectOneGoodsList.add(pdtGoods);
+						}
+
+						if (!selectTwoList.contains(s2)) {
+							selectTwoList.add(s2);
+							selectTwoGoodsList.add(pdtGoods);
+						}
+
+						if (!selectThreeList.contains(s3)) {
+							selectThreeList.add(s3);
+							selectThreeGoodsList.add(pdtGoods);
+						}
+					}
+
+					map.addAttribute("select_one_name", product.getSelectOneName());
+					map.addAttribute("select_two_name", product.getSelectTwoName());
+					map.addAttribute("select_three_name", product.getSelectThreeName());
+					map.addAttribute("one_selected", sOne);
+					map.addAttribute("two_selected", sTwo);
+					map.addAttribute("three_selected", sThree);
+					map.addAttribute("select_one_goods_list", selectOneGoodsList);
+					map.addAttribute("select_two_goods_list", selectTwoGoodsList);
+					map.addAttribute("select_three_goods_list", selectThreeGoodsList);
+					break;
+				}
+			}
+		}
+
+		// 分享时添加积分
+		if (null != shareId) {
+			TdUser sharedUser = tdUserService.findOne(shareId);
+			TdSetting setting = tdSettingService.findTopBy();
+
+			String clientIp = req.getRemoteHost();
+			String oldIp = (String) req.getSession().getAttribute("remote_ip");
+
+			// 不是来自同一个ip的访问，普通用户
+			if (!clientIp.equalsIgnoreCase(oldIp) && sharedUser.getRoleId().equals(0L)) {
+				req.getSession().setAttribute("remote_ip", clientIp);
+
+				if (null != sharedUser && null != setting) {
+					if (null == sharedUser.getPointGetByShareGoods()) {
+						sharedUser.setPointGetByShareGoods(0L);
+					}
+
+					if (null == setting.getGoodsShareLimits()) {
+						setting.setGoodsShareLimits(50L); // 设定一个默认值
+					}
+
+					// 小于积分限额，进行积分
+					if (sharedUser.getPointGetByShareGoods().compareTo(setting.getGoodsShareLimits()) < 0) {
+						TdUserPoint point = new TdUserPoint();
+						point.setDetail("分享商品获得积分");
+						point.setPoint(setting.getGoodsSharePoints());
+						point.setPointTime(new Date());
+						point.setUsername(sharedUser.getUsername());
+
+						if (null != sharedUser.getTotalPoints()) {
+							point.setTotalPoint(sharedUser.getTotalPoints() + point.getPoint());
+						} else {
+							point.setTotalPoint(point.getPoint());
+						}
+
+						point = tdUserPointService.save(point);
+
+						sharedUser.setTotalPoints(point.getTotalPoint()); // 积分
+						tdUserService.save(sharedUser);
+					}
+				}
+			}
+		}
+
+		map.addAttribute("server_ip", req.getLocalName());
+		map.addAttribute("server_port", req.getLocalPort());
+
+		return "/touch/goods";
+	}
 
     @RequestMapping("/touch/goods/comment/{goodsId}")
     public String comments(@PathVariable Long goodsId, 

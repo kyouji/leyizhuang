@@ -1,4 +1,4 @@
-//首页banner效果 - 本效果由昆明天度网络IRIS原创制作
+//首页banner效果
 function indexBanner(boxid,sumid,_go,_speed,numid){
 	var startX,startY,endX,endY;//定义判断变量
 	var _box = document.getElementById(boxid);
@@ -96,7 +96,7 @@ function indexBanner(boxid,sumid,_go,_speed,numid){
 	
 }//该方法结束
 
-//搜索框部分 - 本效果由昆明天度网络IRIS原创制作
+//搜索框部分
 function searchTextClear(_name,_text,color01,color02){
 	var _obj = $(_name);
 	_obj.val(_text);
@@ -115,30 +115,4 @@ function searchTextClear(_name,_text,color01,color02){
 			_obj.css("color",color01);
 		}
 	});
-}
-
-function topNavMenu(){
-	$("#topnav_down").slideToggle(200);
-	$("#comnav_bg").slideToggle(200);
-}
-function proMenuDown(obj){
-	var _obj = $(obj);
-	var _box = _obj.parent().find(".pro_menu_part");
-	if(_obj.hasClass("sel")){
-		_obj.removeClass("sel");
-		_box.slideUp(200);
-		}else{
-			_obj.addClass("sel");
-			_box.slideDown(200);
-			}
-}
-
-function screeningHeight(_top){
-	var _obj = $("#screening");
-	var _height = $(window).height() - _top;
-	_obj.height(_height);
-	$(window).resize(function(){
-		_height = $(window).height() - _top;
-		_obj.height(_height);
-		});
 }

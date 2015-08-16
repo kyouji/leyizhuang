@@ -2,230 +2,321 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if goods??>${goods.seoTitle!''}-</#if></title>
-<meta name="keywords" content="${goods.seoKeywords!''}">
-<meta name="description" content="${goods.seoDescription!''}">
-<meta name="copyright" content="${site.copyright!''}" />
+<title>网站名称</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="copyright" content="" />
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
 
-<link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/front.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-$(document).ready(function(){
-  searchTextClear(".comserch_text","搜索关键字","#999","#333");
-  indexBanner("box","sum",300,5000,"pronum");
-  
-  $("#id-minus").click(function(){
-        var q = parseInt($("#quantity").val());
-        
-        if (q > 1)
-        {
-            $("#quantity").val(q-1);
-        }
-        
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
-    });
-    
-    $("#id-plus").click(function(){
-        var q = parseInt($("#quantity").val());
-        
-        <#if goods.leftNumber??>
-            if (q < ${goods.leftNumber!'0'})
-            {
-                $("#quantity").val(q+1);
-            }
-            else
-            {
-                alert("已达到库存最大值");
-            }
-        <#else>
-            $("#quantity").val(q+1);
-        </#if>
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
-    
-    });
-});
-
-function addCollect(goodsId)
-{
-    if (undefined == goodsId)
+	function showAndHide(type){
+		if(type == 'img'){
+			$("#a_img_by_dx").addClass("sel");
+			$("#a_detail_by_dx").removeClass("sel");
+			$("#a_comment_by_dx").removeClass("sel");
+			
+			$("#goods_img_by_dx").show();
+			$("#goods_detail_by_dx").hide();
+			$("#goods_comment_by_dx").hide();
+		}
+		
+		if(type == 'detail'){
+			$("#a_img_by_dx").removeClass("sel");
+			$("#a_detail_by_dx").addClass("sel");
+			$("#a_comment_by_dx").removeClass("sel");
+			
+			$("#goods_img_by_dx").hide();
+			$("#goods_detail_by_dx").show();
+			$("#goods_comment_by_dx").hide();
+		}
+		
+		if(type == 'comment'){
+			$("#a_img_by_dx").removeClass("sel");
+			$("#a_detail_by_dx").removeClass("sel");
+			$("#a_comment_by_dx").addClass("sel");
+			
+			$("#goods_img_by_dx").hide();
+			$("#goods_detail_by_dx").hide();
+			$("#goods_comment_by_dx").show();
+		}
+	}
+	
+	function addCollections(goodsId){
+		if (undefined == goodsId)
     {
         return;
     }
-    
-    $.ajax({
-        type:"post",
-        url:"/user/collect/add",
-        data:{"goodsId": goodsId},
-        dataType: "json",
-        success:function(res){
-            
-            alert(res.message);
-            
-            // 需登录
-            if (res.code==1)
-            {
-                setTimeout(function(){
-                    window.location.href = "/touch/login";
-                }, 1000); 
-            }
-        }
-    });
-}
+	
+	//将goodsId通过异步请求发送至后台
+	$.post("/user/collect/add",{"goodsId":goodsId},function(data){
+
+		alert(data.message);
+		
+		//在没有用户登陆的情况下跳转到登陆页面
+		if (data.code==1){
+			setTimeout(function(){
+				window.location.href = "/touch/login";
+			}, 1000); 
+		}
+		  
+	});
+	}
 </script>
 </head>
 
 <body>
-<header class="comhead">
+<div class="maintop_bg"></div>
+<header class="maintop">
   <div class="main">
-    <p>产品详细</p>
-    <a class="a1" href="javascript:history.go(-1);">返回</a>
-    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
+    <p>手机专区</p>
+    <a class="a1" href="javascript:history.go(-1)"><img src="/touch/images/back.png" height="22" /></a>
+    <a class="a2" href="#"><img src="/touch/images/menu.png" height="22" /></a>
   </div>
 </header>
-<div class="comhead_bg"></div>
-<!--header END-->
-<!--comcheck END-->
-<section id="box">
-  <ul id="sum">
-    <#if goods.showPictures??>
-        <#list goods.showPictures?split(",") as uri>
-            <#if ""!=uri>
-                <li><img src="${uri!''}" /></li>
-            </#if>
-        </#list>
-    </#if>
-  </ul>
-  <div class="clear"></div>
-</section><!--我是banner-->
-<div class="main" style="z-index:10;">
-  <a class="pro_share" href="javascript:addCollect(${goods.id});">关注</a>
-  <h3 class="protext red">￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span></h3>
-  <p class="center fs09">${goods.title!''}</p>
-  <p class="center fs07 red mb10">${goods.subTitle!''}</p>
 
-  <div class="protext">
-    <table>
-        <tr>
-            <th width="80">选择同盟店：</th>
-            <td>
-              <select>
-                <option value="">请选择...</option>
-                <#list diy_site_list as item>
-                    <option value="${item.id}">${item.title!''}</option>
-                </#list>
-              </select> 
-            </td>
-        </tr>
-      
-        <#if total_select??>
-            <#if 1==total_select>
-                <tr>
-                    <th>${select_one_name!''}：</th>
-                    <td>
-                        <#if select_one_goods_list??>
-                        <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
-                        </#list>
-                        </#if>
-                    </td>
-                </tr>
-            <#elseif 2==total_select>
-                <tr>
-                    <th>${select_one_name!''}：</th>
-                    <td>
-                        <#if select_one_goods_list??>
-                        <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
-                        </#list>
-                        </#if>
-                    </td>
-                </tr>
-                <tr>
-                    <th>${select_two_name!''}：</th>
-                    <td>
-                        <#if select_two_goods_list??>
-                        <#list select_two_goods_list as item>
-                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectTwoValue}</a>
-                        </#list>
-                        </#if>
-                    </td>
-                </tr>
-            <#elseif 3==total_select>
-                <tr>
-                    <th>${select_one_name!''}：</th>
-                    <td>
-                        <#if select_one_goods_list??>
-                        <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
-                        </#list>
-                        </#if>
-                    </td>
-                </tr>
-                <tr>
-                    <th>${select_two_name!''}：</th>
-                    <td>
-                        <#if select_two_goods_list??>
-                        <#list select_two_goods_list as item>
-                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectTwoValue}</a>
-                        </#list>
-                        </#if>
-                    </td>
-                </tr>
-                <tr>
-                    <th>${select_three_name!''}：</th>
-                    <td>
-                        <#if select_three_goods_list??>
-                        <#list select_three_goods_list as item>
-                            <a <#if item.selectThreeValue==three_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectThreeValue}</a>
-                        </#list>
-                        </#if>
-                    </td>
-                </tr>
-            </#if>
+<div class="main">
+  <section class="ta-c combg pt15 pb15" style="border:none;">
+  	<img src="${goods.coverImageUri!''}" />
+  </section>
+  <div class="clear"></div>
+  <section class="combg">
+    <p class="pro_tit_sc">${goods.title!''}<a href="javascript:addCollections(${goods.id});">关注</a></p>
+    <p class="fs08 c7 center pb10">${goods.subTitle!''}</p>
+    <p class="center fs12 fc pb10">￥${goods.salePrice!'0'}</p>
+    
+    <div class="phone_kind">
+      <table class="w100">
+		<#if goods.giftList?? && goods.giftList?size gt 0>
+        	<tr>
+				<#if goods.giftList?? && goods.giftList?size gt 0>
+        			<th width="50">赠品：</th>
+        			<td class="sc">
+        			<#list goods.giftList as gitem>
+        				${gitem.goodsTitle!''}&emsp;
+        			</#list>
+        			</td>
+        		</#if>
+        	</tr>
         </#if>
-      
-      
+        <#if goods.returnPoints gt 0>
+	        <tr>
+	          <th width="50">积分：</th>
+	          <td class="sc">确认收货后赠送${goods.returnPoints}积分</td>
+	        </tr>
+	    </#if>
+	    <#if goods.configuration??>
+		    <tr>
+		    	<th width="50">配置：</th>
+		    	<td>${goods.configuration!''}</td>
+		    </tr>
+		</#if>
+		<#if total_select??>
+			<#if 1==total_select>
+					<tr>
+						<th>${select_one_name!''}</th>
+						<#if select_one_goods_list??>
+							<td id="param_one">
+								<#list select_one_goods_list as item>
+									<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
+								</#list>
+							</td>
+						</#if>
+					</tr>
+			<#elseif 2==total_select>
+				<tr>
+					<th>${select_one_name!''}</th>
+					<#if select_one_goods_list??>
+						<td id="param_one">
+							<#list select_one_goods_list as item>
+								<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
+							</#list>
+						</td>
+					</#if>
+				</tr>
+				<tr>
+					<th>${select_two_name!''}</th>
+					<#if select_two_goods_list??>
+						<td id="param_one">
+							<#list select_two_goods_list as item>
+								<a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id}">${item.selectTwoValue}</a>			
+							</#list>
+						</td>
+					</#if>
+				</tr>
+			<#elseif 3==total_select>
+				<tr>
+					<th>${select_one_name!''}</th>
+					<#if select_one_goods_list??>
+						<td id="param_one">
+							<#list select_one_goods_list as item>
+								<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
+							</#list>
+						</td>
+					</#if>
+				</tr>
+				<tr>
+					<th>${select_two_name!''}</th>
+					<#if select_two_goods_list??>
+						<td id="param_one">
+							<#list select_two_goods_list as item>
+								<a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id}">${item.selectTwoValue}</a>			
+							</#list>
+						</td>
+					</#if>
+				</tr>
+				<tr>
+					<th>${select_three_name!''}</th>
+					<#if select_three_goods_list??>
+						<td id="param_one">
+							<#list select_three_goods_list as item>
+								<a <#if item.selectThreeValue==three_selected>class="sel02"</#if> href="/touch/goods/${item.id}">${item.selectThreeValue}</a>			
+							</#list>
+						</td>
+					</#if>
+				</tr>
+			</#if>
+		</#if>
+		<#--
+        <tr>
+          <th>颜色：</th>
+          <td>
+            <a class="sel" href="#">颜色1</a>
+            <a href="#">颜色1</a>
+            <a href="#">颜色1</a>
+          </td>
+        </tr>
+        <tr>
+          <th>容量：</th>
+          <td>
+            <a class="sel01" href="#">颜色123</a>
+            <a href="#">颜色1</a>
+            <a href="#">颜色1</a>
+          </td>
+        </tr>
+        <tr>
+          <th>版本：</th>
+          <td>
+            <a class="sel02" href="#">颜色1</a>
+            <a href="#">颜色1</a>
+            <a href="#">颜色1</a>
+          </td>
+        </tr>
+      	-->
+      </table>
+    </div>
+    <!--<div class="clear10"></div>
+    <a class="blue_more" href="#">加入购物车</a>-->
+    <div class="clear10"></div>
+    <p class="fs11 pt15 pb5 center">商品介绍</p>
+     <#if goods.paramList??>
+	     <#list goods.paramList as param>
+	     	<p class="pb5 center fs08">${param.paramName!''}: ${param.value!''} </p>
+	     </#list>
+     </#if>
+    <!--
+    <p class="pb5 center fs08">参数名：我是参数哦</p>
+    <p class="pb5 center fs08">参数名：我是参数哦</p>
+    <p class="pb5 center fs08">参数名：我是参数哦</p>
+    <p class="pb5 center fs08">参数名：我是参数哦</p>
+    <p class="pb5 center fs08">参数名：我是参数哦</p>
+    <p class="pb5 center fs08">参数名：我是参数哦</p>
+    <p class="pb5 center fs08">参数名：我是参数哦</p>
+    <p class="pb5 center fs08">参数名：我是参数哦</p>
+    -->
+    <div class="clear10"></div>
+
+    
+    <table class="comtab pro_check">
+      <tr>
+        <td><a id="a_img_by_dx" class="sel" href="javascript:showAndHide('img');">图片展示</a></td>
+        <td><a id="a_detail_by_dx" href="javascript:showAndHide('detail');">详细参数</a></td>
+        <#if comment_page??>
+       		<td><a id="a_comment_by_dx" href="javascript:showAndHide('comment');">评价（<span>${comment_page.content?size!'0'}</span>）</a></td>
+       	<#else>
+       		<td><a id="a_comment_by_dx" href="javascript:showAndHide('comment');">评价（<span>0</span>）</a></td>
+       	</#if>
+      </tr>
     </table>
-  </div>
-  
-  <a class="protext" href="/touch/goods/detail/${goods.id}">图文详情</a>
-  <a class="protext" href="/touch/goods/param/${goods.id}">规格参数</a>
-  <a class="protext" href="/touch/goods/comment/${goods.id}">车友评价（${comment_count!'0'}）</a>
-  <a class="protext" href="/touch/goods/consult/${goods.id}">留言咨询（${consult_page.totalElements!'0'}）</a>
- 
+	<div id="goods_img_by_dx" style="display:block">
+		<ul class="pro_sum">
+		  <li style="display:block;">
+			${goods.detail!''}
+		  </li>
+		  <li>${goods.afterMarketService!''}</li>
+		</ul>
+	</div>
+	<div id="goods_detail_by_dx" style="display:none">
+		<#if goods.paramList??>
+			<ul class="detailed_parameters">
+			  <#list goods.paramList as param>
+				  <li>
+					<span>${param.paramName!''}</span><label>${param.value!''}</label>
+				  </li>
+			  </#list>
+			</ul>
+		</#if>
+	</div>
+	<div id="goods_comment_by_dx" style="display:none">
+		<dl class="detailed_comment">
+			<#if comment_page??>
+				<dt>好评度：<label><span>96</span>%</label> </dt>
+				<#list comment_page.content as item>
+					<dd>
+						<ul>
+							<li class="detailed_comment_li1">
+								<b>
+								<#if item.goodsStar?? && item.goodsStar gt 0>
+	                                <#list 1..item.goodsStar as starCount>
+	                                    <a class="goodsStar fl" href="javascript:;"><img src="/touch/images/front/start.png" /></a>
+	                                </#list>
+                            		<#if 5-item.goodsStar gt 0>
+		                                <#list 1..(5-item.goodsStar) as whiteCount>
+		                                    <a class="goodsStar fl" href="javascript:;"><img src="/client/images/content/start03.png" /></a>
+		                                </#list>
+                            		</#if>
+                             	<#else>
+	                                <#list 1..5 as noUseCount>
+	                                    <a class="goodsStar fl" href="javascript:;"><img src="/client/images/content/start03.png" /></a>
+	                                </#list>
+                             	</#if>
+								</b>
+								<label><span>${item.username!''}</span><span>${item.commentTime}</span></label>
+							</li>
+							<li>
+								<p>${content!''}</p>
+							</li>
+							<li class="detailed_comment_li2">
+								<img src="/touch/images/front/img01.png" />
+								<img src="/touch/images/front/img01.png" />
+								<img src="/touch/images/front/img01.png" />
+								<img src="/touch/images/front/img01.png" />
+								<img src="/touch/images/front/img01.png" />
+							</li>
+						</ul>
+					</dd>	
+				</#list>
+			</#if>
+		</dl>
+	<div>
+  </section>
 </div><!--main END-->
 
-<div class="clear h40"></div>
-<section class="botlogin">
-  <#if username??>
-  <a href="/touch/user">${username!''}</a>
-  <#else>
-  <a href="/touch/login">登录</a><a class="ml20" href="/touch/reg">注册</a>
-  </#if>
-  <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
-</section>
-<footer class="comfoot main">
-    <a href="/goods/${goods.id}">电脑版</a>
-    <a href="/touch/goods/${goods.id}">触屏版</a>
-</footer>
-<p class="bottext mainbox">${site.copyright!''}</p>
-<p class="bottext mainbox">${site.icpNumber!''}</p>
-<div class="buyfoot_bg"></div>
-<footer class="buyfoot">
-  <div class="mainbox">
-    <div class="buynum">
-      <a id="id-plus" href="javascript:;">+</a>
-      <a class="a1"id="id-minus" href="javascript:;">-</a>
-      <input type="text" class="text" value="1" />
-    </div>
-    <a id="addCart" class="fr" href="/cart/init?id=${goods.id}<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
-    <div class="clear"></div>
-  </div>
+
+<div class="clear70"></div>
+<footer class="profoot">
+  <table>
+    <tr>
+      <td><input type="submit" value="立即购买" /></td>
+      <td>&nbsp;</td>
+      <td><input type="submit" value="加入购物车" /></td>
+    </tr>
+  </table>
 </footer>
 </body>
 </html>
