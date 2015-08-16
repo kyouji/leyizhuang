@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+.content_check {
+	z-index:40;
+	width:94%;
+	margin:0 auto;
+	table-layout:fixed;}
+.content_check td {
+	background:#fff;
+	height:40px;
+	text-align:center;
+	border-left:1px solid #eee;
+	border-right:1px solid #eee;}
+.content_check td a.a2 {
+	width:100%;
+	display:inline-block;
+	line-height:40px;
+	color:#555;
+	}
+.content_check td a.sel {
+	color:#fff;
+	background:#3b93de;}
+.myorder_list {
+	border:1px solid #ddd;
+	width:94%;
+	background:#fff;
+	margin:10px auto 0;}
+.myorder_list h2 {
+	font-weight:400;
+	width:96%;
+	padding:8px 2%;
+	font-size:0.9em;
+	background:#eee;}
+.myorder_list h2 span {
+	position:absolute;
+	color:#999;
+	right:2%;
+	top:8px;}
+.myorder_list a.a1{
+	display:block;
+	width:96%;
+	padding:10px 0;
+	border-bottom:1px dashed #ddd;
+	margin:0 auto;}
+.myorder_list a.a1 .sp1 {
+	float:left;
+	display:inline-block;
+	width:20%;}
+.myorder_list a.a1 p {
+	font-size:0.9em;
+	float:right;
+	width:78%;}
+.myorder_list a.a1 img {
+	max-height:90px;}
+.myorder_list a.a2{
+	display:block;
+	width:94%;
+	margin:0 auto;
+	text-align:right;
+	color:#ff5c77;
+	padding:15px 0;}
+.myorder_list a.a2 span {
+	position:absolute;
+	left:0;
+	top:15px;}
+.myorder_list a.a0 {border:none;}

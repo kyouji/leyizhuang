@@ -49,23 +49,27 @@
 	
 	function addCollections(goodsId){
 		if (undefined == goodsId)
-    {
-        return;
-    }
+	    {
+	        return;
+	    }
 	
-	//将goodsId通过异步请求发送至后台
-	$.post("/user/collect/add",{"goodsId":goodsId},function(data){
-
-		alert(data.message);
-		
-		//在没有用户登陆的情况下跳转到登陆页面
-		if (data.code==1){
-			setTimeout(function(){
-				window.location.href = "/touch/login";
-			}, 1000); 
-		}
-		  
-	});
+		//将goodsId通过异步请求发送至后台
+		$.post("/user/collect/add",{"goodsId":goodsId},function(data){
+	
+			alert(data.message);
+			
+			//在没有用户登陆的情况下跳转到登陆页面
+			if (data.code==1){
+				setTimeout(function(){
+					window.location.href = "/touch/login";
+				}, 1000); 
+			}
+			  
+		});
+	}
+	
+	function addCart(id){
+		window.location.href="/cart/init?id=${goods.id?c}";
 	}
 </script>
 </head>
@@ -86,7 +90,7 @@
   </section>
   <div class="clear"></div>
   <section class="combg">
-    <p class="pro_tit_sc">${goods.title!''}<a href="javascript:addCollections(${goods.id});">关注</a></p>
+    <p class="pro_tit_sc">${goods.title!''}<a href="javascript:addCollections(${goods.id?c});">关注</a></p>
     <p class="fs08 c7 center pb10">${goods.subTitle!''}</p>
     <p class="center fs12 fc pb10">￥${goods.salePrice!'0'}</p>
     
@@ -123,7 +127,7 @@
 						<#if select_one_goods_list??>
 							<td id="param_one">
 								<#list select_one_goods_list as item>
-									<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
+									<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
 								</#list>
 							</td>
 						</#if>
@@ -134,7 +138,7 @@
 					<#if select_one_goods_list??>
 						<td id="param_one">
 							<#list select_one_goods_list as item>
-								<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
+								<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
 							</#list>
 						</td>
 					</#if>
@@ -144,7 +148,7 @@
 					<#if select_two_goods_list??>
 						<td id="param_one">
 							<#list select_two_goods_list as item>
-								<a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id}">${item.selectTwoValue}</a>			
+								<a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>			
 							</#list>
 						</td>
 					</#if>
@@ -155,7 +159,7 @@
 					<#if select_one_goods_list??>
 						<td id="param_one">
 							<#list select_one_goods_list as item>
-								<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
+								<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
 							</#list>
 						</td>
 					</#if>
@@ -165,7 +169,7 @@
 					<#if select_two_goods_list??>
 						<td id="param_one">
 							<#list select_two_goods_list as item>
-								<a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id}">${item.selectTwoValue}</a>			
+								<a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>			
 							</#list>
 						</td>
 					</#if>
@@ -175,39 +179,13 @@
 					<#if select_three_goods_list??>
 						<td id="param_one">
 							<#list select_three_goods_list as item>
-								<a <#if item.selectThreeValue==three_selected>class="sel02"</#if> href="/touch/goods/${item.id}">${item.selectThreeValue}</a>			
+								<a <#if item.selectThreeValue==three_selected>class="sel02"</#if> href="/touch/goods/${item.id?c}">${item.selectThreeValue}</a>			
 							</#list>
 						</td>
 					</#if>
 				</tr>
 			</#if>
 		</#if>
-		<#--
-        <tr>
-          <th>颜色：</th>
-          <td>
-            <a class="sel" href="#">颜色1</a>
-            <a href="#">颜色1</a>
-            <a href="#">颜色1</a>
-          </td>
-        </tr>
-        <tr>
-          <th>容量：</th>
-          <td>
-            <a class="sel01" href="#">颜色123</a>
-            <a href="#">颜色1</a>
-            <a href="#">颜色1</a>
-          </td>
-        </tr>
-        <tr>
-          <th>版本：</th>
-          <td>
-            <a class="sel02" href="#">颜色1</a>
-            <a href="#">颜色1</a>
-            <a href="#">颜色1</a>
-          </td>
-        </tr>
-      	-->
       </table>
     </div>
     <!--<div class="clear10"></div>
@@ -314,7 +292,7 @@
     <tr>
       <td><input type="submit" value="立即购买" /></td>
       <td>&nbsp;</td>
-      <td><input type="submit" value="加入购物车" /></td>
+      <td><input type="button" onclick="addCart(${goods.id?c})" value="加入购物车" /></td>
     </tr>
   </table>
 </footer>

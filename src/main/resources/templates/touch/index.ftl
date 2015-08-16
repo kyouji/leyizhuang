@@ -1,291 +1,283 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta name="chinaz-site-verification" content="0571b99b-03be-45ff-b0b0-bc3be3aa6957" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
-<meta name="keywords" content="${site.seoKeywords!''}">
-<meta name="description" content="${site.seoDescription!''}">
-<meta name="copyright" content="${site.copyright!''}" />
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=0, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
 
-<script src="/touch/js/jquery-1.9.1.min.js"></script>
-<script src="/touch/js/common.js"></script>
 
-<link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript">
-$(document).ready(function(){
-    indexBanner("box","sum",300,5000,"num");
-    searchTextClear(".comserch_text","搜索关键字","#999","#333");
-});
-</script>
+<script type="text/javascript" src="/touch/js/search.js"></script>
+<link rel="stylesheet" type="text/css" href="/touch/css/style.css"/>
+
+<title>正品惠客-首页</title>
 </head>
 
 <body>
-<header class="index_top">
-  <div class="main">
-    <section class="comserch">
-        <form action="/search" method="get">
-            <input type="text" class="text comserch_text" name="keywords" value="${keywords!''}"/>
-            <input type="submit" class="sub" value="" />
-        </form>
-    </section>
-    <a class="a1" style="top:9px; left:0;" href="/touch"><img src="<#if site??>${site.logoUri!''}</#if>" height="40" /></a>
-    <a class="a2" href="/touch/cart"><img src="/touch/images/qq.png" height="30" /></a>
-  </div>
-</header>
-<section id="box">
-  <ul id="sum">
-    <#if big_scroll_ad_list??>
-        <#list big_scroll_ad_list as item>
-            <li><a href="${item.linkUri!''}" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if>><img src="${item.fileUri!''}" /></a></li>
-        </#list>
-    </#if>
-  </ul>
-  <div class="clear"></div>
-</section><!--我是banner-->
-<section class="indexnav">
-  <nav class="main">
-    <#if top_category_list??>
-        <#list top_category_list as item>
-            <#if item_index < 8>
-                <li>
-                  <a href="/touch/list/${item.id}"><img src="${item.imgUrl!''}" /><p>${item.title!''}</p></a>
-                </li>
-            </#if>
-        </#list>
-    </#if>
-  </nav>
-  <div class="clear"></div>
-</section>
+<!--Begin-->
+<div class="zphk">
 
-<div class="index_gg">
-    <span>商城快报</span>
-    <#if news_page??>
-        <#list news_page.content as item>
-            <a href="/info/content/${item.id}?mid=12">${item.title!''}</a>
-        </#list>
-    </#if>
+	<!--顶部标题与搜索框-->
+	<div class="top">
+    	<p class="title">正品惠客</p>
+        <p class="searchbox">
+   			<form action="/touch/search" method="get" id="search_form" >
+   				<#if keywords??>
+        			<input type="text" class="search" name="keywords" value="${keywords}"  />
+        		<#else>
+        			<input type="text" class="search" name="keywords" value=""  />
+        		</#if>
+           		<a class="search_photo" href="javascript:submitSearch()"><img src="images/search.gif" /></a>
+            </form>
+        </p>
+    </div>
+    
+	<!--banner图-->
+    <div class="banner">
+    	<#if big_scroll_ad_list??>
+    		<#list big_scroll_ad_list as item>
+        		<img src="${item.fileUri!''}" />
+        	</#list>
+        </#if>
+    </div>
+    
+	<!--导航菜单-->
+	<div class="nav">
+    	<ul class="listico"> 
+            <li class="icon_1"><a href="#" class="ico1">商品分类</a></li> 
+            <li class="icon_2"><a href="#" class="ico2">我的订单</a></li> 
+            <li class="icon_3"><a href="#" class="ico3">个人中心</a></li> 
+            <li class="icon_4"><a href="#" class="ico4">我的关注</a></li> 
+            <li class="icon_5"><a href="#" class="ico5">我的积分</a></li> 
+            <li class="icon_6"><a href="#" class="ico6">收货地址</a></li> 
+            <li class="icon_7"><a href="#" class="ico7">购物车</a></li> 
+            <li class="icon_8"><a href="#" class="ico8">我的评价</a></li> 
+    	</ul> 
+    </div>
+    
+    <!--今日爆款-->
+    <#if speciaPrice_list?? && speciaPrice_list?size gt 0 >
+	    <div class="today_hot">
+	    	<ul class="title">今日爆款</ul>
+	        <ul>
+				<#list speciaPrice_list as item>
+					<#if item_index lt 4>
+						<li>
+							<a class="tj_1" href="/goods/${item.id?c}">
+								<p class="name">${item.title!""}</p>
+								<p class="feature">${item.subTitle!""}</p>
+								<p class="photo">
+								<img src="${item.coverImageUri!""}" />
+								</p>
+							</a>
+						</li>
+					</#if>
+				</#list>
+			</ul>
+		</#if>
+    </div>
+    
+    <#--
+    <div class="today_hot">
+    	<ul class="title">今日爆款</ul>
+        <ul>
+        	<li>
+                <p class="photo">
+                	<a href="#"><img src="images/phone_brand/huawei.png" /></a>
+                </p>
+            </li>
+            <li>
+                <p class="photo">
+                	<a href="#"><img src="images/phone_brand/sumsang.png" /></a>
+                </p>
+                <p class="photo">
+                	<a href="#"><img src="images/phone_brand/iPhone.png" /></a>
+                </p>
+            </li>
+            <li>
+                <p class="photo">
+                	<a href="#"><img src="images/phone_brand/sumsang.png" /></a>
+                </p>
+                <p class="photo">
+                	<a href="#"><img src="images/phone_brand/iPhone.png" /></a>
+                </p>
+            </li>
+        </ul>
+    </div>
+    -->
+    
+    <!--手机大全-->
+    <div class="today_hot">
+    	<#if top_category_list?? && top_category_list?size gt 0 >
+    		<#list top_category_list as item>
+    			<#if item_index == 0>
+		    		<ul class="title">
+			        	<li class="phone_daq">1F${item.title!""}</li>
+			            <li class="more"><a href="/touch/list/${item.id?c}">更多>></a></li>
+		        	</ul>
+	        	</#if>
+        	</#list>
+    	</#if>
+    	
+    	<#if top_cat_goods_page0?? && top_cat_goods_page0.content?size gt 0 >
+        <ul class="phone_details">
+        	<#list top_cat_goods_page0.content as item>
+        		<#if item_index lt 6>
+		        	<li class="daquan_1">
+		                <p class="photo">
+		                	<a href="/touch/goods/${item.id?c}"><img src="${item.coverImageUri!""}" /></a>
+		                </p>
+		                <p class="name">性价比之王</p>
+		                <p class="feature">${item.title!""}</p>
+		                <p class="discount_price">
+		                	<b><del>￥<span>${item.marketPrice!"0.00"}</span></del><br />￥<span>${item.salePrice!"0.00"}</span></b>
+		                </p>
+		            </li>
+            	</#if>
+           	</#list>
+        </ul>
+        </#if>
+    </div>
+    <!--平板/电脑-->
+    <div class="today_hot">
+    	<#if top_category_list?? && top_category_list?size gt 0 >
+    		<#list top_category_list as item>
+    			<#if item_index == 1>
+		    		<ul class="title">
+			        	<li class="phone_daq">2F${item.title!""}</li>
+			            <li class="more"><a href="/touch/list/${item.id?c}">更多>></a></li>
+		        	</ul>
+	        	</#if>
+        	</#list>
+    	</#if>
+        <#if top_cat_goods_page0?? && top_cat_goods_page0.content?size gt 0 >
+        <ul class="phone_details">
+        	<#list top_cat_goods_page1.content as item>
+        		<#if item_index lt 6>
+		        	<li class="daquan_1">
+		                <p class="photo">
+		                	<a href="/touch/goods/${item.id?c}"><img src="${item.coverImageUri!""}" /></a>
+		                </p>
+		                <p class="name">性价比之王</p>
+		                <p class="feature">${item.title!""}</p>
+		                <p class="discount_price">
+		                	<b><del>￥<span>${item.marketPrice!"0.00"}</span></del><br />￥<span>${item.salePrice!"0.00"}</span></b>
+		                </p>
+		            </li>
+            	</#if>
+           	</#list>
+        </ul>
+        </#if>
+    </div>
+    
+    <!--数码穿戴设备-->
+    <div class="today_hot">
+    	<#if top_category_list?? && top_category_list?size gt 0 >
+    		<#list top_category_list as item>
+    			<#if item_index == 2>
+		    		<ul class="title">
+			        	<li class="phone_daq">3F${item.title!""}</li>
+			            <li class="more"><a href="/touch/list/${item.id?c}">更多>></a></li>
+		        	</ul>
+	        	</#if>
+        	</#list>
+    	</#if>
+        <#if top_cat_goods_page2?? && top_cat_goods_page0.content?size gt 0 >
+        <ul class="phone_details">
+        	<#list top_cat_goods_page1.content as item>
+        		<#if item_index lt 6>
+		        	<li class="daquan_1">
+		                <p class="photo">
+		                	<a href="/touch/goods/${item.id?c}"><img src="${item.coverImageUri!""}" /></a>
+		                </p>
+		                <p class="name">性价比之王</p>
+		                <p class="feature">${item.title!""}</p>
+		                <p class="discount_price">
+		                	<b><del>￥<span>${item.marketPrice!"0.00"}</span></del><br />￥<span>${item.salePrice!"0.00"}</span></b>
+		                </p>
+		            </li>
+            	</#if>
+           	</#list>
+        </ul>
+        </#if>
+    </div>
+    
+    <!--数码配件-->
+    <div class="today_hot">
+    	<#if top_category_list?? && top_category_list?size gt 0 >
+    		<#list top_category_list as item>
+    			<#if item_index == 3>
+		    		<ul class="title">
+			        	<li class="phone_daq">4F${item.title!""}</li>
+			            <li class="more"><a href="/touch/list/${item.id?c}">更多>></a></li>
+		        	</ul>
+	        	</#if>
+        	</#list>
+    	</#if>
+        <#if top_cat_goods_page3?? && top_cat_goods_page0.content?size gt 0 >
+        <ul class="phone_details">
+        	<#list top_cat_goods_page1.content as item>
+        		<#if item_index lt 6>
+		        	<li class="daquan_1">
+		                <p class="photo">
+		                	<a href="/touch/goods/${item.id?c}"><img src="${item.coverImageUri!""}" /></a>
+		                </p>
+		                <p class="name">性价比之王</p>
+		                <p class="feature">${item.title!""}</p>
+		                <p class="discount_price">
+		                	<b><del>￥<span>${item.marketPrice!"0.00"}</span></del><br />￥<span>${item.salePrice!"0.00"}</span></b>
+		                </p>
+		            </li>
+            	</#if>
+           	</#list>
+        </ul>
+        </#if>
+    </div>
+    
+    <!--底部导航-->
+    <div class="foot_nav">
+    	<#if username??>
+    		<a href="/touch/user">${username}</a>
+    	<#else>
+    		<a href="/touch/login">登录</a>
+    	</#if>
+        <a href="/touch/reg">注册</a>
+        <a href="#">返回顶部</a>
+    </div>
+    
+    <!--版权备案-->
+    <div class="put_record">
+    	<p>
+        	<a class="pc" href="/computer">电脑版</a>
+            <a class="cp" href="/touch">触屏版</a>
+            <a class="kh" href="#">客户端</a>
+        </p>
+        <#if site??>
+        	<p>${site.copyright!''}</p>
+        </#if>
+    </div>
+    
+    <!--底部-->
+    <div class="footer">
+		 <ul>
+         	<li>
+            	<a class="ic_1" href="#">首页</a>
+            </li>
+            <li>
+            	<a class="ic_2" href="#">分类</a>
+            </li>
+            <li>
+            	<a class="ic_3" href="#">购物车</a>
+            </li>
+            <li>
+            	<a class="ic_4" href="#">我的</a>
+            </li>
+         </ul>   	
+    </div>
+
 </div>
-
-<h3 class="indextit mainbox"><span>特别推荐</span><#--<a href="#">+更多</a>--></h3>
-
-<section class="indexlist">
-  <table style="table-layout:fixed;">
-    <tr>
-        <#if index_recommend_goods_page??>
-            <#list index_recommend_goods_page.content as item>
-                <td rowspan="2" width="30%">
-                    <a class="ta-c" href="/touch/goods/${item.id}">
-                        <p class="fs08" style="overflow: hidden; height: 16px;">${item.title!''}</p>
-                        <p class="fs07 c9" style="overflow: hidden; height: 16px;">${item.subTitle!''}</p>
-                        <p class="fs07 red">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
-                        <img src="${item.coverImageUri!''}" />
-                    </a>
-                </td>
-            </#list>
-        </#if>
-    </tr>
-    
-  </table>
-</section>
-
-<section class="index_ad center mt10">
-  <menu>
-    <#if touch_middle_ad_list??>
-        <#list touch_middle_ad_list as item>
-            <#if item_index < 2>
-                <a class="pr5" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
-                    <img src="${item.fileUri!''}"/>
-                </a>
-            </#if>
-        </#list>
-    </#if>
-  </menu>
-</section>
-
-<h3 class="indextit mainbox mt10"><span>1元秒杀</span>
-<#--
-<p><b>1</b><b>1</b>:<b>1</b><b>1</b>:<b>1</b><b>1</b></p>
--->
-<a href="/touch/promotion/miao">+更多</a></h3>
-
-<section class="indexlist">
-  <table style="border-collapse:separate; border-spacing:5px;">
-    <tr>  
-      <td rowspan="2" width="35%" style="border:none;">
-        <#if touch_miao_ad_list??>
-            <#list touch_miao_ad_list as item>
-                <a href="${item.linkUri!''}" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if>>
-                  <img src="${item.fileUri!''}" />
-                </a>
-                <#break>
-            </#list>
-        </#if>
-      </td>     
-        <#if miao_cur_page??>
-            <#list miao_cur_page.content as item>
-                <#if item_index < 2>
-                    <td>
-                        <a href="/touch/goods/${item.id}?qiang=1">
-                          <p class="fs08">${item.title!''}</p>
-                          <p class="fs07 c9">${item.subTitle!''}</p>
-                          <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                          <img src="${item.coverImageUri!''}" />
-                        </a>
-                    </td>
-                </#if>
-            </#list>
-        </#if>
-    </tr>
-    <tr>
-        <#if miao_cur_page??>
-            <#list miao_cur_page.content as item>
-                <#if item_index gt 1 && item_index < 4>
-                    <td>
-                        <a href="/touch/goods/${item.id}?qiang=1">
-                          <p class="fs08">${item.title!''}</p>
-                          <p class="fs07 c9">${item.subTitle!''}</p>
-                          <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                          <img src="${item.coverImageUri!''}" />
-                        </a>
-                    </td>
-                </#if>
-            </#list>
-        </#if>
-    </tr>
-  </table>
-</section>
-
-<h3 class="indextit mainbox"><span>百人团购</span><a href="/touch/promotion/tuan">+更多</a></h3>
-<section class="indexlist">
-  <table style="border-collapse:separate; border-spacing:5px;">
-    <tr>  
-      <#if tuan_cur_page??>
-        <#list tuan_cur_page.content as item>
-            <#if item_index < 2>
-                <td>
-                    <a href="/touch/goods/${item.id}?qiang=1">
-                      <p class="fs08">${item.title!''}</p>
-                      <p class="fs07 c9">${item.subTitle!''}</p>
-                      <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                      <img src="${item.coverImageUri!''}" />
-                    </a>
-                </td>
-            </#if>
-        </#list>
-      </#if>
-      <td rowspan="2" width="35%" style="border:none;">
-        <#if touch_tuan_ad_list??>
-            <#list touch_tuan_ad_list as item>
-                <a href="${item.linkUri!''}" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if>>
-                  <img src="${item.fileUri!''}" />
-                </a>
-                <#break>
-            </#list>
-        </#if>
-      </td>
-    </tr>
-    <tr>
-        <#if tuan_cur_page??>
-            <#list tuan_cur_page.content as item>
-                <#if item_index gt 1 && item_index < 4>
-                    <td>
-                        <a href="/touch/goods/${item.id}?qiang=1">
-                          <p class="fs08">${item.title!''}</p>
-                          <p class="fs07 c9">${item.subTitle!''}</p>
-                          <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                          <img src="${item.coverImageUri!''}" />
-                        </a>
-                    </td>
-                </#if>
-            </#list>
-        </#if>
-    </tr>
-  </table>
-</section>
-<h3 class="indextit mainbox"><span>服务项目</span><#--<a href="#">+更多</a>--></h3>
-<section class="indexlist">
-  <table style="border-collapse:separate; border-spacing:3px;">
-    <tr> 
-        <#if top_category_list??>
-            <#list top_category_list as item>
-                <#if item_index < 5>
-                    <td>
-                        <a class="a3" href="/touch/list/${item.id}">
-                          <p>${item.title!''}</p>
-                          <img src="${item.imgUrl!''}" />
-                        </a>
-                    </td>
-                </#if>
-            </#list>
-        </#if>
-    </tr>
-    <tr> 
-        <#if top_category_list??>
-            <#list top_category_list as item>
-                <#if item_index gt 4 && item_index < 9>
-                    <td>
-                        <a class="a3" href="/touch/list/${item.id}">
-                          <p>${item.title!''}</p>
-                          <img src="${item.imgUrl!''}" />
-                        </a>
-                    </td>
-                </#if>
-            </#list>
-        </#if>
-          <td style="background:#56606b;">
-            <a class="a3" href="javascript:;">
-              <p class="white">更多项目</p>
-              <p class="white">敬请期待</p>
-            </a>
-          </td>
-    </tr>
-  </table>
-</section>
-
-<h3 class="indextit mainbox"><span>自驾游</span><#if self_drive_product_category??><a href="/touch/list/${self_drive_product_category.id}">+更多</a></#if></h3>
-
-<section class="indexlist">
-  <table style="table-layout:fixed;" class="index_my">
-    <tr>
-        <#if self_drive_goods_page??>
-            <#list self_drive_goods_page.content as item>
-                <td rowspan="2" width="30%">
-                    <a class="ta-c" href="/touch/goods/${item.id}">
-                      <img src="${item.coverImageUri!''}" />
-                      <p class="fs08 ta-l">${item.title!''}</p>
-                      <p class="fs10 red ta-l">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
-                    </a>
-                </td>
-            </#list>
-        </#if>
-    </tr>
-    
-  </table>
-</section>
-
-<h3 class="indextit mainbox mb5"><span>养车护车</span><#--<a href="#">+更多</a>--></h3>
-<#if curing_page??>
-    <#list curing_page.content as item>
-        <a class="block center fs08 mb10" href="/info/content/${item.id}?mid=11">${item.title!''}</a>
-    </#list>
-</#if>
-
-<div class="clear h20"></div>
-<section class="botlogin">
-  <#if username??>
-  <a href="/touch/user">${username!''}</a>
-  <#else>
-  <a href="/touch/login">登录</a><a class="ml20" href="/touch/reg">注册</a>
-  </#if>
-  <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
-</section>
-<footer class="comfoot main">
-    <a href="/">电脑版</a>
-    <a href="/touch">触屏版</a>
-</footer>
-<p class="bottext mainbox">${site.copyright!''}</p>
-<p class="bottext mainbox">${site.icpNumber!''}</p>
+<!--END!-->
 </body>
 </html>
