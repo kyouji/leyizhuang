@@ -154,6 +154,8 @@
 .phone_list h6 span {
 	font-size:0.6em;}
 
+.menu_a{ width:100%; display:block; overflow:hidden; background:#fff; padding-top:15px;}
+.menu_a a{ width:33%; display:block; float:left; text-align:center;color:#3b93de; padding-bottom:15px;}
 
 
 /*购物车-有商品*/
@@ -388,6 +390,7 @@
 .phone_btn_sel {
 	background:url(../images/arrow05.png) no-repeat 96% center;
 	background-size:13px;}
+
 	
 .pro_check td {
 	border:1px solid #eee;
@@ -409,7 +412,10 @@
 .pro_sum {
 	padding:15px 0;
 	display:block;
-	width:100%;}
+	width:100%;display:block;overflow:hidden;}
+.pro_sum ul{ width:100%;display:block;overflow:hidden;}
+.pro_sum ul li{width:100%;float：left;}	
+	
 .profoot {
 	position:fixed;
 	left:0;
@@ -456,8 +462,8 @@
 .detailed_comment dt{ float:left; width:92%; padding:10px 4%; border-bottom:1px #ddd solid;}
 .detailed_comment dd{ float:right; width:100%; border-bottom:1px #ddd solid;}
 .detailed_comment dd ul li{ width:90%; float:left;padding:10px 5% 0 5%;}
-.detailed_comment dd ul .detailed_comment_li1 b img{ width:10%;display:inline-block; float:left; margin-right:5px;}
-.detailed_comment dd ul .detailed_comment_li1 b{ width:45%; float:left;}
+.detailed_comment dd ul .detailed_comment_li1 b{ width:40%;float:left;}
+.detailed_comment dd ul .detailed_comment_li1 b img{ width:20px; height:20px; display:block; float:left; margin-right:5px;}
 .detailed_comment dd ul .detailed_comment_li1 label{ width:55%; float:right; text-align:right;}
 .detailed_comment dd ul .detailed_comment_li1 label span{ margin-right:10px;}
 .detailed_comment .detailed_comment_li2 img{float:left;display:inline-block;width:20%;}

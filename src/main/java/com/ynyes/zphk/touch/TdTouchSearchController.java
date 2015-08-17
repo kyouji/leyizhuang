@@ -54,7 +54,8 @@ public class TdTouchSearchController {
 			}
 			// 将关键字信息再次传到页面，已便于显示----@author dengxiao
 			map.addAttribute("keywords", keywords);
-			map.addAttribute("goods_page", tdGoodsService.searchGoods(keywords.trim(), page, ClientConstant.pageSize));
+//			map.addAttribute("goods_page", tdGoodsService.searchGoods(keywords.trim(), page, ClientConstant.pageSize));
+			map.addAttribute("goods_page", tdGoodsService.searchGoods(keywords.trim()));
 		}
 		map.addAttribute("pageId", page);
 		map.addAttribute("keywords", keywords);

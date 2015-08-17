@@ -31,8 +31,7 @@
 .member_check img{float:left; margin-top:6px; margin-left:15px;}
 .member_check1{ margin-top:20px;}
 
-.member_line{ background:#fff; height:120px; margin-bottom:20px;}
-
+.member_line{ background:#fff; height:150px; margin-bottom:20px;}
 .member_line .member_lin{ float:left; margin-top:20px; margin-left:7%; width:17%}
 .member_line .member_lin img{width:90%;} 
 .member_lin .gn{font-size:0.9em; text-align:left;}

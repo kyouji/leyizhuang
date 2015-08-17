@@ -141,7 +141,7 @@ public class TdTouchGoodsController {
 		// 商品组合
 		map.addAttribute("comb_list", tdGoodsCombinationService.findByGoodsId(goods.getProductId()));
 
-		Page<TdUserComment> comment_page = tdUserCommentService.findByGoodsIdAndIsShowable(goods.getProductId(), 0, ClientConstant.pageSize);
+		List<TdUserComment> comment_page = tdUserCommentService.findByGoodsIdAndIsShowable(goods.getProductId());
 		Page<TdUserConsult> consult_page = tdUserConsultService.findByGoodsIdAndIsShowable(goods.getProductId(), 0, ClientConstant.pageSize);
 		
 		// 全部评论

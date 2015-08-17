@@ -71,6 +71,10 @@
 	function addCart(id){
 		window.location.href="/cart/init?id=${goods.id?c}";
 	}
+	
+	function buyNow(id){
+		window.location.href="/touch/order/buynow?goodsId=${goods.id?c}";
+	}
 </script>
 </head>
 
@@ -80,7 +84,7 @@
   <div class="main">
     <p>手机专区</p>
     <a class="a1" href="javascript:history.go(-1)"><img src="/touch/images/back.png" height="22" /></a>
-    <a class="a2" href="#"><img src="/touch/images/menu.png" height="22" /></a>
+    <a class="a2" href="/touch"><img src="/touch/images/home2.png" height="25" /></a>
   </div>
 </header>
 
@@ -215,7 +219,7 @@
         <td><a id="a_img_by_dx" class="sel" href="javascript:showAndHide('img');">图片展示</a></td>
         <td><a id="a_detail_by_dx" href="javascript:showAndHide('detail');">详细参数</a></td>
         <#if comment_page??>
-       		<td><a id="a_comment_by_dx" href="javascript:showAndHide('comment');">评价（<span>${comment_page.content?size!'0'}</span>）</a></td>
+       		<td><a id="a_comment_by_dx" href="javascript:showAndHide('comment');">评价（<span>${comment_count!'0'}</span>）</a></td>
        	<#else>
        		<td><a id="a_comment_by_dx" href="javascript:showAndHide('comment');">评价（<span>0</span>）</a></td>
        	</#if>
@@ -226,7 +230,7 @@
 		  <li style="display:block;">
 			${goods.detail!''}
 		  </li>
-		  <li>${goods.afterMarketService!''}</li>
+		  <li style=" width:90%; float:left;padding:5%;">${goods.afterMarketService!''}</li>
 		</ul>
 	</div>
 	<div id="goods_detail_by_dx" style="display:none">
@@ -243,8 +247,8 @@
 	<div id="goods_comment_by_dx" style="display:none">
 		<dl class="detailed_comment">
 			<#if comment_page??>
-				<dt>好评度：<label><span>96</span>%</label> </dt>
-				<#list comment_page.content as item>
+				<!-- <dt>好评度：<label><span>96</span>%</label></dt> -->
+				<#list comment_page as item>
 					<dd>
 						<ul>
 							<li class="detailed_comment_li1">
@@ -264,10 +268,10 @@
 	                                </#list>
                              	</#if>
 								</b>
-								<label><span>${item.username!''}</span><span>${item.commentTime}</span></label>
+								<label><span>用户：${item.username!''}</span><span>评价时间：${item.commentTime}</span></label>
 							</li>
 							<li>
-								<p>${content!''}</p>
+								<p>${content!'好评'}</p>
 							</li>
 							<li class="detailed_comment_li2">
 								<img src="/touch/images/front/img01.png" />
@@ -290,7 +294,7 @@
 <footer class="profoot">
   <table>
     <tr>
-      <td><input type="submit" value="立即购买" /></td>
+      <td><input type="submit" onclick="buyNow(${goods.id?c})" value="立即购买" /></td>
       <td>&nbsp;</td>
       <td><input type="button" onclick="addCart(${goods.id?c})" value="加入购物车" /></td>
     </tr>

@@ -112,6 +112,15 @@ public class TdUserCommentService {
         return repository.findByGoodsIdAndStatusIdOrderByIdDesc(goodsId, 1L, pageRequest);
     }
     
+    public List<TdUserComment> findByGoodsIdAndIsShowable(Long goodsId)
+    {
+        if (null == goodsId)
+        {
+            return null;
+        }
+        return repository.findByGoodsIdAndStatusIdOrderByIdDesc(goodsId, 1L);
+    }
+    
     public Long countByGoodsIdAndIsShowable(Long goodsId)
     {
         if (null == goodsId)

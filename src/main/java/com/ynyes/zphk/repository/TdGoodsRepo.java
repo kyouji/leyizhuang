@@ -215,12 +215,31 @@ public interface TdGoodsRepo extends
             String key3,
             String key4,
             Pageable page);
-
+    
+    //直接查找全部不分页的方法
+    List<TdGoods> findByTitleContainingIgnoreCaseAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(String key1,
+            String key2,
+            String key3,
+            String key4);
+    
     List<TdGoods> findByProductIdAndIsOnSaleTrue(Long productId);
     
     Page<TdGoods> findByReturnPriceNotAndIsOnSaleTrue(double returnPrice, Pageable page);
     
     Page<TdGoods> findByReturnPriceNotAndTitleContainingAndIsOnSaleTrue(double returnPrice, String keywords, Pageable page);
     
+    //根据商品分类ID查找到所有商品并根据销量进行排序的两个方法
+    List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberDesc(Long catagoryId);
     
+    List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberAsc(Long catagoryId);
+    
+    //根据商品分类ID查找到所有商品并根据销量进行排序的两个方法
+    List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderBySalePriceDesc(Long catagoryId);
+    
+    List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderBySalePriceAsc(Long catagoryId);
+    
+    //根据商品分类ID查找到所有商品并根据销量进行排序的两个方法
+    List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeDesc(Long catagoryId);
+    
+    List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeAsc(Long catagoryId);
 }
