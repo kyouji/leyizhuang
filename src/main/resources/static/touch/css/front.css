@@ -154,6 +154,8 @@
 .phone_list h6 span {
 	font-size:0.6em;}
 
+.menu_a{ width:100%; display:block; overflow:hidden; background:#fff; padding-top:15px;}
+.menu_a a{ width:33%; display:block; float:left; text-align:center;color:#3b93de; padding-bottom:15px;}
 
 
 /*购物车-有商品*/
