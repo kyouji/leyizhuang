@@ -248,6 +248,32 @@ function buyConbination(){
 <!--中上部参数-->
 <div class="wrapper">
 	<!--图片展示-->
+	<div class="details_pic">
+        <div class="right-extra" style="margin:0px;">
+        <!--产品参数开始-->
+        <div>
+        <div id="preview" class="spec-preview">
+            <span class="jqzoom"><img src="<#if goods??>${goods.coverImageUri!''}</#if>" /></span>
+        </div>
+        <!--缩图开始-->
+        <div class="spec-scroll">
+            <a class="prev">&lt;</a>
+            <a class="next">&gt;</a>
+            <div class="items">
+                <ul>
+                <#if goods.showPictures??>
+                <#list goods.showPictures?split(",") as uri>
+                    <#if ""!=uri && uri_index < 8>
+                        <li><img  src="${uri!''}" onmousemove="preview(this);" ></li>
+                    </#if>
+                </#list>
+                </#if>
+                </ul>
+            </div>
+        </div>
+        <!--缩图结束-->
+    </div>
+    <#--
 	<div class="wrapper" style="width:410px; float:left; overflow:inherit;">
 	   <div class="scrool_box">
           <menu id="proshowimg">
@@ -260,7 +286,7 @@ function buyConbination(){
                 </#list>
             </#if>
           </menu>
-          
+       -->   
           <menu id="proshowmenu"></menu>
           <div class="details_pic_wrapper">
                 <#-- <div class="details_pic_wrapper_share">分享</div> -->

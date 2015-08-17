@@ -65,7 +65,7 @@
     
     <div class="payment_method">
     	支付方式：
-        <input name="payTypeId" type="radio" value="1" class="pay"/>支付宝支付
+        <input name="payTypeId" type="radio" value="1" class="pay" checked="checked"/>支付宝支付
         <div class="wechat">
         	<input name="payTypeId" type="radio" value="2"  class="pay"/>微信支付
         </div>
@@ -146,7 +146,7 @@
 
 <!--提交订单-->
 <div class="clear_num">
-	<input class="clearing_num" type="submit" value="提交订单" />
+	<input class="clearing_num" type="submit" value="提交订单" style="margin-left: 90%;"/>
 </div>
 </form>
 <!--底部footer-->

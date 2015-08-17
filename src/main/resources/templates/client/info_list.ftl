@@ -32,16 +32,14 @@
   <!-- 右侧 -->
 	<div class="article_box">
     <div class="crumb">
-    <#if category_tree_list??>
-        <#list category_tree_list as item>
+    <#if acticle_category??>
             &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
-            <a href="/list/${item.id}" title="${item.title!''}">${item.title!''}</a>
-        </#list>
+            <a href="/info/list/${mid}" title="">${acticle_category.title!''}</a>
     </#if>
     </div>
     <#if info_page??>
        <#list info_page.content as item>
-            <a href="/info/content/${item.id?c}" title="" target="_blank">
+            <a href="/info/content/${item.id?c}?mid=${mid}" title="" target="_blank">
                 <div class="article_box_01">
                     <div>${item.title!''}</div>
                      <p>${item.brief!''}</p> 
@@ -52,11 +50,18 @@
 	<div class="article_page">
     	
     	<div class="article_page_01">
-        <a href="/info/list/${mid}?catId=${info_page.number+1}" title="">上一页</a>
+    	   <#if info_page.first>
+    	   
+    	   <#else>
+                <a href="/info/list/${mid}?catId=${catId!''}?page=${info_page.number-1}" title="">上一页</a>
+            </#if>
         </div>
         
         <div class="article_page_02">
-        <a href="/info/list/${mid}?catId=${info_page.number+1}" title="">下一页</a>
+            <#if info_page.totalPages-1 == info_page.number>
+            <#else>
+                <a href="/info/list/${mid}?catId=${catId!''}?page=${info_page.number+1}" title="">下一页</a>
+            </#if>
         </div>
         
     </div>
