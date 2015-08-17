@@ -108,7 +108,7 @@ public class TdBrandService {
             return null;
         }
         
-        PageRequest pageRequest = new PageRequest(page, size);
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.ASC, "sortId"));
         
         return repository.findByStatusIdAndProductCategoryTreeContaining(statusId, "["+productCategoryId+"]", pageRequest);
     }
@@ -120,7 +120,7 @@ public class TdBrandService {
             return null;
         }
         
-        return repository.findByStatusIdAndProductCategoryTreeContaining(statusId, "["+productCategoryId+"]");
+        return repository.findByStatusIdAndProductCategoryTreeContainingOrderBySortIdAsc(statusId, "["+productCategoryId+"]");
     }
     
     public TdBrand findByTitle(String title)
