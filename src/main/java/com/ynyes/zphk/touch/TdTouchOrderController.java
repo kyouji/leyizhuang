@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ynyes.zphk.controller.front.AbstractPaytypeService;
 import com.ynyes.zphk.entity.TdCartGoods;
 import com.ynyes.zphk.entity.TdCoupon;
 import com.ynyes.zphk.entity.TdCouponType;
@@ -46,7 +47,7 @@ import com.ynyes.zphk.service.TdUserService;
  */
 @Controller
 @RequestMapping("/touch/order")
-public class TdTouchOrderController {
+public class TdTouchOrderController  extends AbstractPaytypeService{
 
     @Autowired
     private TdCartGoodsService tdCartGoodsService;
@@ -483,4 +484,55 @@ public class TdTouchOrderController {
 
         return "/touch/order_pay_success";
     }
+    
+    @RequestMapping(value = "/buynow")
+    public String buyNow(Long goodsId,ModelMap map, HttpServletRequest req) {
+
+    	String username = (String) req.getSession().getAttribute("username");
+		
+		if (null == username) {
+			return "redirect:/touch/login";
+		}
+		
+		List<TdCartGoods> selectedGoodsList = new ArrayList<>();
+		TdGoods goods = tdGoodsService.findOne(goodsId);
+		
+		TdCartGoods cartGoods = new TdCartGoods();
+		cartGoods.setUsername(username);
+		cartGoods.setGoodsId(goods.getId());
+		cartGoods.setGoodsTitle(goods.getTitle());
+		cartGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
+		cartGoods.setQuantity(1L);
+		cartGoods.setPrice(goods.getSalePrice());
+		selectedGoodsList.add(cartGoods);
+		
+		Double totalPrice = cartGoods.getPrice();
+		
+		// 优惠券
+				map.addAttribute("coupon_list", tdCouponService.findByUsernameAndIsUseable(username));
+
+				// 积分限额
+//				map.addAttribute("total_point_limit", totalPointLimited);
+
+				// 线下同盟店
+				map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());
+
+				// 支付方式列表
+				setPayTypes(map);
+
+				// 配送方式
+				map.addAttribute("delivery_type_list", tdDeliveryTypeService.findByIsEnableTrue());
+
+//				// 选中商品
+				map.addAttribute("selected_goods_list", selectedGoodsList);
+				
+				//总金额
+				map.addAttribute("totalPrice",totalPrice);
+
+				tdCommonService.setHeader(map, req);
+
+		
+        return "/touch/order_info";
+    }
+    
 }

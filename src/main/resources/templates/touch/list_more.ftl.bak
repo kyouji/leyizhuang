@@ -1,0 +1,20 @@
+<h1>123123</h1>
+<#if goods_page??>
+	<#list goods_page.content as item>
+		<a class="phone_list" href="/touch/goods/${item.id?c}">
+			<b><img src="${item.coverImageUri!''}" /></b>
+			<p class="p1">${item.title!''}</p>
+			<p>${item.subTitle!''}</p>
+			<p class="p2"><label class="p2_l1">￥<span>5${item.marketPrice}</span></label><label class="p2_l2">￥<span>${item.salePrice}</span></label></p>
+			<div class="clear"></div>
+			<h6><span>已售 </span>${item.soldNumber}</h6>
+		</a>
+		<div class="clear20"></div>
+	</#list>
+</#if>
+  
+<#if goods_page??>
+	<#if goods_page.totalPages!=1>
+		<a href="javascript:loadMore()" style="display:block; width:100%; height:40px;background:#3b93de;color:#fff;float:left; text-align:center;line-height:40px;">显示更多</a>
+	</#if>
+</#if>

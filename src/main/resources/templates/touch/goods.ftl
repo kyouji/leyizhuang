@@ -71,6 +71,10 @@
 	function addCart(id){
 		window.location.href="/cart/init?id=${goods.id?c}";
 	}
+	
+	function buyNow(id){
+		window.location.href="/touch/order/buynow?goodsId=${goods.id?c}";
+	}
 </script>
 </head>
 
@@ -226,7 +230,7 @@
 		  <li style="display:block;">
 			${goods.detail!''}
 		  </li>
-		  <li>${goods.afterMarketService!''}</li>
+		  <li style=" width:90%; float:left;padding:5%;">${goods.afterMarketService!''}</li>
 		</ul>
 	</div>
 	<div id="goods_detail_by_dx" style="display:none">
@@ -267,7 +271,7 @@
 								<label><span>${item.username!''}</span><span>${item.commentTime}</span></label>
 							</li>
 							<li>
-								<p>${content!''}</p>
+								<p>${content!'好评'}</p>
 							</li>
 							<li class="detailed_comment_li2">
 								<img src="/touch/images/front/img01.png" />
@@ -290,7 +294,7 @@
 <footer class="profoot">
   <table>
     <tr>
-      <td><input type="submit" value="立即购买" /></td>
+      <td><input type="submit" onclick="buyNow(${goods.id?c})" value="立即购买" /></td>
       <td>&nbsp;</td>
       <td><input type="button" onclick="addCart(${goods.id?c})" value="加入购物车" /></td>
     </tr>

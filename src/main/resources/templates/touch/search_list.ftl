@@ -56,24 +56,25 @@ function loadMore()
 		    </#if>
 		    <a href="javascript:submitSearch()" class="list_search_a"></a>
    		</form>
-   	</label>
+    </label>
     <a class="a1" href="javascript:history.go(-1)"><img src="/touch/images/back.png" height="22" /></a>
     <a class="a2" href="#"><img src="/touch/images/menu.png" height="22" /></a>
   </div>
 </header>
 
 <div class="list_top">
+<#--
 <table class="main">
-  <tr>
-    <td <#if orderId==0>class="sel"</#if>><a href="/touch/list/${categoryId!'1'}-0-<#if soldId?? && soldId==0>1<#else>0</#if>-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}">销量</a></td>
-    <td <#if orderId==1>class="sel"</#if>><a href="/touch/list/${categoryId!'1'}-1-${soldId!'0'}-<#if priceId?? && priceId==0>1<#else>0</#if>-${timeId!'0'}-${pageId!'0'}">价格</a></td>
-    <td <#if orderId==2>class="sel"</#if>><a href="/touch/list/${categoryId!'1'}-2-${soldId!'0'}-${priceId!'0'}-<#if timeId?? && timeId==0>1<#else>0</#if>-${pageId!'0'}">上架时间</a></td>
-  </tr>
+	<tr>
+		<td <#if orderId==0>class="sel"</#if>><a href="/touch/list/${categoryId!'1'}-0-<#if soldId?? && soldId==0>1<#else>0</#if>-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}">销量</a></td>
+		<td <#if orderId==1>class="sel"</#if>><a href="/touch/list/${categoryId!'1'}-1-${soldId!'0'}-<#if priceId?? && priceId==0>1<#else>0</#if>-${timeId!'0'}-${pageId!'0'}">价格</a></td>
+		<td <#if orderId==2>class="sel"</#if>><a href="/touch/list/${categoryId!'1'}-2-${soldId!'0'}-${priceId!'0'}-<#if timeId?? && timeId==0>1<#else>0</#if>-${pageId!'0'}">上架时间</a></td>
+	</tr>
 </table>
+-->
 </div>
-<div class="clear50"></div>
-<div id="main" class="main">
-	
+<div class="clear20"></div>
+<div class="main">
  	<#if goods_page??>
 	 	<#list goods_page as item>
 		<a class="phone_list" href="/touch/goods/${item.id?c}">
@@ -87,18 +88,7 @@ function loadMore()
 		<div class="clear20"></div>
 	  </#list>
   </#if>
-  
-  <#--
-  <#if goods_page??>
-  	<#if goods_page.totalPages!=1>
-  		<a href="javascript:loadMore()" style="display:block; width:100%; height:40px;background:#3b93de;color:#fff;float:left; text-align:center;line-height:40px;">显示更多</a>
-  	</#if>
-  </#if>
-  -->
 </div>
 <!--main END-->
-
-
-
 </body>
 </html>

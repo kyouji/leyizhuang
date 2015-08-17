@@ -272,7 +272,7 @@
             	<a class="ic_3" href="#">购物车</a>
             </li>
             <li>
-            	<a class="ic_4" href="#">我的</a>
+            	<a class="ic_4" href="#">个人中心</a>
             </li>
          </ul>   	
     </div>
