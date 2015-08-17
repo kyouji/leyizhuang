@@ -2,7 +2,7 @@ li{ list-style:none;}
 a:hover{ text-decoration:none;}
 
 
-.article_box{ width:970px; margin-left:20px; float:left;}
+.article_box{ width:970px; margin-left:20px; float:left;min-height:600px;}
 
 .article_nav *{ float:left;}
 .article_nav{ width:970px; height:30px; margin-top:36px; float:left; border-bottom:#e0dddd 1px dashed; *+padding-bottom:20px; *+margin-top:50px; }

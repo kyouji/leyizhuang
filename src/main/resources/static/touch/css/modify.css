@@ -1,0 +1,34 @@
+@charset "utf-8";
+/*修改邮箱*/
+.main .a2{ color:#fff;}
+.member_check {
+	width:100%;
+	display:block;
+	height:45px;
+	font-size:0.9em;
+	background-size:auto 12px;
+	border-bottom:1px solid #e6e6e6;}
+.member_check .textInput{width:100%;height:45px; border:none; background:url(../images/img1/icon_11.png) no-repeat 94% center #fff;}
+.member_check p{ margin-left:10px; margin-top:5px;}
+
+/*修改性别*/
+.member_1 {
+	width:100%;
+	display:block;
+	height:45px;
+	line-height:45px;
+	font-size:0.9em;
+	background-size:auto 12px; background:#fff;
+	padding-left:5%;
+	border-bottom:1px solid #e6e6e6;}
+.member_m{ background: 94% center #fff;}
+
+
+/*修改密码*/
+.member_ch{width:100%;
+	display:block; margin-left:3%;
+	font-size:0.9em; margin-top:10px;
+	 }
+.member_ch .textInput{width:94%;height:30px; border:none; -moz-box-shadow:1px 1px 1px #c9c9c9 inset; -webkit-box-shadow:1px 1px 1px  #c9c9c9 inset;  box-shadow:1px 1px 1px  #c9c9c9 inset;    }
+.ok_mainbox { width:94%;;background:#3b93de; padding: 10px 0; margin-left:3%; margin-top:10px;  text-align:center; border-radius:2px; -moz-border-radius:2px;-webkit-border-radius:2px;}
+.ok_mainbox a{ color:#fff;}

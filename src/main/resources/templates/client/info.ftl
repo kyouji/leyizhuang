@@ -31,13 +31,15 @@
   </div>
   <!-- 右侧 -->
 <div class="article_box">
-    <div class="crumb">
 	   <#if info??>
+        <div class="crumb">
+                &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
+                <a href="/info/list/${mid}" title="">${info.title!''}</a>
+        </div>
 	   <div class="article_title top30">${info.title}</div>
 		    <div class="article_cont top10">${info.content}</div>
     	</div>
     	</#if>
-    </div>
 </div>
 <!--底部footer-->
 <#include "/client/common_footer.ftl" />
