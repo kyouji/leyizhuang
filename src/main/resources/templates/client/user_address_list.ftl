@@ -114,7 +114,7 @@ DD_belatedPNG.fix('.,img,background');
           <input id="button" class="mysub" type="submit" value="保存">
         </li>  
     </form>
-    
+    </ul>
       
     </div>
 </div>

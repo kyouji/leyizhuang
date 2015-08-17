@@ -1,18 +1,15 @@
 package com.ynyes.zphk.controller.front;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ynyes.zphk.entity.TdGoods;
 import com.ynyes.zphk.entity.TdKeywords;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdGoodsService;
@@ -21,6 +18,7 @@ import com.ynyes.zphk.util.ClientConstant;
 
 /**
  * 商品检索
+ * 
  * @author Sharon
  *
  */
@@ -38,8 +36,8 @@ public class TdSearchController {
     
     @RequestMapping(value="/search", method = RequestMethod.GET)
     public String list(String keywords, Integer page, HttpServletRequest req, ModelMap map){
-        System.err.println(keywords);
-        tdCommonService.setHeader(map, req);
+
+    	tdCommonService.setHeader(map, req);
         
         if (null == page || page < 0)
         {
@@ -82,3 +80,4 @@ public class TdSearchController {
         return "/client/search_list";
     }
 }
+

@@ -53,6 +53,9 @@ public interface TdUserCommentRepo extends
     
     Page<TdUserComment> findByGoodsIdAndStatusIdOrderByIdDesc(Long goodsId, Long statusId, Pageable page);
     
+    //查询指定产品所有评论且不分页的方法
+    List<TdUserComment> findByGoodsIdAndStatusIdOrderByIdDesc(Long goodsId,Long statusId);
+    
     Long countByGoodsIdAndStatusId(Long goodsId, Long statusId);
     
     Page<TdUserComment> findByGoodsIdAndStatusIdAndStarsOrderByIdDesc(Long goodsId, Long statusId, Long stars, Pageable page);

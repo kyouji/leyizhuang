@@ -34,16 +34,16 @@
                              </#if>
                             </b>
                             <p>
-                                <a href="#" title="">${item.tags!''}</a>
+                                <a  title="">${item.tags!''}</a>
                             </p>
                             <span>${content!''}</span>
                         </div>
-                      	
+                      	<#--
                         <div class="c_R_comment_con_R_info_M">
                             <p>颜色：白</p>
                             <p>规格：移动联通双4G(16GB ROM)</p>
                         </div>
-                       
+                       -->
                         <div class="c_R_comment_con_R_info_R">${item.commentTime}</div>
                     </div>
                     
@@ -51,8 +51,8 @@
                         <a href="#" title="">有用（${item.positiveNumber!'0'}）</a>
                         <a href="#" title="">回复（${item.negativeNumber!'0'}）</a>
                     </div>
+                    <#--
                     
-                    <!--有图片的-->
                     <div class="c_R_comment_con_R_pic">
                         <ul>
                             <li><img src="/client/images/pic2.png" /></li>
@@ -62,7 +62,7 @@
                             <li><img src="/client/images/pic2.png" /></li>
                         </ul>
                     </div>
-                    
+                    -->
                     <!--回复
                     <div class="c_R_comment_con_R_reply1">
                         <input type="text" />

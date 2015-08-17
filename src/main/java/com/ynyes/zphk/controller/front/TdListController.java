@@ -773,7 +773,7 @@ public class TdListController {
                 }
             }
         }
-        
+        System.err.println(goodsPage.getTotalElements());
         map.addAttribute("goods_page", goodsPage);   
         
         return "/client/goods_list";

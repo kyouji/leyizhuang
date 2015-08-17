@@ -1,5 +1,7 @@
 package com.ynyes.zphk.touch;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,7 +97,6 @@ public class TdTouchListController {
             }
         }
         
-        map.addAttribute("orderId", orderId);
         
         //  销量排序标志
         Integer soldId = 0;
@@ -159,22 +160,27 @@ public class TdTouchListController {
 
         
         // 查找商品
-        Page<TdGoods> goodsPage = null;
+//        Page<TdGoods> goodsPage = null;
+        List<TdGoods> goodsPage = null;
         
-
+        @SuppressWarnings("unused")
+		int intValue = orderId.intValue();
+        
         // 按销量排序
         if (0 == orderId.intValue())
         {
             if (0 == soldId.intValue())
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySoldNumberDesc(
-                            categoryId, pageId, ClientConstant.pageSize, null);
+            	goodsPage = tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberDesc(categoryId);
+//                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySoldNumberDesc(
+//                            categoryId, pageId, ClientConstant.pageSize, null);
         
             }
             else
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySoldNumberAsc(
-                        categoryId, pageId, ClientConstant.pageSize, null);
+            	goodsPage = tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberAsc(categoryId);
+//                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySoldNumberAsc(
+//                        categoryId, pageId, ClientConstant.pageSize, null);
     
             }
         }
@@ -183,14 +189,16 @@ public class TdTouchListController {
         {
             if (0 == priceId.intValue())
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySalePriceDesc(
-                            categoryId, pageId, ClientConstant.pageSize, null);
+            	goodsPage = tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderBySalePriceDesc(categoryId);
+//                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySalePriceDesc(
+//                            categoryId, pageId, ClientConstant.pageSize, null);
         
             }
             else
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySalePriceAsc(
-                        categoryId, pageId, ClientConstant.pageSize, null);
+            	goodsPage = tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderBySalePriceAsc(categoryId);
+//                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySalePriceAsc(
+//                        categoryId, pageId, ClientConstant.pageSize, null);
     
             }
         }
@@ -199,18 +207,21 @@ public class TdTouchListController {
         {
             if (0 == timeId.intValue())
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderByOnSaleTimeDesc(
-                            categoryId, pageId, ClientConstant.pageSize, null);
+            	goodsPage = tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeDesc(categoryId);
+//                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderByOnSaleTimeDesc(
+//                            categoryId, pageId, ClientConstant.pageSize, null);
         
             }
             else
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderByOnSaleTimeAsc(
-                        categoryId, pageId, ClientConstant.pageSize, null);
+            	goodsPage = tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeAsc(categoryId);
+//                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderByOnSaleTimeAsc(
+//                        categoryId, pageId, ClientConstant.pageSize, null);
     
             }
         }
-            
+        
+        map.addAttribute("orderId", orderId);
         map.addAttribute("goods_page", goodsPage);
         
         return "/touch/list";
@@ -260,7 +271,7 @@ public class TdTouchListController {
             }
         }
         
-//        map.addAttribute("orderId", orderId);
+        map.addAttribute("orderId", orderId);
         
         //  销量排序标志
         Integer soldId = 0;

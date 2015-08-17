@@ -1414,6 +1414,16 @@ public class TdGoodsService {
                         keywords, keywords, keywords, keywords, pageRequest);
     }
 
+    
+    public List<TdGoods> searchGoods(String keywords) {
+        if (null == keywords) {
+            return null;
+        }
+
+        return repository
+                .findByTitleContainingIgnoreCaseAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(
+                        keywords, keywords, keywords, keywords);
+    }
     /**
      * 搜索商品
      * 
@@ -2252,4 +2262,49 @@ public class TdGoodsService {
 
         return flashPrice;
     }
+    
+    //根据商品分类ID查找到所有商品并根据销量进行排序的两个方法
+    public List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberDesc(Long catagoryId){
+    	if(null == catagoryId){
+    		return null;
+    	}
+    	return repository.findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberDesc(catagoryId);
+    };
+    
+    public List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberAsc(Long catagoryId){
+    	if(null == catagoryId){
+    		return null;
+    	}
+    	return repository.findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberAsc(catagoryId);
+    };
+    
+    //根据商品分类ID查找到所有商品并根据销量进行排序的两个方法
+    public List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderBySalePriceDesc(Long catagoryId){
+    	if(null == catagoryId){
+    		return null;
+    	}
+    	return repository.findByCategoryIdAndIsOnSaleTrueOrderBySalePriceDesc(catagoryId);
+    };
+    
+    public List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderBySalePriceAsc(Long catagoryId){
+    	if(null == catagoryId){
+    		return null;
+    	}
+    	return repository.findByCategoryIdAndIsOnSaleTrueOrderBySalePriceAsc(catagoryId);
+    };
+    
+    //根据商品分类ID查找到所有商品并根据销量进行排序的两个方法
+    public List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeDesc(Long catagoryId){
+    	if(null == catagoryId){
+    		return null;
+    	}
+    	return repository.findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeDesc(catagoryId);
+    };
+    
+    public List<TdGoods> findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeAsc(Long catagoryId){
+    	if(null == catagoryId){
+    		return null;
+    	}
+    	return repository.findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeAsc(catagoryId);
+    };
 }

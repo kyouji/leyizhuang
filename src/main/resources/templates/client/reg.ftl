@@ -44,7 +44,7 @@ $(document).ready(function(){
 <div class="header">
 	<!--logo大小：190 58-->
 	<div class="header_logo">
-    	<img src="/client/images/logo_1.png" />
+    	<img src="<#if site??>${site.logoUri!''}</#if>" />
     </div>
     <div class="user_registration">用户注册</div>
 </div>
@@ -74,24 +74,29 @@ $(document).ready(function(){
 	        	<div class="input_information phone_number">
 					用户邮箱：
 					<input name="email" datatype="e" ajaxurl="/reg/check/email" value="" />
+					<span class="Validform_checktip"></span>
 		        </div>
         	<#else>
 	        	<div class="input_information phone_number">
 					手机号码：
 					<input name="mobile" datatype="m" ajaxurl="/reg/check/mobile" value="" />
+					<span class="Validform_checktip"></span>
 		        </div>
         	</#if>
 	        <div class="input_information password">
 				用户密码：
 				<input name="password" type="password" datatype="*6-12" value="" />
+				<span class="Validform_checktip"></span>
 	        </div>
 	        <div class="input_information repeat_password">
 				重复密码：
 				<input name="repassword" type="password" datatype="*6-12" recheck="password" value="" />
+				<span class="Validform_checktip"></span>
 	        </div>
 	        <div class="input_information security_code">
 	        	&nbsp;&nbsp;&nbsp;验证码：
 		        <input name="yzm" type="text" datatype="s4-4" errormsg="请填写4位字符！" value="" />
+		        <span class="Validform_checktip"></span>
 		        <#--
 		        <img id="yzm_image" src="/client/images/security_code.png" />
 		        -->

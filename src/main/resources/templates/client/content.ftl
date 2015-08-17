@@ -3,22 +3,21 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>正品惠客</title>
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.jqzoom.js"></script>
-<script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
-<script type="text/javascript" src="/client/js/common.js"></script>
-<script type="text/javascript" src="/client/js/goods.js"></script>
-<script type="text/javascript" src="/client/js/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
+<script type="text/javascript" src="/client/js/common.js"></script>
+<script type="text/javascript" src="/client/js/goods.js"><="/client//script>
+<script type="text/javascript" srcjs/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/base.js"></script>
 <script type="text/javascript" src="/client/js/list.js"></script>
 <script type="text/javascript" src="/client/js/cart.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
 
-<script src="/client/js/jquery-1.9.1.min.js"></script>
 
 <!--
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
@@ -42,25 +41,26 @@
 });
 </script>
 <!--弹窗-->
-<script type="text/javascript">
+<!-- 不明白为什么突然不起作用了-->
+<!-- <script type="text/javascript">
     $(document).ready(function(){
-        $(".c_pop_boxbg").hide()
+        $(".c_pop_boxbg").hide();
     })
-</script>
+</script> -->
+
 </head>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $(".c_pop_boxbg").hide()
+$(document).ready(function(){
+    $(".c_pop_boxbg").hide()
         
-$("#id-minus").click(function(){
-   var q = parseInt($("#quantity").val());
+	$("#id-minus").click(function(){
+   		var q = parseInt($("#quantity").val());
         
-     if (q > 1)
-     {
-        $("#quantity").val(q-1);
-     }
-     $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+	if (q > 1){
+		$("#quantity").val(q-1);
+	}
+	$("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
 });
     
 $("#id-plus").click(function(){
@@ -201,8 +201,8 @@ function buyConbination(){
 
 <body>
 
-<div id="collectGoods" class="c_pop_boxbg">
-	<div id="collectWindow" class="c_pop_box">
+<div id="collectGoods" class="c_pop_boxbg" style="display:none">
+	<div id="collectWindow" class="c_pop_box" style="display:none">
     	<div class="c_pop_box_top">
         	<span>提 示</span>
             <a href="javascript:close()"></a>
@@ -248,6 +248,32 @@ function buyConbination(){
 <!--中上部参数-->
 <div class="wrapper">
 	<!--图片展示-->
+	<div class="details_pic">
+        <div class="right-extra" style="margin:0px;">
+        <!--产品参数开始-->
+        <div>
+        <div id="preview" class="spec-preview">
+            <span class="jqzoom"><img src="<#if goods??>${goods.coverImageUri!''}</#if>" /></span>
+        </div>
+        <!--缩图开始-->
+        <div class="spec-scroll">
+            <a class="prev">&lt;</a>
+            <a class="next">&gt;</a>
+            <div class="items">
+                <ul>
+                <#if goods.showPictures??>
+                <#list goods.showPictures?split(",") as uri>
+                    <#if ""!=uri && uri_index < 8>
+                        <li><img  src="${uri!''}" onmousemove="preview(this);" ></li>
+                    </#if>
+                </#list>
+                </#if>
+                </ul>
+            </div>
+        </div>
+        <!--缩图结束-->
+    </div>
+    <#--
 	<div class="wrapper" style="width:410px; float:left; overflow:inherit;">
 	   <div class="scrool_box">
           <menu id="proshowimg">
@@ -260,7 +286,7 @@ function buyConbination(){
                 </#list>
             </#if>
           </menu>
-          
+       -->   
           <menu id="proshowmenu"></menu>
           <div class="details_pic_wrapper">
                 <#-- <div class="details_pic_wrapper_share">分享</div> -->
@@ -429,8 +455,8 @@ function buyConbination(){
             <#list hot_list as hot_good>
  				<#if hot_good_index lt 3>
 	                <ul>
-		                <li><img src="${hot_good.coverImageUri!''}" /></li>
-		                <li class="details_goods_opacity"><a href="/goods/${hot_good.id?c}" title="">${hot_good.title!''}</a>￥${goods.salePrice?string("0.00")}</li>
+		                <a href="/goods/${hot_good.id?c}" title=""><li><img src="${hot_good.coverImageUri!''}" /></li>
+		                <li class="details_goods_opacity">${hot_good.title!''}￥${goods.salePrice?string("0.00")}</li></a>
 	                </ul>
                 </#if>
             </#list>

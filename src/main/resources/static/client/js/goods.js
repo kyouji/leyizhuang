@@ -92,38 +92,38 @@ function addCollect(goodsId)
         return;
     }
     
-//    $.post("/user/collect/add",{"goodsId":goodsId},function(data){
-//    	alert(data.message);
-//    });
+    $.post("/user/collect/add",{"goodsId":goodsId},function(data){
+    	alert(data.message);
+    });
     
-//    $.ajax({
-//        type:"post",
-//        url:"/user/collect/add",
-//        data:{"goodsId": goodsId},
-//        dataType: "json",
-//        success:function(res){
-//    		/**
-//    		 * 修改了原来的代码
-//    		 * 根据res中message的值判断是否关注成功，关注成功则显示出成功提示的DIV
-//    		 * （原来的代码是通过alert语句弹出成功提示）
-//    		 * @author dengxiao
-//    		 */
-//        	if(res.message!="添加成功"){
-//        		alert(res.message);
-//        	}else{
-//        		document.getElementById("collectGoods").style.display="block";
-//        		document.getElementById("collectWindow").style.display="block";
-//        	}
-//        	
-//            // 需登录
-//            if (res.code==1)
-//            {
-//                setTimeout(function(){
-//                    window.location.href = "/login";
-//                }, 1000); 
-//            }
-//        }
-//    });
+    $.ajax({
+        type:"post",
+        url:"/user/collect/add",
+        data:{"goodsId": goodsId},
+        dataType: "json",
+        success:function(res){
+    		/**
+    		 * 修改了原来的代码
+    		 * 根据res中message的值判断是否关注成功，关注成功则显示出成功提示的DIV
+    		 * （原来的代码是通过alert语句弹出成功提示）
+    		 * @author dengxiao
+    		 */
+        	if(res.message!="添加成功"){
+        		alert(res.message);
+        	}else{
+        		document.getElementById("collectGoods").style.display="block";
+        		document.getElementById("collectWindow").style.display="block";
+        	}
+        	
+            // 需登录
+            if (res.code==1)
+            {
+                setTimeout(function(){
+                    window.location.href = "/login";
+                }, 1000); 
+            }
+        }
+    });
 }
 
 /**

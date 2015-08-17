@@ -82,45 +82,50 @@ var theForm = document.forms['form1'];
 			               <ul class="right_box_02">	                   
 			                   <li class="price01"><a>${og.price!''}</a></li>
 			                   <li class="price02"><a>${og.quantity!''}</a></li>	
-			                <#if !og.isReturnApplied >   		               				               				                                                      
-				            <li class="price02"><a href="/user/return/${order.id}?id=${og.id}">退货</a></li>
-				            <#else>
+			                <#if og.isReturnApplied >   		               				               				                                                      
 				             <li class="price02"><a href="/user/return/handling/${order.id}?id=${og.id}">查看退货状态</a></li>
+				            <#else>
+				            <li class="price02"><a href="/user/return/${order.id}?id=${og.id}">退货</a></li>
 				            </#if>
 				           </ul>
-				            			              
+				           			              
 				              <ul class="right_box_03" > 
-				            <li class="price01"><a>￥${order.totalPrice?string("#.##")}</a></li>
-				            
-				            <#if order.statusId = 1>     
+				              <#if og_index ==1>
+				                <li class="price01"><a>￥${order.totalPrice?string("0.00")}</a></li>
+				               
+				               <#else>
+				                <li class="price01"><a></a></li>
+				               </#if>
+
+				            <#if order.statusId?? && order.statusId == 1>     
 						         <li class="price03"><div><a>待确认</a><br></div></li>
 						         <li class="price04"><a href="#" title="">确认收货</a></li>
 				            </#if>
-				            <#if order.statusId = 2>
+				            <#if order.statusId?? && order.statusId == 2>
 				                 <li class="price03"><div><a>待付款</a><br></div></li>
-                                 <li class="price04"><a  href="#" title="">去付款</a></li>
+                                 <li class="price04"><a  href="/order/dopay/${order.id}" title="">去付款</a></li>
                             </#if>
-				            <#if order.statusId = 3>
+				            <#if order.statusId?? && order.statusId == 3>
 				                 <li class="price03"><div><a>待发货</a><br></div></li>
                                 <#-- <li class="price04"><a  href="#" title="">&nbsp;</a></li> -->
                              </#if>
-				            <#if order.statusId = 4>
+				            <#if order.statusId?? && order.statusId == 4>
 				                 <li class="price03"><div><a>待收货</a><br></div></li>
                                  <li class="price04"><a  href="#" title="">确认收货</a></li>
 				            </#if>
-				            <#if order.statusId = 5>
+				            <#if order.statusId?? && order.statusId == 5>
 				                 <li class="price03"><div><a>待评价</a><br></div></li>
                                  <li class="price04"><a   href="/user/comment/edit/${order.id}?id=${og.id}" title="去评价">评价</a></li>
 				            </#if>
-				            <#if order.statusId = 6>
+				            <#if order.statusId?? && order.statusId == 6>
 				                 <li class="price03"><div><a>已完成</a><br></div></li>
                                  <li class="price04"><a  href="#" title="">&nbsp;</a></li>
 				            </#if>
-				            <#if order.statusId = 7>
+				            <#if order.statusId?? && order.statusId == 7>
 				                 <li class="price03"><div><a>已取消</a><br></div></li>
                              <#--    <li class="price04"><a  href="#" title="">&nbsp;</a></li> -->
 				            </#if>
-				            <#if order.statusId = 8>
+				            <#if order.statusId?? && order.statusId == 8>
 				                 <li class="price03"><div><a>支付取消（失败）</a><br></div></li>
                              <#--    <li class="price04"><a  href="#" title="">&nbsp;</a></li>		-->		            
 				            </#if> 			                

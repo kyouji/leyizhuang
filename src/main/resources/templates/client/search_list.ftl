@@ -3,12 +3,36 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>正品惠客</title>
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/index.js"></script>
+<script src="/client/js/goods.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/list.css" rel="stylesheet" type="text/css" />
 
+<#--
+<script type="text/javascript">
+	function searchSort(type,priceCheck,pageCheck){
+		获取几个重要的参数：排序关键字，搜索关键字，上一次的排序关键字，最低价格，最高价格 ，页码，上一次是升序还是降序
+		var keywords = document.getElementById("search_keywords").value;
+		var lastType = document.getElementById("last_type").value;
+		var lowPrice = document.getElementById("lowPrice").value;
+		var highPrice = document.getElementById("highPrice").value;
+		var page = document.getElementById("page").value;
+		var sort = document.getElementById("sort").value;
+		
+		if(null == type){
+			type = lastType;
+		}
+		if(isNaN(lowPrice)||isNaN(highPrice)){
+			alert("请输入正确的价格！");
+			return;
+		}
+		
+		window.location.href = "/search/sort?keywords="+keywords+"&type="+type+"&lastType="+lastType+"&lowPrice="+lowPrice+"&highPrice="+highPrice+"&page="+page+"&priceCheck="+priceCheck+"&pageCheck="+pageCheck+"&sort="+sort;
+	}
+-->
+</script>
 </head>
 
 <body>
@@ -20,45 +44,55 @@
 
 <!--面包屑导航-->
 <div class="crumb">
-    <a href="/" title="">首页</a>
-    <#if category_tree_list??>
-        <#list category_tree_list as item>
-            &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
-            <a href="/list/${item.id}" title="${item.title!''}">${item.title!''}</a>
-        </#list>
-    </#if>
-    </div>
+    <a href="/" title="">首页></a>
+    <#--
+    	<#if category_tree_list??>
+	        <#list category_tree_list as item>
+	            &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
+	            <a href="/list/${item.id}" title="${item.title!''}">${item.title!''}</a>
+	        </#list>
+    	</#if>
+	-->
+	<#if keywords??>
+		<a href="/search?keywords=${keywords}">搜索</a>
+	<#else>
+		<a href="/search?keywords=">搜索</a>
+	</#if>
+</div>
 
 <!--中部整体-->
 <div class="wrapper">
 	<!--中部左边-->
 	<div class="c_l">
-    	
-       <!--排序
-        <div class="sort">
-            <a href="#" title="" class="sort_a sort_choiced">销量</a>
-            <a href="#" title="" class="sort_a">价格</a>
-            <a href="#" title="" class="sort_a">时间</a>
-            <span class="sort_spangoods"><input type="checkbox"  />仅限有货</span>
-            <div class="sort_pricesselect">
-                <span>价格区间</span>
-                <input type="text" /><span>-</span><input type="text" />
-                <a href="#" title="">确定</a>
-            </div>
-            <div class="sort_page">
-                <a href="#" title="">&lt;</a>
-                <span>1/16</span>
-                <a href="#" title="">&gt;</a>
-            </div>
-        </div>
-        --> 
-       <hr>
+	<#--
+	<div class="sort">
+		<input type="hidden" id="search_keywords" value="${keywords!''}">
+		<input type="hidden" id="last_type" value="${lastType!''}">
+		<input type="hidden" id="page" value="${page!'0'}">
+		<input type="hidden" id="sort" value="${sort!'0'}">
+		<a href="javascript:searchSort('num',0,0);" title="" class="sort_a sort_choiced">销量</a>
+		<a href="javascript:searchSort('price',0,0);" title="" class="sort_a">价格</a>
+		<a href="javascript:searchSort('date',0,0)" title="" class="sort_a">上架时间</a>
+		<span class="sort_spangoods"><input type="checkbox"  />仅限有货</span>
+		<div class="sort_pricesselect">
+			<span>价格区间</span>
+			<input type="text" id="lowPrice" value="${lowPrice!''}" /><span>-</span><input type="text" id="highPrice" value="${highPrice!''}" />
+			<a href="#" title="">确定</a>
+		</div>
+		<div class="sort_page">
+			<a href="#" title="">&lt;</a>
+			<span>1/16</span>
+			<a href="#" title="">&gt;</a>
+		</div>
+	</div>
+	-->
+<hr>
         <!--产品列表-->
          <div class="piclist">
             <#if goods_page?? && goods_page.content?size gt 0>
                 <#list goods_page.content as item>
                     <dl>
-                        <dt><img src="${item.coverImageUri!''}" with="210" height="210"/></dt>
+                        <dt><a href="/goods/${item.id}" title="${item.title!''}"><img src="${item.coverImageUri!''}" with="210" height="210"/></a></dt>
                         <dd class="piclist_title">
                             <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
                         </dd>
@@ -128,13 +162,15 @@
         <p>热销排行</p>
         <#if most_sold_list??>
            <#list most_sold_list as item>
-           <dl>
-                <dt><img src="${item.coverImageUri!''}" style="width:200px" /></dt>
-                <dd class="c_r_title">
-                    <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> </dd>
-                    <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
-                    <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> </dd>
-                </dl>
+                <#if item_index < 10 >
+                    <dl>
+                        <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!''}" style="width:200px" /></a></dt>
+                        <dd class="c_r_title">
+                            <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> </dd>
+                        <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
+                            <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> </dd>
+                    </dl>
+                </#if>
            </#list>
         </#if>
     </div>

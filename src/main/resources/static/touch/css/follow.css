@@ -1,0 +1,103 @@
+@charset "utf-8";
+
+.content_check {
+	z-index:40;
+	width:94%;
+	margin:0 auto;
+	table-layout:fixed;}
+.content_check td {
+	background:#fff; 
+	height:40px;
+	text-align:center;
+	border-left:1px solid #eee;
+	border-right:1px solid #eee;}
+.content_check td a.a2 {
+	width:100%;
+	display:block;
+	line-height:40px;
+	color:#555;
+	}
+.content_check td a.sel {
+	color:#fff;
+	background:#3b93de;}
+	.carlist { 
+    background:#fff;
+	padding:10px 3%;
+	width:94%;
+	margin-bottom:10px;
+	border-bottom:2px solid #e9e9e9;}
+.carlist b {
+	display:block;
+	width:30%;
+	float:left;
+	border:1px solid #ddd;}
+.carlist p {
+	font-size:0.9em;
+	float:right;
+	width:67%;}
+.carlist .num { 
+    float:right;
+	width:67%;
+	font-size:0.9em;
+    line-height:30px;}
+.carlist .num a {
+	float:left;
+	display:inline-block;
+	width:30px;
+	text-align:center;
+	background:#e3e3e3;
+	color:#000;
+	font-size:1.5em;}
+	.carlist .num input {
+	width:50px;
+	height:28px;
+	float:left;
+	margin:0 5px;
+	text-align:center;
+	border:1px solid #ddd;}
+.carlist a.a1 {
+	position:absolute;
+	right:3%;
+	bottom:10px;}
+	
+	
+	
+	
+.myorder_list h2 {
+	font-weight:400;
+	width:96%;
+	padding:8px 2%;
+	font-size:0.9em;
+	background:#eee;}
+.myorder_list h2 span {
+	position:absolute;
+	color:#999;
+	right:2%;
+	top:8px;}
+	.myorder_list a.a1 img {
+	max-height:90px;}
+	.myorder_list a.a2{
+	display:block;
+	width:94%;
+	margin:0 auto;
+	text-align:right;
+	color:#ff5c77;
+	padding:15px 0;}
+.myorder_list a.a2 span {
+	position:absolute;
+	left:0;
+	top:15px;}
+.myorder_list a.a0 {border:none;}
+.grey_more {
+	width:94%;
+	display:block;
+	border:none;
+	font-family:"微软雅黑";
+	font-size:1em;
+	cursor:pointer;
+	text-align:center;
+	color:#fff;
+	line-height:40px;
+	height:40px;
+	background:#ddd;
+	margin:20px auto 30px;}

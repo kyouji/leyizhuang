@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<title><#if site??>${site.seoTitle!''}-</#if>我的关注</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -10,47 +10,34 @@
 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
-
-<link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript">
-$(document).ready(function(){
-  
-});
-</script>
+<link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/touch/css/follow.css"/>
 </head>
 
 <body>
-<header class="comhead">
+<div class="maintop_bg"></div>
+<header class="maintop">
   <div class="main">
-    <p>我的收藏</p>
-    <a class="a1" href="javascript:history.go(-1);">返回</a>
-    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
-  </div>
+    <p>我的关注</p>
+    <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
+    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a></div>
 </header>
-<div class="comhead_bg"></div>
 
-<div class="main comcheck">
-</div><!--comcheck END-->
-
-<menu class="whitebg mymenu_list">
-<#if collect_page??>
+ <div class="main">
+  <#if collect_page??>
     <#list collect_page.content as cg>
         <a href="/touch/goods/${cg.goodsId}">
             <b><img src="${cg.goodsCoverImageUri}" /></b>
             <p>${cg.goodsTitle!''}<span class="sp1">￥${cg.goodsSalePrice?string("0.00")}</span></p>
             <p class="p1">${cg.goodsSubTitle!''}</p>
-            
             <div class="clear"></div>
         </a>
     </#list>
 </#if>
-</menu>
+</div>
+  
+<!--main END-->
 
-<#--
-<a class="ma15 ta-c block" href="#"><img src="/touch/images/more.png" height="20" /></a>
--->
 
 </body>
 </html>

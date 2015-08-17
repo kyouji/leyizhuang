@@ -86,12 +86,11 @@ public class TdInfoController {
 	        {
 	            catId = catList.get(0).getId();
 	        }
-	        
 	        map.addAttribute("info_page", tdArticleService.findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(mid, catId, page, ClientConstant.pageSize));
 	    }
         
 	    map.addAttribute("artice_Category_list", tdArticleCategoryService.findAll());
-	    
+	    map.addAttribute("acticle_category",tdArticleCategoryService.findOne(catId));
 	    
 	    map.addAttribute("catId", catId);
 	    map.addAttribute("mid", mid);
@@ -113,7 +112,7 @@ public class TdInfoController {
         
         String username = (String) req.getSession().getAttribute("username");
         
-        // 读取浏览记录
+        // 读取	浏览记录
         if (null == username)
         {
             map.addAttribute("recent_page", tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(req.getSession().getId(), 0, ClientConstant.pageSize));
@@ -141,6 +140,7 @@ public class TdInfoController {
             map.addAttribute("next_info", tdArticleService.findNextOne(id, tdArticle.getCategoryId(), tdArticle.getMenuId()));
         }
         
+        map.addAttribute("artice_Category_list", tdArticleCategoryService.findAll());
         // 最近添加
         map.addAttribute("latest_info_page", tdArticleService.findByMenuIdAndIsEnableOrderByIdDesc(mid, 0, ClientConstant.pageSize));
         

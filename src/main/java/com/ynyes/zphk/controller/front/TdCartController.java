@@ -243,7 +243,8 @@ public class TdCartController {
     @RequestMapping(value = "/cart/add")
     public String cartInit(Long id, Device device, HttpServletRequest req, ModelMap map) {
         tdCommonService.setHeader(map, req);
-        
+        boolean mobile = device.isMobile();
+        boolean tablet = device.isTablet();
         if (device.isMobile() || device.isTablet()) { // 移动端浏览器
             
             return "/touch/cart_add_res";

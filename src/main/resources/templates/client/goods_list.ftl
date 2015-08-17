@@ -84,14 +84,12 @@ function btnPageSubmit()
         	<div class="select_title">
             	<p class="select_title_p1">
                 	<strong>${productCategory.title!''}</strong>
-                    找到<b>2655</b>件相关产品
+                    找到<b><#if goods_page??>${goods_page.totalElements!"0"}</#if></b>件相关产品
                 </p>
                 <a href="#" title="">重新筛选</a>
             </div>
             
             <div class="select_cont">
-            	
-                
                 <#if brand_list??>
                     <dl>
                         <dt>品牌：</dt>
@@ -245,7 +243,7 @@ function btnPageSubmit()
     	   <#list most_sold_list as item>
     	       <#if item_index < 6 >
     	       <dl>
-                    <dt><img src="${item.coverImageUri!''}" width="210px" height="210px"/></dt>
+                    <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!''}" width="210px" height="210px"/></a></dt>
                     <dd class="c_r_title">
                         <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
                     </dd>

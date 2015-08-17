@@ -21,6 +21,7 @@ function submitSearch(){
 		var search = document.getElementById("search_form");
 		search.submit();
 	}
+
 	
 $(function(){
         
@@ -176,7 +177,7 @@ $(function(){
             <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
-                        <a href="${item.linkUri!''}">${item.title}</a>
+                        <a href="/search?keywords=${item.title}"  >${item.title}</a>
                     </#if>
                 </#list>
             </#if>
@@ -355,6 +356,16 @@ $(function(){
     </div>
     <div class="phone_brand">
     	<ul class="phones_logo">
+  <!--  	<#if brand0_list?? && brand0_list?size gt 0 >
+    	<#list brand0_list as item>
+    	      <#if item_index < 5 >
+    	           <div class="lg">
+                        <a href="/list/${item.id?c}"><img src="${item.logoUrl!""}"/></a>
+                   </div>
+    	      </#if>
+    	</#list>
+    	</#if>
+    	  -->
     	   <#if top_category_list?? && top_category_list?size gt 0>
                 <#list top_category_list as item>
                      <#if item_index == 0> 
@@ -363,15 +374,15 @@ $(function(){
                                  <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
                                     <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
                                         <div class="lg">
-                                            <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}"></a>
+                                            <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}" width="120px" height="60px"></a>
                                         </div>
                                     </#list>
                                 <#elseif secondLevelItem_index < 5>
                                      <div class="lg">
-                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
+                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
                                     </div>
                                 </#if>
-                            <#--
+                            <!--
                                <#if secondLevelItem_index < 5 >
                                     <div class="lg">
                                         <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
@@ -383,6 +394,7 @@ $(function(){
                    </#if>
                 </#list>
             </#if>
+          
         </ul>
         <!-- 广告  -->
         <ul class="phones_photo">
@@ -460,9 +472,9 @@ $(function(){
                         <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
                             <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
                                 <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
-                                     <#if thirdLevelItem_index < 3 && secondLevelItem_index == 1>
+                                     <#if thirdLevelItem_index < 5 && secondLevelItem_index == 0>
                                      <div class="lg">
-                                        <a href="/list/${thirdLevelItem.id?c}"><img src="${thirdLevelItem.imgUrl!""}"/></a>
+                                        <a href="/list/${thirdLevelItem.id?c}"><img src="${thirdLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
                                      </div>
                                      </#if>   
                                 </#list>
@@ -472,6 +484,7 @@ $(function(){
                     </#if>
                  </#list>
             </#if>
+            <#--
             <div class="pc">
             	<h4>平板</h4>
                 <a href="#">苹果</a>
@@ -492,6 +505,7 @@ $(function(){
                 <a href="#">华硕</a>
                 <a href="#">戴尔</a>
             </div>
+            -->
         </ul>
         <ul class="pc_photo">
             <div id="slideBox" class="slideBox">
@@ -515,8 +529,7 @@ $(function(){
                     <#if item_index < 2 >
                     <li class="photo_1">
                         <dl>
-                           <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                           <dd class="feature">性价比之王</dd>
+                           <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
                            <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
                            <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                            <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
@@ -549,8 +562,7 @@ $(function(){
                     <#if item_index gt 4 && item_index < 8 >
                     <li class="photo_1 photo_4">
                         <dl>
-                           <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                           <dd class="feature">性价比之王</dd>
+                           <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
                            <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
                            <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                            <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
@@ -595,11 +607,17 @@ $(function(){
                      <#if item_index == 2> 
                      <#if ("second_level_"+item_index+"_cat_list")?eval?? >
                         <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                           <#if secondLevelItem_index < 5 >
-                                <div class="lg">
-                                    <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
-                                </div>
-                            </#if>
+                           <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
+                                  <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
+                                      <div class="lg">
+                                          <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"></a>
+                                      </div>
+                                    </#list>
+                           <#elseif secondLevelItem_index < 5>
+                                     <div class="lg">
+                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
+                                    </div>
+                           </#if>
                         </#list>
                    </#if>
                    </#if>
@@ -659,7 +677,7 @@ $(function(){
             </#list>
         </div>
         <div class="phones_right">
-        	<a href="#">热门:</a>&nbsp;&nbsp;
+        	<a >热门:</a>&nbsp;&nbsp;
             <#if fourth_brand_list??>
                 <#list fourth_brand_list as item >
                     <#if item_index lt 6>
@@ -676,11 +694,17 @@ $(function(){
                      <#if item_index == 3> 
                      <#if ("second_level_"+item_index+"_cat_list")?eval?? >
                         <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                           <#if secondLevelItem_index < 5 >
-                                <div class="lg">
-                                    <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
-                                </div>
-                            </#if>
+                           <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
+                                 <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
+                                      <div class="lg">
+                                          <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
+                                       </div>
+                                  </#list>
+                             <#elseif secondLevelItem_index < 5>
+                                   <div class="lg">
+                                      <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
+                                   </div>
+                             </#if>
                         </#list>
                    </#if>
                    </#if>
@@ -708,8 +732,7 @@ $(function(){
                     <#if item_index < 2 >
                     <li class="photo_1">
                         <dl>
-                           <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                           <dd class="feature">性价比之王</dd>
+                           <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
                            <dd class="introduction"><a href="/goods/${item.id?c}">${item.title!""}</a></dd>
                            <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                            <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
@@ -742,8 +765,7 @@ $(function(){
                     <#if item_index gt 4 && item_index < 8 >
                     <li class="photo_1 photo_4">
                         <dl>
-                           <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                           <dd class="feature">性价比之王</dd>
+                           <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
                            <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
                            <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                            <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>

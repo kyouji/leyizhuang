@@ -2,7 +2,7 @@ li{ list-style:none;}
 a:hover{ text-decoration:none;}
 
 
-.article_box{ width:970px; margin-left:20px; float:left;}
+.article_box{ width:970px; margin-left:20px; float:left;min-height:600px;}
 
 .article_nav *{ float:left;}
 .article_nav{ width:970px; height:30px; margin-top:36px; float:left; border-bottom:#e0dddd 1px dashed; *+padding-bottom:20px; *+margin-top:50px; }
@@ -11,7 +11,7 @@ a:hover{ text-decoration:none;}
 .article_nav span{ margin:0 10px;}
 
 
-.article_box_01{ float:left; margin-top:10px; *+width:970px; border-bottom:1px solid #ddd; padding-bottom:10px;}
+.article_box_01{ float:left; margin-top:10px; width:970px; border-bottom:1px solid #ddd; padding-bottom:10px;}
 
 
 .article_page{ width:970px; float:left; margin-top:60px;}
