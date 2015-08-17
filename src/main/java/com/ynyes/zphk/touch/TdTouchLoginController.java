@@ -112,4 +112,10 @@ public class TdTouchLoginController {
         
         return res;
     }
+    
+    @RequestMapping("/touch/logout")
+   	public String logOut(HttpServletRequest request) {
+   		request.getSession().invalidate();
+   		return "redirect:/touch";
+   	}
 }

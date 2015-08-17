@@ -12,6 +12,11 @@
 <script src="/touch/js/common.js"></script>
 <link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/touch/css/modify.css"/>
+<script type="text/javascript">
+   function editPassword(){
+        $("#form1").submit();
+   }
+</script>
 </head>
 
 <body>
@@ -19,19 +24,32 @@
 <header class="maintop">
   <div class="main">
     <p>修改昵称</p>
-    <a class="a1" href="#"><img src="images/back.png" height="22" /></a>
-    <a class="a2" href="#">确定</a>  </div>
+    <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
+    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a>  
 </header>
 
 <div class="main">
-
-    <div class="member_check"  ><input type="text" name="nickname"  class="textInput" value="" /><p>4-20个字符，可由中英文、数字、"_"、"-"组成</p></div>
+    <form action="/touch/user/info" method="post" id="fomr1">
+        <div class="member_check"  >
+            <span>昵称：</span>
+            <input type="text" name="nickname"  class="textInput" value="${user.nickname!''}" />
+        </div>
   
-    <div class="member_check"  ><input type="text" name="email"  class="textInput" value="" /><p>填写常用的邮箱</p></div>
-
-    <div class="member_1"  ><input type="radio" name="sex"  value="rd1" />男</div>
-    <div class="member_1"  ><input type="radio" name="sex"  value="rd2"  />女</div>
-    <div class="member_1 member_m" ><input type="radio" name="sex"  value="rd3" />保密</div>
+        <div class="member_check"  >
+            <span>邮箱：</span>
+            <input type="text" name="email"  class="textInput" value="${user.email!''}" />
+        </div>
+        <div class="member_1"  >
+             <span>性别：</span>
+            <input type="radio" name="sex"  value="男" <#if user.sex?? && user.sex=="男">checked="checked" </#if>/>男
+            <input type="radio" name="sex"  value="女"  <#if user.sex?? && user.sex=="女">checked="checked" </#if>/>女
+            <input type="radio" name="sex"  value="保密" <#if user.sex?? && user.sex=="保密" || !user.sex??>checked="checked" </#if>/>保密
+        </div>
+        
+        <div class="ok_mainbox">
+            <p><a href="javascript:editPassword();"  id="sub">确 认</a></p>
+         </div>
+     </form>
 </div><!--main END-->
 
 

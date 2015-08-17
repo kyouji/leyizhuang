@@ -7,7 +7,7 @@
 .content_2 .content_2_1 a{ background:#0e5baa; color:#fff; width:100px; height:30px; float:right; border-radius:3px; text-align:center; line-height:30px; margin-top:-5px; margin-right:20px;}
 .content_2 .content_2_2{ border-bottom:1px solid #e0dddd; width:970px; }
 .content_2 .content_2_3{ width:970px; margin-top:20px;  display:block; overflow:hidden;}
-.content_2 .content_2_3 .dz_2,.content_2 .content_2_3 .dz_2{ float:left; width:470px; height:130px; border:1px solid #dcdcdc; margin-right:10px; }
+.content_2 .content_2_3 .dz_2,.content_2 .content_2_3 .dz_2{ float:left; width:470px; height:130px; border:1px solid #dcdcdc; margin-right:10px; margin-bottom: 10px;}
 .content_2 .content_2_3 .dz_2 .dz_1_1,.content_2 .content_2_3 .dz_2 .dz_1_1 { width:420px; height:25px; margin-top:15px; background:url(../images/icon-10.png) no-repeat scroll 0 0; display: block;   border-bottom: 1px dotted #dcdcdc; }
 .content_2 .content_2_3 .dz_1{ background:url(../images/dzk.png);}
 .content_2 .content_2_3 .dz_1 .dz_1_1 strong, .content_2 .content_2_3 .dz_2 .dz_1_1 strong{font-weight:400; color:#333; padding-top:20px; padding-bottom: 3px; padding-left:20px; }

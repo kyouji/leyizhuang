@@ -76,16 +76,20 @@ $(document).ready(function(){
       </a>
   </div>
   <div class="member_check" >
-        <a href="/user/return/list">
+        <a href="/touch/user/return/list">
         <img src="/touch/images/img1/icon_3.png" /><label>退换货</label>
         </a>
   </div>
   <div class="member_check member_check1">
-        <a href="/touch/user/address/">
+        <a href="/touch/user/address/show">
         <img src="/touch/images/img1/icon_4.png" /><label>收货地址</label>
         </a>
   </div>
-  <div class="member_check" href="#"><img src="/touch/images/img1/icon_5.png" /><label>个人信息</label></div>
+  <div class="member_check">
+     <a href="/touch/user/data">
+        <img src="/touch/images/img1/icon_5.png" /><label>个人信息</label>
+      </a>
+  </div>
   <div class="member_check  member_check1">
        <a href="/touch/user/setting">
         <img src="/touch/images/img1/icon_6.png" /><label>设置</label>

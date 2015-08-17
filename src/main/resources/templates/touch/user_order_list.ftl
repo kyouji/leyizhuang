@@ -24,8 +24,8 @@ $(document).ready(function(){
 <header class="maintop">
   <div class="main">
     <p>我的订单</p>
-    <a class="a1" href="javascript:history.go(-1);"><img src="images/back.png" height="22" /></a>
-    <a class="a2" href="/touch"><img src="images/home.png" height="22" /></a></div>
+    <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
+    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a></div>
 </header>
 
  <div class="main">
@@ -63,7 +63,7 @@ $(document).ready(function(){
             </a>
          </#list>
          <p>总价：￥${order.totalPrice?string("0.00")}元</p>
-         <#if order.statusId==2>
+         
     </#list>
     </#if>
 </div>

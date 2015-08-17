@@ -356,6 +356,16 @@ $(function(){
     </div>
     <div class="phone_brand">
     	<ul class="phones_logo">
+  <!--  	<#if brand0_list?? && brand0_list?size gt 0 >
+    	<#list brand0_list as item>
+    	      <#if item_index < 5 >
+    	           <div class="lg">
+                        <a href="/list/${item.id?c}"><img src="${item.logoUrl!""}"/></a>
+                   </div>
+    	      </#if>
+    	</#list>
+    	</#if>
+    	  -->
     	   <#if top_category_list?? && top_category_list?size gt 0>
                 <#list top_category_list as item>
                      <#if item_index == 0> 
@@ -364,15 +374,15 @@ $(function(){
                                  <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
                                     <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
                                         <div class="lg">
-                                            <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}"></a>
+                                            <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}" width="120px" height="60px"></a>
                                         </div>
                                     </#list>
                                 <#elseif secondLevelItem_index < 5>
                                      <div class="lg">
-                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
+                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
                                     </div>
                                 </#if>
-                            <#--
+                            <!--
                                <#if secondLevelItem_index < 5 >
                                     <div class="lg">
                                         <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
@@ -384,6 +394,7 @@ $(function(){
                    </#if>
                 </#list>
             </#if>
+          
         </ul>
         <!-- 广告  -->
         <ul class="phones_photo">
@@ -461,9 +472,9 @@ $(function(){
                         <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
                             <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
                                 <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
-                                     <#if thirdLevelItem_index < 3 && secondLevelItem_index == 1>
+                                     <#if thirdLevelItem_index < 5 && secondLevelItem_index == 0>
                                      <div class="lg">
-                                        <a href="/list/${thirdLevelItem.id?c}"><img src="${thirdLevelItem.imgUrl!""}"/></a>
+                                        <a href="/list/${thirdLevelItem.id?c}"><img src="${thirdLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
                                      </div>
                                      </#if>   
                                 </#list>
@@ -596,11 +607,17 @@ $(function(){
                      <#if item_index == 2> 
                      <#if ("second_level_"+item_index+"_cat_list")?eval?? >
                         <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                           <#if secondLevelItem_index < 5 >
-                                <div class="lg">
-                                    <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
-                                </div>
-                            </#if>
+                           <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
+                                  <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
+                                      <div class="lg">
+                                          <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"></a>
+                                      </div>
+                                    </#list>
+                           <#elseif secondLevelItem_index < 5>
+                                     <div class="lg">
+                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
+                                    </div>
+                           </#if>
                         </#list>
                    </#if>
                    </#if>
@@ -677,11 +694,17 @@ $(function(){
                      <#if item_index == 3> 
                      <#if ("second_level_"+item_index+"_cat_list")?eval?? >
                         <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                           <#if secondLevelItem_index < 5 >
-                                <div class="lg">
-                                    <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
-                                </div>
-                            </#if>
+                           <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
+                                 <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
+                                      <div class="lg">
+                                          <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
+                                       </div>
+                                  </#list>
+                             <#elseif secondLevelItem_index < 5>
+                                   <div class="lg">
+                                      <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
+                                   </div>
+                             </#if>
                         </#list>
                    </#if>
                    </#if>

@@ -33,7 +33,7 @@
     <a class="operating">操作</a>
 </div>
 
-<div id="cart-main">
+<div id="cart-main" class="wrapper">
     <#include "/client/cart_goods.ftl" />
 </div>
 

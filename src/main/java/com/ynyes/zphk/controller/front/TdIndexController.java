@@ -104,6 +104,7 @@ public class TdIndexController {
                 TdProductCategory topCat = topCatList.get(i);
 
                 if (null != topCat) {
+                	
                     map.addAttribute(
                             "top_cat_goods_page" + i,
                             tdGoodsService
@@ -116,19 +117,19 @@ public class TdIndexController {
 
         //分类热卖品牌
         for (int i = 0; i < topCatList.size(); i++) {
-        	//热卖手机
+        	//
         	if(0 == i ){
         		map.addAttribute("first_brand_list", tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
         	} 
-        	//热卖平板/笔记本
+        	//
         	if(1 ==i ){
         		map.addAttribute("second_brand_list",tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
         	}
-        	//热卖数码穿戴
+        	//
         	if(2 == i ){
         		map.addAttribute("third_brand_list", tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
         	}
-        	//热卖数码配件
+        	//
         	if(3 == i ){
         		map.addAttribute("fourth_brand_list", tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
         	}

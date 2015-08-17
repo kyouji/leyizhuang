@@ -42,15 +42,15 @@ function subPassword(){
   <input name="__STATE" type="hidden" value="${user.password}"/>
   <div class="member_ch"><p>旧密码</p>
         <input name="oldPassword" type="password"  class="textInput" value=""  datatype="*" errormsg="原始密码不正确" recheck="__STATE"/>
-        <span class="Validform_checktip"></span>
+       <br> <span class="Validform_checktip"></span>
   </div>
   <div class="member_ch"><p>新密码</p>
         <input name="newPassword" type="password"  class="textInput" value="" datatype="*6-18"/>
-        <span class="Validform_checktip"></span>
+        <br><span class="Validform_checktip"></span>
   </div>
   <div class="member_ch"><p>确认密码</p>
         <input type="password"  class="textInput" value="" datatype="*" recheck="newPassword" />
-        <span class="Validform_checktip"></span>
+        <br><span class="Validform_checktip"></span>
   </div>
   <div class="ok_mainbox">
     <p><a href="javascript:subPassword();"  id="sub">确 定</a></p>

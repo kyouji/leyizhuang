@@ -9,8 +9,35 @@
 
 <link href="/client/css/Order_information.css" rel="stylesheet" type="text/css" />
 
+
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/order_info.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
+<script src="/client/js/jquery.cityselect.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+    
+    //初始化表单验证
+    $("#form2").Validform({
+        tiptype: 3
+    });
+    
+    $("#address").citySelect({
+        nodata:"none",
+        <#if address?? && address.province??>prov: "${address.province!''}",</#if>
+        <#if address?? && address.city??>city: "${address.city!''}",</#if>
+        <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
+        required:false
+    }); 
+});
+
+
+
+
+</script>
+
+
 </head>
 
 <body>
@@ -32,13 +59,13 @@
         <input id="input-address-id" type="hidden" name="addressId" value="1" datatype="n" nullmsg="请选择收货地址!"/>
     	 <#if user.shippingAddressList?? && user.shippingAddressList?size gt 0>
              <#list user.shippingAddressList as address>
-    	        <a href="javascript:;" > 
-    	         <div class="address_1" onclick="javascript:selectAddress(this, ${address.id?c});">
+    	        
+    	         <a class="address_1" href="javascript:;" onclick="javascript:selectAddress(this, ${address.id?c});">
                     <p>收货人：${address.receiverName!''}</p>
                     <p>收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>
                     <p>电话：${address.receiverMobile!''}</p>
-                 </div>
                  </a>
+                 
              </#list>
         </#if>
        <a href="/user/address/list" class="m_address">管理收货地址</a>

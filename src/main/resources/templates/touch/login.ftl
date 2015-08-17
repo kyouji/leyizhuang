@@ -72,7 +72,7 @@ $(document).ready(function(){
     <input type="text" class="logintext01" value="" id="txt_loginId"/>
     </div>
     <div class="logintext logintext_p">
-    <input type="text" class="logintext02" value="" id="txt_loginPwd"/>
+    <input type="password" class="logintext02" value="" id="txt_loginPwd"/>
     </div>
     <input type="submit" class="loginbtn" value="登录" id="btn_login"/>
     <p class="login_a">
