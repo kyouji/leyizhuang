@@ -221,27 +221,27 @@ function btnPageSubmit(type)
 	<!--图片展示-->
 	<div class="details_pic">
         <div class="right-extra" style="margin:0px;">
-        <!--产品参数开始-->
-        <div>
-        <div id="preview" class="spec-preview">
-            <span class="jqzoom"><img src="<#if goods??>${goods.coverImageUri!''}</#if>" /></span>
-        </div>
-        <!--缩图开始-->
-        <div class="spec-scroll">
-            <div class="items">
-                <ul>
-                <#if goods.showPictures??>
-                <#list goods.showPictures?split(",") as uri>
-                    <#if ""!=uri && uri_index < 6>
-                        <li><img  src="${uri!''}" onmousemove="preview(this);" ></li>
-                    </#if>
-                </#list>
-                </#if>
-                </ul>
+            <!--产品参数开始-->
+            <div>
+                <div id="preview" class="spec-preview">
+                    <span class="jqzoom"><img src="<#if goods??>${goods.coverImageUri!''}</#if>" /></span>
+                </div>
+                <!--缩图开始-->
+                <div class="spec-scroll">
+                    <div class="items">
+                        <ul>
+                        <#if goods.showPictures??>
+                            <#list goods.showPictures?split(",") as uri>
+                                <#if ""!=uri && uri_index < 6>
+                                    <li><img  src="${uri!''}" onmousemove="preview(this);" ></li>
+                                </#if>
+                            </#list>
+                        </#if>
+                        </ul>
+                    </div>
+                </div>
+                <!--缩图结束-->
             </div>
-        </div>
-        <!--缩图结束-->
-    </div>
     <#--
 	<div class="wrapper" style="width:410px; float:left; overflow:inherit;">
 	   <div class="scrool_box">
@@ -263,7 +263,7 @@ function btnPageSubmit(type)
                 <a href="javascript:userAddCollect(${goods.id})" title="" class="details_pic_wrapper_like">关注</a>
                 
                 <#-- <a href="#" title="" class="details_pic_wrapper_remind">低价提醒</a> -->
-            </div>
+           </div>
 		</div>
 	</div>
     
@@ -280,17 +280,17 @@ function btnPageSubmit(type)
         
         <!--促销信息-->
         <div class="de_promotion">
-          <#if goods.giftList?? && goods.giftList?size gt 0>
-        	<div class="de_promotion_title">促销信息</div>
-          </#if>
+            <#if goods.giftList?? && goods.giftList?size gt 0>
+        	   <div class="de_promotion_title">促销信息</div>
+            </#if>
         	<div class="de_promotion_info">
          	<#if goods.giftList?? && goods.giftList?size gt 0>
                 <ul>
                     <li>
                     <span>赠品</span>
-                    <#list goods.giftList as gitem>
-                       <a class="red ml20" title="点击查看详情" href="/goods/${gitem.goodsId!''}"><label>${gitem.goodsTitle!''}</label></a>
-                     </#list>
+                        <#list goods.giftList as gitem>
+                            <a class="red ml20" title="点击查看详情" href="/goods/${gitem.goodsId!''}"><label>${gitem.goodsTitle!''}</label></a>
+                        </#list>
                     </li>
                 </ul>
             </#if>
@@ -310,7 +310,7 @@ function btnPageSubmit(type)
        
         <!--参数设置-->
         <div class="de_parameter">
-           <#if goods.configuration??>
+            <#if goods.configuration??>
         	<div class="de_parameter_list_pz">
             	<span>配 置</span>             
                 <label>${goods.configuration}</label>
@@ -419,14 +419,15 @@ function btnPageSubmit(type)
             <#list hot_list as hot_good>
  				<#if hot_good_index lt 3>
 	                <ul>
-		                <a href="/goods/${hot_good.id?c}" title=""><li><img src="${hot_good.coverImageUri!''}" /></li>
-		                <li class="details_goods_opacity">${hot_good.title!''}￥${goods.salePrice?string("0.00")}</li></a>
+	                   <a href="/goods/${hot_good.id?c}" title="">
+		                  <li><img src="${hot_good.coverImageUri!''}" /></li>
+		                  <li class="details_goods_opacity">${hot_good.title!''}￥${goods.salePrice?string("0.00")}</li>
+	                   </a>
 	                </ul>
                 </#if>
             </#list>
         </#if>
     </div>
-    
 </div>
 
 

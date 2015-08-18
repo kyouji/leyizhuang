@@ -118,7 +118,8 @@ $(function(){
 <#if index_top_ad_list?? && index_top_ad_list?size gt 0>
     <div class="top_ad">
         <#list index_top_ad_list as item>
-            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}"><img src="${item.fileUri!''}" /></a>
+            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}"><img src="${item.fileUri!''}"/></a>
+            <#break>
         </#list>
     </div>
 </#if>
@@ -128,7 +129,7 @@ $(function(){
 	<div class="top">
     	<div class="top_left">
         	<div class="top_left_welcome">欢迎光临正品惠客</div>
-        	 <#if username??>
+        	<#if username??>
                 <a href="/user">${username}<i></i></a>
                 <a href="/logout">退出<i></i></a>
             <#else>
@@ -137,8 +138,8 @@ $(function(){
             </#if>
         </div>
         <div class="top_right">
-            <a class="top_right_like" href="/user/collect/list" title="">我的关注</a>
-            <a class="top_right_hk" href="/user" title="">我的惠客</a>
+            <a class="top_right_like" href="/user/collect/list" title="我的关注">我的关注</a>
+            <a class="top_right_hk" href="/user" title="我的惠客">我的惠客</a>
         </div>
     </div>
 	
@@ -153,10 +154,10 @@ $(function(){
     
     <!--广告语大小：183 58-->
     <div class="header_ad">
-        <#if tour_km_list_ad_list??>
-            <#list tour_km_list_ad_list as item>
+        <#if head_small_ad_list??>
+            <#list head_small_ad_list as item>
                 <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
-                    <img src="${item.fileUri!''}" />
+                    <img src="${item.fileUri!''}"/>
                 </a>
                 <#break>
             </#list>
@@ -166,7 +167,7 @@ $(function(){
     <div class="header_search">
 	   <div class="header_search_top">
     	    <form action="/search" method="get" id="search_form" >
-            	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title}</#if>"/>
+            	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title!''}</#if>"/>
                	<a href="javascript:submitSearch()" title="" class="header_search_top_btn">搜 索</a>
             </form>
         </div>
@@ -186,8 +187,6 @@ $(function(){
     <div class="header_cart">
     	<a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
     </div>
-   
-    
 </div>
 
 <!--导航-->
@@ -196,14 +195,14 @@ $(function(){
 	<div class="nav">
         <div class="nav_submenu">全部商品分类</div>
         <div class="nav_nav">
-        	<ul>
+            <ul>
             <#if navi_item_list??>
                 <#list navi_item_list as item>
                     <li><a class="a1" href="${item.linkUri!''}">${item.title!''}</a></li>
                 </#list>
-            </#if> 
+            </#if>
             </ul>
-        </div>        
+        </div>
         <div class="nav_num"><#if site??>全国服务热线：${site.telephone!''}</#if></div>
     </div>
 </div>
@@ -214,36 +213,35 @@ $(function(){
 	<div class="advertising_content">
     	<!-- 分类-品牌  start-->
     	<ul class="navlistout" id="navdown">
-    	   <#if top_cat_list??>
+    	    <#if top_cat_list??>
                 <#list top_cat_list as item>
-                      <li class="product_categories phone_${item_index+1}">
-                          <h3><a href="/list/${item.id}">${item.title!''}</a></h3>
+                    <li class="product_categories phone_${item_index+1}">
+                        <h3><a href="/list/${item.id}">${item.title!''}</a></h3>
                 
-                          <div class="nav_showbox">
-                                <div class="clear"></div>
-                                
-                                <#if ("second_level_"+item_index+"_cat_list")?eval?? >
-                                    <table class="nav_more">
-                                        <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                                            <tr>
-                                                <th width="90"><span><a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a></span></th>
-                                                <td>
-                                                    <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
-                                                        <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
-                                                            <a href="/list/${thirdLevelItem.id}">${thirdLevelItem.title!''}</a>
-                                                        </#list>
-                                                    </#if>
-                                                </td>
-                                            </tr>
-                                        </#list>
-                                    </table>
-                                </#if>
-                                <div class="clear"></div>
-                            </div>
-                        </li>
-                    </#list>
-                </#if>
-            </ul>
+                        <div class="nav_showbox">
+                            <div class="clear"></div>
+                            <#if ("second_level_"+item_index+"_cat_list")?eval?? >
+                                <table class="nav_more">
+                                    <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
+                                        <tr>
+                                            <th width="90"><span><a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a></span></th>
+                                            <td>
+                                                <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
+                                                    <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
+                                                        <a href="/list/${thirdLevelItem.id}">${thirdLevelItem.title!''}</a>
+                                                    </#list>
+                                                </#if>
+                                            </td>
+                                        </tr>
+                                    </#list>
+                                </table>
+                            </#if>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                </#list>
+            </#if>
+        </ul>
     	<!-- END  -->
     	<!-- 首页大广告    -->
         <div class="advertising_ifm adver_middle">
@@ -265,22 +263,22 @@ $(function(){
         <div class="advertising_ifm adver_right">
         	<div class="dedication">竭诚服务</div>
                 <ul class="special_service">
-                    <#if tour_km_big_ad_list?? && tour_km_big_ad_list?size gt 0>
+                    <#if service_ad_list?? && service_ad_list?size gt 0>
                     	<li class="li_1">
-                            <img src="${tour_km_big_ad_list[0].fileUri!''}" height="43px;" width="40px;"/>
-                            <a class="icon_1">${tour_km_big_ad_list[0].title!''}</a>
+                            <img src="${service_ad_list[0].fileUri!''}" height="43px;" width="40px;"/>
+                            <a class="icon_1">${service_ad_list[0].title!''}</a>
                         </li>
                         <li>
-                            <img src="${tour_km_big_ad_list[1].fileUri!''}" />
-                            <a class="icon_2">${tour_km_big_ad_list[1].title!''}</a>
+                            <img src="${service_ad_list[1].fileUri!''}" />
+                            <a class="icon_2">${service_ad_list[1].title!''}</a>
                         </li>
                         <li class="li_3">
-                            <img src="${tour_km_big_ad_list[2].fileUri!''}" />
-                            <a class="icon_3">${tour_km_big_ad_list[2].title!''}</a>
+                            <img src="${service_ad_list[2].fileUri!''}" />
+                            <a class="icon_3">${service_ad_list[2].title!''}</a>
                         </li>
                         <li class="li_4">
-                            <img src="${tour_km_big_ad_list[3].fileUri!''}" />
-                            <a class="icon_4">${tour_km_big_ad_list[3].title!''}</a>
+                            <img src="${service_ad_list[3].fileUri!''}" />
+                            <a class="icon_4">${service_ad_list[3].title!''}</a>
                         </li> 
                      </#if>  
                 </ul>
@@ -290,8 +288,8 @@ $(function(){
              <#if news_page??>
                 <#list news_page.content as item>
                      <#if item_index < 7>
-                     <a class="block mt5" href="/info/content/${item.id}?mid=12" style="height:20px; overflow:hidden;">【公告】${item.title!''}</a>
-                    </#if>
+                     <a class="block mt5" href="/info/content/${item.id}?mid=12" style="height:20px; overflow:hidden;">${item.title!''}</a>
+                     </#if>
                 </#list>
             </#if>
             </div>
@@ -303,18 +301,19 @@ $(function(){
 
 <div class="group_buy">
     <#if tuan_title_ad_list?? && tuan_title_ad_list?size gt 0>
-        <a class="tg_1" href="${tuan_title_ad_list[0].linkUri!""}"><img src="${tuan_title_ad_list[0].fileUri!""}" /></a>
+        <a class="tg_1" target="_blank" href="${tuan_title_ad_list[0].linkUri!""}"><img src="${tuan_title_ad_list[0].fileUri!""}" /></a>
+        <#break>
     </#if>
 	<#if tuan_ad_list??>
 	   <#list tuan_ad_list as item>
 	       <#if item_index < 5>
-	           <a href="${item.linkUri!""}"><img src="${item.fileUri!""}" /></a>
+	           <a href="${item.linkUri!""}" target="_blank"><img src="${item.fileUri!""}" /></a>
 	       </#if>
 	   </#list>
 	</#if>
 </div>
 
-<!--今日特价-->
+<!-- 首页推荐 -->
 <#if recommed_index_page?? && recommed_index_page.content?size gt 0 >
 <div class="today_specials">
     <#-- add by Sharon 这里的设计要调整，图片不能是非正方形的 -->
@@ -343,7 +342,7 @@ $(function(){
         <div class="phones_left">
             <#list top_category_list as item>
                 <#if item_index == 0>
-                    <a href="/list/${item.id}">1F${item.title!""}</a>
+                    <a href="/list/${item.id}">1F ${item.title!""}</a>
                 </#if>
             </#list>
         </div>
