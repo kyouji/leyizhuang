@@ -130,7 +130,7 @@ $(function () {
         <dl>
             <dt>品牌名称</dt>
             <dd>
-                <input id="idBrandTitle" name="title" type="text" datatype="*" value="<#if brand??>${brand.title!''}</#if>" ajaxurl="/Verwalter/brand/check<#if brand??>?id=${brand.id}</#if>" class="input normal" sucmsg=" " />
+                <input id="idBrandTitle" name="title" type="text" datatype="*" value="<#if brand??>${brand.title!''}</#if>" class="input normal" sucmsg=" " />
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>

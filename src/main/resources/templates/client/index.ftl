@@ -302,7 +302,6 @@ $(function(){
 <div class="group_buy">
     <#if tuan_title_ad_list?? && tuan_title_ad_list?size gt 0>
         <a class="tg_1" target="_blank" href="${tuan_title_ad_list[0].linkUri!""}"><img src="${tuan_title_ad_list[0].fileUri!""}" /></a>
-        <#break>
     </#if>
 	<#if tuan_ad_list??>
 	   <#list tuan_ad_list as item>
