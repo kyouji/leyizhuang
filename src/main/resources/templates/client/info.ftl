@@ -24,7 +24,7 @@
 			<#if info??&&acticle_category??>
 				<a href="/info/content/${info.id?c}?mid=${mid}&catId=${acticle_category.id}" title="">${info.title}</a>
 			</#if>
-		</div>
+		</div>	
 	</div>
 	<#if info??>
 	<div class="article_cont top20">
@@ -43,12 +43,12 @@
         </div>
         <div class="article_page_02">
             <#if next_info??>
-            	<a>下一篇：无</a>
+                <a href="/info/content/${next_info.id?c}?mid=${mid}&catId=${acticle_category.id}" title="">下一篇：${next_info.title}</a>
             <#else>
-                <a href="/info/content/${next_info.id?c}?mid=${mid}&catId=${acticle_category.id}" title="">下一篇：${prev_info.title}</a>
+            	<a>下一篇：无</a>
             </#if>
         </div>
-</div>
+	</div>
 <!--底部footer-->
 <#include "/client/common_footer.ftl" />
 </body>

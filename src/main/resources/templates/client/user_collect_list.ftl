@@ -41,8 +41,7 @@
                                       <li class="li_1"><a href="/goods/${cg.goodsId}" title=""><img src="${cg.goodsCoverImageUri!''}" /></a><a href="/goods/${cg.goodsId}" title=""><span>${cg.goodsTitle!''}</span></a></li>
                                       <li class="li_2">￥${cg.goodsSalePrice?string("#.##")}</li>
                                       <li class="li_3"><a href="/user/collect/del?id=${cg.goodsId!''}" title="">取消关注</a>&nbsp;/
-                                                        <a href="/cart/init?id=${cg.goodsId!''}" title="">加入购物车</a>&nbsp;/
-                                                        <a href="#" title="">低价提醒</a></li>
+                                                        <a href="/cart/init?id=${cg.goodsId!''}" title="">加入购物车</a>&nbsp;
                                    </ul>
                                </dd>
                           </dl>

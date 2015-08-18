@@ -343,7 +343,7 @@ $(function(){
         <div class="phones_left">
             <#list top_category_list as item>
                 <#if item_index == 0>
-                    <a href="/list/${item.id}">1F${item.title!""}</a>
+                    <a href="${item.linkUri!''}">1F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
@@ -600,7 +600,7 @@ $(function(){
                              <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                              <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                          </dl>
-                        <div class="gz_dh"><a href="#"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                     </li>
                     </#if>
                 </#list>

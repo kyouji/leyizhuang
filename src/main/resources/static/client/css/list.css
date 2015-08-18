@@ -84,7 +84,7 @@
     transform: rotate(180deg);}
 .choose_more a:hover { color:#ff8800;}
 
-#font_style_by_dx {display:block;height:36px;overflow:hidden;}
+.font_style_by_dx {display:block;height:36px;overflow:hidden;}
 
 
 
