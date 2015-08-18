@@ -23,7 +23,8 @@
 
 
 /*编辑收货地址*/
-.mem .member{width:100%; line-height:40px; height:45px; border-bottom:1px solid #e6e6e6; background:#fff; padding:0 3%;}
-.mem .member span{float:left; width:69%;}
-.mem .member span .input{  height:40px; width:89%; border:none;}
-.mem .member label{ width:25%; overflow:hidden; float:left;}
+.mem .member{width:100%; line-height:40px;  border-bottom:1px solid #e6e6e6; background:#fff; padding:0 3%; display: block; overflow: hidden;}
+.mem .member span{float:left; width:35%;}
+.mem .member input{  height:40px; width:40%;}
+.mem .member label{ width:25%; overflow:hidden; float:left; text-align:right;}
+.main .mem .member select{ width:39%;  height:40px; position: absolute;}

@@ -991,6 +991,7 @@ public class TdTouchUserController {
                             }
                         }
                     }
+                    return "/touch/user_address_edit";
                 }
                 else if (method.equalsIgnoreCase("delete"))
                 {
@@ -1003,7 +1004,7 @@ public class TdTouchUserController {
                                 addressList.remove(id);
                                 user.setShippingAddressList(addressList);
                                 tdShippingAddressService.delete(add);
-                                return "redirect:/user/address/list";
+                                return "redirect:/touch/user/address/list";
                             }
                         }
                     }
@@ -1018,12 +1019,33 @@ public class TdTouchUserController {
                     // 新增
                     else
                     {
+                    	tdShippingAddress.setIsDefaultAddress(false);
                         addressList.add(tdShippingAddressService.save(tdShippingAddress));
                         user.setShippingAddressList(addressList);
                         tdUserService.save(user);
                     }
                     
-                    return "redirect:/user/address/list";
+                    return "redirect:/touch/user/address/list";
+                }
+                else if(method.equalsIgnoreCase("default"))
+                {
+                	if (null != id)
+                    {
+                        //map.addAttribute("address", s)
+                        for (TdShippingAddress add : addressList)
+                        {
+                            if (add.getId().equals(id))
+                            {
+                           	 add.setIsDefaultAddress(true);
+                           	 tdShippingAddressService.save(add);
+                            }
+                            else if (!add.getId().equals(id))
+                            {
+                           	 add.setIsDefaultAddress(false);
+                           	 tdShippingAddressService.save(add);
+                            }
+                        }
+                    }
                 }
             }
             

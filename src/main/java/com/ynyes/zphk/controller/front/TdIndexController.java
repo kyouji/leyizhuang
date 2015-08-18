@@ -198,7 +198,7 @@ public class TdIndexController {
         adType = tdAdTypeService.findByTitle("竭诚服务广告");
 
         if (null != adType) {
-            map.addAttribute("tour_km_big_ad_list", tdAdService
+            map.addAttribute("service_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
@@ -359,11 +359,11 @@ public class TdIndexController {
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
-        // 昆明自驾游列表广告
+        // 搜索框左侧小广告
         adType = tdAdTypeService.findByTitle("搜索框左侧小广告");
 
         if (null != adType) {
-            map.addAttribute("tour_km_list_ad_list", tdAdService
+            map.addAttribute("head_small_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 

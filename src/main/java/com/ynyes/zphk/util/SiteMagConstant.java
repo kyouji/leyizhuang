@@ -15,6 +15,4 @@ public class SiteMagConstant {
     
 //    public static final String backupPath = "/root/backup/";
 //    public static final String imagePath = "/root/images/goods";
-    
-
 }

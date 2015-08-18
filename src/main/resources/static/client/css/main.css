@@ -201,7 +201,7 @@
 .phone_encyclopedia .phone_brand .phones_details li dl .introduction a{display:block;width:170px;height:36px;
 float:left;text-overflow:ellipsis;overflow:hidden;text-decoration:none;}
 .phone_encyclopedia .phone_brand .phones_details li dl .introduction a:hover{color:#f00;}
-.phone_encyclopedia .phone_brand .phones_details li dl .discount{width:160px;margin-left:40px;_margin-left:20px;margin-top:5px;font-size:14px;font-weight:700;color:#ef0000;}
+.phone_encyclopedia .phone_brand .phones_details li dl .discount{width:160px;margin-left:25px;_margin-left:20px;margin-top:5px;font-size:14px;font-weight:700;color:#ef0000;}
 .phone_encyclopedia .phone_brand .phones_details li dl .discount del{font-size:12px;font-weight:normal;color:#666666;margin-left:5px;}
 .phone_encyclopedia .phone_brand .phones_details .photo_4{height:197px;_padding-top:10px;border-bottom:none;}
 .phone_encyclopedia .phone_brand .phones_details .photo_5{height:197px;_padding-top:10px;border-bottom:none;}
