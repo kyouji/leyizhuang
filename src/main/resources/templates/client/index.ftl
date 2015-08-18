@@ -316,6 +316,7 @@ $(function(){
 <#if speciaPrice_list?? && speciaPrice_list?size gt 0 >
 <div class="today_specials">
     <#list speciaPrice_list as item>
+        <#if item_index < 6 >
         <a class="tj_1" href="/goods/${item.id?c}">
             <div class="tj">
                 <h3>${item.title!""}</h3>
@@ -327,6 +328,7 @@ $(function(){
                 </div>
             </div>
         </a>
+        </#if>
     </#list>
 </div>
 </#if>
@@ -347,7 +349,7 @@ $(function(){
         	热门:&nbsp;&nbsp;
             <#if first_brand_list??>
                 <#list first_brand_list as item >
-                    <#if item_index lt 6>
+                    <#if item_index < 6>
                     |&nbsp;&nbsp;<a href="/list/${item.id?c!""}">${item.title!""}</a>
                     </#if>
                 </#list>
@@ -373,9 +375,11 @@ $(function(){
                             <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
                                  <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
                                     <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
+                                        <#if thirdLevelItem_index < 5>
                                         <div class="lg">
                                             <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}" width="120px" height="60px"></a>
                                         </div>
+                                        </#if>
                                     </#list>
                                 <#elseif secondLevelItem_index < 5>
                                      <div class="lg">

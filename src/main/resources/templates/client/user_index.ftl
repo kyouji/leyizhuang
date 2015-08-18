@@ -110,35 +110,35 @@ DD_belatedPNG.fix('.,img,background');
                              <li class="li_3">￥${order.totalPrice?string("#.##")}</li>
                              <li class="li_4"> ${order.orderTime!''}</li>
                              <li class="li_7">
-                                <#if order.statusId==2>
+                                <#if order.statusId?? && order.statusId==2>
                                     待付款
-                                <#elseif order.statusId==3>
+                                <#elseif order.statusId?? &&  order.statusId==3>
                                     待发货
-                                <#elseif order.statusId==4>
+                                <#elseif order.statusId?? &&  order.statusId==4>
                                     待收货
-                                <#elseif order.statusId==6>
+                                <#elseif order.statusId?? &&  order.statusId==6>
                                     已完成
                                 </#if>
                              </li>
                              <li class="li_5">
-                                <#if order.statusId==2>
+                                <#if order.statusId?? &&  order.statusId==2>
                                     <a href="#" title="">取消订单</a>
-                                <#elseif order.statusId==3>
+                                <#elseif order.statusId?? &&  order.statusId==3>
                                     <a href="#" title="">&nbsp;</a>                    
-                                <#elseif order.statusId==4>
+                                <#elseif order.statusId?? &&  order.statusId==4>
                                     <a href="#" title="">查看物流</a>
-                                <#elseif order.statusId==6>
+                                <#elseif order.statusId?? &&  order.statusId==6>
                                     <a href="#" title="">申请退货</a>
                                 </#if>
                              </li>
                              <li class="li_6">
-                                <#if order.statusId==2>
+                                <#if order.statusId?? &&  order.statusId==2>
                                     <a href="#" title="">付款</a>
-                                <#elseif order.statusId==3>
+                                <#elseif order.statusId?? &&  order.statusId==3>
                                     <a href="#" title="">查看</a>                    
-                                <#elseif order.statusId==4>
+                                <#elseif order.statusId?? &&  order.statusId==4>
                                    <a href="#" title=""> 确认收货</a>
-                                <#elseif order.statusId==6>
+                                <#elseif order.statusId?? &&  order.statusId==6>
                                    <a href="#" title=""> 评价</a>
                                 </#if>
                              </li>
@@ -162,7 +162,7 @@ DD_belatedPNG.fix('.,img,background');
                     <#if cgoods_index lt 3>   
                        <div class="tp" > 
                            <a  href="/goods/${cgoods.goodsId!''}" title=""> <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" /> <span>${cgoods.goodsTitle!''} </span>
-                           <label>￥${cgoods.goodsSalePrice?string("#.##")}</label>
+                           <label>￥${cgoods.goodsSalePrice?string("0.00")}</label>
                            </a> 
                        </div>
                     </#if> 

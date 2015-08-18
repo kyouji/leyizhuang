@@ -169,7 +169,7 @@ function btnPageSubmit()
                     <dl>
                         <dt>
                             <a href="/goods/${item.id?c}">
-                            <img src="${item.coverImageUri!''}" with="210" height="210"/>
+                            <img src="${item.coverImageUri!''}" width="210" height="210"/>
                             </a>
                         </dt>
                         <dd class="piclist_title">

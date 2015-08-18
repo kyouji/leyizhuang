@@ -5,7 +5,7 @@
 <title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
-<meta name="copyright" content="正品惠客" />
+<meta name="copyright" content="${site.copyright!''}" />
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/address.css"/>

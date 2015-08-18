@@ -34,12 +34,12 @@
         </div>
         <div class="member_check" >
             <ul>
-              <li><a href="#"><img src="<#if item.isDefaultAddress>images/img1/icon_13.png" width="20" /></a></li>
-              <li class="l_1 l_2"><a href="#">默认地址</a></li>
-              <li><a href="#"><img src="images/img1/icon_10.png" width="20"  /></a></li>
-              <li class="l_1 l_2"><a href="#">编辑</a></li>
-              <li><a href="#"><img src="images/img1/icon_14.png" width="15" height="18"/></a></li>
-              <li class="l_2"><a href="#">删除</a></li>
+              <li><a href="/touch/user/address/default?id=${item.id?c}"><img src="<#if item.isDefaultAddress>/touch/images/img1/icon_13.png<#else>/touch/images/img1/icon_13_1.png</#if>" width="20" /></a></li>
+              <li class="l_1 l_2"><a href="/touch/user/address/default?id=${item.id?c}">默认地址</a></li>
+              <li><a href="/touch/user/address/update?id=${item.id?c}"><img src="/touch/images/img1/icon_10.png" width="20"  /></a></li>
+              <li class="l_1 l_2"><a href="/touch/user/address/update?id=${item.id?c}">编辑</a></li>
+              <li><a href="/touch//user/address/delete?id=${item.id?c}"><img src="/touch/images/img1/icon_14.png" width="15" height="18"/></a></li>
+              <li class="l_2"><a href="/touch//user/address/delete?id=${item.id?c}">删除</a></li>
             </ul>
          </div>
     </#list>
@@ -48,7 +48,7 @@
 </div><!--main END-->
 
 <div class="ok_mainbox">
-    <p><a href="#">确 定</a></p>
+    <p><a href="/touch/user/address/update">新增地址</a></p>
   </div>
 </body>
 </html>
