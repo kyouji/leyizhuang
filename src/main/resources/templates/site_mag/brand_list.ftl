@@ -84,8 +84,8 @@ var theForm = document.forms['form1'];
                     <input type="hidden" name="listId" id="listId" value="${item.id}">
                 </td>
                 <td align="center"><a href="/Verwalter/brand/edit?id=${item.id}">${item.title!""}</a></td>
-                <td align="center"><#if item.logoUri??><img src="${item.logoUri!""}" width="80" height="50" /></#if></td>
-                <td align="center"><#if item.statusId?? && item.statusId==0>待审核<#elseif item.statusId?? && item.statusId==1>正常<#else>不显示</#if></td>
+                <td align="center"><#if item.logoUri??><img src="${item.logoUri!""}" width="80" height="40" /></#if></td>
+                <td align="center"><#if item.statusId?? && item.statusId==0>待审核<#elseif item.statusId?? && item.statusId==1>显示<#else>不显示</#if></td>
                 <td align="center"><#if item.createTime??>${item.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
                 <td align="center">
                     <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">

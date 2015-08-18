@@ -122,7 +122,7 @@ $(function () {
                 <div class="rule-multi-radio">
                     <span>
                         <input type="radio" datatype="n" name="statusId" value="0" <#if brand?? && brand.statusId==0>checked="checked"</#if>><label>不显示</label>
-                        <input type="radio" datatype="n" name="statusId" value="1" <#if brand?? && brand.statusId==1>checked="checked"</#if>><label>显示</label>
+                        <input type="radio" datatype="n" name="statusId" value="1" <#if !brand?? || brand.statusId==1>checked="checked"</#if>><label>显示</label>
                     </span>
                 </div>
             </dd>

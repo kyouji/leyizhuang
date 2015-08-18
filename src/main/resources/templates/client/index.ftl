@@ -12,7 +12,6 @@
 
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
-<script src="/client/js/jquery1.42.min.js"></script>
 <script src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script src="/client/js/common.js" type="text/javascript"></script>
 <script src="/client/js/goods.js" type="text/javascript"></script>
@@ -138,7 +137,6 @@ $(function(){
             </#if>
         </div>
         <div class="top_right">
-        	<a href="/user" title="">我的惠客</a>
             <a class="top_right_like" href="/user/collect/list" title="">我的关注</a>
             <a class="top_right_hk" href="/user" title="">我的惠客</a>
         </div>
@@ -200,10 +198,10 @@ $(function(){
         <div class="nav_nav">
         	<ul>
             <#if navi_item_list??>
-            <#list navi_item_list as item>
-                <li><a class="a1" href="${item.linkUri!''}">${item.title!''}</a></li>
-            </#list>
-        </#if> 
+                <#list navi_item_list as item>
+                    <li><a class="a1" href="${item.linkUri!''}">${item.title!''}</a></li>
+                </#list>
+            </#if> 
             </ul>
         </div>        
         <div class="nav_num"><#if site??>全国服务热线：${site.telephone!''}</#if></div>
@@ -254,7 +252,9 @@ $(function(){
                     <div class="scroll_box">
                         <#if big_scroll_ad_list??>
                              <#list big_scroll_ad_list as item>
-                                <img src="${item.fileUri!''}" />
+                                <a href="${item.linkUri!''}" target="_blank">
+                                    <img src="${item.fileUri!''}" />
+                                </a>
                              </#list>
                         </#if>
                     </div>
@@ -291,7 +291,7 @@ $(function(){
                 <#list news_page.content as item>
                      <#if item_index < 7>
                      <a class="block mt5" href="/info/content/${item.id}?mid=12" style="height:20px; overflow:hidden;">【公告】${item.title!''}</a>
-                </#if>
+                    </#if>
                 </#list>
             </#if>
             </div>
@@ -303,20 +303,23 @@ $(function(){
 
 <div class="group_buy">
     <#if tuan_title_ad_list?? && tuan_title_ad_list?size gt 0>
-        <a class="tg_1" href="#"><img src="${tuan_title_ad_list[0].fileUri!""}" /></a>
+        <a class="tg_1" href="${tuan_title_ad_list[0].linkUri!""}"><img src="${tuan_title_ad_list[0].fileUri!""}" /></a>
     </#if>
 	<#if tuan_ad_list??>
 	   <#list tuan_ad_list as item>
-	       <a href="#"><img src="${item.fileUri!""}" /></a>
+	       <#if item_index < 5>
+	           <a href="${item.linkUri!""}"><img src="${item.fileUri!""}" /></a>
+	       </#if>
 	   </#list>
 	</#if>
 </div>
 
 <!--今日特价-->
-<#if speciaPrice_list?? && speciaPrice_list?size gt 0 >
+<#if recommed_index_page?? && recommed_index_page.content?size gt 0 >
 <div class="today_specials">
-    <#list speciaPrice_list as item>
-        <#if item_index < 6 >
+    <#-- add by Sharon 这里的设计要调整，图片不能是非正方形的 -->
+    <#list recommed_index_page.content as item>
+        <#if item_index < 6>
         <a class="tj_1" href="/goods/${item.id?c}">
             <div class="tj">
                 <h3>${item.title!""}</h3>
@@ -340,14 +343,14 @@ $(function(){
         <div class="phones_left">
             <#list top_category_list as item>
                 <#if item_index == 0>
-                    1F${item.title!""}
+                    <a href="/list/${item.id}">1F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
         </#if>
         <div class="phones_right">
-        	热门:&nbsp;&nbsp;
-            <#if first_brand_list??>
+            <#if first_brand_list??&&first_brand_list?size gt 0>
+        		热门:&nbsp;&nbsp;
                 <#list first_brand_list as item >
                     <#if item_index < 6>
                     |&nbsp;&nbsp;<a href="/list/${item.id?c!""}">${item.title!""}</a>
@@ -357,48 +360,18 @@ $(function(){
         </div>
     </div>
     <div class="phone_brand">
-    	<ul class="phones_logo">
-  <!--  	<#if brand0_list?? && brand0_list?size gt 0 >
-    	<#list brand0_list as item>
-    	      <#if item_index < 5 >
-    	           <div class="lg">
-                        <a href="/list/${item.id?c}"><img src="${item.logoUrl!""}"/></a>
-                   </div>
-    	      </#if>
-    	</#list>
-    	</#if>
-    	  -->
-    	   <#if top_category_list?? && top_category_list?size gt 0>
-                <#list top_category_list as item>
-                     <#if item_index == 0> 
-                         <#if ("second_level_"+item_index+"_cat_list")?eval?? >
-                            <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                                 <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
-                                    <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
-                                        <#if thirdLevelItem_index < 5>
-                                        <div class="lg">
-                                            <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}" width="120px" height="60px"></a>
-                                        </div>
-                                        </#if>
-                                    </#list>
-                                <#elseif secondLevelItem_index < 5>
-                                     <div class="lg">
-                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
-                                    </div>
-                                </#if>
-                            <!--
-                               <#if secondLevelItem_index < 5 >
-                                    <div class="lg">
-                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"/></a>
-                                    </div>
-                                </#if>
-                               -->
-                            </#list>
-                       </#if>
-                   </#if>
+        <ul class="phones_logo">
+            <#if f0_brand_page??>
+                <#list f0_brand_page.content as item>
+                    <#if item_index < 5>
+                    <div class="lg">
+                        <a href="/list/${item.productCategoryId}">
+                            <img src="${item.logoUri!''}" width="120" height="60">
+                        </a>
+                    </div>
+                    </#if>
                 </#list>
-            </#if>
-          
+    	    </#if>
         </ul>
         <!-- 广告  -->
         <ul class="phones_photo">
@@ -451,14 +424,14 @@ $(function(){
         <div class="phones_left">
             <#list top_category_list as item>
                 <#if item_index == 1>
-                    2F${item.title!""}
+                    <a href="/list/${item.id}">2F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
         </#if>
         <div class="phones_right">
-            热门:&nbsp;&nbsp;
-            <#if second_brand_list??>
+            <#if second_brand_list??&&second_brand_list?size gt 0>
+            	热门:&nbsp;&nbsp;
                 <#list second_brand_list as item >
                     <#if item_index lt 6>
                     |&nbsp;&nbsp;<a href="/list/${item.id?c!""}">${item.title!""}</a>
@@ -469,24 +442,16 @@ $(function(){
     </div>
     <div class="phone_brand pc_com">
     	<ul class="phones_logo pc_logo">
-	       <#if top_category_list?? && top_category_list?size gt 0>
-                <#list top_category_list as item>
-                  <#if item_index == 1> 
-                  <#if ("second_level_"+item_index+"_cat_list")?eval?? >
-                        <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                            <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
-                                <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
-                                     <#if thirdLevelItem_index < 5 && secondLevelItem_index == 0>
-                                     <div class="lg">
-                                        <a href="/list/${thirdLevelItem.id?c}"><img src="${thirdLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
-                                     </div>
-                                     </#if>   
-                                </#list>
-                            </#if>
-                        </#list>
+    	    <#if f1_brand_page??>
+                <#list f1_brand_page.content as item>
+                    <#if item_index < 3>
+                    <div class="lg">
+                        <a href="${item.linkUri!''}">
+                            <img src="${item.logoUri!''}" width="120" height="60">
+                        </a>
+                    </div>
                     </#if>
-                    </#if>
-                 </#list>
+                </#list>
             </#if>
             <#--
             <div class="pc">
@@ -588,14 +553,14 @@ $(function(){
         <div class="phones_left">
             <#list top_category_list as item>
                 <#if item_index == 2>
-                    3F${item.title!""}
+                    <a href="/list/${item.id}">3F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
         </#if>
         <div class="phones_right">
-        	热门:&nbsp;&nbsp;
-            <#if third_brand_list??>
+            <#if third_brand_list??&&third_brand_list?size gt 0>
+        		热门:&nbsp;&nbsp;
                 <#list third_brand_list as item >
                     <#if item_index lt 6>
                     |&nbsp;&nbsp;<a href="#">${item.title!""}</a>
@@ -606,25 +571,15 @@ $(function(){
     </div>
     <div class="phone_brand">
     	<ul class="phones_logo">
-        	<#if top_category_list?? && top_category_list?size gt 0>
-                <#list top_category_list as item>
-                     <#if item_index == 2> 
-                     <#if ("second_level_"+item_index+"_cat_list")?eval?? >
-                        <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                           <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
-                                  <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
-                                      <div class="lg">
-                                          <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"></a>
-                                      </div>
-                                    </#list>
-                           <#elseif secondLevelItem_index < 5>
-                                     <div class="lg">
-                                        <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
-                                    </div>
-                           </#if>
-                        </#list>
-                   </#if>
-                   </#if>
+    	    <#if f2_brand_page??>
+                <#list f2_brand_page.content as item>
+                    <#if item_index < 5>
+                    <div class="lg">
+                        <a href="${item.linkUri!''}">
+                            <img src="${item.logoUri!''}" width="120" height="60">
+                        </a>
+                    </div>
+                    </#if>
                 </#list>
             </#if>
         </ul>
@@ -676,13 +631,13 @@ $(function(){
     	<div class="phones_left">
              <#list top_category_list as item>
                 <#if item_index == 2>
-                    4F${item.title!""}
+                    <a href="/list/${item.id}">4F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
         <div class="phones_right">
-        	<a >热门:</a>&nbsp;&nbsp;
-            <#if fourth_brand_list??>
+            <#if fourth_brand_list??&&fourth_brand_list?size gt 0>
+        		热门:&nbsp;&nbsp;
                 <#list fourth_brand_list as item >
                     <#if item_index lt 6>
                     |&nbsp;&nbsp;<a href="#">${item.title!""}</a>
@@ -693,25 +648,15 @@ $(function(){
     </div>
     <div class="phone_brand pc_com">
     	<ul class="phones_logo pc_logo">
-        	<#if top_category_list?? && top_category_list?size gt 0>
-                <#list top_category_list as item>
-                     <#if item_index == 3> 
-                     <#if ("second_level_"+item_index+"_cat_list")?eval?? >
-                        <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
-                           <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
-                                 <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
-                                      <div class="lg">
-                                          <a href="/list/${thirdLevelItem.id}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
-                                       </div>
-                                  </#list>
-                             <#elseif secondLevelItem_index < 5>
-                                   <div class="lg">
-                                      <a href="/list/${secondLevelItem.id?c}"><img src="${secondLevelItem.imgUrl!""}"  width="120px" height="60px"/></a>
-                                   </div>
-                             </#if>
-                        </#list>
-                   </#if>
-                   </#if>
+        	<#if f3_brand_page??>
+                <#list f3_brand_page.content as item>
+                    <#if item_index < 5>
+                    <div class="lg">
+                        <a href="${item.linkUri!''}">
+                            <img src="${item.logoUri!''}" width="120" height="60">
+                        </a>
+                    </div>
+                    </#if>
                 </#list>
             </#if>
         </ul>

@@ -26,7 +26,7 @@ public interface TdBrandRepo extends
     
     Page<TdBrand> findByProductCategoryTreeContaining(String productCategoryId, Pageable page);
     
-    List<TdBrand> findByStatusIdAndProductCategoryTreeContaining(Long statusId, String productCategoryId);
+    List<TdBrand> findByStatusIdAndProductCategoryTreeContainingOrderBySortIdAsc(Long statusId, String productCategoryId);
     
     Page<TdBrand> findByStatusIdAndProductCategoryTreeContaining(Long statusId, String productCategoryId, Pageable page);
     

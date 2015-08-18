@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
 <script type="text/javascript" src="/client/js/common.js"></script>
-<script type="text/javascript" src="/client/js/goods.js"><="/client//script>
+<script type="text/javascript" src="/client/js/goods.js"><script>
 <script type="text/javascript" srcjs/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/base.js"></script>
 <script type="text/javascript" src="/client/js/list.js"></script>
@@ -40,6 +40,59 @@
 
 });
 </script>
+<script type="text/javascript">
+function addNum(){
+	var q = parseInt($("#quantity").val());
+   	<#if goods.leftNumber??>
+    	if (q < ${goods.leftNumber!'0'})
+      	{
+        	$("#quantity").val(q+1);
+      	}
+      	else
+     	{
+       		alert("已达到库存最大值");
+     	}
+   <#else>
+        $("#quantity").val(q+1);
+   </#if>
+    $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+    
+}
+
+function minusNum(){
+	var q = parseInt($("#quantity").val());
+        
+	if (q > 1){
+		$("#quantity").val(q-1);
+	}
+	$("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+}
+</script>
+<#--
+ * 立即购买商品组合的方法
+ * @author dengxiao
+-->
+<script type="text/javascript">
+function buyConbination(){
+	var selectNum = document.getElementById("combCount").innerHTML;
+	if(selectNum == 0){
+		alert("请至少选择一件组合商品");
+		return;
+	}
+	var str = "";
+	$(".comboCheckBox:checked").each(function(){
+		str += $(this).attr("zpid");
+		str += ",";
+	});
+	
+	if(${goods.id} == null||${goods.id} == ""||${goods.id} == 0){
+		alert("商品信息有误");
+		return;
+	}
+	var href = "/order/buyCombination?id=" + ${goods.id} + "&zpid=" + str;
+	window.location.href=href;
+}
+</script> 
 <!--弹窗-->
 <!-- 不明白为什么突然不起作用了-->
 <!-- <script type="text/javascript">
@@ -47,53 +100,7 @@
         $(".c_pop_boxbg").hide();
     })
 </script> -->
-
-</head>
-
 <script type="text/javascript">
-$(document).ready(function(){
-    $(".c_pop_boxbg").hide()
-        
-	$("#id-minus").click(function(){
-   		var q = parseInt($("#quantity").val());
-        
-	if (q > 1){
-		$("#quantity").val(q-1);
-	}
-	$("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
-});
-    
-$("#id-plus").click(function(){
-   var q = parseInt($("#quantity").val());
-        
-   <#if goods.leftNumber??>
-      if (q < ${goods.leftNumber!'0'})
-      {
-         $("#quantity").val(q+1);
-      }
-      else
-      {
-       alert("已达到库存最大值");
-      }
-   <#else>
-        $("#quantity").val(q+1);
-   </#if>
-    $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
-    
-});         
-       
-<#--    
-$("#zhAddCart").click(function(){
-     var str = "";
-     $(".comboCheckBox:checked").each(function(){
-         str += $(this).attr("zpid");
-         str += ",";
-     });
-     var href = "/cart/init?id=" + ${goods.id} + "&zpid=" + str;
-     window.location = href;
- -->         
-});   
-      
 <!-- 组合商品选择-->   
 function combSelect(self, price, originPrice)
 {
@@ -119,6 +126,8 @@ function combSelect(self, price, originPrice)
         $("#combSave").html(combSavePrice - originPrice + price);
     }
 }  
+</script>
+<script type="text/javascript">
 <!--商品组合取消全部选择 --> 
 function clearSelect()
 {
@@ -129,7 +138,14 @@ function clearSelect()
     
     $(".comboCheckBox").attr("checked", false);
 }
- 
+</script>
+</head>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".c_pop_boxbg").hide();
+});
+
 function btnPageSubmit(type) 
 {
 	<#--
@@ -173,54 +189,9 @@ function btnPageSubmit(type)
     }
     
 }   
-<#--
- * 立即购买商品组合的方法
- * @author dengxiao
--->
-function buyConbination(){
-	var selectNum = document.getElementById("combCount").innerHTML;
-	if(selectNum == 0){
-		alert("请至少选择一件组合商品");
-		return;
-	}
-	var str = "";
-	$(".comboCheckBox:checked").each(function(){
-		str += $(this).attr("zpid");
-		str += ",";
-	});
-	
-	if(${goods.id} == null||${goods.id} == ""||${goods.id} == 0){
-		alert("商品信息有误");
-		return;
-	}
-	var href = "/order/buyCombination?id=" + ${goods.id} + "&zpid=" + str;
-	window.location.href=href;
-}
- 
 </script>
 
 <body>
-
-<div id="collectGoods" class="c_pop_boxbg" style="display:none">
-	<div id="collectWindow" class="c_pop_box" style="display:none">
-    	<div class="c_pop_box_top">
-        	<span>提 示</span>
-            <a href="javascript:close()"></a>
-        </div>
-        <div class="c_pop_box_success">
-        	<p>您已成功关注该商品！</p>
-            <a href="#" title="">查看我的关注>></a>
-        </div>
-        <div class="c_pop_box_notice">
-        	<p>关注商品降价提醒：</p>
-        	<ul>
-            	<li><span>价格低于￥：</span><input type="text" class="c_pop_box_notice_input1" />时 提醒我</li>
-                <li><span>*邮箱或手机号码：</span><input type="text" class="c_pop_box_notice_input2" /></li>
-                <li><a href="#" title="" class="c_pop_box_notice_a1" >订阅提醒</a><a href="#" title="" class="c_pop_box_notice_a2" >暂不需要</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
 
 <div class="w100">
 <!--顶部ad大小：1920 90-->
@@ -257,13 +228,11 @@ function buyConbination(){
         </div>
         <!--缩图开始-->
         <div class="spec-scroll">
-            <a class="prev">&lt;</a>
-            <a class="next">&gt;</a>
             <div class="items">
                 <ul>
                 <#if goods.showPictures??>
                 <#list goods.showPictures?split(",") as uri>
-                    <#if ""!=uri && uri_index < 8>
+                    <#if ""!=uri && uri_index < 6>
                         <li><img  src="${uri!''}" onmousemove="preview(this);" ></li>
                     </#if>
                 </#list>
@@ -420,9 +389,9 @@ function buyConbination(){
             
             <div class="de_parameter_num">
             	<span>购买数量</span>
-            	<a id="id-minus" href="javascript:;" class="de_parameter_list_num_add">-</a> 
+            	<a id="id-minus" href="javascript:minusNum();" class="de_parameter_list_num_add">-</a> 
                 <input type="text" id="quantity" value="1" class="text" />
-                <a id="id-plus" class="down" href="javascript:;" class="de_parameter_list_num_subduction">+</a>
+                <a id="id-plus" class="down" href="javascript:addNum();" class="de_parameter_list_num_subduction">+</a>
                 <label>库存${goods.leftNumber!'0'}件</label>
             </div>
         </div>
@@ -434,11 +403,6 @@ function buyConbination(){
             <div class="de_service_info">
             	<ul>
                 	<li>${goods.service}</li>
-                    <li>
-                    	<a href="#" title="">全国包邮</a>
-                        <a href="#" title="">七天无理由退换货</a>
-                        <a href="#" title="">全国联保</a>
-                    </li>
                 </ul>
             </div>
          </#if>
@@ -651,7 +615,7 @@ function buyConbination(){
         <div class="c_R_comment top20">
         <div class="c_R_comment_title">
         	<#if comment_page??>
-                <a href="javascript:getCommentByStars(${goodsId}, 0, 0);" id="star0" title="" class="c_R_comment_title_choiced">全部评价（${comment_page.content?size!'0'}）</a>
+                <a href="javascript:getCommentByStars(${goodsId}, 0, 0);" id="star0" title="" class="c_R_comment_title_choiced">全部评价（${comment_count!'0'}）</a>
                 <a href="javascript:getCommentByStars(${goodsId}, 3, 0);" id="star3" title="">好评（${three_star_comment_count!'0'}）</a>
                 <a href="javascript:getCommentByStars(${goodsId}, 2, 0);" id="star2" title="">中评（${two_star_comment_count!'0'}）</a>
                 <a href="javascript:getCommentByStars(${goodsId}, 1, 0);" id="star1" title="">差评（${one_star_comment_count!'0'}）</a>
