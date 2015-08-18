@@ -68,12 +68,7 @@ function userAddCollect(goodsId){
 	//将goodsId通过异步请求发送至后台
 	$.post("/user/collect/add",{"goodsId":goodsId},function(data){
 		//根据message的信息判断用户是否关注成功
-		if(data.message!="关注成功"){
-				alert(data.message);
-    	}else{
-    		document.getElementById("collectGoods").style.display="block";
-    		document.getElementById("collectWindow").style.display="block";
-    	}
+		alert(data.message);
 		
 		//在没有用户登陆的情况下跳转到登陆页面
 		if (data.code==1){
@@ -94,36 +89,36 @@ function addCollect(goodsId)
     
     $.post("/user/collect/add",{"goodsId":goodsId},function(data){
     	alert(data.message);
-    });
-    
-    $.ajax({
-        type:"post",
-        url:"/user/collect/add",
-        data:{"goodsId": goodsId},
-        dataType: "json",
-        success:function(res){
-    		/**
-    		 * 修改了原来的代码
-    		 * 根据res中message的值判断是否关注成功，关注成功则显示出成功提示的DIV
-    		 * （原来的代码是通过alert语句弹出成功提示）
-    		 * @author dengxiao
-    		 */
-        	if(res.message!="添加成功"){
-        		alert(res.message);
-        	}else{
-        		document.getElementById("collectGoods").style.display="block";
-        		document.getElementById("collectWindow").style.display="block";
-        	}
-        	
-            // 需登录
-            if (res.code==1)
-            {
-                setTimeout(function(){
-                    window.location.href = "/login";
-                }, 1000); 
-            }
+        // 需登录
+        if (data.code==1)
+        {
+            setTimeout(function(){
+                window.location.href = "/login";
+            }, 1000); 
         }
     });
+    
+//    $.ajax({
+//        type:"post",
+//        url:"/user/collect/add",
+//        data:{"goodsId": goodsId},
+//        dataType: "json",
+//        success:function(res){
+//    		/**
+//    		 * 修改了原来的代码
+//    		 * 根据res中message的值判断是否关注成功，关注成功则显示出成功提示的DIV
+//    		 * （原来的代码是通过alert语句弹出成功提示）
+//    		 * @author dengxiao
+//    		 */
+//        	if(res.message!="添加成功"){
+//        		alert(res.message);
+//        	}else{
+//        		document.getElementById("collectGoods").style.display="block";
+//        		document.getElementById("collectWindow").style.display="block";
+//        	}
+//        	
+//        }
+//    });
 }
 
 /**

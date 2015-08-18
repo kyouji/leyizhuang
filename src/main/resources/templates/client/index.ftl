@@ -137,7 +137,6 @@ $(function(){
             </#if>
         </div>
         <div class="top_right">
-        	<a href="/user" title="">我的惠客</a>
             <a class="top_right_like" href="/user/collect/list" title="">我的关注</a>
             <a class="top_right_hk" href="/user" title="">我的惠客</a>
         </div>
@@ -344,14 +343,14 @@ $(function(){
         <div class="phones_left">
             <#list top_category_list as item>
                 <#if item_index == 0>
-                    1F${item.title!""}
+                    <a href="/list/${item.id}">1F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
         </#if>
         <div class="phones_right">
-        	热门:&nbsp;&nbsp;
-            <#if first_brand_list??>
+            <#if first_brand_list??&&first_brand_list?size gt 0>
+        		热门:&nbsp;&nbsp;
                 <#list first_brand_list as item >
                     <#if item_index lt 6>
                     |&nbsp;&nbsp;<a href="/list/${item.id?c!""}">${item.title!""}</a>
@@ -366,7 +365,7 @@ $(function(){
                 <#list f0_brand_page.content as item>
                     <#if item_index < 5>
                     <div class="lg">
-                        <a href="${item.linkUri!''}">
+                        <a href="/list/${item.productCategoryId}">
                             <img src="${item.logoUri!''}" width="120" height="60">
                         </a>
                     </div>
@@ -425,14 +424,14 @@ $(function(){
         <div class="phones_left">
             <#list top_category_list as item>
                 <#if item_index == 1>
-                    2F${item.title!""}
+                    <a href="/list/${item.id}">2F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
         </#if>
         <div class="phones_right">
-            热门:&nbsp;&nbsp;
-            <#if second_brand_list??>
+            <#if second_brand_list??&&second_brand_list?size gt 0>
+            	热门:&nbsp;&nbsp;
                 <#list second_brand_list as item >
                     <#if item_index lt 6>
                     |&nbsp;&nbsp;<a href="/list/${item.id?c!""}">${item.title!""}</a>
@@ -554,14 +553,14 @@ $(function(){
         <div class="phones_left">
             <#list top_category_list as item>
                 <#if item_index == 2>
-                    3F${item.title!""}
+                    <a href="/list/${item.id}">3F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
         </#if>
         <div class="phones_right">
-        	热门:&nbsp;&nbsp;
-            <#if third_brand_list??>
+            <#if third_brand_list??&&third_brand_list?size gt 0>
+        		热门:&nbsp;&nbsp;
                 <#list third_brand_list as item >
                     <#if item_index lt 6>
                     |&nbsp;&nbsp;<a href="#">${item.title!""}</a>
@@ -632,13 +631,13 @@ $(function(){
     	<div class="phones_left">
              <#list top_category_list as item>
                 <#if item_index == 2>
-                    4F${item.title!""}
+                    <a href="/list/${item.id}">4F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
         <div class="phones_right">
-        	<a >热门:</a>&nbsp;&nbsp;
-            <#if fourth_brand_list??>
+            <#if fourth_brand_list??&&fourth_brand_list?size gt 0>
+        		热门:&nbsp;&nbsp;
                 <#list fourth_brand_list as item >
                     <#if item_index lt 6>
                     |&nbsp;&nbsp;<a href="#">${item.title!""}</a>

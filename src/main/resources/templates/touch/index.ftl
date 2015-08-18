@@ -149,7 +149,7 @@
     		<#list top_category_list as item>
     			<#if item_index == 0>
 		    		<ul class="title">
-			        	<li class="phone_daq">1F${item.title!""}</li>
+			        	<li class="phone_daq"><a href="/touch/list/${item.id?c}">1F${item.title!""}</a></li>
 			            <li class="more"><a href="/touch/list/${item.id?c}">更多>></a></li>
 		        	</ul>
 	        	</#if>
@@ -181,7 +181,7 @@
     		<#list top_category_list as item>
     			<#if item_index == 1>
 		    		<ul class="title">
-			        	<li class="phone_daq">2F${item.title!""}</li>
+			        	<li class="phone_daq"><a href="/touch/list/${item.id?c}">2F${item.title!""}</a></li>
 			            <li class="more"><a href="/touch/list/${item.id?c}">更多>></a></li>
 		        	</ul>
 	        	</#if>
@@ -213,7 +213,7 @@
     		<#list top_category_list as item>
     			<#if item_index == 2>
 		    		<ul class="title">
-			        	<li class="phone_daq">3F${item.title!""}</li>
+			        	<li class="phone_daq"><a href="/touch/list/${item.id?c}">3F${item.title!""}</a></li>
 			            <li class="more"><a href="/touch/list/${item.id?c}">更多>></a></li>
 		        	</ul>
 	        	</#if>
@@ -245,7 +245,7 @@
     		<#list top_category_list as item>
     			<#if item_index == 3>
 		    		<ul class="title">
-			        	<li class="phone_daq">4F${item.title!""}</li>
+			        	<li class="phone_daq"><a href="/touch/list/${item.id?c}">4F${item.title!""}</a></li>
 			            <li class="more"><a href="/touch/list/${item.id?c}">更多>></a></li>
 		        	</ul>
 	        	</#if>

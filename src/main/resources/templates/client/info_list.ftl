@@ -34,12 +34,13 @@
     <div class="crumb">
     <#if acticle_category??>
             &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
-            <a href="/info/list/${mid}" title="">${acticle_category.title!''}</a>
+            <#-- 不能正常跳转到指定的模块，因此调整了url地址——by dengxiao -->
+            <a href="/info/list/${mid}?catId=${acticle_category.id}" title="">${acticle_category.title!''}</a>
     </#if>
     </div>
     <#if info_page??>
        <#list info_page.content as item>
-            <a href="/info/content/${item.id?c}?mid=${mid}" title="" target="_blank">
+            <a href="/info/content/${item.id?c}?mid=${mid}&catId=${catId}" title="" target="_blank">
                 <div class="article_box_01">
                     <div>${item.title!''}</div>
                      <p>${item.brief!''}</p> 

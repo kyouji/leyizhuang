@@ -68,7 +68,7 @@ function btnPageSubmit()
                             <a href="/goods/${item.id}" title="${item.title!''}" class="img100">
                                 <img src="${item.coverImageUri!''}" height="100" width="100"/>
                             </a>
-                            <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a>
+                            <a class="font_style_by_dx" href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a>
                             <p  class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
                             <a href="/cart/init?id=${item.id}" title="加入购物车" class="btn_cart23">加入购物车</a>
                         </li>
@@ -94,8 +94,10 @@ function btnPageSubmit()
                     <dl>
                         <dt>品牌：</dt>
                         <dd style=" height:80px;" class="select_cont_brand">
-                            <a <#if brandIndex==0>class="select_cont_choiced"</#if> href="${categoryId!'0'}-0<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>">全部</a>
-                    
+                        	<#-- 修改：在切换品牌类型之后，页数还原至第一页（即pageId=0） -->
+                        	
+                            <!-- <a <#if brandIndex==0>class="select_cont_choiced"</#if> href="${categoryId!'0'}-0<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>">全部</a> -->
+                    		<a <#if brandIndex==0>class="select_cont_choiced"</#if> href="${categoryId!'0'}-0<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-0-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>">全部</a>
                             <#list brand_list as brand>
                                 <a href="${categoryId!'0'}-${brand_index+1}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${pageId!'0'}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>" <#if brandIndex==brand_index+1>class="select_cont_choiced"</#if>>${brand.title?trim!''}</a>
                             </#list>
