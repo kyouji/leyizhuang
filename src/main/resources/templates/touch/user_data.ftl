@@ -33,8 +33,7 @@
   <div class="member_check member_check1"><label>性别</label><span>${user.sex!'保密'}</span></div>
   <div class="member_check " ><label>出生日期 </label><span>${user.birthday!''}</span></div>
   <div class="member_check" ><label>联系电话 </label><span>${user.mobile!''}</span></div>
-  <div class="member_check  member_check1" ><label>邮箱</label><span>${user.email!''}</span></div>
-  <div class="member_check " ><label>地址</label><span>${user.detailAddress!''}</span></div>
+  <div class="member_check " ><label>邮箱</label><span>${user.email!''}</span></div>
   
   <div class="ok_mainbox">
     <p><a href="/touch/user/info"  id="sub">修 改 信 息</a></p>

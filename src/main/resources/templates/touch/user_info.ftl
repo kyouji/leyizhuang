@@ -29,12 +29,16 @@
 </header>
 
 <div class="main">
-    <form action="/touch/user/info" method="post" id="fomr1">
+    <form action="/touch/user/info" method="post" id="form1">
         <div class="member_check"  >
             <span>昵称：</span>
             <input type="text" name="nickname"  class="textInput" value="${user.nickname!''}" />
         </div>
-  
+        <div class="member_check"  >
+            <span>电话：</span>
+            <!--<input type="text" name="mobile"  class="textInput" value="${user.mobile!''}" />-->
+            <input type="datetime" name="mobile"  class="textInput" value="${user.mobile!''}" />
+        </div>
         <div class="member_check"  >
             <span>邮箱：</span>
             <input type="text" name="email"  class="textInput" value="${user.email!''}" />
@@ -46,10 +50,10 @@
             <input type="radio" name="sex"  value="保密" <#if user.sex?? && user.sex=="保密" || !user.sex??>checked="checked" </#if>/>保密
         </div>
         
+     </form>
         <div class="ok_mainbox">
             <p><a href="javascript:editPassword();"  id="sub">确 认</a></p>
          </div>
-     </form>
 </div><!--main END-->
 
 

@@ -38,6 +38,7 @@ import com.ynyes.zphk.service.TdGoodsService;
 import com.ynyes.zphk.service.TdOrderGoodsService;
 import com.ynyes.zphk.service.TdOrderService;
 import com.ynyes.zphk.service.TdPayTypeService;
+import com.ynyes.zphk.service.TdShippingAddressService;
 import com.ynyes.zphk.service.TdUserPointService;
 import com.ynyes.zphk.service.TdUserService;
 
@@ -84,6 +85,9 @@ public class TdTouchOrderController  extends AbstractPaytypeService{
     
     @Autowired
     private TdDiySiteService tdDiySiteService;
+    
+    @Autowired
+    private TdShippingAddressService tdShippingAddressService;
 
     @RequestMapping(value = "/info")
     public String orderInfo(HttpServletRequest req, HttpServletResponse resp,
@@ -112,8 +116,9 @@ public class TdTouchOrderController  extends AbstractPaytypeService{
 
         if (null != user) {
             map.addAttribute("user", user);
+            map.addAttribute("address_list", user.getShippingAddressList());
         }
-
+        
         List<TdCartGoods> selectedGoodsList = tdCartGoodsService
                 .findByUsernameAndIsSelectedTrue(username);
 

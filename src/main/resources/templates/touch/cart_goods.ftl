@@ -9,13 +9,15 @@
             <li>
               <a class="a1 <#if cg.isSelected>sel<#else><#assign allChecked=false></#if>" href="javascript:toggleSelect(${cg.id});">&nbsp;</a>
               <a class="a2" href="/touch/goods/${cg.goodsId}<#if cg.qiang??>?qiang=${cg.qiang!''}</#if>" style="background-image:url(${cg.goodsCoverImageUri!''}); height:64px;">
-                <p>${cg.goodsTitle!''}</p>
+                 <p style="height:30px;overflow:hidden; margin-bottom:5px;">${cg.goodsTitle!''}</p>
+                 <p class="c9 lh16">颜色：黑色</p>
+                 <p class="c9 lh16">赠品：无</p>
               </a>
               <div class="car_num">
-                <span class="red">￥${(cg.price*cg.quantity)?string("0.00")}</span>
-                <input type="text" class="text" value="${cg.quantity!''}" />
-                <a class="min" href="javascript:minusNum(${cg.id});">-</a>
-                <a class="plus" href="javascript:addNum(${cg.id});">+</a>
+                   <span class="red">￥${(cg.price*cg.quantity)?string("0.00")}</span>
+                   <input type="text" class="text" value="${cg.quantity!''}" />
+                   <a class="min" href="javascript:minusNum(${cg.id});">-</a>
+                   <a class="plus" href="javascript:addNum(${cg.id});">+</a>
               </div>
               <a class="a3" href="javascript:delCartItem(${cg.id});"><img src="/touch/images/delete.png" height="20" /></a>
               <div class="clear"></div>
@@ -32,7 +34,7 @@
     <footer class="carfoot">
       <div class="mainbox">
         
-        <p><a <#if allChecked>class="a1 sel" href="javascript:toggleAllSelect(1);"<#else>class="a1" href="javascript:toggleAllSelect(0);"</#if>><i></i>全选</a><span>合计：</span><span class="red">￥<#if cart_goods_list??>${totalPrice?string("0.00")}</#if></span></p>
+        <p><a <#if allChecked>class="a1 sel" href="javascript:toggleAllSelect(1);"<#else>class="a1" href="javascript:toggleAllSelect(0);"</#if>><i></i>全选</a><span style="color:#fff;">合计：</span><span class="red">￥<#if cart_goods_list??>${totalPrice?string("0.00")}</#if></span></p>
         <input class="sub" onclick="javascript:goNext(${totalGoods!0});" type="submit" value="结算（<#if cart_goods_list??>${totalGoods!'0'}</#if>）" />
       </div>
     </footer>

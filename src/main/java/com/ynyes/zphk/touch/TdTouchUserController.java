@@ -1193,7 +1193,7 @@ public class TdTouchUserController {
     
     @RequestMapping(value = "/user/info", method=RequestMethod.POST)
     public String userInfo(HttpServletRequest req,
-                        String realName,
+                        String nickname,
                         String sex,
                         String email,
                         String mobile,
@@ -1206,17 +1206,17 @@ public class TdTouchUserController {
         }
         
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
-        
-        if (null != email && null != mobile)
+        System.err.println(nickname);
+        if (null != email )	
         {
-            user.setRealName(realName);
+            user.setNickname(nickname);
             user.setSex(sex);
             user.setEmail(email);
             user.setMobile(mobile);
             user = tdUserService.save(user);
         }
         
-        return "redirect:/user/info";
+        return "redirect:/touch/user/data";
     }
     
     @RequestMapping(value = "/user/password", method=RequestMethod.GET)

@@ -119,7 +119,7 @@ $(function(){
 <#if index_top_ad_list?? && index_top_ad_list?size gt 0>
     <div class="top_ad">
         <#list index_top_ad_list as item>
-            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}"><img src="${item.fileUri!''}"/></a>
+            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}"><img src="${item.fileUri!''}" width="100%"/></a>
             <#break>
         </#list>
     </div>
@@ -169,7 +169,7 @@ $(function(){
 	   <div class="header_search_top">
     	    <form action="/search" method="get" id="search_form" >
             	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title!''}</#if>"/>
-               	<a href="javascript:submitSearch()" title="" class="header_search_top_btn">搜 索</a>
+               	<a href="javascript:submitSearch()" title="搜索" class="header_search_top_btn">搜 索</a>
             </form>
         </div>
         <div class="header_search_bot">
@@ -251,9 +251,11 @@ $(function(){
                     <div class="scroll_box">
                         <#if big_scroll_ad_list??>
                              <#list big_scroll_ad_list as item>
-                                <a href="${item.linkUri!''}" target="_blank">
-                                    <img src="${item.fileUri!''}" />
-                                </a>
+                                <#if item_index < 3 >
+                                    <a href="${item.linkUri!''}" target="_blank">
+                                        <img src="${item.fileUri!''}" />
+                                    </a>
+                                </#if>
                              </#list>
                         </#if>
                     </div>
@@ -319,22 +321,22 @@ $(function(){
     <#-- add by Sharon 这里的设计要调整，图片不能是非正方形的 -->
     <#list recommed_index_page.content as item>
         <#if item_index < 6>
-        <a class="tj_1" href="/goods/${item.id?c}">
-            <div class="tj">
-                <h3>${item.title!""}</h3>
-                <img class="tj_left" src="${item.coverImageUri!""}" width="74px" height="131px" />
-                <div class="tj_right">
-                    <div>店家推荐</div>
-                    <p>${item.subTitle!""}</p>
-                    <p class="price_1">￥<span>${item.salePrice?string('0.00')}</span></p>
+            <a class="tj_1" href="/goods/${item.id?c}">
+                <div class="tj">
+                    <h3>${item.title!""}</h3>
+                    <img class="tj_left" src="${item.coverImageUri!""}" width="74px" height="131px" />
+                    <div class="tj_right">
+                        <div>店家推荐</div>
+                        <p>${item.subTitle!""}</p>
+                        <p class="price_1">￥<span>${item.salePrice?string('0.00')}</span></p>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
         </#if>
     </#list>
 </div>
 </#if>
-<!--1F手机大全-->
+<!--1F展示 -->
 <div class="phone_encyclopedia">
 	<div class="phones">
 	   <!-- 楼层 -->
@@ -363,59 +365,59 @@ $(function(){
             <#if f0_brand_page??>
                 <#list f0_brand_page.content as item>
                     <#if item_index < 5>
-                    <div class="lg">
-                        <a href="/list/${item.productCategoryId}">
-                            <img src="${item.logoUri!''}" width="120" height="60">
-                        </a>
-                    </div>
+                        <div class="lg">
+                            <a href="/list/${item.productCategoryId}">
+                                <img src="${item.logoUri!''}" width="120" height="60">
+                            </a>
+                        </div>
                     </#if>
                 </#list>
     	    </#if>
         </ul>
         <!-- 广告  -->
         <ul class="phones_photo">
-            <#if cat_bottom_ad_list?? && cat_bottom_ad_list?size gt 0 >
-                <img src="${cat_bottom_ad_list[0].fileUri!""}" width="404px" height="470px"/>
+            <#if index_1F_ad_list?? && index_1F_ad_list?size gt 0 >
+                <img src="${index_1F_ad_list[0].fileUri!""}" width="404px" height="470px"/>
             </#if>
         </ul>
         <ul class="phones_details">
            <#if top_cat_goods_page0?? && top_cat_goods_page0.content?size gt 0 >
                 <#list top_cat_goods_page0.content as item>
                     <#if item_index < 3 >
-                     <li class="photo_1">
-                        <dl>
-                            <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                             <dd class="feature">性价比之王</dd>
-                             <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                             <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                             <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                         </dl>
-                        <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
-                    </li>
+                        <li class="photo_1">
+                            <dl>
+                                <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                 <dd class="feature">性价比之王</dd>
+                                 <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                 <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                                 <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                             </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        </li>
                     </#if>
                 </#list>
-            </#if>
-            <#if top_cat_goods_page0?? && top_cat_goods_page0.content?size gt 0 >
+           </#if>
+           <#if top_cat_goods_page0?? && top_cat_goods_page0.content?size gt 0 >
                 <#list top_cat_goods_page0.content as item>
-                    <#if item_index gt 3 && item_index < 6 >
-                    <li class="photo_1 photo_4">
-                         <dl>
-                              <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                              <dd class="feature">性价比之王</dd>
-                              <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                              <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                              <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                        </dl>
-                        <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
-                     </li>
-                     </#if>
+                    <#if item_index gt 2 && item_index < 5 >
+                        <li class="photo_1 photo_4">
+                             <dl>
+                                  <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                  <dd class="feature">性价比之王</dd>
+                                  <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                  <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                                  <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                            </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                         </li>
+                    </#if>
                 </#list>
             </#if>
         </ul>
     </div>
 </div>
 
-<!--2F电脑/平板-->
+<!--2F展示-->
 <div class="phone_encyclopedia">
 	<div class="phones">
        <!-- 楼层 -->
@@ -433,7 +435,7 @@ $(function(){
             	热门:&nbsp;&nbsp;
                 <#list second_brand_list as item >
                     <#if item_index lt 6>
-                    |&nbsp;&nbsp;<a href="/list/${item.id?c!""}">${item.title!""}</a>
+                        |&nbsp;&nbsp;<a href="/list/${item.id?c!""}">${item.title!""}</a>
                     </#if>
                 </#list>
             </#if>
@@ -443,7 +445,7 @@ $(function(){
     	<ul class="phones_logo pc_logo">
     	    <#if f1_brand_page??>
                 <#list f1_brand_page.content as item>
-                    <#if item_index < 3>
+                    <#if item_index < 5>
                     <div class="lg">
                         <a href="${item.linkUri!''}">
                             <img src="${item.logoUri!''}" width="120" height="60">
@@ -452,37 +454,16 @@ $(function(){
                     </#if>
                 </#list>
             </#if>
-            <#--
-            <div class="pc">
-            	<h4>平板</h4>
-                <a href="#">苹果</a>
-                <a href="#">三星</a>
-                <a href="#">联想</a>
-                <a href="#">微软</a>
-                <a href="#">索尼</a>
-                <a href="#">华硕</a>
-                <a href="#">戴尔</a>
-            </div>
-            <div class="computer">
-            	<h4>笔记本</h4>
-                <a href="#">苹果</a>
-                <a href="#">三星</a>
-                <a href="#">联想</a>
-                <a href="#">微软</a>
-                <a href="#">宏基</a>
-                <a href="#">华硕</a>
-                <a href="#">戴尔</a>
-            </div>
-            -->
         </ul>
         <ul class="pc_photo">
             <div id="slideBox" class="slideBox">
                 <div class="bd">
                     <ul>
-                    <#if mid_scroll_ad_list?? >
-                        <#list mid_scroll_ad_list as item>
-                       
-                        <li><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
+                    <#if index_2F_ad_list?? >
+                        <#list index_2F_ad_list as item>
+                            <#if item_index < 3 >
+                                <li><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
+                            </#if>
                         </#list>
                     </#if>  
                    
@@ -495,48 +476,48 @@ $(function(){
             <#if top_cat_goods_page1?? && top_cat_goods_page1.content?size gt 0 >
                 <#list top_cat_goods_page1.content as item>
                     <#if item_index < 2 >
-                    <li class="photo_1">
-                        <dl>
-                           <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
-                           <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                           <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                           <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                        </dl>
-                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
-                    </li>
+                        <li class="photo_1">
+                            <dl>
+                               <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                               <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                               <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                               <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                            </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        </li>
                     </#if>
                 </#list>
             </#if>
         </ul>
         <ul class="phones_details">
-         <#if top_cat_goods_page1?? && top_cat_goods_page1.content?size gt 0 >
+            <#if top_cat_goods_page1?? && top_cat_goods_page1.content?size gt 0 >
                 <#list top_cat_goods_page1.content as item>
                     <#if item_index gt 1 && item_index < 5 >
-                    <li class="photo_1">
-                        <dl>
-                          <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                          <dd class="feature">性价比之王</dd>
-                          <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                          <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                          <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                        </dl>
-                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
-                    </li>
+                        <li class="photo_1">
+                            <dl>
+                              <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                              <dd class="feature">性价比之王</dd>
+                              <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                              <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                              <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                            </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        </li>
                     </#if>
                 </#list>
             </#if>
-             <#if top_cat_goods_page1?? && top_cat_goods_page1.content?size gt 0 >
+            <#if top_cat_goods_page1?? && top_cat_goods_page1.content?size gt 0 >
                 <#list top_cat_goods_page1.content as item>
                     <#if item_index gt 4 && item_index < 8 >
-                    <li class="photo_1 photo_4">
-                        <dl>
-                           <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
-                           <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                           <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                           <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                        </dl>
-                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
-                    </li>
+                        <li class="photo_1 photo_4">
+                            <dl>
+                               <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                               <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                               <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                               <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                            </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        </li>
                     </#if>
                 </#list>
             </#if>
@@ -544,25 +525,25 @@ $(function(){
     </div>
 </div>
 
-<!--3F数码缠带设备-->
+<!--3F展示-->
 <div class="phone_encyclopedia">
 	<div class="phones">
         <!-- 楼层 -->
         <#if top_category_list?? && top_category_list?size gt 0 >
-        <div class="phones_left">
-            <#list top_category_list as item>
-                <#if item_index == 2>
-                    <a href="/list/${item.id}">3F${item.title!""}</a>
-                </#if>
-            </#list>
-        </div>
+            <div class="phones_left">
+                <#list top_category_list as item>
+                    <#if item_index == 2>
+                        <a href="/list/${item.id}">3F${item.title!""}</a>
+                    </#if>
+                </#list>
+            </div>
         </#if>
         <div class="phones_right">
-            <#if third_brand_list??&&third_brand_list?size gt 0>
+            <#if third_brand_list?? && third_brand_list?size gt 0>
         		热门:&nbsp;&nbsp;
                 <#list third_brand_list as item >
                     <#if item_index lt 6>
-                    |&nbsp;&nbsp;<a href="#">${item.title!""}</a>
+                        |&nbsp;&nbsp;<a href="#">${item.title!""}</a>
                     </#if>
                 </#list>
             </#if>
@@ -573,18 +554,18 @@ $(function(){
     	    <#if f2_brand_page??>
                 <#list f2_brand_page.content as item>
                     <#if item_index < 5>
-                    <div class="lg">
-                        <a href="${item.linkUri!''}">
-                            <img src="${item.logoUri!''}" width="120" height="60">
-                        </a>
-                    </div>
+                        <div class="lg">
+                            <a href="${item.linkUri!''}">
+                                <img src="${item.logoUri!''}" width="120" height="60">
+                            </a>
+                        </div>
                     </#if>
                 </#list>
             </#if>
         </ul>
         <ul class="phones_photo">
-            <#if mid_big_ad_list?? && mid_big_ad_list?size gt 0 >
-                <img src="${mid_big_ad_list[0].fileUri!""}" width="404px" height="470px"/>
+            <#if index_3F_ad_list?? && index_3F_ad_list?size gt 0 >
+                 <img src="${index_3F_ad_list[0].fileUri!""}" width="404px" height="470px"/>
             </#if>
         </ul>
         <ul class="phones_details">
@@ -607,24 +588,24 @@ $(function(){
             <#if top_cat_goods_page2?? && top_cat_goods_page2.content?size gt 0 >
                 <#list top_cat_goods_page2.content as item>
                     <#if item_index gt 3 && item_index < 6 >
-                    <li class="photo_1 photo_4">
-                         <dl>
-                          <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                          <dd class="feature">性价比之王</dd>
-                          <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                          <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                          <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                        </dl>
-                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
-                     </li>
-                     </#if>
+                        <li class="photo_1 photo_4">
+                             <dl>
+                              <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                              <dd class="feature">性价比之王</dd>
+                              <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                              <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                              <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                            </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        </li>
+                    </#if>
                 </#list>
             </#if>
         </ul>
     </div>
 </div>
 
-<!--4F数码配件-->
+<!--4F展示-->
 <div class="phone_encyclopedia">
 	<div class="phones">
     	<div class="phones_left">
@@ -639,7 +620,7 @@ $(function(){
         		热门:&nbsp;&nbsp;
                 <#list fourth_brand_list as item >
                     <#if item_index lt 6>
-                    |&nbsp;&nbsp;<a href="#">${item.title!""}</a>
+                        |&nbsp;&nbsp;<a href="#">${item.title!""}</a>
                     </#if>
                 </#list>
             </#if>
@@ -650,11 +631,11 @@ $(function(){
         	<#if f3_brand_page??>
                 <#list f3_brand_page.content as item>
                     <#if item_index < 5>
-                    <div class="lg">
-                        <a href="${item.linkUri!''}">
-                            <img src="${item.logoUri!''}" width="120" height="60">
-                        </a>
-                    </div>
+                        <div class="lg">
+                            <a href="${item.linkUri!''}">
+                                <img src="${item.logoUri!''}" width="120" height="60">
+                            </a>
+                        </div>
                     </#if>
                 </#list>
             </#if>
@@ -663,13 +644,13 @@ $(function(){
         	 <div id="slideBox" class="slideBox">
                 <div class="bd">
                     <ul>
-                    <#if type_scroll_ad_list?? >
-                        <#list type_scroll_ad_list as item>
-                       
-                        <li><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
-                        </#list>
-                    </#if>  
-                   
+                        <#if index_4F_ad_list?? >
+                            <#list index_4F_ad_list as item>
+                                <#if item_index < 3 >
+                                    <li><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
+                                </#if>
+                            </#list>
+                        </#if>  
                     </ul>
                 </div>
                 <a class="prev" href="javascript:void(0)"></a>
@@ -678,15 +659,15 @@ $(function(){
             <#if top_cat_goods_page3?? && top_cat_goods_page3.content?size gt 0 >
                 <#list top_cat_goods_page3.content as item>
                     <#if item_index < 2 >
-                    <li class="photo_1">
-                        <dl>
-                           <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
-                           <dd class="introduction"><a href="/goods/${item.id?c}">${item.title!""}</a></dd>
-                           <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                           <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                        </dl>
-                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
-                    </li>
+                        <li class="photo_1">
+                            <dl>
+                               <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                               <dd class="introduction"><a href="/goods/${item.id?c}">${item.title!""}</a></dd>
+                               <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                               <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                            </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        </li>
                     </#if>
                 </#list>
             </#if>
@@ -695,31 +676,31 @@ $(function(){
         	<#if top_cat_goods_page3?? && top_cat_goods_page3.content?size gt 0 >
                 <#list top_cat_goods_page3.content as item>
                     <#if item_index gt 1 && item_index < 5 >
-                    <li class="photo_1">
-                        <dl>
-                          <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                          <dd class="feature">性价比之王</dd>
-                          <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                          <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                          <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                        </dl>
-                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
-                    </li>
+                        <li class="photo_1">
+                            <dl>
+                              <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                              <dd class="feature">性价比之王</dd>
+                              <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                              <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                              <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                            </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        </li>
                     </#if>
                 </#list>
             </#if>
              <#if top_cat_goods_page3?? && top_cat_goods_page3.content?size gt 0 >
                 <#list top_cat_goods_page3.content as item>
                     <#if item_index gt 4 && item_index < 8 >
-                    <li class="photo_1 photo_4">
-                        <dl>
-                           <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
-                           <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                           <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                           <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                        </dl>
-                    <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
-                    </li>
+                        <li class="photo_1 photo_4">
+                            <dl>
+                               <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                               <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                               <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                               <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                            </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        </li>
                     </#if>
                 </#list>
             </#if>

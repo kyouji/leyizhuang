@@ -49,7 +49,7 @@ public class TdTouchLoginController {
         
         if (null == referer)
         {
-            referer = "/";
+            referer = "/touch/";
         }
         
         return "redirect:" + referer;
