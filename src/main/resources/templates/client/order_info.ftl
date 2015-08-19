@@ -56,10 +56,10 @@
 <div class="shipping_address">
 	<h3>收货地址</h3>
     <div class="address">
-        <input id="input-address-id" type="hidden" name="addressId" value="1" datatype="n" nullmsg="请选择收货地址!"/>
     	 <#if user.shippingAddressList?? && user.shippingAddressList?size gt 0>
              <#list user.shippingAddressList as address>
     	        
+                <input id="input-address-id" type="hidden" name="addressId" value="${address.id?c}" datatype="n" nullmsg="请选择收货地址!"/>
     	         <a class="address_1" href="javascript:;" onclick="javascript:selectAddress(this, ${address.id?c});">
                     <p>收货人：${address.receiverName!''}</p>
                     <p>收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>

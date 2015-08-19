@@ -195,7 +195,11 @@
 .order_info p{ width:100%; float:left; line-height:28px;}
 .order_info a{ position:absolute; z-index:10; right:2%; top:20px;}
 .order_info .order_words{ width:94%; height:30px; padding:0 5px; margin:0 3%;}
+.order_info ul{ display:block; width:94%; margin:0 auto; max-width:600px; top:-5px;}
+.order_info ul li { display:inline-block; margin:0 1% 5px;}
+.order_info ul li span { border:1px solid #ddd; display:inline-block;top:8px;}
 .order_price { float: left; width: 30%; height: 30px; margin: 30px 0 0 3%; border-radius: 3px;}
+
     /*提交订单-底部漂浮*/
 .order_mainbox {width:94%;padding-left:3%;padding-right:3%;max-width:600px;margin-left:auto;margin-right:auto; color:#fff;font-size: 1.2em;}	
 .orderfoot { width: 100%;background:url(../images/front/darkbg.png) repeat; padding: 10px 0; z-index: 80; position: fixed; left: 0; bottom: 0; }

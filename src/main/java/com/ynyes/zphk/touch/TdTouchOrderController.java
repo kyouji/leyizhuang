@@ -448,7 +448,7 @@ public class TdTouchOrderController  extends AbstractPaytypeService{
         tdCartGoodsService.delete(cartGoodsList);
 
         if (tdOrder.getIsOnlinePay()) {
-            return "redirect:/order/pay?orderId=" + tdOrder.getId();
+            return "redirect:/touch/order/pay?orderId=" + tdOrder.getId();
         }
 
         return "redirect:/touch/order/success?orderId=" + tdOrder.getId();
@@ -539,5 +539,118 @@ public class TdTouchOrderController  extends AbstractPaytypeService{
 		
         return "/touch/order_info";
     }
+    
+    /**
+     * 订单页收货地址选择
+     * @param req
+     * @param method
+     * @param id
+     * @param tdShippingAddress
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/address/{method}")
+    public String address(HttpServletRequest req, 
+                        @PathVariable String method,
+                        Long id,
+                        TdShippingAddress tdShippingAddress,
+                        ModelMap map){
+        String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            return "redirect:/touch/login";
+        }
+       
+        tdCommonService.setHeader(map, req);
+        
+        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+
+        map.addAttribute("user", user);
+        
+        if (null != user)
+        {
+            List<TdShippingAddress> addressList = user.getShippingAddressList();
+            
+            if (null != method && !method.isEmpty())
+            {
+                if (method.equalsIgnoreCase("update"))
+                {
+                    if (null != id)
+                    {
+                        //map.addAttribute("address", s)
+                        for (TdShippingAddress add : addressList)
+                        {
+                            if (add.getId().equals(id))
+                            {
+                                map.addAttribute("address", add);
+                            }
+                        }
+                    }
+                    return "/touch/order_address_edit";
+                }
+                else if (method.equalsIgnoreCase("delete"))
+                {
+                    if (null != id)
+                    {
+                        for (TdShippingAddress add : addressList)
+                        {
+                            if (add.getId().equals(id))
+                            {
+                                addressList.remove(id);
+                                user.setShippingAddressList(addressList);
+                                tdShippingAddressService.delete(add);
+                                return "redirect:/touch/order/address/list";
+                            }
+                        }
+                    }
+                }
+                else if (method.equalsIgnoreCase("save"))
+                {
+                    // 修改
+                    if (null != tdShippingAddress.getId())
+                    {
+                        tdShippingAddressService.save(tdShippingAddress);
+                    }
+                    // 新增
+                    else
+                    {
+                    	tdShippingAddress.setIsDefaultAddress(false);
+                        addressList.add(tdShippingAddressService.save(tdShippingAddress));
+                        user.setShippingAddressList(addressList);
+                        tdUserService.save(user);
+                    }
+                    
+                    return "redirect:/touch/order/address/list";
+                }
+                else if(method.equalsIgnoreCase("default"))
+                {
+                	if (null != id)
+                    {
+                        //map.addAttribute("address", s)
+                        for (TdShippingAddress add : addressList)
+                        {
+                            if (add.getId().equals(id))
+                            {
+                           	 add.setIsDefaultAddress(true);
+                           	 tdShippingAddressService.save(add);
+                            }
+                            else if (!add.getId().equals(id))
+                            {
+                           	 add.setIsDefaultAddress(false);
+                           	 tdShippingAddressService.save(add);
+                            }
+                        }
+                    }
+                	return "redirect:/touch/order/info";
+                }
+            }
+            
+            map.addAttribute("address_list", user.getShippingAddressList());
+        }
+        
+        return "/touch/order_address_list";
+    }
+    
     
 }
