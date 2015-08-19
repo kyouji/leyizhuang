@@ -69,11 +69,11 @@
 	}
 	
 	function addCart(id){
-		window.location.href="/cart/init?id=${goods.id?c}";
+		window.location.href="/cart/init?id="+id;
 	}
 	
 	function buyNow(id){
-		window.location.href="/touch/order/buynow?goodsId=${goods.id?c}";
+		window.location.href="/touch/order/buynow?goodsId="+id;
 	}
 </script>
 </head>

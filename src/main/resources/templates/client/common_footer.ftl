@@ -3,7 +3,7 @@
         <div class="footer_icons">
              <#if service_item_list??>
                  <#list service_item_list as item>
-                    <#if item_index < 6>
+                    <#if item_index < 7>
                     <dl>
                         <dt><img src="${item.logo!''}" width="60px;"/></dt>
                         <dd>${item.title!''}</dd>

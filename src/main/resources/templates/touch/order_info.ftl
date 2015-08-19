@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<title><#if site??>${site.seoTitle!''}-</#if>购物车</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -10,93 +10,113 @@
 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
-<script src="/touch/js/order_info.js"></script>
 
-<link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/front.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
 $(document).ready(function(){
+  searchTextClear(".order_words","给商家留言（选填、45字以内）：","#999","#333");
   
+  $("#form1").Validform({
+        tiptype: 1
+    });
+    
 });
 </script>
+
 </head>
 
 <body>
-<header class="comhead">
+<div class="maintop_bg"></div>
+<header class="maintop">
   <div class="main">
-    <p>购物车</p>
-    <a class="a1" href="javascript:history.go(-1);">返回</a>
-    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
+    <p>提交订单</p>
+    <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
+    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a>
   </div>
 </header>
-<div class="comhead_bg"></div>
-<!--header END-->
+<div class="clear"></div>
 
-<div class="mainbox">
-  <p class="address">选择线下同盟店：</p>
-  <div class="address">
-    <select style="width:100%;">
-        <option value="">请选择同盟店</option>
-        <#if diy_site_list??>
-            <#list diy_site_list as item>
-                <option value="item.id">${item.title!''}</option>
+<div class="main">
+    <form action="/touch/order/submit" method="post" id="form1">
+        <#if address_list??>
+            <#list address_list as item>
+                <#if item.isDefaultAddress>
+                    <div class="order_info">
+                        <h4 class="c3">收货人信息</h4>
+                        <p>收货人：<span>${item.receiverName!''}</span></p>
+                        <p>联系方式：<span>${item.receiverMobile!''}</span></p>
+                        <p>地址：<span>${item.province!''}${item.city!''}${item.disctrict!''}${item.detailAddress!''}</span></p>
+                        <a href="/touch/user/add"><img src="/touch/images/front/arrow04.png" /></a>
+                    </div>
+                </#if>
             </#list>
         </#if>
-    </select>
-  </div>
-  <p class="address">选择预约安装时间：</p>
-  <div class="address">
-    <select style="width:100%;">
-        <option >9:00</option>
-        <option >14:00</option>
-        <option >17:00</option>
-    </select>
-  </div>
-  <p class="address">选择粮草：<span class="absolute-r">可用粮草（<b class="red">${total_point_limit!'0'}</b>）</span></p>
-  <input type="text" class="address" value="" />
-  <p class="address">选择优惠券：</p>
-  <div class="address">
-    <select id="couponSelect" name="couponId" style="width:100%;" onchange="couponChange();">
-        <#if coupon_list??>
-            <option value="" fee="0">不使用优惠券</option>
-            <#list coupon_list as item>
-                <option value="${item.id}">${item.typeTitle!''}</option>
+    
+        <div class="order_info">
+        	<h4 class="c3">商品详情</h4>
+    		<a href="#"><img src="/touch/images/front/arrow04.png" /></a>
+        </div>
+        
+        <#if selected_goods_list?? && selected_goods_list?size gt 0>
+        <div class="whitebg">
+          <ul class="car_list main">
+            <#list selected_goods_list as cg>
+                <li>
+                  <a class="a2" href="/touch/goods/${cg.goodsId}<#if cg.qiang??>?qiang=${cg.qiang!''}</#if>" style="background-image:url(${cg.goodsCoverImageUri!''}); height:64px;">
+                     <p style="height:30px;overflow:hidden; margin-bottom:5px;">${cg.goodsTitle!''}</p>
+                     <p class="c9 lh16">颜色：黑色</p>
+                     <p class="c9 lh16">赠品：无</p>
+                  </a>
+                  <div class="car_num">
+                       <span class="red">￥${(cg.price*cg.quantity)?string("0.00")}</span>
+                  </div>
+                  <div class="clear"></div>
+                </li>
             </#list>
+          </ul>
+        </div>
         </#if>
-    </select>
-  </div>
-  <p class="address">选择支付方式：</p>
-  <ul class="paystyle">
-    <#if pay_type_list??>
-        <#list pay_type_list as pay_type>
-            <li><input type="radio" datatype="n" value="${pay_type.id!''}"/><span>${pay_type.title!''}</span></li>
-        </#list>
-    </#if>
-  </ul>
-  <div class="clear"></div>
-  <p class="address">留言：</p>
-  <input type="text" class="address" name="userMessage" value="" />
-  
-    <#assign totalQuantity=0>
-    <#assign totalPrice=0>
-    <#if selected_goods_list??>
+        
+        
+    
+        <div class="order_info">
+    	<h4 class="c3">支付方式</h4>
+        <p>在线支付</p>
+		<a href="#"><img src="/touch/images/front/arrow04.png" /></a>
+    </div>
+    
+    <div class="order_info">
+    	<h4 class="c3">配送方式</h4>
+        <p>惠客配送</p>
+		<a href="#"><img src="/touch/images/front/arrow04.png" /></a>
+    </div>
+    
+    <div class="order_info">
+    	<input type="text" class="order_words" value=""  />
+    </div>
+     <#assign totalQuantity=0>
+     <#assign totalPrice=0>
+     <#if selected_goods_list??>
         <#list selected_goods_list as sg>
             <#assign totalQuantity=totalQuantity+sg.quantity>
             <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
         </#list>
     </#if>
-        
-  <p class="address ta-r">共<#if totalQuantity??>${totalQuantity!'0'}</#if>件商品，合计￥<span id="totalFee" class="red">${totalPrice?string('0.00')}</span></p>
+    
+    </form>
 </div>
 
-<div class="carfoot_bg"></div>
-<footer class="carfoot">
-  <div class="mainbox">
-    
-    <p>共<span class="red"><#if totalQuantity??>${totalQuantity!'0'}</#if></span>件，<span class="red">￥${totalPrice?string('0.00')}</span></p>
-    <input class="sub" type="submit" value="结算（<#if totalQuantity??>${totalQuantity!'0'}</#if>）" />
+<div class="clear60"></div>
+<!--main END-->
+
+<footer class="orderfoot">
+  <div class="order_mainbox">
+    <p><span style="margin-left:5%;">实付款：</span>￥<span>${totalPrice?string('0.00')}</span></p>
+    <input class="sub" type="submit" value="提交订单" />
   </div>
 </footer>
+
 </body>
 </html>

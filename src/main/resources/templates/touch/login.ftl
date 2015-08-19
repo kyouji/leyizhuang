@@ -39,7 +39,7 @@ $(document).ready(function(){
                     if (data.code == 0) {
                         var url = document.referrer;
                         if(undefined==url || ""==url){
-                            window.location.href="/";
+                            window.location.href="/touch/";
                         }else{
                             window.location.href = url; 
                         }
@@ -67,6 +67,7 @@ $(document).ready(function(){
 
 
 <section class="loginbox">
+
   <div class="main">
     <div class="logintext">
     <input type="text" class="logintext01" value="" id="txt_loginId"/>
@@ -80,6 +81,7 @@ $(document).ready(function(){
       <a class="a1" href="/touch/reg">注册</a>
     </p>
   </div>
+
   <!--
   <div class="otherlogin">
     <p class="ta-c fs10 pb20"><span>第三方账号登录</span></p>

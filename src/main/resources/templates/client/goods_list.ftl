@@ -35,9 +35,7 @@ function btnPageSubmit()
 </head>
 
 <body>
-<!--顶部ad大小：1920 90-->
-<div class="top_ad"><img src="/client/images/topad.png" /></div>
-
+<!-- 顶部  -->
 <#include "/client/common_header.ftl" />
 
 <!--面包屑导航-->

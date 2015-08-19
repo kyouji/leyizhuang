@@ -166,7 +166,7 @@ public class TdIndexController {
         adType = tdAdTypeService.findByTitle("一楼商品中部广告");
 
         if (null != adType) {
-            map.addAttribute("cat_bottom_ad_list", tdAdService
+            map.addAttribute("index_1F_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
@@ -174,7 +174,7 @@ public class TdIndexController {
         adType = tdAdTypeService.findByTitle("二楼商品中部广告");
 
         if (null != adType) {
-            map.addAttribute("mid_scroll_ad_list", tdAdService
+            map.addAttribute("index_2F_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
@@ -182,7 +182,7 @@ public class TdIndexController {
         adType = tdAdTypeService.findByTitle("三楼商品中部广告");
 
         if (null != adType) {
-            map.addAttribute("mid_big_ad_list", tdAdService
+            map.addAttribute("index_3F_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
@@ -190,7 +190,7 @@ public class TdIndexController {
         adType = tdAdTypeService.findByTitle("四楼商品中部广告");
 
         if (null != adType) {
-            map.addAttribute("type_scroll_ad_list", tdAdService
+            map.addAttribute("index_4F_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
 
