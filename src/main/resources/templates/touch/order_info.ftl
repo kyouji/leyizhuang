@@ -66,10 +66,9 @@ $(document).ready(function(){
                 <li>
                   <a class="a2" href="/touch/goods/${cg.goodsId}<#if cg.qiang??>?qiang=${cg.qiang!''}</#if>" style="background-image:url(${cg.goodsCoverImageUri!''}); height:64px;">
                      <p style="height:30px;overflow:hidden; margin-bottom:5px;">${cg.goodsTitle!''}</p>
-                     <p class="c9 lh16">颜色：黑色</p>
-                     <p class="c9 lh16">赠品：无</p>
+                     <p class="c9 lh16">数量:${cg.quantity!'0'}</p>
                   </a>
-                  <div class="car_num">
+                  <div class="order_price">
                        <span class="red">￥${(cg.price*cg.quantity)?string("0.00")}</span>
                   </div>
                   <div class="clear"></div>

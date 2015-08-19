@@ -67,7 +67,7 @@
              <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
-                    	<a href="${item.linkUri!''}">${item.title}</a>
+                    	<a href="/search?keywords=${item.title!''}">${item.title}</a>
                     </#if>
                 </#list>
             </#if>

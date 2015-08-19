@@ -21,7 +21,7 @@ import com.ynyes.zphk.entity.TdUser;
 import com.ynyes.zphk.entity.TdUserComment;
 import com.ynyes.zphk.entity.TdUserConsult;
 import com.ynyes.zphk.entity.TdUserPoint;
-import com.ynyes.zphk.entity.TdUserRecentVisit;
+import com.ynyes.zphk.service.TdBrandService;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdDiySiteService;
 import com.ynyes.zphk.service.TdGoodsCombinationService;
@@ -47,6 +47,9 @@ import com.ynyes.zphk.util.ClientConstant;
 public class TdGoodsController {
 	@Autowired
 	private TdGoodsService tdGoodsService;
+	
+	@Autowired
+	private TdBrandService tdBrandService;
 
 	@Autowired
 	private TdUserConsultService tdUserConsultService;
@@ -167,8 +170,8 @@ public class TdGoodsController {
 		map.addAttribute("one_star_comment_count",
 				tdUserCommentService.countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 1L));
 
-		// 热卖
-		map.addAttribute("hot_list", tdGoodsService.findTop10ByIsOnSaleTrueOrderBySoldNumberDesc());
+		// 热卖 edit by Sharon 2015-8-18
+		map.addAttribute("hot_sale_page", tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberDesc(goods.getCategoryId(), 0, 5));
 
 		// 同盟店
 		map.addAttribute("diy_site_list", tdDiySiteService.findByIsEnableTrue());
@@ -178,8 +181,9 @@ public class TdGoodsController {
 
 		// 查找类型
 		TdProductCategory tdProductCategory = tdProductCategoryService.findOne(goods.getCategoryId());
-		// 查询所有品牌
-		map.addAttribute("product_list", tdProductService.findAll());
+		
+		// 查询同类型下面品牌 edit by Sharon 2015-8-18
+		map.addAttribute("brand_page", tdBrandService.findByStatusIdAndProductCategoryTreeContaining(1L, goods.getCategoryId(), 0, 10));
 
 		// 获取该类型所有父类型
 		if (null != tdProductCategory) {

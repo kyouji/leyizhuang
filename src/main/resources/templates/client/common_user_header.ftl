@@ -67,7 +67,7 @@
     </div>
     
     <div class="header_cart">
-        <a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
+        <a href="/cart" title="购物车" id="theCart" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
     </div>
 </div>
 

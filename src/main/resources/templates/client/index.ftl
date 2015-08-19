@@ -16,10 +16,11 @@
 <script src="/client/js/common.js" type="text/javascript"></script>
 <script src="/client/js/goods.js" type="text/javascript"></script>
 <script type="text/javascript">
+
 function submitSearch(){
-		var search = document.getElementById("search_form");
-		search.submit();
-	}
+	var search = document.getElementById("search_form");
+	search.submit();
+}
 
 	
 $(function(){
@@ -290,7 +291,7 @@ $(function(){
              <#if news_page??>
                 <#list news_page.content as item>
                      <#if item_index < 7>
-                     <a class="block mt5" href="/info/content/${item.id}?mid=12" style="height:20px; overflow:hidden;">${item.title!''}</a>
+                     <a class="block mt5" href="/info/content/${item.id}?mid=12&catId=${item.categoryId}" style="height:20px; overflow:hidden;">${item.title!''}</a>
                      </#if>
                 </#list>
             </#if>
@@ -343,7 +344,7 @@ $(function(){
         <div class="phones_left">
             <#list top_category_list as item>
                 <#if item_index == 0>
-                    <a href="/list/${item.id}">1F ${item.title!""}</a>
+                    <a href="${item.linkUri!''}">1F${item.title!""}</a>
                 </#if>
             </#list>
         </div>
@@ -571,16 +572,16 @@ $(function(){
         	<#if top_cat_goods_page2?? && top_cat_goods_page2.content?size gt 0 >
                 <#list top_cat_goods_page2.content as item>
                     <#if item_index < 3 >
-                        <li class="photo_1">
-                            <dl>
-                                <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                                <dd class="feature">性价比之王</dd>
-                                <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
-                                <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
-                                <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
-                             </dl>
-                            <div class="gz_dh"><a href="#"><img src="/client/images/dh_gz_1.png" /></a></div>
-                        </li>
+                     <li class="photo_1">
+                        <dl>
+                            <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                             <dd class="feature">性价比之王</dd>
+                             <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                             <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                             <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                         </dl>
+                        <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                    </li>
                     </#if>
                 </#list>
             </#if>

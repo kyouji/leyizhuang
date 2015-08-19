@@ -4,8 +4,8 @@ $(document).ready(function(){
     $(".stab").click(function(){
        
     	// tab特效切换
-        $(".stab").removeClass("sel");
-        $(this).addClass("sel");
+        $(".stab").removeClass("c_R_tab_choiced");
+        $(this).addClass("c_R_tab_choiced");
        
         // tab页面切换
         $(".php_z").css("display", "none");
