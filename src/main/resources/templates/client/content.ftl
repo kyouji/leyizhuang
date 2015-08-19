@@ -160,6 +160,11 @@ function btnPageSubmit(type)
     }
 }
 
+<!-- 加入购物车的方法（原方法无法使购买数量生效，无论购买数量为多少，加入购物车的数量总是1） -->
+function cartInit(){
+	var quantity = document.getElementById("quantity").value;
+	window.location.href = "/cart/init?id=${goods.id}&quantity="+quantity;
+}
 </script>
 </head>
 <body>
@@ -277,7 +282,7 @@ function btnPageSubmit(type)
 							<p>
 								<#if select_one_goods_list??> 
 									<#list select_one_goods_list as item> 
-										<a<#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="/goods/${item.id}">${item.selectOneValue}</a> 
+										<a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="/goods/${item.id}">${item.selectOneValue}</a> 
 									</#list>
 								</#if>
 							</p>
@@ -288,7 +293,7 @@ function btnPageSubmit(type)
 							<p>
 								<#if select_one_goods_list??> 
 									<#list select_one_goods_list as item> 
-										<a<#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="/goods/${item.id}">${item.selectOneValue}</a>
+										<a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="/goods/${item.id}">${item.selectOneValue}</a>
 									</#list> 
 								</#if>
 							</p>
@@ -298,7 +303,7 @@ function btnPageSubmit(type)
 							<p>
 								<#if select_two_goods_list??> 
 									<#list select_two_goods_list as item> 
-										<a<#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+										<a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
 									</#list>
 								</#if>
 							</p>
@@ -309,7 +314,7 @@ function btnPageSubmit(type)
 							<p>
 								<#if select_one_goods_list??>
 									<#list select_one_goods_list as item> 
-										<a<#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectOneValue}</a> 
+										<a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectOneValue}</a> 
 									</#list>
 								</#if>
 							</p>
@@ -319,7 +324,7 @@ function btnPageSubmit(type)
 							<p>
 								<#if select_two_goods_list??> 
 									<#list select_two_goods_list as item> 
-										<a<#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+										<a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
 									</#list> 
 								</#if>
 							</p>
@@ -329,7 +334,7 @@ function btnPageSubmit(type)
 							<p>
 								<#if select_three_goods_list??> 
 									<#list select_three_goods_list as item> 
-										<a<#if item.selectThreeValue==three_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectThreeValue}</a>
+										<a <#if item.selectThreeValue==three_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectThreeValue}</a>
 								 	</#list>
 								</#if>
 							</p>
@@ -357,7 +362,7 @@ function btnPageSubmit(type)
 				</#if>
 			</div>
 			<span class="addcart">
-				<a href="/cart/init?id=${goods.id}" target="_blank" title="加入购物车" class="addcartorange">加入购物车</a>
+				<a href="javascript:cartInit();" target="_blank" title="加入购物车" class="addcartorange">加入购物车</a>
 			</span>
 		</div>
 			
@@ -594,10 +599,10 @@ function btnPageSubmit(type)
 						<a href="javascript:getCommentByStars(${goodsId}, 2, 0);" id="star2" title="中评">中评（${two_star_comment_count!'0'}）</a>
 						<a href="javascript:getCommentByStars(${goodsId}, 1, 0);" id="star1" title="差评">差评（${one_star_comment_count!'0'}）</a>
 					<#else> 
-						<a href="javascript:;" onlick="changeColor();" id="star0" title="全部评价" class="c_R_comment_title_choiced">全部评价（0）</a> 
-						<a href="javascript:;" onlick="changeColor();" id="star3" title="好评">好评（0）</a>
-						<a href="javascript:;" onlick="changeColor();" id="star2" title="中评">中评（0）</a>
-						<a href="javascript:;" onlick="changeColor();" id="star1" title="差评">差评（0）</a>
+						<a href="javascript:;" id="star0" title="全部评价" class="c_R_comment_title_choiced">全部评价（0）</a> 
+						<a href="javascript:;" id="star3" title="好评">好评（0）</a>
+						<a href="javascript:;" id="star2" title="中评">中评（0）</a>
+						<a href="javascript:;" id="star1" title="差评">差评（0）</a>
 					</#if>
 				</div>
 				<div id="the_comment">
