@@ -16,10 +16,11 @@
 <script src="/client/js/common.js" type="text/javascript"></script>
 <script src="/client/js/goods.js" type="text/javascript"></script>
 <script type="text/javascript">
+
 function submitSearch(){
-		var search = document.getElementById("search_form");
-		search.submit();
-	}
+	var search = document.getElementById("search_form");
+	search.submit();
+}
 
 	
 $(function(){
@@ -288,7 +289,7 @@ $(function(){
              <#if news_page??>
                 <#list news_page.content as item>
                      <#if item_index < 7>
-                     <a class="block mt5" href="/info/content/${item.id}?mid=12" style="height:20px; overflow:hidden;">${item.title!''}</a>
+                     <a class="block mt5" href="/info/content/${item.id}?mid=12&catId=${item.categoryId}" style="height:20px; overflow:hidden;">${item.title!''}</a>
                      </#if>
                 </#list>
             </#if>

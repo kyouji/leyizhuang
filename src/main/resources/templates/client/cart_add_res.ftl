@@ -23,7 +23,7 @@
         </p>
 	</div>
     <div class="acceptable">
-    	<p><a href="/">继续购物</a></p>
+    	<p><a href="javascript:history.back();">继续购物</a></p>
     </div>
     <div class="now_settlement">
     	<a href="/cart">立即去结算</a>
