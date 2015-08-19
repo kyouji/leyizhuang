@@ -574,18 +574,9 @@ function btnPageSubmit(type)
                             </ul>
                         </div>
                         
-                        <!--回复-->
-                        <div class="c_R_comment_con_R_reply1">
-                            <input type="text">
-                            <a href="#" title="">回 复</a>
-                        </div>
-                        
                         <!--已回复的-->
                         <div class="c_R_comment_con_R_reply2">
                             <span>xxx回复：嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩</span>
-                            <span>xxx回复：嗯嗯嗯嗯嗯嗯呢恩</span>
-                            <span>xxx回复：嗯嗯嗯嗯嗯嗯呢恩</span>
-                            <span>xxx回复：嗯嗯嗯嗯嗯嗯呢恩</span>
                         </div>
                         
                         
