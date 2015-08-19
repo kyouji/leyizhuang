@@ -26,13 +26,12 @@
     
 
     <div class="footerall_copyall">
-        <div class="footerall_copy">
-            友情链接：
+        <div class="footerall_copy">友情链接：
             <#if site_link_list??>
                 <#list site_link_list as item>
                      <a href="${item.linkUri!''}">${item.title!''}</a>
                 </#list>
-           </#if>
+            </#if>
             <br />
             <span> ${site.copyright!''}</span>
         </div>

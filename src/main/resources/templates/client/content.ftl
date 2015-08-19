@@ -12,9 +12,8 @@
 <script type="text/javascript" src="/client/js/common.js"></script>
 <script type="text/javascript" src="/client/js/goods.js"></script>
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
-<#--
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
-
+<#--
 <script type="text/javascript" src="/client/js/base.js"></script>
 <script type="text/javascript" src="/client/js/list.js"></script>
 <script type="text/javascript" src="/client/js/cart.js"></script>
@@ -119,22 +118,18 @@ function clearSelect()
 <!-- 跳转到指定页数评价或咨询的方法 -->
 function btnPageSubmit(type) 
 {
-	<#--
-    window.location.href = "goods/${goods.id}/"+(parseInt($('#iPageNum').val()) - 1);
-    -->
-    
     var pageNum = 0;<#-- 表示页数的变量 -->
     var totalPages = 0;<#-- 表示总页数的变量 -->
     
     if(type == "comment"){
     	pageNum = document.getElementById("commentPageNum").value;
     	<#if comment_page??>
-    		totalPages = ${comment_page.totalPages}
+    		totalPages = ${comment_page.totalPages!'0'};
     	</#if>
     }else{
     	pageNum = document.getElementById("consultPageNum").value;
     	<#if consult_page??>
-    		totalPages = ${consult_page.totalPages!'0'}
+    		totalPages = ${consult_page.totalPages!'0'};
     	</#if>
     }
     
@@ -144,7 +139,7 @@ function btnPageSubmit(type)
     }
     
     <#-- 判断是否大于最大页数 -->
-    if(pageNum>(totalPages)){
+    if(pageNum>totalPages){
     	return;
     }
     
@@ -599,10 +594,10 @@ function cartInit(){
 						<a href="javascript:getCommentByStars(${goodsId}, 2, 0);" id="star2" title="中评">中评（${two_star_comment_count!'0'}）</a>
 						<a href="javascript:getCommentByStars(${goodsId}, 1, 0);" id="star1" title="差评">差评（${one_star_comment_count!'0'}）</a>
 					<#else> 
-						<a href="javascript:;" id="star0" title="全部评价" class="c_R_comment_title_choiced">全部评价（0）</a> 
-						<a href="javascript:;" id="star3" title="好评">好评（0）</a>
-						<a href="javascript:;" id="star2" title="中评">中评（0）</a>
-						<a href="javascript:;" id="star1" title="差评">差评（0）</a>
+						<a href="javascript:getCommentByStars(${goodsId}, 0);" id="star0" title="全部评价" class="c_R_comment_title_choiced">全部评价（0）</a> 
+						<a href="javascript:getCommentByStars(${goodsId}, 3);" id="star3" title="好评">好评（0）</a>
+						<a href="javascript:getCommentByStars(${goodsId}, 2);" id="star2" title="中评">中评（0）</a>
+						<a href="javascript:getCommentByStars(${goodsId}, 1);" id="star1" title="差评">差评（0）</a>
 					</#if>
 				</div>
 				<div id="the_comment">

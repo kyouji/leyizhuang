@@ -25,8 +25,30 @@ function setprice() {
     if (price != "0-0") { url += "_" + price; }
     location.href = url;
 }
-function btnPageSubmit() 
-{
+<!-- 该方法实现跳转到指定页数的商品列表页功能，在此功能的基础上增加三点判断：1. 输入的值是否为数字;2. 输入的值是否大于最大页数;3. 输入的值是否小于1 -->
+function btnPageSubmit() {
+    <!-- 进行赋值操作，获取输入的值和总页数 -->
+    var inputPage = document.getElementById("iPageNum").value;
+    var totalPage = 0;
+    <#if goods_page??>
+       totalPage = ${goods_page.totalPages};
+    <#else>
+        return;
+    </#if>
+    
+    <!-- 判断键入的是否为一个数字 -->
+    if(isNaN(inputPage)){
+        return;
+    }
+    <!-- 判断键入的值是否大于总页数 -->
+    if(inputPage > totalPage){
+        return;
+    }
+    <!-- 判断键入的值是否小于1 -->
+    if(inputPage < 1){
+        return;
+    }
+    
     window.location.href = "${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-"
     + (parseInt($('#iPageNum').val()) - 1)
     + "-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string('#.##')}-${priceHigh?string('#.##')}</#if>";
