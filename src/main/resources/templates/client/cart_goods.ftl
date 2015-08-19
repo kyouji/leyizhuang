@@ -27,21 +27,20 @@
                             <a></a>
                             <a class="delete" href="javascript:delCartItem(${cg.id?c});">删除</a>
                         </li>
-                         <#if cg.isSelected>
-                                <#assign totalGoods=totalGoods+cg.quantity>
-                                <#assign totalPrice=totalPrice+cg.price*cg.quantity>
-                         </#if>
+                        <#if cg.isSelected>
+                            <#assign totalGoods=totalGoods+cg.quantity>
+                            <#assign totalPrice=totalPrice+cg.price*cg.quantity>
+                        </#if>
                     </ul>
                 </div>
             </#list>
         </div>
-    
+
         <!--商品统计-->
         <div class="number_statistics">
             <div class="statistics_left">
                 <input class="check_box" type="checkbox" <#if allChecked>checked="checked" onclick="javascript:toggleAllSelect(1);"<#else>onclick="javascript:toggleAllSelect(0);"</#if> />
                 <span>全选</span>
-               
             </div>
             <div class="statistics_right">
                 <a class="number_products">商品数量<span>&nbsp;<#if cart_goods_list??>${totalGoods!'0'}</#if>&nbsp;</span>件</a>
@@ -59,9 +58,7 @@
     <div class="empty">
         <img src="/client/images/order/empty_shopcar.png" />
         <div class="right">
-            <p class="pay">您的购物车还是空的，<br />
-                赶快去选购心怡的商品吧！
-            </p>
+            <p class="pay">您的购物车还是空的，<br /><br />赶快去选购心怡的商品吧！</p>
             <p class="acceptable"><a href="/">立即去购物 >></a></p>
         </div>
     </div>

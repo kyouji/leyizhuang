@@ -13,10 +13,10 @@
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
 
-<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/style/common.css"/>
+<link rel="stylesheet" type="text/css" href="/client/style/cytm.css"/>
+<link rel="stylesheet" type="text/css" href="/client/style/cartoon.css"/>
+<link rel="stylesheet" type="text/css" href="/client/style/style.css"/>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -28,31 +28,31 @@
 	checkNowHover("shopping_down","shopping_sel");
 	navDownList("navdown","li",".nav_showbox");
 	menuDownList("mainnavdown","#navdown",".a2","sel");
-		
 });
 </script>
 </head>
 
 <body>
-<#include "/client/common_header.ftl" />
-
-<div class="main">
-    <menu class="car_top">
-        <p style="z-index:10; width:34%;">我的购物车<i></i></p>
-        <p style="z-index:8;">我的订单信息<i></i></p>
-        <p>支付成功</p>
-        <div class="clear"></div>
-    </menu>
-    <div class="clear h30"></div>
-  
-    <div class="car_kong">
-        <p class="fc fs18 pb10">购物车空空的哦，去看看心意的商品吧！</p>
-        <p class="pt20"><a class="blue" href="/">马上去购物>>  </a></p>
+    <#include "/client/common_header.ftl" />
+    
+    <div class="main">
+        <menu class="car_top">
+            <p style="z-index:10; width:34%;">我的购物车<i></i></p>
+            <p style="z-index:8;">我的订单信息<i></i></p>
+            <p>支付成功</p>
+            <div class="clear"></div>
+        </menu>
+        <div class="clear h30"></div>
+      
+        <div class="car_kong">
+            <p class="fc fs18 pb10">购物车空空的哦，去看看心意的商品吧！</p>
+            <p class="pt20"><a class="blue" href="javascript:go(-1)">马上去购物>>  </a></p>
+        </div>
+      
+        <div class="clear"></div> 
     </div>
-  
-    <div class="clear"></div> 
-</div><!--main END-->
-
-<#include "/client/common_footer.ftl" />
+    <!--main END-->
+    
+    <#include "/client/common_footer.ftl" />
 </body>
 </html>
