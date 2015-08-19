@@ -7,7 +7,7 @@
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
 
-<link href="/client/css/Successfully_joined.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/Successfully_joined.css"/>
 </head>
 
 <body>
@@ -16,17 +16,15 @@
 
 <!--完成支付-->
 <div class="complete_payment">
-	<div class="success_join">
+    <div class="success_join">
         <img src="/client/images/correct.png" />
-        <p class="pay">
-			商品加入购物车成功
-        </p>
-	</div>
+        <p class="pay"> 商品加入购物车成功</p>
+    </div>
     <div class="acceptable">
-    	<p><a href="javascript:history.back();">继续购物</a></p>
+        <p><a href="javascript:history.go(-1);">继续购物</a></p>
     </div>
     <div class="now_settlement">
-    	<a href="/cart">立即去结算</a>
+        <a href="/cart">立即去结算</a>
     </div>
 </div>
 

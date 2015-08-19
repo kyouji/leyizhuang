@@ -3,12 +3,72 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="<#if productCategory??>${productCategory.seoKeywords!''}</#if>" />
+<meta name="description" content="<#if productCategory??>${productCategory.seoDescription!''}</#if>" />
+<meta name="copyright" content="<#if site??>${site.copyright!''}</#if>" /> 
 <title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/index.js"></script>
 <script src="/client/js/goods.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/list.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    <!-- 跳转到下一页的方法 -->
+    function nextPage(keywords){
+        <!-- 赋值处理 -->
+        <#if pageId??&&goods_page??>
+            var currentPage = ${pageId};
+            var totalPage = ${goods_page.totalPages};
+            var nextPage = currentPage+1;
+        <#else>
+            return;
+        </#if>
+        
+        window.location.href = "/search?keywords="+keywords+"&page="+nextPage;
+    }
+    
+    <!-- 跳转到上一页的方法 -->
+    function prePage(keywords){
+        <!-- 赋值处理 -->
+        <#if pageId??&&goods_page??>
+            var currentPage = ${pageId};
+            var totalPage = ${goods_page.totalPages};
+            var previousPage = currentPage-1;
+        <#else>
+            return;
+        </#if>
+        
+        window.location.href = "/search?keywords="+keywords+"&page="+previousPage;
+    }
+    
+    <!-- 跳转到指定页数的方法 -->
+    function changePage(${keywords}){
+        <!-- 获取键入的值 -->
+        var inputPage = document.getElementById("iPageNum").value;
+        <!-- 定义一个变量用于存储总页数 -->
+        var totalPage = 0
+        <!-- 判断总页数是否存在，如果存在便进行赋值操作，如果不存在，直接返回 -->
+        <#if goods_page??>
+            totalPage = ${goods_page.totalPages};        
+        <#else>
+            return;
+        </#if>
+        
+        <!-- 判断键入的是否为一个数字 -->
+        if(isNaN(inputPage)){
+            return;
+        }
+        <!-- 判断键入的值是否大于总页数 -->
+        if(inputPage > totalPage){
+            return;
+        }
+        <!-- 判断键入的值是否小于1 -->
+        if(inputPage < 1){
+            return;
+        }
+        
+        window.location.href = "/search?keywords="+keywords+"&page="+(inputPage-1);
+    }   
 </script>
 </head>
 
@@ -35,27 +95,6 @@
     <div class="wrapper">
         <!--中部左边-->
         <div class="c_l">
-            <!--热卖推荐100*100-->
-            <#if hot_sale_list?? && hot_sale_list?size gt 0>
-                <div class="c_l_hotsale">
-                    <div class="c_l_hotsale_title">热卖推荐</div>
-                    <div class="c_l_hotsale_cont">
-                        <ul>
-                            <#list hot_sale_list as item> 
-                                <#if item_index < 4>
-                                    <li><a href="/goods/${item.id}" title="${item.title!''}" class="img100"> <img src="${item.coverImageUri!''}" height="100" width="100" /></a> 
-                                        <a class="font_style_by_dx" href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a>
-                                        <p class="money16">￥
-                                            <#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
-                                        </p> 
-                                        <a href="/cart/init?id=${item.id}" title="加入购物车" class="btn_cart23">加入购物车</a>
-                                    </li> 
-                                </#if> 
-                            </#list>
-                        </ul>
-                    </div>
-                </div>
-            </#if>
             <hr>
             <!--产品列表-->
             <div class="piclist">
@@ -87,7 +126,7 @@
                         <#if goods_page.number == 0> 
                             <a class="a1 a0" href="javascript:;"><span>上一页</span></a>
                         <#else> 
-                            <a class="a2" href="${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>上一页</span></a>
+                            <a class="a2" href="javascript:prePage(${keywords})"><span>上一页</span></a>
                         </#if> 
                         <#if goods_page.totalPages gt 0> 
                             <#list 1..goods_page.totalPages as page> 
@@ -109,13 +148,13 @@
                         <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
                             <a class="a2 a0" href="javascript:;"><span>下一页</span></a>
                         <#else> 
-                            <a class="a2" href="${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>下一页</span></a>
+                            <a class="a2" href="javascript:nextPage(${keywords});"><span>下一页</span></a>
                         </#if> 
                         <span> 共<b>${goods_page.totalPages}</b>页</span> 
                     </#if>
                 </div>
                 <div class="page">
-                    <input class="sub" type="submit" onclick="javascript:btnPageSubmit();" value="确定" /> <span>页</span>
+                    <input class="sub" type="submit" onclick="javascript:changePage(${keywords});" value="确定" /> <span>页</span>
                     <input class="text" type="text" value="${pageId + 1}" id="iPageNum" />
                     <span>到第</span>
                 </div>

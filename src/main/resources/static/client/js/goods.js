@@ -121,14 +121,6 @@ function addCollect(goodsId)
 //    });
 }
 
-/**
- * 隐藏关注成功窗口的函数
- * @author dengxiao
- */
-function close(){
-	document.getElementById("collectWindow").style.display="none";
-	document.getElementById("collectGoods").style.display="none";
-}
 
 
 

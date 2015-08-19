@@ -12,9 +12,8 @@
 <script type="text/javascript" src="/client/js/common.js"></script>
 <script type="text/javascript" src="/client/js/goods.js"></script>
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
-<#--
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
-
+<#--
 <script type="text/javascript" src="/client/js/base.js"></script>
 <script type="text/javascript" src="/client/js/list.js"></script>
 <script type="text/javascript" src="/client/js/cart.js"></script>
@@ -119,22 +118,18 @@ function clearSelect()
 <!-- 跳转到指定页数评价或咨询的方法 -->
 function btnPageSubmit(type) 
 {
-	<#--
-    window.location.href = "goods/${goods.id}/"+(parseInt($('#iPageNum').val()) - 1);
-    -->
-    
     var pageNum = 0;<#-- 表示页数的变量 -->
     var totalPages = 0;<#-- 表示总页数的变量 -->
     
     if(type == "comment"){
     	pageNum = document.getElementById("commentPageNum").value;
     	<#if comment_page??>
-    		totalPages = ${comment_page.totalPages}
+    		totalPages = ${comment_page.totalPages!'0'};
     	</#if>
     }else{
     	pageNum = document.getElementById("consultPageNum").value;
     	<#if consult_page??>
-    		totalPages = ${consult_page.totalPages!'0'}
+    		totalPages = ${consult_page.totalPages!'0'};
     	</#if>
     }
     
@@ -144,7 +139,7 @@ function btnPageSubmit(type)
     }
     
     <#-- 判断是否大于最大页数 -->
-    if(pageNum>(totalPages)){
+    if(pageNum>totalPages){
     	return;
     }
     
@@ -527,68 +522,8 @@ function cartInit(){
             </div>
             
             <#-- 评价 -->
-            <div class="c_R_comment top20">
-                <div class="c_R_comment_title">
-                    <a href="#" title="" class="c_R_comment_title_choiced">全部评价（60）</a>
-                    <a href="#" title="">好评（60）</a>
-                    <a href="#" title="">中评（60）</a>
-                    <a href="#" title="">差评（60）</a>
-                </div>
-                <!--评价详情-->
-                <div class="c_R_comment_con">
-                    <!--用户信息-->
-                    <div class="c_R_comment_con_L">
-                        <ul>
-                            <li><img src="/client/images/u=2937378011,2167836267&amp;fm=21&amp;gp=0.jpg"></li>
-                            <li><span>这里****八字八字八字</span></li>
-                            <li>会员等级</li>
-                        </ul>
-                    </div>
-                    <!--右部-->
-                    <div class="c_R_comment_con_R">
-                        <!--星 标签 规格 时间-->
-                        <div class="c_R_comment_con_R_info">
-                            <div class="c_R_comment_con_R_info_L">
-                                <b><img src="images/star.png"><img src="images/star.png"><img src="images/star.png"><img src="images/star.png"></b>
-                                <p>
-                                    <a href="#" title="">外观漂亮</a><a href="#" title="">外观漂亮</a><a href="#" title="">外观漂亮</a><a href="#" title="">外观漂亮</a>
-                                    <a href="#" title="">外观漂亮</a><a href="#" title="">外观漂亮外观漂亮</a><a href="#" title="">外观漂亮</a>
-                                </p>
-                                <span>不错，性价比高，服务态度也很好！不错，性价比高，服务态度也很好！不错，性价比高，服务态度也很好！不错，性价比高，服务态度也很好！不错，性价比高，服务态度也很好！</span>
-                            </div>
-                            <div class="c_R_comment_con_R_info_M">
-                                <p>颜色：白</p>
-                                <p>规格：移动联通双4G(16GB ROM)</p>
-                            </div>
-                            <div class="c_R_comment_con_R_info_R">2015-07-09 13:15</div>
-                        </div>
-                        
-                        <div class="c_R_comment_con_R_reply">
-                            <a href="#" title="">有用（0）</a>
-                            <a href="#" title="">回复（0）</a>
-                        </div>
-                        
-                        <!--有图片的-->
-                        <div class="c_R_comment_con_R_pic">
-                            <ul>
-                                <li><img src="images/pic2.png"></li>
-                                <li><img src="images/pic2.png"></li>
-                                <li><img src="images/pic2.png"></li>
-                                <li><img src="images/pic2.png"></li>
-                                <li><img src="images/pic2.png"></li>
-                            </ul>
-                        </div>
-                        
-                        <!--已回复的-->
-                        <div class="c_R_comment_con_R_reply2">
-                            <span>xxx回复：嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩</span>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-     
-            </div>
+            <#include "/client/goods_comment.ftl" />
+            
             
 			<!--评价-->
 			<div class="c_R_comment top20">
@@ -599,10 +534,10 @@ function cartInit(){
 						<a href="javascript:getCommentByStars(${goodsId}, 2, 0);" id="star2" title="中评">中评（${two_star_comment_count!'0'}）</a>
 						<a href="javascript:getCommentByStars(${goodsId}, 1, 0);" id="star1" title="差评">差评（${one_star_comment_count!'0'}）</a>
 					<#else> 
-						<a href="javascript:;" id="star0" title="全部评价" class="c_R_comment_title_choiced">全部评价（0）</a> 
-						<a href="javascript:;" id="star3" title="好评">好评（0）</a>
-						<a href="javascript:;" id="star2" title="中评">中评（0）</a>
-						<a href="javascript:;" id="star1" title="差评">差评（0）</a>
+						<a href="javascript:getCommentByStars(${goodsId}, 0);" id="star0" title="全部评价" class="c_R_comment_title_choiced">全部评价（0）</a> 
+						<a href="javascript:getCommentByStars(${goodsId}, 3);" id="star3" title="好评">好评（0）</a>
+						<a href="javascript:getCommentByStars(${goodsId}, 2);" id="star2" title="中评">中评（0）</a>
+						<a href="javascript:getCommentByStars(${goodsId}, 1);" id="star1" title="差评">差评（0）</a>
 					</#if>
 				</div>
 				<div id="the_comment">
