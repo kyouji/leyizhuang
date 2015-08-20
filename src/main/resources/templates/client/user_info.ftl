@@ -98,17 +98,17 @@ function submitInfo()
     <div class="content_2_1">基本信息</div>
     <div class="content_2_2">     
       <ul>
-        <li><span>昵称：</span>
+        <li><span>&emsp;昵称：</span>
           <input id="nickname" type="text" name="nickname" datatype="*1-16" nullmsg="请输入昵称" errormsg="最多16个字符" class="textInput" value="${user.nickname!'' }" />
         </li>
-        <li><span>性别：</span>
+        <li><span>&emsp;性别：</span>
           <input id="RadioGroup1_0" type="radio" checked="checked" value="男" name="sex" <#if user.sex?? && user.sex=="男">checked="checked" </#if>/>
           男
           <input id="RadioGroup1_1" type="radio" value="女" name="sex"<#if user.sex?? && user.sex=="女">checked="checked" </#if>/>
           女</li>
           <#-- 生日的初始化未实现！！ zhangji -->
           <form id="form1" name="form1">
-		        <li><span>生日：</span>
+		        <li><span>&emsp;生日：</span>
 					<select id="year" name="YYYY" onchange="YYYYMM(this.value)">
 					   <option value="<#if user.birthday?? >${user.birthday?string("yyyy")!''}</#if>"></option> 
 					</select>年  
