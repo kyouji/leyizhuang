@@ -13,7 +13,8 @@
 <script type="text/javascript" src="/client/js/goods.js"></script>
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
-<#--
+<script type="text/javascript" src="/client/js/ljs-v1.01"></script>
+<!--
 <script type="text/javascript" src="/client/js/base.js"></script>
 <script type="text/javascript" src="/client/js/list.js"></script>
 <script type="text/javascript" src="/client/js/cart.js"></script>
@@ -24,10 +25,14 @@
 
 <!--放大镜-->
 <script type="text/javascript">
-$(document).ready(function(){
-	
-	productImgShow("proshowimg","li","proshowmenu","sel",396,396);
-
+  $(document).ready(function(){
+    
+    productImgShow("proshowimg","li","proshowmenu","sel",396,396);
+    checkBoxShow("assort_menu","a","assort_sum","li","sel");
+    productBoxShow("assort_menu","a","assort_ol","li","assort_sum","ul","sel");
+    productBoxWidth(".partside");
+    topTitFloat("detail_tit",1100,"detail_tit_sel");
+    menuNextPage("#proshowmenubox","menu","li",340,80,"#proshowlast","#proshownext",85,4);
 });
 
 <#-- 添加商品数量的方法 -->
@@ -183,36 +188,30 @@ function cartInit(){
 	</div>
 	
 	<!--中上部参数-->
-	<div class="wrapper">
+	<div class="mid_box" style=" width:1200px;">
 		<!--图片展示-->
-		<div class="details_pic">
-			<div class="right-extra" style="margin: 0px;">
-				<!--产品参数开始-->
-				<div>
-					<div id="preview" class="spec-preview">
-						<span class="jqzoom">
-                            <#if goods.showPictures??> 
-                                <#list goods.showPictures?split(",") as uri>
-                                    <img src="${uri!''}" />
-                                    <#break>
-                                </#list>
-							</#if>
-						</span>
-					</div>
-					<!--缩图开始-->
-					<div class="spec-scroll">
-						<div class="items">
-							<ul>
-								<#if goods.showPictures??> 
-									<#list goods.showPictures?split(",") as uri>
-										<li>
-											<img src="${uri!''}" onmousemove="preview(this);">
-										</li>
-									</#list> 
-								</#if>
-							</ul>
-						</div>
-					</div>
+		<div class="wrapper" style="width:410px; float:left; overflow:inherit;">
+            <div class="scrool_box">
+				<section class="proinfo_left">
+				    <menu id="proshowimg">
+                        <#if goods.showPictures??> 
+                            <#list goods.showPictures?split(",") as uri>
+                                <li><img src="${uri!''}" /></li>
+                            </#list>
+    					</#if>
+					</menu>
+					<div class="clear h15"></div>
+    
+                    <div class="clear h15"></div>
+                    <div style=" width:100%;z-index:50; position: relative;">
+                        <a id="proshowlast" href="javascript:void(0);"> < </a>
+                        <a id="proshownext" href="javascript:void(0);"> > </a>
+                    </div>
+                    <div id="proshowmenubox" class="mga" style="position:relative;">
+                        <menu id="proshowmenu"></menu>
+                    </div>
+                    <div class="clear"></div>
+                </section>
 				</div>
 				<div class="details_pic_wrapper">
 					<a href="javascript:userAddCollect(${goods.id})" title="关注" class="details_pic_wrapper_like">关注</a>
@@ -521,9 +520,75 @@ function cartInit(){
                 </dl>
             </div>
             
+<!--
+            <!-- 评价 -->
+            <div class="c_R_comment top20">
+                <div class="c_R_comment_title">
+                    <a href="#" title="" class="c_R_comment_title_choiced">全部评价（60）</a>
+                    <a href="#" title="">好评（60）</a>
+                    <a href="#" title="">中评（60）</a>
+                    <a href="#" title="">差评（60）</a>
+                </div>
+                <!--评价详情-->
+                <div class="c_R_comment_con">
+                    <!--用户信息-->
+                    <div class="c_R_comment_con_L">
+                        <ul>
+                            <li><img src="/client/images/u=2937378011,2167836267&amp;fm=21&amp;gp=0.jpg"></li>
+                            <li><span>这里****八字八字八字</span></li>
+                            <li>会员等级</li>
+                        </ul>
+                    </div>
+                    <!--右部-->
+                    <div class="c_R_comment_con_R">
+                        <!--星 标签 规格 时间-->
+                        <div class="c_R_comment_con_R_info">
+                            <div class="c_R_comment_con_R_info_L">
+                                <b><img src="images/star.png"><img src="images/star.png"><img src="images/star.png"><img src="images/star.png"></b>
+                                <p>
+                                    <a href="#" title="">外观漂亮</a><a href="#" title="">外观漂亮</a><a href="#" title="">外观漂亮</a><a href="#" title="">外观漂亮</a>
+                                    <a href="#" title="">外观漂亮</a><a href="#" title="">外观漂亮外观漂亮</a><a href="#" title="">外观漂亮</a>
+                                </p>
+                                <span>不错，性价比高，服务态度也很好！不错，性价比高，服务态度也很好！不错，性价比高，服务态度也很好！不错，性价比高，服务态度也很好！不错，性价比高，服务态度也很好！</span>
+                            </div>
+                            <div class="c_R_comment_con_R_info_M">
+                                <p>颜色：白</p>
+                                <p>规格：移动联通双4G(16GB ROM)</p>
+                            </div>
+                            <div class="c_R_comment_con_R_info_R">2015-07-09 13:15</div>
+                        </div>
+                        
+                        <div class="c_R_comment_con_R_reply">
+                            <a href="#" title="">有用（0）</a>
+                            <a href="#" title="">回复（0）</a>
+                        </div>
+                        
+                        <!--有图片的-->
+                        <div class="c_R_comment_con_R_pic">
+                            <ul>
+                                <li><img src="images/pic2.png"></li>
+                                <li><img src="images/pic2.png"></li>
+                                <li><img src="images/pic2.png"></li>
+                                <li><img src="images/pic2.png"></li>
+                                <li><img src="images/pic2.png"></li>
+                            </ul>
+                        </div>
+                        
+                        <!--已回复的-->
+                        <div class="c_R_comment_con_R_reply2">
+                            <span>xxx回复：嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩嗯嗯嗯嗯嗯嗯呢恩</span>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+     
+            </div>
+=======
             <#-- 评价 -->
             <#include "/client/goods_comment.ftl" />
             
+>>>>>>> refs/remotes/origin/master
             
 			<!--评价-->
 			<div class="c_R_comment top20">

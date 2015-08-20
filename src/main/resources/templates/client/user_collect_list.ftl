@@ -14,40 +14,42 @@
 </head>
 
 <body>
-<!--顶部-->
-<#include "/client/common_user_header.ftl" />
-<!-- 内容 -->
-<div class="content"> 
-  <!-- 左侧 -->
-  <#include "/client/common_user_menu.ftl" />
-  
-  <!-- 右侧 -->
+    <!--顶部-->
+    <#include "/client/common_user_header.ftl" />
+    <!-- 内容 -->
+    <div class="content"> 
+    <!-- 左侧 -->
+    <#include "/client/common_user_menu.ftl" />
+      
+    <!-- 右侧 -->
     <div class="content_2">
         <div class="content_2_1">关注的商品</div>
         <div class="content_2_2">
-              <div class="content_2_2_1">
-                  <ul>
+            <div class="content_2_2_1">
+                <ul>
                     <li class="dh_1">商品</li>
                     <li class="dh_2">金额</li>
                     <li class="dh_3">操作</li>
-                  </ul>
-              </div>
-             <#if collect_page??>
+                </ul>
+            </div>
+            <#if collect_page??>
                 <#list collect_page.content as cg>
-                      <div class="content_2_2_2">
-                          <dl>
-                               <dd>
-                                   <ul>
-                                      <li class="li_1"><a href="/goods/${cg.goodsId}" title=""><img src="${cg.goodsCoverImageUri!''}" /></a><a href="/goods/${cg.goodsId}" title=""><span>${cg.goodsTitle!''}</span></a></li>
-                                      <li class="li_2">￥${cg.goodsSalePrice?string("#.##")}</li>
-                                      <li class="li_3"><a href="/user/collect/del?id=${cg.goodsId!''}" title="">取消关注</a>&nbsp;/
-                                                        <a href="/cart/init?id=${cg.goodsId!''}" title="">加入购物车</a>&nbsp;
-                                   </ul>
-                               </dd>
-                          </dl>
-                      </div>
+                    <div class="content_2_2_2">
+                        <dl>
+                            <dd>
+                                <ul>
+                                    <li class="li_1"><a href="/goods/${cg.goodsId}" title=""><img src="${cg.goodsCoverImageUri!''}" /></a><a href="/goods/${cg.goodsId}" title=""><span>${cg.goodsTitle!''}</span></a></li>
+                                    <li class="li_2">￥${cg.goodsSalePrice?string("#.##")}</li>
+                                    <li class="li_3">
+                                        <a href="/user/collect/del?id=${cg.goodsId!''}" title="">取消关注</a>&nbsp;/
+                                        <a href="/cart/init?id=${cg.goodsId!''}" title="">加入购物车</a>&nbsp;
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </div>
                 </#list>
-              </#if>
+            </#if>
         </div>
     </div>
 
@@ -79,8 +81,7 @@
           </div>
       </div>
 </div>
-<!--底部footer-->
-<#include "/client/common_footer.ftl" />
-
+    <!--底部footer-->
+    <#include "/client/common_footer.ftl" />
 </body>
 </html>
