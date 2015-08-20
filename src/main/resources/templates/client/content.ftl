@@ -521,7 +521,7 @@ function cartInit(){
                 </dl>
             </div>
             
-            <#-- 评价 -->
+            <!-- 评价 -->
             <div class="c_R_comment top20">
                 <div class="c_R_comment_title">
                     <a href="#" title="" class="c_R_comment_title_choiced">全部评价（60）</a>

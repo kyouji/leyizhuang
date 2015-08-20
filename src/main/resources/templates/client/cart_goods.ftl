@@ -18,7 +18,7 @@
                         <li>
                             <a class="calculated">
                                 <input class="min" type="button" value="-" onclick="javascript:minusNum(${cg.id?c});"/>
-                                <input class="text_box" name="goodnum" type="text" value="${cg.quantity!''}" style="width:70px;height:22px;text-align:center;" />
+                                <input class="text_box" name="goodnum" type="text" value="${cg.quantity!''}" style="width:70px;height:20px;text-align:center;" />
                                 <input class="add" type="button" value="+" onclick="javascript:addNum(${cg.id?c});"/>
                             </a>
                         </li>

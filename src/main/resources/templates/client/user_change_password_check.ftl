@@ -46,33 +46,33 @@ $(document).ready(function(){
 <!-- 内容 -->
 <div class="content"> 
   <!-- 左侧 -->
- <#include "/client/common_user_menu.ftl" />
+<#include "/client/common_user_menu.ftl" />
   <!-- 右侧 -->
-  <div class="content_2">
+<div class="content_2">
 <div class="content_2_1">
-  <ul>
-    <li class="li_1">验证身份 </li>
-    <li class="li_2">修改密码</li>
-    <li class="li_3">完成</li>
-  </ul>
+<ul>
+<li class="li_1">验证身份 </li>
+<li class="li_2">修改密码</li>
+<li class="li_3">完成</li>
+</ul>
 </div>
-  <div class="content_2_2">
-        <div class="content_2_2_1"><span>请输入手机号码：</span>
-            <input type="text" name="nc"  class="textInput" value="" />
-         </div> 
-          <div class="content_2_2_1">
-            <span>请填写手机校验码：</span>
-            <input type="text" name="nc"  class="textInput" value="" /><input id="button" type="button" value="获取短信校验码" onclick="InforSave()" name="btnChange">
-          </div>
-          <div class="content_2_2_1">
-            <span>验证码：</span>
-            <input  type="text" name="nc"  class="text texts" value="" />
-            <img src="images/security_code.png" />看不清？<a href="#" title=""> 换一张</a>
-          </div>
-          <div class="content_2_2_1">
-            <input id="button1" type="button1" value="提交" onclick="InforSave()" name="btnChange">
-          </div>
-  </div>
+<div class="content_2_2">
+<div class="content_2_2_1"><span>请输入手机号码：</span>
+<input type="text" name="nc"  class="textInput" value="" />
+</div> 
+<div class="content_2_2_1">
+<span>请填写手机校验码：</span>
+<input type="text" name="nc"  class="textInput" value="" /><input id="button" type="button" value="获取短信校验码" onclick="InforSave()" name="btnChange">
+</div>
+<div class="content_2_2_1">
+<span>验证码：</span>
+<input  type="text" name="nc"  class="text texts" value="" />
+<img src="images/security_code.png" />看不清？<a href="#" title=""> 换一张</a>
+</div>
+<div class="content_2_2_1">
+<input id="button1" type="button1" value="提交" onclick="InforSave()" name="btnChange">
+</div>
+</div>
 </div>
 </div>
 <!--底部footer-->
