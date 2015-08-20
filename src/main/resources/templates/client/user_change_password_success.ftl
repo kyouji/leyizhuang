@@ -42,28 +42,29 @@ $(document).ready(function(){
 
 </head>
 <body>
-<#include "/client/common_header.ftl" />
-<!-- 内容 -->
-<div class="content"> 
-  <!-- 左侧 -->
- <#include "/client/common_user_menu.ftl" />
-  <!-- 右侧 -->
-  <div class="content_2">
-    <div class="content_2_1">
-      <ul>
-         <li class="li_1">验证身份 </li>
-         <li class="li_2">修改密码</li>
-         <li class="li_3">完成</li>
-      </ul>
+    <#include "/client/common_header.ftl" />
+    <!-- 内容 -->
+    <div class="content"> 
+        <!-- 左侧 -->
+        <#include "/client/common_user_menu.ftl" />
+        <!-- 右侧 -->
+        <div class="content_2">
+            <div class="content_2_1">
+                <ul>
+                    <li class="li_1">验证身份 </li>
+                    <li class="li_2">修改密码</li>
+                    <li class="li_3">完成</li>
+                </ul>
+            </div>
+            <div class="right_yes">
+                <img src="images/secret_03.png">
+                <a class="secret_title_01">恭喜您，修改密码成功！</a>
+                <a href="/" title="返回首页" class="secret_title_02">返回首页</a> 
+            </div>
+        </div>
     </div>
-    <div class="right_yes">
-        <img src="images/secret_03.png">
-        <a class="secret_title_01">恭喜您，修改密码成功！</a>
-        <a a href="#" title="" class="secret_title_02">返回首页</a> 
-    </div>
-</div>
-<!--底部footer-->
-<#include "/client/common_footer.ftl" />
+    <!--底部footer-->
+    <#include "/client/common_footer.ftl" />
 </body>
 </html>
 <!--结束-->

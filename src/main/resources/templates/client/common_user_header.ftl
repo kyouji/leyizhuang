@@ -3,6 +3,29 @@
     	var search = document.getElementById("search_form");
     	search.submit();
     }
+    $(function(){
+        $(".nav_submenu").mouseover(function(){
+        $(".nav_more_dx").show();/*fadeIn 淡入 fadeOut淡出*/
+        })
+
+        $(".nav_more_dx").mouseover(function(){
+        $(".nav_more_dx").show();
+
+        /*fadeIn 淡入 fadeOut淡出*/
+        })
+    
+        $(".nav_more_dx").mouseleave(function(){
+        $(".nav_more_dx").hide();
+        
+
+        /*fadeIn 淡入 fadeOut淡出*/
+        })
+    
+        
+        $(".nav_submenu1").mouseleave(function(){
+        $(".nav_more_dx").hide();/*fadeIn 淡入 fadeOut淡出*/
+        })
+    })
 </script>
 <!--顶部-->
 <div class="top_all">
@@ -71,6 +94,22 @@
 <div class="navigation">
     <div class="nav">
         <div class="nav_submenu">我的正品惠客</div>
+        <#if top_cat_list??>
+            <table class="nav_more_dx">
+                <#list top_cat_list as item>
+                    <tr>
+                        <th width="120"><a href="/list/${item.id}"><span>${item.title!''}</span></a></th>
+                        <#if ("second_level_"+item_index+"_cat_list")?eval?? >
+                            <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
+                                <td>
+                                    <a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a>
+                                </td>
+                            </#list>
+                        </#if>
+                    </tr>
+                </#list>
+            </table>
+        </#if> 
         <div class="nav_nav">
             <ul>
                 <#if navi_item_list??&&navi_item_list?size gt 0>

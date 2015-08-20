@@ -13,6 +13,7 @@
 <script type="text/javascript" src="/client/js/goods.js"></script>
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
+<script type="text/javascript" src="/client/js/ljs-v1.01"></script>
 <!--
 <script type="text/javascript" src="/client/js/base.js"></script>
 <script type="text/javascript" src="/client/js/list.js"></script>
@@ -24,10 +25,14 @@
 
 <!--放大镜-->
 <script type="text/javascript">
-$(document).ready(function(){
-	
-	productImgShow("proshowimg","li","proshowmenu","sel",396,396);
-
+  $(document).ready(function(){
+    
+    productImgShow("proshowimg","li","proshowmenu","sel",396,396);
+    checkBoxShow("assort_menu","a","assort_sum","li","sel");
+    productBoxShow("assort_menu","a","assort_ol","li","assort_sum","ul","sel");
+    productBoxWidth(".partside");
+    topTitFloat("detail_tit",1100,"detail_tit_sel");
+    menuNextPage("#proshowmenubox","menu","li",340,80,"#proshowlast","#proshownext",85,4);
 });
 
 <#-- 添加商品数量的方法 -->
@@ -183,36 +188,30 @@ function cartInit(){
 	</div>
 	
 	<!--中上部参数-->
-	<div class="wrapper">
+	<div class="mid_box" style=" width:1200px;">
 		<!--图片展示-->
-		<div class="details_pic">
-			<div class="right-extra" style="margin: 0px;">
-				<!--产品参数开始-->
-				<div>
-					<div id="preview" class="spec-preview">
-						<span class="jqzoom">
-                            <#if goods.showPictures??> 
-                                <#list goods.showPictures?split(",") as uri>
-                                    <img src="${uri!''}" />
-                                    <#break>
-                                </#list>
-							</#if>
-						</span>
-					</div>
-					<!--缩图开始-->
-					<div class="spec-scroll">
-						<div class="items">
-							<ul>
-								<#if goods.showPictures??> 
-									<#list goods.showPictures?split(",") as uri>
-										<li>
-											<img src="${uri!''}" onmousemove="preview(this);">
-										</li>
-									</#list> 
-								</#if>
-							</ul>
-						</div>
-					</div>
+		<div class="wrapper" style="width:410px; float:left; overflow:inherit;">
+            <div class="scrool_box">
+				<section class="proinfo_left">
+				    <menu id="proshowimg">
+                        <#if goods.showPictures??> 
+                            <#list goods.showPictures?split(",") as uri>
+                                <li><img src="${uri!''}" /></li>
+                            </#list>
+    					</#if>
+					</menu>
+					<div class="clear h15"></div>
+    
+                    <div class="clear h15"></div>
+                    <div style=" width:100%;z-index:50; position: relative;">
+                        <a id="proshowlast" href="javascript:void(0);"> < </a>
+                        <a id="proshownext" href="javascript:void(0);"> > </a>
+                    </div>
+                    <div id="proshowmenubox" class="mga" style="position:relative;">
+                        <menu id="proshowmenu"></menu>
+                    </div>
+                    <div class="clear"></div>
+                </section>
 				</div>
 				<div class="details_pic_wrapper">
 					<a href="javascript:userAddCollect(${goods.id})" title="关注" class="details_pic_wrapper_like">关注</a>
