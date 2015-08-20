@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ynyes.zphk.entity.TdSetting;
 import com.ynyes.zphk.entity.TdUser;
-import com.ynyes.zphk.entity.TdUserPoint;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdSettingService;
 import com.ynyes.zphk.service.TdUserPointService;
@@ -108,7 +106,8 @@ public class TdRegController {
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public String reg(String regist_method, String username, String mobile, String password, String email,
 			String smsCode, String code, String carCode, HttpServletRequest request) {
-		String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
+		
+	    String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
 		String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
 
 		

@@ -412,7 +412,7 @@ public class TdGoodsController {
 		map.addAttribute("stars", stars);
 		map.addAttribute("goodsId", goodsId);
 
-		return "/client/goods_content_comment";
+		return "/client/goods_comment";
 	}
 
 	@RequestMapping("/goods/consult/{goodsId}")

@@ -1,30 +1,13 @@
-
+//$(document).ready(function(){
+//    $("#consultForm").Validform({
+//        tiptype: 1
+//    });
+//    
+//});
 
 // 按星级获取评论
 function getCommentByStars(goodsId, stars, page)
 {
-	//移除所有评价标签的class
-	$("#star0").removeClass();
-	$("#star1").removeClass();
-	$("#star2").removeClass();
-	$("#star3").removeClass();
-	
-	if(stars == 0){
-		$("#star0").addClass("c_R_comment_title_choiced");
-	}
-	
-	if(stars == 1){
-		$("#star1").addClass("c_R_comment_title_choiced");
-	}
-	
-	if(stars == 2){
-		$("#star2").addClass("c_R_comment_title_choiced");
-	}
-	
-	if(stars == 3){
-		$("#star3").addClass("c_R_comment_title_choiced");
-	}
-	
     if (null == goodsId || null == stars || null == page)
     {
         return;
@@ -34,8 +17,7 @@ function getCommentByStars(goodsId, stars, page)
         type:"post",
         url:"/goods/comment/" + goodsId + "?stars=" + stars + "&page=" + page,
         success:function(res){
-        	$("#the_comment").html(res);
-            <!-- $("#comment-list").html(res);  -->
+            $("#comment-list").html(res);
         }
     });
 }
@@ -52,21 +34,17 @@ function getConsult(goodsId, page)
         type:"post",
         url:"/goods/consult/" + goodsId + "?page=" + page,
         success:function(res){
-//            $("#consult-list").html(res);
-        	$("#the_consult").html(res);
+            $("#consult-list").html(res);
         }
     });
 }
 
-
 //提交咨询
 function submitConsult()
 {
-	var goodsId =  $('#goodsId').val();
-	var content = $('#consult').val();
     $.ajax({
         type:"post",
-        url:"/user/consult/add?goodsId=" +goodsId+"&content="+content,
+        url:"/user/consult/add?" + $("#consultForm").serialize(),
         success:function(res){
             if (0 == res.code)
             {
@@ -138,6 +116,106 @@ function starChange(type, stars)
             $("a.goodsStar").eq(2).html('<img src="/client/images/content/start03.png" />');
             $("a.goodsStar").eq(3).html('<img src="/client/images/content/start03.png" />');
             $("a.goodsStar").eq(4).html('<img src="/client/images/content/start03.png" />');    
+        }
+    }
+    // 专业技能满意度
+    else if ("skillStar" == type)
+    {
+        $("#skillStar").val(starCount);
+        switch(starCount)
+        {
+        case 1:
+            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 2:
+            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 3:
+            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 4:
+            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 5:
+            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar").eq(4).html('<img src="/client/images/content/start01.png" />');
+            break;
+        default:
+            $("a.skillStar").eq(0).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+                
+        }
+    }
+    // 服务满意度
+    else if ("serviceStar" == type)
+    {
+        $("#serviceStar").val(starCount);
+        switch(starCount)
+        {
+        case 1:
+            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 2:
+            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 3:
+            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 4:
+            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 5:
+            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start01.png" />');
+            break;
+        default:
+            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
+                
         }
     }
 }

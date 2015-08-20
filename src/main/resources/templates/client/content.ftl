@@ -12,12 +12,8 @@
 <script type="text/javascript" src="/client/js/common.js"></script>
 <script type="text/javascript" src="/client/js/goods.js"></script>
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
+<script type="text/javascript" src="/client/js/ljs-v1.01.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
-<#--
-<script type="text/javascript" src="/client/js/base.js"></script>
-<script type="text/javascript" src="/client/js/list.js"></script>
-<script type="text/javascript" src="/client/js/cart.js"></script>
--->
 
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
@@ -25,9 +21,12 @@
 <!--放大镜-->
 <script type="text/javascript">
 $(document).ready(function(){
-	
 	productImgShow("proshowimg","li","proshowmenu","sel",396,396);
-
+    checkBoxShow("assort_menu","a","assort_sum","li","sel");
+    productBoxShow("assort_menu","a","assort_ol","li","assort_sum","ul","sel");
+    productBoxWidth(".partside");
+    topTitFloat("detail_tit",1100,"detail_tit_sel");
+    menuNextPage("#proshowmenubox","menu","li",340,80,"#proshowlast","#proshownext",85,4);
 });
 
 <#-- 添加商品数量的方法 -->
@@ -183,43 +182,43 @@ function cartInit(){
 	</div>
 	
 	<!--中上部参数-->
-	<div class="wrapper">
-		<!--图片展示-->
-		<div class="details_pic">
-			<div class="right-extra" style="margin: 0px;">
-				<!--产品参数开始-->
-				<div>
-					<div id="preview" class="spec-preview">
-						<span class="jqzoom">
-                            <#if goods.showPictures??> 
-                                <#list goods.showPictures?split(",") as uri>
-                                    <img src="${uri!''}" />
-                                    <#break>
-                                </#list>
-							</#if>
-						</span>
-					</div>
-					<!--缩图开始-->
-					<div class="spec-scroll">
-						<div class="items">
-							<ul>
-								<#if goods.showPictures??> 
-									<#list goods.showPictures?split(",") as uri>
-										<li>
-											<img src="${uri!''}" onmousemove="preview(this);">
-										</li>
-									</#list> 
-								</#if>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="details_pic_wrapper">
-					<a href="javascript:userAddCollect(${goods.id})" title="关注" class="details_pic_wrapper_like">关注</a>
-				</div>
-			</div>
-		</div>
-			
+    <div class="mid_box" style=" width:1200px;">
+        <div class="wrapper" style="width:410px; float:left; overflow:inherit;">
+            <div class="scrool_box">
+       
+                <section class="proinfo_left">
+                    <menu id="proshowimg">
+                        <#if goods.showPictures??> 
+                            <#list goods.showPictures?split(",") as uri>
+                                <#if uri!="">
+                                    <li><img src="${uri!''}"/></li>
+                                </#if>
+                            </#list>
+                        </#if>
+                    </menu>
+                    <div class="clear h15"></div>
+                    <div class="clear h15"></div>
+                    <div style=" width:100%;z-index:50; position: relative;">
+                        <a id="proshowlast" href="javascript:void(0);"> < </a>
+                        <a id="proshownext" href="javascript:void(0);"> > </a>
+                    </div>
+                    <div id="proshowmenubox" class="mga" style="position:relative;">
+                        <menu id="proshowmenu"></menu>
+                    </div>
+                    <div class="clear"></div>
+
+                </section>
+          
+                <div class="details_pic_wrapper">
+                    <#-- 
+                    <div class="details_pic_wrapper_share">分享</div>
+                    <a href="#" title="" class="details_pic_wrapper_remind">低价提醒</a>
+                    -->
+                    <a href="javascript:userAddCollect(${goods.id})" title="" class="details_pic_wrapper_like">关注</a>
+                </div>
+            </div>
+        </div>
+    
 		<!--中部信息-->
 		<div class="details_details">
 			<div class="de_title">${goods.title!''}</div>
@@ -413,7 +412,7 @@ function cartInit(){
 							<li class="c_combination_btm_all_li2">已节省：￥<strong id="combSave">0.00</strong></li>
 							<li><a href="javascript:clearSelect();">全部清空</a></li>
 						</ul>
-						<a href="javascript:buyConbination();" id="zhAddCart" title="" class="addcartorange" style="margin: 10px 0 0 83px; background: #0e5baa; text-decoration: none;">立即购买</a>
+						<a href="javascript:buyConbination();" target="_blank" id="zhAddCart" title="" class="addcartorange" style="margin: 10px 0 0 83px; background: #0e5baa; text-decoration: none;">立即购买</a>
 					</div>
 				</div>
 			</div>
@@ -522,32 +521,15 @@ function cartInit(){
             </div>
             
             <#-- 评价 -->
-            <#include "/client/goods_comment.ftl" />
+            <div id="comment-list">
+                <#include "/client/goods_comment.ftl" />
+            </div>
             
-            
-			<!--评价-->
-			<div class="c_R_comment top20">
-				<div class="c_R_comment_title">
-					<#if comment_page??>
-						<a href="javascript:getCommentByStars(${goodsId}, 0, 0);" id="star0" title="全部评价" class="c_R_comment_title_choiced">全部评价（${comment_count!'0'}）</a>
-						<a href="javascript:getCommentByStars(${goodsId}, 3, 0);" id="star3" title="好评">好评（${three_star_comment_count!'0'}）</a>
-						<a href="javascript:getCommentByStars(${goodsId}, 2, 0);" id="star2" title="中评">中评（${two_star_comment_count!'0'}）</a>
-						<a href="javascript:getCommentByStars(${goodsId}, 1, 0);" id="star1" title="差评">差评（${one_star_comment_count!'0'}）</a>
-					<#else> 
-						<a href="javascript:getCommentByStars(${goodsId}, 0);" id="star0" title="全部评价" class="c_R_comment_title_choiced">全部评价（0）</a> 
-						<a href="javascript:getCommentByStars(${goodsId}, 3);" id="star3" title="好评">好评（0）</a>
-						<a href="javascript:getCommentByStars(${goodsId}, 2);" id="star2" title="中评">中评（0）</a>
-						<a href="javascript:getCommentByStars(${goodsId}, 1);" id="star1" title="差评">差评（0）</a>
-					</#if>
-				</div>
-				<div id="the_comment">
-					<#include "/client/goods_content_comment.ftl" />
-				</div>
-			</div>
-			<!--咨询-->
-			<div id="the_consult">
-				<#include "/client/goods_content_consult.ftl">
-			</div>
+            <#-- 咨询 -->
+            <div id="consult-list">
+                <#include "/client/goods_consult.ftl" />
+            </div>
+			
 			<!--动态咨询-->
 			<div id="tab3" class="c_R_consult top20">
 				<form>
