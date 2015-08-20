@@ -58,19 +58,19 @@
                     <#assign continueEnter=false>
                     <#if collect_page.totalPages gt 0>
                         <#list 1..collect_page.totalPages as page>
-                            <#if page <= 3 || (collect_page.totalPages-page) < 3 || (collect_page.number+1-page)?abs<3 >
-                                <#if page == collect_page.number+1>
-                                    <a class="mysel" href="javascript:;">${page}</a>
-                                <#else>
-                                    <a href="/user/collect/list?page=${page-1}&keywords=${keywords!''}">${page}</a>
-                                </#if>
-                                <#assign continueEnter=false>
-                             <#else>
-                                <#if !continueEnter>
-                                    ...
-                                <#assign continueEnter=true>
-                                </#if>
-                            </#if>
+                               <#if page <= 3 || (collect_page.totalPages-page) < 3 || (collect_page.number+1-page)?abs<3 >
+                                    <#if page == collect_page.number+1>
+                                        <a class="mysel" href="javascript:;">${page}</a>
+                                    <#else>
+                                        <a href="/user/collect/list?page=${page-1}&keywords=${keywords!''}">${page}</a>
+                                    </#if>
+                                    <#assign continueEnter=false>
+                               <#else>
+                                    <#if !continueEnter>
+                                        ...
+                                    <#assign continueEnter=true>
+                                    </#if>
+                               </#if>
                         </#list>
                     </#if>
                </#if>  

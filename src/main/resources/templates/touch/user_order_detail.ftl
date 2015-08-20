@@ -13,6 +13,7 @@
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 <link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/front.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/common.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -50,7 +51,7 @@
 
 <div class="main">
   <div class="clear20"></div>
-  <h2 class="myorder_tit">订单编号:${order.orderNumber!''}<span>2015-01-22</span></h2>
+  <h2 class="myorder_tit">订单编号:${order.orderNumber!''}<span><#if order.checkTime??>${order.checkTime}</#if></span></h2>
   <p class="myorder_text"><span>收货人：</span>${order.shippingName!''}</p>
   <p class="myorder_text"><span>联系方式：</span>${order.shippingPhone!''}</p>
   <p class="myorder_text"><span>收货地址：</span>${order.shippingAddress!''}</p>
@@ -63,10 +64,8 @@
                   <p class="mb10">${og.goodsTitle!''}</p>
                   <p>单价：<span class="sc">￥${og.price?string('0.00')}</span>&nbsp;&nbsp;数量：${og.quantity}</p></a> 
                   <div class="clear"></div>
-                <!--
-                 <a class="a2" href="#">换货</a>
-                 <a class="a2" href="#">退货</a>
-                 -->
+                
+                 <a class="a2" href="/touch/user/return/${order.id?c}?goodsId=${og.id?c}">换货/换货</a>
              </div>
              <#if order.statusId==5 && !og.isCommented>
                  <div id="order_comment">
@@ -95,5 +94,6 @@
 </div><!--main END-->
 
 
+<#include "/touch/common_footer.ftl" />
 </body>
 </html>

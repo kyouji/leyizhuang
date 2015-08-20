@@ -14,6 +14,7 @@
 
 <link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/touch/css/modify.css"/>
+<link href="/touch/css/common.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 $(document).ready(function(){
     
@@ -37,8 +38,8 @@ function subPassword(){
     <p>修改密码</p>
     <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
 </header>
-<form id="form1" action="/touch/user/password" method="post"> 
 <div class="main">
+<form id="form1" action="/touch/user/password" method="post"> 
   <input name="__STATE" type="hidden" value="${user.password}"/>
   <div class="member_ch"><p>旧密码</p>
         <input name="oldPassword" type="password"  class="textInput" value=""  datatype="*" errormsg="原始密码不正确" recheck="__STATE"/>
@@ -55,8 +56,9 @@ function subPassword(){
   <div class="ok_mainbox">
     <p><a href="javascript:subPassword();"  id="sub">确 定</a></p>
   </div>
-</div><!--main END-->
 </form>
+</div><!--main END-->
 
+<#include "/touch/common_footer.ftl" />
 </body>
 </html>
