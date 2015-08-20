@@ -53,7 +53,7 @@ $(document).ready(function(){
   <div class="myorder_list">
     <#if order_page??>
     <#list order_page.content as order>
-        <h2>订单编号&nbsp; ${order.orderNumber!''}<span>${order.orderTime!''}</span></h2>
+       <a href="/touch/user/order?id=${order.id?c}"> <h2>订单编号&nbsp; ${order.orderNumber!''}<span>${order.orderTime!''}</span></h2></a>
         <#list order.orderGoodsList as og>
             <a class="a1" href="/touch/goods/${og.goodsId}">
               <span class="sp1"><img src="${og.goodsCoverImageUri}" /></span>

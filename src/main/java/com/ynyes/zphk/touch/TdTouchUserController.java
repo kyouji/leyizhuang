@@ -346,7 +346,37 @@ public class TdTouchUserController {
             map.addAttribute("order", tdOrderService.findOne(id));
         }
         
-        return "/client/user_order_detail";
+        return "/touch/user_order_detail";
+    }
+    
+    @RequestMapping(value="/user/order/confirmed")
+    public String orderConfirmed(
+    		HttpServletRequest req,
+    		Long id,
+    		ModelMap map){
+    	 String username = (String) req.getSession().getAttribute("username");
+         if (null == username)
+         {
+             return "redirect:/touch/login";
+         }
+         
+         tdCommonService.setHeader(map, req);
+         
+         TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+         
+         map.addAttribute("user", tdUser);
+         TdOrder order=null;
+         
+         if (null != id)
+         {
+             order = tdOrderService.findOne(id);
+             order.setStatusId(5L);
+             order.setReceiveTime(new Date());
+             tdOrderService.save(order);
+         }
+         map.addAttribute("order",order);
+    	
+    	return "/touch/user_order_detail";
     }
     
     @RequestMapping(value = "/user/collect/list")
@@ -695,6 +725,8 @@ public class TdTouchUserController {
     public Map<String, Object> commentAdd(HttpServletRequest req, 
                         TdUserComment tdComment,
                         String code,
+                        Long goodsId,
+                        Long orderId, // 订单ID
                         ModelMap map){
         Map<String, Object> res = new HashMap<String, Object>();
         res.put("code", 1);
@@ -720,6 +752,7 @@ public class TdTouchUserController {
             res.put("message", "评论的商品不存在！");
             return res;
         }
+        
         
 //        String codeBack = (String) req.getSession().getAttribute("RANDOMVALIDATECODEKEY");
 //        
@@ -747,6 +780,26 @@ public class TdTouchUserController {
         tdComment.setStatusId(0L);
         
         tdUserCommentService.save(tdComment);
+        
+        if (null != orderId && null != goodsId)
+        {
+            TdOrder order = tdOrderService.findOne(orderId);
+            
+            if (null != order)
+            {
+                for (TdOrderGoods tog : order.getOrderGoodsList())
+                {
+                    if (goodsId.equals(tog.getGoodsId()))
+                    {
+                        tog.setIsCommented(true);
+                        tog.setCommentId(tdComment.getId());
+                        tdOrderGoodsService.save(tog);
+                        break;
+                    }
+                }
+            }
+        }
+        
         
 
         if (null == goods.getTotalComments())
