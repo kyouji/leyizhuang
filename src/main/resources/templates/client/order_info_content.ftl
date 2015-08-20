@@ -8,9 +8,9 @@
                     <#list user.shippingAddressList as address>
                         <div class="s_gwc2_1_b">
                             <a class="selAddress" href="javascript:void(0);" aid="${address.id}">
-                            <p>收货人：${address.receiverName!''}</p>
-                            <p>收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>
-                            <p>联系方式：${address.receiverMobile!''}</p>
+                                <p>收货人：${address.receiverName!''}</p>
+                                <p>收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>
+                                <p>联系方式：${address.receiverMobile!''}</p>
                             </a>
                         </div>
                     </#list>
@@ -18,61 +18,59 @@
             </div>
             <div class="clear"></div>
         </div>
-        
+    
         <div id="addressForm" class="new-address hide">
             <table class="mymember_address">
-              <tbody>
-              <tr>
-                <th>收货人：</th>
-                <td>
-                    <input class="mytext" id="receiverName" value="" type="text">
-                    <span class="Validform_checktip">*收货人姓名</span>
-                </td>
-              </tr>
-              <tr>
-                <th>地区：</th>
-                <td>
-                  <div id="address">
-                  <select id="prov" class="prov" style="width: 100px;"></select>
-                  <select id="city" class="city" style="width: 100px;"></select>
-                  <select id="dist" class="dist" style="width: 100px;"></select>
-                  <span class="Validform_checktip">*省市区</span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th>详细地址：</th>
-                <td>
-                    <input class="mytext" id="detailAdd" value="" type="text">
-                    <span class="Validform_checktip">*详细地址</span>
-                </td>
-              </tr>
-              <tr>
-                <th>邮政编码：</th>
-                <td>
-                    <input class="mytext" id="postcode" value="" type="text">
-                </td>
-              </tr>
-              <tr>
-                <th>联系电话：</th>
-                <td>
-                    <input class="mytext" id="mobile" value="" type="text">
-                    <span class="Validform_checktip">*电话号码</span>
-                </td>
-              </tr>
-              <tr>
-                <th></th>
-                <td><input id="addAddressSubmit" class="mysub" type="button" value="保存"></td>
-              </tr>
-            </tbody>
+                <tbody>
+                    <tr>
+                        <th>收货人：</th>
+                        <td>
+                            <input class="mytext" id="receiverName" value="" type="text">
+                            <span class="Validform_checktip">*收货人姓名</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>地区：</th>
+                        <td>
+                          <div id="address">
+                              <select id="prov" class="prov" style="width: 100px;"></select>
+                              <select id="city" class="city" style="width: 100px;"></select>
+                              <select id="dist" class="dist" style="width: 100px;"></select>
+                              <span class="Validform_checktip">*省市区</span>
+                          </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>详细地址：</th>
+                        <td>
+                            <input class="mytext" id="detailAdd" value="" type="text">
+                            <span class="Validform_checktip">*详细地址</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>邮政编码：</th>
+                        <td>
+                            <input class="mytext" id="postcode" value="" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>联系电话：</th>
+                        <td>
+                            <input class="mytext" id="mobile" value="" type="text">
+                            <span class="Validform_checktip">*电话号码</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><input id="addAddressSubmit" class="mysub" type="button" value="保存"></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
-        
-        
-        
+    
         <div class="main mt15">
             <div class="s_gwc3_1">
-            <div class="s_gwc3_1_a"><p><span>支付方式</span></p></div>
+                <div class="s_gwc3_1_a"><p><span>支付方式</span></p></div>
                 <div class="gwc_3zf">
                     <ul>
                         <#if pay_type_list??>
@@ -101,7 +99,7 @@
                             </#list>
                         </#if>
                     </select>
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span>说明：</span>
                     <input type="text" class="fapiaolan">
                 </div>
@@ -122,22 +120,22 @@
                 </div>
             </div>
         </div>
-    
+        
         <div class="main mt15">
             <div class="s_gwc4_1">
                 <div class="s_gwc4_1_a"><p><span>商品信息</span></p></div>
                 <div class="gwc2_psfs">
                     <div class="gwc1_lm">
                         <table border="0" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td width="100">商品编号</td>
-                                <td>商品信息</td>
-                                <td>单价</td>
-                                <td>数量</td>
-                                <td>合计</td>
-                            </tr>
-                        </tbody>
+                            <tbody>
+                                <tr>
+                                    <td width="100">商品编号</td>
+                                    <td>商品信息</td>
+                                    <td>单价</td>
+                                    <td>数量</td>
+                                    <td>合计</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
         
@@ -148,7 +146,7 @@
                 <div class="clear"></div>
             </div>
         </div>
-    
+        
         <#--
         <div class="main mt15">
             <div class="s_gwc3_1">
@@ -165,7 +163,7 @@
             </div>
         </div>
         -->
-
+        
         <div id="main">
             <div class="s_gwc1zj fr">
                 <input id="idTotalPriceSteady" type="hidden" value="${(totalPrice+delivery_fee!0)?string("#.##")}" />
@@ -175,7 +173,7 @@
         <div class="clear"></div>
         <div class="main">
             <div class="s_gwc1zja">
-                <div class="fr s_gwc1zja_2"><input type="submit" value="提交订单" class="input_zy"></input></div>
+            <div class="fr s_gwc1zja_2"><input type="submit" value="提交订单" class="input_zy"></input></div>
             </div>
         </div>
     </div>

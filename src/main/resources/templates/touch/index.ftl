@@ -219,9 +219,9 @@
 	        	</#if>
         	</#list>
     	</#if>
-        <#if top_cat_goods_page2?? && top_cat_goods_page0.content?size gt 0 >
+        <#if top_cat_goods_page2?? && top_cat_goods_page2.content?size gt 0 >
         <ul class="phone_details">
-        	<#list top_cat_goods_page1.content as item>
+        	<#list top_cat_goods_page2.content as item>
         		<#if item_index lt 6>
 		        	<li class="daquan_1">
 		                <p class="photo">
@@ -251,9 +251,9 @@
 	        	</#if>
         	</#list>
     	</#if>
-        <#if top_cat_goods_page3?? && top_cat_goods_page0.content?size gt 0 >
+        <#if top_cat_goods_page3?? && top_cat_goods_page3.content?size gt 0 >
         <ul class="phone_details">
-        	<#list top_cat_goods_page1.content as item>
+        	<#list top_cat_goods_page3.content as item>
         		<#if item_index lt 6>
 		        	<li class="daquan_1">
 		                <p class="photo">

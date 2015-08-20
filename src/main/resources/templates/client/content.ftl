@@ -14,6 +14,7 @@
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/ljs-v1.01.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
+<script type="text/javascript" src="/client/js/ljs-v1.01"></script>
 
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
@@ -219,6 +220,7 @@ function cartInit(){
             </div>
         </div>
     
+
 		<!--中部信息-->
 		<div class="details_details">
 			<div class="de_title">${goods.title!''}</div>
@@ -529,7 +531,7 @@ function cartInit(){
             <div id="consult-list">
                 <#include "/client/goods_consult.ftl" />
             </div>
-			
+
 			<!--动态咨询-->
 			<div id="tab3" class="c_R_consult top20">
 				<form>

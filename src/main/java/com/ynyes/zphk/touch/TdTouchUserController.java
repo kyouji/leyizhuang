@@ -346,7 +346,37 @@ public class TdTouchUserController {
             map.addAttribute("order", tdOrderService.findOne(id));
         }
         
-        return "/client/user_order_detail";
+        return "/touch/user_order_detail";
+    }
+    
+    @RequestMapping(value="/user/order/confirmed")
+    public String orderConfirmed(
+    		HttpServletRequest req,
+    		Long id,
+    		ModelMap map){
+    	 String username = (String) req.getSession().getAttribute("username");
+         if (null == username)
+         {
+             return "redirect:/touch/login";
+         }
+         
+         tdCommonService.setHeader(map, req);
+         
+         TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+         
+         map.addAttribute("user", tdUser);
+         TdOrder order=null;
+         
+         if (null != id)
+         {
+             order = tdOrderService.findOne(id);
+             order.setStatusId(5L);
+             order.setReceiveTime(new Date());
+             tdOrderService.save(order);
+         }
+         map.addAttribute("order",order);
+    	
+    	return "/touch/user_order_detail";
     }
     
     @RequestMapping(value = "/user/collect/list")
@@ -543,8 +573,7 @@ public class TdTouchUserController {
     @RequestMapping(value = "/user/return/{orderId}")
     public String userReturn(HttpServletRequest req, 
                         @PathVariable Long orderId,
-                        Long id, // 商品ID
-                        String method,
+                        Long goodsId, // 商品ID
                         ModelMap map){
         String username = (String) req.getSession().getAttribute("username");
         
@@ -564,11 +593,11 @@ public class TdTouchUserController {
             TdOrder tdOrder = tdOrderService.findOne(orderId);
             map.addAttribute("order", tdOrder);
             
-            if (null != tdOrder && null != id)
+            if (null != tdOrder && null != goodsId)
             {
                 for (TdOrderGoods tog : tdOrder.getOrderGoodsList())
                 {
-                    if (tog.getId().equals(id))
+                    if (tog.getId().equals(goodsId))
                     {
                         // 已经退换货
                         if (null != tog.getIsReturnApplied() && tog.getIsReturnApplied())
@@ -578,21 +607,22 @@ public class TdTouchUserController {
 
                         map.addAttribute("order_goods", tog);
                         
-                        return "/client/user_return_edit";
+                        return "/touch/user_return";
                     }
                 }
             }
         }
         
-        return "/client/user_return";
+        return "/touch/user_return";
     }
     
     @RequestMapping(value = "/user/return/save", method=RequestMethod.POST)
     public String returnSave(HttpServletRequest req, 
                         Long goodsId,
-                        Long id, // 订单ID
+                        Long orderId, // 订单ID
                         String reason,
                         String telephone,
+                        String isReturn,
                         ModelMap map){
         String username = (String) req.getSession().getAttribute("username");
         
@@ -603,9 +633,9 @@ public class TdTouchUserController {
         
         tdCommonService.setHeader(map, req);
 
-        if (null != id && null != goodsId)
+        if (null != orderId && null != goodsId)
         {
-            TdOrder order = tdOrderService.findOne(id);
+            TdOrder order = tdOrderService.findOne(orderId);
             
             if (null != order)
             {
@@ -614,8 +644,13 @@ public class TdTouchUserController {
                     if (goodsId.equals(tog.getGoodsId()))
                     {
                         TdUserReturn tdReturn = new TdUserReturn();
-                        
-                        tdReturn.setIsReturn(false); 
+                        if("t".equalsIgnoreCase(isReturn))
+                        {
+                        	tdReturn.setIsReturn(true);
+                        }
+                        if("f".equalsIgnoreCase(isReturn)){
+                        	tdReturn.setIsReturn(false); 
+                        }
                         
                         // 用户
                         tdReturn.setUsername(username);
@@ -647,7 +682,7 @@ public class TdTouchUserController {
             }
         }
         
-        return "redirect:/user/return/list";
+        return "/touch/user_return_sub";
     }
     
     @RequestMapping(value = "/user/return/list")
@@ -695,6 +730,8 @@ public class TdTouchUserController {
     public Map<String, Object> commentAdd(HttpServletRequest req, 
                         TdUserComment tdComment,
                         String code,
+                        Long goodsId,
+                        Long orderId, // 订单ID
                         ModelMap map){
         Map<String, Object> res = new HashMap<String, Object>();
         res.put("code", 1);
@@ -720,6 +757,7 @@ public class TdTouchUserController {
             res.put("message", "评论的商品不存在！");
             return res;
         }
+        
         
 //        String codeBack = (String) req.getSession().getAttribute("RANDOMVALIDATECODEKEY");
 //        
@@ -747,6 +785,26 @@ public class TdTouchUserController {
         tdComment.setStatusId(0L);
         
         tdUserCommentService.save(tdComment);
+        
+        if (null != orderId && null != goodsId)
+        {
+            TdOrder order = tdOrderService.findOne(orderId);
+            
+            if (null != order)
+            {
+                for (TdOrderGoods tog : order.getOrderGoodsList())
+                {
+                    if (goodsId.equals(tog.getGoodsId()))
+                    {
+                        tog.setIsCommented(true);
+                        tog.setCommentId(tdComment.getId());
+                        tdOrderGoodsService.save(tog);
+                        break;
+                    }
+                }
+            }
+        }
+        
         
 
         if (null == goods.getTotalComments())

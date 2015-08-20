@@ -1,13 +1,13 @@
 <div class="footerall">
     <div class="footer_iconsall">
         <div class="footer_icons">
-             <#if service_item_list??>
-                 <#list service_item_list as item>
+            <#if service_item_list??>
+                <#list service_item_list as item>
                     <#if item_index < 7>
-                    <dl>
-                        <dt><img src="${item.logo!''}" width="60px;"/></dt>
-                        <dd>${item.title!''}</dd>
-                    </dl>
+                        <dl>
+                            <dt><img src="${item.logo!''}" width="60px;"/></dt>
+                            <dd>${item.title!''}</dd>
+                        </dl>
                     </#if>
                 </#list>
             </#if>
@@ -23,13 +23,12 @@
             </#list>
         </#if>
     </div>
-    
 
     <div class="footerall_copyall">
         <div class="footerall_copy">友情链接：
             <#if site_link_list??>
                 <#list site_link_list as item>
-                     <a href="${item.linkUri!''}">${item.title!''}</a>
+                    <a href="${item.linkUri!''}">${item.title!''}</a>
                 </#list>
             </#if>
             <br />

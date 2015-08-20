@@ -13,6 +13,7 @@
 
 <link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/information.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/common.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -40,6 +41,6 @@
   </div>
 </div><!--main END-->
 
-
+<#include "/touch/common_footer.ftl" />
 </body>
 </html>
