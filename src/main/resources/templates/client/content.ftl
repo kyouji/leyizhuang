@@ -13,7 +13,7 @@
 <script type="text/javascript" src="/client/js/goods.js"></script>
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
-<#--
+<!--
 <script type="text/javascript" src="/client/js/base.js"></script>
 <script type="text/javascript" src="/client/js/list.js"></script>
 <script type="text/javascript" src="/client/js/cart.js"></script>
@@ -521,6 +521,7 @@ function cartInit(){
                 </dl>
             </div>
             
+<!--
             <!-- 评价 -->
             <div class="c_R_comment top20">
                 <div class="c_R_comment_title">
@@ -584,6 +585,11 @@ function cartInit(){
                 </div>
      
             </div>
+=======
+            <#-- 评价 -->
+            <#include "/client/goods_comment.ftl" />
+            
+>>>>>>> refs/remotes/origin/master
             
 			<!--评价-->
 			<div class="c_R_comment top20">

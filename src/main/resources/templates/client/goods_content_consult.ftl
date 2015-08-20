@@ -13,7 +13,7 @@
             <dl>
                 <dd>
                     <#if consult_page?? && consult_page.content?size gt 0> 
-                        <#listconsult_page.content as item>
+                        <#list consult_page.content as item>
                             <ul>
                                 <li><b>?</b><span>${item.username}</span><label>${item.content}</label></li>
                                 <#if item.isReplied>

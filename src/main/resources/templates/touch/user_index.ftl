@@ -75,13 +75,15 @@ $(document).ready(function(){
             <img src="/touch/images/img1/icon_2.png" /><label>我的关注</label>
       </a>
   </div>
+  <!--
   <div class="member_check" >
         <a href="/touch/user/return/list">
         <img src="/touch/images/img1/icon_3.png" /><label>退换货</label>
         </a>
   </div>
+  -->
   <div class="member_check member_check1">
-        <a href="/touch/user/address/show">
+        <a href="/touch/user/address/list">
         <img src="/touch/images/img1/icon_4.png" /><label>收货地址</label>
         </a>
   </div>

@@ -33,16 +33,16 @@
 </head>
 
 <body>
-    <!--顶部-->
-    <#include "/client/common_user_header.ftl" />
-    
-    <!--购物车进度条-->
-    <div class="progress_bar">
-        <div class="bar_1">1、购物车</div>
-        <div class="bar_2">2、订单信息</div>
-        <div class="bar_3">3、支付完成</div>
-    </div>
-    
+<!--顶部-->
+<#include "/client/common_user_header.ftl" />
+
+<!--购物车进度条-->
+<div class="progress_bar">
+	<div class="bar_1">1、购物车</div>
+    <div class="bar_2">2、订单信息</div>
+    <div class="bar_3">3、支付完成</div>
+</div>
+
     <!--收货地址-->
     <form id="form1" name="form1" action="/order/submit" method="post">
         <div class="shipping_address">

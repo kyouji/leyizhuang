@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
 <script src="/touch/js/common.js"></script>
 
 <link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
@@ -19,7 +20,7 @@ $(document).ready(function(){
   searchTextClear(".order_words","给商家留言（选填、45字以内）：","#999","#333");
   
   $("#form1").Validform({
-        tiptype: 1
+        tiptype: 3
     });
     
 });
@@ -37,18 +38,19 @@ $(document).ready(function(){
   </div>
 </header>
 <div class="clear"></div>
-
+ <form action="/touch/order/submit" method="post" id="form1">
 <div class="main">
-    <form action="/touch/order/submit" method="post" id="form1">
+   
         <#if address_list??>
             <#list address_list as item>
                 <#if item.isDefaultAddress>
                     <div class="order_info">
                         <h4 class="c3">收货人信息</h4>
+                        <input type="hidden" name="addressId" value="${item.id?c}"/>
                         <p>收货人：<span>${item.receiverName!''}</span></p>
                         <p>联系方式：<span>${item.receiverMobile!''}</span></p>
                         <p>地址：<span>${item.province!''}${item.city!''}${item.disctrict!''}${item.detailAddress!''}</span></p>
-                        <a href="/touch/user/add"><img src="/touch/images/front/arrow04.png" /></a>
+                        <a href="/touch/order/address/list"><img src="/touch/images/front/arrow04.png" /></a>
                     </div>
                 </#if>
             </#list>
@@ -82,9 +84,14 @@ $(document).ready(function(){
     
         <div class="order_info">
     	<h4 class="c3">支付方式</h4>
-        <p>在线支付</p>
-		<a href="#"><img src="/touch/images/front/arrow04.png" /></a>
-    </div>
+            <ul>
+            <#if pay_type_list?? >
+                <#list pay_type_list as pay>
+                    <li><input name="payTypeId" type="radio" value="${pay.id?c}" /><span><img src="${pay.coverImageUri!''}" height="30" /></span></li>
+                </#list>
+            </#if>
+            </ul>
+        </div>
     
     <div class="order_info">
     	<h4 class="c3">配送方式</h4>
@@ -93,7 +100,7 @@ $(document).ready(function(){
     </div>
     
     <div class="order_info">
-    	<input type="text" class="order_words" value=""  />
+    	<input type="text" class="order_words" value="" name="userMessage" />
     </div>
      <#assign totalQuantity=0>
      <#assign totalPrice=0>
@@ -104,7 +111,7 @@ $(document).ready(function(){
         </#list>
     </#if>
     
-    </form>
+
 </div>
 
 <div class="clear60"></div>
@@ -116,6 +123,6 @@ $(document).ready(function(){
     <input class="sub" type="submit" value="提交订单" />
   </div>
 </footer>
-
+</form>
 </body>
 </html>
