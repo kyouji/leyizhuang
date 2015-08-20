@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>正品惠客-首页</title>
+<title><#if site??>${site.seoTitle!''}-</#if>首页</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -139,8 +139,9 @@ $(function(){
                 </#if>
             </div>
             <div class="top_right">
+                <a href="/user" title="我的惠客">我的惠客</a>
                 <a class="top_right_like" href="/user/collect/list" title="我的关注">我的关注</a>
-                <a class="top_right_hk" href="/user" title="我的惠客">我的惠客</a>
+                <a class="top_right_hk" href="/touch" title="我的惠客">手机惠客</a>
             </div>
         </div>
     </div>
@@ -353,7 +354,7 @@ $(function(){
             		热门:&nbsp;&nbsp;
                     <#list first_brand_list as item >
                         <#if item_index < 6>
-                        |&nbsp;&nbsp;<a href="/list/${item.id?c!""}">${item.title!""}</a>
+                        |&nbsp;&nbsp;<a href="/list/${item.id?c}">${item.title!''}</a>
                         </#if>
                     </#list>
                 </#if>

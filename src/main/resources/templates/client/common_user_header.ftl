@@ -41,9 +41,9 @@
             </#if>
         </div>
         <div class="top_right">
-            <a href="/user" title="">我的惠客</a>
-            <a class="top_right_like" href="/user/collect/list" >我的关注</a>
-            <a class="top_right_hk" href="/user">我的惠客</a>
+            <a href="/user" title="我的惠客">我的惠客</a>
+            <a class="top_right_like" href="/user/collect/list">我的关注</a>
+            <a class="top_right_hk" href="/touch">手机惠客</a>
         </div>
     </div>
 </div>
