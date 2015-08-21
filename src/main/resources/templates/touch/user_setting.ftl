@@ -27,14 +27,14 @@
 
 <div class="main">
 <div class="clear15"></div>
-
-  <div class="member_check" ><a href="/touch/user/password"><label>修改密码</label></a></div>
-  <#--
-  <div class="member_check" ><a href="#"><label>清除缓存</label></a><span>ok</span></div>
-  -->
-  <div class="member_check member_check1" ><a href="#"><label>服务中心</label></a></div>
-  <div class="member_check " ><a href="#"><label>关于我们 </label></a></div>
-  <div class="member_check11" ><label>客服热线</label><span><#if setting??>${setting.telephone!''}</#if></span></div>
+    <#if setting??>
+      <div class="member_check" ><label>网站名称：${setting.title!''}</label></div>
+      <div class="member_check" ><label>公司名称：${setting.company!''}</label></div>
+      <div class="member_check " ><label>公司地址：${setting.address!''}</label></div>
+      <div class="member_check" ><label>客服热线：${setting.telephone!''}</label></div>
+      <div class="member_check" ><label>传真号码：${setting.fex!''}</label></div>
+      <div class="member_check" ><label>服务QQ：${setting.qq!''}</label></div>
+    </#if>
 </div><!--main END-->
 
 <#include "/touch/common_footer.ftl" />

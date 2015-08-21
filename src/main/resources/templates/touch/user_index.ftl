@@ -91,7 +91,7 @@ $(document).ready(function(){
         </a>
   </div>
 
-  <div class="member_check member_check1">
+  <div class="member_check ">
         <a href="/touch/user/address/list">
         <img src="/touch/images/img1/icon_4.png" /><label>收货地址</label>
         </a>
@@ -101,9 +101,14 @@ $(document).ready(function(){
         <img src="/touch/images/img1/icon_5.png" /><label>个人信息</label>
       </a>
   </div>
-  <div class="member_check  member_check1">
-       <a href="/touch/user/setting">
-        <img src="/touch/images/img1/icon_6.png" /><label>设置</label>
+  <div class="member_check ">
+       <a href="/touch/user/password">
+        <img src="/touch/images/img1/icon_15.png" /><label>修改密码</label>
+       </a>
+  </div>
+  <div class="member_check ">
+       <a href="/touch//user/setting">
+        <img src="/touch/images/img1/icon_16.png" /><label>关于我们</label>
        </a>
   </div>
 </div><!--main END-->
