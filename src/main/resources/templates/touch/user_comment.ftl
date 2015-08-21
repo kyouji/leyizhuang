@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>我的关注</title>
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -11,7 +11,7 @@
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
 <link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="/touch/css/follow.css"/>
+<link rel="stylesheet" type="text/css" href="/touch/css/evaluate.css"/>
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -19,26 +19,31 @@
 <div class="maintop_bg"></div>
 <header class="maintop">
   <div class="main">
-    <p>我的关注</p>
+    <p>我的评价</p>
     <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
-    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a></div>
+    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a>  
+  </div>
 </header>
 
- <div class="main">
-  <#if collect_page??>
-    <#list collect_page.content as cg>
-        <section class="carlist">
-            <b><a href="/touch/goods/${cg.goodsId}"><img src="${cg.goodsCoverImageUri!''}" /></a></b>
-            <p><a href="/touch/goods/${cg.goodsId}">${cg.goodsTitle!''}</a></p>
-            <p class="pt5 pb5">单价：<span class="sc">￥${cg.goodsSalePrice?string("0.00")}</span></p>
-            <div class="clear"></div>
-            <a class="a1" href="/touch/user/collect/del?id=${cg.goodsId}"><img src="/touch/images/img1/delete.png" width="30" /></a>
-       </section>
-    </#list>
-</#if>
-</div>
+<div class="main">
+  <div class="clear20"></div>
+ 
+  <#if comment_page??>
+       <#list comment_page.content as item>
+            <div class="myorder_list">
+                <a class="a1 a0" href="/touch/goods/${item.goodsId}">
+                  <span class="sp1"><img src="${item.goodsCoverImageUri!''}" /></span>
+                  <p class="mb10">${item.goodsTitle!''}</p>
+                  <p class="p1">订单号：<span>${item.orderNUmber!''}</span></p>
+                  <div class="clear"></div>
+                </a>
+                <textarea class="myorder_area_2" readonly="true">${item.content!''}</textarea>
+               
+             </div>
+       </#list>
+  </#if>
   
-<!--main END-->
+</div>
 
 <#include "/touch/common_footer.ftl" />
 </body>

@@ -41,27 +41,36 @@ $(document).ready(function(){
  
   <div class="member_line">
     <div class="member_lin">
+      
       <ul>
+        <a href="/touch/user/order/list/2">
         <li><img src="/touch/images/img1/icon_7.png" /></li>
-        <li class="gn">代付款<span>${total_unpayed!'0'}</span></li>
+        <li class="gn">待付款<span>${total_unpayed!'0'}</span></li>
+        </a>
       </ul>
     </div>
     <div class="member_lin">
       <ul>
+      <a href="/touch/user/order/list/3">
         <li><img src="/touch/images/img1/icon_8.png" /></li>
-        <li class="gn">代发货<span>${total_undelivered!'0'}</span></li>
+        <li class="gn">待发货<span>${total_undelivered!'0'}</span></li>
+        </a>
       </ul>
     </div>
     <div class="member_lin">
       <ul>
+      <a href="/touch/user/order/list/4">
         <li><img src="/touch/images/img1/icon_9.png" /></li>
-        <li class="gn">代收货<span>${total_unreceived!'0'}</span></li>
+        <li class="gn">待收货<span>${total_unreceived!'0'}</span></li>
+        </a>
       </ul>
     </div>
     <div class="member_lin">
       <ul>
+      <a href="/touch/user/order/list/5">
         <li><img src="/touch/images/img1/icon_10.png" /></li>
-        <li class="gn">代评价<span>${total_finished!'0'}</span></li>
+        <li class="gn">待评价<span>${total_finished!'0'}</span></li>
+        </a>
       </ul>
     </div>
   </div>
@@ -75,13 +84,13 @@ $(document).ready(function(){
             <img src="/touch/images/img1/icon_2.png" /><label>我的关注</label>
       </a>
   </div>
-  <!--
+  
   <div class="member_check" >
         <a href="/touch/user/return/list">
         <img src="/touch/images/img1/icon_3.png" /><label>退换货</label>
         </a>
   </div>
-  -->
+
   <div class="member_check member_check1">
         <a href="/touch/user/address/list">
         <img src="/touch/images/img1/icon_4.png" /><label>收货地址</label>

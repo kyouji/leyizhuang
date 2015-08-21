@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>退换货</title>
+<title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -18,24 +18,16 @@
 <body>
 <div class="maintop_bg"></div>
 <header class="maintop">
-    <div class="main">
-        <p>退/换货</p>
-        <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
-        <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a>  
-    </div>
+  <div class="main">
+    <p>退换货</p>
+      <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
+      <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a>
+   </div>
 </header>
 
 <div class="main">
   
-  <div class="member_check">
-     <ul>
-       <li>提交成功！！！</li>
-	   <li>等待商家处理申请</li>
-	   <li class="li_1">如果商家同意，退货申请将达成需要您退货给商家</li>
-	   <li class="li_1">如果商家拒绝，将需要您修改退货申请</li>
-	   <li>点击返回<a href="/touch/user">个人中心</a></li>
-	 </ul>
-  </div>
+  <div class="member_check"  ><img src="/touch/images/img1/gou.png" width="75"/><span>退换成功！</span><a href="/touch" title="">返回首页</a></div>
   
 </div><!--main END-->
 

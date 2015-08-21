@@ -12,6 +12,7 @@
 <script type="text/javascript" src="/touch/js/search.js"></script>
 <link rel="stylesheet" type="text/css" href="/touch/css/style.css"/>
 
+
 <title>正品惠客-首页</title>
 </head>
 
@@ -82,13 +83,13 @@
 	<div class="nav">
     	<ul class="listico"> 
             <li class="icon_1"><a href="/touch/brand" class="ico1">商品分类</a></li> 
-            <li class="icon_2"><a href="#" class="ico2">我的订单</a></li> 
+            <li class="icon_2"><a href="touch/user/order/list/0" class="ico2">我的订单</a></li> 
             <li class="icon_3"><a href="/touch/user" class="ico3">个人中心</a></li> 
             <li class="icon_4"><a href="/touch/user/collect/list" class="ico4">我的关注</a></li> 
             <li class="icon_5"><a href="#" class="ico5">我的积分</a></li> 
-            <li class="icon_6"><a href="/touch/user/address/" class="ico6">收货地址</a></li> 
+            <li class="icon_6"><a href="/touch/user/address/list" class="ico6">收货地址</a></li> 
             <li class="icon_7"><a href="/touch/cart" class="ico7">购物车</a></li> 
-            <li class="icon_8"><a href="#" class="ico8">我的评价</a></li> 
+            <li class="icon_8"><a href="/touch/user/comment/list" class="ico8">我的评价</a></li> 
     	</ul> 
     </div>
     

@@ -41,6 +41,8 @@ function subReturn(){
   <div class="clear15"></div>
   <form action="/touch/user/return/save" method="post" id="form1">
   <section class="carlist"> 
+        <input input name="orderId" type="hidden" value="${order.id?c}">
+        <input input name="goodsId" type="hidden" value="${order_goods.goodsId}">
         <h2>订单编号&nbsp; ${order.orderNumber!''}<span><#if order.checkTime??>${order.checkTime!''}</#if></span></h2>
         <b><a href="/touch/goods/${order_goods.goodsId}"><img src="${order_goods.goodsCoverImageUri!''}" /></a></b>
         <p><a href="/touch/goods/${order_goods.goodsId}" style="display:block; overflow:hidden; height:20px; width:15%;">${order_goods.goodsTitle}</a></p>

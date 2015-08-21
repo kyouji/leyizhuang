@@ -440,7 +440,7 @@ public class TdTouchUserController {
             }
         }
         
-        return "redirect:/user/collect/list";
+        return "redirect:/touch/user/collect/list";
     }
     
     @RequestMapping(value = "/user/collect/add", method=RequestMethod.POST)
@@ -685,6 +685,26 @@ public class TdTouchUserController {
         return "/touch/user_return_sub";
     }
     
+    @RequestMapping(value ="/user/return/end")
+    public String returnend(HttpServletRequest req,
+    						String cmd,ModelMap map){
+    	 String username = (String) req.getSession().getAttribute("username");
+         
+         if (null == username)
+         {
+             return "redirect:/touch/login";
+         }
+         
+         tdCommonService.setHeader(map, req);
+    	
+         if("已审核".equals(cmd))
+         {
+        	 return "/touch/user_return_end";
+         }
+    	
+    	return "/touch/user_return_sub";
+    }
+    
     @RequestMapping(value = "/user/return/list")
     public String returnList(HttpServletRequest req, 
                         Integer page,
@@ -722,7 +742,7 @@ public class TdTouchUserController {
         map.addAttribute("return_page", returnPage);
         map.addAttribute("keywords", keywords);
         
-        return "/client/user_return_list";
+        return "/touch/user_return_list";
     }
     
     @RequestMapping(value = "/user/comment/add", method=RequestMethod.POST)
@@ -784,7 +804,6 @@ public class TdTouchUserController {
         
         tdComment.setStatusId(0L);
         
-        tdUserCommentService.save(tdComment);
         
         if (null != orderId && null != goodsId)
         {
@@ -799,13 +818,17 @@ public class TdTouchUserController {
                         tog.setIsCommented(true);
                         tog.setCommentId(tdComment.getId());
                         tdOrderGoodsService.save(tog);
+                        tdComment.setOrderNumber(order.getOrderNumber());
                         break;
                     }
                 }
+                order.setSortId(6L);
+                tdOrderService.save(order);
             }
         }
         
         
+        tdUserCommentService.save(tdComment);
 
         if (null == goods.getTotalComments())
         {
@@ -858,7 +881,7 @@ public class TdTouchUserController {
         map.addAttribute("comment_page", commentPage);
         map.addAttribute("keywords", keywords);
         
-        return "/client/user_comment_list";
+        return "/touch/user_comment";
     }
     
     @RequestMapping(value = "/user/consult/add", method=RequestMethod.POST)
