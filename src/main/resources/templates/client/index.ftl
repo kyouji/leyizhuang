@@ -291,7 +291,7 @@ $(function(){
                  <#if news_page??>
                     <#list news_page.content as item>
                          <#if item_index < 7>
-                         <a class="block mt5" href="/info/content/${item.id}?mid=12&catId=${item.categoryId}" style="height:20px; overflow:hidden;">${item.title!''}</a>
+                         <a class="block mt5" target="_blank" href="/info/content/${item.id}?mid=12&catId=${item.categoryId}" style="height:20px; overflow:hidden;">${item.title!''}</a>
                          </#if>
                     </#list>
                 </#if>

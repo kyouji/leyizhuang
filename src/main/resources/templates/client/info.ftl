@@ -56,14 +56,14 @@
             </#if> 
             <div class="article_page_01">
                 <#if prev_info??>
-                    <a href="/info/content/${prev_info.id?c}?mid=${mid}&catId=${acticle_category.id}" title="">上一篇：${prev_info.title}</a>
+                    <a target="_blank" href="/info/content/${prev_info.id?c}?mid=${mid}&catId=${acticle_category.id}" title="">上一篇：${prev_info.title}</a>
                 <#else>
                     <a>上一篇：无</a> 
                 </#if>
             </div>
             <div class="article_page_02">
                 <#if next_info??>
-                    <a href="/info/content/${next_info.id?c}?mid=${mid}&catId=${acticle_category.id}" title="">下一篇：${next_info.title}</a>
+                    <a target="_blank" href="/info/content/${next_info.id?c}?mid=${mid}&catId=${acticle_category.id}" title="">下一篇：${next_info.title}</a>
                 <#else>
                     <a>下一篇：无</a>
                 </#if>
