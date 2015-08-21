@@ -17,7 +17,7 @@
 
 <body>
     <!--顶部-->
-    <#include "/client/common_user_header.ftl" />
+    <#include "/client/common_header.ftl" />
 
     <!--购物车进度条-->
     <div class="progress_bar">

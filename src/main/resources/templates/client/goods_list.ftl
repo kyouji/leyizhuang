@@ -66,7 +66,7 @@ function btnPageSubmit() {
         <#if category_tree_list??> 
             <#list category_tree_list as item> 
                 &nbsp;&nbsp;&gt;&nbsp;&nbsp; 
-                <a href="/list/${item.id}" title="${item.title!''}">${item.title!''}</a>
+                <a href="/list/${item.id}" title="${item.title!''}" target="_blank">${item.title!''}</a>
             </#list> 
         </#if>
     </div>
@@ -84,12 +84,12 @@ function btnPageSubmit() {
                             <#list hot_sale_list as item>
                                 <#if item_index < 4>
                                     <li>
-                                        <a href="/goods/${item.id}" title="${item.title!''}" class="img100">
+                                        <a href="/goods/${item.id}" title="${item.title!''}" class="img100" target="_blank">
                                             <img src="${item.coverImageUri!''}" height="100" width="100"/>
                                         </a>
-                                        <a class="font_style_by_dx" href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a>
+                                        <a class="font_style_by_dx" href="/goods/${item.id}" title="${item.title!''}" target="_blank">${item.title!''}</a>
                                         <p  class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
-                                        <a href="/cart/init?id=${item.id}" title="加入购物车" class="btn_cart23">加入购物车</a>
+                                        <a href="/cart/init?id=${item.id}" title="加入购物车" class="btn_cart23" target="_blank">加入购物车</a>
                                     </li>
                                 </#if>
                             </#list>
@@ -181,12 +181,12 @@ function btnPageSubmit() {
                     <#list goods_page.content as item>
                         <dl>
                             <dt>
-                                <a href="/goods/${item.id?c}">
+                                <a href="/goods/${item.id?c}" target="_blank">
                                     <img src="${item.coverImageUri!''}" width="210" height="210"/>
                                 </a>
                             </dt>
                             <dd class="piclist_title">
-                                <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
+                                <a href="/goods/${item.id}" title="${item.title!''}" target="_blank">${item.title!''}</a> 
                             </dd>
                             <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
                                 <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> 
@@ -255,9 +255,9 @@ function btnPageSubmit() {
                 <#list most_sold_list as item>
                     <#if item_index < 6 >
                         <dl>
-                            <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!''}" width="210px" height="210px"/></a></dt>
+                            <dt><a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!''}" width="210px" height="210px"/></a></dt>
                             <dd class="c_r_title">
-                                <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a> 
+                                <a href="/goods/${item.id}" title="${item.title!''}" target="_blank">${item.title!''}</a> 
                             </dd>
                             <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
                                 <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> 

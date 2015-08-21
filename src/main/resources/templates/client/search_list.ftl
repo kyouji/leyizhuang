@@ -95,17 +95,16 @@
     <div class="wrapper">
     <!--中部左边-->
     <div class="c_l">
-    <hr>
     <!--产品列表-->
     <div class="piclist">
         <#if goods_page?? && goods_page.content?size gt 0> 
             <#list goods_page.content as item>
                 <dl>
                     <dt>
-                        <a href="/goods/${item.id}" title="${item.title!''}"><img src="${item.coverImageUri!''}" width="210" height="210" /></a>
+                        <a href="/goods/${item.id}" title="${item.title!''}" target="_blank"><img src="${item.coverImageUri!''}" width="210" height="210" /></a>
                     </dt>
                     <dd class="piclist_title">
-                        <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a>
+                        <a href="/goods/${item.id}" title="${item.title!''}" target="_blank">${item.title!''}</a>
                     </dd>
                     <dd class="money16"> ￥ <#if item.salePrice??>${item.salePrice?string("0.00")}</#if> <span class="moneydelete">￥ <#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if> </span></dd>
                     <dd class="piclist_ie">
@@ -161,6 +160,8 @@
         <div class="clear"></div>
     </div>
     
+    </div><!--中部左边end-->
+    
     <!--中部右边-->
     <div class="c_r">
         <p>热销排行</p>
@@ -169,10 +170,10 @@
                     <#if item_index < 10 >
                         <dl>
                             <dt>
-                                <a href="/goods/${item.id?c}"><img src="${item.coverImageUri!''}" style="width: 200px" /></a>
+                                <a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!''}" style="width: 200px" /></a>
                             </dt>
                             <dd class="c_r_title">
-                                <a href="/goods/${item.id}" title="${item.title!''}">${item.title!''}</a>
+                                <a href="/goods/${item.id}" title="${item.title!''}" target="_blank">${item.title!''}</a>
                             </dd>
                             <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if> <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span>
                             </dd>
@@ -180,8 +181,11 @@
                     </#if> 
                 </#list> 
             </#if>
-        </div>
-    </div>
+     </div>
+        
+        
+        
+    </div><!--wrapper—end-->
     
     <!--底部footer-->
     <#include "/client/common_footer.ftl" />

@@ -9,10 +9,10 @@
 <body>
     <!-- 顶部  -->
     <#include "/client/common_header.ftl" />
-    <div>
+    <div class="wrapper" style="min-height:600px;">
         <center>
-            <h3>抱歉！您访问的页面已经删除或更改地址</h3>
-            <h4>请<a href="/">返回首页</a>查看</h4>
+            <h1 style="margin-top:160px;">抱歉！您访问的页面已经删除或更改地址</h1>
+            <h3 style="margin-top:80px;">请<a href="/">返回首页</a>查看</h3>
         </center>
     </div>
     <!--底部footer-->

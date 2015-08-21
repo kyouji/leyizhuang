@@ -5,12 +5,13 @@
 <title><#if site??>${site.seoTitle!''}-</#if>云南车有同盟商贸有限公司</title>
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
-<meta name="copyright" content="云南车有同盟商贸有限公司" />
+<meta name="copyright" content="${site.copyright!''}" />
 <link href="/client/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <link href="/client/style/bankLogo.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/change_paymethod.css" rel="stylesheet" type="text/css" />

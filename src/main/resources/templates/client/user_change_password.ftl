@@ -14,20 +14,43 @@
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 
 <script type="text/javascript">
+<!--
 $(document).ready(function(){
-	/**
-    menuDownList("top_phone","#top_phonelist",".a1","sel");
-    phoneListMore();//单独下拉
-    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-    navDownList("navdown","li",".nav_showbox");
-    menuDownList("mainnavdown","#navdown",".a2","sel");
-    checkNowHover("shopping_down","shopping_sel");
-    **/
     //初始化表单验证
     $("#form1").Validform({
         tiptype: 3
     });
 });
+-->
+
+function checkForm(){
+    var oldPassword = document.getElementById("oldPassword").value;
+    var newPassword = document.getElementById("newPassword").value;
+    var rePassword = document.getElementById("rePassword").value;
+    <#if user??>
+        var userPassword = '${user.password}';
+    <#else>
+        alert("未知原因，修改未能成功！请稍后重试！");
+    </#if>
+    if(oldPassword != userPassword){
+        alert("原密码输入错误！");
+        return;
+    }
+    
+    if(newPassword != rePassword){
+        alert("两次输入的密码不一致!");
+        return;
+    }
+    
+    if(newPassword ==""||newPassword.length<6||newPassword.length>12){
+        alert("请输入一个长度大于6小于12的新密码");
+        return;
+    }
+    
+    alert("修改成功！");
+    
+    document.getElementById("form1").submit();
+}
 </script>
 
 </head>
@@ -39,30 +62,22 @@ $(document).ready(function(){
         <#include "/client/common_user_menu.ftl" />
         <!-- 右侧 -->
         <div class="content_2">
-            <div class="content_2_1">
-                <ul>
-                    <li class="li_1">验证身份 </li>
-                    <li class="li_2">修改密码</li>
-                    <li class="li_3">完成</li>
-                </ul>
-            </div>
             <div class="content_2_2">
-                <div class="content_2_2_1"><span>请输入手机号码：</span>
-                    <input type="text" name="nc"  class="textInput" value="" />
+                <form id="form1" action="/user/password" method="POST">
+                <div class="content_2_2_1"><span>原始密码：</span>
+                    <input type="password" name="oldPassword" id="oldPassword" class="textInput" value="" />
+                </div> 
+                <div class="content_2_2_1"><span>新密码：</span>
+                    <input type="password" name="newPassword" id="newPassword" class="textInput" value="" />
                 </div> 
                 <div class="content_2_2_1">
-                    <span>请填写手机校验码：</span>
-                    <input type="text" name="nc"  class="textInput" value="" />
-                    <input id="button" type="button" value="获取短信校验码" onclick="InforSave()" name="btnChange">
+                    <span>再次输入密码：</span>
+                    <input type="password" name="rePassword" id="rePassword" class="textInput" value="" />
                 </div>
                 <div class="content_2_2_1">
-                    <span>验证码：</span>
-                    <input  type="text" name="nc"  class="text texts" value="" />
-                    <img src="images/security_code.png" />看不清？<a href="#" title="换一张"> 换一张</a>
+                    <input id="button1" type="button" onclick="checkForm();" value="提交" name="btnChange">
                 </div>
-                <div class="content_2_2_1">
-                    <input id="button1" type="button" value="提交" onclick="InforSave()" name="btnChange">
-                </div>
+                </form>
             </div>
         </div>
     </div>

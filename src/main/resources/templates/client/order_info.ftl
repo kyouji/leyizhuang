@@ -8,7 +8,7 @@
 <meta name="copyright" content="${site.copyright!''}" />
 
 <link href="/client/css/Order_information.css" rel="stylesheet" type="text/css" />
-
+<link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/order_info.js"></script>
@@ -34,7 +34,7 @@
 
 <body>
 <!--顶部-->
-<#include "/client/common_user_header.ftl" />
+<#include "/client/common_header.ftl" />
 
 <!--购物车进度条-->
 <div class="progress_bar">
@@ -82,7 +82,7 @@
                 </div>
                 <div class="online_banking">
     	           <#if pay_type_list_bank??>
-            	       <input name="" type="radio" value=""  />网银支付
+            	       <input name="payTypeId" type="radio" value=""  />网银支付
             	       <ul class="online_banking_right">
                             <#list pay_type_list_bank as pay_type>
                                 <#assign onlineBank=false/>

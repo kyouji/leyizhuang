@@ -386,9 +386,9 @@ $(function(){
                         <#if item_index < 3 >
                             <li class="photo_1">
                                 <dl>
-                                    <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                    <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
                                      <dd class="feature">性价比之王</dd>
-                                     <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                     <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                      <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                      <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                  </dl>
@@ -399,12 +399,12 @@ $(function(){
                </#if>
                <#if top_cat_goods_page0?? && top_cat_goods_page0.content?size gt 0 >
                     <#list top_cat_goods_page0.content as item>
-                        <#if item_index gt 2 && item_index < 5 >
+                        <#if item_index gt 2 && item_index < 6 >
                             <li class="photo_1 photo_4">
                                  <dl>
-                                      <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                      <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
                                       <dd class="feature">性价比之王</dd>
-                                      <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                      <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                       <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                       <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                 </dl>
@@ -478,8 +478,8 @@ $(function(){
                         <#if item_index < 2 >
                             <li class="photo_1">
                                 <dl>
-                                   <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
-                                   <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                   <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                   <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                    <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                    <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                 </dl>
@@ -495,9 +495,9 @@ $(function(){
                         <#if item_index gt 1 && item_index < 5 >
                             <li class="photo_1">
                                 <dl>
-                                  <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                  <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
                                   <dd class="feature">性价比之王</dd>
-                                  <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                  <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                   <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                   <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                 </dl>
@@ -511,8 +511,8 @@ $(function(){
                         <#if item_index gt 4 && item_index < 8 >
                             <li class="photo_1 photo_4">
                                 <dl>
-                                   <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
-                                   <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                   <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                   <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                    <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                    <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                 </dl>
@@ -574,9 +574,9 @@ $(function(){
                         <#if item_index < 3 >
                          <li class="photo_1">
                             <dl>
-                                <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
                                  <dd class="feature">性价比之王</dd>
-                                 <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                 <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                  <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                  <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                              </dl>
@@ -590,9 +590,9 @@ $(function(){
                         <#if item_index gt 3 && item_index < 6 >
                             <li class="photo_1 photo_4">
                                  <dl>
-                                  <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                  <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
                                   <dd class="feature">性价比之王</dd>
-                                  <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                  <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                   <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                   <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                 </dl>
@@ -661,8 +661,8 @@ $(function(){
                         <#if item_index < 2 >
                             <li class="photo_1">
                                 <dl>
-                                   <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
-                                   <dd class="introduction"><a href="/goods/${item.id?c}">${item.title!""}</a></dd>
+                                   <dt><a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                   <dd class="introduction"><a href="/goods/${item.id?c}" target="_blank">${item.title!""}</a></dd>
                                    <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                    <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                 </dl>
@@ -678,9 +678,9 @@ $(function(){
                         <#if item_index gt 1 && item_index < 5 >
                             <li class="photo_1">
                                 <dl>
-                                  <dt><a href="/goods/${item.id?c}"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                  <dt><a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
                                   <dd class="feature">性价比之王</dd>
-                                  <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                  <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                   <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                   <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                 </dl>
@@ -694,8 +694,8 @@ $(function(){
                         <#if item_index gt 4 && item_index < 8 >
                             <li class="photo_1 photo_4">
                                 <dl>
-                                   <dt><a href="/goods/${item.id?c!""}"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
-                                   <dd class="introduction"><a href="/goods/${item.id?c!""}">${item.title!""}</a></dd>
+                                   <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                   <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                    <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                    <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                 </dl>

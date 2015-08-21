@@ -14,7 +14,7 @@
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/ljs-v1.01.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
-<script type="text/javascript" src="/client/js/ljs-v1.01"></script>
+<script type="text/javascript" src="/client/js/ljs-v1.01.js"></script>
 
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
@@ -75,7 +75,7 @@ function buyConbination(){
 		return;
 	}
 	var href = "/order/buyCombination?id=" + ${goods.id} + "&zpid=" + str;
-	window.location.href=href;
+	window.open(href);
 }
 
 <#-- 组合商品选择--> 
@@ -365,13 +365,13 @@ function cartInit(){
 		<!--右部商品展示-->
 		<div class="details_goods">
 			<span class="details_goods_title">
-				<span>看了又看</span>
+				<span>火爆推荐</span>
 			</span> 
 			<#if hot_sale_page??> 
 				<#list hot_sale_page.content as hot_good> 
 					<#if hot_good_index lt 3>
 						<ul>
-							<a href="/goods/${hot_good.id?c}" title="${hot_good.title!''}">
+							<a href="/goods/${hot_good.id?c}" title="${hot_good.title!''}" target="_blank">
 								<li><img src="${hot_good.coverImageUri!''}" /></li>
 								<li class="details_goods_opacity">${hot_good.title!''}￥${goods.salePrice?string("0.00")}</li>
 							</a>
@@ -381,6 +381,7 @@ function cartInit(){
 			</#if>
 		</div>
 	</div>
+	<br /><br />
 	<!--推荐组合-->
 	<#if goods.combList?? && goods.combList?size gt 0>
 		<div class="c_combination">
@@ -388,7 +389,7 @@ function cartInit(){
 				<div class="c_combination_btm">
 					<div class="c_combination_btm_list">
 						<ul>
-							<li><a href="/goods/${goods.id?c}" title="${goods.name!''}"> <img src="${goods.coverImageUri!''}" /></a> 
+							<li><a href="/goods/${goods.id?c}" title="${goods.name!''}"  target="_blank"> <img src="${goods.coverImageUri!''}" /></a> 
 							<a href="#" title=""> <span>${goods.name!''}</span></a> 
 							<a href="#" title="">￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></a></li>
 						</ul>
@@ -396,7 +397,7 @@ function cartInit(){
 							<ul>
 								<s></s>
 								<li>
-									<a href="/goods/${item.goodsId}" title="${item.goodsId}"> 
+									<a href="/goods/${item.goodsId}"  target="_blank" title="${item.goodsId}"> 
 										<img src="${item.coverImageUri!''}" />
 										<span>${item.title!''}</span>
 										￥${item.currentPrice?string("0.00")}
@@ -414,7 +415,7 @@ function cartInit(){
 							<li class="c_combination_btm_all_li2">已节省：￥<strong id="combSave">0.00</strong></li>
 							<li><a href="javascript:clearSelect();">全部清空</a></li>
 						</ul>
-						<a href="javascript:buyConbination();" target="_blank" id="zhAddCart" title="" class="addcartorange" style="margin: 10px 0 0 83px; background: #0e5baa; text-decoration: none;">立即购买</a>
+						<a href="javascript:buyConbination();"  target="_blank" id="zhAddCart" title="" class="addcartorange" style="margin: 10px 0 0 83px; background: #0e5baa; text-decoration: none;">立即购买</a>
 					</div>
 				</div>
 			</div>
@@ -442,18 +443,18 @@ function cartInit(){
 				<div class="c_L_frame_title">同类排行榜</div>
 				<div class="c_L_frame_line"></div>
 				<div class="c_L_rank">
-					<#if hot_sale_page??> 
-						<#list hot_sale_page.content as item> 
+					<#if most_sold_list??> 
+						<#list most_sold_list as item> 
 							<#if item_index < 5>
 								<dl>
 									<span class="c_L_rank_piao">${item_index+1}</span>
 									<dt>
-										<a href="/goods/${item.id}" title="${item.title!""}">
+										<a href="/goods/${item.id}" title="${item.title!""}" target="_blank">
 											<img src="${item.coverImageUri!''}" />
 										</a>
 									</dt>
 									<dd>
-										<a href="/goods/${item.id}" title="${item.title!""}">${item.title!""}</a> 
+										<a href="/goods/${item.id}" title="${item.title!""}" target="_blank">${item.title!""}</a> 
 										<b>惠客价：￥${item.salePrice?string("0.00")}</b>
 									</dd>
 								</dl>
@@ -470,12 +471,12 @@ function cartInit(){
 						<#list recent_page.content as item>
 						<dl>
 							<dt>
-								<a href="/goods/${item.goodsId}" title="${item.goodsTitle!''}">
+								<a href="/goods/${item.goodsId}" title="${item.goodsTitle!''}" target="_blank">
 									<img src="${item.goodsCoverImageUri!''}" />
 								</a>
 							</dt>
 							<dd>
-								<a href="/goods/${item.goodsId}" title="${item.goodsTitle!''}">${item.goodsTitle!''}</a>
+								<a href="/goods/${item.goodsId}" title="${item.goodsTitle!''}" target="_blank">${item.goodsTitle!''}</a>
 								<b>惠客价：￥<#if item.goodsSalePrice??>${item.goodsSalePrice?string("0.00")}</#if></b>
 							</dd>
 						</dl>

@@ -1,3 +1,4 @@
+<!--
 <script>
     function submitSearch(){
     	var search = document.getElementById("search_form");
@@ -32,6 +33,7 @@
         })
     })
 </script>
+-->
 <!--顶部-->
 
 <#if index_top_ad_list?? && index_top_ad_list?size gt 0>

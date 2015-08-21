@@ -8,11 +8,13 @@
 <meta name="copyright" content="${site.copyright!''}" />
 
 <link rel="stylesheet" type="text/css" href="/client/css/Successfully_joined.css"/>
+<link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
 </head>
 
 <body>
 <!--顶部-->
 <#include "/client/common_header.ftl" />
+
 
 <!--完成支付-->
 <div class="complete_payment">

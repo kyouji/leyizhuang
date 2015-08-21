@@ -46,9 +46,9 @@ var theForm = document.forms['form1'];
             <#list recent_page.content as rp>  
              <dl class="dl_1 shadow_add"> 
                 <li class="evenflow_scale">           
-                <dt><a href="/goods/${rp.goodsId!''}" title="${rp.goodsTitle!''}"><img src="${rp.goodsCoverImageUri!''}" /></a></dt>
-                <dd class="dd_1"><a href="/goods/${rp.goodsId!''}" title="">${rp.goodsTitle!''}</a></dd>
-                <dd class="dd_2"><a href="" title="">￥${rp.goodsSalePrice?string("#.##")}</a></dd>
+                <dt><a href="/goods/${rp.goodsId!'0'}" target="_blank" title="${rp.goodsTitle!''}"><img src="${rp.goodsCoverImageUri!''}" /></a></dt>
+                <dd class="dd_1"><a href="/goods/${rp.goodsId!'0'}"  target="_blank" title="${rp.goodsTitle!''}">${rp.goodsTitle!''}</a></dd>
+                <dd class="dd_2"><a href="/goods/${rp.goodsId!'0'}" title="${rp.goodsTitle!''}"  target="_blank">￥${rp.goodsSalePrice?string("#.##")}</a></dd>
                 </li>
              </dl>
              </#list>

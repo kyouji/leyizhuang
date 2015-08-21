@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link href="/client/css/my_order.css" rel="stylesheet" type="text/css" />
-<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
+<link href="/client/css/member.css" rel="stylesheet" type="text/css" />
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 
 <!--[if IE]>

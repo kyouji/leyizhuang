@@ -96,9 +96,15 @@ DD_belatedPNG.fix('.,img,background');
           <#list order_page.content as order>
              <#if order_index < 5>
                  <dl>
-                     <dt>订单编号：<span><a href="/user/order?id=${order.id}">${order.orderNumber!''}</a></span></dt>
-                     <dd>                                                      
-                         <ul>
+                     <dt>订单编号：
+                        <span>
+                            <!--<a href="/user/order?id=${order.id}">-->
+                                ${order.orderNumber!''}
+                            <!--</a>-->
+                        </span>
+                    </dt>
+                    <dd>                                                      
+                        <ul>
                              <li class="li_1">
                                  <#if order.orderGoodsList??>
                                     <#list order.orderGoodsList as og>  
@@ -152,16 +158,16 @@ DD_belatedPNG.fix('.,img,background');
  </div>
     <!-- 中下 -->
     <div class="content_2_3">
-       <div class="content_2_3_1"><a href="/user/collect/list" title="">我关注的商品</a></div>
+       <div class="content_2_3_1"><a href="/user/collect/list" title="我关注的商品">我关注的商品</a></div>
        <div class="content_2_3_2">
            <div class="tb_1">
-               <a href="javascript:reduceIndex;" title=""><img src="/client/images/icon-8.png" /><br/> </a>
+               <a href="javascript:reduceIndex();" title="上一页"><img src="/client/images/icon-8.png" /><br/> </a>
            </div>
            <#if collect_page??>
                <#list collect_page.content as cgoods>
                     <#if cgoods_index lt 3>   
                        <div class="tp" > 
-                           <a  href="/goods/${cgoods.goodsId!''}" title=""> <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" /> <span>${cgoods.goodsTitle!''} </span>
+                           <a href="/goods/${cgoods.goodsId!''}"  target="_blank" title="${cgoods.title!''}"> <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" /> <span>${cgoods.goodsTitle!''} </span>
                            <label>￥${cgoods.goodsSalePrice?string("0.00")}</label>
                            </a> 
                        </div>
@@ -169,7 +175,7 @@ DD_belatedPNG.fix('.,img,background');
                </#list>
            </#if>          
            <div class="tb_2" style="float:right;">
-               <a href="javascript:addIndex;" title=""><img src="/client/images/icon-9.png" /><br/></a>
+               <a href="javascript:addIndex();" title="下一页"><img src="/client/images/icon-9.png" /><br/></a>
            </div>
       </div>
     </div>
@@ -182,10 +188,10 @@ DD_belatedPNG.fix('.,img,background');
           <#if recommend_goods_page??>
              <#list recommend_goods_page.content as item>
                 <dl>
-                <dt><a href="" title=""><img src="${item.coverImageUri!''}" /></a></dt>
-                <dd><a href="" title=""><label>${item.title!''}</label></a><br/>
-                <span class="red1">￥${item.salePrice?string("0.00")}</span></dd>
-                <dd class="red"><a href="/goods/${item.id}" title="">购买</a></dd>
+                    <dt><a href="/goods/${item.id}" title="${item.title!''}" target="_blank"><img src="${item.coverImageUri!''}" /></a></dt>
+                    <dd><a href="/goods/${item.id}" title="${item.title!''}" target="_blank"><label>${item.title!''}</label></a><br/>
+                    <span class="red1">￥${item.salePrice?string("0.00")}</span></dd>
+                    <dd class="red"><a href="/goods/${item.id}" title="${item.title!''}" target="_blank">购买</a></dd>
                 </dl>
              </#list>
           </#if>   

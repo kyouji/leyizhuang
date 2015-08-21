@@ -1,3 +1,4 @@
+<!--
 <script>
     function submitSearch(){
     	var search = document.getElementById("search_form");
@@ -27,6 +28,7 @@
         })
     })
 </script>
+-->
 <!--顶部-->
 <div class="top_all">
     <div class="top">

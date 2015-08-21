@@ -60,7 +60,7 @@
 
 
 /*中部右边*/
-.c_r{ width:220px; display:block; overflow:hidden; float:right; margin-top:-28px;}
+.c_r{ width:220px; display:block; overflow:hidden; float:right;}
 .c_r p{ font-weight:700; color:#333; font-size:14px;}
 .c_r dl{ margin-top:10px; width:220px; float:left; cursor:pointer; border:1px #ddd solid; width:218px; padding-bottom:10px;}
 .c_r dl dt{ text-align:center;}
