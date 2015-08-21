@@ -402,8 +402,7 @@ $(function(){
                         <#if item_index gt 2 && item_index < 6 >
                             <li class="photo_1 photo_4">
                                  <dl>
-                                      <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                                      <dd class="feature">性价比之王</dd>
+                                      <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
                                       <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                       <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                       <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
@@ -590,8 +589,7 @@ $(function(){
                         <#if item_index gt 3 && item_index < 6 >
                             <li class="photo_1 photo_4">
                                  <dl>
-                                  <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
-                                  <dd class="feature">性价比之王</dd>
+                                  <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
                                   <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                   <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                   <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>

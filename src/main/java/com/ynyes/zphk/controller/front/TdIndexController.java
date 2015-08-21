@@ -111,7 +111,7 @@ public class TdIndexController {
                             "top_cat_goods_page" + i,
                             tdGoodsService
                                     .findByCategoryIdAndIsRecommendIndexTrueAndIsOnSaleTrueOrderByIdDesc(
-                                            topCat.getId(), 0, 3));
+                                            topCat.getId(), 0, 10));
                 }
                 
                 // 楼层品牌 add by Sharon 2015-08-17
