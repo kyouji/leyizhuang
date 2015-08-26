@@ -1,12 +1,12 @@
 <p class="fz_24 fw_700 td_group">即将开团</p>
 <#if going_goods_page??>
     <div class="today_photo">
-        <#list going_goods_page.content as item>
-            <ul>
-                <li>
+        <ul>
+            <#list going_goods_page.content as item>
+                <li style="position:relative">
                     <a href="#" class="iphone6_1"><img width="188" height="188" src="${item.groupSaleImage!''}" /></a>
                     <div class="percentage">
-                        <span>(${item.groupSalePrice}/${item.salePrice?c})*100</span>%<br />
+                        <span>${((1-item.groupSalePrice/item.salePrice)*100)?string("0")}</span>%<br />
                         <span>off</span>
                     </div>
                     <a href="#" class="fz_14 trait">${item.title!''}</a>
@@ -49,11 +49,11 @@
                         <b class="right">￥<span>${item.groupSalePrice}</span></b>
                     </div>
                 </li>
-            </ul>
-        </#list>
+            </#list>
+        </ul>
         <!--前进后退箭头-->
-        <a href="javascript:preGoingTuan();" class="pre_1"></a>
-        <a href="javascript:nextGoingTuan();" class="next_1"></a>
+        <a href="javascript:;" class="pre_1"></a>
+        <a href="javascript:;" class="next_1"></a>
     </div>
     </#if>
     <#if service_item_list??>

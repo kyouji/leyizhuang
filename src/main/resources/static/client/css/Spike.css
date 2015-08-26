@@ -27,9 +27,11 @@
 }
 .hui_spike ul li .iPhone6{
 	float:left;
+	display:block;
 	width:305px;
+	height: 303px;
 	text-align:center;
-	margin-top:14px;
+	/* margin-top:14px; */
 	overflow:hidden;
 }
 .hui_spike ul li .spike_right{
@@ -51,7 +53,7 @@
 	font-size:16px;
 	color:#333;
 	height:36px;	
-	padding:0 14px;
+	padding:15px 14px;
 	text-decoration:none;
 }
 .hui_spike ul li .spike_right .trait:hover{
@@ -60,7 +62,7 @@
 .hui_spike ul li .spike_right .special_offer{
 	overflow:hidden;
 	padding:0 14px;
-	margin-top:90px;
+	margin-top:120px;
 	_height:36px;	/*IE 6*/
 }
 .hui_spike ul li .spike_right .special_offer del,b{
@@ -74,7 +76,7 @@
 /*剩余时间*/
 .hui_spike ul li .spike_right .time_left{
 	overflow:hidden;
-	margin-top:25px;
+	margin-top:53px;
 	background:#6c6c6c url(../images/spike/clock.png) no-repeat 10px center;
 	padding:5px 14px;
 	padding-left:34px;
@@ -93,7 +95,7 @@
 /*抢购定位层*/
 .hui_spike ul li .snapped_up{
 	position:absolute;
-	top:140px;
+	top:100px;
 	right:0px;
 	width:314px;
 	height:57px;
@@ -122,8 +124,10 @@
 	font-weight:700;
 	color:#fff;
 }
-
-
+/*分页*/
+.pagebox .num span .ff{
+	font-style:normal;
+}
 
 
 
