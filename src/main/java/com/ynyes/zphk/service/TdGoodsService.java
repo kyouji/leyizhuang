@@ -456,6 +456,14 @@ public class TdGoodsService {
     }
     
     /**
+     * 即将开始团购不分页
+     * @author dengxiao
+     */
+    public List<TdGoods> findByGroupSaleGoingToStartOrderByGroupSaleStartTimeAsc(){
+    	return repository.findByIsGroupSaleTrueAndIsOnSaleTrueAndGroupSaleStartTimeAfterOrderByGroupSaleStartTimeAsc(new Date());
+    }
+    
+    /**
      * 查找特价商品
      * @author libiao
      * @return

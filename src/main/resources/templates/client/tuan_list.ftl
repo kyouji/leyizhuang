@@ -8,6 +8,7 @@
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/Groupbuy.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript">
     function checkTime(i)  
     {  

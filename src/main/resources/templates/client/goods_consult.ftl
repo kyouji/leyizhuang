@@ -51,7 +51,7 @@
                 </#if>
                 
                 <#if consult_page.number+1 == consult_page.totalPages || consult_page.totalPages==0>
-                    <a class="a2" href="javascript:;">下一页</a>
+                    <a class="a2" href="javascript:;"><span>下一页</span></a>
                 <#else>
                     <a class="a2" href="javascript:getConsult(${goodsId}, ${consult_page.number+1});">下一页</a>
                 </#if>

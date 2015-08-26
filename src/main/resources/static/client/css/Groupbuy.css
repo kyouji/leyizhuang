@@ -25,6 +25,7 @@ a{text-decoration:none;}
 	text-align:left;
 }
 .hui_groupbuy .today_gb .today_photo{
+
 	position:relative;
 }
 .hui_groupbuy .today_gb .today_photo ul{
@@ -37,21 +38,22 @@ a{text-decoration:none;}
 	float:left;
 	width:200px;
 	margin:0 10px;
+	position:relative;
 }
 .hui_groupbuy .today_gb .today_photo ul li .iphone6_1{
 	display:block;
 	position:relative;
-	width:188px;
-	height:206px;
+	width:200px;
+	height:200px;
 	text-align:center;
 }
 .hui_groupbuy .today_gb .today_photo ul li .iphone6_1 img{
-	margin-top:14px;
+	margin-top:3px;
 }
 .hui_groupbuy .today_gb .today_photo ul li .percentage{
 	position:absolute;
-	top:8px;
-	right:25px;
+	top:3px;
+	right:15px;
 	width:40px;
 	height:47px;
 	background:url(/client/images/bg_1.png) no-repeat center 0;
@@ -65,6 +67,10 @@ a{text-decoration:none;}
 	height:20px;
 	line-height:20px;
 	text-decoration:none;
+	margin-top:10px;
+	text-align:center;
+	font-weight:700;
+
 }
 .hui_groupbuy .today_gb .today_photo ul li .trait:hover{
 	color:#f00;
@@ -82,7 +88,7 @@ a{text-decoration:none;}
     color:#f00;
 }
 .hui_groupbuy .today_gb .today_photo ul li .snapped_up{
-	margin-top:10px;
+	margin-top:6px;
 	width:100%;
 	height:34px;
 	background:#ef7c00;
@@ -93,7 +99,7 @@ a{text-decoration:none;}
 	height:34px;
 	border:none;
 	padding-left:10px;
-	background:url(../images/today_gb/bg_2.png) no-repeat center;
+	background:url(/client/images/bg_2.png) no-repeat center;
 	font-family:"微软雅黑";
 	font-size:18px;
 	font-weight:700;
@@ -251,8 +257,29 @@ a{text-decoration:none;}
 }
 
 
+/*图片轮播*/
+    .js{width:90%; margin:10px auto 0 auto; }
+    .js p{ padding:5px 0; font-weight:bold; overflow:hidden;  }
+    .js p span{ float:right; }
+    .js p span a{ color:#f00; text-decoration:underline;   }
+    .js textarea{ height:50px;  width:98%; padding:5px; border:1px solid #ccc; border-top:2px solid #aaa;  border-left:2px solid #aaa;  }
 
+    /* 本例子css */
+    .scrollBox{ width:1200px;padding:10px;border-top:1px solid #fff; position:relative; }
+    .scrollBox .piclist{ overflow:hidden; zoom:1;}
+    .scrollBox .ohbox{overflow:hidden; position:relative;width:1100px;}
+    .scrollBox {position:relative;overflow:hidden;zoom:1;}
+    .scrollBox .piclist li{float:left; display:inline; width:188px;background:#fff;margin-right:23px;}
+    .scrollBox .piclist img{width:200px;height:200px;}
 
+    .scrollBox .pageBtn span{ display:block;width:21px;height:37px;position:absolute;top:72px;cursor:pointer;text-indent:-999em;overflow:hidden; }
+    .scrollBox .pageBtn .prev{ background:url(/client/images/icon-8.png) no-repeat;left:20px;}
+    .scrollBox .pageBtn .next{ background:url(/client/images/icon-9.png) no-repeat;right:20px;}
+    .scrollBox .pageBtn .list{overflow:hidden;zoom:1;margin:10px 0 0 413px; }
+    .scrollBox .pageBtn .list li{ background:#fff; float:left; display:inline; width:15px;height:15px;background-position:-86px -57px ;cursor:pointer;margin-left:10px;line-height:10000px;overflow:hidden;  }
+    .scrollBox .pageBtn .list li.on{background-position:-114px -57px }
+
+.timing{width:200px; height:23px;background:url(/client/images/thedark.png) repeat;color:#fff;position:absolute;z-index:333;top:180px; text-align:center;line-height:23px;}
 
 
 

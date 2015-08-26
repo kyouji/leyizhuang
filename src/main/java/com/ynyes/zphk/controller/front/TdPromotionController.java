@@ -69,7 +69,7 @@ public class TdPromotionController {
 
 			//因页面需要，无论何种情况下都要使用即将团购----@author dengxiao
 			map.addAttribute("going_goods_page", tdGoodsService
-					.findByGroupSaleGoingToStartOrderByGroupSaleStartTimeAsc(page, ClientConstant.pageSize));
+					.findByGroupSaleGoingToStartOrderByGroupSaleStartTimeAsc());
 			map.addAttribute("goingPage",0);
 
 			return "/client/tuan_list";
