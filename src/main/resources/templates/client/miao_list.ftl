@@ -7,6 +7,16 @@
 <!--css-->
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/Spike.css" rel="stylesheet" type="text/css" />
+<script src="/client/js/jquery-1.9.1.min.js"></script>
+<script>
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
+</script>
 </head>
 
 <body>
@@ -117,188 +127,78 @@
 <!--秒杀开始-->
 <div class="hui_spike">
     <ul>
-        <li>
-            <a href="#" class="iPhone6"><img width="300" height="300" src="images/spike/iPhone6.png" /></a>
-            <div class="spike_right">
-                <!--<div class="iPhone_logo"><img src="images/spike/iPhone_logo.png" /></div>-->
-                <a href="#" class="trait">三星SAMSUNG Galaxy S6  盖世6 全网通公开版 G9200</a>                
-                <p class="special_offer">
-                    <del>原价<br />￥<span>5688.00</span></del>
-                    <b>节省<br /><span>688.00</span></b>
-                </p>
-                <div class="time_left">
-                	<div><span>1</span>天<span>22</span>时<span>22</span>分<span>22</span>秒</div>
-                    <div class="remaining">还剩<span>2</span>件</div>
-                </div>
+        <#if miao_goods_page??>
+            <#list miao_goods_page.content as item>
+<script>
+$(document).ready(function(){
+    setInterval("timer${item_index}()",1000);
+});
+
+function timer${item_index}()
+{
+<#if item.isFlashSale && item.flashSaleStartTime < .now && item.flashSaleStopTime gt .now>
+    var ts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+    
+    var allts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")}))
+               - (new Date(${item.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStartTime?string("dd")}, 
+                ${item.flashSaleStartTime?string("HH")}, 
+                ${item.flashSaleStartTime?string("mm")}, 
+                ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数
                 
-            </div>
-            <div class="snapped_up">
-                <input type="submit" class="snapp" value="立即抢购">
-                <b class="snapp_price">￥<span>5688.00</span></b>
-            </div>
-        </li>
-        <li class="merch_2">
-            <a href="#" class="iPhone6"><img width="300" height="300" src="images/spike/iPhone6.png" /></a>
-            <div class="spike_right">
-                <!--<div class="iPhone_logo"><img src="images/spike/iPhone_logo.png" /></div>-->
-                <a href="#" class="trait">三星SAMSUNG Galaxy S6  盖世6 全网通公开版 G9200</a>                
-                <p class="special_offer">
-                    <del>原价<br />￥<span>5688.00</span></del>
-                    <b>节省<br /><span>688.00</span></b>
-                </p>
-                <div class="time_left">
-                	<div><span>1</span>天<span>22</span>时<span>22</span>分<span>22</span>秒</div>
-                    <div class="remaining">还剩<span>2</span>件</div>
-                </div>
-                
-            </div>
-            <div class="snapped_up">
-                <input type="submit" class="snapp" value="立即抢购">
-                <b class="snapp_price">￥<span>5688.00</span></b>
-            </div>
-        </li>
-        <li>
-            <a href="#" class="iPhone6"><img width="300" height="300" src="images/spike/iPhone6.png" /></a>
-            <div class="spike_right">
-                <!--<div class="iPhone_logo"><img src="images/spike/iPhone_logo.png" /></div>-->
-                <a href="#" class="trait">三星SAMSUNG Galaxy S6  盖世6 全网通公开版 G9200</a>                
-                <p class="special_offer">
-                    <del>原价<br />￥<span>5688.00</span></del>
-                    <b>节省<br /><span>688.00</span></b>
-                </p>
-                <div class="time_left">
-                	<div><span>1</span>天<span>22</span>时<span>22</span>分<span>22</span>秒</div>
-                    <div class="remaining">还剩<span>2</span>件</div>
-                </div>
-                
-            </div>
-            <div class="snapped_up">
-                <input type="submit" class="snapp" value="立即抢购">
-                <b class="snapp_price">￥<span>5688.00</span></b>
-            </div>
-        </li>
-        <li class="merch_2">
-            <a href="#" class="iPhone6"><img width="300" height="300" src="images/spike/iPhone6.png" /></a>
-            <div class="spike_right">
-                <!--<div class="iPhone_logo"><img src="images/spike/iPhone_logo.png" /></div>-->
-                <a href="#" class="trait">三星SAMSUNG Galaxy S6  盖世6 全网通公开版 G9200</a>                
-                <p class="special_offer">
-                    <del>原价<br />￥<span>5688.00</span></del>
-                    <b>节省<br /><span>688.00</span></b>
-                </p>
-                <div class="time_left">
-                	<div><span>1</span>天<span>22</span>时<span>22</span>分<span>22</span>秒</div>
-                    <div class="remaining">还剩<span>2</span>件</div>
-                </div>
-                
-            </div>
-            <div class="snapped_up">
-                <input type="submit" class="snapp" value="立即抢购">
-                <b class="snapp_price">￥<span>5688.00</span></b>
-            </div>
-        </li>
-        <li>
-            <a href="#" class="iPhone6"><img width="300" height="300" src="images/spike/iPhone6.png" /></a>
-            <div class="spike_right">
-                <!--<div class="iPhone_logo"><img src="images/spike/iPhone_logo.png" /></div>-->
-                <a href="#" class="trait">三星SAMSUNG Galaxy S6  盖世6 全网通公开版 G9200</a>                
-                <p class="special_offer">
-                    <del>原价<br />￥<span>5688.00</span></del>
-                    <b>节省<br /><span>688.00</span></b>
-                </p>
-                <div class="time_left">
-                	<div><span>1</span>天<span>22</span>时<span>22</span>分<span>22</span>秒</div>
-                    <div class="remaining">还剩<span>2</span>件</div>
-                </div>
-                
-            </div>
-            <div class="snapped_up">
-                <input type="submit" class="snapp" value="立即抢购">
-                <b class="snapp_price">￥<span>5688.00</span></b>
-            </div>
-        </li>
-        <li class="merch_2">
-            <a href="#" class="iPhone6"><img width="300" height="300" src="images/spike/iPhone6.png" /></a>
-            <div class="spike_right">
-                <!--<div class="iPhone_logo"><img src="images/spike/iPhone_logo.png" /></div>-->
-                <a href="#" class="trait">三星SAMSUNG Galaxy S6  盖世6 全网通公开版 G9200</a>                
-                <p class="special_offer">
-                    <del>原价<br />￥<span>5688.00</span></del>
-                    <b>节省<br /><span>688.00</span></b>
-                </p>
-                <div class="time_left">
-                	<div><span>1</span>天<span>22</span>时<span>22</span>分<span>22</span>秒</div>
-                    <div class="remaining">还剩<span>2</span>件</div>
-                </div>
-                
-            </div>
-            <div class="snapped_up">
-                <input type="submit" class="snapp" value="立即抢购">
-                <b class="snapp_price">￥<span>5688.00</span></b>
-            </div>
-        </li>
-        <li>
-            <a href="#" class="iPhone6"><img width="300" height="300" src="images/spike/iPhone6.png" /></a>
-            <div class="spike_right">
-                <!--<div class="iPhone_logo"><img src="images/spike/iPhone_logo.png" /></div>-->
-                <a href="#" class="trait">三星SAMSUNG Galaxy S6  盖世6 全网通公开版 G9200</a>                
-                <p class="special_offer">
-                    <del>原价<br />￥<span>5688.00</span></del>
-                    <b>节省<br /><span>688.00</span></b>
-                </p>
-                <div class="time_left">
-                	<div><span>1</span>天<span>22</span>时<span>22</span>分<span>22</span>秒</div>
-                    <div class="remaining">还剩<span>2</span>件</div>
-                </div>
-                
-            </div>
-            <div class="snapped_up">
-                <input type="submit" class="snapp" value="立即抢购">
-                <b class="snapp_price">￥<span>5688.00</span></b>
-            </div>
-        </li>
-        <li class="merch_2">
-            <a href="#" class="iPhone6"><img width="300" height="300" src="images/spike/iPhone6.png" /></a>
-            <div class="spike_right">
-                <!--<div class="iPhone_logo"><img src="images/spike/iPhone_logo.png" /></div>-->
-                <a href="#" class="trait">三星SAMSUNG Galaxy S6  盖世6 全网通公开版 G9200</a>                
-                <p class="special_offer">
-                    <del>原价<br />￥<span>5688.00</span></del>
-                    <b>节省<br /><span>688.00</span></b>
-                </p>
-                <div class="time_left">
-                	<div><span>1</span>天<span>22</span>时<span>22</span>分<span>22</span>秒</div>
-                    <div class="remaining">还剩<span>2</span>件</div>
-                </div>
-                
-            </div>
-            <div class="snapped_up">
-                <input type="submit" class="snapp" value="立即抢购">
-                <b class="snapp_price">￥<span>5688.00</span></b>
-            </div>
-        </li>
+    if (0 >= ts)
+    {
+        window.location.reload();
+    }
+    
+    var date = new Date();
+    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+    dd = checkTime(dd);
+    hh = checkTime(hh);
+    mm = checkTime(mm);
+    ss = checkTime(ss);
+    $("#timeLeft${item_index}").html("<span>"+dd+"</span>天<span>"+hh+"</span>时<span>"+mm+"</span>分<span>"+ss+"</span>秒");          
+</#if>
+}
+</script>
+                <li>
+                    <a href="#" class="iPhone6">
+                        <img width="300" height="300" src="${item.coverImageUri!''}" />
+                    </a>
+                    <div class="spike_right">
+                        <a href="#" class="trait">${item.title!''}</a>                
+                        <p class="special_offer">
+                            <del>原价<br />￥<span><#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></del>
+                            <b>节省<br /><span><#if item.salePrice?? && item.flashSalePrice??>${(item.salePrice-item.flashSalePrice)?string("0.00")}</#if></span></b>
+                        </p>
+                        <div class="time_left">
+                            <div id="timeLeft${item_index}"><span>00</span>天<span>00</span>时<span>00</span>分<span>00</span>秒</div>
+                            <div class="remaining">还剩<span>${item.flashSaleLeftNumber?c}</span>件</div>
+                        </div>
+                        
+                    </div>
+                    <div class="snapped_up">
+                        <input type="submit" class="snapp" value="立即抢购">
+                        <b class="snapp_price">￥<span><#if item.salePrice??>${item.flashSalePrice?string("0.00")}</#if></span></b>
+                    </div>
+                </li>
+            </#list>
+        </#if>
     </ul>
-    <!--分页-->
-        <div class="pagebox">
-          <div class="num">
-            <a class="a1 a0" href="#"><span>上一页</span></a>
-            <a class="sel" href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <span> ... </span>
-            <a href="#">45</a>
-            <a class="a2" href="#"><span>下一页</span></a>
-            <span> 共<i class="ff">45</i>页 </span>
-          </div>
-          <div class="page">
-            <input class="sub" type="submit" value="确定" style=" *+border:none;" />
-            <span>页</span>
-            <input class="text" type="text" value="1" />
-            <span>到第</span>
-          </div>
-          <div class="clear"></div>
-        </div> 
 </div>
 <!--秒杀结束-->
 
