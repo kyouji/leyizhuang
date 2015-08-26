@@ -44,7 +44,7 @@ DD_belatedPNG.fix('.,img,background');
 </head>
 <body>
 <!-- header开始 -->
-<#include "/client/common_header.ftl" />
+<#include "/client/common_user_header.ftl" />
 <!--header结束-->
 <div class="mymember_out">
 <div class="mymember_main">

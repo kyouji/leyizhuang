@@ -13,19 +13,8 @@
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter.css"/>
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
-
-
-<!--[if IE]>
-   <script src="/client/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/client/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
-  
-
+<script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="/client/js/mymember.js"></script>
 </head>
 <body>
 <!--顶部-->
@@ -117,35 +106,35 @@ DD_belatedPNG.fix('.,img,background');
                              <li class="li_4"> ${order.orderTime!''}</li>
                              <li class="li_7">
                                 <#if order.statusId?? && order.statusId==2>
-                                    待付款
+                                                                                        待付款
                                 <#elseif order.statusId?? &&  order.statusId==3>
-                                    待发货
+                                                                                        待发货
                                 <#elseif order.statusId?? &&  order.statusId==4>
-                                    待收货
+                                                                                        待收货
                                 <#elseif order.statusId?? &&  order.statusId==6>
-                                    已完成
+                                                                                        已完成
                                 </#if>
                              </li>
                              <li class="li_5">
                                 <#if order.statusId?? &&  order.statusId==2>
-                                    <a href="#" title="">取消订单</a>
+                                    <a href="#" title="取消订单">取消订单</a>
                                 <#elseif order.statusId?? &&  order.statusId==3>
                                     <a href="#" title="">&nbsp;</a>                    
                                 <#elseif order.statusId?? &&  order.statusId==4>
-                                    <a href="#" title="">查看物流</a>
+                                    <a href="#" title="查看物流">查看物流</a>
                                 <#elseif order.statusId?? &&  order.statusId==6>
-                                    <a href="#" title="">申请退货</a>
+                                    <a href="#" title="申请退货">申请退货</a>
                                 </#if>
                              </li>
                              <li class="li_6">
                                 <#if order.statusId?? &&  order.statusId==2>
-                                    <a href="#" title="">付款</a>
+                                    <a href="#" title="付款">付款</a>
                                 <#elseif order.statusId?? &&  order.statusId==3>
-                                    <a href="#" title="">查看</a>                    
+                                    <a href="#" title="查看">查看</a>                    
                                 <#elseif order.statusId?? &&  order.statusId==4>
-                                   <a href="#" title=""> 确认收货</a>
+                                   <a href="#" title="确认收货">确认收货</a>
                                 <#elseif order.statusId?? &&  order.statusId==6>
-                                   <a href="#" title=""> 评价</a>
+                                   <a href="#" title="评价">评价</a>
                                 </#if>
                              </li>
                          </ul>
@@ -158,28 +147,14 @@ DD_belatedPNG.fix('.,img,background');
  </div>
     <!-- 中下 -->
     <div class="content_2_3">
-       <div class="content_2_3_1"><a href="/user/collect/list" title="我关注的商品">我关注的商品</a></div>
-       <div class="content_2_3_2">
-           <div class="tb_1">
-               <a href="javascript:reduceIndex();" title="上一页"><img src="/client/images/icon-8.png" /><br/> </a>
-           </div>
-           <#if collect_page??>
-               <#list collect_page.content as cgoods>
-                    <#if cgoods_index lt 3>   
-                       <div class="tp" > 
-                           <a href="/goods/${cgoods.goodsId!''}"  target="_blank" title="${cgoods.title!''}"> <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" /> <span>${cgoods.goodsTitle!''} </span>
-                           <label>￥${cgoods.goodsSalePrice?string("0.00")}</label>
-                           </a> 
-                       </div>
-                    </#if> 
-               </#list>
-           </#if>          
-           <div class="tb_2" style="float:right;">
-               <a href="javascript:addIndex();" title="下一页"><img src="/client/images/icon-9.png" /><br/></a>
-           </div>
-      </div>
+        <div class="content_2_3_1"><a href="/user/collect/list" title="我关注的商品">我关注的商品</a></div>
+            <div class="content_2_3_2">
+                <div id="collectionPage">
+                    <#include "/client/user_collection_page.ftl">
+                </div> 
+            </div>
+        </div>
     </div>
- </div>
   <!-- 右侧 -->
   <div class="content_3">
     <div class="content_3_1">小商品推荐</div>

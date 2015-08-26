@@ -41,7 +41,7 @@
 .content_2 .content_2_2 .content_2_2_2 dl dd .ul{border-bottom:1px solid #f5f5f5;}
 .content .content_2 .content_2_3{ width:770px; margin-top:20px;}
 .content_2 .content_2_3 .content_2_3_1 a{font-size:18px; color:#333333; padding-left:25px;}
-.content_2 .content_2_3 .content_2_3_2 div{ float:left; margin-top:20px; text-align:center;}
+.content_2 .content_2_3 .content_2_3_2 div{ float:left; margin-top:5px; text-align:center;}
 .content_2 .content_2_3 .content_2_3_2 .tb_1,.content_2 .content_2_3 .content_2_3_2 .tb_2{ padding-top:70px; }
 .content_2_3 .content_2_3_2 .tb_2{ margin-left:46px; _margin-left:66px;}
 .content_2 .content_2_3 .content_2_3_2 .tp{ margin-left:46px; _margin-left:35px;  width:180px}
@@ -63,4 +63,34 @@
 .content_3 .content_3_2 dl dd{ padding-left:10px; line-height:12px; _line-height:15px; margin-top:10px;}
 .content_3 .content_3_2 dl .red{ padding-top:29px; float:right; }
 .content_3 .content_3_2 dl dd a label{ width:70px; height:15px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; display:block;}
+
+
+/* 我的关注图片滚动 */
+    .js{width:90%; margin:10px auto 0 auto; }
+    .js p{ padding:5px 0; font-weight:bold; overflow:hidden;  }
+    .js p span{ float:right; }
+    .js p span a{ color:#f00; text-decoration:underline;   }
+    .js textarea{ height:50px;  width:98%; padding:5px; border:1px solid #ccc; border-top:2px solid #aaa;  border-left:2px solid #aaa;  }
+
+    /* 本例子css */
+    .scrollBox{ width:766px;padding:10px;border-top:1px solid #fff; position:relative; }
+    .scrollBox .piclist{ overflow:hidden; zoom:1;}
+    .scrollBox .ohbox{overflow:hidden; position:relative;width:670px;left:60px}
+    .scrollBox {position:relative;overflow:hidden;zoom:1;}
+    .scrollBox .piclist li{float:left; display:inline; width:185px;background:#fff;border:1px solid #c9bea9;margin-right:23px;padding:5px;}
+    .scrollBox .piclist li span{height:25px;line-height:25px;display:block;text-align:center; overflow:hidden;   }
+    .scrollBox .piclist li img{display:block;width:185px; height:185px;}
+    .scrollBox .piclist li a{text-decoration:none;}
+    .scrollBox .piclist li p{color:#ef0000;font-size:16px;}
+    
+    .scrollBox .pageBtn span{ display:block;width:21px;height:37px;position:absolute;top:115px;cursor:pointer;text-indent:-999em;overflow:hidden; }
+    .scrollBox .pageBtn .prev{ background:url(/client/images/icon-8.png) no-repeat;left:20px;}
+    .scrollBox .pageBtn .next{ background:url(/client/images/icon-9.png) no-repeat;right:20px;}
+    .scrollBox .pageBtn .list{overflow:hidden;zoom:1;margin:10px 0 0 413px; }
+    .scrollBox .pageBtn .list li{ background:#fff; float:left; display:inline; width:15px;height:15px;background-position:-86px -57px ;cursor:pointer;margin-left:10px;line-height:10000px;overflow:hidden;  }
+    .scrollBox .pageBtn .list li.on{background-position:-114px -57px }
+
+
+
+
  

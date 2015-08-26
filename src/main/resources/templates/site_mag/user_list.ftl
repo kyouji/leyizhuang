@@ -106,6 +106,7 @@ var theForm = document.forms['form1'];
                     <span>
                       <a class="amount" href="/Verwalter/user/point/list?userId=${user.id}" title="积分">积分</a>
                       <a class="point" href="/Verwalter/user/collect/list?userId=${user.id}" title="关注商品">关注商品</a>
+                      <a class="remind" href="/Verwalter/user/remind/list?userId=${user.id}" title="低价提醒">低价提醒</a>
                       <a class="msg" href="/Verwalter/user/recent/list?userId=${user.id}" title="浏览历史">浏览历史</a>
                       <#if user.roleId?? && user.roleId==1>
                           <a class="sms" href="/Verwalter/user/reward/list?userId=${user.id}" title="返现记录">返现记录</a>

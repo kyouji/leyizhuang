@@ -1,8 +1,12 @@
-<!--
 <script>
     function submitSearch(){
-    	var search = document.getElementById("search_form");
-    	search.submit();
+        var search = document.getElementById("search_form");
+        search.submit();
+    }
+    
+    function submitSearch(){
+        var search = document.getElementById("search_form");
+        search.submit();
     }
     $(function(){
         $(".nav_submenu").mouseover(function(){
@@ -28,8 +32,16 @@
         })
     })
 </script>
--->
 <!--顶部-->
+
+<#if index_top_ad_list?? && index_top_ad_list?size gt 0>
+    <div class="top_ad">
+        <#list index_top_ad_list as item>
+            <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}"><img src="${item.fileUri!''}" /></a>
+        </#list>
+    </div>
+</#if>
+
 <div class="top_all">
     <div class="top">
         <div class="top_left">
@@ -81,22 +93,37 @@
             <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
-                        <a href="${item.linkUri!''}">${item.title}</a>
+                        <a href="/search?keywords=${item.title!''}">${item.title}</a>
                     </#if>
                 </#list>
             </#if>
         </div>
     </div>
+
     <div class="header_cart">
-        <a href="/cart" title="购物车" id="theCart" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
+        <a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
     </div>
 </div>
 
 <!--导航-->
 <div class="navigation">
     <div class="nav">
-        <div class="nav_submenu">我的正品惠客</div>
-        <#if top_cat_list??>
+        <div class="nav_submenu">全部商品分类</div>
+        <div class="nav_nav">
+            <ul>
+                <#if navi_item_list??&&navi_item_list?size gt 0>
+                    <#list navi_item_list as item>
+                        <#-- 如果导航标签超过了7个会产生两排标签 -->
+                        <#if item_index lt 7>
+                            <li><a href="${item.linkUri}" title="${item.title}">${item.title}</a></li>
+                        </#if>
+                    </#list>
+                </#if>
+            </ul>
+        </div>
+
+        <div class="nav_num">
+            <#if top_cat_list??>
             <table class="nav_more_dx">
                 <#list top_cat_list as item>
                     <tr>
@@ -112,19 +139,7 @@
                 </#list>
             </table>
         </#if> 
-        <div class="nav_nav">
-            <ul>
-                <#if navi_item_list??&&navi_item_list?size gt 0>
-                    <#list navi_item_list as item>
-                        <#-- 如果导航标签超过了7个会产生两排标签 -->
-                        <#if item_index lt 7>
-                            <li><a href="${item.linkUri}" title="${item.title}">${item.title}</a></li>
-                        </#if>
-                    </#list>
-                </#if>
-            </ul>
+            <#if site??>全国服务热线：${site.telephone!''}</#if>
         </div>
-
-        <div class="nav_num"><#if site??>全国服务热线：${site.telephone!''}</#if></div>
     </div>
 </div>

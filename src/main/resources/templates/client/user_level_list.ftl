@@ -6,13 +6,13 @@
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/member.css"/>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
-
+<script src="/client/js/jquery-1.9.1.min.js"></script>
 
 <#-- 这个会员等级的意思大概是,每升一级新增一个特权。级数越高特权越多 -->
 </head>
 
 <body>
-<#include "/client/common_header.ftl" />
+<#include "/client/common_user_header.ftl" />
 <!-- 内容 -->
 <div class="content"> 
   <!-- 左侧 -->

@@ -11,6 +11,7 @@
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/follow.css"/>
+<script src="/client/js/jquery-1.9.1.min.js"></script>
 
 </head>
 

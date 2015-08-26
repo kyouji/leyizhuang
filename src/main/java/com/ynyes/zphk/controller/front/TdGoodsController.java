@@ -2,7 +2,9 @@ package com.ynyes.zphk.controller.front;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.zphk.entity.TdGoods;
 import com.ynyes.zphk.entity.TdProduct;
@@ -20,6 +23,7 @@ import com.ynyes.zphk.entity.TdSetting;
 import com.ynyes.zphk.entity.TdUser;
 import com.ynyes.zphk.entity.TdUserComment;
 import com.ynyes.zphk.entity.TdUserConsult;
+import com.ynyes.zphk.entity.TdUserLowPriceRemind;
 import com.ynyes.zphk.entity.TdUserPoint;
 import com.ynyes.zphk.service.TdBrandService;
 import com.ynyes.zphk.service.TdCommonService;
@@ -32,6 +36,7 @@ import com.ynyes.zphk.service.TdSettingService;
 import com.ynyes.zphk.service.TdUserCollectService;
 import com.ynyes.zphk.service.TdUserCommentService;
 import com.ynyes.zphk.service.TdUserConsultService;
+import com.ynyes.zphk.service.TdUserLowPriceRemindService;
 import com.ynyes.zphk.service.TdUserPointService;
 import com.ynyes.zphk.service.TdUserRecentVisitService;
 import com.ynyes.zphk.service.TdUserService;
@@ -86,6 +91,9 @@ public class TdGoodsController {
 
 	@Autowired
 	private TdDiySiteService tdDiySiteService;
+	
+	@Autowired
+	private TdUserLowPriceRemindService tdRemindService;
 
 	@RequestMapping("/goods/{goodsId}")
 	public String product(@PathVariable Long goodsId, Long shareId, Integer qiang, ModelMap map,
@@ -438,5 +446,45 @@ public class TdGoodsController {
 		map.addAttribute("goodsId", goodsId);
 
 		return "/client/goods_content_consult";
+	}
+	
+	/**
+	 * 添加低价提醒的功能
+	 * @author dengxiao
+	 */
+	@RequestMapping("/goods/remind")
+	@ResponseBody
+	public Map<String, Object> saveRemind(Long goodsId,HttpServletRequest req){
+		Map<String, Object> res = new HashMap<String, Object>();
+		//code的值为1的时候代表低价提醒功能失败
+		res.put("code", 2);
+		String username = (String) req.getSession().getAttribute("username");
+		TdUserLowPriceRemind theUserRemind = tdRemindService.findByGoodsIdAndUsername(goodsId, username);
+		if(null != theUserRemind){
+			res.put("message", "您已经开启了此件商品的低价提醒功能！");
+			return res;
+		}
+		if(null == username){
+			res.put("code", 1);
+			res.put("message", "请先登陆！");
+			return res;
+		}
+		TdGoods goods = tdGoodsService.findOne(goodsId);
+		if(null == goods){
+			res.put("message", "未能找到指定的商品！");
+			return res;
+		}
+		
+		TdUserLowPriceRemind remind = new TdUserLowPriceRemind();
+		remind.setUsername(username);
+		remind.setGoodsId(goods.getId());
+		remind.setGoodsTitle(goods.getTitle());
+		remind.setGoodsCoverImageUri(goods.getCoverImageUri());
+		remind.setAddTime(new Date());
+		tdRemindService.save(remind);
+		
+		res.put("message", "低价提醒功能启动！");
+		res.put("code", 0);
+		return res;
 	}
 }

@@ -233,7 +233,7 @@ function commentJump()
 
 </head>
 <body>
-<#include "/client/common_header.ftl" />
+<#include "/client/common_user_header.ftl" />
 <!-- 内容 -->
 <div class="content"> 
   <!-- 左侧 -->

@@ -2202,7 +2202,7 @@ public class TdGoodsService {
         // 没有改过价，或改价后的记录与当前销售价不相等
         if (null == priceLog || !priceLog.getPrice().equals(e.getSalePrice())) {
             TdPriceChangeLog newPriceLog = new TdPriceChangeLog();
-
+            
             newPriceLog.setCreateTime(new Date());
             newPriceLog.setGoodsId(e.getId());
             newPriceLog.setGoodsTitle(e.getTitle()

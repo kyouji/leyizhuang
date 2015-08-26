@@ -29,6 +29,7 @@ import com.ynyes.zphk.service.TdUserCollectService;
 import com.ynyes.zphk.service.TdUserCommentService;
 import com.ynyes.zphk.service.TdUserConsultService;
 import com.ynyes.zphk.service.TdUserLevelService;
+import com.ynyes.zphk.service.TdUserLowPriceRemindService;
 import com.ynyes.zphk.service.TdUserPointService;
 import com.ynyes.zphk.service.TdUserRecentVisitService;
 import com.ynyes.zphk.service.TdUserReturnService;
@@ -74,6 +75,9 @@ public class TdManagerUserController {
     
     @Autowired
     TdManagerLogService tdManagerLogService;
+    
+    @Autowired
+    TdUserLowPriceRemindService tdRemindService;
     
     @RequestMapping(value="/check", method = RequestMethod.POST)
     @ResponseBody
@@ -632,6 +636,23 @@ public class TdManagerUserController {
                 
                 map.addAttribute("user_collect_page", tdUserCollectService.findByUsername(user.getUsername(), page, size));
                 return "/site_mag/user_collect_list";
+            }
+            else if (type.equalsIgnoreCase("remind")) // 低价提醒
+            {
+                if (null == userId)
+                {
+                    return "/site_mag/error_404";
+                }
+                
+                TdUser user = tdUserService.findOne(userId);
+                
+                if (null == user || null == user.getUsername())
+                {
+                    return "/site_mag/error_404";
+                }
+                
+                map.addAttribute("user_remind_page", tdRemindService.findByUsernameOrderByAddTimeDesc(user.getUsername(), page, size));
+                return "/site_mag/user_remind_list";
             }
             else if (type.equalsIgnoreCase("recent")) // 最近浏览
             {

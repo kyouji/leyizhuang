@@ -15,7 +15,6 @@
 <script type="text/javascript" src="/client/js/ljs-v1.01.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
 <script type="text/javascript" src="/client/js/ljs-v1.01.js"></script>
-
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
 
@@ -155,18 +154,62 @@ function btnPageSubmit(type)
     }
 }
 
+<!-- JiaThis参数设置 -->
+var jiathis_config = {
+    url:"${basePath}",
+    title:"${goods.title}",
+    summary:"${goods.subTitle}"
+};
+
+
 <!-- 加入购物车的方法（原方法无法使购买数量生效，无论购买数量为多少，加入购物车的数量总是1） -->
 function cartInit(){
 	var quantity = document.getElementById("quantity").value;
 	window.location.href = "/cart/init?id=${goods.id}&quantity="+quantity;
 }
+
+<!-- 低价提醒的方法 -->
+function lowPriceRemind(goodsId){
+    if(null==goodsId){
+        alert("商品信息错误！");
+        return;
+    }
+    $.post("/goods/remind",{"goodsId":goodsId},function(res){
+        alert(res.message);
+        if(1==res.code){
+            setTimeout(function(){
+                    window.location.href = "/login";
+            }, 1000); 
+        }
+    });
+    
+}
 </script>
 </head>
 <body>
 <div class="w100">
+<!--<div class="c_pop_boxbg">
+    <div class="c_pop_box">
+        <div class="c_pop_box_top">
+            <span>提 示</span>
+            <a href="#"></a>
+        </div>
+        <div class="c_pop_box_success">
+            <p>您已成功关注该商品！</p>
+            <a href="#" title="">查看我的关注>></a>
+        </div>
+        <div class="c_pop_box_notice">
+            <p>关注商品降价提醒：</p>
+            <ul>
+                <li><span>价格低于￥：</span><input type="text" class="c_pop_box_notice_input1" />时 提醒我</li>
+                <li><span>*邮箱或手机号码：</span><input type="text" class="c_pop_box_notice_input2" /></li>
+                <li><a href="#" title="" class="c_pop_box_notice_a1" >订阅提醒</a><a href="#" title="" class="c_pop_box_notice_a2" >暂不需要</a></li>
+            </ul>
+        </div>
+    </div>
+</div>-->
 	<!--顶部-->
 	<#include "/client/common_header.ftl" />
-
 	<!--面包屑导航-->
 	<div class="crumb">
 		<a href="/" title="">首页</a> 
@@ -211,16 +254,26 @@ function cartInit(){
                 </section>
           
                 <div class="details_pic_wrapper">
-                    <#-- 
-                    <div class="details_pic_wrapper_share">分享</div>
-                    <a href="#" title="" class="details_pic_wrapper_remind">低价提醒</a>
-                    -->
-                    <a href="javascript:userAddCollect(${goods.id})" title="" class="details_pic_wrapper_like">关注</a>
+                    <div class="details_pic_wrapper_share">
+                        <!-- JiaThis Button BEGIN -->
+                        <div class="jiathis_style">
+                            <span class="jiathis_txt">分享到：</span>
+                            <a class="jiathis_button_icons_1"></a>
+                            <a class="jiathis_button_icons_2"></a>
+                            <a class="jiathis_button_icons_3"></a>
+                            <a class="jiathis_button_icons_4"></a>
+                            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                            <a class="jiathis_counter_style"></a>
+                        </div>
+                        <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
+                        <!-- JiaThis Button END -->
+                    </div>
+                    <a href="javascript:userAddCollect(${goods.id})" title="关注" class="details_pic_wrapper_like">关注</a>
+                    <a href="javascript:lowPriceRemind(${goods.id})" title="" class="details_pic_wrapper_remind">低价提醒</a>
                 </div>
             </div>
         </div>
-    
-
+        
 		<!--中部信息-->
 		<div class="details_details">
 			<div class="de_title">${goods.title!''}</div>

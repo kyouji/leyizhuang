@@ -1,4 +1,3 @@
-<!--
 <script>
     function submitSearch(){
     	var search = document.getElementById("search_form");
@@ -33,7 +32,6 @@
         })
     })
 </script>
--->
 <!--顶部-->
 
 <#if index_top_ad_list?? && index_top_ad_list?size gt 0>
@@ -111,6 +109,20 @@
 <div class="navigation">
     <div class="nav">
         <div class="nav_submenu">全部商品分类</div>
+        <div class="nav_nav">
+            <ul>
+                <#if navi_item_list??&&navi_item_list?size gt 0>
+                    <#list navi_item_list as item>
+                        <#-- 如果导航标签超过了7个会产生两排标签 -->
+                        <#if item_index lt 7>
+                            <li><a href="${item.linkUri}" title="${item.title}">${item.title}</a></li>
+                        </#if>
+                    </#list>
+                </#if>
+            </ul>
+        </div>
+
+        <div class="nav_num">
             <#if top_cat_list??>
             <table class="nav_more_dx">
                 <#list top_cat_list as item>
@@ -127,19 +139,7 @@
                 </#list>
             </table>
         </#if> 
-        <div class="nav_nav">
-            <ul>
-                <#if navi_item_list??&&navi_item_list?size gt 0>
-                    <#list navi_item_list as item>
-                        <#-- 如果导航标签超过了7个会产生两排标签 -->
-                        <#if item_index lt 7>
-                            <li><a href="${item.linkUri}" title="${item.title}">${item.title}</a></li>
-                        </#if>
-                    </#list>
-                </#if>
-            </ul>
+            <#if site??>全国服务热线：${site.telephone!''}</#if>
         </div>
-
-        <div class="nav_num"><#if site??>全国服务热线：${site.telephone!''}</#if></div>
     </div>
 </div>

@@ -85,7 +85,7 @@ div{ margin:0 auto;}
 .navigation .nav .nav_nav ul li a{ display:block; overflow:hidden; height:37px; padding:0 14px;_padding:0 5px; text-decoration:none; color:#333333; margin:0 10px;_width:100px; _height:40px;_margin:0;}
 .navigation .nav .nav_nav ul li a:hover{ color:#0e5baa; border-bottom:3px #043a84 solid;}
 .navigation .nav .nav_nav ul li .nav_choiced{ color:#0e5baa; border-bottom:3px #043a84 solid;}
-.navigation .nav .nav_num{ width:220px; height:40px; text-align:right; float:right; color:#ef7c00; font-size:14px; font-weight:bold; line-height:40px;}
+.navigation .nav .nav_num{ width:220px; height:40px; text-align:right; float:right; color:#ef7c00; font-size:14px; font-weight:bold; line-height:40px;position:relative;}
 
 
 /*面包屑导航 */
@@ -199,7 +199,7 @@ margin:0 2px;}
 .nav_more_dx {
     width:500px;
     float:left;
-    background-color:#0e5baa; position:absolute; left:0px;top:40px;z-index:9999;
+    background-color:#0e5baa; position:absolute; left:-980px;top:40px;z-index:9999;
     display:none;}
 .nav_more_dx th {color:white;
     vertical-align:top;
@@ -221,6 +221,38 @@ margin:0 2px;}
     padding-bottom:20px;
     padding-top:20px;}
 .nav_more_dx td a {
+    display:inline-block;
+    padding:0 10px;
+    margin:0 0 7px 0;
+    border-left:1px solid #eee;
+    color:white;}
+    
+    /*下拉菜单01*/
+.nav_more_dx01 {
+    width:500px;
+    float:left;
+    background-color:#0e5baa; position:absolute; left:-980px;top:40px;z-index:9999;
+    display:none;}
+.nav_more_dx01 th {color:white;
+    vertical-align:top;
+    font-size:14px;
+    line-height:16px;
+    text-align:right;
+    padding-right:20px;
+    padding-bottom:20px;
+    padding-top:20px;
+    }
+.nav_more_dx01 th span {color:white;
+    display:inline-block;
+    padding-right:20px;}
+.nav_more_dx01 td {color:white;
+    vertical-align:top;
+    font-size:12px;
+    line-height:16px;
+    text-align:left;
+    padding-bottom:20px;
+    padding-top:20px;}
+.nav_more_dx01 td a {
     display:inline-block;
     padding:0 10px;
     margin:0 0 7px 0;

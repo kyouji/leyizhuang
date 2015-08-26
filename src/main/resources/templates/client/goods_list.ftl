@@ -58,7 +58,7 @@ function btnPageSubmit() {
 
 <body>
     <!-- 顶部  -->
-    <#include "/client/common_header.ftl" />
+    <#include "/client/common_user_header.ftl" />
     
     <!--面包屑导航-->
     <div class="crumb">

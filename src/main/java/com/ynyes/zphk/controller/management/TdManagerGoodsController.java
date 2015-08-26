@@ -24,6 +24,7 @@ import com.ynyes.zphk.entity.TdGoods;
 import com.ynyes.zphk.entity.TdGoodsParameter;
 import com.ynyes.zphk.entity.TdPriceChangeLog;
 import com.ynyes.zphk.entity.TdProductCategory;
+import com.ynyes.zphk.entity.TdUserLowPriceRemind;
 import com.ynyes.zphk.service.TdArticleService;
 import com.ynyes.zphk.service.TdBrandService;
 import com.ynyes.zphk.service.TdGoodsParameterService;
@@ -35,6 +36,7 @@ import com.ynyes.zphk.service.TdProductCategoryService;
 import com.ynyes.zphk.service.TdProductService;
 import com.ynyes.zphk.service.TdProviderService;
 import com.ynyes.zphk.service.TdSiteService;
+import com.ynyes.zphk.service.TdUserLowPriceRemindService;
 import com.ynyes.zphk.service.TdWarehouseService;
 import com.ynyes.zphk.util.SiteMagConstant;
 
@@ -83,6 +85,9 @@ public class TdManagerGoodsController {
     
     @Autowired
     TdSiteService tdSiteService;
+    
+    @Autowired
+    TdUserLowPriceRemindService tdRemindService;
 
     @RequestMapping(value = "/edit/parameter/{categoryId}", method = RequestMethod.POST)
     public String parameter(@PathVariable Long categoryId, ModelMap map,
@@ -198,6 +203,13 @@ public class TdManagerGoodsController {
         }
 
         TdGoods goods = tdGoodsService.findOne(goodsId);
+        
+        if(goods.getSalePrice()>outPrice){
+        	List<TdUserLowPriceRemind> reminds_by_goodsId = tdRemindService.findByGoodsId(goodsId);
+        	for (TdUserLowPriceRemind remind : reminds_by_goodsId) {
+				//在此开始一个一个发送信息
+			}
+        }
 
         goods.setSalePrice(outPrice);
 
@@ -809,20 +821,17 @@ public class TdManagerGoodsController {
             newGoods.setFlashSaleSoldNumber(tdGoods.getFlashSaleSoldNumber());
             newGoods.setFlashSaleStartTime(tdGoods.getFlashSaleStartTime());
             newGoods.setFlashSaleStopTime(tdGoods.getFlashSaleStopTime());
-            newGoods.setGroupSaleHundredPrice(tdGoods.getGroupSaleHundredPrice());
+            newGoods.setGroupSalePrice(tdGoods.getGroupSalePrice());
             newGoods.setGroupSaleImage(tdGoods.getGroupSaleImage());
             newGoods.setGroupSaleLeftNumber(tdGoods.getGroupSaleLeftNumber());
             newGoods.setGroupSalePrice(tdGoods.getGroupSalePrice());
-            newGoods.setGroupSaleSevenPrice(tdGoods.getGroupSaleSevenPrice());
             newGoods.setGroupSaleSoldNumber(tdGoods.getGroupSaleSoldNumber());
             newGoods.setGroupSaleStartTime(tdGoods.getGroupSaleStartTime());
             newGoods.setGroupSaleStopTime(tdGoods.getGroupSaleStopTime());
-            newGoods.setGroupSaleTenPrice(tdGoods.getGroupSaleTenPrice());
-            newGoods.setGroupSaleThreePrice(tdGoods.getGroupSaleThreePrice());
             newGoods.setIncludePrice(tdGoods.getIncludePrice());
             newGoods.setIsFlashSale(tdGoods.getIsFlashSale());
             newGoods.setIsGroupSale(tdGoods.getIsGroupSale());
-            newGoods.setIsGroupSaleHundred(tdGoods.getIsGroupSaleHundred());
+            newGoods.setIsGroupSale(tdGoods.getIsGroupSale());
             newGoods.setIsHot(tdGoods.getIsHot());
             newGoods.setIsNew(tdGoods.getIsNew());
             newGoods.setIsOnSale(tdGoods.getIsOnSale());
@@ -911,15 +920,29 @@ public class TdManagerGoodsController {
     public String save(TdGoods tdGoods, String[] hid_photo_name_show360,
             String __EVENTTARGET, String __EVENTARGUMENT, String __VIEWSTATE,
             String menuId, String channelId, ModelMap map,
-            HttpServletRequest req) {
+            HttpServletRequest req,Double oldPrice) {
         String username = (String) req.getSession().getAttribute("manager");
+        System.err.println(tdGoods.getSalePrice());
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
-
+        if(tdGoods.getSalePrice() < oldPrice){
+        	List<TdUserLowPriceRemind> reminds = tdRemindService.findByGoodsId(tdGoods.getId());
+        	for (TdUserLowPriceRemind remind : reminds) {
+				//在此开始提醒操作
+			}
+        }
         String uris = parsePicUris(hid_photo_name_show360);
 
         tdGoods.setShowPictures(uris);
+//        if(tdGoods.getSalePrice() < theOneGoods.getSalePrice()){
+//        	System.err.println("现在开始执行提醒操作");
+//        	//在此开始遍历remind，发送信息
+//        	List<TdUserLowPriceRemind> reminds = tdRemindService.findByGoodsId(tdGoods.getId());
+//        	for (TdUserLowPriceRemind oneRemind : reminds) {
+//				//再次开始提醒操作
+//			}
+//        }
 
         String type = null;
 

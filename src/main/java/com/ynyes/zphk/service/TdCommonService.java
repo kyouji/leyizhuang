@@ -16,159 +16,144 @@ import com.ynyes.zphk.entity.TdSetting;
 @Service
 public class TdCommonService {
 
-    @Autowired
-    private TdSettingService tdSettingService;
+	@Autowired
+	private TdSettingService tdSettingService;
 
-    @Autowired
-    private TdKeywordsService tdKeywordsService;
+	@Autowired
+	private TdKeywordsService tdKeywordsService;
 
-    @Autowired
-    private TdCartGoodsService tdCartGoodsService;
+	@Autowired
+	private TdCartGoodsService tdCartGoodsService;
 
-    @Autowired
-    private TdNaviBarItemService tdNaviBarItemService;
+	@Autowired
+	private TdNaviBarItemService tdNaviBarItemService;
 
-    @Autowired
-    private TdArticleCategoryService tdArticleCategoryService;
+	@Autowired
+	private TdArticleCategoryService tdArticleCategoryService;
 
-    @Autowired
-    private TdArticleService tdArticleService;
+	@Autowired
+	private TdArticleService tdArticleService;
 
-    @Autowired
-    private TdProductCategoryService tdProductCategoryService;
+	@Autowired
+	private TdProductCategoryService tdProductCategoryService;
 
-    @Autowired
-    private TdSiteLinkService tdSiteLinkService;
+	@Autowired
+	private TdSiteLinkService tdSiteLinkService;
 
-    @Autowired
-    private TdUserService tdUserService;
-    
-    @Autowired
-    private TdServiceItemService tdServiceItemService;
-    
-    @Autowired
-    private TdAdTypeService tdAdTypeService;
-    
-    @Autowired
-    private TdAdService tdAdService;
+	@Autowired
+	private TdUserService tdUserService;
 
-    public void setHeader(ModelMap map, HttpServletRequest req) {
-        String username = (String) req.getSession().getAttribute("username");
+	@Autowired
+	private TdServiceItemService tdServiceItemService;
 
-        // 用户名，购物车
-        if (null != username) {
-            map.addAttribute("username", username);
-            map.addAttribute("user",
-                    tdUserService.findByUsernameAndIsEnabled(username));
-            map.addAttribute("cart_goods_list",
-                    tdCartGoodsService.findByUsername(username));
-        } else {
-            map.addAttribute("cart_goods_list",
-                    tdCartGoodsService.findByUsername(req.getSession().getId()));
-        }
-        
-        // 顶部小图广告
-        TdAdType adType = tdAdTypeService.findByTitle("搜索框左侧小图广告");
+	@Autowired
+	private TdAdTypeService tdAdTypeService;
 
-        if (null != adType) {
-            map.addAttribute("top_small_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
-        }
+	@Autowired
+	private TdAdService tdAdService;
 
-        // 网站基本信息
-        TdSetting setting = tdSettingService.findTopBy();
-        
-        // 统计访问量
-        if (null != setting && null == req.getSession().getAttribute("countedTotalVisits"))
-        {
-            req.getSession().setAttribute("countedTotalVisits", "yes");
-            if (null == setting.getTotalVisits())
-            {
-                setting.setTotalVisits(1L);
-            }
-            else
-            {
-                setting.setTotalVisits(setting.getTotalVisits() + 1L);
-            }
-            setting = tdSettingService.save(setting);
-        }
-        
-        // 统计在线人数
-        if (null != setting && null == req.getSession().getAttribute("countedTotalOnlines"))
-        {
-            req.getSession().setAttribute("countedTotalOnlines", "yes");
-            if (null == setting.getTotalOnlines())
-            {
-                setting.setTotalOnlines(1L);
-            }
-            else
-            {
-                setting.setTotalOnlines(setting.getTotalOnlines() + 1L);
-            }
-            setting = tdSettingService.save(setting);
-        }
+	public void setHeader(ModelMap map, HttpServletRequest req) {
+		String username = (String) req.getSession().getAttribute("username");
 
-        map.addAttribute("site", setting);
-        map.addAttribute("keywords_list",
-                tdKeywordsService.findByIsEnableTrueOrderBySortIdAsc());
+		// 用户名，购物车
+		if (null != username) {
+			map.addAttribute("username", username);
+			map.addAttribute("user", tdUserService.findByUsernameAndIsEnabled(username));
+			map.addAttribute("cart_goods_list", tdCartGoodsService.findByUsername(username));
+		} else {
+			map.addAttribute("cart_goods_list", tdCartGoodsService.findByUsername(req.getSession().getId()));
+		}
 
-        // 全部商品分类，取三级
-        List<TdProductCategory> topCatList = tdProductCategoryService
-                .findByParentIdIsNullOrderBySortIdAsc();
-        map.addAttribute("top_cat_list", topCatList);
+		// 顶部小图广告
+		TdAdType adType = tdAdTypeService.findByTitle("搜索框左侧小图广告");
 
-        if (null != topCatList && topCatList.size() > 0) 
-        {
-            for (int i = 0; i < topCatList.size(); i++) 
-            {
-                TdProductCategory topCat = topCatList.get(i);
-                List<TdProductCategory> secondLevelList = tdProductCategoryService
-                        .findByParentIdOrderBySortIdAsc(topCat.getId());
-                map.addAttribute("second_level_" + i + "_cat_list", secondLevelList);
+		if (null != adType) {
+			map.addAttribute("top_small_ad_list", tdAdService.findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+		}
 
-                if (null != secondLevelList && secondLevelList.size() > 0) 
-                {
-                    for (int j=0; j<secondLevelList.size(); j++)
-                    {
-                        TdProductCategory secondLevelCat = secondLevelList.get(j);
-                        List<TdProductCategory> thirdLevelList = tdProductCategoryService
-                                .findByParentIdOrderBySortIdAsc(secondLevelCat.getId());
-                        map.addAttribute("third_level_" + i + j + "_cat_list", thirdLevelList);
-                    }
-                }
-            }
-        }
+		// 网站基本信息
+		TdSetting setting = tdSettingService.findTopBy();
 
-        // 导航菜单
-        map.addAttribute("navi_item_list",
-                tdNaviBarItemService.findByIsEnableTrueOrderBySortIdAsc());
-        
-        // 商城服务
-        map.addAttribute("service_item_list", tdServiceItemService.findByIsEnableTrueOrderBySortIdAsc());
+		// 统计访问量
+		if (null != setting && null == req.getSession().getAttribute("countedTotalVisits")) {
+			req.getSession().setAttribute("countedTotalVisits", "yes");
+			if (null == setting.getTotalVisits()) {
+				setting.setTotalVisits(1L);
+			} else {
+				setting.setTotalVisits(setting.getTotalVisits() + 1L);
+			}
+			setting = tdSettingService.save(setting);
+		}
 
-        // 帮助中心
-        Long helpId = 12L;
+		// 统计在线人数
+		if (null != setting && null == req.getSession().getAttribute("countedTotalOnlines")) {
+			req.getSession().setAttribute("countedTotalOnlines", "yes");
+			if (null == setting.getTotalOnlines()) {
+				setting.setTotalOnlines(1L);
+			} else {
+				setting.setTotalOnlines(setting.getTotalOnlines() + 1L);
+			}
+			setting = tdSettingService.save(setting);
+		}
 
-        map.addAttribute("help_id", helpId);
+		map.addAttribute("site", setting);
+		map.addAttribute("keywords_list", tdKeywordsService.findByIsEnableTrueOrderBySortIdAsc());
 
-        List<TdArticleCategory> level0HelpList = tdArticleCategoryService
-                .findByMenuIdAndParentId(helpId, 0L);
+		// 全部商品分类，取三级
+		List<TdProductCategory> topCatList = tdProductCategoryService.findByParentIdIsNullOrderBySortIdAsc();
+		map.addAttribute("top_cat_list", topCatList);
 
-        map.addAttribute("help_level0_cat_list", level0HelpList);
+		if (null != topCatList && topCatList.size() > 0) {
+			for (int i = 0; i < topCatList.size(); i++) {
+				TdProductCategory topCat = topCatList.get(i);
+				List<TdProductCategory> secondLevelList = tdProductCategoryService
+						.findByParentIdOrderBySortIdAsc(topCat.getId());
+				map.addAttribute("second_level_" + i + "_cat_list", secondLevelList);
 
-        if (null != level0HelpList) {
+				if (null != secondLevelList && secondLevelList.size() > 0) {
+					for (int j = 0; j < secondLevelList.size(); j++) {
+						TdProductCategory secondLevelCat = secondLevelList.get(j);
+						List<TdProductCategory> thirdLevelList = tdProductCategoryService
+								.findByParentIdOrderBySortIdAsc(secondLevelCat.getId());
+						map.addAttribute("third_level_" + i + j + "_cat_list", thirdLevelList);
+					}
+				}
+			}
+		}
 
-            for (int i = 0; i < level0HelpList.size() && i < 4; i++) {
-                TdArticleCategory articleCat = level0HelpList.get(i);
-                map.addAttribute("help_" + i + "_cat_list",
-                        tdArticleCategoryService.findByMenuIdAndParentId(
-                                helpId, articleCat.getId()));
-            }
-        }
+		// 导航菜单
+		map.addAttribute("navi_item_list", tdNaviBarItemService.findByIsEnableTrueOrderBySortIdAsc());
 
-        // 友情链接
-        map.addAttribute("site_link_list",
-                tdSiteLinkService.findByIsEnableTrue());
-    }
+		// 商城服务
+		map.addAttribute("service_item_list", tdServiceItemService.findByIsEnableTrueOrderBySortIdAsc());
+
+		// 帮助中心
+		Long helpId = 12L;
+
+		map.addAttribute("help_id", helpId);
+
+		List<TdArticleCategory> level0HelpList = tdArticleCategoryService.findByMenuIdAndParentId(helpId, 0L);
+
+		map.addAttribute("help_level0_cat_list", level0HelpList);
+
+		if (null != level0HelpList) {
+
+			for (int i = 0; i < level0HelpList.size() && i < 4; i++) {
+				TdArticleCategory articleCat = level0HelpList.get(i);
+				map.addAttribute("help_" + i + "_cat_list",
+						tdArticleCategoryService.findByMenuIdAndParentId(helpId, articleCat.getId()));
+			}
+		}
+
+		// 友情链接
+		map.addAttribute("site_link_list", tdSiteLinkService.findByIsEnableTrue());
+
+		/*
+		 * 获取当前请求地址
+		 */
+		String basePath = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort()
+				+ req.getContextPath()+req.getRequestURI();
+		map.addAttribute("basePath", basePath);
+	}
 
 }

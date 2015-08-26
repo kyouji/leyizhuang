@@ -552,6 +552,7 @@ function del_goods_comb(obj) {
             <dd>
                 <input id="idComputeSalePrice" name="salePrice" type="text" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">销售价</span>
+                <input type="hidden" name="oldPrice" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>">
             </dd>
         </dl>
         <dl>
@@ -725,51 +726,10 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
-            <dt>预付定金</dt>
+            <dt>团购价格</dt>
             <dd>
                 <input name="groupSalePrice" type="text" value="<#if goods?? && goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
                 <span class="Validform_checktip">预付定金额度</span>
-            </dd>
-        </dl>
-        <dl>
-            <dt>三人团价格</dt>
-            <dd>
-                <input name="groupSaleThreePrice" type="text" value="<#if goods?? && goods.groupSaleThreePrice??>${goods.groupSaleThreePrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">三人团商品团购价格</span>
-            </dd>
-        </dl>
-        <dl>
-            <dt>七人团价格</dt>
-            <dd>
-                <input name="groupSaleSevenPrice" type="text" value="<#if goods?? && goods.groupSaleSevenPrice??>${goods.groupSaleSevenPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">七人团商品团购价格</span>
-            </dd>
-        </dl>
-        <dl>
-            <dt>十人团价格</dt>
-            <dd>
-                <input name="groupSaleTenPrice" type="text" value="<#if goods?? && goods.groupSaleTenPrice??>${goods.groupSaleTenPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">十人团商品团购价格</span>
-            </dd>
-        </dl>
-        <dl>
-            <dt>开启百人团</dt>
-            <dd>
-                <div class="rule-multi-radio">
-                    <span>
-                        <input type="radio" name="isGroupSaleHundred" value="1" <#if goods?? && goods.isGroupSaleHundred?? && goods.isGroupSaleHundred==true>checked="checked"</#if>>
-                        <label>是</label>
-                        <input type="radio" name="isGroupSaleHundred" value="0" <#if goods??==false || goods.isGroupSaleHundred??==false || goods.isGroupSaleHundred==false>checked="checked"</#if>>
-                        <label>否</label>
-                    </span>
-                </div>
-            </dd>
-        </dl>
-        <dl>
-            <dt>百人团价格</dt>
-            <dd>
-                <input name="groupSaleHundredPrice" type="text" value="<#if goods?? && goods.groupSaleHundredPrice??>${goods.groupSaleHundredPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">十人团商品团购价格</span>
             </dd>
         </dl>
         <dl>
