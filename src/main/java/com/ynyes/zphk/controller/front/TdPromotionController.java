@@ -73,7 +73,8 @@ public class TdPromotionController {
 			map.addAttribute("goingPage",0);
 
 			return "/client/tuan_list";
-		} else if (promotionType.equalsIgnoreCase("miao")) // 秒杀
+		} 
+		else if (promotionType.equalsIgnoreCase("miao")) // 秒杀
 		{
 			if (null == type) {
 				type = "";
