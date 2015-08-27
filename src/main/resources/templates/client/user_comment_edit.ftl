@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/return_1.css"/>
 
-<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 <script src="/client/js/jquery.cityselect.js"></script>

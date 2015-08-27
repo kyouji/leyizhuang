@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>正品惠客-惠客团购</title>
 <!--css-->
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/Groupbuy.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>

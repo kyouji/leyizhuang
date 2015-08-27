@@ -10,7 +10,7 @@
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/client/js/Validform_v5.3.2_min.js"></script>
-
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/log_in.css" rel="stylesheet" type="text/css" />
 

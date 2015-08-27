@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><#if site??>${site.seoTitle!''}-</#if>正品惠客-购物车</title>
-
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 <link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/Shopping_cart.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>

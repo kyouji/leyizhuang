@@ -6,7 +6,7 @@
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
-
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 <link href="/client/css/Complete_payment.css" rel="stylesheet" type="text/css" />
 </head>
 

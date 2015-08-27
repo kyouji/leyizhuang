@@ -12,7 +12,7 @@
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
-<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 <link href="/client/style/bankLogo.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/change_paymethod.css" rel="stylesheet" type="text/css" />
 <script src="/client/js/jquery-1.9.1.min.js"></script>

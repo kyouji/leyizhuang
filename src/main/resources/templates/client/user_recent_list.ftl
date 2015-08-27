@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/history.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/big.css"/>
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 </head>
 

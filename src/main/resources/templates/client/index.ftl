@@ -9,7 +9,7 @@
 <meta name="copyright" content="${site.copyright!''}" />
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/main.css" rel="stylesheet" type="text/css" />
-
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/jquery.SuperSlide.2.1.1.js"></script>

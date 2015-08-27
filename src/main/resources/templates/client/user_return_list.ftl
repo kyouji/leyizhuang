@@ -10,18 +10,9 @@
 <link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link href="/client/css/record.css" rel="stylesheet" type="text/css" />
-<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 
-<!--[if IE]>
-   <script src="/client/js/html5.js"></script>
-<![endif]-->
-<!--[if IE 6]>
-<script type="text/javascript" src="/client/js/DD_belatedPNG_0.0.8a.js" ></script>
-<script>
-DD_belatedPNG.fix('.,img,background');
-</script>
-<![endif]-->
 
 </head>
 <body>

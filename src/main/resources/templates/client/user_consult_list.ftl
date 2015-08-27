@@ -11,7 +11,7 @@
 <link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
-<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
+<link rel="shortcut icon" href="/images/zphk_logo.ico">
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
 <script src="/client/js/common.js"></script>
