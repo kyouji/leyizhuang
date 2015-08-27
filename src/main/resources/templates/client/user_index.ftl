@@ -3,18 +3,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><#if site??>${site.seoTitle!''}-</#if>正品惠客</title>
-<#--
-<meta name="keywords" content="${site.seoKeywords!''}" />
-<meta name="description" content="${site.seoDescription!''}" />
-<meta name="copyright" content="${site.copyright!''}" />
--->
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter.css"/>
-<!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script src="/client/js/mymember.js"></script>
+
+<script type="text/javascript" src="/client/js/swfupload.js"></script>
+<script type="text/javascript" src="/client/js/swfupload.queue.js"></script>
+<script type="text/javascript" src="/client/js/swfupload.handlers.js"></script>
+<script type="text/javascript" src="/client/js/WdatePicker.js"></script>
+<script type="text/javascript" src="/client/js/layout.js"></script>
+<script type="text/javascript">
+   $(function () {
+    //初始化上传控件
+    $(".upload-img").each(function () {
+        $(this).InitSWFUpload({ 
+            sendurl: "/Verwalter/upload/client", 
+            flashurl: "/client/js/swfupload.swf"
+        });
+    });
+});
+</script>
+<script type="text/javascript">
+   function testImg(theURL)
+   {
+       if (null == theURL)
+        {
+            return;
+        }
+    $.post("/user/headImageUrl",{"imgUrl": theURL},function(data){
+        window.location.reload();       
+        alert("头像更改成功");
+    })
+   }
+</script>
 </head>
 <body>
 <!--顶部-->
@@ -29,7 +53,12 @@
   <div class="content_2"> 
     <!-- 中上 -->
     <div class="content_2_1">
-      <div class="content_2_1_1"><a href="/user/info" title="编辑基本信息"><img src="${user.headImageUri!'/mag/style/user_avatar.png'}"  /></a></div>
+      <div class="content_2_1_1">
+        <a href="/user/info" title="编辑基本信息"><img src="${user.headImageUri!'/mag/style/user_avatar.png'}"  /></a>
+        <p class="upload-box upload-img"></p>
+      </div>
+      
+      
       <div class="content_2_1_2">
         <div class="content_2_1_2_top">
           <dl>
@@ -162,12 +191,15 @@
      
           <#if recommend_goods_page??>
              <#list recommend_goods_page.content as item>
-                <dl>
-                    <dt><a href="/goods/${item.id}" title="${item.title!''}" target="_blank"><img src="${item.coverImageUri!''}" /></a></dt>
-                    <dd><a href="/goods/${item.id}" title="${item.title!''}" target="_blank"><label>${item.title!''}</label></a><br/>
-                    <span class="red1">￥${item.salePrice?string("0.00")}</span></dd>
-                    <dd class="red"><a href="/goods/${item.id}" title="${item.title!''}" target="_blank">购买</a></dd>
-                </dl>
+                <!-- 超过7个之后看上去太长了 -->
+                <#if item_index lt 7>
+                    <dl>
+                        <dt><a href="/goods/${item.id}" title="${item.title!''}" target="_blank"><img src="${item.coverImageUri!''}" /></a></dt>
+                        <dd><a href="/goods/${item.id}" title="${item.title!''}" target="_blank"><label>${item.title!''}</label></a><br/>
+                        <span class="red1">￥${item.salePrice?string("0.00")}</span></dd>
+                        <dd class="red"><a href="/goods/${item.id}" title="${item.title!''}" target="_blank">购买</a></dd>
+                    </dl>
+                </#if>
              </#list>
           </#if>   
     </div>

@@ -58,7 +58,7 @@ function minusNum(){
 }
 
 function buyConbination(){
-	var selectNum = document.getElementById("combCount").innerHTML;
+var selectNum = document.getElementById("combCount").innerHTML;
 	if(selectNum == 0){
 		alert("请至少选择一件组合商品");
 		return;
@@ -188,26 +188,6 @@ function lowPriceRemind(goodsId){
 </head>
 <body>
 <div class="w100">
-<!--<div class="c_pop_boxbg">
-    <div class="c_pop_box">
-        <div class="c_pop_box_top">
-            <span>提 示</span>
-            <a href="#"></a>
-        </div>
-        <div class="c_pop_box_success">
-            <p>您已成功关注该商品！</p>
-            <a href="#" title="">查看我的关注>></a>
-        </div>
-        <div class="c_pop_box_notice">
-            <p>关注商品降价提醒：</p>
-            <ul>
-                <li><span>价格低于￥：</span><input type="text" class="c_pop_box_notice_input1" />时 提醒我</li>
-                <li><span>*邮箱或手机号码：</span><input type="text" class="c_pop_box_notice_input2" /></li>
-                <li><a href="#" title="" class="c_pop_box_notice_a1" >订阅提醒</a><a href="#" title="" class="c_pop_box_notice_a2" >暂不需要</a></li>
-            </ul>
-        </div>
-    </div>
-</div>-->
 	<!--顶部-->
 	<#include "/client/common_header.ftl" />
 	<!--面包屑导航-->
@@ -225,8 +205,8 @@ function lowPriceRemind(goodsId){
 		</#if>
 	</div>
 	
-	<!--中上部参数-->
-    <div class="mid_box" style=" width:1200px;">
+	
+    <div class="wrapper">
         <div class="wrapper" style="width:410px; float:left; overflow:inherit;">
             <div class="scrool_box">
        
@@ -269,7 +249,7 @@ function lowPriceRemind(goodsId){
                         <!-- JiaThis Button END -->
                     </div>
                     <a href="javascript:userAddCollect(${goods.id})" title="关注" class="details_pic_wrapper_like">关注</a>
-                    <a href="javascript:lowPriceRemind(${goods.id})" title="" class="details_pic_wrapper_remind">低价提醒</a>
+                    <a href="javascript:lowPriceRemind(${goods.id})" title="低价提醒" class="details_pic_wrapper_remind">低价提醒</a>
                 </div>
             </div>
         </div>
@@ -279,15 +259,34 @@ function lowPriceRemind(goodsId){
 			<div class="de_title">${goods.title!''}</div>
 			<div class="de_describe">${goods.subTitle!''}</div>
             <div class="de_price">
-				<p>
-					市 场 价<label>￥${goods.marketPrice?string("0.00")}</label>
-				</p>
-				<p>
-					惠 客 价<b>￥${goods.salePrice?string("0.00")}</b>
-				</p>
+                <#if promotion??>
+                    <#if promotion=='miao'>
+                        <p>
+                                                                   原价<label>￥${goods.salePrice?string("0.00")}</label>
+                        </p>
+                        <p>
+                                                                    秒杀价<b>￥${goods.flashSalePrice?string("0.00")}</b>
+                        </p>
+                    <#else>
+                        <p>
+                                                                   原价<label>￥${goods.salePrice?string("0.00")}</label>
+                        </p>
+                        <p>
+                                                                    团购价<b>￥${goods.groupSalePrice?string("0.00")}</b>
+                        </p>
+                    </#if>
+                <#else>
+    				<p>
+    					市 场 价<label>￥${goods.marketPrice?string("0.00")}</label>
+    				</p>
+    				<p>
+    					惠 客 价<b>￥${goods.salePrice?string("0.00")}</b>
+    				</p>
+				</#if>
             </div>
 
 			<!--促销信息-->
+			<#if promotion??&&promotion=='wu'>
 			<div class="de_promotion">
 				<#if goods.giftList?? && goods.giftList?size gt 0>
 					<div class="de_promotion_title">促销信息</div>
@@ -305,16 +304,17 @@ function lowPriceRemind(goodsId){
 							</li>
 						</ul>
 					</#if> 
-					<#if goods.returnPoints gt 0>
-						<ul>
-							<li>
-								<span>积分</span>
-								<label>确认收货后赠送${goods.returnPoints}积分</label>
-							</li>
-						</ul>
-					</#if>
-				</div>
-			</div>
+    					<#if goods.returnPoints gt 0>
+    						<ul>
+    							<li>
+        							<span>积分</span>
+    								<label>确认收货后赠送${goods.returnPoints}积分</label>
+    							</li>
+    						</ul>
+					   </#if>
+				    </div>
+			     </div>
+			</#if>
 
 			<!--参数设置-->
 			<div class="de_parameter">
@@ -331,7 +331,10 @@ function lowPriceRemind(goodsId){
 							<p>
 								<#if select_one_goods_list??> 
 									<#list select_one_goods_list as item> 
-										<a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="/goods/${item.id}">${item.selectOneValue}</a> 
+									   <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="/goods/${item.id}">${item.selectOneValue}</a> 
+									   <#if promotion??&&promotion != 'wu'>
+                                           <#break>
+									   </#if>
 									</#list>
 								</#if>
 							</p>
@@ -343,6 +346,9 @@ function lowPriceRemind(goodsId){
 								<#if select_one_goods_list??> 
 									<#list select_one_goods_list as item> 
 										<a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="/goods/${item.id}">${item.selectOneValue}</a>
+										<#if promotion??&&promotion != 'wu'>
+                                           <#break>
+                                       </#if>
 									</#list> 
 								</#if>
 							</p>
@@ -353,6 +359,9 @@ function lowPriceRemind(goodsId){
 								<#if select_two_goods_list??> 
 									<#list select_two_goods_list as item> 
 										<a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+										<#if promotion??&&promotion != 'wu'>
+                                           <#break>
+                                       </#if>
 									</#list>
 								</#if>
 							</p>
@@ -364,6 +373,9 @@ function lowPriceRemind(goodsId){
 								<#if select_one_goods_list??>
 									<#list select_one_goods_list as item> 
 										<a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectOneValue}</a> 
+										<#if promotion??&&promotion != 'wu'>
+                                           <#break>
+                                       </#if>
 									</#list>
 								</#if>
 							</p>
@@ -374,6 +386,9 @@ function lowPriceRemind(goodsId){
 								<#if select_two_goods_list??> 
 									<#list select_two_goods_list as item> 
 										<a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+										<#if promotion??&&promotion != 'wu'>
+                                           <#break>
+                                       </#if>
 									</#list> 
 								</#if>
 							</p>
@@ -384,6 +399,9 @@ function lowPriceRemind(goodsId){
 								<#if select_three_goods_list??> 
 									<#list select_three_goods_list as item> 
 										<a <#if item.selectThreeValue==three_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectThreeValue}</a>
+										<#if promotion??&&promotion != 'wu'>
+                                           <#break>
+                                       </#if>
 								 	</#list>
 								</#if>
 							</p>
@@ -391,27 +409,50 @@ function lowPriceRemind(goodsId){
 					</#if>
 				</#if>
 				<div class="de_parameter_num">
-					<span>购买数量</span> 
-					<a id="id-minus" href="javascript:minusNum();" class="de_parameter_list_num_add">-</a> 
-					<input type="text" id="quantity" value="1" class="text" />
-					<a id="id-plus" class="down" href="javascript:addNum();" class="de_parameter_list_num_subduction">+</a>
-					<label>库存${goods.leftNumber!'0'}件</label>
+					<#if promotion??&&promotion != 'wu'> 
+					   <#if promotion=='nowTuan'>
+					       <label style="margin-left:50px;">团购剩余数量${goods.groupSaleLeftNumber!'0'}件</label>
+				       </#if>
+				       <#if promotion=='miao'>
+				            <label style="margin-left:50px;">秒杀数量剩余${goods.flashSaleLeftNumber!'0'}件</label>
+				       </#if>
+					<#else>
+    					<span>购买数量</span>
+    					<a id="id-minus" href="javascript:minusNum();" class="de_parameter_list_num_add">-</a> 
+    					<input type="text" id="quantity" value="1" class="text" />
+    					<a id="id-plus" class="down" href="javascript:addNum();" class="de_parameter_list_num_subduction">+</a>
+    					<label>库存${goods.leftNumber!'0'}件</label>
+					</#if>
 				</div>
 			</div>
 				
 			<!--服务-->
 			<div class="de_service">
-				<#if goods.service??>
-					<div class="de_service_title">服 务</div>
-					<div class="de_service_info">
-						<ul>
-							<li>${goods.service}</li>
-						</ul>
-					</div>
+                <#if promotion??&&promotion=='wu'>
+        			<#if goods.service??>
+    					<div class="de_service_title">服 务</div>
+    					<div class="de_service_info">
+    						<ul>
+    							<li>${goods.service}</li>
+    						</ul>
+    					</div>
+    				</#if>
 				</#if>
 			</div>
 			<span class="addcart">
-				<a href="javascript:cartInit();" target="_blank" title="加入购物车" class="addcartorange">加入购物车</a>
+    			<#if promotion??&&promotion=='wu'>
+        				<a href="javascript:cartInit();" target="_blank" title="加入购物车" class="addcartorange">加入购物车</a>
+    			<#else>
+                    <#if promotion=="goingTuan">
+                        <a href="javascript:;" target="_blank" title="团购还未开始" style="background-color:#818181" class="addcartorange">团购还未开始</a>
+                    <#else>
+                        <#if promotion=='miao'>
+                            <a href="/order/promotionBuy?goodsId=${goods.id}&promotion=miao" target="_blank" title="立即秒杀" class="addcartorange">立即秒杀</a>
+                        <#else>
+                            <a href="/order/promotionBuy?goodsId=${goods.id}&promotion=nowTuan" target="_blank" title="立即团购" class="addcartorange">立即团购</a>
+                        </#if>
+                    </#if>
+    			</#if>
 			</span>
 		</div>
 			
@@ -434,45 +475,47 @@ function lowPriceRemind(goodsId){
 			</#if>
 		</div>
 	</div>
-	<br /><br />
+	<div style="margin-top:20px;"></div>
 	<!--推荐组合-->
-	<#if goods.combList?? && goods.combList?size gt 0>
-		<div class="c_combination">
-			<div class="c_combination_title">推荐组合</div>
-				<div class="c_combination_btm">
-					<div class="c_combination_btm_list">
-						<ul>
-							<li><a href="/goods/${goods.id?c}" title="${goods.name!''}"  target="_blank"> <img src="${goods.coverImageUri!''}" /></a> 
-							<a href="#" title=""> <span>${goods.name!''}</span></a> 
-							<a href="#" title="">￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></a></li>
-						</ul>
-						<#list goods.combList as item>
-							<ul>
-								<s></s>
-								<li>
-									<a href="/goods/${item.goodsId}"  target="_blank" title="${item.goodsId}"> 
-										<img src="${item.coverImageUri!''}" />
-										<span>${item.title!''}</span>
-										￥${item.currentPrice?string("0.00")}
-									</a>
-									<input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string(" 0.00")}, ${item.goodsPrice?string("0.00")});"/>
-								</li>
-							</ul>
-						</#list>
-					</div>
-					<div class="c_combination_btm_all">
-						<ul>
-							<li>已选择 <span class="red" id="combCount">0</span> 个配件</li>
-							<li class="c_combination_btm_all_li3">套餐价：￥<b id="combCurrentPrice">${goods.salePrice?string("0.00")}</b></li>
-							<li class="c_combination_btm_all_li1">原价：￥<label id="combOriginPrice">${goods.salePrice?string("0.00")}</label></li>
-							<li class="c_combination_btm_all_li2">已节省：￥<strong id="combSave">0.00</strong></li>
-							<li><a href="javascript:clearSelect();">全部清空</a></li>
-						</ul>
-						<a href="javascript:buyConbination();"  target="_blank" id="zhAddCart" title="" class="addcartorange" style="margin: 10px 0 0 83px; background: #0e5baa; text-decoration: none;">立即购买</a>
-					</div>
-				</div>
-			</div>
-		</div>
+	<#if promotion??&&promotion=='wu'>
+    	<#if goods.combList?? && goods.combList?size gt 0>
+    		<div class="c_combination">
+    			<div class="c_combination_title">推荐组合</div>
+    				<div class="c_combination_btm">
+    					<div class="c_combination_btm_list">
+    						<ul>
+    							<li><a href="/goods/${goods.id?c}" title="${goods.name!''}"  target="_blank"> <img src="${goods.coverImageUri!''}" /></a> 
+    							<a href="#" title=""> <span>${goods.name!''}</span></a> 
+    							<a href="#" title="">￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></a></li>
+    						</ul>
+    						<#list goods.combList as item>
+    							<ul>
+    								<s></s>
+    								<li>
+    									<a href="/goods/${item.goodsId}"  target="_blank" title="${item.goodsId}"> 
+    										<img src="${item.coverImageUri!''}" />
+    										<span>${item.title!''}</span>
+    										￥${item.currentPrice?string("0.00")}
+    									</a>
+    									<input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string(" 0.00")}, ${item.goodsPrice?string("0.00")});"/>
+    								</li>
+    							</ul>
+    						</#list>
+    					</div>
+    					<div class="c_combination_btm_all">
+    						<ul>
+    							<li>已选择 <span class="red" id="combCount">0</span> 个配件</li>
+    							<li class="c_combination_btm_all_li3">套餐价：￥<b id="combCurrentPrice">${goods.salePrice?string("0.00")}</b></li>
+    							<li class="c_combination_btm_all_li1">原价：￥<label id="combOriginPrice">${goods.salePrice?string("0.00")}</label></li>
+    							<li class="c_combination_btm_all_li2">已节省：￥<strong id="combSave">0.00</strong></li>
+    							<li><a href="javascript:clearSelect();">全部清空</a></li>
+    						</ul>
+    						<a href="javascript:buyConbination();"  target="_blank" id="zhAddCart" title="" class="addcartorange" style="margin: 10px 0 0 83px; background: #0e5baa; text-decoration: none;">立即购买</a>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</#if>
 	</#if>
 		
 	<!--中下部详情-->

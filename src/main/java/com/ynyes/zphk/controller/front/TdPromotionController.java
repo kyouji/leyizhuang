@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdGoodsService;
@@ -63,18 +64,15 @@ public class TdPromotionController {
 				// 正在团购
 				map.addAttribute("tuan_goods_page",
 						tdGoodsService.findByGroupSalingOrderByGroupSaleStartTimeAsc(page, ClientConstant.pageSize));
-				map.addAttribute("tuanPage",0);
+				map.addAttribute("pageId", 0);
 				break;
 			}
 
-			//因页面需要，无论何种情况下都要使用即将团购----@author dengxiao
-			map.addAttribute("going_goods_page", tdGoodsService
-					.findByGroupSaleGoingToStartOrderByGroupSaleStartTimeAsc());
-			map.addAttribute("goingPage",0);
-
+			// 因页面需要，无论何种情况下都要使用即将团购----@author dengxiao
+			map.addAttribute("going_goods_page",
+					tdGoodsService.findByGroupSaleGoingToStartOrderByGroupSaleStartTimeAsc());
 			return "/client/tuan_list";
-		} 
-		else if (promotionType.equalsIgnoreCase("miao")) // 秒杀
+		} else if (promotionType.equalsIgnoreCase("miao")) // 秒杀
 		{
 			if (null == type) {
 				type = "";
@@ -101,6 +99,7 @@ public class TdPromotionController {
 				// 正在秒杀
 				map.addAttribute("miao_goods_page",
 						tdGoodsService.findByFlashSalingOrderByFlashSaleStartTimeAsc(page, ClientConstant.pageSize));
+				map.addAttribute("pageId", 0);
 				break;
 			}
 
@@ -108,5 +107,21 @@ public class TdPromotionController {
 		} else {
 			return "/client/error_404";
 		}
+	}
+
+	@RequestMapping(value = "/promotion/changePages", method = RequestMethod.POST)
+	public String changePages(ModelMap map, Integer pageId) {
+		map.addAttribute("tuan_goods_page",
+				tdGoodsService.findByGroupSalingOrderByGroupSaleStartTimeAsc(pageId, ClientConstant.pageSize));
+		map.addAttribute("pageId", pageId);
+		return "/client/now_tuan";
+	}
+
+	@RequestMapping(value = "/promotion/changeMiao", method = RequestMethod.POST)
+	public String changeMiao(ModelMap map, Integer pageId) {
+		map.addAttribute("miao_goods_page",
+				tdGoodsService.findByFlashSalingOrderByFlashSaleStartTimeAsc(pageId, ClientConstant.pageSize));
+		map.addAttribute("pageId", pageId);
+		return "/client/now_miao";
 	}
 }

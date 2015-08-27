@@ -1,3 +1,14 @@
+<script type="text/javascript">
+    function goingTuan(id){
+        if(null != id){
+            var goodsId = id;
+        }else{
+            alert("获取商品信息失败！");
+            return;
+        }
+        window.open("/goods/"+goodsId+"?promotion=goingTuan");
+    }
+</script>
 <#if going_goods_page??>
     <p class="fz_24 fw_700 td_group">即将开团</p>
     <div class="scrollBox today_photo" style="margin:0 auto">
@@ -5,7 +16,7 @@
                 <ul class="piclist">
                     <#list going_goods_page as item>
                         <li>
-                            <a href="#" class="iphone6_1"><img src="${item.groupSaleImage!''}" /></a>
+                            <a href="/goods/${item.id}?promotion=goingTuan" target="_blank" class="iphone6_1"><img src="${item.groupSaleImage!''}" /></a>
                             <div class="percentage">
                                 <span>${((1-item.groupSalePrice/item.salePrice)*100)?string("0")}</span>%<br />
                                 <span>off</span>
@@ -46,9 +57,9 @@
                                 }
                             </script>
                             <div></div>
-                            <a href="#" class="fz_14 trait">${item.title!''}</a>
+                            <a href="/goods/${item.id}?promotion=goingTuan" target="_blank" class="fz_14 trait">${item.title!''}</a>
                             <div class="snapped_up">
-                                <input class="right" type="submit" value="团购" />
+                                <input class="right" type="button" onClick="goingTuan(${item.id});" value="团购" />
                                 <b class="right">￥<span>${item.groupSalePrice?string("0.00")}</span></b>
                             </div>
                         </li>

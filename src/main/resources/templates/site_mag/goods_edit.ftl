@@ -617,7 +617,7 @@ function del_goods_comb(obj) {
     
     <div class="tab-content" style="display: none;">
         <dl>
-            <dt>支持一元抢拍</dt>
+            <dt>支持秒杀</dt>
             <dd>
                 <div class="rule-multi-radio multi-radio">
                     <span>
@@ -650,7 +650,7 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
-            <dt>一元抢拍展示图片</dt>
+            <dt>秒杀展示图片</dt>
             <dd>
                 <input id="flashSaleImage" name="flashSaleImage" type="text" value="<#if goods??>${goods.flashSaleImage!""}</#if>" class="input normal upload-path">
                 <div class="upload-box upload-img"></div>
@@ -660,7 +660,7 @@ function del_goods_comb(obj) {
         </dl>
         
         <dl>
-            <dt>一元抢拍价</dt>
+            <dt>秒杀价</dt>
             <dd>
                 <input name="flashSalePrice" type="text" value="<#if goods?? && goods.flashSalePrice??>${goods.flashSalePrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
                 <span class="Validform_checktip">商品限时抢购价格</span>
@@ -668,14 +668,14 @@ function del_goods_comb(obj) {
         </dl>
         
         <dl>
-            <dt>一元抢拍剩余数量</dt>
+            <dt>秒杀剩余数量</dt>
             <dd>
                 <input name="flashSaleLeftNumber" type="text" value="<#if goods??>${goods.flashSaleLeftNumber!''}</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
                 <span class="Validform_checktip">为0时抢购结束</span>
             </dd>
         </dl>
         <dl>
-            <dt>一元抢拍销量</dt>
+            <dt>秒杀销量</dt>
             <dd>
                 <input name="flashSaleSoldNumber" type="text" value="<#if goods??>${goods.flashSaleSoldNumber!''}</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
                 <span class="Validform_checktip">已销售商品数量</span>

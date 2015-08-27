@@ -432,28 +432,25 @@ public class TdUserController extends AbstractPaytypeService {
 		res.put("code", 1);
 
 		if (null == goodsId) {
-			res.put("message", "参数错误");
+			res.put("message", "参数错误！");
 			return res;
 		}
 
 		String username = (String) req.getSession().getAttribute("username");
 
 		if (null == username) {
-			res.put("message", "请先登录");
+			res.put("message", "请先登录！");
 			return res;
 		}
 
 		res.put("code", 0);
-
-		TdUserCollect findByUsernameAndGoodsId = tdUserCollectService.findByUsernameAndGoodsId(username, goodsId);
-		System.out.println(findByUsernameAndGoodsId);
 
 		// 没有收藏
 		if (null == tdUserCollectService.findByUsernameAndGoodsId(username, goodsId)) {
 			TdGoods goods = tdGoodsService.findOne(goodsId);
 
 			if (null == goods) {
-				res.put("message", "商品不存在");
+				res.put("message", "商品不存在！");
 				return res;
 			}
 
@@ -468,7 +465,7 @@ public class TdUserController extends AbstractPaytypeService {
 
 			tdUserCollectService.save(collect);
 
-			res.put("message", "关注成功");
+			res.put("message", "关注成功！");
 			return res;
 		}
 
@@ -1304,7 +1301,7 @@ public class TdUserController extends AbstractPaytypeService {
 	 */
 	@RequestMapping(value = "/user/info/save", method = RequestMethod.POST)
 	public String userInfo(HttpServletRequest req, String nickname, String sex,
-			@DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday, String detailAddress, ModelMap map) {
+			@DateTimeFormat(pattern = "yyyy-MM-dd") Date EntTime, String detailAddress, ModelMap map) {
 		String username = (String) req.getSession().getAttribute("username");
 
 		if (null == username) {
@@ -1313,10 +1310,10 @@ public class TdUserController extends AbstractPaytypeService {
 
 		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
 
-		if (null != birthday && null != detailAddress) {
+		if (null != EntTime && null != detailAddress) {
 			user.setNickname(nickname);
 			user.setSex(sex);
-			user.setBirthday(birthday);
+			user.setBirthday(EntTime);
 			user.setDetailAddress(detailAddress);
 			user = tdUserService.save(user);
 		}
@@ -1324,7 +1321,7 @@ public class TdUserController extends AbstractPaytypeService {
 		return "redirect:/user/info";
 	}
 
-	@RequestMapping("/user/editInfo")
+	@RequestMapping(value="/user/saveInfo",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> saveInfo(String nickname, String sex, Date birthday, String detailAddress,
 			HttpServletRequest req) {
@@ -1410,4 +1407,19 @@ public class TdUserController extends AbstractPaytypeService {
 		map.addAttribute("pageId", pageId);
 		return "/client/user_collection_page";
 	}
+	
+	@RequestMapping(value = "/user/headImageUrl", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveHeadPortrait(String imgUrl,HttpServletRequest rep)
+    {
+    	String username = (String)rep.getSession().getAttribute("username");
+    	if (null == username) {
+            return "redirect:/login";
+        }
+        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+    	user.setHeadImageUri(imgUrl);
+    	tdUserService.save(user);
+    	
+    	return "/client/user_index";
+    }
 }

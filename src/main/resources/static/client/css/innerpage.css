@@ -54,11 +54,11 @@
 .scrool_box a{ text-decoration:none;}
 
 
-.details_pic_wrapper{ width:400px; float:left; position:relative; display:block; overflow:hidden;}
+.details_pic_wrapper{ width:400px; float:left; position:relative; display:block; overflow:hidden;margin-bottom:30px;}
 .details_pic_wrapper .details_pic_wrapper_share{ width:230px; float:left; margin-top:10px;}
 .details_pic_wrapper a{ text-decoration:none; display:block; width:52px; float:left; margin-top:10px;}
-.details_pic_wrapper .details_pic_wrapper_like{ background:url(../images/icons.png) no-repeat 0 -174px; padding-left:22px;}
-.details_pic_wrapper .details_pic_wrapper_remind{ background:url(../images/icons.png) no-repeat -90px -174px; padding-left:22px;}
+.details_pic_wrapper .details_pic_wrapper_like{ background:url(/client/images/icons.png) no-repeat 0 -174px; padding-left:22px;}
+.details_pic_wrapper .details_pic_wrapper_remind{ background:url(/client/images/icons.png) no-repeat -90px -174px; padding-left:22px;}
 
 /*中部参数*/
 .details_details{ width: 560px; display:block; overflow:hidden;margin:0 15px; float:left;/* position:relative;*/}
@@ -109,10 +109,10 @@
 .details_goods .details_goods_title{ width:162px; float:left; height:20px; text-align:center; padding-left:38px;}
 .details_goods .details_goods_title a{ display:block; float:left; width:32px; height:1px; border-top:1px #ddd dotted; margin-top:8px; cursor:auto;}
 .details_goods .details_goods_title span{ float:left; margin:0 5px;}
-.details_goods ul{ width:145px; margin-left:27px; float:left;}
-.details_goods ul li{ margin-top:15px;}
+.details_goods ul{ width:145px; margin-left:27px; float:left; margin-top:20px;}
+.details_goods ul li{}
 .details_goods ul li img{ width:145px; height:145px;}
-.details_goods .details_goods_opacity{ display:block; width:145px; height:40px; background:url(../images/whitebg.png) repeat; margin-top:-50px; text-align:center; padding-top:10px;}
+.details_goods .details_goods_opacity{ display:block; width:145px; overflow:hidden;background:url("/client/images/thewhite.png") repeat;  text-align:center;margin-top:-50px;position:relative;padding:5px 0;}
 .details_goods .details_goods_opacity a{ display:block; width:145px; height:16px;white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
 
 /*****************************推荐组合*****************************/

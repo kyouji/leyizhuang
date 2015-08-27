@@ -52,7 +52,7 @@ import com.ynyes.zphk.util.ClientConstant;
 public class TdGoodsController {
 	@Autowired
 	private TdGoodsService tdGoodsService;
-	
+
 	@Autowired
 	private TdBrandService tdBrandService;
 
@@ -91,12 +91,12 @@ public class TdGoodsController {
 
 	@Autowired
 	private TdDiySiteService tdDiySiteService;
-	
+
 	@Autowired
 	private TdUserLowPriceRemindService tdRemindService;
 
 	@RequestMapping("/goods/{goodsId}")
-	public String product(@PathVariable Long goodsId, Long shareId, Integer qiang, ModelMap map,
+	public String product(@PathVariable Long goodsId, Long shareId, Integer qiang, ModelMap map, String promotion,
 			HttpServletRequest req) {
 
 		tdCommonService.setHeader(map, req);
@@ -124,17 +124,18 @@ public class TdGoodsController {
 		}
 
 		if (null == goodsId) {
-			return "error_404";
+			return "/client/error_404";
 		}
 
 		TdGoods goods = tdGoodsService.findOne(goodsId);
 
 		if (null == goods) {
-			return "error_404";
+			return "/client/error_404";
 		}
 
-//		Page<TdUserConsult> consultPage = tdUserConsultService.findByGoodsIdAndIsShowable(goodsId, 0,
-//				ClientConstant.pageSize);
+		// Page<TdUserConsult> consultPage =
+		// tdUserConsultService.findByGoodsIdAndIsShowable(goodsId, 0,
+		// ClientConstant.pageSize);
 
 		// 商品
 		map.addAttribute("goods", goods);
@@ -153,15 +154,15 @@ public class TdGoodsController {
 		// 商品组合
 		map.addAttribute("comb_list", tdGoodsCombinationService.findByGoodsId(goods.getProductId()));
 
-		Page<TdUserComment> comment_page = tdUserCommentService.findByGoodsIdAndIsShowable(goods.getProductId(), 0, ClientConstant.pageSize);
-		Page<TdUserConsult> consult_page = tdUserConsultService.findByGoodsIdAndIsShowable(goods.getProductId(), 0, ClientConstant.pageSize);
-		
-		// 全部评论
-		map.addAttribute("comment_page",
-				comment_page);
+		Page<TdUserComment> comment_page = tdUserCommentService.findByGoodsIdAndIsShowable(goods.getProductId(), 0,
+				ClientConstant.pageSize);
+		Page<TdUserConsult> consult_page = tdUserConsultService.findByGoodsIdAndIsShowable(goods.getProductId(), 0,
+				ClientConstant.pageSize);
 
-		map.addAttribute("consult_page",
-				consult_page);
+		// 全部评论
+		map.addAttribute("comment_page", comment_page);
+
+		map.addAttribute("consult_page", consult_page);
 
 		// 全部评论数
 		map.addAttribute("comment_count", tdUserCommentService.countByGoodsIdAndIsShowable(goods.getProductId()));
@@ -179,7 +180,8 @@ public class TdGoodsController {
 				tdUserCommentService.countByGoodsIdAndStarsAndIsShowable(goods.getProductId(), 1L));
 
 		// 热卖 edit by Sharon 2015-8-18
-		map.addAttribute("hot_sale_page", tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberDesc(goods.getCategoryId(), 0, 5));
+		map.addAttribute("hot_sale_page",
+				tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberDesc(goods.getCategoryId(), 0, 5));
 
 		// 同盟店
 		map.addAttribute("diy_site_list", tdDiySiteService.findByIsEnableTrue());
@@ -189,9 +191,10 @@ public class TdGoodsController {
 
 		// 查找类型
 		TdProductCategory tdProductCategory = tdProductCategoryService.findOne(goods.getCategoryId());
-		
+
 		// 查询同类型下面品牌 edit by Sharon 2015-8-18
-		map.addAttribute("brand_page", tdBrandService.findByStatusIdAndProductCategoryTreeContaining(1L, goods.getCategoryId(), 0, 10));
+		map.addAttribute("brand_page",
+				tdBrandService.findByStatusIdAndProductCategoryTreeContaining(1L, goods.getCategoryId(), 0, 10));
 
 		// 获取该类型所有父类型
 		if (null != tdProductCategory) {
@@ -370,7 +373,11 @@ public class TdGoodsController {
 
 		map.addAttribute("server_ip", req.getLocalName());
 		map.addAttribute("server_port", req.getLocalPort());
-
+		// 将促销标识符传递到详情页(4种情况：1：nowTuan,正在团购；2.goingTuan，即将开团；3.miao，秒杀；4.wu，无促销活动)
+		if (null == promotion) {
+			promotion = "wu";
+		}
+		map.addAttribute("promotion", promotion);
 		return "/client/content";
 	}
 
@@ -434,9 +441,9 @@ public class TdGoodsController {
 			page = 0;
 		}
 
-		//获取指定商品的信息
+		// 获取指定商品的信息
 		TdGoods goods = tdGoodsService.findOne(goodsId);
-		
+
 		Page<TdUserConsult> consultPage = tdUserConsultService.findByGoodsIdAndIsShowable(goods.getProductId(), page,
 				ClientConstant.pageSize);
 
@@ -447,34 +454,35 @@ public class TdGoodsController {
 
 		return "/client/goods_content_consult";
 	}
-	
+
 	/**
 	 * 添加低价提醒的功能
+	 * 
 	 * @author dengxiao
 	 */
 	@RequestMapping("/goods/remind")
 	@ResponseBody
-	public Map<String, Object> saveRemind(Long goodsId,HttpServletRequest req){
+	public Map<String, Object> saveRemind(Long goodsId, HttpServletRequest req) {
 		Map<String, Object> res = new HashMap<String, Object>();
-		//code的值为1的时候代表低价提醒功能失败
+		// code的值为1的时候代表低价提醒功能失败
 		res.put("code", 2);
 		String username = (String) req.getSession().getAttribute("username");
 		TdUserLowPriceRemind theUserRemind = tdRemindService.findByGoodsIdAndUsername(goodsId, username);
-		if(null != theUserRemind){
+		if (null != theUserRemind) {
 			res.put("message", "您已经开启了此件商品的低价提醒功能！");
 			return res;
 		}
-		if(null == username){
+		if (null == username) {
 			res.put("code", 1);
 			res.put("message", "请先登陆！");
 			return res;
 		}
 		TdGoods goods = tdGoodsService.findOne(goodsId);
-		if(null == goods){
+		if (null == goods) {
 			res.put("message", "未能找到指定的商品！");
 			return res;
 		}
-		
+
 		TdUserLowPriceRemind remind = new TdUserLowPriceRemind();
 		remind.setUsername(username);
 		remind.setGoodsId(goods.getId());
@@ -482,7 +490,7 @@ public class TdGoodsController {
 		remind.setGoodsCoverImageUri(goods.getCoverImageUri());
 		remind.setAddTime(new Date());
 		tdRemindService.save(remind);
-		
+
 		res.put("message", "低价提醒功能启动！");
 		res.put("code", 0);
 		return res;

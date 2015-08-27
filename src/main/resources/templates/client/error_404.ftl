@@ -9,7 +9,7 @@
 <body>
     <!-- 顶部  -->
     <#include "/client/common_header.ftl" />
-    <div class="wrapper" style="min-height:600px;">
+    <div class="wrapper" style="min-height:600px;display:block;overflow:hidden;">
         <center>
             <h1 style="margin-top:160px;">抱歉！您访问的页面已经删除或更改地址</h1>
             <h3 style="margin-top:80px;">请<a href="/">返回首页</a>查看</h3>

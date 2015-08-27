@@ -8,6 +8,9 @@
 /*惠客秒杀*/
 .hui_spike{
 	width:1200px;
+	min-height:500px;
+	display:block;
+	overflow:hidden;
 }
 .hui_spike ul{
 	overflow:hidden;
@@ -16,7 +19,7 @@
 .hui_spike ul li{
 	position:relative;
 	float:left;
-	margin-right:40px;
+	margin:0 10px;
 	margin-top:30px;
 	width:578px;
 	height:303px;
@@ -50,11 +53,14 @@
 .hui_spike ul li .spike_right .trait{
 	display:block;
 	overflow:hidden;
-	font-size:16px;
+	font-size:20px;
 	color:#333;
-	height:36px;	
-	padding:15px 14px;
+	height:25px;	
+	padding:10px 14px;
 	text-decoration:none;
+}
+.hui_spike ul li .spike_right .fz_14{
+	font-size:14px;
 }
 .hui_spike ul li .spike_right .trait:hover{
 	color:#F00;
@@ -62,7 +68,7 @@
 .hui_spike ul li .spike_right .special_offer{
 	overflow:hidden;
 	padding:0 14px;
-	margin-top:120px;
+	margin-top:96px;
 	_height:36px;	/*IE 6*/
 }
 .hui_spike ul li .spike_right .special_offer del,b{

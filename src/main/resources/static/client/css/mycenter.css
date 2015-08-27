@@ -7,6 +7,8 @@
 .content_2 .content_2_1,.content_3 .content_3_1{margin-top:30px;}
 .content_2 .content_2_1 .content_2_1_1,.content_2 .content_2_1 .content_2_1_2,.content_2 .content_2_1 .content_2_1_3{ float:left;}
 .content_2 .content_2_1 .content_2_1_1, .content_2_1_2  dl{ margin-left:40px; _margin-left:20px;}
+.content_2 .content_2_1 .content_2_1_1 img{width:80px; height:80px;border-radius:40px; -moz-border-radius:40px;-webkit-border-radius:40px;}
+.content_2 .content_2_1 .content_2_1_1 p{margin-top:5px;}
 .content_2 .content_2_1 .content_2_1_2{ width:304px;}
 .content_2 .content_2_1 .content_2_1_2 .content_2_1_2_top{ height:32px;}
 .content_2 .content_2_1 .content_2_1_2 .content_2_1_2_tobbon{ margin-top:20px;}

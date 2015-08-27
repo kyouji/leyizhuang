@@ -104,7 +104,7 @@ public class TdOrderController extends AbstractPaytypeService {
 
 	@Autowired
 	private TdGoodsCombinationService combinationService;
-	
+
 	@RequestMapping(value = "/info")
 	public String orderInfo(HttpServletRequest req, HttpServletResponse resp, ModelMap map) {
 		String username = (String) req.getSession().getAttribute("username");
@@ -137,6 +137,7 @@ public class TdOrderController extends AbstractPaytypeService {
 		Long totalPointLimited = 0L;
 		/**
 		 * 添加了141行和147行代码，用于计算总价
+		 * 
 		 * @author dengxiao
 		 */
 		Double totalPrice = new Double(0);
@@ -145,10 +146,10 @@ public class TdOrderController extends AbstractPaytypeService {
 		if (null != selectedGoodsList) {
 			for (TdCartGoods cg : selectedGoodsList) {
 				TdGoods goods = tdGoodsService.findOne(cg.getGoodsId());
-				totalPrice += cg.getPrice()*cg.getQuantity();
+				totalPrice += cg.getPrice() * cg.getQuantity();
 				if (null != goods && null != goods.getPointLimited()) {
 					totalPointLimited += goods.getPointLimited() * cg.getQuantity();
-					
+
 				}
 			}
 		}
@@ -170,9 +171,9 @@ public class TdOrderController extends AbstractPaytypeService {
 
 		// 选中商品
 		map.addAttribute("selected_goods_list", selectedGoodsList);
-		
-		//总金额
-		map.addAttribute("totalPrice",totalPrice);
+
+		// 总金额
+		map.addAttribute("totalPrice", totalPrice);
 
 		tdCommonService.setHeader(map, req);
 
@@ -692,27 +693,27 @@ public class TdOrderController extends AbstractPaytypeService {
 
 	/**
 	 * 处理商品详情页中立即购买组合的方法
+	 * 
 	 * @author dengxiao
 	 */
 	@RequestMapping(value = "/buyCombination")
-	public String buyCombination(String id, String zpid, HttpServletRequest req, HttpServletResponse resp,
-			ModelMap map) {
+	public String buyCombination(String id, String zpid, HttpServletRequest req, ModelMap map) {
 		String username = (String) req.getSession().getAttribute("username");
-		
+
 		if (null == username) {
 			return "redirect:/login";
 		}
-		
-		//获取所有的“组合商品编号”
+
+		// 获取所有的“组合商品编号”
 		String[] combinationIds = zpid.split(",");
-		
-		//定义一个集合来存储所有选中的组合商品，为了方便下一个页面读取数据，其泛型为TdCartGoods
+
+		// 定义一个集合来存储所有选中的组合商品，为了方便下一个页面读取数据，其泛型为TdCartGoods
 		List<TdCartGoods> selectedGoodsList = new ArrayList<>();
-		//定义一个变量用来存放总金额
+		// 定义一个变量用来存放总金额
 		Double totalPrice = new Double(0);
 
 		TdGoods goods = tdGoodsService.findOne(Long.parseLong(id));
-		
+
 		TdCartGoods cartGoods = new TdCartGoods();
 		cartGoods.setUsername(username);
 		cartGoods.setGoodsId(goods.getId());
@@ -720,60 +721,29 @@ public class TdOrderController extends AbstractPaytypeService {
 		cartGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
 		cartGoods.setQuantity(1L);
 		cartGoods.setPrice(goods.getSalePrice());
-		
+
 		selectedGoodsList.add(cartGoods);
 		totalPrice += cartGoods.getPrice();
-		
+
 		for (String theId : combinationIds) {
 			TdGoodsCombination combination = combinationService.findOne(Long.parseLong(theId));
 			TdCartGoods cart = new TdCartGoods();
-			
+
 			cart.setUsername(username);
 			cart.setGoodsId(combination.getGoodsId());
 			cart.setGoodsTitle(combination.getGoodsTitle());
 			cart.setGoodsCoverImageUri(combination.getCoverImageUri());
 			cart.setQuantity(1L);
 			cart.setPrice(combination.getCurrentPrice());
-			
+
 			selectedGoodsList.add(cart);
 			totalPrice += cart.getPrice();
 		}
-		
+
 		req.getSession().setAttribute("selectedGoodsList", selectedGoodsList);
-//		if (null != cartGoodsList && cartGoodsList.size() > 0) {
-//			for (TdCartGoods cartGoods : cartGoodsList) {
-//				cartGoods.setUsername(username);
-//				cartGoods.setIsLoggedIn(true);
-//			}
-//			tdCartGoodsService.save(cartGoodsList);
-//		}
-//
-//		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
-//
-//		if (null != user) {
-//			map.addAttribute("user", user);
-//		}
-//
-//		List<TdCartGoods> selectedGoodsList = tdCartGoodsService.findByUsernameAndIsSelectedTrue(username);
-//
-//		Long totalPointLimited = 0L;
-//
-//		// 积分限制总和
-//		if (null != selectedGoodsList) {
-//			for (TdCartGoods cg : selectedGoodsList) {
-//				TdGoods goods = tdGoodsService.findOne(cg.getGoodsId());
-//
-//				if (null != goods && null != goods.getPointLimited()) {
-//					totalPointLimited += goods.getPointLimited() * cg.getQuantity();
-//				}
-//			}
-//		}
-//
+
 		// 优惠券
 		map.addAttribute("coupon_list", tdCouponService.findByUsernameAndIsUseable(username));
-
-		// 积分限额
-//		map.addAttribute("total_point_limit", totalPointLimited);
 
 		// 线下同盟店
 		map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());
@@ -784,14 +754,51 @@ public class TdOrderController extends AbstractPaytypeService {
 		// 配送方式
 		map.addAttribute("delivery_type_list", tdDeliveryTypeService.findByIsEnableTrue());
 
-//		// 选中商品
+		// 选中商品
 		map.addAttribute("selected_goods_list", selectedGoodsList);
-		
-		//总金额
-		map.addAttribute("totalPrice",totalPrice);
+
+		// 总金额
+		map.addAttribute("totalPrice", totalPrice);
 
 		tdCommonService.setHeader(map, req);
 
+		return "/client/order_info";
+	}
+
+	/**
+	 * 团购或秒杀中立即购买的方法
+	 * 
+	 * @author dengxiao
+	 */
+	@RequestMapping(value = "/promotionBuy")
+	public String promotionBuy(Long goodsId, String promotion, HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/login";
+		}
+		// 定义一个集合来存储商品，为了方便下一个页面读取数据，其泛型为TdCartGoods
+		List<TdCartGoods> selectedGoodsList = new ArrayList<>();
+		TdGoods goods = tdGoodsService.findOne(goodsId);
+		TdCartGoods cart = new TdCartGoods();
+		// 定义一个变量用来存放总金额
+		Double totalPrice = new Double(0);
+		cart.setUsername(username);
+		cart.setGoodsId(goods.getId());
+		cart.setGoodsTitle(goods.getTitle());
+		cart.setGoodsCoverImageUri(goods.getCoverImageUri());
+		cart.setQuantity(1L);
+		if (promotion.trim().equals("nowTuan")) {
+			cart.setPrice(goods.getGroupSalePrice());
+		}
+		if (promotion.trim().equals("miao")) {
+			cart.setPrice(goods.getFlashSalePrice());
+		}
+		selectedGoodsList.add(cart);
+		totalPrice += cart.getPrice();
+		map.addAttribute("selected_goods_list", selectedGoodsList);
+		map.addAttribute("totalPrice", totalPrice);
+		setPayTypes(map);
+		tdCommonService.setHeader(map, req);
 		return "/client/order_info";
 	}
 }
