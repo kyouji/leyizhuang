@@ -9,7 +9,7 @@
 
 <link href="/client/css/Order_information.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/order_info.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
@@ -33,6 +33,8 @@
 </head>
 
 <body>
+
+
 <!--顶部-->
 <#include "/client/common_header.ftl" />
 

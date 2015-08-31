@@ -7,13 +7,14 @@
 <meta name="keywords" content="<#if productCategory??>${productCategory.seoKeywords!''}</#if>" />
 <meta name="description" content="<#if productCategory??>${productCategory.seoDescription!''}</#if>" />
 <meta name="copyright" content="<#if site??>${site.copyright!''}</#if>" /> 
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/index.js"></script>
 <script src="/client/js/list.js"></script>
 <script src="/client/js/goods.js" type="text/javascript"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/list.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/lrtk.css" />
 
 <script type="text/javascript">
 function setprice() {
@@ -57,6 +58,10 @@ function btnPageSubmit() {
 </head>
 
 <body>
+
+    <!--qq and weixin-->
+    <#include "/client/qq_and_weixin.ftl">
+
     <!-- 顶部  -->
     <#include "/client/common_user_header.ftl" />
     

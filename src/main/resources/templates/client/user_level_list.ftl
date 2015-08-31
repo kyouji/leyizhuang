@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/member.css"/>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 
 <#-- 这个会员等级的意思大概是,每升一级新增一个特权。级数越高特权越多 -->

@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/password_1.css"/>
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 

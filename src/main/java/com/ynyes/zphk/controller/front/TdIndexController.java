@@ -201,6 +201,21 @@ public class TdIndexController {
             map.addAttribute("service_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
         }
+        
+        adType = tdAdTypeService.findByTitle("团购标题图");
+
+        if (null != adType) {
+            map.addAttribute("tuan_title_ad_list", tdAdService
+                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+        }
+
+        // 团购广告图片
+        adType = tdAdTypeService.findByTitle("团购广告图片");
+
+        if (null != adType) {
+            map.addAttribute("tuan_ad_list", tdAdService
+                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+        }
 
         // 触屏
         if (device.isMobile() || device.isTablet()) {
@@ -258,7 +273,7 @@ public class TdIndexController {
                             "top_cat_goods_page" + i,
                             tdGoodsService
                                     .findByCategoryIdAndIsRecommendIndexTrueAndIsOnSaleTrueOrderByIdDesc(
-                                            topCat.getId(), 0, 3));
+                                            topCat.getId(), 0, 6));
                 }
             }
         }

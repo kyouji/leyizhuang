@@ -196,6 +196,9 @@ public class TdGoodsController {
 		map.addAttribute("brand_page",
 				tdBrandService.findByStatusIdAndProductCategoryTreeContaining(1L, goods.getCategoryId(), 0, 10));
 
+		//同类排行榜
+		map.addAttribute("most_sold_list",tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberDesc(goods.getCategoryId()));
+		
 		// 获取该类型所有父类型
 		if (null != tdProductCategory) {
 			if (null != tdProductCategory.getParentTree() && !"".equals(tdProductCategory.getParentTree())) {

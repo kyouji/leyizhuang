@@ -11,7 +11,11 @@
             <span class="prev">&lt;</span>
             <span class="next">&gt;</span>
             <ul class="list">
-            <#assign totalPage=(user_collection?size/3+1)>
+            <#if user_collection?size%3==0>
+                <#assign totalPage=(user_collection?size/3)>
+            <#else>
+                <#assign totalPage=(user_collection?size/3+1)>
+            </#if>
             <#list 1..totalPage as item>
                 <li>${item-1}</li>
             </#list>

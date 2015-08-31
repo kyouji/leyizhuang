@@ -7,9 +7,10 @@
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/register.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="/client/js/jquery1.42.min.js"></script>
 <script type="text/javascript" src="/client/js/Validform_v5.3.2_min.js"></script>
 <script type="text/javascript" src="/client/js/regist.js"></script>
@@ -23,6 +24,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+
     <!--顶部-->
     <div class="top_all">
     	<div class="top">

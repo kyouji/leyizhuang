@@ -5,9 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>正品惠客-惠客秒杀</title>
 <!--css-->
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/Spike.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/lrtk.css" />
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script>
 function checkTime(i)  
@@ -70,7 +71,11 @@ function changeMiao(pageId){
 </head>
 
 <body>
-<#include "/client/common_useR_header.ftl">
+
+<!--qq and weixin-->
+<#include "/client/qq_and_weixin.ftl">
+
+<#include "/client/common_user_header.ftl">
 
 <!--秒杀开始-->
 <div id="now_miao_by_dx" class="wrapper">

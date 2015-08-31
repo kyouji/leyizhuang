@@ -6,7 +6,7 @@
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/integral.css"/>
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 </head>
 

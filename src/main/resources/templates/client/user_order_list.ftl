@@ -6,7 +6,7 @@
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
 <meta name="copyright" content="正品惠客" />
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link href="/client/css/my_order.css" rel="stylesheet" type="text/css" />

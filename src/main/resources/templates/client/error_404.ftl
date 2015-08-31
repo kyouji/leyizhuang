@@ -5,7 +5,7 @@
 <title><#if site??>${site.seoTitle!''}-</#if>错误</title>
 <script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 </head>
 <body>
     <!-- 顶部  -->

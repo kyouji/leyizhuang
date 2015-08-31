@@ -5,9 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>正品惠客-惠客团购</title>
 <!--css-->
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/Groupbuy.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/client/css/lrtk.css" />
 <script type="text/javascript" src="/client/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script type="text/javascript">
@@ -61,6 +62,8 @@ function changePage(pageId){
 </head>
 
 <body>
+
+<#include "/client/qq_and_weixin.ftl">
 
 <#include "/client/common_header.ftl">
 

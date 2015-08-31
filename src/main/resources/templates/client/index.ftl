@@ -10,6 +10,7 @@
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/main.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="stylesheet" type="text/css" href="/client/css/lrtk.css" />
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
@@ -18,13 +19,12 @@
 <script type="text/javascript">
 
 function submitSearch(){
-	var search = document.getElementById("search_form");
-	search.submit();
+    var search = document.getElementById("search_form");
+    search.submit();
 }
 
-	
+    
 $(function(){
-        
     /*广告滑动*/    
     function numUp(){
 
@@ -116,6 +116,7 @@ $(function(){
 </head>
 
 <body>
+    <#include "/client/qq_and_weixin.ftl">
     <#if index_top_ad_list?? && index_top_ad_list?size gt 0>
         <div class="top_ad">
             <#list index_top_ad_list as item>
@@ -127,10 +128,10 @@ $(function(){
     
     <!--顶部-->
     <div class="top_all">
-    	<div class="top">
-        	<div class="top_left">
-            	<div class="top_left_welcome">欢迎光临正品惠客</div>
-            	<#if username??>
+        <div class="top">
+            <div class="top_left">
+                <div class="top_left_welcome">欢迎光临正品惠客</div>
+                <#if username??>
                     <a href="/user">${username}<i></i></a>
                     <a href="/logout">退出<i></i></a>
                 <#else>
@@ -148,9 +149,9 @@ $(function(){
     
     <!--头部-->
     <div class="header">
-    	<!--logo大小：190 58-->
-    	<div class="header_logo">
-    	   <a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a>
+        <!--logo大小：190 58-->
+        <div class="header_logo">
+           <a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a>
         </div>
         
         <!--广告语大小：183 58-->
@@ -166,10 +167,10 @@ $(function(){
         </div>
         
         <div class="header_search">
-    	   <div class="header_search_top">
-        	    <form action="/search" method="get" id="search_form" >
-                	<input type="text" class="header_search_top_text" id="keywords" name="keywords" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title!''}</#if>"/>
-                   	<a href="javascript:submitSearch()" title="搜索" class="header_search_top_btn">搜 索</a>
+           <div class="header_search_top">
+                <form action="/search" method="get" id="search_form" >
+                    <input type="text" class="header_search_top_text" id="keywords" name="keywords" value="<#if keywords_list?? && keywords_list[0]??>${keywords_list[0].title!''}</#if>"/>
+                    <a href="javascript:submitSearch()" title="搜索" class="header_search_top_btn">搜 索</a>
                 </form>
             </div>
             <div class="header_search_bot">
@@ -186,14 +187,14 @@ $(function(){
         
         <#-- 设计要改，增加下拉显示  -->
         <div class="header_cart">
-        	<a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
+            <a href="/cart" title="购物车" class="header_cart_btn">购物车（<#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if>）</a>
         </div>
     </div>
     
     <!--导航-->
     <#-- 导航读3级分类 -->
     <div class="navigation">
-    	<div class="nav">
+        <div class="nav">
             <div class="nav_submenu">全部商品分类</div>
             <div class="nav_nav">
                 <ul>
@@ -211,10 +212,10 @@ $(function(){
     <div class="contents_box">
     <!--banner-->
     <div class="advertising">
-    	<div class="advertising_content">
-        	<!-- 分类-品牌  start-->
-        	<ul class="navlistout" id="navdown">
-        	    <#if top_cat_list??>
+        <div class="advertising_content">
+            <!-- 分类-品牌  start-->
+            <ul class="navlistout" id="navdown">
+                <#if top_cat_list??>
                     <#list top_cat_list as item>
                         <li class="product_categories phone_${item_index+1}">
                             <h3><a href="/list/${item.id}">${item.title!''}</a></h3>
@@ -243,8 +244,8 @@ $(function(){
                     </#list>
                 </#if>
             </ul>
-        	<!-- END  -->
-        	<!-- 首页大广告    -->
+            <!-- END  -->
+            <!-- 首页大广告    -->
             <div class="advertising_ifm adver_middle">
                 <div class="scroll">
                     <div class="adv_box">   
@@ -264,10 +265,10 @@ $(function(){
             </div>
             
             <div class="advertising_ifm adver_right">
-            	<div class="dedication">竭诚服务</div>
+                <div class="dedication">竭诚服务</div>
                     <ul class="special_service">
                         <#if service_ad_list?? && service_ad_list?size gt 0>
-                        	<li class="li_1">
+                            <li class="li_1">
                                 <img src="${service_ad_list[0].fileUri!''}" height="43px;" width="40px;"/>
                                 <a class="icon_1">${service_ad_list[0].title!''}</a>
                             </li>
@@ -290,7 +291,7 @@ $(function(){
                 <div class="announcement_list">
                  <#if news_page??>
                     <#list news_page.content as item>
-                         <#if item_index < 7>
+                         <#if item_index < 6>
                          <a class="block mt5" target="_blank" href="/info/content/${item.id}?mid=12&catId=${item.categoryId}" style="height:20px; overflow:hidden;">${item.title!''}</a>
                          </#if>
                     </#list>
@@ -306,13 +307,13 @@ $(function(){
         <#if tuan_title_ad_list?? && tuan_title_ad_list?size gt 0>
             <a class="tg_1" target="_blank" href="${tuan_title_ad_list[0].linkUri!""}"><img src="${tuan_title_ad_list[0].fileUri!""}" /></a>
         </#if>
-    	<#if tuan_ad_list??>
-    	   <#list tuan_ad_list as item>
-    	       <#if item_index < 5>
-    	           <a href="${item.linkUri!""}" target="_blank"><img src="${item.fileUri!""}" /></a>
-    	       </#if>
-    	   </#list>
-    	</#if>
+        <#if tuan_ad_list??>
+           <#list tuan_ad_list as item>
+               <#if item_index < 5>
+                   <a href="${item.linkUri!""}" target="_blank"><img src="${item.fileUri!""}" /></a>
+               </#if>
+           </#list>
+        </#if>
     </div>
     
     <!-- 首页推荐 -->
@@ -338,8 +339,8 @@ $(function(){
     </#if>
     <!--1F展示 -->
     <div class="phone_encyclopedia">
-    	<div class="phones">
-    	   <!-- 楼层 -->
+        <div class="phones">
+           <!-- 楼层 -->
             <#if top_category_list?? && top_category_list?size gt 0 >
             <div class="phones_left">
                 <#list top_category_list as item>
@@ -351,10 +352,10 @@ $(function(){
             </#if>
             <div class="phones_right">
                 <#if first_brand_list??&&first_brand_list?size gt 0>
-            		热门:&nbsp;&nbsp;
+                    热门:&nbsp;&nbsp;
                     <#list first_brand_list as item >
                         <#if item_index < 6>
-                        |&nbsp;&nbsp;<a href="/list/${item.id?c}">${item.title!''}</a>
+                        |&nbsp;&nbsp;<a href="${item.linkUri!''}">${item.title!''}</a>
                         </#if>
                     </#list>
                 </#if>
@@ -366,13 +367,13 @@ $(function(){
                     <#list f0_brand_page.content as item>
                         <#if item_index < 5>
                             <div class="lg">
-                                <a href="/list/${item.productCategoryId}">
+                                <a href="${item.linkUri!''}">
                                     <img src="${item.logoUri!''}" width="120" height="60">
                                 </a>
                             </div>
                         </#if>
                     </#list>
-        	    </#if>
+                </#if>
             </ul>
             <!-- 广告  -->
             <ul class="phones_photo">
@@ -386,7 +387,7 @@ $(function(){
                         <#if item_index < 3 >
                             <li class="photo_1">
                                 <dl>
-                                    <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                    <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" height="150px" /></a></dt>
                                      <dd class="feature">性价比之王</dd>
                                      <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                      <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
@@ -402,7 +403,7 @@ $(function(){
                         <#if item_index gt 2 && item_index < 6 >
                             <li class="photo_1 photo_4">
                                  <dl>
-                                      <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                      <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" height="120px" /></a></dt>
                                       <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                       <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                       <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
@@ -418,7 +419,7 @@ $(function(){
     
     <!--2F展示-->
     <div class="phone_encyclopedia">
-    	<div class="phones">
+        <div class="phones">
            <!-- 楼层 -->
             <#if top_category_list?? && top_category_list?size gt 0 >
             <div class="phones_left">
@@ -431,18 +432,18 @@ $(function(){
             </#if>
             <div class="phones_right">
                 <#if second_brand_list??&&second_brand_list?size gt 0>
-                	热门:&nbsp;&nbsp;
+                    热门:&nbsp;&nbsp;
                     <#list second_brand_list as item >
                         <#if item_index lt 6>
-                            |&nbsp;&nbsp;<a href="/list/${item.id?c!""}">${item.title!""}</a>
+                            |&nbsp;&nbsp;<a href="${item.linkUri!''}">${item.title!""}</a>
                         </#if>
                     </#list>
                 </#if>
             </div>
         </div>
         <div class="phone_brand pc_com">
-        	<ul class="phones_logo pc_logo">
-        	    <#if f1_brand_page??>
+            <ul class="phones_logo pc_logo">
+                <#if f1_brand_page??>
                     <#list f1_brand_page.content as item>
                         <#if item_index < 5>
                         <div class="lg">
@@ -477,7 +478,7 @@ $(function(){
                         <#if item_index < 2 >
                             <li class="photo_1">
                                 <dl>
-                                   <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                   <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" height="120px" /></a></dt>
                                    <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                    <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                    <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
@@ -494,7 +495,7 @@ $(function(){
                         <#if item_index gt 1 && item_index < 5 >
                             <li class="photo_1">
                                 <dl>
-                                  <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                  <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" height="150px" /></a></dt>
                                   <dd class="feature">性价比之王</dd>
                                   <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                   <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
@@ -510,7 +511,7 @@ $(function(){
                         <#if item_index gt 4 && item_index < 8 >
                             <li class="photo_1 photo_4">
                                 <dl>
-                                   <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                   <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" height="120px" /></a></dt>
                                    <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                    <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                    <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
@@ -526,7 +527,7 @@ $(function(){
     
     <!--3F展示-->
     <div class="phone_encyclopedia">
-    	<div class="phones">
+        <div class="phones">
             <!-- 楼层 -->
             <#if top_category_list?? && top_category_list?size gt 0 >
                 <div class="phones_left">
@@ -539,18 +540,18 @@ $(function(){
             </#if>
             <div class="phones_right">
                 <#if third_brand_list?? && third_brand_list?size gt 0>
-            		热门:&nbsp;&nbsp;
+                    热门:&nbsp;&nbsp;
                     <#list third_brand_list as item >
                         <#if item_index lt 6>
-                            |&nbsp;&nbsp;<a href="#">${item.title!""}</a>
+                            |&nbsp;&nbsp;<a href="${item.linkUri!''}">${item.title!""}</a>
                         </#if>
                     </#list>
                 </#if>
             </div>
         </div>
         <div class="phone_brand">
-        	<ul class="phones_logo">
-        	    <#if f2_brand_page??>
+            <ul class="phones_logo">
+                <#if f2_brand_page??>
                     <#list f2_brand_page.content as item>
                         <#if item_index < 5>
                             <div class="lg">
@@ -568,12 +569,12 @@ $(function(){
                 </#if>
             </ul>
             <ul class="phones_details">
-            	<#if top_cat_goods_page2?? && top_cat_goods_page2.content?size gt 0 >
+                <#if top_cat_goods_page2?? && top_cat_goods_page2.content?size gt 0 >
                     <#list top_cat_goods_page2.content as item>
                         <#if item_index < 3 >
                          <li class="photo_1">
                             <dl>
-                                <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" height="150px"/></a></dt>
                                  <dd class="feature">性价比之王</dd>
                                  <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                  <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
@@ -586,10 +587,10 @@ $(function(){
                 </#if>
                 <#if top_cat_goods_page2?? && top_cat_goods_page2.content?size gt 0 >
                     <#list top_cat_goods_page2.content as item>
-                        <#if item_index gt 3 && item_index < 6 >
+                        <#if item_index gt 2 && item_index < 6 >
                             <li class="photo_1 photo_4">
                                  <dl>
-                                  <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                  <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" height="120px"/></a></dt>
                                   <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                   <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                   <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
@@ -605,28 +606,28 @@ $(function(){
     
     <!--4F展示-->
     <div class="phone_encyclopedia">
-    	<div class="phones">
-        	<div class="phones_left">
+        <div class="phones">
+            <div class="phones_left">
                  <#list top_category_list as item>
-                    <#if item_index == 2>
+                    <#if item_index == 3>
                         <a href="/list/${item.id}">4F${item.title!""}</a>
                     </#if>
                 </#list>
             </div>
             <div class="phones_right">
                 <#if fourth_brand_list??&&fourth_brand_list?size gt 0>
-            		热门:&nbsp;&nbsp;
+                    热门:&nbsp;&nbsp;
                     <#list fourth_brand_list as item >
                         <#if item_index lt 6>
-                            |&nbsp;&nbsp;<a href="#">${item.title!""}</a>
+                            |&nbsp;&nbsp;<a href="${item.linkUri!''}">${item.title!""}</a>
                         </#if>
                     </#list>
                 </#if>
             </div>
         </div>
         <div class="phone_brand pc_com">
-        	<ul class="phones_logo pc_logo">
-            	<#if f3_brand_page??>
+            <ul class="phones_logo pc_logo">
+                <#if f3_brand_page??>
                     <#list f3_brand_page.content as item>
                         <#if item_index < 5>
                             <div class="lg">
@@ -639,7 +640,7 @@ $(function(){
                 </#if>
             </ul>
             <ul class="pc_photo">
-            	 <div id="slideBox" class="slideBox">
+                 <div id="slideBox" class="slideBox">
                     <div class="bd">
                         <ul>
                             <#if index_4F_ad_list?? >
@@ -659,7 +660,7 @@ $(function(){
                         <#if item_index < 2 >
                             <li class="photo_1">
                                 <dl>
-                                   <dt><a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                   <dt><a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" height="120px"/></a></dt>
                                    <dd class="introduction"><a href="/goods/${item.id?c}" target="_blank">${item.title!""}</a></dd>
                                    <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                    <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
@@ -671,12 +672,12 @@ $(function(){
                 </#if>
             </ul>
             <ul class="phones_details">
-            	<#if top_cat_goods_page3?? && top_cat_goods_page3.content?size gt 0 >
+                <#if top_cat_goods_page3?? && top_cat_goods_page3.content?size gt 0 >
                     <#list top_cat_goods_page3.content as item>
                         <#if item_index gt 1 && item_index < 5 >
                             <li class="photo_1">
                                 <dl>
-                                  <dt><a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" /></a></dt>
+                                  <dt><a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" height="150px"/></a></dt>
                                   <dd class="feature">性价比之王</dd>
                                   <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                   <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
@@ -692,7 +693,7 @@ $(function(){
                         <#if item_index gt 4 && item_index < 8 >
                             <li class="photo_1 photo_4">
                                 <dl>
-                                   <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" /></a></dt>
+                                   <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" height="120px"/></a></dt>
                                    <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                    <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                    <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>

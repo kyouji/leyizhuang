@@ -12,6 +12,8 @@
 <script src="/client/js/goods.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/list.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
+<link rel="stylesheet" type="text/css" href="/client/css/lrtk.css" />
 <script type="text/javascript">
     <!-- 跳转到下一页的方法 -->
     function nextPage(keywords){
@@ -73,6 +75,10 @@
 </head>
 
 <body>
+
+    <!-- qq and weixin -->
+    <#include "/client/qq_and_weixin.ftl">
+
     <!--顶部ad大小：1920 90-->
     <div class="top_ad">
         <img src="/client/images/topad.png" />

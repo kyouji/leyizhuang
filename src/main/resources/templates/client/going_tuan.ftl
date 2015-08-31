@@ -69,49 +69,23 @@
             <div class="pageBtn">
                 <span class="prev">&lt;</span>
                 <span class="next">&gt;</span>
-                <#assign totalPage=(going_goods_page?size/5+1)>
+                <#if going_goods_page?size%5==0>
+                    <#assign totalPage=(going_goods_page?size/5)>
+                <#else>
+                    <#assign totalPage=(going_goods_page?size/5+1)>
+                </#if>
                 <ul class="list">
                     <#list 1..totalPage as item>
                         <li>${item-1}</li>
                     </#list>
                 </ul>
             </div>
-            <input type="hidden" value="${going_goods_page?size%5}">
+            <input type="hidden" value="${going_goods_page?size/5}">
             <input type="hidden" value="${totalPage}">
     </div>
     <script type="text/javascript">jQuery(".scrollBox").slide({ titCell:".list li", mainCell:".piclist", effect:"left",vis:5,scroll:5,delayTime:800,trigger:"click",easing:"easeOutCirc"});</script>
 </#if>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!--
     <#if service_item_list??>
         <ol>
             <#list service_item_list as item>
@@ -133,3 +107,4 @@
             </#list>
         </ol>
     </#if>
+-->

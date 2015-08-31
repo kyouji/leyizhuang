@@ -9,7 +9,8 @@
 <link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/news.css"/>
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
+
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 
 <link type="text/css" rel="stylesheet" href="/client/css/calendar.css" >

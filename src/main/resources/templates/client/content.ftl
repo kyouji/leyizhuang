@@ -16,8 +16,8 @@
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
-<link rel="shortcut icon" href="/images/zphk_logo.ico">
-
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
+<link rel="stylesheet" type="text/css" href="/client/css/lrtk.css" />
 
 <!--放大镜-->
 <script type="text/javascript">
@@ -189,6 +189,10 @@ function lowPriceRemind(goodsId){
 </head>
 <body>
 <div class="w100">
+
+    <!--QQ和微信-->
+    <#include "/client/qq_and_weixin.ftl">
+
 	<!--顶部-->
 	<#include "/client/common_header.ftl" />
 	<!--面包屑导航-->
@@ -260,7 +264,7 @@ function lowPriceRemind(goodsId){
 			<div class="de_title">${goods.title!''}</div>
 			<div class="de_describe">${goods.subTitle!''}</div>
             <div class="de_price">
-                <#if promotion??>
+                <#if promotion??&&promotion!='wu'>
                     <#if promotion=='miao'>
                         <p>
                                                                    原价<label>￥${goods.salePrice?string("0.00")}</label>
