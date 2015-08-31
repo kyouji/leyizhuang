@@ -2,7 +2,7 @@
     $(function(){
     /*QQ，微信，电话*/
     var tophtml="<div id=\"izl_rmenu\" class=\"izl-rmenu\"><a href=\"http://wpa.qq.com/msgrd?v=3&uin=${site.qq!''}&site=qq&menu=yes\" class=\"btn btn-qq\"></a><div class=\"btn btn-wx\"><img class=\"pic\" src=\"images/weixin.jpg\" onclick=\"window.location.href=\'http://www.lanrentuku.com\'\"/></div><div class=\"btn btn-phone\"><div class=\"phone\"><#if site??>${site.telephone!''}</#if></div></div><div class=\"btn btn-top\"></div></div>";
-    $("#top").html(tophtml);
+    $("#top_qq").html(tophtml);
     $("#izl_rmenu").each(function(){
         $(this).find(".btn-wx").mouseenter(function(){
             $(this).find(".pic").fadeIn("fast");
@@ -43,5 +43,5 @@
 </script>
 
 <#if site??>
-    <div id="top"></div>
+    <div id="top_qq"></div>
 </#if>

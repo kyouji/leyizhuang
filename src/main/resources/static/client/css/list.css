@@ -64,6 +64,7 @@
 .c_r p{ font-weight:700; color:#333; font-size:14px;}
 .c_r dl{ margin-top:10px; width:220px; float:left; cursor:pointer; border:1px #ddd solid; width:218px; padding-bottom:10px;}
 .c_r dl dt{ text-align:center;}
+.c_r dl dt img{width:200px;height:200px; margin:10px 0;}
 .c_r dl dd{ width:198px; margin-left:10px;}
 .c_r dl .c_r_title{ width:194px;display:block; overflow:hidden; height:32px;}
 

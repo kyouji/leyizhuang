@@ -188,10 +188,10 @@ function lowPriceRemind(goodsId){
 </script>
 </head>
 <body>
+    <#include "/client/qq_and_weixin.ftl">
 <div class="w100">
 
     <!--QQ和微信-->
-    <#include "/client/qq_and_weixin.ftl">
 
 	<!--顶部-->
 	<#include "/client/common_header.ftl" />
@@ -210,7 +210,7 @@ function lowPriceRemind(goodsId){
 	</div>
 	
        <div class="wrapper">
-        <div class="mid_box" style=" width:1200px;">
+        <div class="mid_box">
         <div class="wrapper" style="width:410px; float:left; overflow:inherit;">
             <div class="scrool_box">
        

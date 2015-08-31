@@ -116,7 +116,7 @@ $(function(){
 </head>
 
 <body>
-    <#include "/client/qq_and_weixin.ftl">
+    
     <#if index_top_ad_list?? && index_top_ad_list?size gt 0>
         <div class="top_ad">
             <#list index_top_ad_list as item>
@@ -125,7 +125,7 @@ $(function(){
             </#list>
         </div>
     </#if>
-    
+    <#include "/client/qq_and_weixin.ftl">
     <!--顶部-->
     <div class="top_all">
         <div class="top">

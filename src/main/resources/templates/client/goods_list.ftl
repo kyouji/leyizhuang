@@ -58,10 +58,8 @@ function btnPageSubmit() {
 </head>
 
 <body>
-
-    <!--qq and weixin-->
     <#include "/client/qq_and_weixin.ftl">
-
+    
     <!-- 顶部  -->
     <#include "/client/common_user_header.ftl" />
     
@@ -260,7 +258,7 @@ function btnPageSubmit() {
                 <#list most_sold_list as item>
                     <#if item_index < 6 >
                         <dl>
-                            <dt><a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!''}" width="210px" height="210px"/></a></dt>
+                            <dt><a href="/goods/${item.id?c}" target="_blank"><img src="${item.coverImageUri!''}"/></a></dt>
                             <dd class="c_r_title">
                                 <a href="/goods/${item.id}" title="${item.title!''}" target="_blank">${item.title!''}</a> 
                             </dd>
