@@ -15,12 +15,12 @@ a:hover{ text-decoration:none;}
 
 
 .article_page{ width:970px; float:left; margin-top:60px;}
-.article_page_01{  height:20px; width:100px; border-top:#ef7c00 1px solid; float:left;}
-.article_page_02{  height:20px; width:100px; border-top:#0e5baa 1px solid; float:right;}
+.article_page_01{  height:20px; max-width:350px;min-width:100px; border-top:#ef7c00 1px solid; float:left;overflow:hidden;font-size:14px;}
+.article_page_02{  height:20px; max-width:350px;min-width:100px; border-top:#0e5baa 1px solid; float:right;overflow:hidden;font-size:14px;}
 
 .article_box_01 p{ height:20px; overflow:hidden;}
 
-.article_cont{ width:970px; display:block; overflow:hidden; float:left;}
+.article_cont{ width:970px;min-height:500px; display:block; overflow:hidden; float:left;}
 
 .nav_submenu1 p{ height:30px; overflow:hidden; margin-left:6px;}
 .nav_submenu1 *{ float:left;}

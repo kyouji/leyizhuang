@@ -437,6 +437,10 @@ public class TdGoodsService {
                 .findByIsGroupSaleTrueAndIsOnSaleTrueAndGroupSaleStopTimeAfterAndGroupSaleStartTimeBeforeOrderByGroupSaleStartTimeAsc(
                         new Date(), new Date(), pageRequest);
     }
+    
+    public List<TdGoods> findByGroupSalingOrderByGroupSaleStartTimeAsc(){
+    	return repository.findByIsGroupSaleTrueAndIsOnSaleTrueAndGroupSaleStopTimeAfterAndGroupSaleStartTimeBeforeOrderByGroupSaleStartTimeAsc(new Date(),new Date());
+    }
 
     /**
      * 即将开始团购

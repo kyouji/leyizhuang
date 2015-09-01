@@ -69,7 +69,7 @@ public class TdPromotionController {
 			}
 
 			// 因页面需要，无论何种情况下都要使用即将团购----@author dengxiao
-			map.addAttribute("going_goods_page",
+			map.addAttribute("going_goods_list",
 					tdGoodsService.findByGroupSaleGoingToStartOrderByGroupSaleStartTimeAsc());
 			return "/client/tuan_list";
 		} else if (promotionType.equalsIgnoreCase("miao")) // 秒杀

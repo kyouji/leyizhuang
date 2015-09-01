@@ -75,6 +75,13 @@
 	function buyNow(id){
 		window.location.href="/touch/order/buynow?goodsId="+id;
 	}
+	
+	<!-- JiaThis参数设置 -->
+    var jiathis_config = {
+    url:"${basePath}",
+    title:"${goods.title}",
+    summary:"${goods.subTitle}"
+};
 </script>
 </head>
 
@@ -94,6 +101,7 @@
   </section>
   <div class="clear"></div>
   <section class="combg">
+    
     <p class="pro_tit_sc">${goods.title!''}<a href="javascript:addCollections(${goods.id?c});">关注</a></p>
     <p class="fs08 c7 center pb10">${goods.subTitle!''}</p>
     <p class="center fs12 fc pb10">￥${goods.salePrice!'0'}</p>
@@ -201,19 +209,8 @@
 	     	<p class="pb5 center fs08">${param.paramName!''}: ${param.value!''} </p>
 	     </#list>
      </#if>
-    <!--
-    <p class="pb5 center fs08">参数名：我是参数哦</p>
-    <p class="pb5 center fs08">参数名：我是参数哦</p>
-    <p class="pb5 center fs08">参数名：我是参数哦</p>
-    <p class="pb5 center fs08">参数名：我是参数哦</p>
-    <p class="pb5 center fs08">参数名：我是参数哦</p>
-    <p class="pb5 center fs08">参数名：我是参数哦</p>
-    <p class="pb5 center fs08">参数名：我是参数哦</p>
-    <p class="pb5 center fs08">参数名：我是参数哦</p>
-    -->
     <div class="clear10"></div>
 
-    
     <table class="comtab pro_check">
       <tr>
         <td><a id="a_img_by_dx" class="sel" href="javascript:showAndHide('img');">图片展示</a></td>

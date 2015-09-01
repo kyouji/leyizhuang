@@ -1,0 +1,169 @@
+@charset "utf-8";
+
+/*今日团购*/
+.all_hot{width:100%;color:#333333;}
+.all_hot ul{width:100%;overflow:hidden;}
+.all_hot .title{background:#f3f3f3;width:90%;padding:2% 5%;font-size: 0.6em;}
+.all_hot .title label{ color:#999; font-size:0.8em; margin-left:10px;}
+.phone_list {
+	display:block;
+	width:94%;
+	padding:15px 3%;
+	background:#fff;
+	margin-top:10px;
+	border-bottom:1px solid #e9e9e9;
+	overflow:hidden;}
+.phone_list b {
+	float:left;
+	display:block;
+	width:28%;
+	text-align:center;}
+.phone_list p {
+	float:right;
+	display:block;
+	width:70%;
+	color:#999;
+	font-size:0.5em;}
+.phone_list p.p1 {
+	color:#333;
+	font-size:0.6em;}
+.phone_list p.p2 {
+	margin-top:5px;
+	font-size:0.8em;}
+.phone_list p.p2 .p2_l1{color:red;}
+.phone_list p.p2 .p2_l2{color:#999;font-size:0.6em; text-decoration:line-through; margin-left:5px;}
+.phone_list h6 {
+	position:absolute;
+	bottom:0;
+	right:0;
+	color:#ccc;
+	font-weight:400;
+	display: inline-block;
+	width:70px;
+	line-height:30px;
+	font-size:0.6em;
+	text-align: center;
+	background:none;}
+.phone_list h6 span {
+font-size:0.6em;}
+	.phone_list .p_1{ height:60px; overflow:hidden; display:block;}
+
+
+/*全部团购*/
+.today_hot{}
+
+
+
+
+/* CSS Document */
+
+
+table{border-collapse:collapse;border-spacing:0;}
+
+
+
+.box_163css{width:100%; margin:0 auto;}
+
+#wrapper {width:100%;float:left;position:relative;z-index:1;overflow:hidden;-webkit-border-radius:10px;-moz-border-radius:10px;
+
+-o-border-radius:10px;border-radius:10px; margin-bottom:15px;}
+
+#scroller{width:400%;height:100%;float:left;}
+
+#scroller ul{display:block;float:left;width:100%; height:100%;}
+
+#scroller li{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-o-box-sizing:border-box;box-sizing:border-box;display:block; float:left;
+
+width:25%;text-align:center;font-family:georgia;font-size:18px;line-height:140%;}
+
+
+
+
+
+#nav{width:150px; margin:0 auto;}
+
+#prev, #next{ display:inline-block;cursor:pointer; float:left;}
+
+#indicator, #indicator > li{display:block; float:left;list-style:none;}
+
+#indicator{padding:12px 0 0 15px; width:65px; float:left;}
+
+#indicator > li{text-indent:-9999em;width:8px; height:8px;-webkit-border-radius:4px;-moz-border-radius:4px;- o-border-radius:4px;border-radius:4px;
+
+background:#ddd;overflow:hidden;margin-right:6px;}
+
+#indicator > li.active {background:#c00;}
+
+#indicator > li:last-child {margin:0;}
+
+
+
+#prev{ background:url(../images/btn.gif) no-repeat; width:25px; height:19px; margin-top:7px;}
+
+#next{ background:url(../images/btn.gif) no-repeat -26px 0; width:25px; height:19px; margin-top:7px;}
+
+#thelist{ padding-top:15px;}
+
+#thelist li span{ width:50%; display:inline-block;float:left;}
+
+#thelist li span img{ width:80%; display:block; margin:0 auto; max-width:282px; max-height:282px;}
+
+#thelist li em{ display:block;width:80%; font-style:normal;max-width:282px;box-sizing:border-box; background:#eaeaea; font-size:14px; color:#ef0000; height:28px; line-height:28px; margin:0 auto; overflow:hidden;}
+
+
+
+
+
+/*秒杀*/
+.today_hot{width:100%;color:#333333;}
+.today_hot ul{width:100%;overflow:hidden;}
+.today_hot .phone_list {
+	display:block;
+	width:94%;
+	padding:15px 3%;
+	background:#fff;
+	margin-top:10px;
+	border-bottom:1px solid #e9e9e9;}
+.today_hot .phone_list b {
+	float:left;
+	display:block;
+	width:28%;
+	text-align:center;}
+.today_hot .phone_list p {
+	float:right;
+	display:block;
+	width:70%;
+	color:#999;
+	font-size:0.5em;}
+.today_hot .phone_list p.p1 {
+	color:#333;
+	font-size:0.6em;}
+.today_hot .phone_list p.p2 {
+	margin-top:3px;
+	font-size:0.5em;}
+.today_hot .phone_list p.p2 .p2_l1{color:#317ef3;}
+.today_hot .phone_list p.p2 .p2_l1 span{font-size:1.2em;}
+.today_hot .phone_list p.p2 .p2_l2{color:#999;text-decoration:line-through;}
+.today_hot .phone_list h6 {
+	position:absolute;
+	bottom:0;
+	right:0;
+	color:#ccc;
+	font-weight:400;
+	display: inline-block;
+	width:160px;
+	line-height:30px;
+	font-size:0.6em;
+	text-align: center;
+	background:none;}
+.today_hot .phone_list h6 span {
+	font-size:0.6em;}
+.today_hot .phone_list .p_1{ height:60px; overflow:hidden; display:block;}
+.today_hot .phone_list h6 label { padding:5px 15px; margin-right:10px; background:#ed0000; color:#fff; font-size: 0.8em; border-radius:3px; -webkit-border-radius:3px; -moz-border-radius:3px;}
+
+
+
+
+
+
+

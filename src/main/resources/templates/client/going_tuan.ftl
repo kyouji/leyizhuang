@@ -9,12 +9,12 @@
         window.open("/goods/"+goodsId+"?promotion=goingTuan");
     }
 </script>
-<#if going_goods_page??>
+<#if going_goods_list??>
     <p class="fz_24 fw_700 td_group">即将开团</p>
     <div class="scrollBox today_photo" style="margin:0 auto">
             <div class="ohbox">
                 <ul class="piclist">
-                    <#list going_goods_page as item>
+                    <#list going_goods_list as item>
                         <li>
                             <a href="/goods/${item.id}?promotion=goingTuan" target="_blank" class="iphone6_1"><img src="${item.groupSaleImage!''}" /></a>
                             <div class="percentage">
@@ -69,10 +69,10 @@
             <div class="pageBtn">
                 <span class="prev">&lt;</span>
                 <span class="next">&gt;</span>
-                <#if going_goods_page?size%5==0>
-                    <#assign totalPage=(going_goods_page?size/5)>
+                <#if going_goods_list?size%5==0>
+                    <#assign totalPage=(going_goods_list?size/5)>
                 <#else>
-                    <#assign totalPage=(going_goods_page?size/5+1)>
+                    <#assign totalPage=(going_goods_list?size/5+1)>
                 </#if>
                 <ul class="list">
                     <#list 1..totalPage as item>
@@ -80,7 +80,7 @@
                     </#list>
                 </ul>
             </div>
-            <input type="hidden" value="${going_goods_page?size/5}">
+            <input type="hidden" value="${going_goods_list?size/5}">
             <input type="hidden" value="${totalPage}">
     </div>
     <script type="text/javascript">jQuery(".scrollBox").slide({ titCell:".list li", mainCell:".piclist", effect:"left",vis:5,scroll:5,delayTime:800,trigger:"click",easing:"easeOutCirc"});</script>

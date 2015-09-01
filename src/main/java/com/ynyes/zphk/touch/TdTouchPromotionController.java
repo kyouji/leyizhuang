@@ -68,12 +68,15 @@ public class TdTouchPromotionController {
                 break;
             default:
                 // 正在团购
-                map.addAttribute("tuan_goods_page", tdGoodsService
-                        .findByGroupSalingOrderByGroupSaleStartTimeAsc(page,
-                                ClientConstant.pageSize));
+                map.addAttribute("tuan_goods_list", tdGoodsService
+                        .findByGroupSalingOrderByGroupSaleStartTimeAsc());
                     break;
             }
 
+            //无论何种情况下都显示即将开团
+            map.addAttribute("going_goods_list",
+					tdGoodsService.findByGroupSaleGoingToStartOrderByGroupSaleStartTimeAsc());
+            
             return "/touch/tuan_list";
         }
         else if (promotionType.equalsIgnoreCase("miao")) // 秒杀

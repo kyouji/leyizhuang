@@ -88,8 +88,8 @@
             <li class="icon_4"><a href="/touch/user/collect/list" class="ico4">我的关注</a></li> 
             <li class="icon_5"><a href="/touch/user/return/list" class="ico5">退换货</a></li> 
             <li class="icon_6"><a href="/touch/user/address/list" class="ico6">收货地址</a></li> 
-            <li class="icon_7"><a href="/touch/cart" class="ico7">购物车</a></li> 
-            <li class="icon_8"><a href="/touch/user/comment/list" class="ico8">我的评价</a></li> 
+            <li class="icon_7"><a href="/touch/promotion/tuan" class="ico7">团购</a></li> 
+            <li class="icon_8"><a href="/touch/promotion/miao" class="ico8">秒杀</a></li> 
     	</ul> 
     </div>
     
@@ -101,7 +101,7 @@
 				<#list speciaPrice_list as item>
 					<#if item_index lt 4>
 						<li>
-							<a class="tj_1" href="/goods/${item.id?c}">
+							<a class="tj_1" href="/touch/goods/${item.id?c}">
 								<p class="name">${item.title!""}</p>
 								<p class="feature">${item.subTitle!""}</p>
 								<p class="photo">
@@ -112,8 +112,8 @@
 					</#if>
 				</#list>
 			</ul>
-		</#if>
-    </div>
+        </div>
+	</#if>
     
     <#--
     <div class="today_hot">
@@ -298,23 +298,8 @@
     </div>
     
     <!--底部-->
-    <div class="footer">
-		 <ul>
-         	<li>
-            	<a class="ic_1" href="#">首页</a>
-            </li>
-            <li>
-            	<a class="ic_2" href="/touch/brand">分类</a>
-            </li>
-            <li>
-            	<a class="ic_3" href="/touch/cart">购物车</a>
-            </li>
-            <li>
-            	<a class="ic_4" href="/touch/user">个人中心</a>
-            </li>
-         </ul>   	
-    </div>
-
+    <#include "/touch/common_touch_footer.ftl">
+        
 </div>
 <!--END!-->
 </body>

@@ -234,12 +234,13 @@ float:left;text-overflow:ellipsis;overflow:hidden;text-decoration:none;}
 /* 本例子css */
         .slideBox{ width:404px; height:272px; overflow:hidden; position:relative; border:1px solid #ddd;  }
         .slideBox .bd{ position:relative; height:100%; z-index:0;   }
-        .slideBox .bd li{ zoom:1; vertical-align:middle; }
+        .slideBox .bd ul{width:404px;height:272px;}
+        .slideBox .bd li{ width:404px;height:272px;zoom:1; vertical-align:middle; }
         .slideBox .bd img{ width:404px; height:272px; display:block;  }
 
         /* 下面是前/后按钮代码，如果不需要删除即可 */
         .slideBox .prev,
-        .slideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(../images/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
+        .slideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(/client/images/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
         .slideBox .next{ left:auto; right:3%; background-position:8px 5px; }
         .slideBox .prev:hover,
         .slideBox .next:hover{ filter:alpha(opacity=100);opacity:1;  }
@@ -270,3 +271,26 @@ float:left;text-overflow:ellipsis;overflow:hidden;text-decoration:none;}
 
 /*底部*/
 .footerall{margin-top:0px;}
+
+
+
+
+/*banner*/
+        /* 本例子css */
+        .bannerslideBox{ width:807px; height:439px; overflow:hidden; position:relative;float:left;  }
+        .bannerslideBox .bd{ position:relative; height:100%; z-index:0;   }
+        .bannerslideBox .bd li{ zoom:1; vertical-align:middle; }
+        .bannerslideBox .bd img{ width:807px; height:439px; display:block;  }
+
+        /* 下面是前/后按钮代码，如果不需要删除即可 */
+        .bannerslideBox .prev,
+        .bannerslideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(../images/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
+        .bannerslideBox .next{ left:auto; right:3%; background-position:8px 5px; }
+        .bannerslideBox .prev:hover,
+        .bannerslideBox .next:hover{ filter:alpha(opacity=100);opacity:1;  }
+        .bannerslideBox .prevStop{ display:none;  }
+        .bannerslideBox .nextStop{ display:none;  }
+
+
+
+

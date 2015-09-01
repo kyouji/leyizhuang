@@ -273,6 +273,9 @@ public class TdTouchIndexController {
                                     pCat.getId(), 0, 5));
         }
         
+    	//特价商品
+        map.addAttribute("speciaPrice_list",tdGoodsService.findByIsSpecialPriceTrueAndIsOnSaleTrue());
+        
         return "/touch/index";
     }
     

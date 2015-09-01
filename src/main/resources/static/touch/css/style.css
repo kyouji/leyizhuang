@@ -112,7 +112,7 @@ button{vertical-align:middle;}
 .put_record p .kh{ background:url(../images/footnav_3.png) no-repeat 0 center;}
 
 /*底部*/
-.footer{width:100%;background:#525252;position:fixed;bottom:0;}
+.footer{width:100%;background:#525252;position:fixed;bottom:0;z-index:9999;}
 .footer ul{width:100%;overflow:hidden;}
 .footer ul li{float:left;width:25%;text-align:center;padding:2% 0;}
 .footer ul li:hover a{color:#3b93de;}

@@ -200,7 +200,9 @@ $(function(){
                 <ul>
                 <#if navi_item_list??>
                     <#list navi_item_list as item>
-                        <li><a class="a1" href="${item.linkUri!''}">${item.title!''}</a></li>
+                        <#if item_index lt 7>
+                            <li><a class="a1" href="${item.linkUri!''}">${item.title!''}</a></li>
+                        </#if>
                     </#list>
                 </#if>
                 </ul>
@@ -246,7 +248,7 @@ $(function(){
             </ul>
             <!-- END  -->
             <!-- 首页大广告    -->
-            <div class="advertising_ifm adver_middle">
+            <!--<div class="advertising_ifm adver_middle">
                 <div class="scroll">
                     <div class="adv_box">   
                         <div class="scroll_box">
@@ -262,7 +264,31 @@ $(function(){
                         </div>
                     </div>
                 </div>
+            </div>-->
+            
+            <div id="bannerslideBox" class="bannerslideBox">
+                <#if big_scroll_ad_list??>
+                <div class="bd">
+                    <ul>
+                        <#list big_scroll_ad_list as item>
+                            <li><a href="${item.linkUri}" target="_blank"><img src="${item.fileUri!''}" /></a></li>
+                        </#list>
+                    </ul>
+                </div>
+
+                <!-- 下面是前/后按钮代码，如果不需要删除即可 -->
+                <a class="prev" href="javascript:void(0)"></a>
+                <a class="next" href="javascript:void(0)"></a>
+                </#if>
             </div>
+
+            <script type="text/javascript">
+                jQuery(".bannerslideBox").slide({mainCell:".bd ul",autoPlay:true});
+            </script>
+                
+                
+                
+                
             
             <div class="advertising_ifm adver_right">
                 <div class="dedication">竭诚服务</div>
@@ -462,11 +488,10 @@ $(function(){
                         <#if index_2F_ad_list?? >
                             <#list index_2F_ad_list as item>
                                 <#if item_index < 3 >
-                                    <li><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
+                                    <li style="width:404px;height:272px;"><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
                                 </#if>
                             </#list>
                         </#if>  
-                       
                         </ul>
                     </div>
                     <a class="prev" href="javascript:void(0)"></a>
@@ -641,12 +666,12 @@ $(function(){
             </ul>
             <ul class="pc_photo">
                  <div id="slideBox" class="slideBox">
-                    <div class="bd">
+                    <div class="bd"> 
                         <ul>
                             <#if index_4F_ad_list?? >
                                 <#list index_4F_ad_list as item>
                                     <#if item_index < 3 >
-                                        <li><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
+                                        <li style="width:404px;height:272px;"><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
                                     </#if>
                                 </#list>
                             </#if>  

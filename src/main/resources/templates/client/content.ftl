@@ -188,10 +188,9 @@ function lowPriceRemind(goodsId){
 </script>
 </head>
 <body>
-    <#include "/client/qq_and_weixin.ftl">
-<div class="w100">
-
     <!--QQ和微信-->
+    <#include "/client/qq_and_weixin.ftl">
+    <div class="w100">
 
 	<!--顶部-->
 	<#include "/client/common_header.ftl" />
@@ -239,7 +238,7 @@ function lowPriceRemind(goodsId){
           
                 <div class="details_pic_wrapper">
                     <div class="details_pic_wrapper_share">
-                        <!-- JiaThis Button BEGIN -->
+                      <!-- JiaThis Button BEGIN -->
                         <div class="jiathis_style">
                             <span class="jiathis_txt">分享到：</span>
                             <a class="jiathis_button_icons_1"></a>
