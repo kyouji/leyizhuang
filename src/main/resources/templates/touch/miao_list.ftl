@@ -7,66 +7,94 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<link rel="stylesheet" type="text/css" href="css/sales.css"/>
+<link rel="stylesheet" type="text/css" href="/touch/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/touch/css/sales.css"/>
 <title>秒杀</title>
+<script type="text/javascript">
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
+</script>
 </head>
 
 <body>
 <!--Begin-->
 <div class="zphk">
 
-	<!--顶部标题与搜索框-->
+<!--顶部标题与搜索框-->
 <header class="maintop">
-  <div class="main">
-  <p>秒杀</p>
-    <a class="a1" href="#"><img src="images/back.png" height="22" /></a>
-    <a class="a2" href="#"><img src="images/menu.png" height="22" /></a>
-  </div>
- 
-</header>   
+    <div class="main">
+        <p>秒杀</p>
+        <a class="a1" href="#"><img src="/touch/images/back.png" height="22" /></a>
+        <a class="a2" href="#"><img src="/touch/images/home2.png" height="22" /></a>
+    </div>
+</header>
+   
 <div class="clear"></div> 
 	
-    
-    <!--秒杀-->
-    <div class="today_hot">
-        <a class="phone_list" href="#">
-            <b><img src="images/img01.png" /></b>
-            <p class="p1">我是商品的标题哦</p>
-            <p class="p_1">这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。</p>
-            <p class="p2"><label class="p2_l1">秒杀价￥<span>5899.00</span></label></p>
-            <p class="p2"><label class="p2_l2">原价￥<span>6288.00</span></label></p>
-            
-            <div class="clear1"></div>
+    <#if miao_goods_list??&&miao_goods_list?size gt 0>
+        <!--秒杀-->
+        <div class="today_hot">
+            <#list miao_goods_list as item>
+                <a class="phone_list" href="#">
+                    <b><img src="${item.flashSaleImage!''}" /></b>
+                    <p class="p1">${item.title!''}</p>
+                    <p class="p_1">${item.subTitle!''}</p>
+                    <p class="p2"><label class="p2_l1">秒杀价￥<span>${item.flashSalePrice?string("0.00")}</span></label></p>
+                    <p class="p2"><label class="p2_l2">原价￥<span>${item.salePrice?string("0.00")}</span></label></p>
+                    <p id="miao_time${item_index}" tyle="display:block;"></p>
+                        <script type="text/javascript" src="/touch/js/jquery-1.9.1.min.js"></script>
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                miaoTimer${item_index}();
+                                setInterval("miaoTimer${item_index}()",1000);
+                            });
+                    
+                            function miaoTimer${item_index}(){
+                                    var ts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                                    parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                                    ${item.flashSaleStopTime?string("dd")}, 
+                                    ${item.flashSaleStopTime?string("HH")}, 
+                                    ${item.flashSaleStopTime?string("mm")}, 
+                                    ${item.flashSaleStopTime?string("ss")})) - (new Date());
+                                    if (0 == ts)
+                                    {
+                                        window.location.reload();
+                                    }
         
-            <h6 style="margin-bottom:10px;"><label>去购买</label>25<span>人已买 </span></h6>
-         </a>
-         
-         <a class="phone_list" href="#">
-            <b><img src="images/img01.png" /></b>
-            <p class="p1">我是商品的标题哦</p>
-            <p class="p_1">这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。</p>
-            <p class="p2"><label class="p2_l1">秒杀价￥<span>5899.00</span></label></p>
-            <p class="p2"><label class="p2_l2">原价￥<span>6288.00</span></label></p>
-            
-            <div class="clear1"></div>
-        
-            <h6 style="margin-bottom:10px;"><label>去购买</label>25<span>人已买 </span></h6>
-         </a>
-         
-         <a class="phone_list" href="#">
-            <b><img src="images/img01.png" /></b>
-            <p class="p1">我是商品的标题哦</p>
-            <p class="p_1">这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。这里是内容文字，唔嗯，可能会是灰常多的文字啊。</p>
-            <p class="p2"><label class="p2_l1">秒杀价￥<span>5899.00</span></label></p>
-            <p class="p2"><label class="p2_l2">原价￥<span>6288.00</span></label></p>
-            
-            <div class="clear1"></div>
-        
-            <h6 style="margin-bottom:10px;"><label>去购买</label>25<span>人已买 </span></h6>
-         </a>
- 
-    </div>
+                                    var date = new Date();
+                                    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);
+                                    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);
+                                    var mm = parseInt(ts / 1000 / 60 % 60, 10);
+                                    var ss = parseInt(ts / 1000 % 60, 10);
+                                    dd = checkTime(dd);
+                                    hh = checkTime(hh);
+                                    mm = checkTime(mm);
+                                    ss = checkTime(ss);
+                                    $("#miao_time${item_index}").html("剩余时间：<span>"
+                                    + dd + "</span>天<span>"
+                                    + hh + "</span>时<span>"
+                                    + mm + "</span>分<span>"
+                                    + ss + "</span>秒");
+                                }
+                        </script>
+                    <div class="clear1"></div>
+                
+                    <h6 style="margin-bottom:10px;"><label>去购买</label>
+                        <#if item.flashSaleLeftNumber==0>
+                            <span>已售完</span>
+                        <#else>
+                            <span>还剩${item.flashSaleLeftNumber!'0'}件 </span>
+                        </#if>
+                    </h6>
+                 </a>
+             </#list>
+        </div>
+    </#if>
     
     <!--底部导航-->
     <div class="foot_nav">

@@ -286,19 +286,10 @@
     </div>
     
     <!--版权备案-->
-    <div class="put_record">
-    	<p>
-        	<a class="pc" href="/computer">电脑版</a>
-            <a class="cp" href="#">触屏版</a>
-            <a class="kh" href="#">客户端</a>
-        </p>
-        <#if site??>
-        	<p>${site.copyright!''}</p>
-        </#if>
-    </div>
+    <#include "/touch/common_touch_footer.ftl">
     
     <!--底部-->
-    <#include "/touch/common_touch_footer.ftl">
+    <#include "/touch/common_touch_menu.ftl">
         
 </div>
 <!--END!-->

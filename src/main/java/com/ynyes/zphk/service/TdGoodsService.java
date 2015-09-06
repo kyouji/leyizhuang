@@ -527,6 +527,14 @@ public class TdGoodsService {
     }
 
     /**
+     * 正在秒杀的商品（不分页）
+     * @author dengxiao
+     */
+    public List<TdGoods> findByFlashSalingOrderByFlashSaleStartTimeAsc(){
+    	return repository.findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStopTimeAfterAndFlashSaleStartTimeBeforeOrderByFlashSaleStartTimeAsc(new Date(),new Date());
+    }
+    
+    /**
      * 通过开始时间查找秒杀商品
      * 
      * @param page

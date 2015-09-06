@@ -109,11 +109,10 @@ public class TdTouchPromotionController {
                                         page, ClientConstant.pageSize));
                 break;
             default:
-
-                // 正在秒杀
-                map.addAttribute("miao_goods_page", tdGoodsService
-                        .findByFlashSalingOrderByFlashSaleStartTimeAsc(page,
-                                ClientConstant.pageSize));
+            	
+                // 正在秒杀（不分页）
+                map.addAttribute("miao_goods_list", tdGoodsService
+                        .findByFlashSalingOrderByFlashSaleStartTimeAsc());
                     break;
             }
             

@@ -30,7 +30,7 @@
 .phone_list p.p2 {
 	margin-top:5px;
 	font-size:0.8em;}
-.phone_list p.p2 .p2_l1{color:red;}
+.phone_list p.p2 .p2_l1{color:#317ef3;}
 .phone_list p.p2 .p2_l2{color:#999;font-size:0.6em; text-decoration:line-through; margin-left:5px;}
 .phone_list h6 {
 	position:absolute;
@@ -104,7 +104,7 @@ background:#ddd;overflow:hidden;margin-right:6px;}
 
 #thelist{ padding-top:15px;}
 
-#thelist li span{ width:50%; display:inline-block;float:left;}
+#thelist li span{ width:50%; display:inline-block;}
 
 #thelist li span img{ width:80%; display:block; margin:0 auto; max-width:282px; max-height:282px;}
 
