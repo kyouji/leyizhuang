@@ -10,6 +10,7 @@
 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
+<script src="/touch/js/swipe.js"></script>
 
 <link href="/touch/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/front.css" rel="stylesheet" type="text/css" />
@@ -76,12 +77,21 @@
 		window.location.href="/touch/order/buynow?goodsId="+id;
 	}
 	
-	<!-- JiaThis参数设置 -->
-    var jiathis_config = {
-    url:"${basePath}",
-    title:"${goods.title}",
-    summary:"${goods.subTitle}"
-};
+	<!-- 低价提醒的方法 -->
+    function lowPriceRemind(goodsId){
+        if(null==goodsId){
+            alert("商品信息错误！");
+            return;
+        }
+        $.post("/goods/remind",{"goodsId":goodsId},function(res){
+            alert(res.message);
+            if(1==res.code){
+                setTimeout(function(){
+                        window.location.href = "/touch/login";
+                }, 1000); 
+            }
+        });
+    }
 </script>
 </head>
 
@@ -96,35 +106,79 @@
 </header>
 
 <div class="main">
-  <section class="ta-c combg pt15 pb15" style="border:none;">
+  <!--<section class="ta-c combg pt15 pb15" style="border:none;">
   	<img src="${goods.coverImageUri!''}" />
-  </section>
+  </section>-->
+  
+    <div class="addWrap">
+        <div class="swipe" id="mySwipe">
+            <div class="swipe-wrap">
+                <#if goods.showPictures??>
+                    <#list goods.showPictures?split(",") as uri> 
+                        <div><a href="javascript:;"><img class="img-responsive" src="${uri!''}"/></a></div>
+                    </#list>
+                </#if>
+            </div>
+        </div>
+        <ul id="position">
+        <li class="cur"></li>
+        <li class=""></li>
+        <li class=""></li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    var bullets = document.getElementById('position').getElementsByTagName('li');
+    var banner = Swipe(document.getElementById('mySwipe'), {
+        auto: 2000,
+        continuous: true,
+        disableScroll:false,
+        callback: function(pos) {
+            var i = bullets.length;
+            while (i--) {
+              bullets[i].className = ' ';
+            }
+            bullets[pos].className = 'cur';
+        }
+    });
+    </script>   
+  
+  
+  
   <div class="clear"></div>
   <section class="combg">
     
-    <p class="pro_tit_sc">${goods.title!''}<a href="javascript:addCollections(${goods.id?c});">关注</a></p>
+    <p class="pro_tit_sc">${goods.title!''}</p>
     <p class="fs08 c7 center pb10">${goods.subTitle!''}</p>
     <p class="center fs12 fc pb10">￥${goods.salePrice!'0'}</p>
     
+    <#if promotion??&&promotion=="wu">
+        <p class="center pb10">
+            <a class="a_combg_focus" href="javascript:addCollections(${goods.id?c});">关注</a>
+            <a class="a_combg_remind" href="javascript:lowPriceRemind(${goods.id?c})">低价提醒</a>
+        </p>
+    </#if>
+    
     <div class="phone_kind">
       <table class="w100">
-		<#if goods.giftList?? && goods.giftList?size gt 0>
-        	<tr>
-				<#if goods.giftList?? && goods.giftList?size gt 0>
-        			<th width="50">赠品：</th>
-        			<td class="sc">
-        			<#list goods.giftList as gitem>
-        				${gitem.goodsTitle!''}&emsp;
-        			</#list>
-        			</td>
-        		</#if>
-        	</tr>
-        </#if>
-        <#if goods.returnPoints gt 0>
-	        <tr>
-	          <th width="50">积分：</th>
-	          <td class="sc">确认收货后赠送${goods.returnPoints}积分</td>
-	        </tr>
+        <#if promotion??&&promotion=="wu">
+    		<#if goods.giftList?? && goods.giftList?size gt 0>
+            	<tr>
+    				<#if goods.giftList?? && goods.giftList?size gt 0>
+            			<th width="50">赠品：</th>
+            			<td class="sc">
+            			<#list goods.giftList as gitem>
+            				${gitem.goodsTitle!''}&emsp;
+            			</#list>
+            			</td>
+            		</#if>
+            	</tr>
+            </#if>
+            <#if goods.returnPoints gt 0>
+    	        <tr>
+    	          <th width="50">积分：</th>
+    	          <td class="sc">确认收货后赠送${goods.returnPoints}积分</td>
+    	        </tr>
+    	    </#if>
 	    </#if>
 	    <#if goods.configuration??>
 		    <tr>
@@ -139,7 +193,13 @@
 						<#if select_one_goods_list??>
 							<td id="param_one">
 								<#list select_one_goods_list as item>
-									<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
+								    <#if promotion??&&promotion!="wu">
+								        <#if item.selectOneValue==one_selected>
+								            <a class="sel" href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
+								        </#if>
+									<#else>
+								       <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
+									</#if>
 								</#list>
 							</td>
 						</#if>
@@ -150,7 +210,13 @@
 					<#if select_one_goods_list??>
 						<td id="param_one">
 							<#list select_one_goods_list as item>
-								<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
+								<#if promotion??&&promotion!="wu">
+                                    <#if item.selectOneValue==one_selected>
+                                        <a class="sel" href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
+                                    </#if>
+                                <#else>
+                                   <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
+                                </#if>
 							</#list>
 						</td>
 					</#if>
@@ -160,7 +226,13 @@
 					<#if select_two_goods_list??>
 						<td id="param_one">
 							<#list select_two_goods_list as item>
-								<a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>			
+							     <#if promotion??&&promotion!="wu">
+							         <#if item.selectTwoValue==two_selected>
+							             <a class="sel01" href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>           
+						             </#if>
+							     <#else>
+								    <a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>			
+								</#if>
 							</#list>
 						</td>
 					</#if>
@@ -171,7 +243,13 @@
 					<#if select_one_goods_list??>
 						<td id="param_one">
 							<#list select_one_goods_list as item>
-								<a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
+								<#if promotion??&&promotion!="wu">
+                                    <#if item.selectOneValue==one_selected>
+                                        <a class="sel" href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
+                                    </#if>
+                                <#else>
+                                   <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
+                                </#if>
 							</#list>
 						</td>
 					</#if>
@@ -181,7 +259,13 @@
 					<#if select_two_goods_list??>
 						<td id="param_one">
 							<#list select_two_goods_list as item>
-								<a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>			
+								<#if promotion??&&promotion!="wu">
+                                     <#if item.selectTwoValue==two_selected>
+                                         <a class="sel01" href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>           
+                                     </#if>
+                                 <#else>
+                                    <a <#if item.selectTwoValue==two_selected>class="sel01"</#if> href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>           
+                                </#if>			
 							</#list>
 						</td>
 					</#if>
@@ -191,7 +275,13 @@
 					<#if select_three_goods_list??>
 						<td id="param_one">
 							<#list select_three_goods_list as item>
-								<a <#if item.selectThreeValue==three_selected>class="sel02"</#if> href="/touch/goods/${item.id?c}">${item.selectThreeValue}</a>			
+							     <#if promotion??&&promotion!="wu">
+							         <#if item.selectThreeValue==three_selected>
+							             <a class="sel02" href="/touch/goods/${item.id?c}">${item.selectThreeValue}</a> 
+							         </#if>
+							     <#else>
+								    <a <#if item.selectThreeValue==three_selected>class="sel02"</#if> href="/touch/goods/${item.id?c}">${item.selectThreeValue}</a>			
+								</#if>
 							</#list>
 						</td>
 					</#if>

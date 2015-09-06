@@ -337,17 +337,9 @@
 	font-size:1.1em;
 	color:#111;
 	margin:0 auto;}
-.pro_tit_sc a {
-	display:inline-block;
-	background:url(../images/front/pro_sc.png) no-repeat left center;
-	background-size:20px;
-	line-height:20px;
-	color:#3b93de;
-	font-size:0.8em;
-	padding-left:25px;
-	position:absolute;
-	right:0;
-	top:15px;}
+	
+.a_combg_focus{color:#3b93de;background:url(/touch/images/pro_sc.png) no-repeat left center;background-size:15px; padding-left:25px; font-size:0.8em;}
+.a_combg_remind{color:#3b93de;background:url(/touch/images/pro_sc2.png) no-repeat left center;background-size:15px; padding-left:25px; margin-left:20px;font-size:0.8em;}
 	
 .phone_kind {
 	width:94%;
@@ -469,9 +461,21 @@
 .detailed_comment dt{ float:left; width:92%; padding:10px 4%; border-bottom:1px #ddd solid;}
 .detailed_comment dd{ float:right; width:100%; border-bottom:1px #ddd solid;}
 .detailed_comment dd ul li{ width:90%; float:left;padding:10px 5% 0 5%;}
-.detailed_comment dd ul .detailed_comment_li1 b{ width:40%;float:left;}
-.detailed_comment dd ul .detailed_comment_li1 b img{ width:20px; height:20px; display:block; float:left; margin-right:5px;}
+.detailed_comment dd ul .detailed_comment_li1 b img{ width:10%; float:left; }
+.detailed_comment dd ul .detailed_comment_li1 b{ width:40%; float:left;}
 .detailed_comment dd ul .detailed_comment_li1 label{ width:55%; float:right; text-align:right;}
 .detailed_comment dd ul .detailed_comment_li1 label span{ margin-right:10px;}
 .detailed_comment .detailed_comment_li2 img{float:left;display:inline-block;width:20%;}
+
+/*商品详细-图片滚动*/
+.addWrap{ position:relative; width:100%;background:#fff;margin:0; padding:0;}
+.addWrap .swipe{overflow: hidden;visibility: hidden;position:relative;}
+.addWrap .swipe-wrap{overflow:hidden;position:relative;}
+.addWrap .swipe-wrap > div {float: left;width: 100%;position:relative;}
+
+#position{ position:absolute; bottom:0; right:0; padding-right:8px; margin:0; background:#000; opacity: 0.4; width:100%; filter: alpha(opacity=50);text-align:right;}
+#position li{width:10px;height:10px;margin:0 2px;display:inline-block;-webkit-border-radius:5px;border-radius:5px;background-color:#AFAFAF;}
+#position li.cur{background-color:#FF0000;}
+.img-responsive { display: block; max-width: 100%;  height:250px;}
+
 

@@ -183,7 +183,6 @@ function lowPriceRemind(goodsId){
             }, 1000); 
         }
     });
-    
 }
 </script>
 </head>
@@ -251,8 +250,10 @@ function lowPriceRemind(goodsId){
                         <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
                         <!-- JiaThis Button END -->
                     </div>
-                    <a href="javascript:userAddCollect(${goods.id})" title="关注" class="details_pic_wrapper_like">关注</a>
-                    <a href="javascript:lowPriceRemind(${goods.id})" title="低价提醒" class="details_pic_wrapper_remind">低价提醒</a>
+                    <#if promotion??&&promotion=="wu">
+                        <a href="javascript:userAddCollect(${goods.id?c})" title="关注" class="details_pic_wrapper_like">关注</a>
+                        <a href="javascript:lowPriceRemind(${goods.id?c})" title="低价提醒" class="details_pic_wrapper_remind">低价提醒</a>
+                    </#if>
                 </div>
             </div>
         </div>
@@ -336,8 +337,9 @@ function lowPriceRemind(goodsId){
 								<#if select_one_goods_list??> 
 									<#list select_one_goods_list as item> 
 									   <#if promotion??&&promotion != 'wu'>
-									       <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="">${item.selectOneValue}</a> 
-                                           <#break>
+									       <#if item.selectOneValue==one_selected>
+									           <a class="de_parameter_list_choiced" href="">${item.selectOneValue}</a> 
+								           </#if>
                                        <#else>
                                             <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="/goods/${item.id}">${item.selectOneValue}</a> 
 									   </#if>
@@ -352,8 +354,9 @@ function lowPriceRemind(goodsId){
 								<#if select_one_goods_list??> 
 									<#list select_one_goods_list as item> 
 										<#if promotion??&&promotion != 'wu'>
-										   <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="">${item.selectOneValue}</a>
-                                           <#break>
+									       <#if item.selectOneValue==one_selected>
+										      <a class="de_parameter_list_choiced" href="">${item.selectOneValue}</a>
+										   </#if>
                                        <#else>
                                             <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if>href="/goods/${item.id}">${item.selectOneValue}</a>
                                        </#if>
@@ -367,8 +370,9 @@ function lowPriceRemind(goodsId){
 								<#if select_two_goods_list??> 
 									<#list select_two_goods_list as item> 
 										<#if promotion??&&promotion != 'wu'>
-										   <a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="">${item.selectTwoValue}</a>
-                                           <#break>
+										  <#if item.selectTwoValue==two_selected>
+										      <a class="de_parameter_list_choiced" href="">${item.selectTwoValue}</a>
+										  </#if>
                                        <#else>
                                             <a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
                                        </#if>
@@ -383,8 +387,9 @@ function lowPriceRemind(goodsId){
 								<#if select_one_goods_list??>
 									<#list select_one_goods_list as item> 
 										<#if promotion??&&promotion != 'wu'>
-										   <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="">${item.selectOneValue}</a> 
-                                           <#break>
+										  <#if item.selectOneValue==one_selected>
+										      <a class="de_parameter_list_choiced" href="">${item.selectOneValue}</a> 
+										  </#if>
                                        <#else>
                                             <a <#if item.selectOneValue==one_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectOneValue}</a> 
                                        </#if>
@@ -398,8 +403,9 @@ function lowPriceRemind(goodsId){
 								<#if select_two_goods_list??> 
 									<#list select_two_goods_list as item> 
 										<#if promotion??&&promotion != 'wu'>
-										   <a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="">${item.selectTwoValue}</a>
-                                           <#break>
+										  <#if item.selectTwoValue==two_selected>
+										      <a class="de_parameter_list_choiced" href="">${item.selectTwoValue}</a>
+										  </#if>
                                        <#else>
                                             <a <#if item.selectTwoValue==two_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
                                        </#if>
@@ -413,8 +419,9 @@ function lowPriceRemind(goodsId){
 								<#if select_three_goods_list??> 
 									<#list select_three_goods_list as item> 
 										<#if promotion??&&promotion != 'wu'>
-										   <a <#if item.selectThreeValue==three_selected>class="de_parameter_list_choiced"</#if> href="">${item.selectThreeValue}</a>
-                                           <#break>
+        							      <#if item.selectThreeValue==three_selected>		
+										      <a class="de_parameter_list_choiced" href="">${item.selectThreeValue}</a>
+										  </#if>
                                        <#else>
                                             <a <#if item.selectThreeValue==three_selected>class="de_parameter_list_choiced"</#if> href="/goods/${item.id}">${item.selectThreeValue}</a>
                                        </#if>

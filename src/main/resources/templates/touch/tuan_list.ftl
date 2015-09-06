@@ -152,7 +152,7 @@
             <div class="all_hot">
                 <ul class="title">正在团购</ul>
                 <#list tuan_goods_list as item>
-                    <a class="phone_list" href="#">
+                    <a class="phone_list" href="/touch/goods/${item.id?c}?promotion=nowTuan">
                         <b><img src="${item.groupSaleImage!''}" /></b>
                         <p class="p1">${item.title!''}</p>
                         <p class="p_1">${item.subTitle!''}</p>
@@ -207,42 +207,12 @@
             </div>
         </#if>
         <!--底部导航-->
-        <div class="foot_nav">
-            <a href="#">登录</a>
-            <a href="#">注册</a>
-            <a href="#">返回顶部</a>
-        </div>
+        <#include "/touch/common_footer.ftl">
         
         <!--版权备案-->
-        <div class="put_record">
-            <p>
-                <a class="pc" href="#">电脑版</a>
-                <a class="cp" href="#">触屏版</a>
-                <a class="kh" href="#">客户端</a>
-            </p>
-            <p>版权所有 © 2005-2015正品惠客，严禁抄袭复制正品惠客 《企业集团登记证》</p>
-            <p>编号：53010020086</p>
-            <p>ICP备案号：渝ICP备15007430号</p>
-        </div>
-        
+        <#include "/touch/common_touch_copyright.ftl">        
         <!--底部-->
-        <div class="footer">
-            <ul>
-                <li>
-                    <a class="ic_1" href="#">首页</a>
-                </li>
-                <li>
-                    <a class="ic_2" href="#">分类</a>
-                </li>
-                <li>
-                    <a class="ic_3" href="#">购物车</a>
-                </li>
-                <li>
-                    <a class="ic_4" href="#">我的</a>
-                </li>
-            </ul>       
-        </div>
-    </div>
+        <#include "/touch/common_touch_menu.ftl">
     <!--END!-->
 </body>
 </html>

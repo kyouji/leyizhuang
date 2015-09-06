@@ -273,20 +273,10 @@
     </div>
     
     <!--底部导航-->
-    <div class="foot_nav">
-    	<#if username??>
-    		<a href="/touch/user">${username}</a>
-    		<a href="">退出</a>
-    	<#else>
-    		<a href="/touch/login">登录</a>
-    		<a href="/touch/reg">注册</a>
-    	</#if>
-        
-        <a href="#">返回顶部</a>
-    </div>
+    <#include "/touch/common_footer.ftl">
     
     <!--版权备案-->
-    <#include "/touch/common_touch_footer.ftl">
+    <#include "/touch/common_touch_copyright.ftl">
     
     <!--底部-->
     <#include "/touch/common_touch_menu.ftl">
