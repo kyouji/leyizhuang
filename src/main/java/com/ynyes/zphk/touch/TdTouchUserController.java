@@ -1,5 +1,6 @@
 package com.ynyes.zphk.touch;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ibm.icu.text.SimpleDateFormat;
 import com.ynyes.zphk.entity.TdGoods;
 import com.ynyes.zphk.entity.TdOrder;
 import com.ynyes.zphk.entity.TdOrderGoods;
@@ -47,6 +49,8 @@ import com.ynyes.zphk.service.TdUserRecentVisitService;
 import com.ynyes.zphk.service.TdUserReturnService;
 import com.ynyes.zphk.service.TdUserService;
 import com.ynyes.zphk.util.ClientConstant;
+
+import freemarker.template.SimpleDate;
 
 /**
  * 用户中心
@@ -402,18 +406,18 @@ public class TdTouchUserController {
         
         map.addAttribute("user", tdUser);
         
-        Page<TdUserCollect> collectPage = null;
+        List<TdUserCollect> collectList = null;
         
         if (null == keywords || keywords.isEmpty())
         {
-            collectPage = tdUserCollectService.findByUsername(username, page, ClientConstant.pageSize);
+            collectList = tdUserCollectService.findByUsername(username);
         }
         else
         {
-            collectPage = tdUserCollectService.findByUsernameAndSearch(username, keywords, page, ClientConstant.pageSize);
+            collectList = tdUserCollectService.findByUsernameAndSearch(username,keywords);
         }
         
-        map.addAttribute("collect_page", collectPage);
+        map.addAttribute("collect_list", collectList);
         map.addAttribute("keywords", keywords);
         
         return "/touch/user_collect_list";
@@ -1268,6 +1272,14 @@ public class TdTouchUserController {
         map.addAttribute("user", user);
         
         map.addAttribute("recommend_goods_page", tdGoodsService.findByIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(0, ClientConstant.pageSize));
+       
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        
+        String birthday = null;
+        if(null != user.getBirthday()){
+        	birthday = sdf.format(user.getBirthday());
+        }
+        map.addAttribute("birthday",birthday);
         
         return "/touch/user_info";
     }
@@ -1278,6 +1290,7 @@ public class TdTouchUserController {
                         String sex,
                         String email,
                         String mobile,
+                        String birthday,
                         ModelMap map){
         String username = (String) req.getSession().getAttribute("username");
         
@@ -1287,13 +1300,20 @@ public class TdTouchUserController {
         }
         
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
-        System.err.println(nickname);
         if (null != email )	
         {
             user.setNickname(nickname);
             user.setSex(sex);
             user.setEmail(email);
             user.setMobile(mobile);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = null;
+			try {
+				date = sdf.parse(birthday);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+            user.setBirthday(date);
             user = tdUserService.save(user);
         }
         

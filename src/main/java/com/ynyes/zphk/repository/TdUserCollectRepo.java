@@ -24,6 +24,9 @@ public interface TdUserCollectRepo extends
     
     Page<TdUserCollect> findByUsernameAndGoodsTitleContainingOrderByIdDesc(String username, String keywords, Pageable page);
     
+    //不分页的findByUsernameAndGoodsTitleContainingOrderByIdDesc——by dengxiao
+    List<TdUserCollect> findByUsernameAndGoodsTitleContainingOrderByIdDesc(String username,String keywords);
+    
     List<TdUserCollect> findByUsername(String username);
     
     TdUserCollect findByUsernameAndGoodsId(String username, Long goodsId);

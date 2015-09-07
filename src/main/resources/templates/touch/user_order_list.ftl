@@ -33,7 +33,7 @@ $(document).ready(function(){
   <table class="content_check">
     <tr>
       <td>
-        <a class="a2 <#if status_id?? && status_id==0>sel</#if>" href="/touch/user/order/list/0"><p>全部订单</p></a>
+        <a class="a2 <#if status_id?? && status_id==0>sel</#if>" href="/touch/user/order/list/0"><p>全部</p></a>
       </td>
       <td class="two-border">
         <a class="a2 <#if status_id?? && status_id==2>sel</#if>" href="/touch/user/order/list/2"><p>待付款</p></a>

@@ -101,7 +101,7 @@ $(document).ready(function(){
     	        </div>
     	        <div class="input_information security_code">
     	        	&nbsp;&nbsp;&nbsp;验证码：
-    		        <input name="yzm" type="text" datatype="s4-4" errormsg="请填写4位字符！" value="" />
+    		        <input name="code" type="text" datatype="s4-4" errormsg="请填写4位字符！" value="" />
     		        <span class="Validform_checktip Validform_wrong"></span>
     		        <#--
     		        <img id="yzm_image" src="/client/images/security_code.png" />

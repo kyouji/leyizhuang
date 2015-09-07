@@ -43,12 +43,12 @@
         <!--顶部标题与搜索框-->
         <header class="maintop">
             <div class="main">
-                <p>团购</p>
-                <a class="a1" href="javascript:history.go(-1)"><img src="/touch/images/back.png" height="22" /></a>
-                <a class="a2" href="/touch"><img src="/touch/images/home2.png" height="22" /></a>
-            </div>
+                    <p>惠客团购</p>
+                    <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
+                    <a class="a2" href="/touch"><img src="/touch/images/home2.png" height="25" /></a>
+                </div>
         </header>   
-        <div class="clear"></div>  
+        <div class="clear" style="margin-top:50px;"></div>  
         <!--banner图
         <div class="banner">
         <img src="images/banner_1.gif" />
@@ -58,16 +58,24 @@
         <div class="addWrap">
             <div class="swipe" id="mySwipe">
                 <div class="swipe-wrap">
-                    <div><a href="javascript:;"><img class="img-responsive" src="images/1.jpg"/></a></div>
-                    <div><a href="javascript:;"><img class="img-responsive" src="images/2.jpg"/></a></div>
-                    <div><a href="javascript:;"><img class="img-responsive" src="images/3.jpg"/></a></div>
+                    <#if big_scroll_ad_list??>
+                        <#list big_scroll_ad_list as item>
+                            <div><a href="javascript:;"><img class="img-responsive" style="width:100%;" src="${item.fileUri!''}" /></a></div>
+                        </#list>
+                    </#if>
                 </div>
             </div>
-            <ul id="position">
-                <li class="cur"></li>
-                <li class=""></li>
-                <li class=""></li>
-            </ul>
+            <#if big_scroll_ad_list??>
+                <ul id="position">
+                    <#list big_scroll_ad_list as item>
+                        <#if item_index==0>
+                            <li class="cur"></li>
+                        <#else>
+                            <li></li>
+                        </#if>
+                    </#list>
+                </ul>
+            </#if>
         </div>
         <script type="text/javascript">
             var bullets = document.getElementById('position').getElementsByTagName('li');
@@ -86,18 +94,7 @@
         </script>
     
         <!--导航菜单-->
-        <div class="nav">
-            <ul class="listico"> 
-                <li class="icon_1"><a href="#" class="ico1">商品分类</a></li> 
-                <li class="icon_2"><a href="#" class="ico2">我的订单</a></li> 
-                <li class="icon_3"><a href="#" class="ico3">个人中心</a></li> 
-                <li class="icon_4"><a href="#" class="ico4">我的关注</a></li> 
-                <li class="icon_5"><a href="#" class="ico5">我的积分</a></li> 
-                <li class="icon_6"><a href="#" class="ico6">收货地址</a></li> 
-                <li class="icon_7"><a href="#" class="ico7">购物车</a></li> 
-                <li class="icon_8"><a href="#" class="ico8">我的评价</a></li> 
-            </ul> 
-        </div>
+        <#include "/touch/common_navi.ftl">
     
         <!--即将开团-->
         <#if going_goods_list??&&going_goods_list?size gt 0>
@@ -152,13 +149,15 @@
             <div class="all_hot">
                 <ul class="title">正在团购</ul>
                 <#list tuan_goods_list as item>
+                <span class="p_time" id="tuan_time${item_index}" ></span>
                     <a class="phone_list" href="/touch/goods/${item.id?c}?promotion=nowTuan">
                         <b><img src="${item.groupSaleImage!''}" /></b>
                         <p class="p1">${item.title!''}</p>
                         <p class="p_1">${item.subTitle!''}</p>
                         <p class="p2"><label class="p2_l1">团购价:￥<span>${item.groupSalePrice?string("0.00")}</span></label></p>
                         <p class="p2"><label class="p2_l2">原价：￥<span>${item.salePrice?string("0.00")}</span></label></p>
-                        <p id="tuan_time${item_index}" tyle="display:block;"></p>
+                        
+                        
                         <script type="text/javascript" src="/touch/js/jquery-1.9.1.min.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function(){
@@ -187,7 +186,7 @@
                                     hh = checkTime(hh);
                                     mm = checkTime(mm);
                                     ss = checkTime(ss);
-                                    $("#tuan_time${item_index}").html("剩余时间：<span>"
+                                    $("#tuan_time${item_index}").html("&emsp;剩余时间：<span>"
                                     + dd + "</span>天<span>"
                                     + hh + "</span>时<span>"
                                     + mm + "</span>分<span>"
@@ -199,7 +198,7 @@
                             <#if item.groupSaleLeftNumber==0>
                                 <span>已售完</span>
                             <#else>
-                                <span>还剩： </span>${item.groupSaleLeftNumber!'0'}<span>件</span>
+                                <span>还剩</span>${item.groupSaleLeftNumber!'0'}<span>件</span>
                             </#if>
                         </h6>
                     </a>

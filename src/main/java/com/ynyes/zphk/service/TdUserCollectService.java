@@ -129,6 +129,9 @@ public class TdUserCollectService {
         return repository.findByUsernameAndGoodsTitleContainingOrderByIdDesc(username, keywords, pageRequest);
     }
     
+    public List<TdUserCollect> findByUsernameAndSearch(String username,String keywords){
+    	return repository.findByUsernameAndGoodsTitleContainingOrderByIdDesc(username,keywords);
+    }
     /**
      * 保存
      * 

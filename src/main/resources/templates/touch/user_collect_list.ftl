@@ -25,21 +25,25 @@
 </header>
 
  <div class="main">
-  <#if collect_page??>
-    <#list collect_page.content as cg>
+  <#if collect_list??>
+    <#list collect_list as cg>
         <section class="carlist">
-            <b><a href="/touch/goods/${cg.goodsId}"><img src="${cg.goodsCoverImageUri!''}" /></a></b>
-            <p><a href="/touch/goods/${cg.goodsId}">${cg.goodsTitle!''}</a></p>
+            <b><a href="/touch/goods/${cg.goodsId?c}"><img src="${cg.goodsCoverImageUri!''}" /></a></b>
+            <p>
+                <a href="/touch/goods/${cg.goodsId?c}">${cg.goodsTitle!''}</a>
+            
+            </p>
             <p class="pt5 pb5">单价：<span class="sc">￥${cg.goodsSalePrice?string("0.00")}</span></p>
             <div class="clear"></div>
-            <a class="a1" href="/touch/user/collect/del?id=${cg.goodsId}"><img src="/touch/images/img1/delete.png" width="30" /></a>
+            <a class="a1" href="/touch/user/collect/del?id=${cg.goodsId?c}"><img src="/touch/images/img1/delete.png" width="30" /></a>
        </section>
     </#list>
 </#if>
 </div>
   
 <!--main END-->
-
+<!--
 <#include "/touch/common_footer.ftl" />
+-->
 </body>
 </html>

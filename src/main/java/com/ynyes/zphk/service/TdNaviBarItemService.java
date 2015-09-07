@@ -105,9 +105,9 @@ public class TdNaviBarItemService {
         return (List<TdNaviBarItem>) repository.findAll(new Sort(Direction.ASC, "sortId"));
     }
     
-    public List<TdNaviBarItem> findByIsEnableTrueOrderBySortIdAsc()
+    public List<TdNaviBarItem> findByIsEnableTrueAndIsTouchFalseOrderBySortIdAsc()
     {
-        return repository.findByIsEnableTrueOrderBySortIdAsc();
+        return repository.findByIsEnableTrueAndIsTouchFalseOrderBySortIdAsc();
     }
     
     /**
@@ -125,5 +125,13 @@ public class TdNaviBarItemService {
     {
         
         return (List<TdNaviBarItem>) repository.save(entities);
+    }
+    
+    /**
+     * 查找可用且支持触屏的NaviBarItem
+     * @author dengxiao
+     */
+    public List<TdNaviBarItem> fingTouchNaviBarList(){
+    	return repository.findByIsEnableTrueAndIsTouchTrueOrderBySortIdAsc();
     }
 }

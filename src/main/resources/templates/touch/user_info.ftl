@@ -23,39 +23,51 @@
 <div class="maintop_bg"></div>
 <header class="maintop">
   <div class="main">
-    <p>修改昵称</p>
+    <p>修改信息</p>
     <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
     <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a>  
 </header>
 
 <div class="main">
-    <form action="/touch/user/info" method="post" id="form1">
-        <div class="member_check"  >
+    <form action="/touch/user/info" method="post" id="form1" style="width:100%;display:block;overflow:hidden;background:#fff;">
+
+        <div class="member_check">
             <span>昵称：</span>
             <input type="text" name="nickname"  class="textInput" value="${user.nickname!''}" />
         </div>
         <div class="member_check"  >
             <span>电话：</span>
-            <!--<input type="text" name="mobile"  class="textInput" value="${user.mobile!''}" />-->
+
             <input type="datetime" name="mobile"  class="textInput" value="${user.mobile!''}" />
         </div>
         <div class="member_check"  >
             <span>邮箱：</span>
             <input type="text" name="email"  class="textInput" value="${user.email!''}" />
         </div>
-        <div class="member_1"  >
+        <div class="member_check"  >
              <span>性别：</span>
-            <input type="radio" name="sex"  value="男" <#if user.sex?? && user.sex=="男">checked="checked" </#if>/>男
-            <input type="radio" name="sex"  value="女"  <#if user.sex?? && user.sex=="女">checked="checked" </#if>/>女
-            <input type="radio" name="sex"  value="保密" <#if user.sex?? && user.sex=="保密" || !user.sex??>checked="checked" </#if>/>保密
+            <!--<input type="radio" name="sex"  value="男" <#if user.sex?? && user.sex=="男">checked="checked" </#if>/><label>男</label>
+            <input type="radio" name="sex"  value="女"  <#if user.sex?? && user.sex=="女">checked="checked" </#if>/><label>男</label>-->
+            <select name="sex">
+                <option value="男" <#if user.sex?? && user.sex=="男">selected="selected"</#if>>男</option>
+                <option value="女" <#if user.sex?? && user.sex=="女">selected="selected"</#if>>女</option>
+            </select>
         </div>
-        
+        <div class="member_check"  >
+            <span>生日：</span>
+            <input type="date" name="birthday" class="textInput" value=${user.birthday?string("yyyy-MM-dd")}>
+            <br/>
+        </div>
+        <div class="clear20"></div>
+
      </form>
+     <div class="clear10"></div>
         <div class="ok_mainbox">
-            <p><a href="javascript:editPassword();"  id="sub">确 认</a></p>
+            <a href="javascript:editPassword();"  id="sub"><p>确 认</p></a>
          </div>
 </div><!--main END-->
-
+<!--
 <#include "/touch/common_footer.ftl" />
+-->
 </body>
 </html>

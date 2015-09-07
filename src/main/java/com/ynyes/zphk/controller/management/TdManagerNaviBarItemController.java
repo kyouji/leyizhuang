@@ -81,7 +81,11 @@ public class TdManagerNaviBarItemController {
 
         if (null != id)
         {
-            map.addAttribute("navi_bar_item", tdNaviBarItemService.findOne(id));
+        	TdNaviBarItem barItem = tdNaviBarItemService.findOne(id);
+        	if(null == barItem.getIsTouch()){
+        		barItem.setIsTouch(false);
+        	}
+            map.addAttribute("navi_bar_item", barItem);
         }
         return "/site_mag/navi_bar_item_edit";
     }

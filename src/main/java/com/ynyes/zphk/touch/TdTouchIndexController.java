@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ynyes.zphk.entity.TdAdType;
 import com.ynyes.zphk.entity.TdArticleCategory;
 import com.ynyes.zphk.entity.TdGoods;
+import com.ynyes.zphk.entity.TdNaviBarItem;
 import com.ynyes.zphk.entity.TdProductCategory;
 import com.ynyes.zphk.service.TdAdService;
 import com.ynyes.zphk.service.TdAdTypeService;
@@ -23,6 +24,7 @@ import com.ynyes.zphk.service.TdArticleService;
 import com.ynyes.zphk.service.TdBrandService;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdGoodsService;
+import com.ynyes.zphk.service.TdNaviBarItemService;
 import com.ynyes.zphk.service.TdProductCategoryService;
 import com.ynyes.zphk.service.TdSiteLinkService;
 import com.ynyes.zphk.util.ClientConstant;
@@ -61,6 +63,9 @@ public class TdTouchIndexController {
 
     @Autowired
     private TdBrandService tdBrandService;
+    
+    @Autowired
+	private TdNaviBarItemService tdNaviBarItemService;
 
     @RequestMapping
     public String index(HttpServletRequest req, Device device, ModelMap map) {
@@ -275,6 +280,10 @@ public class TdTouchIndexController {
         
     	//特价商品
         map.addAttribute("speciaPrice_list",tdGoodsService.findByIsSpecialPriceTrueAndIsOnSaleTrue());
+        
+        //触屏导航栏——by dengxiao
+        List<TdNaviBarItem> naviBarList = tdNaviBarItemService.fingTouchNaviBarList();
+        map.addAttribute("navi_touch_list", naviBarList);
         
         return "/touch/index";
     }

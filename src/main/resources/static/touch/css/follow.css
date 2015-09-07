@@ -30,11 +30,12 @@
 	display:block;
 	width:30%;
 	float:left;
-	border:1px solid #ddd;}
+	}
 .carlist p {
 	font-size:0.9em;
 	float:right;
 	width:67%;}
+.carlist p a{display:block;height:40px;overflow:hidden;}
 .carlist .num { 
     float:right;
 	width:67%;

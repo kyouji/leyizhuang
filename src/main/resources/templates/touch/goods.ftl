@@ -74,7 +74,7 @@
 	}
 	
 	function buyNow(id){
-		window.location.href="/touch/order/buynow?goodsId="+id;
+		window.location.href="/touch/order/buynow?goodsId="+id+"&promotion=${promotion}";
 	}
 	
 	<!-- 低价提醒的方法 -->
@@ -115,15 +115,28 @@
             <div class="swipe-wrap">
                 <#if goods.showPictures??>
                     <#list goods.showPictures?split(",") as uri> 
-                        <div><a href="javascript:;"><img class="img-responsive" src="${uri!''}"/></a></div>
+                        <#if uri!="">
+                            <div>
+                                <a href="javascript:;">
+                                    <img class="img-responsive" src="${uri!''}"/>
+                                </a>
+                            </div>
+                        </#if>
                     </#list>
                 </#if>
             </div>
         </div>
         <ul id="position">
-        <li class="cur"></li>
-        <li class=""></li>
-        <li class=""></li>
+            <#if goods.showPictures??>
+                <#list goods.showPictures?split(",") as uri>
+                    <#if uri_index==0>
+                        <li class="cur"></li>
+                    <#elseif uri_index==(goods.showPictures?split(",")?size-1)>
+                    <#else>
+                        <li class=""></li>
+                    </#if>
+                </#list>
+            </#if>
         </ul>
     </div>
     <script type="text/javascript">
@@ -149,7 +162,17 @@
     
     <p class="pro_tit_sc">${goods.title!''}</p>
     <p class="fs08 c7 center pb10">${goods.subTitle!''}</p>
-    <p class="center fs12 fc pb10">￥${goods.salePrice!'0'}</p>
+    <p class="center fs12 fc pb10">
+        <#if promotion??&&promotion=="wu">
+                            惠客价：￥${goods.salePrice?string("0.00")}
+        <#else>
+            <#if promotion??&&promotion=="miao">
+                                        秒杀价：￥${goods.flashSalePrice?string("0.00")}
+            <#else>
+                                        团购价：￥${goods.groupSalePrice?string("0.00")}
+            </#if>
+        </#if>
+    </p>
     
     <#if promotion??&&promotion=="wu">
         <p class="center pb10">
@@ -355,7 +378,7 @@
 	                                </#list>
                              	</#if>
 								</b>
-								<label><span>用户：${item.username!''}</span><span>评价时间：${item.commentTime}</span></label>
+								<label><span>${item.username!''}</span><span>${item.commentTime}</span></label>
 							</li>
 							<li>
 								<p>${content!'好评'}</p>
@@ -381,9 +404,27 @@
 <footer class="profoot">
   <table>
     <tr>
-      <td><input type="submit" onclick="buyNow(${goods.id?c})" value="立即购买" /></td>
+        <#if promotion??&&promotion=="miao"&&goods.flashSaleLeftNumber lt 1>
+            <td><input type="submit" style="background-color:#ccc" value="已售完" /></td>
+        <#elseif promotion??&promotion!="wu"&&promotion!="miao"&&goods.groupSaleLeftNumber lt 1>    
+            <td><input type="submit" style="background-color:#ccc" value="已售完" /></td>
+        <#else>
+            <#if goods.leftNumber lt 1>
+                <td><input type="submit" style="background-color:#ccc" value="已售完" /></td>
+            <#else>
+                <td><input type="button" onclick="buyNow(${goods.id?c})" value="立即购买" /></td>
+            </#if>
+        </#if>
       <td>&nbsp;</td>
-      <td><input type="button" onclick="addCart(${goods.id?c})" value="加入购物车" /></td>
+      <#if promotion??&&promotion!="wu">
+            <td><input type="button" style="background-color:#ccc" value="加入购物车" /></td>
+      <#else>
+            <#if goods.leftNumber lt 1>
+                <td><input type="button" style="background-color:#ccc" value="加入购物车" /></td>
+            <#else>
+                <td><input type="button" onclick="addCart(${goods.id?c})" value="加入购物车" /></td>
+            </#if>
+      </#if>
     </tr>
   </table>
 </footer>

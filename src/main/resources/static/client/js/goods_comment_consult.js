@@ -40,11 +40,11 @@ function getConsult(goodsId, page)
 }
 
 //提交咨询
-function submitConsult()
+function submitConsult(goodsId)
 {
     $.ajax({
         type:"post",
-        url:"/user/consult/add?" + $("#consultForm").serialize(),
+        url:"/user/consult/add?goodsId=" + goodsId,
         success:function(res){
             if (0 == res.code)
             {

@@ -21,7 +21,7 @@
 <header class="maintop">
   <div class="main">
     <p>商品分类</p>
-    <a class="a1" href="javascript:history.go(-1);"><img src="images/back.png" height="22" /></a>
+    <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
     <a class="a2" href="/touch"><img src="/touch/images/home2.png" height="25" /></a>
   </div>
 </header>

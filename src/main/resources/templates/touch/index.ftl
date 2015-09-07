@@ -52,16 +52,22 @@
 		    <div class="swipe-wrap">
 		    	<#if big_scroll_ad_list??>
 		    		<#list big_scroll_ad_list as item>
-			    		<div><a href="javascript:;"><img class="img-responsive" src="${item.fileUri!''}" /></a></div>
+			    		<div><a href="javascript:;"><img class="img-responsive" style="width:100%;" src="${item.fileUri!''}" /></a></div>
 			    	</#list>
 			    </#if>
 		    </div>
 	    </div>
-	    <ul id="position">
-		    <li class="cur"></li>
-		    <li class=""></li>
-		    <li class=""></li>
-	    </ul>
+        <#if big_scroll_ad_list??>
+            <ul id="position">
+                <#list big_scroll_ad_list as item>
+                    <#if item_index==0>
+                        <li class="cur"></li>
+                    <#else>
+                        <li></li>
+                    </#if>
+                </#list>
+            </ul>
+        </#if>
 	</div>
 	<script src="/touch/js/swipe.js"></script> 
 <script type="text/javascript">
@@ -80,19 +86,8 @@
     });
 </script>
 	<!--导航菜单-->
-	<div class="nav">
-    	<ul class="listico"> 
-            <li class="icon_1"><a href="/touch/brand" class="ico1">商品分类</a></li> 
-            <li class="icon_2"><a href="touch/user/order/list/0" class="ico2">我的订单</a></li> 
-            <li class="icon_3"><a href="/touch/user" class="ico3">个人中心</a></li> 
-            <li class="icon_4"><a href="/touch/user/collect/list" class="ico4">我的关注</a></li> 
-            <li class="icon_5"><a href="/touch/user/return/list" class="ico5">退换货</a></li> 
-            <li class="icon_6"><a href="/touch/user/address/list" class="ico6">收货地址</a></li> 
-            <li class="icon_7"><a href="/touch/promotion/tuan" class="ico7">团购</a></li> 
-            <li class="icon_8"><a href="/touch/promotion/miao" class="ico8">秒杀</a></li> 
-    	</ul> 
-    </div>
-    
+    <#include "/touch/common_navi.ftl">
+        
     <!--今日爆款-->
     <#if speciaPrice_list?? && speciaPrice_list?size gt 0 >
 	    <div class="today_hot">
@@ -114,35 +109,6 @@
 			</ul>
         </div>
 	</#if>
-    
-    <#--
-    <div class="today_hot">
-    	<ul class="title">今日爆款</ul>
-        <ul>
-        	<li>
-                <p class="photo">
-                	<a href="#"><img src="images/phone_brand/huawei.png" /></a>
-                </p>
-            </li>
-            <li>
-                <p class="photo">
-                	<a href="#"><img src="images/phone_brand/sumsang.png" /></a>
-                </p>
-                <p class="photo">
-                	<a href="#"><img src="images/phone_brand/iPhone.png" /></a>
-                </p>
-            </li>
-            <li>
-                <p class="photo">
-                	<a href="#"><img src="images/phone_brand/sumsang.png" /></a>
-                </p>
-                <p class="photo">
-                	<a href="#"><img src="images/phone_brand/iPhone.png" /></a>
-                </p>
-            </li>
-        </ul>
-    </div>
-    -->
     
     <!--手机大全-->
     <div class="today_hot">
@@ -168,7 +134,7 @@
 		                <p class="name">性价比之王</p>
 		                <p class="feature">${item.title!""}</p>
 		                <p class="discount_price">
-		                	<b><del>￥<span>${item.marketPrice!"0.00"}</span></del><br />￥<span>${item.salePrice!"0.00"}</span></b>
+		                	<b><del>市场价￥<span>${item.marketPrice!"0.00"}</span></del><br />惠客价￥<span>${item.salePrice!"0.00"}</span></b>
 		                </p>
 		            </li>
             	</#if>

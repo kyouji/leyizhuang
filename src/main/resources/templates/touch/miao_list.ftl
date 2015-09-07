@@ -9,6 +9,7 @@
 <meta name="format-detection" content="telephone=no">
 <link rel="stylesheet" type="text/css" href="/touch/css/style.css"/>
 <link rel="stylesheet" type="text/css" href="/touch/css/sales.css"/>
+
 <title>秒杀</title>
 <script type="text/javascript">
 function checkTime(i)  
@@ -28,25 +29,19 @@ function checkTime(i)
 <!--顶部标题与搜索框-->
 <header class="maintop">
     <div class="main">
-        <p>秒杀</p>
-        <a class="a1" href="#"><img src="/touch/images/back.png" height="22" /></a>
-        <a class="a2" href="#"><img src="/touch/images/home2.png" height="22" /></a>
+        <p>惠客秒杀</p>
+        <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
+        <a class="a2" href="/touch"><img src="/touch/images/home2.png" height="25" /></a>
     </div>
-</header>
+</header>   
    
-<div class="clear"></div> 
+<div class="clear" style="margin-top:50px;"></div> 
 	
     <#if miao_goods_list??&&miao_goods_list?size gt 0>
         <!--秒杀-->
         <div class="today_hot">
             <#list miao_goods_list as item>
-                <a class="phone_list" href="/touch/goods/${item.id?c}?promotion=miao">
-                    <b><img src="${item.flashSaleImage!''}" /></b>
-                    <p class="p1">${item.title!''}</p>
-                    <p class="p_1">${item.subTitle!''}</p>
-                    <p class="p2"><label class="p2_l1">秒杀价￥<span>${item.flashSalePrice?string("0.00")}</span></label></p>
-                    <p class="p2"><label class="p2_l2">原价￥<span>${item.salePrice?string("0.00")}</span></label></p>
-                    <p id="miao_time${item_index}" tyle="display:block;"></p>
+            <span class="p_time" id="miao_time${item_index}"></span>
                         <script type="text/javascript" src="/touch/js/jquery-1.9.1.min.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function(){
@@ -75,22 +70,31 @@ function checkTime(i)
                                     hh = checkTime(hh);
                                     mm = checkTime(mm);
                                     ss = checkTime(ss);
-                                    $("#miao_time${item_index}").html("剩余时间：<span>"
+                                    $("#miao_time${item_index}").html("&emsp;剩余时间：<span>"
                                     + dd + "</span>天<span>"
                                     + hh + "</span>时<span>"
                                     + mm + "</span>分<span>"
                                     + ss + "</span>秒");
                                 }
                         </script>
+                <a class="phone_list" href="/touch/goods/${item.id?c}?promotion=miao">
+                    <b><img src="${item.flashSaleImage!''}" /></b>
+                    <p class="p1">${item.title!''}</p>
+                    <p class="p_1">${item.subTitle!''}</p>
+                    <p class="p2"><label class="p2_l1">秒杀价￥<span>${item.flashSalePrice?string("0.00")}</span></label></p>
+                    <p class="p2"><label class="p2_l2">原价￥<span>${item.salePrice?string("0.00")}</span></label></p>
+                   
                     <div class="clear1"></div>
                 
-                    <h6 style="margin-bottom:10px;"><label>去购买</label>
+                    <h6 style="margin-bottom:10px;">
                         <#if item.flashSaleLeftNumber==0>
                             <span>已售完</span>
                         <#else>
                             <span>还剩${item.flashSaleLeftNumber!'0'}件 </span>
                         </#if>
                     </h6>
+                    <div style=" width:100%;clear:both;height:10px;"></div>
+                    <span class="m_btn">立即购买</span>
                  </a>
              </#list>
         </div>

@@ -491,7 +491,7 @@ public class TdTouchOrderController  extends AbstractPaytypeService{
     }
     
     @RequestMapping(value = "/buynow")
-    public String buyNow(Long goodsId,ModelMap map, HttpServletRequest req) {
+    public String buyNow(Long goodsId,ModelMap map, HttpServletRequest req,String promotion) {
 
     	String username = (String) req.getSession().getAttribute("username");
 		
@@ -508,7 +508,15 @@ public class TdTouchOrderController  extends AbstractPaytypeService{
 		cartGoods.setGoodsTitle(goods.getTitle());
 		cartGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
 		cartGoods.setQuantity(1L);
-		cartGoods.setPrice(goods.getSalePrice());
+		if(null == promotion||"wu".equals(promotion.trim())){
+			cartGoods.setPrice(goods.getSalePrice());
+		}else{
+			if("miao".equals(promotion.trim())){
+				cartGoods.setPrice(goods.getFlashSalePrice());
+			}else{
+				cartGoods.setPrice(goods.getGroupSalePrice());
+			}
+		}
 		selectedGoodsList.add(cartGoods);
 		
 		Double totalPrice = cartGoods.getPrice();

@@ -37,9 +37,21 @@ public class TdNaviBarItem {
     @Column
     private Boolean isEnable;
     
-    // 链接地址
+    //是否支持触屏——by dengxiao
+    @Column
+    private Boolean isTouch;
+    
+	// 链接地址
     @Column
     private String linkUri;
+    
+    public Boolean getIsTouch() {
+    	return isTouch;
+    }
+    
+    public void setIsTouch(Boolean isTouch) {
+    	this.isTouch = isTouch;
+    }
 
     public Long getId() {
         return id;

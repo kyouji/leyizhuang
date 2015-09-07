@@ -18,5 +18,9 @@ public interface TdNaviBarItemRepo extends
 		PagingAndSortingRepository<TdNaviBarItem, Long>,
 		JpaSpecificationExecutor<TdNaviBarItem> 
 {
-    List<TdNaviBarItem> findByIsEnableTrueOrderBySortIdAsc();
+	//修改：使其不能查找到支持触屏的
+    List<TdNaviBarItem> findByIsEnableTrueAndIsTouchFalseOrderBySortIdAsc();
+    
+    //查找可用且支持触屏的naviBarItem——by dengxiao
+    List<TdNaviBarItem> findByIsEnableTrueAndIsTouchTrueOrderBySortIdAsc();
 }

@@ -16,6 +16,7 @@ input {font-family:"微软雅黑";-webkit-appearance:none}
 input:focus {
     outline:none;
 }
+select{-webkit-appearance:none}
 /* common main */
 .red, a.red { color:#ef0000;}
 .white, a.white { color:#fff;}

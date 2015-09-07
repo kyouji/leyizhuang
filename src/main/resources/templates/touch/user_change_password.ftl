@@ -53,12 +53,14 @@ function subPassword(){
         <input type="password"  class="textInput" value="" datatype="*" recheck="newPassword" />
         <br><span class="Validform_checktip"></span>
   </div>
+  <div class="clear10"></div>
   <div class="ok_mainbox">
     <p><a href="javascript:subPassword();"  id="sub">确 定</a></p>
   </div>
 </form>
 </div><!--main END-->
-
-<#include "/touch/common_footer.ftl" />
+<!--
+    <#include "/touch/common_footer.ftl" />
+-->
 </body>
 </html>

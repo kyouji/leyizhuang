@@ -1,5 +1,7 @@
 package com.ynyes.zphk.touch;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ynyes.zphk.entity.TdAdType;
+import com.ynyes.zphk.entity.TdNaviBarItem;
+import com.ynyes.zphk.service.TdAdService;
+import com.ynyes.zphk.service.TdAdTypeService;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdGoodsService;
+import com.ynyes.zphk.service.TdNaviBarItemService;
 import com.ynyes.zphk.util.ClientConstant;
 
 @Controller
@@ -20,6 +27,15 @@ public class TdTouchPromotionController {
 
     @Autowired
     TdCommonService tdCommonService;
+    
+    @Autowired
+	private TdNaviBarItemService tdNaviBarItemService;
+    
+    @Autowired
+    private TdAdService tdAdService;
+    
+    @Autowired
+    private TdAdTypeService tdAdTypeService;
 
     @RequestMapping("/touch/promotion/{promotionType}")
     public String list(@PathVariable String promotionType, String type,
@@ -72,10 +88,22 @@ public class TdTouchPromotionController {
                         .findByGroupSalingOrderByGroupSaleStartTimeAsc());
                     break;
             }
+            // 首页大图轮播广告——by dengxiao
+            TdAdType adType = tdAdTypeService.findByTitle("首页轮播大图广告");
 
+            if (null != adType) {
+                map.addAttribute("big_scroll_ad_list", tdAdService
+                        .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+            }
+            
+            
             //无论何种情况下都显示即将开团
             map.addAttribute("going_goods_list",
 					tdGoodsService.findByGroupSaleGoingToStartOrderByGroupSaleStartTimeAsc());
+            
+            //触屏导航栏——by dengxiao
+            List<TdNaviBarItem> naviBarList = tdNaviBarItemService.fingTouchNaviBarList();
+            map.addAttribute("navi_touch_list", naviBarList);
             
             return "/touch/tuan_list";
         }

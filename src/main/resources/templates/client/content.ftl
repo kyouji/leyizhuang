@@ -655,7 +655,7 @@ function lowPriceRemind(goodsId){
 			<!--动态咨询-->
 			<div id="tab3" class="c_R_consult top20">
 				<form>
-					<input type="hidden" id="goodsId" name="goodsId" value=${goods.id } />
+					<input type="hidden" id="goodsId" name="goodsId" value=${goods.id?c} />
 					<h3>商品咨询</h3>
 					<p>
 						声明：您可在购买前对产品包装、颜色、运输、库存等方面进行咨询，我们有专人进行回复！因厂家随时会更改一些产品的包装、颜色、产地等参数，所以该回复仅在当时
@@ -665,7 +665,7 @@ function lowPriceRemind(goodsId){
 						<li>咨询内容</li>
 						<li><textarea id="consult"></textarea></li>
 					</ul>
-					<a href="javascript:submitConsult();" title="提交咨询">提 交</a>
+					<a href="javascript:submitConsult(${goods.id?c});" title="提交咨询">提 交</a>
 				</form>
 			</div>
 		</div>

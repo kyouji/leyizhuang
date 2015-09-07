@@ -32,15 +32,16 @@
   <div class="member_check11" ><label>用户名</label><span>${user.username!''}</span></div>
   <div class="member_check" ><label>昵称</label><span>${user.nickname!''}</span></div>
   <div class="member_check member_check1"><label>性别</label><span>${user.sex!'保密'}</span></div>
-  <div class="member_check " ><label>出生日期 </label><span>${user.birthday!''}</span></div>
+  <div class="member_check " ><label>出生日期 </label><span>${user.birthday?string("yyyy-MM-dd")}</span></div>
   <div class="member_check" ><label>联系电话 </label><span>${user.mobile!''}</span></div>
   <div class="member_check " ><label>邮箱</label><span>${user.email!''}</span></div>
   
   <div class="ok_mainbox">
-    <p><a href="/touch/user/info"  id="sub">修 改 信 息</a></p>
+    <a href="/touch/user/info"  id="sub"><p>修 改 信 息</p></a>
   </div>
 </div><!--main END-->
-
+<!--
 <#include "/touch/common_footer.ftl" />
+-->
 </body>
 </html>

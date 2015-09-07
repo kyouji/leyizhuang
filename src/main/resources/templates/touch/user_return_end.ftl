@@ -32,5 +32,6 @@
 </div><!--main END-->
 
 <#include "/touch/common_footer.ftl" />
+
 </body>
 </html>

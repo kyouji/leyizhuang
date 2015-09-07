@@ -20,7 +20,7 @@
 <div class="maintop_bg"></div>
 <header class="maintop">
   <div class="main">
-    <p>设置</p>
+    <p>关于我们</p>
     <a class="a1" href="javascript:history.go(-1);"><img src="/touch/images/back.png" height="22" /></a>
     <a class="a2" href="/touch"><img src="/touch/images/home.png" height="22" /></a>  </div>
 </header>
@@ -36,7 +36,8 @@
       <div class="member_check" ><label>服务QQ：${setting.qq!''}</label></div>
     </#if>
 </div><!--main END-->
-
-<#include "/touch/common_footer.ftl" />
+    <!--
+    <#include "/touch/common_footer.ftl" />
+    -->
 </body>
 </html>

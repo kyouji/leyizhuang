@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.zphk.entity.TdSetting;
 import com.ynyes.zphk.entity.TdUser;
+import com.ynyes.zphk.entity.TdUserPoint;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdSettingService;
 import com.ynyes.zphk.service.TdUserPointService;
@@ -44,19 +46,20 @@ public class TdRegController {
 
 	/**
 	 * 新增加了一个字段type用于表示用户选择的是手机注册还是邮箱注册
+	 * 
 	 * @author dengxiao
 	 */
 	@RequestMapping("/reg")
-	public String reg(Integer errCode, Integer shareId,String type, HttpServletRequest request, ModelMap map) {
+	public String reg(Integer errCode, Integer shareId, String type, HttpServletRequest request, ModelMap map) {
 		String username = (String) request.getSession().getAttribute("username");
 
-		//从主页跳转到注册页时，type的值是null，所以处于默认的状态（默认状态未手机注册），所以type的值为"phone"
-		if(null == type){
+		// 从主页跳转到注册页时，type的值是null，所以处于默认的状态（默认状态未手机注册），所以type的值为"phone"
+		if (null == type) {
 			type = "phone";
 		}
-		
-		map.addAttribute("type",type);
-		
+
+		map.addAttribute("type", type);
+
 		if (null != shareId) {
 			map.addAttribute("share_id", shareId);
 		}
@@ -104,100 +107,36 @@ public class TdRegController {
 	 * @since 1.0.0
 	 */
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public String reg(String regist_method, String username, String mobile, String password, String email,
-			String smsCode, String code, String carCode, HttpServletRequest request) {
-		
-	    String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
+	public String reg(String username, String mobile, String password, String email, String code, String carCode,
+			Long shareId, HttpServletRequest request) {
+		String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
 		String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
-
-		
-		/**
-		 * 不太明白某些字段的意思，因此在保证注册功能实现的情况下注释掉了大部分代码
-		 * @author dengxiao
-		 */
-//		if (null == codeBack || null == smsCodeSave) {
-//			if (null == shareId) {
-//				return "redirect:/reg";
-//			} else {
-//				return "redirect:/reg?shareId=" + shareId;
-//			}
-//		}
-//
-//		if (!codeBack.equalsIgnoreCase(code)) {
-//			if (null == shareId) {
-//				return "redirect:/reg?errCode=1";
-//			} else {
-//				return "redirect:/reg?errCode=1&shareId=" + shareId;
-//			}
-//		}
-//
-//		if (!smsCodeSave.equalsIgnoreCase(smsCode)) {
-//			if (null == shareId) {
-//				return "redirect:/reg?errCode=4";
-//			} else {
-//				return "redirect:/reg?errCode=4&shareId=" + shareId;
-//			}
-//		}
-		
-		if("phone".equalsIgnoreCase(regist_method)){
-			username = mobile;
+		if (!codeBack.equalsIgnoreCase(code)) {
+			if (null == shareId) {
+				return "redirect:/reg?errCode=1&name= " + username + "&carCode=" + carCode;
+			} else {
+				return "redirect:/reg?errCode=1&shareId=" + shareId + "&name= " + username + "&carCode=" + carCode;
+			}
 		}
-		
-		if("email".equalsIgnoreCase(regist_method)){
+
+		if (null != email) {
 			username = email;
 		}
-		
-		TdUser user = tdUserService.findByUsername(username);
 
-//		if (null != user) {
-//			if (null == shareId) {
-//				return "redirect:/reg?errCode=2";
-//			} else {
-//				return "redirect:/reg?errCode=2&shareId=" + shareId;
-//			}
-//		}
+		if (null != mobile) {
+			username = mobile;
+		}
+		TdUser user = tdUserService.addNewUser(null, username, password, mobile, email, carCode);
 
-		user = tdUserService.addNewUser(null, username, password, mobile, email, carCode);
-
-//		if (null == user) {
-//			if (null == shareId) {
-//				return "redirect:/reg?errCode=3";
-//			} else {
-//				return "redirect:/reg?errCode=3&shareId=" + shareId;
-//			}
-//		}
+		if (null == user) {
+			if (null == shareId) {
+				return "redirect:/reg?errCode=3";
+			} else {
+				return "redirect:/reg?errCode=3&shareId=" + shareId;
+			}
+		}
 
 		user = tdUserService.save(user);
-
-		// 奖励分享用户
-//		if (null != shareId) {
-//			TdUser sharedUser = tdUserService.findOne(shareId);
-//
-//			if (null != sharedUser && sharedUser.getRoleId().equals(0L)) {
-//				TdSetting setting = tdSettingService.findTopBy();
-//				TdUserPoint userPoint = new TdUserPoint();
-//
-//				if (null != setting) {
-//					userPoint.setPoint(setting.getRegisterSharePoints());
-//				} else {
-//					userPoint.setPoint(0L);
-//				}
-//
-//				if (null != sharedUser.getTotalPoints()) {
-//					userPoint.setTotalPoint(sharedUser.getTotalPoints() + userPoint.getPoint());
-//				} else {
-//					userPoint.setTotalPoint(userPoint.getPoint());
-//				}
-//
-//				userPoint.setUsername(sharedUser.getUsername());
-//				userPoint.setDetail("用户分享网站成功奖励");
-//
-//				userPoint = tdUserPointService.save(userPoint);
-//
-//				sharedUser.setTotalPoints(userPoint.getTotalPoint()); // 积分
-//				tdUserService.save(sharedUser);
-//			}
-//		}
 
 		request.getSession().setAttribute("username", username);
 
@@ -207,12 +146,11 @@ public class TdRegController {
 			return "redirect:" + referer;
 		}
 
-		return "redirect:/";
-//		if (null == shareId) {
-//			return "redirect:/user";
-//		}
+		if (null == shareId) {
+			return "redirect:/user";
+		}
 
-//		return "redirect:/user?shareId=" + shareId;
+		return "redirect:/user?shareId=" + shareId;
 	}
 
 	@RequestMapping(value = "/code", method = RequestMethod.GET)
@@ -286,6 +224,7 @@ public class TdRegController {
 
 		/**
 		 * 增加判断用户通过邮箱注册时，邮箱是否与已有用户注册的邮箱重复的逻辑判断
+		 * 
 		 * @author dengxiao
 		 */
 		if (type.equalsIgnoreCase("email")) {

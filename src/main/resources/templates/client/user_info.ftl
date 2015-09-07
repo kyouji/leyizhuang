@@ -53,8 +53,12 @@ function submitInfo()
               <input id="RadioGroup1_1" type="radio" value="女" name="sex"<#if user.sex?? && user.sex=="女">checked="checked" </#if>/>
                                     女
             </li>
-            <li>   
-               <span>&emsp; 生日：</span><input type="text" value="${user.birthday?string("yyyy-MM-dd")}" style="width:160px;height:30px;" id="EntTime" name="EntTime" onclick="return showCalendar('EntTime', 'y-mm-dd');"  />
+            <li>
+               <#if user.birthday??>   
+                    <span>&emsp; 生日：</span><input type="text" value="${user.birthday?string("yyyy-MM-dd")}" style="width:160px;height:30px;" id="EntTime" name="EntTime" onclick="return showCalendar('EntTime', 'y-mm-dd');"  />
+               <#else>
+                    <span>&emsp; 生日：</span><input type="text" style="width:160px;height:30px;" id="EntTime" name="EntTime" onclick="return showCalendar('EntTime', 'y-mm-dd');"  />
+               </#if>
             </li>
             <li><span>所在地：</span>
               <input id="detailAddress" type="text" name="detailAddress" datatype="*" class="Input" value="${user.detailAddress!''}" />
