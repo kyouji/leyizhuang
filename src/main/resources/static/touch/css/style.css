@@ -67,7 +67,10 @@ button{vertical-align:middle;}
 .today_hot .title .phone_daq span{padding:0 10%;font-family:"Aparajita";font-style:italic;color:#999999;}
 .today_hot .title .more{width:20%;text-align:right;font-size: 0.6em;margin-top:3px;}
 .today_hot .title .more a{text-align:right;color:#999999;}
-.today_hot .phone_details li{width: 33%;/*height:240px;*/padding:2% 0;}
+.today_hot .phone_details li{width: 33%;height:240px;padding:2% 0;}
+@media screen and (max-width:640px) {
+.today_hot .phone_details li{width: 33%;height:180px;padding:2% 0;}
+} 
 .today_hot .phone_details li .name{font-size: 0.4em;font-weight:700;}
 /*.today_hot .phone_details li .feature{color:#666666;}*/
 .today_hot .phone_details li .discount_price{font-size: 0.4em;color:#f00;}
@@ -79,6 +82,8 @@ button{vertical-align:middle;}
 .today_hot .phone_details .daquan_4{border-right:solid 1px #f3f3f3;height: 190px;}
 .today_hot .phone_details .daquan_5{border-right:solid 1px #f3f3f3;height: 190px;}
 .today_hot .phone_details .daquan_6{height: 190px;}
+
+
 
 /*底部导航*/
 .foot_nav{width:100%;overflow:hidden;background:#f3f3f3;border-bottom:solid 1px #FFFFFF;}

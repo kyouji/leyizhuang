@@ -92,7 +92,7 @@
     <#if speciaPrice_list?? && speciaPrice_list?size gt 0 >
 	    <div class="today_hot">
 	    	<ul class="title">今日爆款</ul>
-	        <ul>
+            <ul>
 				<#list speciaPrice_list as item>
 					<#if item_index lt 4>
 						<li>

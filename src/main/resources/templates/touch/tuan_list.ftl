@@ -96,12 +96,11 @@
         <!--导航菜单-->
         <#include "/touch/common_navi.ftl">
     
-        <!--即将开团-->
+        <!--即将开团
         <#if going_goods_list??&&going_goods_list?size gt 0>
             <div class="all_hot">
-                <div class="title">即将开团<!--<label>每天<span>9:30</span>上新</label>--></div>
+                <div class="title">即将开团</div>
         
-                <!--滑动图片-->        
                 <div class="box_163css">
                     <div id="wrapper" style="overflow: hidden;">
                         <div id="scroller" style="-webkit-transition-property: -webkit-transform; transition-property: -webkit-transform; -webkit-transform-origin: 0px 0px 0px; -webkit-transform: translate3d(0px, 0px, 0px);">
@@ -140,11 +139,9 @@
                         <div id="next" onclick="myScroll.scrollToPage(&#39;next&#39;, 0);return false">&nbsp;</div>
                     </div>
                 </div>
-                <!--滑动图片end-->
-                
             </div>
         </#if>
-    
+        -->
         <#if tuan_goods_list??&&tuan_goods_list?size gt 0>
             <div class="all_hot">
                 <ul class="title">正在团购</ul>
