@@ -42,16 +42,16 @@ $(document).ready(function(){
   <div class="main">
   <form id="form1" method="post" action="/touch/reg">
     <div class="logintext">
-        <input class="logintext01" name="username" type="text" datatype="s6-20" placeholder="手机号/邮箱"/>
+        <input class="logintext01" name="mobile" type="text" datatype="m" placeholder="手机号" ajaxurl="/touch/reg/check/username" nullmsg="请输入手机号！" errormsg="手机号码格式不正确！"/>
     </div>
     <div class="logintext">
         <input class="logintext02" name="password" type="password" placeholder="请输入密码" datatype="s6-20"/>
     </div>
     <div class="logintext">
-        <input class="logintext02" type="password" placeholder="请输入密码" recheck="password"/>
+        <input class="logintext02" name="repassword" type="password" placeholder="请再次输入密码" datatype="*" recheck="password" nullmsg="请再次输入密码！" errormsg="两次输入的密码不一致！"/>
     </div>
     <div class="logintext logintext_y">
-        <input type="text" class="logintext02" name="code" datatype="s4-4"/>
+        <input type="text" class="logintext02" name="code" datatype="*" ajaxurl="/touch/reg/check/yzm"/ nullmsg="请输入验证码！" errormsg="验证码错误！">
     </div>
     <a href="javascript:;" class="login_yzm"><img onclick="this.src = '/code?date='+Math.random();" src="/code" /></a>
     <div class="clear"></div>
@@ -64,20 +64,5 @@ $(document).ready(function(){
   
 </section>
 <div class="clear h15"></div>
-<section class="botlogin">
-  <#if username??>
-  <a href="/touch/user">${username!''}</a>
-  <a class="ml20" href="/touch/logout">退出</a>
-  <#else>
-  <a href="/touch/login">登录</a><a class="ml20" href="/touch/reg">注册</a>
-  </#if>
-  <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
-</section>
-<footer class="comfoot main">
-    <a href="/">电脑版</a>
-    <a href="/touch">触屏版</a>
-</footer>
-<p class="bottext mainbox">${site.copyright!''}</p>
-<p class="bottext mainbox">${site.icpNumber!''}</p>
 </body>
 </html>

@@ -1,12 +1,17 @@
 package com.ynyes.zphk.touch;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.zphk.entity.TdSetting;
 import com.ynyes.zphk.entity.TdUser;
@@ -92,19 +97,6 @@ public class TdTouchRegController {
                     Long shareId,
                     HttpServletRequest request){
         String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
-        String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
-        
-        if (null == codeBack || null == smsCodeSave)
-        {
-            if (null == shareId)
-            {
-                return "redirect:/touch/reg";
-            }
-            else
-            {
-                return "redirect:/touch/reg?shareId=" + shareId;
-            }
-        }
         
         if (!codeBack.equalsIgnoreCase(code))
         {
@@ -118,16 +110,8 @@ public class TdTouchRegController {
             }
         }
         
-        if (!smsCodeSave.equalsIgnoreCase(smsCode))
-        {
-            if (null == shareId)
-            {
-                return "redirect:/reg?errCode=4";
-            }
-            else
-            {
-                return "redirect:/reg?errCode=4&shareId=" + shareId;
-            }
+        if(null != mobile){
+        	username = mobile;
         }
         
         TdUser user = tdUserService.findByUsername(username);
@@ -160,44 +144,6 @@ public class TdTouchRegController {
         
         user = tdUserService.save(user);
         
-        // 奖励分享用户
-        if (null != shareId)
-        {
-            TdUser sharedUser = tdUserService.findOne(shareId);
-            
-            if (null != sharedUser && sharedUser.getRoleId().equals(0L))
-            {
-                TdSetting setting = tdSettingService.findTopBy();
-                TdUserPoint userPoint = new TdUserPoint();
-                
-                if (null != setting)
-                {
-                    userPoint.setPoint(setting.getRegisterSharePoints());
-                }
-                else
-                {
-                    userPoint.setPoint(0L);
-                }
-                
-                if (null != sharedUser.getTotalPoints())
-                {
-                    userPoint.setTotalPoint(sharedUser.getTotalPoints() + userPoint.getPoint());
-                }
-                else
-                {
-                    userPoint.setTotalPoint(userPoint.getPoint());
-                }
-                
-                userPoint.setUsername(sharedUser.getUsername());
-                userPoint.setDetail("用户分享网站成功奖励");
-                
-                userPoint = tdUserPointService.save(userPoint);
-                
-                sharedUser.setTotalPoints(userPoint.getTotalPoint()); // 积分
-                tdUserService.save(sharedUser);
-            }
-        }
-        
         request.getSession().setAttribute("username", username);
         
         String referer = (String) request.getAttribute("referer");
@@ -214,4 +160,28 @@ public class TdTouchRegController {
         
         return "redirect:/touch/user?shareId=" + shareId;
     }
+    
+    @RequestMapping(value = "/touch/reg/check/{type}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> validateForm(@PathVariable String type,String param,HttpServletRequest request) {
+		Map<String, String> res = new HashMap<String, String>();
+		
+		res.put("status", "n");
+		if("username".equalsIgnoreCase(type)){
+			TdUser user = tdUserService.findByUsername(param);
+			if(null != user){
+				res.put("info",	"该用户已经存在！");
+				return res;
+			}
+		}
+		if("yzm".equalsIgnoreCase(type)){
+			String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
+			if(!param.equalsIgnoreCase(codeBack)){
+				res.put("info", "验证码错误！");
+				return res;
+			}
+		}
+		res.put("status", "y");
+		return res;
+	}
 }

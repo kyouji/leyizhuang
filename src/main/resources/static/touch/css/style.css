@@ -60,17 +60,17 @@ button{vertical-align:middle;}
 .today_hot ul li{float:left;width:50%;}
 .today_hot ul li p{margin:0 auto;/* padding:2% 0; */ text-align:center;font-size:0.7em;}
 .today_hot ul li p a{display:block;}
-.today_hot ul li .feature{display:block;width:80%;height:16px;overflow:hidden;font-size:0.4em;color:#666666;}
+.today_hot ul li .feature{display:block;width:80%;height:15px;overflow:hidden;font-size:0.4em;color:#666666;margin-top:5px;}
 
 /*手机大全*/
 .today_hot .title .phone_daq{width: 80%;font-size:0.8em;}
 .today_hot .title .phone_daq span{padding:0 10%;font-family:"Aparajita";font-style:italic;color:#999999;}
 .today_hot .title .more{width:20%;text-align:right;font-size: 0.6em;margin-top:3px;}
 .today_hot .title .more a{text-align:right;color:#999999;}
-.today_hot .phone_details li{width: 33%;height:240px;padding:2% 0;}
-@media screen and (max-width:640px) {
+.today_hot .phone_details li{width: 33%;padding:2% 0;}
+/*@media screen and (max-width:640px) {
 .today_hot .phone_details li{width: 33%;height:180px;padding:2% 0;}
-} 
+} */
 .today_hot .phone_details li .name{font-size: 0.4em;font-weight:700;}
 /*.today_hot .phone_details li .feature{color:#666666;}*/
 .today_hot .phone_details li .discount_price{font-size: 0.4em;color:#f00;}
@@ -120,3 +120,6 @@ button{vertical-align:middle;}
 .footer ul li .ic_3{background:url(../images/foot_icon_3.png) no-repeat center 0;background-size:30px;}
 .footer ul li .ic_4{background:url(../images/foot_icon_4.png) no-repeat center 0;background-size:30px;}
 
+
+
+.index_photo{width:50%;}

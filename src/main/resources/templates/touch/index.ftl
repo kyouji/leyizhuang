@@ -95,11 +95,11 @@
             <ul>
 				<#list speciaPrice_list as item>
 					<#if item_index lt 4>
-						<li>
+						<li style="margin:10px 0;">
 							<a class="tj_1" href="/touch/goods/${item.id?c}">
-								<p class="name">${item.title!""}</p>
+								<p class="name" style="font-size:0.5em;">${item.title!""}</p>
 								<p class="feature">${item.subTitle!""}</p>
-								<p class="photo">
+								<p class="index_photo">
 									<img src="${item.coverImageUri!""}" />
 								</p>
 							</a>
@@ -128,10 +128,9 @@
         	<#list top_cat_goods_page0.content as item>
         		<#if item_index lt 6>
 		        	<li class="daquan_1">
-		                <p class="photo">
+		                <p class="index_photo">
 		                	<a href="/touch/goods/${item.id?c}"><img src="${item.coverImageUri!""}" /></a>
 		                </p>
-		                <p class="name">性价比之王</p>
 		                <p class="feature">${item.title!""}</p>
 		                <p class="discount_price">
 		                	<b><del>市场价￥<span>${item.marketPrice!"0.00"}</span></del><br />惠客价￥<span>${item.salePrice!"0.00"}</span></b>
@@ -159,10 +158,9 @@
         	<#list top_cat_goods_page1.content as item>
         		<#if item_index lt 6>
 		        	<li class="daquan_1">
-		                <p class="photo">
+		                <p class="index_photo">
 		                	<a href="/touch/goods/${item.id?c}"><img src="${item.coverImageUri!""}" /></a>
 		                </p>
-		                <p class="name">性价比之王</p>
 		                <p class="feature">${item.title!""}</p>
 		                <p class="discount_price">
 		                	<b><del>￥<span>${item.marketPrice!"0.00"}</span></del><br />￥<span>${item.salePrice!"0.00"}</span></b>
@@ -191,10 +189,9 @@
         	<#list top_cat_goods_page2.content as item>
         		<#if item_index lt 6>
 		        	<li class="daquan_1">
-		                <p class="photo">
+		                <p class="index_photo">
 		                	<a href="/touch/goods/${item.id?c}"><img src="${item.coverImageUri!""}" /></a>
 		                </p>
-		                <p class="name">性价比之王</p>
 		                <p class="feature">${item.title!""}</p>
 		                <p class="discount_price">
 		                	<b><del>￥<span>${item.marketPrice!"0.00"}</span></del><br />￥<span>${item.salePrice!"0.00"}</span></b>
@@ -223,10 +220,9 @@
         	<#list top_cat_goods_page3.content as item>
         		<#if item_index lt 6>
 		        	<li class="daquan_1">
-		                <p class="photo">
+		                <p class="index_photo">
 		                	<a href="/touch/goods/${item.id?c}"><img src="${item.coverImageUri!""}" /></a>
 		                </p>
-		                <p class="name">性价比之王</p>
 		                <p class="feature">${item.title!""}</p>
 		                <p class="discount_price">
 		                	<b><del>￥<span>${item.marketPrice!"0.00"}</span></del><br />￥<span>${item.salePrice!"0.00"}</span></b>

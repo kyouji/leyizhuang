@@ -371,7 +371,7 @@ $(function(){
             <div class="phones_left">
                 <#list top_category_list as item>
                     <#if item_index == 0>
-                        <a href="${item.linkUri!''}">1F${item.title!""}</a>
+                        <a href="/list/${item.id}">1F${item.title!""}</a>
                     </#if>
                 </#list>
             </div>
