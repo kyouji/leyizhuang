@@ -276,7 +276,8 @@ public class TdGoodsController {
 							selectOneGoodsList.add(pdtGoods);
 						}
 
-						if (!selectTwoList.contains(s2)) {
+						if (!selectTwoList.contains(s2)
+                                && sOne.equalsIgnoreCase(s1)) {
 							selectTwoList.add(s2);
 							selectTwoGoodsList.add(pdtGoods);
 						}
@@ -305,12 +306,15 @@ public class TdGoodsController {
 							selectOneGoodsList.add(pdtGoods);
 						}
 
-						if (!selectTwoList.contains(s2)) {
+						if (!selectTwoList.contains(s2)
+                                && sOne.equalsIgnoreCase(s1)) {
 							selectTwoList.add(s2);
 							selectTwoGoodsList.add(pdtGoods);
 						}
 
-						if (!selectThreeList.contains(s3)) {
+						if (!selectThreeList.contains(s3)
+                                && sTwo.equalsIgnoreCase(s2)
+                                && sOne.equalsIgnoreCase(s1)) {
 							selectThreeList.add(s3);
 							selectThreeGoodsList.add(pdtGoods);
 						}

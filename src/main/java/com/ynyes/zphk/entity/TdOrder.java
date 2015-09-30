@@ -218,8 +218,21 @@ public class TdOrder {
     // 是否在线付款
     @Column
     private Boolean isOnlinePay;
+    
+    //订单支付过期时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date orderTimeExpire;
+    
+    public Date getOrderTimeExpire() {
+		return orderTimeExpire;
+	}
 
-    public Long getId() {
+	public void setOrderTimeExpire(Date orderTimeExpire) {
+		this.orderTimeExpire = orderTimeExpire;
+	}
+
+	public Long getId() {
         return id;
     }
 
