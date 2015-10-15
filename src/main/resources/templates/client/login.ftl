@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta property="qc:admins" content="0505761457620031006375" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>正品惠客-登录</title>
@@ -38,7 +39,7 @@
         }
         $.ajax({
             type: "post",
-            url: "login",
+            url: "/login",
             data: { "username": username, "password": password },
             dataType: "json",
             success: function (data) { 
@@ -108,14 +109,14 @@
                 <a>丨</a>
                 <a href="/reg">立即注册</a>
             </div>
-            <!--
             <div class="agree_1">您还可以使用以下正品惠客合作伙伴登录：</div>
             <div class="agree_2">
-                <a href="#"><img src="/client/images/weixin.png" /></a>
-                <a href="#"><img src="/client/images/qq.png" /></a>
-                <a href="#"><img src="/client/images/weibo.png" /></a>
-                <a href="#"><img src="/client/images/zhifubao.png" /></a>
+                <a id=""><img src="/client/images/weixin.png" /></a>
+                <a id="qqLogin"><img src="/client/images/qq.png" /></a>
+                <a href="/login/alipay_login"><img src="/client/images/zhifubao.png" /></a>
             </div>
+            <!--
+                <a href="#"><img src="/client/images/weibo.png" /></a>
             -->
         </div>
     </div>

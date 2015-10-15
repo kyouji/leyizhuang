@@ -4,6 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><#if site??>${site.seoTitle!''}-</#if>首页</title>
+<meta property="qc:admins" content="0505761457620031006375" />
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />

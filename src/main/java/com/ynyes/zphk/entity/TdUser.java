@@ -202,7 +202,19 @@ public class TdUser {
     @Column
     private Long pointGetByShareGoods;
     
-    public Long getId() {
+    //支付宝用户号
+    @Column
+    private String alipayUserId;
+
+	public String getAlipayUserId() {
+		return alipayUserId;
+	}
+
+	public void setAlipayUserId(String alipayUserId) {
+		this.alipayUserId = alipayUserId;
+	}
+
+	public Long getId() {
         return id;
     }
 

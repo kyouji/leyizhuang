@@ -25,15 +25,19 @@ public class AlipayConfig {
 	
 	//↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	// 合作身份者ID，以2088开头由16位纯数字组成的字符串
-	public static String partner = "";
+	public static String partner = "2088021968240099";
 	// 商户的私钥
-	public static String key = "";
-
+	public static String key = "z8fqj5cb62fd7n6vlyasplboqejssjb0";
+	
+	//必填，页面跳转同步通知页面路径
+	public static String return_url = "http://127.0.0.1:8010/login/alipay_return_url";
+		
+	//需http://格式的完整路径，不允许加?id=123这类自定义参数
 	//↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	
 
 	// 调试用，创建TXT日志文件夹路径
-	public static String log_path = "D:\\";
+	public static String log_path = "D:\\alipay\\log.txt";
 
 	// 字符编码格式 目前支持 gbk 或 utf-8
 	public static String input_charset = "utf-8";

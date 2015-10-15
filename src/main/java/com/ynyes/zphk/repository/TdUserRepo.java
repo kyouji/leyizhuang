@@ -50,4 +50,10 @@ public interface TdUserRepo extends
      * @author dengxiao
      */
     TdUser findByEmail(String email);
+    
+    /**
+     * 通过支付宝用户号查找用户的方法
+     * @author dengxiao
+     */
+    TdUser findByAlipayUserId(String alipayUserId);
 }

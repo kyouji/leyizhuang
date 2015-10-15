@@ -392,4 +392,15 @@ public class TdUserService {
     	}
     	return repository.findByEmail(email);
     }
+    
+    /**
+     * 通过支付宝用户号查找用户的方法
+     * @author dengxiao
+     */
+    public TdUser findByAlipayUserId(String alipayUserId){
+    	if(null == alipayUserId){
+    		return null;
+    	}
+    	return repository.findByAlipayUserId(alipayUserId);
+    }
 }
