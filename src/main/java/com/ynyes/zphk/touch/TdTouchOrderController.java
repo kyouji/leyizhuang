@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ynyes.zphk.controller.front.AbstractPaytypeService;
+import com.ynyes.zphk.controller.front.AbstractPaytypeController;
 import com.ynyes.zphk.entity.TdCartGoods;
 import com.ynyes.zphk.entity.TdCoupon;
 import com.ynyes.zphk.entity.TdCouponType;
@@ -48,7 +48,7 @@ import com.ynyes.zphk.service.TdUserService;
  */
 @Controller
 @RequestMapping("/touch/order")
-public class TdTouchOrderController  extends AbstractPaytypeService{
+public class TdTouchOrderController  extends AbstractPaytypeController{
 
     @Autowired
     private TdCartGoodsService tdCartGoodsService;
@@ -531,7 +531,7 @@ public class TdTouchOrderController  extends AbstractPaytypeService{
 				map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());
 
 				// 支付方式列表
-				setPayTypes(map);
+				setPayTypes(map, true, false, req);
 
 				// 配送方式
 				map.addAttribute("delivery_type_list", tdDeliveryTypeService.findByIsEnableTrue());
