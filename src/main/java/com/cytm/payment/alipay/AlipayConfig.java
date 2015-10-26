@@ -1,23 +1,26 @@
 package com.cytm.payment.alipay;
 
 public class AlipayConfig {
-    // ISO-8859-1编码
+	// ISO-8859-1编码
     public static final String ISO_8859_1 = "ISO-8859-1";
     
     // 编码方式
     public static final String CHARSET = "UTF-8";
     
     // 合作身份者ID
-    public static final String PARTNER = "2088711810860604";
+    public static final String PARTNER = "2088021968240099";
+//    public static final String PARTNER = "2088711810860604";
 
     // 收款支付宝账号
-    public static String SELLER_EMAIL = "2309643626@qq.com";
+    public static String SELLER_EMAIL = "13330205177@189.cn";
+//    public static String SELLER_EMAIL = "2309643626@qq.com";
     
     // 收款支付宝ID
     public static String SELLER_ID = PARTNER;
 
     // 商户的私钥
-    public static String KEY = "1sfhrsrza6k9hwy0y07c902lc9ayhpvs";
+    public static String KEY = "z8fqj5cb62fd7n6vlyasplboqejssjb0";
+//    public static String KEY = "1sfhrsrza6k9hwy0y07c902lc9ayhpvs";
 
     // 签名方式
     public static String SIGN_TYPE = "MD5";
@@ -29,7 +32,7 @@ public class AlipayConfig {
     public static final String PAYMENT_TYPE = "1";
     
     // 合作伙伴名称
-    public static final String SUBJECT = "云南车有同盟商贸有限公司";
+    public static final String SUBJECT = "重庆百域科技有限公司";
     
     // 发货快递
     public static final String DEFAULT_EXPRESS = "EXPRESS";

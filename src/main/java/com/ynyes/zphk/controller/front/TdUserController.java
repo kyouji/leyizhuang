@@ -56,7 +56,7 @@ import com.ynyes.zphk.util.ClientConstant;
  *
  */
 @Controller
-public class TdUserController extends AbstractPaytypeService {
+public class TdUserController extends AbstractPaytypeController {
 
 	@Autowired
 	private TdUserService tdUserService;
@@ -366,7 +366,7 @@ public class TdUserController extends AbstractPaytypeService {
 		}
 
 		// 支付方式列表
-		setPayTypes(map);
+		setPayTypes(map, true, false, req);
 
 		return "/client/user_order_detail";
 	}

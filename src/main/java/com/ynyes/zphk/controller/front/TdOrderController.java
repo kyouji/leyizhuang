@@ -62,7 +62,7 @@ import net.sf.json.JSONObject;
  */
 @Controller
 @RequestMapping("/order")
-public class TdOrderController extends AbstractPaytypeService {
+public class TdOrderController extends  AbstractPaytypeController{
 
 	private static final String PAYMENT_ALI = "ALI";
 
@@ -104,6 +104,9 @@ public class TdOrderController extends AbstractPaytypeService {
 
 	@Autowired
 	private TdGoodsCombinationService combinationService;
+	
+//	@Autowired
+//    private PaymentChannelAlipay payChannelAlipay;
 
 	@RequestMapping(value = "/info")
 	public String orderInfo(HttpServletRequest req, HttpServletResponse resp, ModelMap map) {
@@ -164,7 +167,7 @@ public class TdOrderController extends AbstractPaytypeService {
 		map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());
 
 		// 支付方式列表
-		setPayTypes(map);
+		setPayTypes(map, true, false, req);
 
 		// 配送方式
 		map.addAttribute("delivery_type_list", tdDeliveryTypeService.findByIsEnableTrue());
@@ -525,6 +528,7 @@ public class TdOrderController extends AbstractPaytypeService {
 			req.setAttribute("orderNumber", order.getOrderNumber());
 
 			String payCode = payType.getCode();
+			
 			if (PAYMENT_ALI.equals(payCode)) {
 				PaymentChannelAlipay channelAlipay = new PaymentChannelAlipay();
 				payForm = channelAlipay.getPayFormData(req);
@@ -575,7 +579,8 @@ public class TdOrderController extends AbstractPaytypeService {
 	 */
 	@RequestMapping(value = "/pay/notify_alipay")
 	public void payNotifyAlipay(ModelMap map, HttpServletRequest req, HttpServletResponse resp) {
-		new PaymentChannelAlipay().doResponse(req, resp);
+		PaymentChannelAlipay payChannelAlipay = new PaymentChannelAlipay();
+		payChannelAlipay.doResponse(req, resp);
 	}
 
 	/*
@@ -583,7 +588,7 @@ public class TdOrderController extends AbstractPaytypeService {
 	 */
 	@RequestMapping(value = "/pay/notify_cebpay")
 	public void payNotifyCEBPay(ModelMap map, HttpServletRequest req, HttpServletResponse resp) {
-		new PaymentChannelCEB().doResponse(req, resp);
+//		payChannelCEB.doResponse(req, resp);
 	}
 
 	/*
@@ -749,7 +754,7 @@ public class TdOrderController extends AbstractPaytypeService {
 		map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());
 
 		// 支付方式列表
-		setPayTypes(map);
+		setPayTypes(map, true, false, req);
 
 		// 配送方式
 		map.addAttribute("delivery_type_list", tdDeliveryTypeService.findByIsEnableTrue());
@@ -797,7 +802,7 @@ public class TdOrderController extends AbstractPaytypeService {
 		totalPrice += cart.getPrice();
 		map.addAttribute("selected_goods_list", selectedGoodsList);
 		map.addAttribute("totalPrice", totalPrice);
-		setPayTypes(map);
+		setPayTypes(map, true, false, req);
 		tdCommonService.setHeader(map, req);
 		return "/client/order_info";
 	}
