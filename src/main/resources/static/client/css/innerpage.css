@@ -64,7 +64,7 @@
 .details_details{ width: 560px; display:block; overflow:hidden;margin:0 15px; float:left;/* position:relative;*/}
 .details_details .de_title{ width:560px; height:50px; font-size:16px; font-weight:700; color:#333; line-height:24px; display:block; overflow:hidden;float:left;}
 .details_details .de_describe{ color:#0e5baa; float:left;}
-.details_details .de_price{ width:530px; height:72px; float:left;margin-top:10px; background:#3b93de url(../images/price_bg.png) repeat-x; color:#fff; line-height:28px; padding:13px 0 0 30px;}
+.details_details .de_price{ width:530px; height:72px; float:left;margin-top:10px; background:#b61d1d url(../images/price_bg.png) repeat-x; color:#fff; line-height:28px; padding:13px 0 0 30px;}
 .details_details .de_price label{ margin-left:30px; text-decoration:line-through;}
 .details_details .de_price b{ margin-left:30px; font-size:22px; font-weight:700;}
 
