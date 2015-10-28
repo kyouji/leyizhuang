@@ -2,14 +2,14 @@
 /* CSS Document */
 /* 我的正品惠客 */
 .navigation .nav .nav_submenu1{ width:190px; height:40px; background:#0e5baa; color:#ffffff; line-height:40px; font-size:18px;text-align:center; cursor:pointer; float:left;}
-a:hover {color:#0e5baa;}
+a:hover {color:#b61d1d;}
 .content .content_1 .content_1_2 ul li .nav_choiced{ color:#0e5baa;}
 /* 内容 */
 .content{ width:1200px; display:block; overflow:hidden;}
 .content .content_1,.content .content_2,.content .content_3 { float:left;}
 /* 左侧内容 */
 .content .content_1{ width:190px;}
-.content_1 .content_1_1{width: 190px;height: 11px; background-repeat: repeat-x; background-image: url(../images/icon-1.png); margin-bottom:20px;}
+.content_1 .content_1_1{width: 190px;height: 11px; background-repeat: repeat-x; background-image: url(/client/images/icon-1.png); margin-bottom:20px;}
 .content_1 .content_1_2{width: 160px;}
 .content_1 .content_1_2 ul{ border-top:1px dashed #e0dddd; margin-bottom:15px;}
 .content_1 .content_1_2 ul li{ list-style:url(../images/icon-2.png); line-height:24px; margin-left:30px; text-indent:-4px; *+text-indent:3px; }

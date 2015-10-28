@@ -2,7 +2,7 @@ li{ list-style:none;}
 a:hover{ text-decoration:none;}
 .content_right{ float:left;  padding-left:22px; padding-top:34px;}
 .content_right *{ _float:left;}
-.right_title{ height:26px; font-size:18px;  border-bottom:#043a84 2px solid; width:970px;}
+.right_title{ height:26px; font-size:18px;  border-bottom:#b61d1d 2px solid; width:970px;}
 .right_title a{ color:#333333; display:block; padding-left:20px; font-weight:bold;}
 
 .right_nav{ height:40px; width:968px; overflow:hidden; border:#e6e6e6 1px solid; *+margin-left:9px;  _margin-left:0px;}
@@ -17,7 +17,7 @@ a:hover{ text-decoration:none;}
 .right_product_nav li{ float:left; }
 .right_product_nav a{ height:40px; _height:40px; display:block; line-height:40px; line-height:40px; }
 .product_nav_01 a{ }
-.product_nav_02 a{ color:#0e5baa;}
+.product_nav_02 a{ color:#b61d1d;}
 .product_nav_03 a{ margin-left:88px; _margin-left:84px; _display:inline-block;}
 .product_nav_04 a{ margin-left:118px; _margin-left:122px; _display:inline-block; }
 .product_nav_05{ width:20px; height:24px; }
@@ -42,7 +42,7 @@ a:hover{ text-decoration:none;}
 .price03 { display:block; width:114px; height:130px;  text-align:center; border-right:#e6e6e6 1px solid;}
 .price03 div{ margin-top:56px; _margin-left:16px; _display:inline-block; }
 .price04{ display:block; width:114px; height:130px; }
-.price04 a{ display:block; width:70px; height:30px; background-image:url(../images/order_bacblue.png); background-repeat:no-repeat; background-position:center; line-height:30px; text-align:center; color:white; margin:auto; margin-top:48px;  _margin-left:22px; _display:inline-block;}
+.price04 a{ display:block; width:70px; height:30px; background-image:url(/client/images/order_bacblue.png); background-repeat:no-repeat; background-position:center; line-height:30px; text-align:center; color:white; margin:auto; margin-top:48px;  _margin-left:22px; _display:inline-block;}
 
 .price06 a{ display:block; width:114px; height:130px;  line-height:130px;  text-align:center; border-right:#e6e6e6 1px solid; color:#c9c5c5;}
 .price07{ display:block; width:114px; height:130px;  }

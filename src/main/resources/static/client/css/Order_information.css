@@ -98,7 +98,7 @@ div{ margin:0 auto;}
 .shipping_address .address .address_1{float:left;margin-top:20px;margin-right:35px;width:533px;height:91px;border:solid 1px #dddddd; text-decoration:none;}
 .shipping_address .address .address_1:hover{background:url(../images/current_address.png) no-repeat;}
 .shipping_address .address .address_1 p{margin-top:9px;margin-left:30px;}
-.shipping_address .address .m_address{float:left;margin-top:20px;color:#0e5baa;}
+.shipping_address .address .m_address{float:left;margin-top:20px;color:#b61d1d;}
 
 /*配送/支付方式*/
 .delivery_payment{width:1200px;margin-top:40px;}
@@ -108,8 +108,8 @@ div{ margin:0 auto;}
 .delivery_payment .payment_method{margin-top:10px;margin-left:20px;}
 .delivery_payment .payment_method input{vertical-align:middle;margin-right:10px;}
 .delivery_payment .payment_method .wechat,.online_banking{padding-left:63px;margin-top:10px;margin-bottom:10px;}
-.delivery_payment .payment_method .online_banking_right{width:1064px;border:solid 1px #ededed;margin-top:14px;display:block;overflow:hidden; padding-bottom:15px;}
-.delivery_payment .payment_method .online_banking_right li{float:left;width:180px;margin-top:16px;}
+.delivery_payment .payment_method .online_banking_right{width:1000px;border:solid 1px #ededed;margin-top:14px;display:block;overflow:hidden; padding-bottom:15px;}
+.delivery_payment .payment_method .online_banking_right li{float:left;width:180px;margin:8px;}
 .delivery_payment .payment_method .online_banking_right img{vertical-align:middle;}
 
 /*订单详情*/

@@ -141,7 +141,7 @@ div{ margin:0 auto;}
 /*加入购物车成功*/
 .complete_payment .success_join{overflow:hidden;font-size:18px;color:#ef7c00;}
 .complete_payment .acceptable{margin-top:20px;font-size:14px;}
-.complete_payment .acceptable a{color:#0e5baa;}
+.complete_payment .acceptable a{color:#b61d1d;}
 .complete_payment .now_settlement a{display:block;margin-left:70px;margin-top:40px;width:127px;height:40px;line-height:40px;font-size:18px;text-decoration:none;text-align:center;color:#FFF;background:#ef7c00;border:solid 1px #e47600;}
 
 /*底部*/

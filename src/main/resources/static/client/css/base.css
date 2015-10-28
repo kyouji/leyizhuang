@@ -50,7 +50,7 @@ div{ margin:0 auto;}
 .top_all .top .top_left{ width:350px; float:left;}
 .top_all .top .top_left .top_left_welcome{ float:left; margin-right:30px;}
 .top_all .top .top_left a{ margin-left:10px; color:#999999;}
-.top_all .top .top_left a:hover{ color:#0e5baa;}
+.top_all .top .top_left a:hover{ color:#b61d1d;}
 
 .top_all .top .top_right{ width:230px; float:right;}
 .top_all .top .top_right a{ float:left;}
@@ -84,12 +84,12 @@ div{ margin:0 auto;}
 .navigation .nav .nav_nav ul li{ _height:40px;float:left; display:block; overflow:hidden; font-size:16px; font-weight:bold;} 
 .navigation .nav .nav_nav ul li a{ display:block; overflow:hidden; height:37px; padding:0 14px;_padding:0 5px; text-decoration:none; color:#333333; margin:0 10px;_width:100px; _height:40px;_margin:0;}
 .navigation .nav .nav_nav ul li a:hover{ color:#b61d1d; border-bottom:3px #b61d1d solid;}
-.navigation .nav .nav_nav ul li .nav_choiced{ color:#0e5baa; border-bottom:3px #043a84 solid;}
+.navigation .nav .nav_nav ul li .nav_choiced{ color:#b61d1d; border-bottom:3px #043a84 solid;}
 .navigation .nav .nav_num{ width:220px; height:40px; text-align:right; float:right; color:#ef7c00; font-size:14px; font-weight:bold; line-height:40px;position:relative;}
 
 
 /*面包屑导航 */
-.crumb{ width:1180px; height:40px; line-height:40px; color:#999999; padding-left:20px; background:url(../images/icons.png) no-repeat -290px -21px;}
+.crumb{ width:1180px; height:40px; line-height:40px; color:#999999; padding-left:20px; background:url(/client/images/icons.png) no-repeat -290px -21px;}
 
 
 
@@ -135,7 +135,7 @@ div{ margin:0 auto;}
 	background:#fff;
 	margin:0 2px;}
 .pagebox .num a:hover {
-	background:#3b93de;
+	background:#b61d1d;
 	color:#fff;}
 .pagebox .num a.sel {
 	color:#666;
@@ -231,7 +231,7 @@ margin:0 2px;}
 .nav_more_dx01 {
     width:500px;
     float:left;
-    background-color:#0e5baa; position:absolute; left:-980px;top:40px;z-index:9999;
+    background-color:#b61d1d; position:absolute; left:-980px;top:40px;z-index:9999;
     display:none;}
 .nav_more_dx01 th {color:white;
     vertical-align:top;

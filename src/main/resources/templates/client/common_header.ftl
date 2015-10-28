@@ -65,7 +65,6 @@
 <!--头部-->
 <div class="header">
     <!--logo大小：190 58-->
-    <div class="header_logo"><a href="/"><img src="<#if site??>${site.logoUri!''}</#if>" /></a></div>
     <!--广告语大小：183 58-->
     <div class="header_ad">
         <#if top_small_ad_list??>

@@ -32,10 +32,10 @@ body{background:#f7f7f7;}
 
 /* 同意注册 */
 .register_content .content .agree{margin-top:20px;margin-left:290px;overflow:hidden;}
-.register_content .content .agree a{float:left;line-height:39px;color:#0e5baa;}
+.register_content .content .agree a{float:left;line-height:39px;color:#b61d1d;}
 .register_content .content .agree .btn{display:block; width:243px;height:39px;background:#ef7c00;border:solid 1px #c56701;color:#FFF; text-decoration:none; text-align:center;margin-right:20px;}
 .register_content .content .agree_1{margin-top:20px;margin-left:300px;_margin-top:80px;_margin-left:300px;}
-.register_content .content .agree_1 a{color:#0e5baa;}
+.register_content .content .agree_1 a{color:#b61d1d;}
 
 /* 底部 */
 .register_footer{margin:0 auto;padding-bottom:20px;}
