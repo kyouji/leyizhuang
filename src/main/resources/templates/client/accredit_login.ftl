@@ -80,7 +80,12 @@ function cliLogin(){
 <div class="main">
     <!--QQ登录显示用户在Qzone的昵称-->
     <input type="hidden" name="mouseposY" <#if nickName??>id="qquser_id"<#else>id="alipayuser_id"</#if> value="${alipay_user_id!''}">
-<div class="contenta">
+    
+<div style="width:1200px;height:125px; text-align:center;line-height:160px;font-size:30px;">
+    正品惠客
+</div>
+
+<div class="contenta" style="height:350px;">
             <div class="lefta">
                 <h3><i style="background-color:#b61d1d;"></i>绑定已有账号</h3>
                <span> 用户名：</span><input type="text" id="txtUser"><br>
@@ -99,8 +104,31 @@ function cliLogin(){
             <div class="clear"></div>
        </div><!--logingbg END-->
 </div>
-<div align="center">
-<#include "/client/common_footer.ftl">
+
+<div style="width:1200px;margin:0 auto;min-height:20px;display:block;overflow:hidden;text-align:center;">
+<p style="width:1200px;float:left;display:block;">
+        <#if help_level0_cat_list??>
+            <#list help_level0_cat_list as item>
+                
+                    <a style="margin:0 10px;" href="/info/list/${help_id!'0'}?catId=${item.id!''}">${item.title!''}</a>
+                
+            </#list>
+        </#if>
+        </p>
 </div>
+
+  
+        <div style="text-align:center;margin-top:20px;">友情链接：
+            <#if site_link_list??>
+                <#list site_link_list as item>
+                    <a href="${item.linkUri!''}">${item.title!''}</a>
+                </#list>
+            </#if>
+            <br />
+            <span style="text-align:center;margin-top:20px;display:block;"> ${site.copyright!''}</span>
+           <span style="text-align:center;margin-top:20px;display:block;">网站建设技术支持：重庆天度网络公司</span> 
+        </div>
+   
+
 </body>
 </html>

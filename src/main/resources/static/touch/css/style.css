@@ -14,7 +14,7 @@ button{vertical-align:middle;}
 
 /*顶部*/
 .zphk{width:100%;}
-.top{width: 96%;padding: 2%;background:#3b93de;overflow:hidden;}
+.top{width: 96%;padding: 2%;background:#b61d1d;overflow:hidden;}
 .top .title{float:left;width: 30%;line-height: 44px;color:#FFF; text-align:center;font-size:0.7em;}
 .top .title a{display:block;}
 .top .searchbox{float:right;width: 70%;}

@@ -22,10 +22,9 @@
 	<!--顶部标题与搜索框-->
 	<div class="top">
     	<p class="title">
-        	<a href="#"><img src="/touch/images/logo_1.png" /></a>
         </p>
         <p class="searchbox">
-   			<form style="float:right;width: 70%;" action="/touch/search" method="get" id="search_form" >
+   			<form style="margin:0 10%;width: 80%;" action="/touch/search" method="get" id="search_form" >
    				<#if keywords??>
         			<input style="display:block;width:100%;height:40px;font-size:0.6em;position:relative;padding:1%;border-radius:10px;border:none;" type="text" class="search" name="keywords" value="${keywords}"  />
         			<a style="display:block;position:absolute;right:0;top:25%;" class="search_photo" href="javascript:submitSearch()"><img src="/touch/images/search.gif" /></a>

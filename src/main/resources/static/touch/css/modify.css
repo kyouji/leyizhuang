@@ -37,7 +37,7 @@
 	font-size:0.9em; margin-top:10px;
 	 }
 .member_ch .textInput{width:88%;margin:0 5%;padding-left:2%;height:45px; border:1px #ddd solid; font-size:1.2em; }
-.ok_mainbox { width:94%;;background:#3b93de; padding: 10px 0; margin-left:3%; margin-top:10px;  text-align:center; border-radius:2px; -moz-border-radius:2px;-webkit-border-radius:2px;}
+.ok_mainbox { width:94%;;background:#b61d1d; padding: 10px 0; margin-left:3%; margin-top:10px;  text-align:center; border-radius:2px; -moz-border-radius:2px;-webkit-border-radius:2px;}
 .ok_mainbox a{ color:#fff;}
 
 .member_ch p{padding-left:5%;line-height:40px;}

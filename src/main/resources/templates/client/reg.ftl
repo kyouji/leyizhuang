@@ -49,9 +49,6 @@ $(document).ready(function(){
     <!--头部-->
     <div class="header">
     	<!--logo大小：190 58-->
-    	<div class="header_logo">
-        	<img src="<#if site??>${site.logoUri!''}</#if>" />
-        </div>
         <div class="user_registration">用户注册</div>
     </div>
     

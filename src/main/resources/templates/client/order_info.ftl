@@ -81,7 +81,7 @@
             <#if pay_type_list_third?? && (pay_type_list_third?size > 0)>
                 <#list pay_type_list_third as pay_type>
                     <#assign onlineBank=false/>
-                    <input class="pay_type_chk" name="payTypeId" type="radio" datatype="n" value="${pay_type.id?c!''}" fee="${pay_type.fee!'0'}" nullmsg="请选择支付方式!" />支付宝支付
+                    <input class="pay_type_chk" name="payTypeId" checked="" type="radio" datatype="n" value="${pay_type.id?c!''}" fee="${pay_type.fee!'0'}" nullmsg="请选择支付方式!" />支付宝支付
                 </#list>
             </#if>
                 <div class="wechat">
