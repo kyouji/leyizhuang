@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
+import com.ynyes.zphk.util.StringUtils;
 import com.ynyes.zphk.entity.TdAdType;
 import com.ynyes.zphk.entity.TdArticleCategory;
 import com.ynyes.zphk.entity.TdProductCategory;
@@ -152,8 +153,33 @@ public class TdCommonService {
 		 * 获取当前请求地址
 		 */
 		String basePath = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort()
-				+ req.getContextPath()+req.getRequestURI();
+				+ req.getContextPath() + req.getRequestURI();
 		map.addAttribute("basePath", basePath);
+	}
+
+	public static String getIp(HttpServletRequest request) {
+		if (request == null)
+			return "";
+		String ip = request.getHeader("X-Requested-For");
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("X-Forwarded-For");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_CLIENT_IP");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
 	}
 
 }

@@ -112,7 +112,7 @@
             <div class="agree_1">您还可以使用以下正品惠客合作伙伴登录：</div>
             <div class="agree_2">
                 <a id=""><img src="/client/images/weixin.png" /></a>
-                <a id="qqLogin"><img src="/client/images/qq.png" /></a>
+                <a id="qqLogin" href="/login/qq_login"><img src="/client/images/qq.png" /></a>
                 <a href="/login/alipay_login"><img src="/client/images/zhifubao.png" /></a>
             </div>
             <!--

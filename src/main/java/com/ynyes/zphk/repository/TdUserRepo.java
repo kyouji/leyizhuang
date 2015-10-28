@@ -56,4 +56,10 @@ public interface TdUserRepo extends
      * @author dengxiao
      */
     TdUser findByAlipayUserId(String alipayUserId);
+    
+    /**
+     * 通过QQ用户号查找用户
+     * @author dengxiao
+     */
+    TdUser findByQqUserId(String qqUserId);
 }

@@ -403,4 +403,15 @@ public class TdUserService {
     	}
     	return repository.findByAlipayUserId(alipayUserId);
     }
+    
+    /**
+     * 通过QQ用户账号查找用户
+     * @author dengxiao
+     */
+    public TdUser findByQqUserId(String qqUserId){
+    	if(null == qqUserId){
+    		return null;
+    	}
+    	return repository.findByQqUserId(qqUserId);
+    }
 }

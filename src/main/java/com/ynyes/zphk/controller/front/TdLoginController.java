@@ -19,6 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
+import com.qq.connect.QQConnectException;
+import com.qq.connect.api.OpenID;
+import com.qq.connect.api.qzone.UserInfo;
+import com.qq.connect.javabeans.AccessToken;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
+import com.qq.connect.oauth.Oauth;
 import com.ynyes.zphk.entity.TdUser;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdSettingService;
@@ -39,7 +45,7 @@ public class TdLoginController {
     
     @Autowired
     private TdCommonService tdCommonService;
-
+    
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(HttpServletRequest req, ModelMap map) {
         String username = (String) req.getSession().getAttribute("username");
@@ -232,8 +238,72 @@ public class TdLoginController {
 		}
 	}
     
-    @RequestMapping(value= "/login/qq_return_url"  , method = RequestMethod.GET)
-	public String qqReturnUrl(HttpServletRequest request, ModelMap map){
+    @RequestMapping(value= "/login/qq_return_url")
+	public String qqReturnUrl(String code, String state, HttpServletRequest request, ModelMap map){
+		tdCommonService.setHeader(map, request);
+		try {
+			System.err.println("code-------"+code);
+			System.err.println("state-------"+state);
+			AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
+			System.err.println("accessTokenObj--------"+accessTokenObj);
+			String accessToken = null, openID = null;
+			long tokenExpireIn = 0L;
+
+			if (accessTokenObj.getAccessToken().equals("")) {
+				// 我们的网站被CSRF攻击了或者用户取消了授权
+				// 做一些数据统计工作
+				System.err.print("没有获取到响应参数");
+			} else {
+				accessToken = accessTokenObj.getAccessToken();
+				System.err.println("accessToken-------"+accessToken);
+				
+				tokenExpireIn = accessTokenObj.getExpireIn();
+
+				request.getSession().setAttribute("demo_access_token", accessToken);
+				request.getSession().setAttribute("demo_token_expirein", String.valueOf(tokenExpireIn));
+
+				// 利用获取到的accessToken 去获取当前用的openid -------- start
+				OpenID openIDObj = new OpenID(accessToken);
+				openID = openIDObj.getUserOpenID();
+				System.err.println("openID-----------"+openID);
+
+				//利用获取到的accessToken,openid 去获取用户在Qzone的昵称
+				UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
+                UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
+                if (userInfoBean.getRet() == 0) {
+                   map.put("nickName",userInfoBean.getNickname());
+                }
+				
+				//根据openID查找用户
+				map.put("alipay_user_id", openID);
+				map.put("qq", "qq");
+				TdUser user = tdUserService.findByQqUserId(openID);
+				if(null == user){
+					//用户不存在，跳转绑定页面
+					return "/client/accredit_login";
+				}else{
+					//用户存在，修改最后登录时间，跳转首页
+					user.setLastLoginTime(new Date());
+					tdUserService.save(user);
+					request.getSession().setAttribute("username", user.getUsername());
+					request.getSession().setAttribute("usermobile", user.getMobile());
+					return "redirect:/";
+				}
+			}
+		} catch (QQConnectException e) {
+			
+		}
 		return "/client/error_404";
     }
+    
+    @RequestMapping(value = "/login/qq_login")
+    public void QQLogin(HttpServletResponse resp,HttpServletRequest req){
+    	resp.setContentType("text/html;charset=utf-8");
+		try {
+			resp.sendRedirect(new Oauth().getAuthorizeURL(req));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
 }

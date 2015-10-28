@@ -199,7 +199,7 @@ margin:0 2px;}
 .nav_more_dx {
     width:500px;
     float:left;
-    background-color:#0e5baa; position:absolute; left:-980px;top:40px;z-index:9999;
+    background-color:#b61d1d; position:absolute; left:-980px;top:40px;z-index:9999;
     display:none;}
 .nav_more_dx th {color:white;
     vertical-align:top;

@@ -202,10 +202,22 @@ public class TdUser {
     @Column
     private Long pointGetByShareGoods;
     
-    //支付宝用户号
+    //QQ用户账号
+    @Column
+    private String qqUserId;
+
+	//支付宝用户号
     @Column
     private String alipayUserId;
 
+    public String getQqUserId() {
+    	return qqUserId;
+    }
+    
+    public void setQqUserId(String qqUserId) {
+    	this.qqUserId = qqUserId;
+    }
+    
 	public String getAlipayUserId() {
 		return alipayUserId;
 	}
