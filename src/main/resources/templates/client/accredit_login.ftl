@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>车有同盟</title>
+<title>正品惠客</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="copyright" content="" />
@@ -37,7 +37,7 @@ $(document).ready(function(){
     //searchTextClear(".text01","用户名/邮箱/手机号","#999","#555");  
 });
 function otherlogin(){    
-    window.location.href = "/login/alipay_accredit/<#if qq??>${qq}<#else>zfb</#if>?useralipay_username=${alipay_user_id!''}";
+    window.location.href = "/login/shortcut_accredit/<#if qq??>${qq}<#else>zfb</#if>?accredit_userId=${alipay_user_id!''}";
 } 
    
 function cliLogin(){
@@ -56,10 +56,7 @@ function cliLogin(){
                 dataType: "json",
                 success: function (data) { 
                 <!-- 修改 -->
-                    if (data.role == 2){
-                        window.location.href="/user/diysite/order/list/0";
-                    }    
-                    else if (data.code == 0) {
+                   if (data.code == 0) {
                         var url = document.referrer;          
                         if(undefined==url || ""==url){
                             window.location.href="/";
@@ -79,7 +76,7 @@ function cliLogin(){
 <body>
 <div class="main">
     <!--QQ登录显示用户在Qzone的昵称-->
-    <input type="hidden" name="mouseposY" <#if nickName??>id="qquser_id"<#else>id="alipayuser_id"</#if> value="${alipay_user_id!''}">
+    <input type="hidden" name="mouseposY" id="alipayuser_id" value="${alipay_user_id!''}">
     
 <div style="width:1200px;height:125px; text-align:center;line-height:160px;font-size:30px;">
     正品惠客

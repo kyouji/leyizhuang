@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +27,7 @@ import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
+
 import com.ynyes.zphk.entity.TdUser;
 import com.ynyes.zphk.service.TdCommonService;
 import com.ynyes.zphk.service.TdSettingService;
@@ -90,6 +93,7 @@ public class TdLoginController {
     public Map<String, Object> login(String username, 
                 String password, 
                 String code, 
+                String alipayuser_id,String type,
                 Boolean isSave,
                 HttpServletRequest request) {
         Map<String, Object> res = new HashMap<String, Object>();
@@ -116,6 +120,23 @@ public class TdLoginController {
         }
         
         user.setLastLoginTime(new Date());
+        
+        if(null !=type){
+			/**
+			 * @author libiao
+			 * 判断绑定类型为绑定QQ
+			 */
+			if("qq".equals(type)){
+				user.setQqUserId(alipayuser_id);
+			}
+			/**
+			 * @author lc
+			 * @注释：添加支付宝第三方登陆用户名
+			 */
+			if("zfb".equals(type)){
+				user.setAlipayUserId(alipayuser_id);
+			}
+		}
         
         tdUserService.save(user);
         
@@ -286,7 +307,7 @@ public class TdLoginController {
 					user.setLastLoginTime(new Date());
 					tdUserService.save(user);
 					request.getSession().setAttribute("username", user.getUsername());
-					request.getSession().setAttribute("usermobile", user.getMobile());
+				
 					return "redirect:/";
 				}
 			}
@@ -306,4 +327,55 @@ public class TdLoginController {
 		}
     }
     
+    @RequestMapping(value = "/login/shortcut_accredit/{type}", method = RequestMethod.GET)
+	public String alipaylogin(@PathVariable String type, 
+							  String accredit_userId,
+							  HttpServletRequest request,
+							  ModelMap map) {
+		TdUser user = tdUserService.findByAlipayUserId(accredit_userId);
+		if ("qq".equals(type)) {
+			user = tdUserService.findByQqUserId(accredit_userId);
+		}		        
+        
+		
+		
+		if (null != user) {
+			user.setLastLoginTime(new Date());
+			
+			user = tdUserService.save(user);
+			request.getSession().setAttribute("username", user.getUsername());			
+
+			return "redirect:/";
+		} else {
+			
+			String accreditusername = randomUsername();
+			TdUser newuser = tdUserService.addNewUser(null, accreditusername, "123456", null, null, null);
+			if (null != newuser) {
+				if("qq".equals(type)){
+					//QQ登录新建账号
+					newuser.setQqUserId(accredit_userId);
+				}else{
+					//支付宝登录新建账号
+					newuser.setAlipayUserId(accredit_userId);
+				}
+				newuser.setLastLoginTime(new Date());
+				tdUserService.save(newuser);
+				request.getSession().setAttribute("username", newuser.getUsername());
+				return "redirect:/";
+			}
+		}
+		return "client/error_404";
+	}
+    
+    public String randomUsername() {
+		Random random = new Random();
+		String username = " ";
+		while (true) {
+			int temp1 = random.nextInt(10000000);
+			username = "user_" + temp1;
+			if (null == tdUserService.findByUsername(username)) {
+				return username;
+			}
+		}
+	}
 }
