@@ -52,7 +52,7 @@
 .c_l .piclist dl:hover{ border:3px #ddd solid; padding:0px;}
 .c_l .piclist dl dt{ text-align:center;}
 .c_l .piclist dl dd{ width:210px; margin-left:14px;}
-.c_l .piclist dl .piclist_title{ width:210px; *+width:212px; display:block; overflow:hidden; height:36px;}
+.c_l .piclist dl .piclist_title{ width:210px; *+width:212px; display:block; overflow:hidden; height:57px;}
 .c_l .piclist .piclist_cart{ display:block; overflow:hidden; float:left; padding:5px 15px; background:#ef7c00; margin:5px 0 15px 15px;border-radius:2px; -moz-border-radius:2px;-webkit-border-radius:2px; text-decoration:none; color:#fff;}
 .c_l .piclist .piclist_like{display:block; overflow:hidden; float:left; padding:5px 15px 5px 33px; background:#ccc url(../images/icons.png) no-repeat 12px -109px;; margin:5px 0 15px 15px;border-radius:2px; -moz-border-radius:2px;-webkit-border-radius:2px; text-decoration:none; color:#fff;}
 .c_l .piclist .piclist_ie{ *+margin-bottom:15px;}

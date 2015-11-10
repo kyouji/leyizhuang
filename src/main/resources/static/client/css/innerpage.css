@@ -86,7 +86,6 @@
 .details_details .de_parameter .de_parameter_list p a{ display:block; padding:7px 11px; border:1px #ddd solid; margin-top:5px; float:left; margin:0 10px 10px 0; word-wrap:break-word; white-space:nowrap; text-decoration:none;}
 .details_details .de_parameter .de_parameter_list p a:hover{ border:2px #b61d1d solid; padding:6px 10px;}
 .details_details .de_parameter .de_parameter_list .de_parameter_list_choiced{ border:2px #b61d1d solid; padding:6px 10px; background:url(/client/images/parameter_choiced.png) no-repeat right bottom;}
-.details_details .de_parameter .de_parameter_num{ width:560px; display:block; overflow:hidden; margin-top:10px;*+margin-top:15px; border-bottom:1px #ddd dotted; padding-bottom:15px;}
 .details_details .de_parameter .de_parameter_num span{display:block; width:74px; height:30px; text-align:right; line-height:30px; float:left; margin-right:27px; color:#999;}
 .details_details .de_parameter .de_parameter_num a{ display:inline-block; width:28px; height:28px; border:1px #ddd solid; float:left; font-size:22px; text-align:center; line-height:24px; text-decoration:none;}
 .details_details .de_parameter .de_parameter_num .de_parameter_list_num_add{ border-right:none;}

@@ -189,14 +189,15 @@ function btnPageSubmit() {
                                 </a>
                             </dt>
                             <dd class="piclist_title">
-                                <a href="/goods/${item.id}" title="${item.title!''}" target="_blank">${item.title!''}</a> 
+                                <a href="/goods/${item.id?c}" title="${item.title!''}" target="_blank">${item.title!''}</a><br />
+                                <a href="/goods/${item.id?c}" title="${item.subTitle!''}" target="_blank">${item.subTitle!''}</a>
                             </dd>
                             <dd class="money16">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if>
                                 <span class="moneydelete">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span> 
                             </dd>
                             <dd class="piclist_ie">
-                                <a href="/cart/init?id=${item.id}" title="加入购物车" target="_blank" class="piclist_cart">加入购物车</a>
-                                <a href="javascript:addCollect(${item.id});" title="关注" class="piclist_like">关注</a>
+                                <a href="/cart/init?id=${item.id?c}" title="加入购物车" target="_blank" class="piclist_cart">加入购物车</a>
+                                <a href="javascript:addCollect(${item.id?c});" title="关注" class="piclist_like">关注</a>
                             </dd>
                         </dl>  
                     </#list>

@@ -14,10 +14,13 @@
 <script type="text/javascript" src="/client/js/innerpage.js"></script>
 <script type="text/javascript" src="/client/js/ljs-v1.01.js"></script>
 <script type="text/javascript" src="/client/js/goods_comment_consult.js"></script>
+<script type="text/javascript" src="/client/js/jquery.scroll-follow.js"></script>
+<script type="text/javascript" src="/client/js/rich_lee.js"></script>
 <link href="/client/css/base.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/innerpage.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <link rel="stylesheet" type="text/css" href="/client/css/lrtk.css" />
+<link rel="stylesheet" type="text/css" href="/client/css/new_left.css" />
 
 <!--放大镜-->
 <script type="text/javascript">
@@ -558,6 +561,9 @@ function lowPriceRemind(goodsId){
 				</div>
 			</div>
 			<!--同类排行-->
+			
+			<div class='follow_box'>
+			<div class='follow'>
 			<div class="c_L_frame top20">
 				<div class="c_L_frame_title">同类排行榜</div>
 				<div class="c_L_frame_line"></div>
@@ -582,6 +588,8 @@ function lowPriceRemind(goodsId){
 					</#if>
 				</div>
 			</div>
+			
+			
 			<div class="c_L_frame top20">
 				<div class="c_L_frame_title">浏览记录</div>
 				<div class="c_L_frame_line"></div>
@@ -603,11 +611,13 @@ function lowPriceRemind(goodsId){
 					</#if>
 				</div>
 			</div>
+			</div>
+			</div>
 		</div>
 		<!--右边-->
 		<div class="c_R">
 			<!--tab-->
-			<div class="c_R_tab">
+			<div class="c_R_tab" id="tab_dx">
 				<ul>
 					<li><a href="#detail_tit" tid="0" class="c_R_tab_choiced stab">商品介绍</a></li>
 					<li><a href="#detail_tit" tid="1" class="stab">参数规格</a></li> 

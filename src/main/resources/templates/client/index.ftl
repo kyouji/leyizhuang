@@ -12,11 +12,12 @@
 <link href="/client/css/main.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="/images/zphk_logo.ico">
 <link rel="stylesheet" type="text/css" href="/client/css/lrtk.css" />
-
+<link rel="stylesheet" type="text/css" href="/client/css/new_left.css" />
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 <script src="/client/js/common.js" type="text/javascript"></script>
 <script src="/client/js/goods.js" type="text/javascript"></script>
+<script src="/client/js/rich_lee.js"></script>
 <script type="text/javascript">
 
 function submitSearch(){
@@ -218,12 +219,41 @@ $(function(){
     <!--banner-->
     <div class="advertising">
         <div class="advertising_content">
-            <!-- 分类-品牌  start-->
+            <div class="new_left_nav">
+            <dl>
+                <#list top_cat_list as item>
+                    <dd>
+                        <a class="title_dx" href="/list/${item.id?c}">${item.title!''}</a>
+                        <#if ("second_level_"+item_index+"_cat_list")?eval?? >
+                            <span class="new_box01">
+                                <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
+                                    <#if secondLevelItem_index lt 6>
+                                        <a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a>
+                                    </#if>
+                                </#list>
+                            </span>
+                        </#if>
+                        <#if ("second_level_"+item_index+"_cat_list")?eval??&&("second_level_"+item_index+"_cat_list")?eval?size gt 6>
+                            <div class="new_posi">
+                                <span class="new_box02">
+                                    <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
+                                        <#if secondLevelItem_index gt 5>
+                                            <a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a>
+                                        </#if>
+                                    </#list>
+                                </span>
+                            </div>
+                        </#if>
+                    </dd>
+                </#list>
+            </dl>
+        </div>
+            <!-- 分类-品牌  start
             <ul class="navlistout" id="navdown">
                 <#if top_cat_list??>
                     <#list top_cat_list as item>
                         <li class="product_categories phone_${item_index+1}">
-                            <h3><a href="/list/${item.id}">${item.title!''}</a></h3>
+                            <h3></h3>
                     
                             <div class="nav_showbox">
                                 <div class="clear"></div>
@@ -249,6 +279,7 @@ $(function(){
                     </#list>
                 </#if>
             </ul>
+            -->
             <!-- END  -->
             <!-- 首页大广告    -->
             <!--<div class="advertising_ifm adver_middle">
@@ -491,7 +522,7 @@ $(function(){
                         <#if index_2F_ad_list?? >
                             <#list index_2F_ad_list as item>
                                 <#if item_index < 3 >
-                                    <li style="width:404px;height:272px;"><a href="/" target="_blank"><img src="${item.fileUri!""}" /></a></li>
+                                    <li style="width:404px;height:272px;"><a href="${item.linkUri!'/'}" target="_blank"><img src="${item.fileUri!""}" /></a></li>
                                 </#if>
                             </#list>
                         </#if>  
@@ -725,6 +756,85 @@ $(function(){
                                    <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
                                    <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
                                    <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                                </dl>
+                                <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                            </li>
+                        </#if>
+                    </#list>
+                </#if>
+            </ul>
+        </div>
+    </div>
+    
+    <!--5F展示-->
+    <div class="phone_encyclopedia">
+        <div class="phones">
+            <!-- 楼层 -->
+            <#if top_category_list?? && top_category_list?size gt 0 >
+                <div class="phones_left">
+                    <#list top_category_list as item>
+                        <#if item_index == 4>
+                            <a href="/list/${item.id}">5F${item.title!""}</a>
+                        </#if>
+                    </#list>
+                </div>
+            </#if>
+            <div class="phones_right">
+                <#if fifth_brand_list?? && fifth_brand_list?size gt 0>
+                    热门:&nbsp;&nbsp;
+                    <#list fifth_brand_list as item >
+                        <#if item_index lt 6>
+                            |&nbsp;&nbsp;<a href="${item.linkUri!''}">${item.title!""}</a>
+                        </#if>
+                    </#list>
+                </#if>
+            </div>
+        </div>
+        <div class="phone_brand">
+            <ul class="phones_logo">
+                <#if f4_brand_page??>
+                    <#list f4_brand_page.content as item>
+                        <#if item_index < 5>
+                            <div class="lg">
+                                <a href="${item.linkUri!''}">
+                                    <img src="${item.logoUri!''}" width="120" height="60">
+                                </a>
+                            </div>
+                        </#if>
+                    </#list>
+                </#if>
+            </ul>
+            <ul class="phones_photo">
+                <#if index_5F_ad_list?? && index_5F_ad_list?size gt 0 >
+                     <img src="${index_5F_ad_list[0].fileUri!""}" width="404px" height="470px"/>
+                </#if>
+            </ul>
+            <ul class="phones_details">
+                <#if top_cat_goods_page4?? && top_cat_goods_page4.content?size gt 0 >
+                    <#list top_cat_goods_page4.content as item>
+                        <#if item_index < 3 >
+                         <li class="photo_1">
+                            <dl>
+                                <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="150px" height="150px"/></a></dt>
+                                 <dd class="feature">性价比之王</dd>
+                                 <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
+                                 <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                                 <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
+                             </dl>
+                            <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
+                        </li>
+                        </#if>
+                    </#list>
+                </#if>
+                <#if top_cat_goods_page4?? && top_cat_goods_page2.content?size gt 0 >
+                    <#list top_cat_goods_page4.content as item>
+                        <#if item_index gt 2 && item_index < 6 >
+                            <li class="photo_1 photo_4">
+                                 <dl>
+                                  <dt><a href="/goods/${item.id?c!""}" target="_blank"><img src="${item.coverImageUri!""}" width="120px" height="120px"/></a></dt>
+                                  <dd class="introduction"><a href="/goods/${item.id?c!""}" target="_blank">${item.title!""}</a></dd>
+                                  <dd class="discount">￥<span>${item.salePrice?string('0.00')}</span>
+                                  <del>￥<span>${item.marketPrice?string('0.00')}</span></del></dd>
                                 </dl>
                                 <div class="gz_dh"><a href="javascript:addCollect(${item.id?c});"><img src="/client/images/dh_gz_1.png" /></a></div>
                             </li>

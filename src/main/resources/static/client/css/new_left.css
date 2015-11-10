@@ -1,0 +1,28 @@
+.new_left_nav{width: 190px; height: 439px; background: #b61d1d; float: left;}
+.new_left_nav dl{ width: 190px; height: 439px;}
+.new_left_nav dl dd{width: 172px;padding: 9px ; height: 69px;  display: block; border-bottom:#D9D9D9 1px solid;position: relative;}
+.new_left_nav dl dd .title_dx{ width: 186px; margin-left: 4px; color: white; font-size:16px}
+.new_left_nav dl dd .new_box01{ width:190px; display: block; overflow: hidden; margin-top:2px }
+.new_left_nav dl dd .new_box01 a{ display: block; float: left;width:60px;color: white;line-height:26px}
+
+.new_posi{width:1px;display: block; overflow: hidden; position: absolute; left: 190px; top: -1px; z-index: 99999; height: 88px;background: white; border: #b61d1d 1px solid; }
+
+.new_posi .new_box02{ width:300px; display: block; overflow: hidden;margin-top: 30px;}
+.new_posi .new_box02 a{ display: block; float: left; padding: 4px; color: #333333; }
+
+.follow_box{ float: left; overflow: hidden; margin-top: 16px;width: 220px;position:relative;}
+.follow{ overflow: hidden;float: left;  width: 220px;}
+.pos01{position:fixed;left:20%px;top:0px; float: left; }
+.pos02{position:absolute;left:0px;bottom:0px;}
+.c_R_parameter{float: left;}
+
+
+
+
+
+
+
+
+
+
+

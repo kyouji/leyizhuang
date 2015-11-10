@@ -144,6 +144,10 @@ public class TdIndexController {
         	if(3 == i ){
         		map.addAttribute("fourth_brand_list", tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
         	}
+        	
+        	if(4 == i ){
+        		map.addAttribute("fifth_brand_list", tdBrandService.findByProductCategoryIdDesc(topCatList.get(i).getId(), 1L));
+        	}
 		}
         
         //特价商品
