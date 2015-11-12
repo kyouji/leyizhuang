@@ -208,8 +208,29 @@
 .column_sum li div { background:#e5e5e5; height:34px; width:100%; text-align:left; margin-top:5px;}
 .column_sum li div a { display:inline-block; line-height:34px;}
 .column_sum li a.a2 { background:#e6caa8 url(../images/content/part_buy.png) no-repeat left center; padding:0 10px 0 40px;border-right:1px solid #fff;}
-.column_sum li a.a3 { border-right:1px solid #fff; padding:0 11px; margin-right:10px;}
+.column_sum li a.a3 { /*border-right:1px solid #fff; padding:0 11px; margin-right:10px;*/}
 .column_sum li:hover { border:1px solid #eee; box-shadow:0px 2px 0px #ccc;}
+.column_px .fr { width:180px; padding-right:10px;}
+.zy { width:13px; height:13px; margin-top:14px; float:left; /*margin-left:12px ;*/ background:url(../images/pic.png) no-repeat -731px -204px; border:none}
+.zyon { width:13px; height:13px; margin-top:14px; float:left; /*margin-left:12px;*/ background:url(../images/pic.png) no-repeat -744px -220px; border:none}
+.dd { line-height:42px; float:left; padding-left:7px;}
+.jgqj_txt { width: 48px; height: 20px; border: 1px solid #ccc; background: #fff; margin-top: 9px; text-align: center;}
+.sxtjBox { overflow: hidden; padding-left: 3px; float:left;}
+.sxtjBox span{ font-family:"Microsoft Yahei", "SimSun"; font-size:12px; color:#444444; /*margin-right:10px;*/ line-height:39px;}  
+.jgqj_btn {
+  width: 50px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+  background: #ff4454;
+  color: #fff;
+  text-align: center;
+  margin-top: 9px;
+  margin-left: 10px;
+  border: none;
+}
+.jgqj_btn:hover{ background:#ff3535;}
 
 /* 商品详细页 */
 .pro_info { width:100%; min-width:1200px; margin:0 auto; background:#d9d9d9;}

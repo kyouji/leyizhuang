@@ -172,7 +172,7 @@ function delItem(id)
   </section>
    <#if navi_item_list??>
         <#list navi_item_list as item>
-          <#if item_index < 11>
+          <#if item_index < 8>
             <a class="a1" href="${item.linkUri!''}">${item.title!''}</a>
           </#if>
         </#list>

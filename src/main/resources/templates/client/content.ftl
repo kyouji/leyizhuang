@@ -125,6 +125,7 @@ function deleterecent()
 <body>
 <#include "/client/common_header.ftl" />
 <div class="clear"></div>
+
 <div class="pro_info">
   <h2 class="main pro_tit">
   <span><a href="/">首页</a></span>
@@ -514,18 +515,18 @@ function deleterecent()
     <section class="detail_hp">
     <div class="part02">
         好评率
-        <p class="red fs28 lh40">100%</p>
+        <p class="red fs28 lh40"><#if comment_count?? && three_star_comment_count?? && comment_count != 0>${three_star_comment_count/comment_count}<#else>0</#if>%</p>
       </div>
       <div class="part01">
         <h3 class="fs16 fw400">商品评价</h3>
         <p>
-          好评<span><b style=" width:100%;"></b></span>100%
+          好评<span><b style=" width:<#if comment_count?? && three_star_comment_count?? && comment_count != 0>${three_star_comment_count/comment_count}<#else>0</#if>%;"></b></span><#if comment_count?? && three_star_comment_count?? && comment_count != 0>${three_star_comment_count/comment_count}<#else>0</#if>%
         </p>
         <p>
-          中评<span><b style=" width:0%;"></b></span>100%
+          中评<span><b style=" width:<#if comment_count?? && two_star_comment_count?? && comment_count != 0>${two_star_comment_count/comment_count}<#else>0</#if>%;"></b></span><#if comment_count?? && two_star_comment_count?? && comment_count != 0>${two_star_comment_count/comment_count}<#else>0</#if>%
         </p>
         <p>
-          差评<span><b style=" width:0%;"></b></span>100%
+          差评<span><b style=" width:<#if comment_count?? && one_star_comment_count?? && comment_count != 0>${one_star_comment_count/comment_count}<#else>0</#if>%;"></b></span><#if comment_count?? && one_star_comment_count?? && comment_count != 0>${one_star_comment_count/comment_count}<#else>0</#if>%
         </p>
       </div>
       
@@ -573,136 +574,6 @@ function deleterecent()
 </div><!--main END-->
 
 <div class="clear h40"></div>
-<section class="index_center">
-  <table>
-    <tr>
-      <td>
-        <a href="#"><img src="images/bot_ico01.png" />品牌连锁 实体体验</a>
-      </td>
-      <td>
-        <a href="#"><img src="images/bot_ico02.png" />货到付款 安全放心</a>
-      </td>
-      <td>
-        <a href="#"><img src="images/bot_ico03.png" />市区内免费送货</a>
-      </td>
-      <td>
-        <a href="#"><img src="images/bot_ico04.png" />七天包换 后顾无忧</a>
-      </td>
-      <td>
-        <a href="#"><img src="images/bot_ico05.png" />两年延保 诚信满意</a>
-      </td>
-      <td>
-        <a href="#"><img src="images/bot_ico06.png" />软件终身免费维护</a>
-      </td>
-    </tr>
-  </table>
-</section><!--index_center END-->
-<div class="clear h20"></div>
-<section class="bot_help main">
-  <menu>
-    <h3>关于我们</h3>
-    <a href="#">关于丫丫</a>
-    <a href="#">业务合作</a>
-    <a href="#">高薪诚聘</a>
-    <a href="#">丫丫会员积分</a>
-  </menu>
-  <menu>
-    <h3>关于我们</h3>
-    <a href="#">关于丫丫</a>
-    <a href="#">业务合作</a>
-    <a href="#">高薪诚聘</a>
-    <a href="#">丫丫会员积分</a>
-  </menu>
-  <menu>
-    <h3>关于我们</h3>
-    <a href="#">关于丫丫</a>
-    <a href="#">业务合作</a>
-    <a href="#">高薪诚聘</a>
-    <a href="#">丫丫会员积分</a>
-  </menu>
-  <menu>
-    <h3>关于我们</h3>
-    <a href="#">关于丫丫</a>
-    <a href="#">业务合作</a>
-    <a href="#">高薪诚聘</a>
-    <a href="#">丫丫会员积分</a>
-  </menu>
-  <menu>
-    <h3>关于我们</h3>
-    <a href="#">关于丫丫</a>
-    <a href="#">业务合作</a>
-    <a href="#">高薪诚聘</a>
-    <a href="#">丫丫会员积分</a>
-  </menu>
-  <menu>
-    <h3>关于我们</h3>
-    <a href="#">关于丫丫</a>
-    <a href="#">业务合作</a>
-    <a href="#">高薪诚聘</a>
-    <a href="#">丫丫会员积分</a>
-  </menu>
-  <div class="bot_work">
-    <p>
-      <img src="images/bot_ico08.png" />
-      <span class="lh40 fs26 fc block">4009-955-966</span>
-      <span class="c7">工作时间：每天09:00-21:30</span>
-    </p>
-    <p class="mt20">
-      <img src="images/bot_ico09.png" />
-      <a href="#">点击进行在线咨询</a>
-    </p>
-  </div>
-  <div class="clear h20"></div>
-</section>
-<footer class="foot_sys">
-  <section class="main">
-    <div class="sys">
-      <img src="images/sys01.png" />
-      <p class="lh30 fs20 pb5">微信平台</p>
-      <p>微信二维码</p>
-      <p>扫一扫更多惊喜带给您</p>
-    </div>
-    <div class="sys">
-      <img src="images/sys01.png" />
-      <p class="lh30 fs20 pb5">微信平台</p>
-      <p>微信二维码</p>
-      <p>扫一扫更多惊喜带给您</p>
-    </div>
-    <div class="sys">
-      <img src="images/sys01.png" />
-      <p class="lh30 fs20 pb5">微信平台</p>
-      <p>微信二维码</p>
-      <p>扫一扫更多惊喜带给您</p>
-    </div>
-    <div class="bot_search">
-      <p class="fs18">您身边的丫丫</p>
-      <p class="fs12">丫丫网实体店和服务店为您提供最贴心的体验服务</p>
-      <div>
-        <input type="submit" class="sub" value=" " />
-        <input type="text" class="text bottext" value="查看所有门店" />
-      </div>
-    </div><!--bot_search END-->
-    <div class="clear"></div>
-  </section>
-</footer><!--bot_search END-->
-
-<footer class="mainfoot">
-  <section class="main">
-    <nav>
-      <a class="a1" href="#"><img src="images/footer.png" /></a>
-      <a href="#">关于丫丫</a>|
-      <a href="#">团队介绍</a>|
-      <a href="#">高薪诚聘</a>|
-      <a href="#">业务合作</a>|
-      <a href="#">会员积分</a>|
-      <a href="#">投诉建议</a>|
-      <a href="#">友情链接</a>
-    </nav>
-    <p class="c9 w100">
-      Copyright©2006-2015 All Rights Reserved 丫丫手机网 版权所有 滇ICP备07004173号
-      <span><a title="云南网站建设" href="http://www.ynyes.com" target="_blank">网站建设</a>技术支持：<a title="云南网站建设" href="http://www.ynyes.com" target="_blank">昆明天度网络公司</a></span>
-    </p>
-  </section>
-</footer><!--mainfoot END-->
+<#include "/client/common_footer.ftl" />
 </body>
 </html>
