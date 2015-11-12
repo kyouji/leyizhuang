@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import com.ynyes.zphk.util.StringUtils;
+import com.ynyes.zphk.entity.TdBrand;
 import com.ynyes.zphk.entity.TdAdType;
 import com.ynyes.zphk.entity.TdArticleCategory;
 import com.ynyes.zphk.entity.TdProductCategory;
@@ -52,6 +53,9 @@ public class TdCommonService {
 
 	@Autowired
 	private TdAdService tdAdService;
+	
+	@Autowired
+	private TdBrandService tdBrandService;
 
 	public void setHeader(ModelMap map, HttpServletRequest req) {
 		String username = (String) req.getSession().getAttribute("username");
@@ -103,7 +107,9 @@ public class TdCommonService {
 		// 全部商品分类，取三级
 		List<TdProductCategory> topCatList = tdProductCategoryService.findByParentIdIsNullOrderBySortIdAsc();
 		map.addAttribute("top_cat_list", topCatList);
-
+		
+		
+		
 		if (null != topCatList && topCatList.size() > 0) {
 			for (int i = 0; i < topCatList.size(); i++) {
 				TdProductCategory topCat = topCatList.get(i);
@@ -119,6 +125,10 @@ public class TdCommonService {
 						map.addAttribute("third_level_" + i + j + "_cat_list", thirdLevelList);
 					}
 				}
+				// 每个大类品牌
+		        List<TdBrand> brandList = tdBrandService.findByStatusIdAndProductCategoryTreeContaining(1L, topCat.getId());
+		        
+		        map.addAttribute("brand_list_" + i, brandList);
 			}
 		}
 
@@ -146,6 +156,16 @@ public class TdCommonService {
 			}
 		}
 
+		// 导航栏菜单广告
+		List<TdAdType> tdAdTypes = tdAdTypeService.findAllOrderBySortIdAsc();
+        
+        if (null != tdAdTypes) {
+        	for(int i = 0; i < 9 && i < tdAdTypes.size(); i++){
+        		map.addAttribute("nav_"+i+"_ad_list",
+                        tdAdService.findByTypeIdAndIsValidTrueOrderByIdDesc((tdAdTypes.get(i)).getId()));
+            }
+         }
+		
 		// 友情链接
 		map.addAttribute("site_link_list", tdSiteLinkService.findByIsEnableTrue());
 

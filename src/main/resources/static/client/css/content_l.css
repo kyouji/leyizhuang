@@ -10,6 +10,7 @@
 .pro_choose tr td{width: 500px;}
 .pro_choose{margin-top: 10px;}
 .pro_choose .text{ width: 36px;height: 36px;border: 1px solid #ddd;text-align: center;float: left;line-height: 36px;border-right: none;}
+.pro_choose .plus {float: left;width: 17px;}
 .pro_choose .plus a{display: block;line-height: 17px;border: 1px solid #ddd;background: #f1f1f1;text-align: center;padding: 0;margin: 0;}
 .detail_hp .part02 { margin-right: 30px;}
 .pro_eval li {min-height:80px;padding:20px 10% 15px 10%;width:80%;}
@@ -30,11 +31,245 @@
 /*详细页end*/
 /*订单*/
 .member_top {background:#e5373a;}
-.member_check a.a1 {margin: 20px 12px 0;}
+.member_check a.a1 {margin: 20px 15px 0;}
 .mymember_order_search .mysub:hover {background: #e5373a url(../images/mymember/search.png) no-repeat center center;}
 .mymember_order_search .mysub {background: #e5373a url(../images/mymember/search.png) no-repeat center center;}
 .member_top .search .sub:hover {background: #F39700;}
+.member_top nav a:hover,.member_top nav a.sel {background: url(../newimg/arrow09.png) no-repeat center bottom;}
+.mymember_menu_tit {margin-top: 2px;border: none;background: url(../images/mymember/arrow05.png) no-repeat 133px center;text-indent: 35px;}
+.mymember_menu_part a.sel01 {color: #f40;}
+.mymember_menu_tit:hover {color: #f40;}
+.leftmenu a.sel,.mymember_menu_part div a:hover {color: #f40;}
+.mymember_order_search a.a002{color: #f40;}
+.mymember_order_search a.a001{color: #f40;}
+.mymember_order_search a.a004{color: #f40;}
+.fc{color: #f40;}
+#mymember_likecheck span{color: #f40;}
+.member_top .search .sub{background: #f2f2f2;color: #333;}
+.member_top .search .sub:hover{background: #F2EAEA;color: #333;}
+.mymember_menu_part a.sel01 {background-image: url(../images/mymember/arrow10.png);}
+.mymember_menu_part div a{margin-top: -0px;margin-bottom: 5px;}
+.member_check{background: #fff;margin-bottom: 10px;border-radius: 66px 0 0 66px;}
+.member_check a.head{margin-left: 20px;width: 100px;height: 100px;}
+.member_check{padding: 15px 0;}
+.member_check a.a2 {color:#b73882;}
+.member_check a.a2:hover span {background:#69bfd8 url(../images/ico/member07.png) no-repeat center center;border:1px solid #69bfd8;}
+.member_check a.a2 span {background:#fff url(../images/ico/member07-1.png) no-repeat center center;}
+.member_check a.a3 {color:#5f47b0;}
+.member_check a.a3:hover span {background:#69d8cf url(../images/ico/member06.png) no-repeat center center;border:1px solid #69d8cf;}
+.member_check a.a3 span {background:#fff url(../images/ico/member06-1.png) no-repeat center center;}
+.member_check a.a4 {color:#9abc32;}
+.member_check a.a4:hover span {background:#dba7d7 url(../images/ico/member05.png) no-repeat center center;border:1px solid #dba7d7;}
+.member_check a.a4 span {background:#fff url(../images/ico/member05-1.png) no-repeat center center;}
+.member_check a.a5 {color:#d53f40;}
+.member_check a.a5:hover span {background:#edb6bc url(../images/ico/member04.png) no-repeat center center;border:1px solid #edb6bc;}
+.member_check a.a5 span {background:#fff url(../images/ico/member04-1.png) no-repeat center center;}
+.member_check a.a6 {color:#3983c2;}
+.member_check a.a6:hover span {background:#d5cf47 url(../images/ico/member03.png) no-repeat center center;border:1px solid #d5cf47;}
+.member_check a.a6 span {background:#fff url(../images/ico/member03-1.png) no-repeat center center;}
+.member_check a.a7 {color:#f79263;}
+.member_check a.a7:hover span {background:#f0be67 url(../images/ico/member02.png) no-repeat center center;border:1px solid #f0be67;}
+.member_check a.a7 span {background:#fff url(../images/ico/member02-1.png) no-repeat center center;}
+.member_check a.a8 {color:#727272;}
+.member_check a.a8:hover span {background:#22a8b8 url(../images/ico/member01.png) no-repeat center center;border:1px solid #22a8b8;}
+.member_check a.a8 span {background:#fff url(../images/ico/member01-1.png) no-repeat center center;}
 /*订单end*/
-
+/*关注中心*/
+.attention_tab a.a1 {background: #FF6261 url(../images/member/pro_buy.png) no-repeat 5px center;}
+.td02 .mt5{margin-right: 5px;}
+.mymember_info02 td a:hover,.mymember_info02 td.td003 a:hover{color: red;}
+/*关注中心end*/
+/*我的积分*/
+.myscore_tit nav a:hover, .myscore_tit nav a.sel{background: #FF3236}
+/*我的积分end*/
+/*我要投诉*/
+.mymember_info02 td .blue{color: #FF292D}
+/*我要投诉end*/
+/*收货地址*/
+.address_tab td a:hover{color: #FF292D}
+.myinfo_tab .text{padding-left: 10px;width: 60%}
+.myinfo_tab span{margin-left: 20px;color: #FF3E41}
+.myinfo_tab .sub{background: #FF3E41}
+/*收货地址end*/
+/*晒单*/
+.mymember_order_search a.a003{background: #FF3E41}
+/*晒单end*/
+/*申请返修*/
+.myback_tab td a.a1{color: #FF5356}
+.myinfo_tab th,.myinfo_tab textarea{outline: medium;font-size: 16px;font-family: "Microsoft Yahei";}
+/*申请返修end*/
+/*评价管理*/
+.attention_tab td.td01 a{color: #555}
+.attention_tab td.td01 a:hover{color: #000}
+.attention_tab td a img{width: 60px;height: 60px;}
+/*评价管理end*/
+/*购买咨询*/
+.member_advice a.a4{color: red}
+.member_advice a.a3:hover{color: #000}
+.member_advice a.a2:hover{color: #000}
+.pagebox .num .a0{opacity: 0.8;}
+.pagebox .num .a2 span:hover{background: #E5373A}
+.pagebox .num .a0:hover{background: #E5373A}
+.pagebox .num a:hover{background: #E5373A}
+/*购买咨询end*/
+/*登陆与注册*/
+.register .tit span{color: #FF8800;}
+/*登陆与注册end*/
+/*购物车*/
+.newshopcar{width: 100%;padding: 0 20px;background: #fff;}
+.shopcarnum{margin-left: 50px;}
+.car_btn {width: 100%;background: #eee;line-height: 40px;height: 40px;}
+.car_btn .sub {position: absolute;right: 0;top: 0;width: 150px;height: 40px;font-size: 18px;text-align: center;color: #fff;background: #E54346;line-height: 40px;}
+.text02{ width: 36px;height: 36px;border: 1px solid #ddd;text-align: center;float: left;line-height: 36px;border-right: none;}
+.plus {float: left;width: 17px;}
+.plus a{display: block;line-height: 17px;border: 1px solid #ddd;background: #f1f1f1;text-align: center;padding: 0;margin: 0;}
+/*购物车end*/
+/*结算*/
+.car_btn span {
+    position: absolute;
+    top: 0;
+    right: 170px;
+}
+.car_tit {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 35px;
+    border-bottom: 1px dashed #eee;
+    margin-bottom: 20px;
+}
+.car_list {
+    width: 100%;
+}
+.car_list th {
+    line-height: 35px;
+    background: #eee;
+}
+.car_list th, .car_list td {
+    font-weight: 400;
+    text-align: center;
+}
+.car_list td {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+.car_pay a {
+    display: inline-block;
+    padding: 0 20px;
+    border: 1px solid #eee;
+    _width: 120px;
+    margin: 0 5px 5px 0;
+    line-height: 30px;
+}
+.car_pay select {
+    border: 1px solid #ddd;
+    padding: 8px 0;
+    float: left;
+}
+.prefersum {
+    width: 96%;
+    padding: 10px 2%;
+}
+.prefersum .d01, .prefersum .d02 {
+    padding: 10px 0;
+}
+.prefersum .d02 span, .prefersum .d02 a, .prefersum .d02 input {
+    float: left;
+    line-height: 30px;
+}
+.prefer_tit a.sel {
+    background: #efefef;
+    color: #4fbba1;
+}
+.prefer_tit a {
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    color: #555;
+}
+.prefer_tit {
+    width: 100%;
+    border-bottom: 1px dashed #ccc;
+}
+.prefersum .d02 .text {
+    width: 110px;
+    background: #dfdfdf;
+    text-align: center;
+}
+.prefersum .d02 .sub {
+    width: 90px;
+    color: #fff;
+    font-size: 16px;
+    background: #4fbba1;
+    margin: 0 30px 0 10px;
+}
+/*结算end*/
+/*提交成功*/
+.main-tit {
+    margin: 0 auto;
+    padding: 10px 0 0;
+}
+.main-tit h2 {
+    display: block;
+    padding-right: 10px;
+    color: #666;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 25px;
+}
+.inner-box {
+    margin: 30px 0;
+    min-height: 350px;
+    _height: 350px;
+    border: 1px solid #f0f0f0;
+    background: #fff;
+    text-align: center;
+}
+.inner-box .dl-list {
+    margin: 0 auto;
+    padding: 30px;
+    text-align: left;
+    width: 879px;
+    font-size: 14px;
+}
+.inner-box .dl-list dl {
+    clear: both;
+    display: block;
+    padding: 5px 0;
+}
+.inner-box .dl-list dl dt {
+    display: block;
+    padding: 5px 0;
+    float: left;
+    width: 30%;
+    line-height: 42px;
+    min-height: 42px;
+    color: #555;
+    text-align: right;
+}
+.inner-box .dl-list dl dd {
+    position: relative;
+    padding: 5px 0 5px 20px;
+    line-height: 42px;
+    min-height: 42px;
+    color: #555;
+    overflow: hidden;
+    _margin-left: 120px;
+}
+.pay_sub {
+    width: 120px;
+    height: 36px;
+    color: #fff;
+    font-size: 18px;
+    background: #4fbba1;
+    border:none;
+    border-radius: 18px;
+}
+/*提交成功end*/
+/*猜你喜欢*/
+#mymember_likelist a p:hover{color: #E5373A;}
+#mymember_likelist a:hover p{color: #E5373A;}
+/*猜你喜欢end*/
 
 

@@ -102,1119 +102,28 @@
         
         $(".comboCheckBox").attr("checked", false);
     }
+    
+function deleterecent()
+{
+     $.ajax({
+            type: "post",
+            url: "/user/recent/deleteAll",
+            data: { },
+            dataType: "json",
+            success: function (data) { 
+             if (data.code == 0) {
+                   window.location.reload();
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
+}
 </script>
 </head>
 
 <body>
-<header class="maintop">
-  <section class="main">
-    <h1>亲，欢迎来到丫丫手机网</h1>
-    <p class="p1">昆明热线：0871-67996799</p>
-    <p class="p2">4009-955-966</p>
-    <p class="p3">服务热线：</p>
-    <menu id="top_phone">
-      <a class="a1" href="#">手机丫丫</a>
-      <div class="clear"></div>
-      <ul class="phone_sum" id="top_phonelist">
-        <li style="padding-top:10px;"><a href="#"><span class="phoneico01">触屏版</span></a></li>
-        <li><a href="#"><span class="phoneico02">丫丫微信</span></a>
-  
-        </li>
-        <li><a href="#"><span class="phoneico03">iPhone</span></a></li>
-        <li style="border-bottom:1px solid #eee; padding-bottom:10px;"><a href="#"><span class="phoneico04">Android</span></a></li>
-        <li class="phone_sum_more">
-          <p>
-            <span>客户端抓侧即送10元豪礼</span>
-            <span class="mt5"><img src="images/sys01.png" /></span>
-          </p>
-          <p>
-            <span>客户端抓侧即送10元豪礼</span>
-            <span class="mt5"><img src="images/sys02.png" /></span>
-          </p>
-          <p>
-            <span>客户端抓侧即送10元豪礼</span>
-            <span class="mt5"><img src="images/sys01.png" /></span>
-          </p>
-        </li>
-      </ul>
-    </menu>
-    
-    
-    <a class="a2" href="#">在线咨询</a>
-    <a class="a3" href="#">会员俱乐部</a>
-    <a class="z-in10" href="#">帮助中心</a>
-    <menu id="top_order">
-      <a class="a4" href="#">我的订单<i></i></a>
-      <div class="clear"></div>
-      <div id="top_orderlist">
-        <p class="p_box">
-        <a href="#"><img src="images/t_order01.png" />我的信息</a>
-        <a href="#"><img src="images/t_order02.png" />我的收藏</a>
-        <a href="#"><img src="images/t_order03.png" />报修/退换货</a>
-        <a href="#"><img src="images/t_order04.png" />我拍到的宝贝</a>
-        <a href="#"><img src="images/t_order05.png" />我的商品咨询</a>
-        </p>
-      </div>
-    </menu>
-    <div class="clear"></div>
-  </section>
-</header><!--maintop-->
-
-<!-- 浮动 -->
-<aside class="floatbox">
-  <a href="#" title="微信客服"><img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服" /><span><img src="/client/images/sys01.png" /></span></a>
-  <a href="#" title="在线咨询"><img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询" /></a>
-  <a href="#" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /></a>
-  <a href="#" title="服务热线"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线" /><span><img src="/client/images/sys02.png" /></span></a>
-  <a href="javascript:$('html,body').animate({scrollTop:0},500);" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
-</aside>
-
-<section class="main pt20 pb20 z-in10">
-  <a class="fl" href="#"><img src="images/logo.png" /></a>
-  <div class="index_place">
-    <h2 class="fc fs26 lh30 fw400">昆明市区</h2>
-    <p class="pt5">三小时急速送达</p>
-  </div>
-  <div class="searchbox">
-    <div>
-      <input class="text toptext" type="text" value="请输入品牌或商品名称" />
-      <p class="clear"></p>
-      <input class="sub" type="submit" value="搜 索" />
-    </div>
-    <p>
-      <a href="#">三星</a>
-      <a href="#">索尼</a>
-      <a href="#">苹果ipad</a>
-      <a href="#">Note4</a>
-      <a href="#">小米4</a>
-      <a href="#">魅族MX4</a>
-    </p>
-  </div>
-  <div id="shopping_down" class="shopping_box">
-    <span class="sp1">5</span>
-    <a class="a1" href="#">去购物车结算<i></i></a>
-    <menu>
-      <!--<h3 class="ta-c pa15 fs14 fw400">购物车中还没有商品，赶紧选购吧！</h3>-->
-      <h2>最新加入的商品</h2>
-      <h3 class="tit">
-        <span>满减</span>
-        购满1999元，即可享受满减优惠 小计：￥2888.00
-      </h3>
-      <div class="shopping_list">
-        <div class="clear"></div>
-        <a class="a2" href="#"><img src="images/photo/img02.png" /></a>
-        <a class="a3" href="#">三星A700 超薄金属机身三星时尚新机 潮流品牌</a>
-        <p>￥2888.00 x1<a href="#">删除</a></p>
-        <div class="clear"></div>
-      </div>
-      <div class="shopping_list">
-        <div class="clear"></div>
-        <a class="a2" href="#"><img src="images/photo/img02.png" /></a>
-        <a class="a3" href="#">三星A700 超薄金属机身三星时尚新机 潮流品牌</a>
-        <p>￥2888.00 x1<a href="#">删除</a></p>
-        <div class="clear"></div>
-      </div>
-      <div class="shopping_list">
-        <div class="clear"></div>
-        <a class="a2" href="#"><img src="images/photo/img02.png" /></a>
-        <a class="a3" href="#">三星A700 超薄金属机身三星时尚新机 潮流品牌</a>
-        <p>￥2888.00 x1<a href="#">删除</a></p>
-        <div class="clear"></div>
-      </div><!--shopping_list END-->
-      <h3 class="tit">
-        <span>满减</span>
-        购满1999元，即可享受满减优惠 小计：￥2888.00
-      </h3>
-      <div class="shopping_list">
-        <div class="clear"></div>
-        <a class="a2" href="#"><img src="images/photo/img02.png" /></a>
-        <a class="a3" href="#">三星A700 超薄金属机身三星时尚新机 潮流品牌</a>
-        <p>￥2888.00 x1<a href="#">删除</a></p>
-        <div class="clear"></div>
-      </div><!--shopping_list END-->
-      <h4 class="shopping_price">
-        共1件商品 &nbsp;&nbsp;共计<span class="fw-b">￥2288.00</span>
-        <a href="#">去结算</a>
-      </h4>
-    </menu>
-  </div>
-  <div class="clear"></div>
-</section>
-
-<nav class="navbox">
-  <section class="navlist" id="mainnavdown">
-    <a href="#" class="a2">全部商品分类</a>
-    <ul class="navlistout" id="navdown" style="display:none;">
-      <li>
-        <h3>手机大全</h3>
-        <p class="p_box">
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-          <a href="#">索尼</a>
-          <a href="#">小米</a>
-          <a href="#">华为</a>
-          <a href="#">魅族</a>
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-          <a href="#">索尼</a>
-          <a href="#">小米</a>
-          <a href="#">华为</a>
-        </p>
-        <div class="nav_showbox">
-          <i class="bg"></i>
-          <div class="clear"></div>
-          <table class="nav_right">
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="pt10"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-          </table>
-          <table class="nav_more">
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-          </table>
-          <div class="clear"></div>
-        </div>
-      </li>
-      <li>
-        <h3>家具用品</h3>
-        <p class="p_box">
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-          <a href="#">索尼</a>
-        </p>
-        <div class="nav_showbox">
-          <i class="bg"></i>
-          <div class="clear"></div>
-          <table class="nav_right">
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="pt10"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-          </table>
-          <table class="nav_more">
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-          </table>
-          <div class="clear"></div>
-        </div>
-      </li>
-      <li>
-        <h3>平板电脑</h3>
-        <p class="p_box">
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-          <a href="#">索尼</a>
-          <a href="#">小米</a>
-          <a href="#">华为</a>
-          <a href="#">魅族</a>
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-          <a href="#">索尼</a>
-          <a href="#">小米</a>
-          <a href="#">华为</a>
-        </p>
-        <div class="nav_showbox">
-          <i class="bg"></i>
-          <div class="clear"></div>
-          <table class="nav_right">
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="pt10"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-          </table>
-          <table class="nav_more">
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-          </table>
-          <div class="clear"></div>
-        </div>
-      </li>
-      <li>
-        <h3>手机配件</h3>
-        <p class="p_box">
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-          <a href="#">索尼</a>
-          <a href="#">小米</a>
-          <a href="#">华为</a>
-          <a href="#">魅族</a>
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-          <a href="#">索尼</a>
-          <a href="#">小米</a>
-          <a href="#">华为</a>
-        </p>
-        <div class="nav_showbox">
-          <i class="bg"></i>
-          <div class="clear"></div>
-          <table class="nav_right">
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="pt10"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-          </table>
-          <table class="nav_more">
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-          </table>
-          <div class="clear"></div>
-        </div>
-      </li>
-      <li>
-        <h3>电脑办公</h3>
-        <p class="p_box">
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-          <a href="#">索尼</a>
-          <a href="#">小米</a>
-          <a href="#">华为</a>
-          <a href="#">魅族</a>
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-        </p>
-        <div class="nav_showbox">
-          <i class="bg"></i>
-          <div class="clear"></div>
-          <table class="nav_right">
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="pt10"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-          </table>
-          <table class="nav_more">
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-          </table>
-          <div class="clear"></div>
-        </div>
-      </li>
-      <li>
-        <h3>网络外设</h3>
-        <p class="p_box">
-          <a href="#">苹果</a>
-          <a href="#">三星</a>
-          <a href="#">索尼</a>
-          <a href="#">小米</a>
-          <a href="#">华为</a>
-          <a href="#">魅族</a>
-        </p>
-        <div class="nav_showbox">
-          <i class="bg"></i>
-          <div class="clear"></div>
-          <table class="nav_right">
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-              <td><a href="#"><img src="newimg/img05.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="pt10"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-            <tr>
-              <td colspan="2"><a href="#"><img src="images/photo/img06.png" /></a></td>
-            </tr>
-          </table>
-          <table class="nav_more">
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-            <tr>
-              <th width="90"><span>品牌</span></th>
-              <td>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-                <a href="#">苹果</a>
-              </td>
-            </tr>
-          </table>
-          <div class="clear"></div>
-        </div>
-      </li>
-    </ul><!--navlistout END-->
-  </section>
-  <a class="a1" href="#">手机</a>
-  <a class="a1" href="#">笔记本</a>
-  <a class="a1" href="#">配件</a>
-  <a class="a1" href="#">摄影</a>
-  <a class="a1" href="#">闪购</a>
-  <a class="a1" href="#">团购</a>
-  <a class="a1" href="#">母婴</a>
-  <a class="a1" href="#">选号</a>
-  <a class="a1" href="#">资讯</a>
-  <a class="a1" href="#">会员专区</a>
-  <a class="a1" href="#">门店</a>
-</nav>
+<#include "/client/common_header.ftl" />
 <div class="clear"></div>
 <div class="pro_info">
   <h2 class="main pro_tit">
@@ -1455,106 +364,58 @@
   <div class="clear h20"></div>
   <section class="column_left">
      <menu class="border-df mb20">
-      <h3 class="tit mb10" style="border-bottom:1px dotted #ddd;">关于手机，你可能在找</h3>
-      <a class="greybox" href="#">合约机</a>
-      <a class="greybox" href="#">非合约机</a>
-      <a class="greybox" href="#">电信4G</a>
-      <a class="greybox" href="#">移动3G</a>
-      <a class="greybox" href="#">合约机</a>
-      <a class="greybox" href="#">非合约机</a>
-      <a class="greybox" href="#">电信4G</a>
-      <a class="greybox" href="#">移动3G</a>
-      <a class="greybox" href="#">合约机</a>
-      <a class="greybox" href="#">非合约机</a>
-      <a class="greybox" href="#">电信4G</a>
-      <a class="greybox" href="#">移动3G</a>
+      <h3 class="tit mb10" style="border-bottom:1px dotted #ddd;">关于${tdProductCategory.title!''}，你可能在找</h3>
+      <#if childrenCat_list??>
+           <#list childrenCat_list as item>
+                <a class="greybox" href="/list/${item.id?c}">${item.title!''}</a>
+           </#list>
+      </#if>     
      </menu>
     
     <menu class="border-df mb20">
       <h3 class="tit mb10" style="border-bottom:1px dotted #ddd;">其他品牌</h3>
-      <a class="abox" href="#">苹果</a>
-      <a class="abox" href="#">索尼</a>
-      <a class="abox" href="#">小米</a>
-      <a class="abox" href="#">诺基亚</a>
-      <a class="abox" href="#">魅族</a>
-      <a class="abox" href="#">苹果</a>
-      <a class="abox" href="#">索尼</a>
-      <a class="abox" href="#">小米</a>
-      <a class="abox" href="#">诺基亚</a>
-      <a class="abox" href="#">魅族</a>
+      <#if brand_page??>
+           <#list brand_page.content as brand>
+                <a class="abox" href="/list/${tdProductCategory.id!'0'}-${brand_index+1}">${brand.title?trim!''}</a>
+           </#list>
+      </#if>
      </menu>
     
     <menu class="border-df">
       <h3 class="tit">新品推荐</h3>
-      <li>
-        <a href="#"><img src="images/photo/img09.png" /></a>
-        <a href="#">我是产品名字的标题文字我是产品名字的标题文字</a>
-        <p class="fs18 red ta-c">￥5490.00</p>
-        <p class="fs12">已有<span class="blue">58</span>人咨询</p>
-      </li>
-      <li>
-        <a href="#"><img src="images/photo/img09.png" /></a>
-        <a href="#">我是产品名字的标题文字我是产品名字的标题文字</a>
-        <p class="fs18 red ta-c">￥5490.00</p>
-        <p class="fs12">已有<span class="blue">58</span>人咨询</p>
-      </li>
-      <li>
-        <a href="#"><img src="images/photo/img09.png" /></a>
-        <a href="#">我是产品名字的标题文字我是产品名字的标题文字</a>
-        <p class="fs18 red ta-c">￥5490.00</p>
-        <p class="fs12">已有<span class="blue">58</span>人咨询</p>
-      </li>
-      <li>
-        <a href="#"><img src="images/photo/img09.png" /></a>
-        <a href="#">我是产品名字的标题文字我是产品名字的标题文字</a>
-        <p class="fs18 red ta-c">￥5490.00</p>
-        <p class="fs12">已有<span class="blue">58</span>人咨询</p>
-      </li>
-      <li>
-        <a href="#"><img src="images/photo/img09.png" /></a>
-        <a href="#">我是产品名字的标题文字我是产品名字的标题文字</a>
-        <p class="fs18 red ta-c">￥5490.00</p>
-        <p class="fs12">已有<span class="blue">58</span>人咨询</p>
-      </li>
-      <li>
-        <a href="#"><img src="images/photo/img09.png" /></a>
-        <a href="#">我是产品名字的标题文字我是产品名字的标题文字</a>
-        <p class="fs18 red ta-c">￥5490.00</p>
-        <p class="fs12">已有<span class="blue">58</span>人咨询</p>
-      </li>
+      <#if new_sold_list??>
+           <#list new_sold_list as item>
+                <#if item_index < 8>
+                     <li>
+                        <a href="/goods/${item.id?c}"><img src="${item.coverImageUri!''}" /></a>
+                        <a href="/goods/${item.id?c}" style="overflow: hidden;height: 40px;">${item.title!''}</a>
+                        <p class="fs18 red ta-c">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
+                        <p class="fs12">已有<span class="blue">${item.totalCollects!''}</span>人关注</p>
+                     </li>
+                </#if>
+           </#list>
+          
+      </#if>           
     </menu>
 
     <menu class="border-df mt20">
       <h3 class="tit">浏览记录</h3>
-      <a class="scan" href="#">
-        <img src="images/photo/img02.png" />
-        <p>苹果iPhone 6 Plus/A1524 5.5英寸特惠版</p>
-        <p class="red">￥5498.00</p>
-      </a>
-      <a class="scan" href="#">
-        <img src="images/photo/img02.png" />
-        <p>苹果iPhone 6 Plus/A1524 5.5英寸特惠版</p>
-        <p class="red">￥5498.00</p>
-      </a>
-      <a class="scan" href="#">
-        <img src="images/photo/img02.png" />
-        <p>苹果iPhone 6 Plus/A1524 5.5英寸特惠版</p>
-        <p class="red">￥5498.00</p>
-      </a>
-      <a class="scan" href="#">
-        <img src="images/photo/img02.png" />
-        <p>苹果iPhone 6 Plus/A1524 5.5英寸特惠版</p>
-        <p class="red">￥5498.00</p>
-      </a>
-      <a class="scan" href="#">
-        <img src="images/photo/img02.png" />
-        <p>苹果iPhone 6 Plus/A1524 5.5英寸特惠版</p>
-        <p class="red">￥5498.00</p>
-      </a>
-      <div class="ta-r" style="border-top:1px dotted #ddd;"><a class="blue fs12 lh30" href="#">清空浏览记录</a></div>
+      <#if recent_page??>
+        <#list recent_page.content as item>
+            <#if item_index < 9>
+                <a class="scan" href="/goods/${item.goodsId?c}">
+                    <img src="${item.goodsCoverImageUri!''}" width="80" height="80"/>
+                    <p style="overflow: hidden;height: 60px;">${item.goodsTitle!''}</p>
+                    <p class="red">￥<#if item.goodsSalePrice??>${item.goodsSalePrice?string("0.00")}</#if></p>
+                </a>
+            </#if>
+        </#list>
+      </#if>     
+      
+      <div class="ta-r" style="border-top:1px dotted #ddd;"><a class="blue fs12 lh30" href="javascript:deleterecent();">清空浏览记录</a></div>
     </menu>
     
-    <menu class="border-df mt20">
+<!--    <menu class="border-df mt20">
       <h3 class="tit">猜你喜欢</h3>
       <a class="scan" href="#">
         <img src="images/photo/img02.png" />
@@ -1582,9 +443,9 @@
         <p class="red">￥5498.00</p>
       </a>
       
-    </menu>
+    </menu> -->
     
-    <menu class="border-df mt20">
+ <!--   <menu class="border-df mt20">
       <h3 class="tit">相关配件</h3>
       <a class="scan" href="#">
         <img src="images/photo/img02.png" />
@@ -1612,56 +473,44 @@
         <p class="red">￥5498.00</p>
       </a>
       
-    </menu>
+    </menu> -->
   </section><!--column_left END-->
   
   <div class="column_right">
     <div class="detail_tit" id="detail_tit">
       <div class="out">
         <menu id="product_show_div">
-          <a class="sel" href="#item1">规格参数</a>
+          <a class="sel stab" href="#item1">规格参数</a>
           <a href="#item2" class>商品介绍</a>
-          <a href="#item3" class>价格走势</a>
-          <a href="#item4" class>商品评价</a>
-          <a href="#item5" class>商品咨询</a>
+          <!--<a href="#item3" class>价格走势</a>-->
+          <a href="#item3" class>商品评价</a>
+          <a href="#item4" class>商品咨询</a>
           <div class="clear"></div>
         </menu>
       </div>
     </div><!--detail_tit END-->
     <div id="item1"></div>
-    <table class="detail_tab">
-      <tr>
-        <td>品牌：三星</td>
-        <td>型号：三星SAMSUNG GALAXY S5</td>
-        <td>颜色：黑色 白色 蓝色 金色</td>
-      </tr>
-      <tr>
-        <td>品牌：三星</td>
-        <td>型号：三星SAMSUNG GALAXY S5</td>
-        <td>颜色：黑色 白色 蓝色 金色</td>
-      </tr>
-      <tr>
-        <td>品牌：三星</td>
-        <td>型号：三星SAMSUNG GALAXY S5</td>
-        <td>颜色：黑色 白色 蓝色 金色</td>
-      </tr>
-      <tr>
-        <td>品牌：三星</td>
-        <td>型号：三星SAMSUNG GALAXY S5</td>
-        <td>颜色：黑色 白色 蓝色 金色</td>
-      </tr>
-      <tr>
-        <td>品牌：三星</td>
-        <td>型号：三星SAMSUNG GALAXY S5</td>
-        <td>颜色：黑色 白色 蓝色 金色</td>
-      </tr>
+     <table class="detail_tab">
+      <#if goods.paramList??>
+                <#list goods.paramList as param>
+                    <#if param_index % 3 == 0 >
+                        <tr>
+                            <td>${param.paramName!''}: ${param.value!''}</td>
+                            <#if goods.paramList?size gt param_index+1 >
+                                <td>${goods.paramList[param_index+1].paramName!''}: ${goods.paramList[param_index+1].value!''}</td>
+                            </#if>
+                            <#if goods.paramList?size gt param_index+2 >
+                                <td>${goods.paramList[param_index+2].paramName!''}: ${goods.paramList[param_index+2].value!''}</td>
+                            </#if>
+                        </tr>  
+                    </#if>
+                </#list>
+            </#if>
     </table>
     <div id="item2"></div>
-    <article class="detail_essay">
-      <p class="ta-c"><img src="images/photo/img11.png" /></p>
-    </article>
+     ${goods.detail!''}    
     <div class="clear h10"></div>
-    <div id="item4"></div>
+    <div id="item3"></div>
     <section class="detail_hp">
     <div class="part02">
         好评率
@@ -1694,184 +543,29 @@
       </div> -->
       <div class="clear"></div>
     </section>
-    
-    <section class="pro_mytext" id="pro_mytext">
-      <div class="pb20">
-        <span class="fs18 mr20">我要评价</span>
-        <input class="ml20" type="radio" />
-        <span class="mr20">好评</span>
-        <input type="radio" />
-        <span class="mr20">中评</span>
-        <input type="radio" />
-        <span class="mr20">差评</span>
-      </div>
-      <div class="area">
-        <textarea>请输入您的评价</textarea>
-      </div>
-      <div class="pt10 pb10">
-        <div class="clear"></div>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错(500)</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <p>
-        <input type="checkbox" />
-        <span>照相不错</span>
-        </p>
-        <div class="clear"></div>
-      </div>
-      <input class="sub" type="submit" value="提交评价" />
-    </section><!--pro_mytext END-->
-    
+       
     <div class="clear h20"></div>
-    <menu class="pro_eval w100">
-      <h3 class="tit"><input type="radio" /><span>全部</span><input type="radio" /><span>好评（10）</span><input type="radio" /><span>中评（5）</span><input type="radio" /><span>差评（5）</span></h3>
-      <li>
-        <a class="a1" href="#"><img src="newimg/img05.png" /><p>我是用户名</p></a>
-        <a class="a1 a2 lparameter" href="#"><p>版本：4G无敌版</p><p>颜色：白色</p><p>参数：屏幕很大很光滑</p></a> 
-        <p class="pb10">手机很好很强大，性价比非常不错，朋友看了都喜欢！</p>
-        <p class="c9">屏幕大&nbsp;&nbsp;&nbsp;&nbsp;性价比高&nbsp;&nbsp;&nbsp;&nbsp;外观漂亮</p>
-        <p class="ta-r red pt10">丫丫回复：谢谢光临丫丫网。<span class="c9 ml20">2015.03.15</span></p>
-      </li>
-      <li>
-        <a class="a1" href="#"><img src="newimg/img05.png" /><p>我是用户名</p></a>
-        <a class="a1 a2 lparameter" href="#"><p>版本：4G无敌版</p><p>颜色：白色</p><p>参数：屏幕很大很光滑</p></a> 
-        <p class="pb10">手机很好很强大，性价比非常不错，朋友看了都喜欢！</p>
-        <p class="c9">屏幕大&nbsp;&nbsp;&nbsp;&nbsp;性价比高&nbsp;&nbsp;&nbsp;&nbsp;外观漂亮</p>
-        <p class="ta-r red pt10">丫丫回复：谢谢光临丫丫网。<span class="c9 ml20">2015.03.15</span></p>
-      </li>
-      <li>
-        <a class="a1" href="#"><img src="newimg/img05.png" /><p>我是用户名</p></a>
-        <a class="a1 a2 lparameter" href="#"><p>版本：4G无敌版</p><p>颜色：白色</p><p>参数：屏幕很大很光滑</p></a> 
-        <p class="pb10">手机很好很强大，性价比非常不错，朋友看了都喜欢！</p>
-        <p class="c9">屏幕大&nbsp;&nbsp;&nbsp;&nbsp;性价比高&nbsp;&nbsp;&nbsp;&nbsp;外观漂亮</p>
-        <p class="ta-r red pt10">丫丫回复：谢谢光临丫丫网。<span class="c9 ml20">2015.03.15</span></p>
-      </li>
-      <li>
-        <a class="a1" href="#"><img src="newimg/img05.png" /><p>我是用户名</p></a>
-        <a class="a1 a2 lparameter" href="#"><p>版本：4G无敌版</p><p>颜色：白色</p><p>参数：屏幕很大很光滑</p></a> 
-        <p class="pb10">手机很好很强大，性价比非常不错，朋友看了都喜欢！</p>
-        <p class="c9">屏幕大&nbsp;&nbsp;&nbsp;&nbsp;性价比高&nbsp;&nbsp;&nbsp;&nbsp;外观漂亮</p>
-        <p class="ta-r red pt10">丫丫回复：谢谢光临丫丫网。<span class="c9 ml20">2015.03.15</span></p>
-      </li>
-      <li>
-        <a class="a1" href="#"><img src="newimg/img05.png" /><p>我是用户名</p></a>
-        <a class="a1 a2 lparameter" href="#"><p>版本：4G无敌版</p><p>颜色：白色</p><p>参数：屏幕很大很光滑</p></a> 
-        <p class="pb10">手机很好很强大，性价比非常不错，朋友看了都喜欢！</p>
-        <p class="c9">屏幕大&nbsp;&nbsp;&nbsp;&nbsp;性价比高&nbsp;&nbsp;&nbsp;&nbsp;外观漂亮</p>
-        <p class="ta-r red pt10">丫丫回复：谢谢光临丫丫网。<span class="c9 ml20">2015.03.15</span></p>
-      </li>
-    </menu><!--pro_eval END-->
+     <#include "/client/goods_comment.ftl" />
     <div class="clear h20"></div>
-      <div class="page-ldy">
-        <a href="#"><</a>
-        <a class="sel" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">></a>
-      </div>
-    <div class="clear h20"></div>
-    <div id="item3"></div>
-    <div id="item5"></div>
+    <div id="item4"></div>
     <section class="pro_myseek">
-      <h3 class="lh30 fs18 fw400 pb10">购买咨询</h3>
-      <menu>
-        <textarea placeholder="请告诉我您的问题……"></textarea>
-      </menu>
-      <p>温馨提示：您可在购买前对产品包装、颜色、运输、库存等方面进行咨询，我们有专人进行回复！因厂家随时会更改一些产品的包装、颜色、产地等参数，所以该回复仅在当时对提问者有效，其他网友仅供参考！咨询回复的工作时间为：周一至周六，9:00至18:00，请耐心等待工作人员回复。</p>
-      <div class="clear"></div>
-      <input class="sub" type="submit" value="马上提问" />
+      <#if username??>
+            <form id="consultForm" action="javascript:submitConsult();">
+                <input type="hidden" name="goodsId" value=${goods.id?c} />
+                <h3 class="lh30 fs18 fw400 pb10">购买咨询</h3>
+                <menu>
+                    <textarea name="content" datatype="*5-255" nullmsg="请输入咨询内容"></textarea>
+                </menu>
+                <p>温馨提示：我们将尽快回复您的咨询。</p>
+                <div class="clear"></div>
+                <input class="sub" type="submit" value="马上提问" />
+            </form>
+        <#else>
+            <div>请 <a href="/login">登录</a> 以进行咨询</div>
+        </#if>
     </section><!--pro_myseek END-->
     
-    <ul class="pro_myseek_list w100">
-      <li>
-        <span class="sp1">2015.03.15</span>
-        <p><b>我是用户名：</b>可以使用多张卡支付么？</p>
-        <p class="red pt5">丫丫回复：可以的哦，亲。</p>
-      </li>
-      <li>
-        <span class="sp1">2015.03.15</span>
-        <p><b>我是用户名：</b>可以使用多张卡支付么？</p>
-        <p class="red pt5">丫丫回复：可以的哦，亲。</p>
-      </li>
-      <li>
-        <span class="sp1">2015.03.15</span>
-        <p><b>我是用户名：</b>可以使用多张卡支付么？</p>
-        <p class="red pt5">丫丫回复：可以的哦，亲。</p>
-      </li>
-      <li>
-        <span class="sp1">2015.03.15</span>
-        <p><b>我是用户名：</b>可以使用多张卡支付么？</p>
-        <p class="red pt5">丫丫回复：可以的哦，亲。</p>
-      </li>
-      <li>
-        <span class="sp1">2015.03.15</span>
-        <p><b>我是用户名：</b>可以使用多张卡支付么？</p>
-        <p class="red pt5">丫丫回复：可以的哦，亲。</p>
-      </li>
-    </ul>
-    
-    <div class="clear h20"></div>
-     <div class="page-ldy">
-        <a href="#"><</a>
-        <a class="sel" href="#">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">></a>
-      </div>
-    <div class="clear"></div>
+    <#include "/client/goods_consult.ftl" />
     
   </div><!--column_right END-->
   

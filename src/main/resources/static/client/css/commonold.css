@@ -158,9 +158,7 @@ a.white:hover { color:#ff7d43;}
 .maintop p.p1 {
 	float:left;
 	padding-left:15px;
-	background:url(../images/top_ico05.png) no-repeat left center;
-	padding-left: 26px;
-	}
+	background:url(../images/top_ico05.png) no-repeat left center;}
 .maintop p.p2 {
 	color:#e83928;
 	float:right;
@@ -179,7 +177,6 @@ a.white:hover { color:#ff7d43;}
 	margin-top:5px;
 	border-right:1px solid #eee;
 	padding:0 7px;}
-	.maintop a:hover{color: #c91c28}
 .maintop a.a1 {
 	z-index:5;
 	padding-left:30px;
@@ -332,7 +329,7 @@ a.white:hover { color:#ff7d43;}
 	width:375px;
 	margin-bottom:5px;
 	padding:2px 90px 2px 2px;
-	background:#e83928;}
+	background:#ff8800;}
 .searchbox div input.text {
 	background:#fff;
 	height:38px;
@@ -343,7 +340,7 @@ a.white:hover { color:#ff7d43;}
 	position:absolute;
 	right:0;
 	top:0;
-	background:#e83928;
+	background:#ff8800;
 	color:#fff;
 	font-size:20px;
 	width:88px;
@@ -470,7 +467,7 @@ a.white:hover { color:#ff7d43;}
 	width:1200px;
 	min-width:1200px;
 	margin:0 auto;
-	background:#c91c28;
+	background:#ff8800;
 	height:45px;}
 .navbox a.a1 {
 	float:left;
@@ -524,7 +521,7 @@ a.white:hover { color:#ff7d43;}
 	-moz-transform: translateX(0px);
 	transform: translateX(0px);
 }*/
-.navbox a.a1:hover { background:#b61d1e;}
+.navbox a.a1:hover { background:#ff6300;}
 .navlist {
 	margin-right:10px;
 	width:218px;
@@ -538,7 +535,7 @@ a.white:hover { color:#ff7d43;}
 	font-size:16px;
 	color:#fff;
 	line-height:45px;
-	background:#b61d1e url(../images/arrow04.png) no-repeat 180px center;}
+	background:#e83928 url(../images/arrow04.png) no-repeat 180px center;}
 .navlistout {
 	display:block;
 	position:absolute;
@@ -547,9 +544,8 @@ a.white:hover { color:#ff7d43;}
 	width:174px;
 	height:520px;
 	top:40px;
-	border:2px solid #e83928;
+	border:2px solid #ff8800;
 	}
-	.navlistout a:hover{color: #e83928}
 .navlistout li { width:100%;}
 .navlistout h3 {
 	font-size:16px;
@@ -575,7 +571,7 @@ a.white:hover { color:#ff7d43;}
 	width:951px;
 	padding:15px;
 	min-height:85px;
-	border:1px solid #e83928;
+	border:1px solid #ff8800;
 	background:#f7f7f7;}
 .nav_showbox .bg {
 	display:block;
@@ -620,12 +616,9 @@ a.white:hover { color:#ff7d43;}
 	padding:0 10px;
 	margin:0 0 7px 0;
 	border-left:1px solid #eee;}
-.index_center {width:100%;padding:15px 0;}
+.index_center {width:100%;background:#f3f0f2; padding:15px 0;}
 .index_center table { width:1200px; table-layout:fixed; margin:0 auto;}
-.index_center a { display:block; padding:10px 0 0 66px; height:37px; font-size:14px;}
-.index_center span{ width: 180px; text-align: center; height: 24px; line-height: 24px; display: block;}
-.footer_sp01{font-size: 16px;}
-
+.index_center a { display:block; padding:20px 0 0 60px; height:37px; font-size:14px;}
 .index_center a img { position:absolute;left:0;top:0;}
 .index_center a:hover img {
 	-webkit-transition: all 0.4s ease-in-out 0.01s;
@@ -673,7 +666,6 @@ a.white:hover { color:#ff7d43;}
 	min-width:1200px;
 	background:#9a9a9a;
 	padding:25px 0;}
-
 .foot_sys .sys {
 	float:left;
 	padding:0 0 0 95px;
@@ -681,8 +673,9 @@ a.white:hover { color:#ff7d43;}
 .foot_sys .sys img {
 	width:83px;
 	height:83px;
-	
-	}
+	position:absolute;
+	left:0;
+	top:0;}
 .foot_sys p { color:#fff;}
 .bot_search {
 	float:right;
@@ -696,7 +689,7 @@ a.white:hover { color:#ff7d43;}
 	height:30px;
 	overflow:hidden;
 	padding-left:35px;
-	background:#c91c28;}
+	background:#40a8f7;}
 .bot_search .sub {
 	background:url(../images/bot_search.png) no-repeat center center;
 	display:block;
@@ -716,9 +709,7 @@ a.white:hover { color:#ff7d43;}
 .mainfoot nav {
 	height:30px;
 	color:#ccc;
-	padding:10px 0 0 45px;
-	margin-left: 304px;
-	}
+	padding:10px 0 0 45px;}
 .mainfoot nav a {
 	color:#fff;
 	font-size:14px;
@@ -728,15 +719,14 @@ a.white:hover { color:#ff7d43;}
 	left:0;
 	top:0;}
 .mainfoot nav a:hover { color:#ff8800;}
-.mainfoot p{width: 100%; text-align: center; color: white;}
-.mainfoot span{width: 100%; text-align: center; display: block;}
-.mainfoot span a {color: white;  margin-left: 6px; padding-top: 6px;}
+.mainfoot p span { position:absolute; right:0; top:0;}
+.mainfoot p a { color:#999;}
 .index_floor {
 	display:none;
 	z-index:80;
 	position:fixed;
 	_position:absolute;
-	left:0;
+	left:5px;
 	top:30%;}
 .index_floor a {
 	display:block;
@@ -1001,13 +991,13 @@ margin:0 2px;}
 
 
 
-.index_zx a:hover{color:#e83928}
-.index_sh a:hover{color:#e83928}
-.index_zx a:hover{color:#e83928}
-table a:hover{color:#e83928}
-.fc{color:#e83928}
-.bot_help a:hover{color:#e83928}
-.main a:hover{color:#e83928}
+
+
+
+
+
+
+
 
 
 

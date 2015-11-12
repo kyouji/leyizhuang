@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sun.syndication.feed.atom.Category;
 import com.ynyes.zphk.entity.TdGoods;
 import com.ynyes.zphk.entity.TdProduct;
 import com.ynyes.zphk.entity.TdProductCategory;
@@ -41,6 +42,8 @@ import com.ynyes.zphk.service.TdUserPointService;
 import com.ynyes.zphk.service.TdUserRecentVisitService;
 import com.ynyes.zphk.service.TdUserService;
 import com.ynyes.zphk.util.ClientConstant;
+
+import scala.collection.parallel.ParIterableLike.Product;
 
 /**
  * 商品详情页
@@ -154,9 +157,9 @@ public class TdGoodsController {
 		// 商品组合
 		map.addAttribute("comb_list", tdGoodsCombinationService.findByGoodsId(goods.getProductId()));
 
-		Page<TdUserComment> comment_page = tdUserCommentService.findByGoodsIdAndIsShowable(goods.getProductId(), 0,
+		Page<TdUserComment> comment_page = tdUserCommentService.findByGoodsIdAndIsShowable(goods.getId(), 0,
 				ClientConstant.pageSize);
-		Page<TdUserConsult> consult_page = tdUserConsultService.findByGoodsIdAndIsShowable(goods.getProductId(), 0,
+		Page<TdUserConsult> consult_page = tdUserConsultService.findByGoodsIdAndIsShowable(goods.getId(), 0,
 				ClientConstant.pageSize);
 
 		// 全部评论
@@ -191,13 +194,21 @@ public class TdGoodsController {
 
 		// 查找类型
 		TdProductCategory tdProductCategory = tdProductCategoryService.findOne(goods.getCategoryId());
+		map.addAttribute("tdProductCategory", tdProductCategory);
 
+		// 所有子类别
+		List<TdProductCategory> childrencatlist = tdProductCategoryService.findByParentIdOrderBySortIdAsc(tdProductCategory.getId());
+		map.addAttribute("childrenCat_list", childrencatlist);
+		
 		// 查询同类型下面品牌 edit by Sharon 2015-8-18
 		map.addAttribute("brand_page",
 				tdBrandService.findByStatusIdAndProductCategoryTreeContaining(1L, goods.getCategoryId(), 0, 10));
 
 		//同类排行榜
 		map.addAttribute("most_sold_list",tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderBySoldNumberDesc(goods.getCategoryId()));
+		
+		// 新品推荐
+		map.addAttribute("new_sold_list", tdGoodsService.findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeDesc(goods.getCategoryId()));
 		
 		// 获取该类型所有父类型
 		if (null != tdProductCategory) {
