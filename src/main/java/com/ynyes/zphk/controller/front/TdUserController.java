@@ -518,6 +518,30 @@ public class TdUserController extends AbstractPaytypeController {
 		return "/client/user_recent_list";
 	}
 
+	// 清空浏览记录
+	 @RequestMapping(value = "/user/recent/deleteAll", method = RequestMethod.POST)
+	    @ResponseBody
+	    public Map<String, Object> deleterecent(	                                   
+	                                    HttpServletRequest req) {
+	        Map<String, Object> res = new HashMap<String, Object>();
+	        
+	        res.put("code", 1);
+	        
+	        String username = (String) req.getSession().getAttribute("username");
+	        
+	        if (null == username)
+	        {
+	        	username = req.getSession().getId();
+	        }
+	        	        
+	        List<TdUserRecentVisit> recentList = tdUserRecentVisitService.findByUsername(username);
+       	    tdUserRecentVisitService.delete(recentList);
+	      	        
+	        res.put("code", 0);
+	        
+	        return res;
+	    }
+	
 	/**
 	 * 会员等级页面
 	 * 

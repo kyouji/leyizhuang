@@ -1,6 +1,4 @@
-$(document).ready(function(){
-  
-});
+//本效果由昆明天度网络IRIS原创制作
 
 function hoverShowInfo(boxid){
 	var _box = $("#"+boxid);
@@ -105,10 +103,33 @@ function myOrderShow(aid,tabid){
 	var _tab = $("#"+tabid);
 	var _display = _tab.css("display");
 	if(_display == "none"){
-		_obj.html("收起");
+		_obj.addClass("member_down");
 		_tab.slideDown(200);
 		}else {
-			_obj.html("展开");
+			_obj.removeClass("member_down");
 		    _tab.slideUp(200);
 			}
 }
+
+//本效果由昆明天度网络IRIS原创制作-左侧收缩菜单
+function myLeftMunu(){
+	var _show = $(".mymember_menu").find(".leftmenu");
+	var _menu = $(".mymember_menu").find(".mymember_menu_tit");
+	_menu.click(function(){
+		var _obj = $(this).parent();
+		var _box = _obj.find(".leftmenu");
+		var _dis = _box.css("display");
+		_box.slideToggle(100);
+		if(_dis == "none"){
+			$(this).addClass("sel01");
+			_box.slideDown(100);
+			}else{
+				$(this).removeClass("sel01");
+			    _box.slideUp(100);
+				}
+		
+		});
+	//alert(_menu.length)
+}
+
+

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
@@ -392,6 +393,159 @@ public class TdGoodsService {
         return repository.findByIdAndIsOnSaleTrue(ids);
     }
 
+    /**
+  	 * @author lc
+  	 * @注释：新的商品筛选
+  	 */
+      public Page<TdGoods> findByCategoryIdAndLeftNumberGreaterThanZeroAndSalePriceBetweenAndParamsLikeAndIsOnSaleTrue(
+              long catId, double priceLow, double priceHigh, 
+              List<String> paramValueList, Pageable pageRequest) {
+
+          String paramStr = "%";
+
+          for (int i = 0; i < paramValueList.size(); i++) {
+              String value = paramValueList.get(i);
+              if (!"".equals(value)) {
+                  paramStr += value;
+                  paramStr += "%";
+              }
+          }
+
+          return repository
+                  .findByCategoryIdTreeContainingAndLeftNumberGreaterThanAndSalePriceBetweenAndParamValueCollectLikeAndIsOnSaleTrue(
+                          "[" + catId + "]", 0L, priceLow, priceHigh, paramStr,
+                          pageRequest);
+      }
+      
+      public Page<TdGoods> findByCategoryIdAndBrandIdAndLeftNumberGreaterThanZeroAndSalePriceBetweenAndParamsLikeAndIsOnSaleTrue(
+              long catId, long brandId, double priceLow, double priceHigh,
+              List<String> paramValueList, Pageable pageRequest) {
+          String paramStr = "%";
+
+          for (int i = 0; i < paramValueList.size(); i++) {
+              String value = paramValueList.get(i);
+              if (!"".equals(value)) {
+                  paramStr += value;
+                  paramStr += "%";
+              }
+          }
+
+          return repository
+                  .findByCategoryIdTreeContainingAndBrandIdAndLeftNumberGreaterThanAndSalePriceBetweenAndParamValueCollectLikeAndIsOnSaleTrue(
+                          "[" + catId + "]", brandId, 0L, priceLow, priceHigh,
+                          paramStr, pageRequest);
+      }
+      
+      public Page<TdGoods> findByCategoryIdAndLeftNumberGreaterThanZeroAndParamsLikeAndIsOnSaleTrue(
+              long catId, List<String> paramValueList, Pageable pageRequest) {
+          String paramStr = "%";
+
+          for (int i = 0; i < paramValueList.size(); i++) {
+              String value = paramValueList.get(i);
+              if (!"".equals(value)) {
+                  paramStr += value;
+                  paramStr += "%";
+              }
+          }
+
+          return repository
+                  .findByCategoryIdTreeContainingAndLeftNumberGreaterThanAndParamValueCollectLikeAndIsOnSaleTrue(
+                          "[" + catId + "]", 0L, paramStr, pageRequest);
+      }
+      
+      public Page<TdGoods> findByCategoryIdAndBrandIdAndLeftNumberGreaterThanZeroAndParamsLikeAndIsOnSaleTrue(
+              long catId, long brandId,
+              List<String> paramValueList, Pageable pageRequest) {
+          String paramStr = "%";
+
+          for (int i = 0; i < paramValueList.size(); i++) {
+              String value = paramValueList.get(i);
+              if (!"".equals(value)) {
+                  paramStr += value;
+                  paramStr += "%";
+              }
+          }
+
+          return repository
+                  .findByCategoryIdTreeContainingAndBrandIdAndLeftNumberGreaterThanAndParamValueCollectLikeAndIsOnSaleTrue(
+                          "[" + catId + "]", brandId, 0L, paramStr, pageRequest);
+      }
+      
+      public Page<TdGoods> findByCategoryIdAndSalePriceBetweenAndParamsLikeAndIsOnSaleTrue(
+              long catId, double priceLow, double priceHigh,
+              List<String> paramValueList, Pageable pageRequest) {
+          String paramStr = "%";
+
+          for (int i = 0; i < paramValueList.size(); i++) {
+              String value = paramValueList.get(i);
+              if (!"".equals(value)) {
+                  paramStr += value;
+                  paramStr += "%";
+              }
+          }
+
+          return repository
+                  .findByCategoryIdTreeContainingAndSalePriceBetweenAndParamValueCollectLikeAndIsOnSaleTrue(
+                          "[" + catId + "]", priceLow, priceHigh, paramStr,
+                          pageRequest);
+      }
+      
+      public Page<TdGoods> findByCategoryIdAndBrandIdAndSalePriceBetweenAndParamsLikeAndIsOnSaleTrue(
+              long catId, long brandId, double priceLow, double priceHigh,
+              List<String> paramValueList, Pageable pageRequest) {
+          String paramStr = "%";
+
+          for (int i = 0; i < paramValueList.size(); i++) {
+              String value = paramValueList.get(i);
+              if (!"".equals(value)) {
+                  paramStr += value;
+                  paramStr += "%";
+              }
+          }
+
+          return repository
+                  .findByCategoryIdTreeContainingAndBrandIdAndSalePriceBetweenAndParamValueCollectLikeAndIsOnSaleTrue(
+                          "[" + catId + "]", brandId, priceLow, priceHigh,
+                          paramStr, pageRequest);
+      }
+      
+      public Page<TdGoods> findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+              long catId, List<String> paramValueList, Pageable pageRequest) {
+          String paramStr = "%";
+
+          if (null != paramValueList) {
+              for (int i = 0; i < paramValueList.size(); i++) {
+                  String value = paramValueList.get(i);
+                  if (!"".equals(value)) {
+                      paramStr += value;
+                      paramStr += "%";
+                  }
+              }
+          }
+
+          return repository
+                  .findByCategoryIdTreeContainingAndParamValueCollectLikeAndIsOnSaleTrue(
+                          "[" + catId + "]", paramStr, pageRequest);
+      }
+      
+      public Page<TdGoods> findByCategoryIdAndBrandIdAndParamsLikeAndIsOnSaleTrue(
+              long catId, long brandId,
+              List<String> paramValueList, Pageable pageRequest) {
+          String paramStr = "%";
+
+          for (int i = 0; i < paramValueList.size(); i++) {
+              String value = paramValueList.get(i);
+              if (!"".equals(value)) {
+                  paramStr += value;
+                  paramStr += "%";
+              }
+          }
+
+          return repository
+                  .findByCategoryIdTreeContainingAndBrandIdAndParamValueCollectLikeAndIsOnSaleTrue(
+                          "[" + catId + "]", brandId, paramStr, pageRequest);
+      }
+    
     /**
      * 按类型查找所有商品
      * 

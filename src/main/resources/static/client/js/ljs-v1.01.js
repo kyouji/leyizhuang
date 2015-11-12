@@ -203,6 +203,7 @@ jQuery.ljs_adcartoon = {
 		_li02.css("float","left");
 		_arr.css({"float":"left","position":"relative"});
 		
+		
 		//插入右下角数值
 	 var _numstr = "<div id='"+_obj.numid+"'>";//注意div的id
 	 for(var i=1;i<=_arr.length;i++){

@@ -63,18 +63,37 @@ function phoneListMore(){
 			});
 }
 
-function navDownList(boxid,_sumname,_showname){
-	var _box = $("#"+boxid);
-	var _arr = _box.find(_sumname);
-	var _hover = _box.find(_showname);
+function navDownList(boxid, _sumname, _showname) {
+	$("#mainnavdown").append("<div id='mainnavdownbg'></div>");
+	var _mybg = $("#mainnavdownbg");
+	
+    var _box = $("#" + boxid);
+    var _arr = _box.find(_sumname);
+    var _hover = _box.find(_showname);
+    _arr.hover(function () {
+        if (_hover.is(":animated")) { _hover.stop(true, true); }
+        var _height = $(this).height() + 0;
+        $(this).find(".bg").height(_height);
+        $(this).find(_showname).css("display","block");
+
+        var _index = $(this).index();
+        var _top = 0;
+        for (var i = 0; i < _index; i++) {
+            _top = _top - _arr.eq(i).height() - 0;
+        }
+        $(this).find(_showname).css("top", _top + "px");
+        _top = -_top - 8;
+
+
+    }, function () {
+        if (_hover.is(":animated")) { _hover.stop(true, true); }
+        _hover.css("display","none");
+    });
+	
 	_arr.hover(function(){
-		if(_hover.is(":animated")){_hover.stop(true,true);}
-		var _height = $(this).height() + 5;
-		$(this).find(".bg").height(_height);
-		$(this).find(_showname).fadeIn(100);
+		_mybg.css("display","block");
 		},function(){
-			if(_hover.is(":animated")){_hover.stop(true,true);}
-			_hover.fadeOut(100);
+			_mybg.css("display","none");
 			});
 }
 //选项卡 - 本效果由昆明天度网络IRIS原创制作
@@ -145,6 +164,7 @@ function indexBannerShow(boxid,_bname,numid,_nname,_hover,_speed){
 		},_speed);
 			});
 }
+
 //首页专用选项卡 - 本效果由昆明天度网络IRIS原创制作
 function indexBoxShow(menuid,_mname,sumid,_sname,_hover){
 	var _menu = $("#"+menuid);
@@ -218,7 +238,7 @@ function chooseMoreDown(){
 	var _arr = $(".choose_box menu");
 	var _length = _arr.length;
 	if(_length > 4){
-		var _str = "<a href='javascript:chooseMoreUp();'>收起选项<img src='images/content/arrow01.png' /></a>";
+		var _str = "<a href='javascript:chooseMoreUp();'>收起选项<img src='/client/images/content/arrow01.png' /></a>";
 		$(".choose_more").html(_str);
 		var _time = 200;
 		for(var i=4;i<_length;i++){
@@ -231,7 +251,7 @@ function chooseMoreUp(){
 	var _arr = $(".choose_box menu");
 	var _length = _arr.length;
 	if(_length > 4){
-		var _str = "<a href='javascript:chooseMoreDown();'>下拉，更多选项<img src='images/content/arrow01.png' /></a>";
+		var _str = "<a href='javascript:chooseMoreDown();'>下拉，更多选项<img src='/client/images/content/arrow01.png' /></a>";
 		$(".choose_more").html(_str);
 		var _time = 200;
 		for(var i=4;i<_length;i++){
@@ -258,11 +278,11 @@ function productImgShow(boxid,_name,_menuid,_hover,_width,_height){
 	_arr.find("img").css({"width":_width+"px","height":_height+"px"});
 	
 	//加入放大框
-	var _showwidth = 500;
-	var _showheight = 500;
-	var _boxshowstr = "<div class='myboxshowstr' style='position:absolute;top:0;left:"+_width+"px;width:"+_showwidth+"px;height:"+_showheight+"px;border:1px solid #ddd;background:#fff;display:none;overflow:hidden;margin-left:20px;transition-duration:0;'></div>";
+	var _showwidth = 400;
+	var _showheight = 400;
+	var _boxshowstr = "<div class='myboxshowstr' style='position:absolute;z-index:999;top:0;left:"+_width+"px;width:"+_showwidth+"px;height:"+_showheight+"px;border:1px solid #ddd;background:#fff;display:none;overflow:hidden;margin-left:20px;transition-duration:0;'></div>";
 	_box.append(_boxshowstr);
-	var _cha = 100;
+	var _cha = 150;
 	var _showmovestr = "<div class='myboxmovestr' style='position:absolute;top:0;left:0;width:"+_cha+"px;height:"+_cha+"px;border:1px solid #ccc;background:#fff;z-index:10;opacity:0.5;filter:alpha(Opacity=50);-moz-opacity:0.5;display:none;transition: all 0s ease-in-out 0s;'></div>";
 	_box.append(_showmovestr);
 	var _showout = _box.find(".myboxshowstr");//放大镜盒子

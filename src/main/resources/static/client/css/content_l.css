@@ -1,0 +1,40 @@
+/*详细页*/
+.pro_info {  background:#F1F1F1;}
+.pro_tit .a1 { font-size:18px; line-height:25px;}
+.pro_tit .a2,.pro_tit span { font-size:12px; line-height:18px;}
+.proinfo_right h4 {  font-weight:700; }
+.l-weight{font-weight: bold;}
+.l-gift{background: #E4393C;color: #fff;padding: 0 2px;}
+.pro_choose tr th{color: red;vertical-align:text-top;line-height: 34px;font-weight: normal;color: #555;}
+.pro_choose tr td a{padding: 2px 6px;border: 1px solid #ccc;background: #fff;margin: 4px 2px;display: inline-block;}
+.pro_choose tr td{width: 500px;}
+.pro_choose{margin-top: 10px;}
+.pro_choose .text{ width: 36px;height: 36px;border: 1px solid #ddd;text-align: center;float: left;line-height: 36px;border-right: none;}
+.pro_choose .plus a{display: block;line-height: 17px;border: 1px solid #ddd;background: #f1f1f1;text-align: center;padding: 0;margin: 0;}
+.detail_hp .part02 { margin-right: 30px;}
+.pro_eval li {min-height:80px;padding:20px 10% 15px 10%;width:80%;}
+.pro_eval li .pt10{float: left;margin-top:0px;margin-left:-10%;color: #333;}
+.pro_eval li a.a1 img { width:30px; height:30px; margin-bottom:5px;}
+.pro_eval li a.a2 {  float: left; right:20%;text-align: left;}
+.lparameter p{  width:160px; }
+.page-ldy {display: block;width: 95%;padding-right: 5%;text-align: right;}
+.page-ldy a {display: inline-block;width: 30px;height: 30px;text-align: center;overflow: hidden;border: 1px solid #999;color: #999;line-height: 30px;font-size: 16px;margin-right: 5px;}
+.page-ldy a.sel {background: #999;color: #fff;}
+.page-ldy a:hover,.page-ldy a.sel {background:#999; color:#fff;}
+.pro_myseek menu { border:2px solid #DDDDDD;height: 100px; }
+.pro_myseek menu textarea{ outline: medium;font-size: 14px;font-family: "Microsoft Yahei"}
+.pro_myseek {border-bottom:2px solid #DDDDDD;}
+.detail_tit menu a:hover,.detail_tit menu a.sel { background:#c91c28; }
+.pro_choose tr td a:hover,.pro_choose tr td .lchose{border: 1px solid #D9313D;background: url(../newimg/csbg.png) no-repeat right bottom;}
+.pro_choose tr{margin-top: 5px;display: block;}
+/*详细页end*/
+/*订单*/
+.member_top {background:#e5373a;}
+.member_check a.a1 {margin: 20px 12px 0;}
+.mymember_order_search .mysub:hover {background: #e5373a url(../images/mymember/search.png) no-repeat center center;}
+.mymember_order_search .mysub {background: #e5373a url(../images/mymember/search.png) no-repeat center center;}
+.member_top .search .sub:hover {background: #F39700;}
+/*订单end*/
+
+
+
