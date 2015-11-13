@@ -9,7 +9,7 @@
 </head>
 <body>
     <!-- 顶部  -->
-    <#include "/client/common_header.ftl" />
+
     <div class="wrapper" style="min-height:600px;display:block;overflow:hidden;">
         <center>
             <h1 style="margin-top:160px;">抱歉！您访问的页面已经删除或更改地址</h1>
@@ -17,6 +17,6 @@
         </center>
     </div>
     <!--底部footer-->
-    <#include "/client/common_footer.ftl" />
+
 </body>
 </html>

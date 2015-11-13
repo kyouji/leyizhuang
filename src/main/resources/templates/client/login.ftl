@@ -7,7 +7,7 @@
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
 <!--[if IE]>
-   <script src="js/html5.js"></script>
+   <script src="/client/js/html5.js"></script>
 <![endif]-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js"></script>
@@ -174,7 +174,7 @@ function saveUserInfo() {
   </section>
 </footer><!--mainfoot END-->
 
-<#include "/client/regwindow.ftl">
+<#include "/client/reg_window.ftl">
 <!--winbox END-->
 
 </body>

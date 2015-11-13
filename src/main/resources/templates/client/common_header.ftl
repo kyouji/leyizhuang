@@ -188,5 +188,5 @@ function delItem(id)
 </nav>
 <div class="clear"></div>
 
-<#include "/client/regwindow.ftl">
+<#include "/client/reg_window.ftl">
 <!--winbox END-->
