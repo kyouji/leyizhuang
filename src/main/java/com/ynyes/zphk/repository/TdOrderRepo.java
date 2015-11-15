@@ -41,4 +41,12 @@ public interface TdOrderRepo extends
     Long countByUsernameAndStatusId(String username, Long statusId);
     
     TdOrder findByOrderNumber(String orderNumber);
+    
+    Page<TdOrder> findByUsernameAndStatusIdAndOrderTimeBetweenOrderByOrderTimeDesc(String username,Long statusId,Date begin,Date finish,Pageable page);
+    
+    Page<TdOrder> findByUsernameAndOrderTimeBetweenOrderByOrderTimeDesc(String username,Date begin,Date finish,Pageable page);
+    
+    Page<TdOrder> findByUsernameAndStatusIdAndOrderTimeBetweenAndOrderNumberContainingOrderByOrderTimeDesc(String username,Long statusId,Date begin,Date finish,String keywords,Pageable page);
+    
+    Page<TdOrder> findByUsernameAndOrderTimeBetweenAndOrderNumberContainingOrderByOrderTimeDesc(String username,Date begin,Date finish,String keywords,Pageable page);
 }

@@ -24,5 +24,9 @@ public interface TdUserPointRepo extends
     
     List<TdUserPoint> findByUsername(String username);
     
+    Page<TdUserPoint> findByUsernameAndPointGreaterThanOrderByPointTimeDesc(String username,Long point,Pageable page);
+    
+    Page<TdUserPoint> findByUsernameAndPointLessThanOrderByPointTimeDesc(String username,Long point,Pageable page);
+    
     
 }

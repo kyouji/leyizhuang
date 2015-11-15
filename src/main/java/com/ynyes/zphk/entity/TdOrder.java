@@ -599,4 +599,5 @@ public class TdOrder {
     public void setAppointmentTime(Date appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
+
 }

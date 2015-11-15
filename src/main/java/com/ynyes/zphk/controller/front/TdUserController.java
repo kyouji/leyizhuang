@@ -1,5 +1,7 @@
 package com.ynyes.zphk.controller.front;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -124,6 +126,11 @@ public class TdUserController extends AbstractPaytypeController {
 		}
 
 		map.addAttribute("user", tdUser);
+		Page<TdOrder> page = tdOrderService.findByUsername(username, 0, ClientConstant.pageSize);
+		List<TdOrder> list = page.getContent();
+		for (TdOrder tdOrder : list) {
+			System.err.println(tdOrder);
+		}
 		map.addAttribute("order_page", tdOrderService.findByUsername(username, 0, ClientConstant.pageSize));
 		map.addAttribute("user_collection", tdUserCollectService.findByUsername(username));
 		map.addAttribute("recent_page",
@@ -132,6 +139,7 @@ public class TdUserController extends AbstractPaytypeController {
 		map.addAttribute("total_undelivered", tdOrderService.countByUsernameAndStatusId(username, 3));
 		map.addAttribute("total_unreceived", tdOrderService.countByUsernameAndStatusId(username, 4));
 		map.addAttribute("total_finished", tdOrderService.countByUsernameAndStatusId(username, 6));
+		map.addAttribute("pageId", 0);
 		/**
 		 * 加载推荐商品
 		 * 
@@ -139,7 +147,58 @@ public class TdUserController extends AbstractPaytypeController {
 		 */
 		map.addAttribute("recommend_goods_page",
 				tdGoodsService.findByIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(0, ClientConstant.pageSize));
+		map.addAttribute("pageId", 0);
 		return "/client/user_index";
+	}
+
+	@RequestMapping(value = "/user/myOrder")
+	public String myOrder(HttpServletRequest req, int page, String keywords, Long time_limit, Long order_status,ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+
+		Date begin = null;
+		Date finish = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		if (1L == time_limit) {
+			cal.add(Calendar.MONTH, -3);
+			begin = cal.getTime();
+		} else if (2L == time_limit) {
+			int year = Calendar.YEAR;
+			String sBegin = year + "-1-1 00:00:00";
+			try {
+				begin = sdf.parse(sBegin);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (null == keywords || "".equals(keywords)||"订单编号".equals(keywords)) {
+			if (0L == order_status) {
+				Page<TdOrder> order_page = tdOrderService.findByUsernameAndOrderTimeBetweenOrderByOrderTimeDesc(username, begin, finish, page,
+						ClientConstant.pageSize);
+				map.addAttribute("order_page", order_page);
+			} else {
+				Page<TdOrder> order_page =tdOrderService.findByUsernameAndStatusIdAndOrderTimeBetweenOrderByOrderTimeDesc(username, order_status,
+						begin, finish, page, ClientConstant.pageSize);
+				map.addAttribute("order_page", order_page);
+			}
+		} else {
+			if (0L == order_status) {
+				Page<TdOrder> order_page =tdOrderService.findByUsernameAndOrderTimeBetweenAndOrderNumberContainingOrderByOrderTimeDesc(username,
+						begin, finish, keywords, page, ClientConstant.pageSize);
+				map.addAttribute("order_page", order_page);
+			} else {
+				Page<TdOrder> order_page =tdOrderService.findByUsernameAndStatusIdAndOrderTimeBetweenAndOrderNumberContainingOrderByOrderTimeDesc(
+						username, order_status, begin, finish, keywords, page, ClientConstant.pageSize);
+				map.addAttribute("order_page", order_page);
+			}
+		}
+		map.addAttribute("pageId", page);
+		map.addAttribute("keywords", keywords);
+		map.addAttribute("time_limit", time_limit);
+		map.addAttribute("order_status", order_status);
+		
+		return "/client/user_order";
 	}
 
 	@RequestMapping(value = "/user/order/list/{statusId}")
@@ -398,6 +457,7 @@ public class TdUserController extends AbstractPaytypeController {
 					ClientConstant.pageSize);
 		}
 
+		map.addAttribute("pageId", 0);
 		map.addAttribute("collect_page", collectPage);
 		map.addAttribute("keywords", keywords);
 
@@ -422,6 +482,23 @@ public class TdUserController extends AbstractPaytypeController {
 		}
 
 		return "redirect:/user/collect/list";
+	}
+	
+	@RequestMapping(value = "/user/collect/change", method = RequestMethod.POST)
+	public String collectChange(HttpServletRequest req,String keywords,int pageId,ModelMap map){
+		String username = (String) req.getSession().getAttribute("username");
+		Page<TdUserCollect> collectPage = null;
+		if (null == keywords || keywords.isEmpty()) {
+			collectPage = tdUserCollectService.findByUsername(username, pageId, ClientConstant.pageSize);
+		} else {
+			collectPage = tdUserCollectService.findByUsernameAndSearch(username, keywords, pageId,ClientConstant.pageSize);
+		}
+
+		map.addAttribute("pageId", pageId);
+		map.addAttribute("collect_page", collectPage);
+		map.addAttribute("keywords", keywords);
+		
+		return "/client/user_collect";
 	}
 
 	@RequestMapping(value = "/user/collect/add", method = RequestMethod.POST)
@@ -514,34 +591,52 @@ public class TdUserController extends AbstractPaytypeController {
 
 		map.addAttribute("recent_page", recentPage);
 		map.addAttribute("keywords", keywords);
-
+		map.addAttribute("pageId", page);
+		
 		return "/client/user_recent_list";
+	}
+	
+	@RequestMapping(value = "/user/recent/change", method = RequestMethod.POST)
+	public String recentChange(HttpServletRequest req,String keywords,int pageId,ModelMap map){
+		String username = (String) req.getSession().getAttribute("username");
+		Page<TdUserRecentVisit> recentPage = null;		
+		if (null == keywords || keywords.isEmpty()) {
+			recentPage = tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(username, pageId,
+					ClientConstant.recentPageSize);
+		} else {
+			recentPage = tdUserRecentVisitService.findByUsernameAndSearchOrderByVisitTimeDesc(username, keywords, pageId,
+					ClientConstant.recentPageSize);
+		}
+
+		map.addAttribute("recent_page", recentPage);
+		map.addAttribute("keywords", keywords);
+		map.addAttribute("pageId", pageId);
+		
+		return "/client/user_collect";
 	}
 
 	// 清空浏览记录
-	 @RequestMapping(value = "/user/recent/deleteAll", method = RequestMethod.POST)
-	    @ResponseBody
-	    public Map<String, Object> deleterecent(	                                   
-	                                    HttpServletRequest req) {
-	        Map<String, Object> res = new HashMap<String, Object>();
-	        
-	        res.put("code", 1);
-	        
-	        String username = (String) req.getSession().getAttribute("username");
-	        
-	        if (null == username)
-	        {
-	        	username = req.getSession().getId();
-	        }
-	        	        
-	        List<TdUserRecentVisit> recentList = tdUserRecentVisitService.findByUsername(username);
-       	    tdUserRecentVisitService.delete(recentList);
-	      	        
-	        res.put("code", 0);
-	        
-	        return res;
-	    }
-	
+	@RequestMapping(value = "/user/recent/deleteAll", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleterecent(HttpServletRequest req) {
+		Map<String, Object> res = new HashMap<String, Object>();
+
+		res.put("code", 1);
+
+		String username = (String) req.getSession().getAttribute("username");
+
+		if (null == username) {
+			username = req.getSession().getId();
+		}
+
+		List<TdUserRecentVisit> recentList = tdUserRecentVisitService.findByUsername(username);
+		tdUserRecentVisitService.delete(recentList);
+
+		res.put("code", 0);
+
+		return res;
+	}
+
 	/**
 	 * 会员等级页面
 	 * 
@@ -614,8 +709,33 @@ public class TdUserController extends AbstractPaytypeController {
 
 		map.addAttribute("point_page", pointPage);
 		map.addAttribute("keywords", keywords);
-
+		map.addAttribute("recommend_goods_page",
+				tdGoodsService.findByIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(0, ClientConstant.pageSize));
+		map.addAttribute("pageId", 0);
+		map.addAttribute("status", 0);
+		map.addAttribute("user", tdUser);
+		
 		return "/client/user_point_list";
+	}
+	
+	@RequestMapping(value = "/user/point/change")
+	public String pointChange(HttpServletRequest req,Long status,int pageId,ModelMap map){
+		String username = (String) req.getSession().getAttribute("username");
+		Page<TdUserPoint> pointPage = null;
+		if(null != status&&0L == status){
+			pointPage = tdUserPointService.findByUsername(username, pageId, ClientConstant.pageSize);
+		}else if(null != status&&1L == status){
+			pointPage = tdUserPointService.findByUsernameAndPointGreaterThanOrderByPointTimeDesc(username, pageId, ClientConstant.pageSize);
+		}else if(null != status&&2L == status){
+			pointPage = tdUserPointService.findByUsernameAndPointLessThanOrderByPointTimeDesc(username, pageId, ClientConstant.pageSize);
+		}
+		
+		TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+		map.addAttribute("user", tdUser);
+		map.addAttribute("point_page", pointPage);
+		map.addAttribute("pageId", pageId);
+		map.addAttribute("status", status);
+		return "/client/user_point";
 	}
 
 	@RequestMapping(value = "/user/return/{orderId}")
@@ -1345,7 +1465,7 @@ public class TdUserController extends AbstractPaytypeController {
 		return "redirect:/user/info";
 	}
 
-	@RequestMapping(value="/user/saveInfo",method=RequestMethod.POST)
+	@RequestMapping(value = "/user/saveInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> saveInfo(String nickname, String sex, Date birthday, String detailAddress,
 			HttpServletRequest req) {
@@ -1431,19 +1551,18 @@ public class TdUserController extends AbstractPaytypeController {
 		map.addAttribute("pageId", pageId);
 		return "/client/user_collection_page";
 	}
-	
+
 	@RequestMapping(value = "/user/headImageUrl", method = RequestMethod.POST)
-    @ResponseBody
-    public String saveHeadPortrait(String imgUrl,HttpServletRequest rep)
-    {
-    	String username = (String)rep.getSession().getAttribute("username");
-    	if (null == username) {
-            return "redirect:/login";
-        }
-        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
-    	user.setHeadImageUri(imgUrl);
-    	tdUserService.save(user);
-    	
-    	return "/client/user_index";
-    }
+	@ResponseBody
+	public String saveHeadPortrait(String imgUrl, HttpServletRequest rep) {
+		String username = (String) rep.getSession().getAttribute("username");
+		if (null == username) {
+			return "redirect:/login";
+		}
+		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+		user.setHeadImageUri(imgUrl);
+		tdUserService.save(user);
+
+		return "/client/user_index";
+	}
 }

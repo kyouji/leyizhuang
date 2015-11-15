@@ -32,4 +32,5 @@ public interface TdUserCollectRepo extends
     TdUserCollect findByUsernameAndGoodsId(String username, Long goodsId);
     
     Long countByGoodsId(Long goodsId);
+    
 }

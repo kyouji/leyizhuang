@@ -130,4 +130,14 @@ public class TdUserPointService {
         
         return (List<TdUserPoint>) repository.save(entities);
     }
+    
+    public Page<TdUserPoint> findByUsernameAndPointGreaterThanOrderByPointTimeDesc(String username,int page,int size){
+    	PageRequest pageRequest = new PageRequest(page, size);	
+    	return repository.findByUsernameAndPointGreaterThanOrderByPointTimeDesc(username, 0L, pageRequest);
+    }
+    
+    public Page<TdUserPoint> findByUsernameAndPointLessThanOrderByPointTimeDesc(String username,int page,int size){
+    	PageRequest pageRequest = new PageRequest(page, size);	
+    	return repository.findByUsernameAndPointLessThanOrderByPointTimeDesc(username, 0L, pageRequest);
+    }
 }
