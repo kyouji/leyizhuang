@@ -170,6 +170,10 @@ public class TdOrder {
     @Column
     private Long statusId;
     
+    // 订单类型 1：普通订单 2：组合购买订单 3：抢购订单 4：团购订单 
+    @Column
+    private Long typeId;
+    
     // 订单取消原因
     @Column
     private String cancelReason;
@@ -252,7 +256,15 @@ public class TdOrder {
         this.postalCode = postalCode;
     }
 
-    public void setOrderNumber(String orderNumber) {
+    public Long getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
+	}
+
+	public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
 

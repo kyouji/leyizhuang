@@ -124,20 +124,20 @@
 
 <!--购物车进度条-->
 <div class="progress_bar">
-	<div class="bar_1">1、购物车</div>
+    <div class="bar_1">1、购物车</div>
     <div class="bar_2">2、订单信息</div>
     <div class="bar_3">3、支付完成</div>
 </div>
 
     <!--收货地址-->
-    <form id="form2" name="form1" action="/order/submit" method="post">
+    <form id="form2" name="form1" action="/order/buysubmit" method="post">
         <div class="shipping_address">
             <h3>收货地址</h3>
             <div class="address">
                 <input id="input-address-id" type="hidden" name="addressId" value="" datatype="n" nullmsg="请选择收货地址!"/>
                 <#if user.shippingAddressList?? && user.shippingAddressList?size gt 0>
                     <#list user.shippingAddressList as address>
-        	           <a class="address_1" href="javascript:;" onclick="javascript:selectAddress(this, ${address.id?c});">
+                       <a class="address_1" href="javascript:;" onclick="javascript:selectAddress(this, ${address.id?c});">
                            <p>收货人：${address.receiverName!''}</p>
                            <p>收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>
                            <p>电话：${address.receiverMobile!''}</p>
@@ -156,7 +156,7 @@
                 <#if delivery_type_list?? && delivery_type_list?size gt 0 >
                     <select class="s1_text1_italic" name="deliveryTypeId" id="deliveryTypeId">
                         <#list delivery_type_list as item>
-                        	<option value="${item.id?c}" selected="">${item.title}</option>
+                            <option value="${item.id?c}" selected="">${item.title}</option>
                         </#list>
                    </select>
                 </#if>
@@ -172,9 +172,9 @@
                     <input name="payTypeId" type="radio" value="2"  class="pay"/>微信支付
                 </div>
                 <div class="online_banking">
-    	           <#if pay_type_list_bank??>
-            	       <input name="payTypeId" type="radio" value=""  />网银支付
-            	       <ul class="online_banking_right">
+                   <#if pay_type_list_bank??>
+                       <input name="payTypeId" type="radio" value=""  />网银支付
+                       <ul class="online_banking_right">
                             <#list pay_type_list_bank as pay_type>
                                 <#assign onlineBank=false/>
                                 <li>
@@ -210,7 +210,7 @@
                     <div class="category">
                         <ul>
                             <li class="picture_information">
-                            	<img class="ss" src="${sg.goodsCoverImageUri}" width="108px"/>
+                                <img class="ss" src="${sg.goodsCoverImageUri}" width="108px"/>
                                 <a href="/goods/${sg.goodsId}">${sg.goodsTitle}</a>
                             </li>
                             <li class="commodity_price">￥${sg.price?string("0.00")}</li>
@@ -223,19 +223,19 @@
             </#if>
                
             <!--积分-->
-            <div class="integration">
+           <div class="integration">
                 <div class="product_remarks">商品备注<br />
                     <input type="text" id="userMessage"/>
                 </div>
-                <div class="available_points">
-            	   <input id="" type="checkbox" value="" /> 使用我的积分<br />
+           <!--      <div class="available_points">
+                   <input id="" type="checkbox" value="" /> 使用我的积分<br />
                     &nbsp;&nbsp;&nbsp;&nbsp;（可用积分${total_point_limit!'0'}点）
                 </div>
                 <div class="points_800">
-                	<input value="${total_point_limit!'0'}" id="pointUse" onchange="pointChange(this, $(this).val(), ${total_point_limit!'0'});"/>
+                    <input value="${total_point_limit!'0'}" id="pointUse" onchange="pointChange(this, $(this).val(), ${total_point_limit!'0'});"/>
                 </div>
-                <div class="integral_value">0</div>
-            </div>
+                <div class="integral_value">0</div> -->
+            </div> 
         </div>
         
         <!--实付款-->

@@ -6,9 +6,35 @@
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
+
+<script src="/client/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/common.js"></script>
+<script src="/client/js/ljs-v1.01.js"></script>
+
 <link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <link rel="stylesheet" type="text/css" href="/client/css/Successfully_joined.css"/>
 <link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
+<link href="/client/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="/client/css/content_l.css" />
+
+<script>
+  $(document).ready(function(){
+    menuDownList("top_phone","#top_phonelist",".a1","sel");
+    phoneListMore();//单独下拉
+    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+    searchTextClear(".toptext","请输入品牌或商品名称","#999","#666");
+    searchTextClear(".bottext","查看所有门店","#fff","#fff");
+    checkNowHover("shopping_down","shopping_sel");
+    navDownList("navdown","li",".nav_showbox");
+    menuDownList("mainnavdown","#navdown",".a2","sel");
+    
+    chooseMoreShow();
+    
+    
+});
+</script>
 </head>
 
 <body>

@@ -6,7 +6,8 @@ function move()
 </script> 
 <header class="maintop">
   <section class="main">
-    <h1>亲，欢迎来到正品惠客</h1>   
+    <h1>亲，欢迎来到正品惠客</h1>
+    <p class="p1">重庆</p>   
     <p class="p2"><#if site??>${site.telephone!''}</#if></p>
     <p class="p3">服务热线：</p>
     
@@ -15,19 +16,26 @@ function move()
     <a class="a2" href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq!''}&site=qq&menu=yes">在线咨询</a>
     <a class="a3" href="/user">会员俱乐部</a>
     <a class="z-in10" href="#">帮助中心</a>
-    <menu id="top_order">
-      <a class="a4" href="/user/order/list/0">我的订单<i></i></a>
-      <div class="clear"></div>
-      <div id="top_orderlist">
-        <p class="p_box">
-        <a href="/user"><img src="/client/images/t_order01.png" />我的信息</a>
-        <a href="/user/collect/list"><img src="/client/images/t_order02.png" />我的收藏</a>
-        <a href="/user/return/list"><img src="/client/images/t_order03.png" />报修/退换货</a>
-        <a href="/user/comment/list"><img src="/client/images/t_order04.png" />我拍到的宝贝</a>
-        <a href="/user/consult/list"><img src="/client/images/t_order05.png" />我的商品咨询</a>
-        </p>
-      </div>
-    </menu>
+    <#if username??>
+        <menu id="top_order">
+          <a class="a4" href="/user/order/list/0">我的订单<i></i></a>
+          <div class="clear"></div>
+          <div id="top_orderlist">
+            <p class="p_box">
+            <a href="/user"><img src="/client/images/t_order01.png" />我的信息</a>
+            <a href="/user/collect/list"><img src="/client/images/t_order02.png" />我的收藏</a>
+            <a href="/user/return/list"><img src="/client/images/t_order03.png" />报修/退换货</a>
+            <a href="/user/comment/list"><img src="/client/images/t_order04.png" />我拍到的宝贝</a>
+            <a href="/user/consult/list"><img src="/client/images/t_order05.png" />我的商品咨询</a>
+            <a href="/logout"><img src="/client/images/t_order06.png" />安全退出</a>
+            </p>
+          </div>
+        </menu>
+    <#else>
+        <a class="z-in10" href="javascript:void(0);" onclick="$('#register').fadeIn(300);">免费注册</a>
+        <a class="z-in10" href="/login">你好！请登录</a>
+        
+    </#if>
     <div class="clear"></div>
   </section>
 </header><!--maintop-->
@@ -179,3 +187,6 @@ function delItem(id)
     </#if> 
 </nav>
 <div class="clear"></div>
+
+<#include "/client/reg_window.ftl">
+<!--winbox END-->

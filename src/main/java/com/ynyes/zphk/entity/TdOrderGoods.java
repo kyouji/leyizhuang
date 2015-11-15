@@ -52,7 +52,7 @@ public class TdOrderGoods {
     
     // 商品销售方式
     @Column
-    private String goodsSaleType;
+    private Integer goodsSaleType;
     
     // 成交价
     @Column(scale=2)
@@ -145,16 +145,16 @@ public class TdOrderGoods {
     public void setGoodsVersion(String goodsVersion) {
         this.goodsVersion = goodsVersion;
     }
-
-    public String getGoodsSaleType() {
-        return goodsSaleType;
-    }
-
-    public void setGoodsSaleType(String goodsSaleType) {
-        this.goodsSaleType = goodsSaleType;
-    }
     
-    public Double getPrice() {
+    public Integer getGoodsSaleType() {
+		return goodsSaleType;
+	}
+
+	public void setGoodsSaleType(Integer goodsSaleType) {
+		this.goodsSaleType = goodsSaleType;
+	}
+
+	public Double getPrice() {
         return price;
     }
 

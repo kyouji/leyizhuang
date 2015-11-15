@@ -7,13 +7,14 @@
 <meta name="description" content="<#if productCategory??>${productCategory.seoDescription!''}</#if>">
 <meta name="copyright" content="<#if site??>${site.copyright!''}</#if>" />
 <!--[if IE]>
-   <script src="js/html5.js"></script>
+   <script src="/client/js/html5.js"></script>
 <![endif]-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
 <script type="text/javascript" src="/client/js/list.js"></script>
 
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <link rel="stylesheet" type="text/css" href="/client/css/list.css"/>
 <link href="/client/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />

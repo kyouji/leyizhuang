@@ -7,7 +7,7 @@
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
 <!--[if IE]>
-   <script src="js/html5.js"></script>
+   <script src="/client/js/html5.js"></script>
 <![endif]-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js"></script>
@@ -16,7 +16,7 @@
 <script src="/client/js/scro-content.js"></script>
 <script type="text/javascript" src="/client/js/goods.js"></script>
 
-
+<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
 <link href="/client/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
@@ -65,6 +65,18 @@
         </#if>
         $("#addCart").attr("href", "/cart/init?id=${goods.id?c}&quantity=" + $("#quantity").val()); 
     
+    });
+    
+    $("#zhAddCart").click(function(){
+        var str = "";
+        $(".comboCheckBox:checked").each(function(){
+            str += $(this).attr("zpid");
+            str += ",";
+        });
+        var href = "/order/buy/comb?gid=" + ${goods.id?c} + "&zhid=" + str<#if shareId??>+"&shareId=${shareId}"</#if>;
+        
+        window.location = href;
+        
     });
 });
 
@@ -297,8 +309,9 @@ function deleterecent()
         <tr>
           <th></th>
           <td>
-            <input type="submit" class="sub" value="加入购物车" />
+            <!--<input type="submit" class="sub" id="addCart" href="/cart/init?id=${goods.id?c}<#if shareId??>&shareId=${shareId}</#if>" value="加入购物车" />
             <!-- 删除<input type="submit" class="sub sub01" value="分期付款" /> -->
+            <a class="sub" style="height:35px; line-height:35px;text-align:center" id="addCart" href="/cart/init?id=${goods.id?c}">加入购物车</a>
             <div class="clear"></div>
           </td>
         </tr>
@@ -318,7 +331,7 @@ function deleterecent()
 
 
 <div class="main pt20">
-  <#if goods.combList??>  
+  <#if goods.combList?? && goods.combList?size gt 0>  
   <section class="pro_assort">
     <menu id="assort_menu">
       <a class="sel" href="#">全部推荐</a>      

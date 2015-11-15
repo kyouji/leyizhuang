@@ -2481,4 +2481,6 @@ public class TdGoodsService {
     	}
     	return repository.findByCategoryIdAndIsOnSaleTrueOrderByOnSaleTimeAsc(catagoryId);
     };
+    
+  
 }

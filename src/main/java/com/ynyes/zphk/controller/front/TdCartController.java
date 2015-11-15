@@ -137,6 +137,7 @@ public class TdCartController {
                 {
                     long oldQuantity = oldCartGoodsList.get(0).getQuantity();
                     oldCartGoodsList.get(0).setQuantity(oldQuantity + quantity);
+                    oldCartGoodsList.get(0).setAddTime(new Date());
                     tdCartGoodsService.save(oldCartGoodsList.get(0));
                 }
                 else
@@ -180,7 +181,7 @@ public class TdCartController {
     
                     cartGoods.setQuantity(quantity);
                     
-    
+                    cartGoods.setAddTime(new Date());
                     tdCartGoodsService.save(cartGoods);
                 }
             }
@@ -215,6 +216,7 @@ public class TdCartController {
                         if (null != oldCartGoods) 
                         {
                             oldCartGoods.setQuantity(oldCartGoods.getQuantity().longValue() + 1L);
+                            oldCartGoods.setAddTime(new Date());
                             tdCartGoodsService.save(oldCartGoods);
                         }
                         else
@@ -229,7 +231,7 @@ public class TdCartController {
                             cartGoods.setGoodsTitle(combGoods.getGoodsTitle());
                             cartGoods.setPrice(combGoods.getCurrentPrice());
                             cartGoods.setQuantity(1L);
-    
+                            cartGoods.setAddTime(new Date());
                             tdCartGoodsService.save(cartGoods);
                         }
                     }
