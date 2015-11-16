@@ -172,7 +172,7 @@
                             <div class="leftmenu">
                                 <a href="#">返修退换货</a>
                                 <a href="#">我的投诉</a>
-                                <a href="#">购买咨询</a>
+                                <a href="/user/consult/list">购买咨询</a>
                                 <div class="clear h30"></div>
                             </div>
                         </div><!--mymember_menu_part END-->
