@@ -703,8 +703,7 @@ public class TdUserController {
 	@RequestMapping(value = "/address/get")
 	public String addressGet(HttpServletRequest req, Long type, Long id, ModelMap map) {
 
-		// type的值表示不同的操作：0. 获取指定id的城市的所有下属行政区划；1. 获取指定id的行政区划的所有下属行政街道 ;3.
-		// 选择行政街道完毕，存储信息
+		// type的值表示不同的操作：0. 获取指定id的城市的所有下属行政区划；1. 获取指定id的行政区划的所有下属行政街道 ;3.选择行政街道完毕，存储信息
 		if (0 == type) {
 			// 获取当前登陆的用户
 			String username = (String) req.getSession().getAttribute("username");

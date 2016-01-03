@@ -72,11 +72,11 @@
                     <#list goods_list as item>
                         <dl>
                             <dt>
-                                <a>
+                                <a href="/goods/detail/${item.id?c}">
                                     <img src="${item.coverImageUri!''}" />
                                 </a>
                             </dt>
-                            <dd>
+                            <dd onclick="window.location.href='/goods/detail/${item.id?c}'">
                                 <p>${item.title!''}</p>
                                 <div class="fen_div01">
                                     <#-- 用户存储指定商品的库存 -->

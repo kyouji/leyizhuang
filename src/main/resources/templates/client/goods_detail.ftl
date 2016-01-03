@@ -82,13 +82,14 @@
 						<div>品牌：</div>
 						<p>${goods.brandTitle!''}</p>
 					</li>
+				    <#--
 					<li class="li02">
 						<div>促销：</div>
 						<p>金钻雅家五合一PU清底漆*3 + 金钻雅家五合一PU清底漆* 2 + 金钻雅家五合一PU清底漆 * 1   赠送   金钻雅家五合一PU清底漆 * 3</p>
 						<div></div>
 						<p>满<a href="#">399</a>，赠墙面漆一桶</p>
 					</li>
-					
+					-->
 					<li class="li05"></li>
 					<li class="li03">
 						<div>数量：</div>
@@ -105,12 +106,10 @@
 						<p>重庆市 渝中区 解放碑</p>
 					</li>
 					-->
-					<#--
 					<li class="li04">
 						<div>服务：</div>
-						<p>由“乐易装”售后和发货，并享受售后服务</p>
+						<p>${goods.service!''}</p>
 					</li>
-					-->
 				</ul>
 				<div class="index_test_box"></div>
 				<dl class="det_text">
@@ -134,6 +133,19 @@
 					</dd>
 					-->
 				</dl>
+				<#if activity_list??>
+    				<div class="det_mes">
+                        <div class="det_mestitle">促销活动</div>
+                        <ul>
+                            <#list activity_list as item>
+                                <li>
+                                    <span style="width:96%; padding:5px 3%; display:block;">${item.title!''}</span>
+                                    <img style="width:100%;" src="${item.activityImg!''}"></img>
+                                </li>
+                            </#list>
+                        </ul>
+                    </div>
+                </#if>
 				<div class="index_test_box"></div>
 			    <#if goods.detail??>
     				<div class="det_img">${goods.detail!''}</div>

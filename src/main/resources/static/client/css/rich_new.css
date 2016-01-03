@@ -45,7 +45,7 @@
 }
 .new_goodbox dl dd{
 	max-width: 70%;
-	float: left;
+	float: right;
 	padding:14px 0;
 
 }
@@ -55,11 +55,13 @@
 	text-overflow: ellipsis;
 	-o-text-overflow:ellipsis;
 	white-space:nowrap;
+	float: left;
 }
 .new_goodbox dl dd .fen_div01{
 	width: 100%;
 	margin-top: 10px;
 	overflow: hidden;
+	float:left;
 }
 .new_goodbox dl dd .fen_div01 span{
 	float: left;
@@ -98,6 +100,7 @@
 	width: 100%;
 	margin-top:9px;
 	overflow: hidden;
+	float:left;
 }
 .new_goodbox dl dd .fen_div02 a{
 	float: left;

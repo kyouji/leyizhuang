@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.lyz.entity.TdActivity;
 import com.ynyes.lyz.entity.TdCartColorPackage;
 import com.ynyes.lyz.entity.TdCartGoods;
 import com.ynyes.lyz.entity.TdDiySite;
@@ -23,6 +24,7 @@ import com.ynyes.lyz.entity.TdPriceListItem;
 import com.ynyes.lyz.entity.TdUser;
 import com.ynyes.lyz.entity.TdUserCollect;
 import com.ynyes.lyz.entity.TdUserComment;
+import com.ynyes.lyz.service.TdActivityService;
 import com.ynyes.lyz.service.TdCommonService;
 import com.ynyes.lyz.service.TdGoodsService;
 import com.ynyes.lyz.service.TdPriceListItemService;
@@ -51,6 +53,9 @@ public class TdGoodsController {
 
 	@Autowired
 	private TdUserCollectService tdUserCollectService;
+
+	@Autowired
+	private TdActivityService tdActivityService;
 
 	/*
 	 *********************************** 普通下单模式的控制器和方法********************************************
@@ -343,6 +348,27 @@ public class TdGoodsController {
 		if (null != collect) {
 			isCollect = true;
 		}
+
+		// 创建一个集合用于存储该商品参加的活动
+		List<TdActivity> activity_list = new ArrayList<>();
+
+		// 获取该商品参加的所有活动
+		if (null == priceListItem.getActivities()) {
+			String activities = priceListItem.getActivities();
+			if (null != activities) {
+				String[] all_activity = activities.split(",");
+				if (null != all_activity) {
+					for (String sId : all_activity) {
+						if (null != sId) {
+							TdActivity activity = tdActivityService.findOne(Long.parseLong(sId));
+							activity_list.add(activity);
+						}
+					}
+				}
+			}
+		}
+
+		map.addAttribute("activity_list", activity_list);
 		map.addAttribute("isCollect", isCollect);
 		return "/client/goods_detail";
 	}
@@ -514,12 +540,12 @@ public class TdGoodsController {
 				}
 			}
 		}
-		
+
 		// 获取所有的已选商品（整合后）
 		List<TdCartGoods> all = tdCommonService.getAllContainsColorPackage(req);
 		if (null != all) {
 			res.put("number", all.size());
-		}else{
+		} else {
 			res.put("number", 0);
 		}
 		return res;
