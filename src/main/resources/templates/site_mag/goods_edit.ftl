@@ -292,11 +292,11 @@ function del_goods_comb(obj) {
                     <li><a href="javascript:;" onclick="tabs(this);" class="selected">基本信息</a></li>
                     <li><a href="javascript:;" onclick="tabs(this);" class="">扩展选项</a></li>
                     <li><a href="javascript:;" onclick="tabs(this);" class="">详细描述</a></li>
-                    <li><a href="javascript:;" onclick="tabs(this);" class="">价格与库存</a></li>
-                    <#--<li><a href="javascript:;" onclick="tabs(this);" class="">促销</a></li>
+                    <#--<li><a href="javascript:;" onclick="tabs(this);" class="">库存</a></li>
+                    <li><a href="javascript:;" onclick="tabs(this);" class="">促销</a></li>
                     <li><a href="javascript:;" onclick="tabs(this);" class="">赠品</a></li>
-                    <li><a href="javascript:;" onclick="tabs(this);" class="">组合商品</a></li> -->
-                    <li><a href="javascript:;" onclick="tabs(this);" class="">SEO选项</a></li>
+                    <li><a href="javascript:;" onclick="tabs(this);" class="">组合商品</a></li> 
+                    <li><a href="javascript:;" onclick="tabs(this);" class="">SEO选项</a></li>-->
                 </ul>
             </div>
         </div>
@@ -359,25 +359,12 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
-            <dt>推荐类型</dt>
+            <dt>库存余量</dt>
             <dd>
-                <div class="rule-multi-checkbox multi-checkbox">
-                    <span>
-                        <input id="cblItem_0" type="checkbox" name="isRecommendIndex" <#if goods?? && goods.isRecommendIndex?? && goods.isRecommendIndex==true>checked="checked"</#if>>
-                        <label for="cblItem_0">首页推荐</label>
-                        <input id="cblItem_1" type="checkbox" name="isRecommendType" <#if goods?? && goods.isRecommendType?? && goods.isRecommendType==true>checked="checked"</#if>>
-                        <label for="cblItem_1">分类推荐</label>
-                        <input id="cblItem_2" type="checkbox" name="isHot" <#if goods?? && goods.isHot?? && goods.isHot==true>checked="checked"</#if>>
-                        <label for="cblItem_2">热销</label>
-                        <input id="cblItem_3" type="checkbox" name="isNew" <#if goods?? && goods.isNew?? && goods.isNew==true>checked="checked"</#if>>
-                        <label for="cblItem_3">新品</label>
-                        <input id="cblItem_4" type="checkbox" name="isSpecialPrice" <#if goods?? && goods.isSpecialPrice?? && goods.isSpecialPrice==true>checked="checked"</#if>>
-                        <label for="cblItem_4">特价</label>
-                    </span>
-                </div>
+                <input name="leftNumber" type="text" value="<#if goods?? && goods.leftNumber??>${goods.leftNumber?c!"1"}<#else>1</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">库存为0时显示为缺货</span>
             </dd>
         </dl>
-        
         <dl>
             <dt>排序数字</dt>
             <dd>
@@ -427,7 +414,7 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
-            <dt>商品编码</dt>
+            <dt>商品编码(SKU)</dt>
             <dd>
                 <input name="code" type="text" value="<#if goods??>${goods.code!""}</#if>" class="input normal" datatype="*0-7" sucmsg=" ">
                 <span class="Validform_checktip">*编码最多7个字符</span>
@@ -444,13 +431,6 @@ function del_goods_comb(obj) {
             <dt>促销</dt>
             <dd>
                 <textarea name="promotion" rows="2" cols="20" class="input" datatype="*0-255" sucmsg=" "><#if goods??>${goods.promotion!""}</#if></textarea>
-                <span class="Validform_checktip">255个字符以内</span>
-            </dd>
-        </dl>
-        <dl>
-            <dt>配置</dt>
-            <dd>
-                <textarea name="configuration" rows="2" cols="20" class="input" datatype="*0-255" sucmsg=" "><#if goods??>${goods.configuration!""}</#if></textarea>
                 <span class="Validform_checktip">255个字符以内</span>
             </dd>
         </dl>
@@ -496,17 +476,17 @@ function del_goods_comb(obj) {
                 <textarea name="detail" class="editor"><#if goods??>${goods.detail!""}</#if></textarea>
             </dd>
         </dl>
-        <dl>
+        <#--<dl>
             <dt>售后服务</dt>
             <dd>
                 <textarea name="afterMarketService" class="editor"><#if goods??>${goods.afterMarketService!""}</#if></textarea>
             </dd>
-        </dl>
+        </dl>-->
     </div>
     
     <div class="tab-content" style="display: none;">
         
-        <dl>
+        <#--<dl>
             <dt>成本价</dt>
             <dd>
                 <input name="costPrice" type="text" value="<#if goods?? && goods.costPrice??>${goods.costPrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
@@ -519,7 +499,7 @@ function del_goods_comb(obj) {
                 <input name="marketPrice" type="text" value="<#if goods?? && goods.marketPrice??>${goods.marketPrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
                 <span class="Validform_checktip">市场价格</span>
             </dd>
-        </dl>
+        </dl>-->
         <#--
         <dl>
             <dt>包含费用</dt>
@@ -536,7 +516,7 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         -->
-        <dl>
+        <#--<dl>
             <dt>出厂价</dt>
             <dd>
                 <input id="outFactoryPrice" name="outFactoryPrice" type="text" value="<#if goods?? && goods.outFactoryPrice??>${goods.outFactoryPrice?string("0.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
@@ -585,21 +565,14 @@ function del_goods_comb(obj) {
                 </div>
             </dd>
         </dl>
-        </#if>
-        <dl>
-            <dt>库存余量</dt>
-            <dd>
-                <input name="leftNumber" type="text" value="<#if goods?? && goods.leftNumber??>${goods.leftNumber?c!"1"}<#else>1</#if>" class="input normal" datatype="n" sucmsg=" ">
-                <span class="Validform_checktip">库存为0时显示为缺货</span>
-            </dd>
-        </dl>
-        <dl>
+        </#if>-->
+        <#--<dl>
             <dt>销量</dt>
             <dd>
                 <input name="soldNumber" type="text" value="<#if goods?? && goods.soldNumber??>${goods.soldNumber?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">商品已销售数量</span>
             </dd>
-        </dl>
+        </dl>-->
     </div>
     
     <#--<div class="tab-content" style="display: none;">
