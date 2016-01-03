@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.ynyes.lyz.entity.TdUserSuggestionCategory;
@@ -38,7 +40,8 @@ public class TdUserSuggestionCategoryService {
 	}
 
 	public List<TdUserSuggestionCategory> findAll() {
-		return (List<TdUserSuggestionCategory>) repository.findAll();
+		Sort sort = new Sort(Direction.ASC,"sortId"); //zhangji 2016-1-3 15:14:30
+		return (List<TdUserSuggestionCategory>) repository.findAll(sort);
 	}
 
 	/**
@@ -49,4 +52,5 @@ public class TdUserSuggestionCategoryService {
 	public List<TdUserSuggestionCategory> findByIsEnableTrueOrderBySortIdAsc() {
 		return repository.findByIsEnableTrueOrderBySortIdAsc();
 	}
+	
 }

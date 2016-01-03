@@ -20,18 +20,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.lyz.entity.TdMessage;
+import com.ynyes.lyz.entity.TdMessageType;
 import com.ynyes.lyz.entity.TdOrder;
 import com.ynyes.lyz.entity.TdUser;
 import com.ynyes.lyz.entity.TdUserComment;
 import com.ynyes.lyz.entity.TdUserLevel;
+import com.ynyes.lyz.entity.TdUserSuggestion;
 import com.ynyes.lyz.service.TdGoodsService;
 import com.ynyes.lyz.service.TdManagerLogService;
+import com.ynyes.lyz.service.TdMessageService;
+import com.ynyes.lyz.service.TdMessageTypeService;
 import com.ynyes.lyz.service.TdOrderService;
 import com.ynyes.lyz.service.TdUserCollectService;
 import com.ynyes.lyz.service.TdUserCommentService;
 import com.ynyes.lyz.service.TdUserLevelService;
 import com.ynyes.lyz.service.TdUserRecentVisitService;
 import com.ynyes.lyz.service.TdUserService;
+import com.ynyes.lyz.service.TdUserSuggestionService;
 import com.ynyes.lyz.util.SiteMagConstant;
 
 
@@ -67,6 +73,15 @@ public class TdManagerUserController {
     @Autowired
     TdOrderService tdOrderService; //zhangji
        
+    @Autowired
+    TdUserSuggestionService tdUserSuggestionService; //zhangji 2016-1-3 12:59:58
+    
+    @Autowired
+    TdMessageService tdMessageService; //zhangji 2016-1-3 15:29:21
+    
+    @Autowired
+    TdMessageTypeService tdMessageTypeService; //zhangji 2016-1-3 15:40:32
+    
     @Autowired
     TdGoodsService tdGoodsService;
     
@@ -511,6 +526,191 @@ public class TdManagerUserController {
         
         return "redirect:/Verwalter/user/cancel/list?statusId=" + __VIEWSTATE;
     }
+    
+    /*----------------用户投诉咨询 begin ------------------*/
+    @RequestMapping(value="/{type}/list")
+    public String list(@PathVariable String type,
+                        Integer page,
+                        Integer size,
+                        String __EVENTTARGET,
+                        String __EVENTARGUMENT,
+                        String __VIEWSTATE,
+                        Long[] listId,
+                        Integer[] listChkId,
+                        Long[] listSortId,
+                        ModelMap map,
+                        HttpServletRequest req){
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                } 
+            }
+            else if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
+            {
+                btnDelete(type, listId, listChkId);
+            }
+//            else if (__EVENTTARGET.equalsIgnoreCase("btnSave"))
+//            {
+//                btnSave(type, listId, listSortId);
+//            }
+//            else if (__EVENTTARGET.equalsIgnoreCase("btnVerify"))
+//            {
+//                btnVerify(type, listId, listChkId);
+//            }
+        }
+        
+        if (null == page || page < 0)
+        {
+            page = 0;
+        }
+        
+        if (null == size || size <= 0)
+        {
+            size = SiteMagConstant.pageSize;;
+        }
+        
+        map.addAttribute("page", page);
+        map.addAttribute("size", size);
+        map.addAttribute("__EVENTTARGET", __EVENTTARGET);
+        map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+            
+        if (null != type)
+        {
+            if (type.equalsIgnoreCase("suggestion"))  //投诉咨询
+            {
+          	  Page<TdUserSuggestion> suggestionPage =  tdUserSuggestionService.findAll(page , size);
+                map.addAttribute("user_suggestion_page",suggestionPage);
+                for(TdUserSuggestion item : suggestionPage.getContent())
+                {
+              	  TdUser user = tdUserService.findOne(item.getUserId());
+              	  if(null != user)
+              	  {
+              		  map.addAttribute("username_"+user.getId(), user.getUsername());
+              	  }
+                }
+                return "/site_mag/user_suggestion_list";
+            }
+            else if (type.equalsIgnoreCase("message"))  //信息
+            {
+          	  Page<TdMessage> messagePage =  tdMessageService.findAll(page , size);
+                map.addAttribute("message_page",messagePage);
+                for(TdMessage item : messagePage.getContent())
+                {
+              	  TdUser user = tdUserService.findOne(item.getUserId());
+              	  if(null != user)
+              	  {
+              		  map.addAttribute("username_"+user.getId(), user.getUsername());
+              	  }
+              	  TdMessageType messageType = tdMessageTypeService.findOne(item.getTypeId());
+              	  if(null != messageType)
+              	  {
+              		map.addAttribute("messageType_"+messageType.getId(), messageType.getName());
+              	  }
+                }
+                return "/site_mag/message_list";
+            }
+        }
+        
+        return "/site_mag/error_404";
+    }
+      
+    
+    @RequestMapping(value="/suggestion/edit")
+    public String suggestionEdit(Long id,
+                        String __VIEWSTATE,
+                        ModelMap map,
+                        HttpServletRequest req){
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        if (null != id)
+        {
+      	  TdUserSuggestion suggestion =  tdUserSuggestionService.findOne(id);
+            map.addAttribute("userSuggestionId", id);
+            map.addAttribute("user_suggestion", suggestion);
+            map.addAttribute("user", tdUserService.findOne(suggestion.getUserId()));
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        return "/site_mag/user_suggestion_edit";
+    }
+    
+    @RequestMapping(value="/message/detail")
+    public String messageDetail(Long id,
+                        String __VIEWSTATE,
+                        ModelMap map,
+                        HttpServletRequest req){
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        if (null != id)
+        {
+      	  	TdMessage message =  tdMessageService.findOne(id);
+      	  	if(null != message.getIsRead()&& !message.getIsRead() || null == message.getIsRead())
+      	  	{
+          	  	message.setIsRead(true);
+          	  	message.setReadTime(new Date());
+          	  	tdMessageService.save(message);
+      	  	}
+      	  	
+      	  	map.addAttribute("messageId", message.getId());
+            map.addAttribute("message", message);
+            map.addAttribute("user", tdUserService.findOne(message.getUserId()));
+            map.addAttribute("messageType", tdMessageTypeService.findOne(message.getTypeId()).getName());
+            map.addAttribute("imgUri", tdMessageTypeService.findOne(message.getTypeId()).getImgUrl());
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        return "/site_mag/message_detail";
+    }
+    
+    @RequestMapping(value="/suggestion/save" ,method = RequestMethod.POST)
+    public String suggestionSave(Long userSuggestionId, String answerContent,
+                        String __VIEWSTATE,
+                        ModelMap map,
+                        HttpServletRequest req){
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        TdUserSuggestion suggestion =  tdUserSuggestionService.findOne(userSuggestionId);
+        
+        if (null == suggestion.getIsAnswered() || !suggestion.getIsAnswered())
+        {
+      	  suggestion.setIsAnswered(true);
+      	  suggestion.setAnswerTime(new Date());
+      	  suggestion.setAnswerContent(answerContent);
+        }
+
+        tdManagerLogService.addLog("add", "回复用户投诉咨询", req);
+        
+        tdUserSuggestionService.save(suggestion);
+        
+        return "redirect:/Verwalter/user/suggestion/list";
+    }
+      /*----------------用户投诉咨询 end  ---------------------*/
     
 //    @RequestMapping(value="/{type}/list")
 //    public String list(@PathVariable String type,
@@ -986,6 +1186,14 @@ public class TdManagerUserController {
                 else if (type.equalsIgnoreCase("level")) // 用户等级
                 {
                     tdUserLevelService.delete(id);
+                }
+                else if (type.equalsIgnoreCase("suggestion")) // 投诉咨询 zhangji
+                {
+                    tdUserSuggestionService.delete(id);
+                }
+                else if (type.equalsIgnoreCase("message")) // 信息 zhangji
+                 {
+                    tdMessageService.delete(id);
                 }
 //                else if (type.equalsIgnoreCase("consult")) // 咨询
 //                {

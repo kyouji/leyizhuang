@@ -21,6 +21,7 @@
     }, {
         name: '取消'
     });
+    
 
     //页面加载完成执行
     $(function () {
@@ -34,8 +35,19 @@
             $("#txtItemPricelist_stockPrice").val($(parentObj).find("input[id='stockPrice']").val()); 
             $("#txtItemPricelist_realStockPrice").val($(parentObj).find("input[id='realStockPrice']").val()); 
             $("#txtItemPricelist_dispatch").val($(parentObj).find("input[id='dispatch']").val()); 
-            
-            
+            $("#txtItemPricelist_companyName").val($(parentObj).find("input[id='companyName']").val()); 
+            //radio赋值
+            var radioChecked = $(parentObj).find("input[id='isPromotion']").val();
+            var radios = document.getElementsByName("isPromotion");
+            for (var i=0; i<radios.length;i++)
+            {
+             	if(radioChecked == radios[i].value)
+             	{
+             		radios[i].checked = true;
+             		break;
+             	}
+            }
+           
         }
     });
 
@@ -97,11 +109,23 @@
             W.$.dialog.alert('请输入数字(最多2位小数)！', function () { $("#txtItemPricelist_realStockPrice").focus(); }, api);
             return false;
         }        
+                    
+	    //zhangji 根据name获取radio输入的值
+		 var radioObjects = document.getElementsByName("isPromotion");
+		 var checkObject = 0;
+		 for(var i=0; i<radioObjects.length; i++ ){
+		 	if(radioObjects[i].checked)
+		 	{
+		 		checkObject = i;
+		 		break;
+		 	}
+		 }
         
         //添加或修改
         if ($(api.data).length > 0) {
         
             var parentObj = $(api.data).parent().parent();
+
             
         //验证商品id是否重复       zhangji 
         <#if pricelist?? && pricelist.priceItemList??>
@@ -122,6 +146,8 @@
             parentObj.find("input[id='stockPrice']").val($("#txtItemPricelist_stockPrice").val());
             parentObj.find("input[id='realStockPrice']").val($("#txtItemPricelist_realStockPrice").val());
             parentObj.find("input[id='dispatch']").val($("#txtItemPricelist_dispatch").val());
+            parentObj.find("input[id='isPromotion']").val(radioObjects[checkObject].value);
+            parentObj.find("input[id='companyName']").val($("#txtItemPricelist_companyName").val());
         } else {
         
        	//验证商品id是否重复
@@ -135,6 +161,7 @@
 			      </#if>
 			  </#list>
 		 </#if>	
+		 
 		 
             var trHtml = '<tr class="td_c">'
             + '<td><input name="priceItemList[${total!'0'}].id" type="hidden" value="" />'
@@ -152,6 +179,7 @@
             + '<input type="hidden" id="priceListNumber" name="priceItemList[${total!'0'}].priceListNumber" class="td-input" value="' + '${pricelist.priceListNumber!''}' + '"  />'
             + '<input type="hidden" id="priceListId" name="priceItemList[${total!'0'}].priceListId" class="td-input" value="' + '<#if pricelist??>${pricelist.id?c!''}</#if>' + '"  />'
             + '<input type="hidden" id="companyName" name="priceItemList[${total!'0'}].companyName"class="td-input" value="' + $("#txtItemPricelist_companyName").val() + '" style="width:90%;"  />'
+            + '<input type="hidden" id="isPromotion" name="priceItemList[${total!'0'}].isPromotion"class="td-input" value="' + radioObjects[checkObject].value + '" style="width:90%;"  />'
             + '<td>'
             + '<i class="icon"></i>'
             + '<a title="编辑" class="img-btn edit operator" onclick="show_goods_gift_dialog(this);">编辑</a>'
@@ -243,6 +271,22 @@
         	<span class="Validform_checktip">*</span>
       </dd>
     </dl>        
+    <dl>
+        <dt>是否推荐</dt>
+        <dd>
+            <input type="radio" name="isPromotion" value="true" checked="checked"><label>推荐</label>
+            <input type="radio" name="isPromotion" value="false" ><label>不推荐</label>
+        
+        <#--
+            <div class="rule-multi-radio multi-radio">
+                <span id="rblStatus" style="display: none;">
+                    <input type="radio" name="isPromotion" value="true" ><label>推荐</label>
+                    <input type="radio" name="isPromotion" value="false" ><label>不推荐</label>
+                </span>
+            </div>
+          -->  
+        </dd>
+    </dl>    
 </div>
 
 <form name="form1" method="post" action="" id="form1">

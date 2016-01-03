@@ -47,6 +47,15 @@ public class TdUserSuggestion {
 	@Column
 	private Boolean isAnswered;
 	
+    // 评论回复 zhangji 2016年1月2日 23:09:43
+    @Column
+    private String answerContent;
+    
+	// 回复时间
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date answerTime;
+	
 	// 排序号
 	@Column
 	private Double sortId;
@@ -114,4 +123,21 @@ public class TdUserSuggestion {
 	public void setSortId(Double sortId) {
 		this.sortId = sortId;
 	}
+
+	public String getAnswerContent() {
+		return answerContent;
+	}
+
+	public void setAnswerContent(String answerContent) {
+		this.answerContent = answerContent;
+	}
+
+	public Date getAnswerTime() {
+		return answerTime;
+	}
+
+	public void setAnswerTime(Date answerTime) {
+		this.answerTime = answerTime;
+	}
+	
 }

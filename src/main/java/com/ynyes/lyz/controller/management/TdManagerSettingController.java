@@ -6,24 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ynyes.lyz.entity.TdCity;
 import com.ynyes.lyz.entity.TdCompany;
+import com.ynyes.lyz.entity.TdMessageType;
 import com.ynyes.lyz.entity.TdDistrict;
 import com.ynyes.lyz.entity.TdServiceItem;
 import com.ynyes.lyz.entity.TdSetting;
 import com.ynyes.lyz.entity.TdSmsAccount;
+import com.ynyes.lyz.entity.TdUserSuggestionCategory;
 import com.ynyes.lyz.entity.TdSubdistrict;
 import com.ynyes.lyz.service.TdCityService;
 import com.ynyes.lyz.service.TdCompanyService;
 import com.ynyes.lyz.service.TdDistrictService;
 import com.ynyes.lyz.service.TdManagerLogService;
+import com.ynyes.lyz.service.TdMessageTypeService;
 import com.ynyes.lyz.service.TdServiceItemService;
 import com.ynyes.lyz.service.TdSettingService;
 import com.ynyes.lyz.service.TdSmsAccountService;
+import com.ynyes.lyz.service.TdUserSuggestionCategoryService;
 import com.ynyes.lyz.service.TdSubdistrictService;
 import com.ynyes.lyz.util.SiteMagConstant;
 
@@ -63,7 +68,11 @@ public class TdManagerSettingController {
     @Autowired
     private TdSubdistrictService tdSubdistrictService;
     
+    @Autowired
+    TdUserSuggestionCategoryService tdUserSuggestionCategoryService; //zhangji 2016-1-3 13:37:08
     
+    @Autowired
+    TdMessageTypeService tdMessageTypeService; //zhangji 2016-1-3 13:37:23
     @RequestMapping
     public String setting(Long status, ModelMap map,
             HttpServletRequest req){
@@ -648,8 +657,9 @@ public class TdManagerSettingController {
     }
     
     /*-------------------------短信账户 begin --------------------------*/
-    @RequestMapping(value = "/smsAccount/list")
-    public String settingsmsAccountList(Integer page,
+    @RequestMapping(value = "/{type}/list")
+    public String settingTypeList(Integer page,
+    								@PathVariable String type,
 						            Integer size,
 						            String __EVENTTARGET,
 						            String __EVENTARGUMENT,
@@ -669,8 +679,19 @@ public class TdManagerSettingController {
         {
             if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
             {
-                btnDeleteSmsAccount(listId, listChkId);
-                tdManagerLogService.addLog("delete", "删除子公司", req);
+                btnTypeDelete(type, listId, listChkId);
+                switch (type)
+                {
+                	case "smsAccount": tdManagerLogService.addLog("delete", "删除短信账户", req);
+                	break;
+                	case "userSuggestionCategory":  tdManagerLogService.addLog("delete", "删除投诉咨询", req);
+                	break;
+                	case "messageType":  tdManagerLogService.addLog("delete", "删除信息", req);
+                	break;
+                	default:tdManagerLogService.addLog("delete", "删除信息", req);
+                }
+                	
+                
             }
             else if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
             {
@@ -697,12 +718,26 @@ public class TdManagerSettingController {
         map.addAttribute("__EVENTTARGET", __EVENTTARGET);
         map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
-        map.addAttribute("sms_page", tdSmsAccountService.findAll(page,size));
+        switch (type)
+        {
+	    	case "smsAccount": map.addAttribute("sms_page", tdSmsAccountService.findAll(page,size));
+	    	return "/site_mag/smsAccount_list";
+	    	
+	    	case "userSuggestionCategory":  map.addAttribute("userSuggestionCategory_list", tdUserSuggestionCategoryService.findAll());
+	    	return "/site_mag/user_suggestion_category_list";
+	    	
+	    	case "messageType":  map.addAttribute("messageType_list", tdMessageTypeService.findAll());
+	    	return "/site_mag/message_type_list";
+	    	
+	    	default: map.addAttribute("sms_page", tdSmsAccountService.findAll(page,size));
+        }
+        
     	return "/site_mag/smsAccount_list";
     }
     
-    @RequestMapping(value="/smsAccount/edit")
-    public String smsAccountEdit(Long id,
+    @RequestMapping(value="/{type}/edit")
+    public String settingTypeEdit(Long id,
+    					@PathVariable String type,
                         String __VIEWSTATE,
                         ModelMap map,
                         HttpServletRequest req)
@@ -715,15 +750,43 @@ public class TdManagerSettingController {
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
-        
-        if (null != id)
+            
+        switch (type)
         {
-            map.addAttribute("smsAccount", tdSmsAccountService.findOne(id));
+
+	    	case "smsAccount": 
+		        if (null != id)
+		        {
+		        	map.addAttribute("smsAccount", tdSmsAccountService.findOne(id));
+		        }
+		        return "/site_mag/smsAccount_edit";
+	    	
+	    	case "userSuggestionCategory":  
+		        if (null != id)
+		        {
+		        	map.addAttribute("userSuggestionCategory", tdUserSuggestionCategoryService.findOne(id));
+		        }
+	    	return "/site_mag/user_suggestion_category_edit";
+	    	
+	    	case "messageType":  
+		        if (null != id)
+		        {
+		        	map.addAttribute("messageType", tdMessageTypeService.findOne(id));
+		        }
+	    	return "/site_mag/message_type_edit";
+	    	
+	    	default: 
+		        if (null != id)
+		        {
+		        	map.addAttribute("smsAccount", tdSmsAccountService.findOne(id));
+		        }
         }
+
         
         return "/site_mag/smsAccount_edit";
     }
     
+    //保存短信账户 zhangji
     @RequestMapping(value="/smsAccount/save", method = RequestMethod.POST)
     public String smsAccountSave(TdSmsAccount tdSmsAccount,
                         String __VIEWSTATE,
@@ -752,6 +815,65 @@ public class TdManagerSettingController {
         return "redirect:/Verwalter/setting/smsAccount/list";
     }  
     
+    //保存投诉咨询类别 zhangji
+    @RequestMapping(value="/userSuggestionCategory/save", method = RequestMethod.POST)
+    public String userSuggestionCategorySave(TdUserSuggestionCategory tdUserSuggestionCategory,
+                        String __VIEWSTATE,
+                        ModelMap map,
+                        HttpServletRequest req) {
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        String type = null;
+        if (null ==  tdUserSuggestionCategory.getId())
+        {
+			type = "add";
+		} 
+        else 
+        {
+			type = "edit";
+		}
+        tdUserSuggestionCategory.setIsEnable(true);
+        tdUserSuggestionCategoryService.save(tdUserSuggestionCategory);
+        
+        tdManagerLogService.addLog(type, "修改投诉咨询类别", req);
+        
+        return "redirect:/Verwalter/setting/userSuggestionCategory/list";
+    }  
+    
+    //保存信息类别 zhangji
+    @RequestMapping(value="/messageType/save", method = RequestMethod.POST)
+    public String userSuggestionCategorySave(TdMessageType tdMessageType,
+                        String __VIEWSTATE,
+                        ModelMap map,
+                        HttpServletRequest req) {
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        String type = null;
+        if (null ==  tdMessageType.getId())
+        {
+			type = "add";
+		} 
+        else 
+        {
+			type = "edit";
+		}
+        tdMessageType.setIsEnable(true);
+        tdMessageTypeService.save(tdMessageType);
+        
+        tdManagerLogService.addLog(type, "修改信息类别", req);
+        
+        return "redirect:/Verwalter/setting/messageType/list";
+    }
     /*-------------------------短信账户 end -----------------------------*/
     @ModelAttribute
     public void getModel(@RequestParam(value = "id", required = false) Long id,
@@ -883,14 +1005,14 @@ public class TdManagerSettingController {
     }
     
     /**
-     * 删除短信账户
+     * 删除短信账户以及其他信息类别
      * @author Zhangji
      * @param ids
      * @param chkIds
      */
-    private void btnDeleteSmsAccount(Long[] ids, Integer[] chkIds)
+    private void btnTypeDelete(String type, Long[] ids, Integer[] chkIds)
     {
-        if (null == ids || null == chkIds
+        if (null == ids || null == chkIds || null == type || type.equals("")
                 || ids.length < 1 || chkIds.length < 1)
         {
             return;
@@ -901,8 +1023,19 @@ public class TdManagerSettingController {
             if (chkId >=0 && ids.length > chkId)
             {
                 Long id = ids[chkId];
-                
-                tdSmsAccountService.delete(id);
+                if (type.equals("smsAccount"))
+                {
+                	 tdSmsAccountService.delete(id);
+                }
+                else if (type.equals("userSuggestionCategory"))
+                {
+                	 tdUserSuggestionCategoryService.delete(id);
+                }
+                else if (type.equals("messageType"))
+                {
+                	 tdMessageTypeService.delete(id);
+                }
+               
             }
         }
     }
