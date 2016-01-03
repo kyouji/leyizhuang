@@ -260,7 +260,7 @@
                         <ul>
                             <li>
                                 <#list commend_page.content as item>
-                                    <a class="good03_box" href="#">
+                                    <a class="good03_box" href="/goods/detail/${item.id?c}">
                                         <div>
                                             <#if ("goods"+item_index)?eval??>
                                                 <img src="${("goods"+item_index)?eval}" />

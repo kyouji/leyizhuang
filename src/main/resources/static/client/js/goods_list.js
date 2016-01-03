@@ -325,3 +325,20 @@ function operateCollect(goodsId) {
 		}
 	});
 }
+
+/**
+ * 去结算的方法（首先判定当前是否已有选择的商品）
+ * 
+ * @author dengxiao
+ */
+function clearing() {
+	var number = $("#select_num").html();
+	if (0 == number) {
+		warning("亲，请先选择商品");
+		return;
+	}
+
+	if (number > 0) {
+		window.location.href = "/order";
+	}
+}

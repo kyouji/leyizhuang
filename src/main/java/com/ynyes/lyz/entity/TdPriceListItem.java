@@ -33,8 +33,8 @@ public class TdPriceListItem {
 	// 所属区域城市名称
 	@Column
 	private String cityName;
-	
-	// 所属价目表编号  zhangji
+
+	// 所属价目表编号 zhangji
 	@Column
 	private String priceListNumber;
 
@@ -49,8 +49,8 @@ public class TdPriceListItem {
 	// 商品id
 	@Column
 	private Long goodsId;
-	
-	// 商品名称  zhangji
+
+	// 商品名称 zhangji
 	@Column
 	private String goodsTitle;
 
@@ -81,10 +81,14 @@ public class TdPriceListItem {
 	// 该件商品是否首页推荐
 	@Column
 	private Boolean isCommendIndex;
-	
-	//是否过期
+
+	// 是否过期
 	@Column
 	private Boolean isOutDate;
+
+	// 参加的活动id（多个以","隔开）
+	@Column
+	private String activities;
 
 	// 排序号
 	@Column
@@ -240,5 +244,13 @@ public class TdPriceListItem {
 
 	public void setPriceListNumber(String priceListNumber) {
 		this.priceListNumber = priceListNumber;
+	}
+
+	public String getActivities() {
+		return activities;
+	}
+
+	public void setActivities(String activities) {
+		this.activities = activities;
 	}
 }

@@ -14,18 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ynyes.lyz.entity.TdCity;
 import com.ynyes.lyz.entity.TdCompany;
 import com.ynyes.lyz.entity.TdMessageType;
+import com.ynyes.lyz.entity.TdDistrict;
 import com.ynyes.lyz.entity.TdServiceItem;
 import com.ynyes.lyz.entity.TdSetting;
 import com.ynyes.lyz.entity.TdSmsAccount;
 import com.ynyes.lyz.entity.TdUserSuggestionCategory;
+import com.ynyes.lyz.entity.TdSubdistrict;
 import com.ynyes.lyz.service.TdCityService;
 import com.ynyes.lyz.service.TdCompanyService;
+import com.ynyes.lyz.service.TdDistrictService;
 import com.ynyes.lyz.service.TdManagerLogService;
 import com.ynyes.lyz.service.TdMessageTypeService;
 import com.ynyes.lyz.service.TdServiceItemService;
 import com.ynyes.lyz.service.TdSettingService;
 import com.ynyes.lyz.service.TdSmsAccountService;
 import com.ynyes.lyz.service.TdUserSuggestionCategoryService;
+import com.ynyes.lyz.service.TdSubdistrictService;
 import com.ynyes.lyz.util.SiteMagConstant;
 
 
@@ -57,6 +61,12 @@ public class TdManagerSettingController {
     
     @Autowired
     private TdCityService tdCityService;
+    
+    @Autowired
+    private TdDistrictService tdDistrictService;
+    
+    @Autowired
+    private TdSubdistrictService tdSubdistrictService;
     
     @Autowired
     TdUserSuggestionCategoryService tdUserSuggestionCategoryService; //zhangji 2016-1-3 13:37:08
@@ -296,6 +306,7 @@ public class TdManagerSettingController {
         
         return "redirect:/Verwalter/setting/company/list";
     }  
+    
     /**
      * 城市维护-列表
      * @param page
@@ -411,7 +422,239 @@ public class TdManagerSettingController {
         tdManagerLogService.addLog(type, "修改子公司", req);
         
         return "redirect:/Verwalter/setting/city/list";
-    }  
+    } 
+    
+    /**
+     * 行政区划-列表
+     * @param page
+     * @param size
+     * @param __EVENTTARGET
+     * @param __EVENTARGUMENT
+     * @param __VIEWSTATE
+     * @param action
+     * @param listId
+     * @param listChkId
+     * @param map
+     * @param req
+     * @return
+     */
+    @RequestMapping(value = "/district/list")
+    public String settingDistrictList(Integer page,
+						            Integer size,
+						            String __EVENTTARGET,
+						            String __EVENTARGUMENT,
+						            String __VIEWSTATE,
+						            String action,
+						            Long[] listId,
+						            Integer[] listChkId,
+						            ModelMap map,
+						            HttpServletRequest req)
+    {
+    	String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
+            {
+                btnDeleteDistrict(listId, listChkId);
+                tdManagerLogService.addLog("delete", "删除行政区划", req);
+            }
+            else if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                }
+            }
+        }
+        
+        if (null == page || page < 0)
+        {
+            page = 0;
+        }
+        
+        if (null == size || size <= 0)
+        {
+            size = SiteMagConstant.pageSize;;
+        }
+        
+        map.addAttribute("page", page);
+        map.addAttribute("size", size);
+        map.addAttribute("action", action);
+        map.addAttribute("__EVENTTARGET", __EVENTTARGET);
+        map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        map.addAttribute("district_page", tdDistrictService.findAll(page, size));
+    	return "/site_mag/district_list";
+    }
+    
+    @RequestMapping(value="/district/edit")
+    public String districtEdit(Long id,
+                        String __VIEWSTATE,
+                        ModelMap map,
+                        HttpServletRequest req)
+    {
+        String username = (String) req.getSession().getAttribute("manager");
+        
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        if (null != id)
+        {
+            map.addAttribute("district", tdDistrictService.findOne(id));
+        }
+        map.addAttribute("city_list",tdCityService.findAll());
+        return "/site_mag/district_edit";
+    }
+    
+    @RequestMapping(value="/district/save", method = RequestMethod.POST)
+    public String districtSave(TdDistrict tdDistrict, String __VIEWSTATE, ModelMap map, HttpServletRequest req) 
+    {
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        String type = null;
+        if (null ==  tdDistrict.getId())
+        {
+			type = "add";
+		}
+        else
+        {
+			type = "edit";
+		}
+        tdDistrictService.save(tdDistrict);
+        
+        tdManagerLogService.addLog(type, "修改行政区划", req);
+        
+        return "redirect:/Verwalter/setting/district/list";
+    }
+    
+    /**
+     * 行政街道-列表
+     * @param page
+     * @param size
+     * @param __EVENTTARGET
+     * @param __EVENTARGUMENT
+     * @param __VIEWSTATE
+     * @param action
+     * @param listId
+     * @param listChkId
+     * @param map
+     * @param req
+     * @return
+     */
+    @RequestMapping(value = "/subdistrict/list")
+    public String settingSubistrictList(Integer page,
+						            Integer size,
+						            String __EVENTTARGET,
+						            String __EVENTARGUMENT,
+						            String __VIEWSTATE,
+						            String action,
+						            Long[] listId,
+						            Integer[] listChkId,
+						            ModelMap map,
+						            HttpServletRequest req)
+    {
+    	String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
+            {
+                btnDeleteSubdistrict(listId, listChkId);
+                tdManagerLogService.addLog("delete", "删除行政街道", req);
+            }
+            else if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                }
+            }
+        }
+        
+        if (null == page || page < 0)
+        {
+            page = 0;
+        }
+        
+        if (null == size || size <= 0)
+        {
+            size = SiteMagConstant.pageSize;;
+        }
+        
+        map.addAttribute("page", page);
+        map.addAttribute("size", size);
+        map.addAttribute("action", action);
+        map.addAttribute("__EVENTTARGET", __EVENTTARGET);
+        map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        map.addAttribute("subdistrict_page", tdSubdistrictService.findAll(page, size));
+    	return "/site_mag/subdistrict_list";
+    }
+    
+    @RequestMapping(value="/subdistrict/edit")
+    public String subdistrictEdit(Long id,
+                        String __VIEWSTATE,
+                        ModelMap map,
+                        HttpServletRequest req)
+    {
+        String username = (String) req.getSession().getAttribute("manager");
+        
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        if (null != id)
+        {
+            map.addAttribute("subdistrict", tdSubdistrictService.findOne(id));
+        }
+        map.addAttribute("district_list",tdDistrictService.findAll());
+        return "/site_mag/subdistrict_edit";
+    }
+    
+    @RequestMapping(value="/subdistrict/save", method = RequestMethod.POST)
+    public String subdistrictSave(TdSubdistrict tdSubdistrict, String __VIEWSTATE, ModelMap map, HttpServletRequest req) 
+    {
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        String type = null;
+        if (null ==  tdSubdistrict.getId())
+        {
+			type = "add";
+		}
+        else
+        {
+			type = "edit";
+		}
+        tdSubdistrictService.save(tdSubdistrict);
+        
+        tdManagerLogService.addLog(type, "修改行政街道", req);
+        
+        return "redirect:/Verwalter/setting/subdistrict/list";
+    }
     
     /*-------------------------短信账户 begin --------------------------*/
     @RequestMapping(value = "/{type}/list")
@@ -721,6 +964,42 @@ public class TdManagerSettingController {
                 Long id = ids[chkId];
                 
                 tdCityService.delete(id);
+            }
+        }
+    }
+    
+    private void btnDeleteDistrict(Long[] ids, Integer[] chkIds)
+    {
+        if (null == ids || null == chkIds || ids.length < 1 || chkIds.length < 1)
+        {
+            return;
+        }
+        
+        for (int chkId : chkIds)
+        {
+            if (chkId >=0 && ids.length > chkId)
+            {
+                Long id = ids[chkId];
+                
+                tdDistrictService.delete(id);
+            }
+        }
+    }
+    
+    private void btnDeleteSubdistrict(Long[] ids, Integer[] chkIds)
+    {
+        if (null == ids || null == chkIds || ids.length < 1 || chkIds.length < 1)
+        {
+            return;
+        }
+        
+        for (int chkId : chkIds)
+        {
+            if (chkId >=0 && ids.length > chkId)
+            {
+                Long id = ids[chkId];
+                
+                tdSubdistrictService.delete(id);
             }
         }
     }

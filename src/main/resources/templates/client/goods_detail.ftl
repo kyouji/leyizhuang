@@ -69,7 +69,7 @@
 				<div class="det_pri">
 				    <#if goods??>
     					<p>${goods.name!''}</p>
-    					<p>￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></p>
+    					<p>￥<#if priceListItem??&&priceListItem.salePrice??>${priceListItem.salePrice?string("0.00")}<#else>0.00</#if></p>
     					<p>销量：${goods.soldNumber!'0'}件</p>
     					<#-- 该标签用以存储库存 -->
     					<input type="hidden" id="inventory${goods.id?c}" value="<#if goods.leftNumber??>${goods.leftNumber?c}<#else>0</#if>">
@@ -79,12 +79,12 @@
 				<div class="index_test_box"></div>
 				<ul class="det_list">
 					<li class="li01">
-						<div>运费：</div>
-						<p>10元~100元 运费10元</p>
+						<div>品牌：</div>
+						<p>${goods.brandTitle!''}</p>
 					</li>
 					<li class="li02">
 						<div>促销：</div>
-						<p>满<a href="#">399</a>，赠墙面漆一桶</p>
+						<p>金钻雅家五合一PU清底漆*3 + 金钻雅家五合一PU清底漆* 2 + 金钻雅家五合一PU清底漆 * 1   赠送   金钻雅家五合一PU清底漆 * 3</p>
 						<div></div>
 						<p>满<a href="#">399</a>，赠墙面漆一桶</p>
 					</li>
@@ -105,24 +105,25 @@
 						<p>重庆市 渝中区 解放碑</p>
 					</li>
 					-->
+					<#--
 					<li class="li04">
 						<div>服务：</div>
 						<p>由“乐易装”售后和发货，并享受售后服务</p>
 					</li>
+					-->
 				</ul>
 				<div class="index_test_box"></div>
 				<dl class="det_text">
+				    <#--
 					<dt>商品参数</dt>
 					<dd>
 						<span>品牌</span>
 						<p>${goods.brandTitle!''}</p>
 					</dd>
-					<#--
 					<dd>
 						<span>产地</span>
 						<p>法国</p>
 					</dd>
-					-->
 					<dd>
 						<span>发货地</span>
 						<p>
@@ -131,6 +132,7 @@
 						  </#if>
 						</p>
 					</dd>
+					-->
 				</dl>
 				<div class="index_test_box"></div>
 			    <#if goods.detail??>
@@ -180,7 +182,7 @@
 						<span onclick="addCart();">加入已选</span>
 					</li>
 					<li>
-						<span>立刻购买</span>
+						<span onclick="window.location.href='/goods/buy/now?goodsId=${goods.id?c}'">立刻购买</span>
 					</li>	
 				</ul>
 			</section>

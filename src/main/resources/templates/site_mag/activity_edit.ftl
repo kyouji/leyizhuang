@@ -32,6 +32,49 @@ $(function () {
         allowFileManager: true
     });
     
+    //初始化上传控件
+    $(".upload-img").each(function () {
+        $(this).InitSWFUpload({ 
+            sendurl: "/Verwalter/upload", 
+            flashurl: "/mag/js/swfupload.swf"
+        });
+    });
+    
+    $(".upload-show360").each(function () {
+        $(this).InitSWFUpload_show360({ 
+            btntext: "批量上传", 
+            btnwidth: 66, 
+            single: false, 
+            water: true, 
+            thumbnail: true, 
+            filesize: "5120", 
+            sendurl: "/Verwalter/upload", 
+            flashurl: "/mag/js/swfupload.swf", 
+            filetypes: "*.jpg;*.jpge;*.png;*.gif;" 
+        });
+    });
+
+    //（缩略图）
+    var txtPic = $("#txtImgUrl").val();
+    if (txtPic == "" || txtPic == null) {
+        $("#thumb_ImgUrl_show1").hide();
+    }
+    else {
+        $("#thumb_ImgUrl_show1").html("<ul><li><div class='img-box1'><img src='" + txtPic + "' bigsrc='" + txtPic + "' /></div></li></ul>");
+        $("#thumb_ImgUrl_show1").show();
+    }
+
+    $("#txtImgUrl").blur(function () {
+        var txtPic = $("#txtImgUrl").val();
+        if (txtPic == "" || txtPic == null) {
+            $("#thumb_ImgUrl_show1").hide();
+        }
+        else {
+            $("#thumb_ImgUrl_show1").html("<ul><li><div class='img-box1'><img src='" + txtPic + "' bigsrc='" + txtPic + "' /></div></li></ul>");
+            $("#thumb_ImgUrl_show1").show();
+        }
+    });
+    
     
     // 添加门店
     $("#addDiySite").click(function(){
@@ -295,6 +338,15 @@ function del_goods_comb(obj) {
                             </#list>
                         </#if>
                     </select>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>活动图片</dt>
+            <dd>
+                <input id="txtImgUrl" name="activityImg" type="text" value="<#if activity??>${activity.activityImg!""}</#if>" class="input normal upload-path">
+                <div class="upload-box upload-img"></div>
+                <div id="thumb_ImgUrl_show1" class="photo-list thumb_ImgUrl_show">
                 </div>
             </dd>
         </dl>
