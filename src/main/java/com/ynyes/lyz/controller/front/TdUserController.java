@@ -383,6 +383,13 @@ public class TdUserController {
 		req.getSession().setAttribute("all_color", selected_colors);
 		map.addAttribute("all_selected", all_selected);
 		map.addAttribute("selected_colors", selected_colors);
+
+		// 获取所有的已选商品（整合后）
+		List<TdCartGoods> all = tdCommonService.getAllContainsColorPackage(req);
+		if (null != all) {
+			map.addAttribute("selected_number", all.size());
+		}
+
 		return "/client/user_selected";
 	}
 
