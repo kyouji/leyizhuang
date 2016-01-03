@@ -36,12 +36,15 @@ public class TdActivityService {
 	
 	@Autowired
 	private TdDiySiteListService tdDiySiteListService;
+	
+	@Autowired 
+	private TdPriceListItemService tdPriceListItemService;
 
 	public TdActivity save(TdActivity e) {
 		if (null == e) {
 			return null;
 		}
-
+		
 		// 城市名
 		e.setCityName(tdCityService.findOne(e.getCityId()).getCityName());
 
