@@ -26,6 +26,9 @@ public class TdSubdistrict {
 	// 所属区域id
 	@Column
 	private Long districtId;
+	
+	@Column
+	private String districtName;
 
 	// 物流配送费用
 	@Column(scale = 2)
@@ -57,6 +60,15 @@ public class TdSubdistrict {
 
 	public void setDistrictId(Long districtId) {
 		this.districtId = districtId;
+	}
+	
+
+	public String getDistrictName() {
+		return districtName;
+	}
+
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
 	}
 
 	public Double getSortId() {

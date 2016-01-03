@@ -25,6 +25,9 @@ public class TdDistrict {
 	// 所属城市id
 	@Column
 	private Long cityId;
+	
+	@Column
+	private String cityName;
 
 	// 排序号
 	@Column
@@ -52,6 +55,14 @@ public class TdDistrict {
 
 	public void setCityId(Long cityId) {
 		this.cityId = cityId;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 	public Double getSortId() {
