@@ -105,10 +105,8 @@ public class TdActivityService {
 		String diySiteIdStr = "";
 		for (TdDiySiteList siteList : e.getSiteList()) {
 			siteNameString += siteList.getTitle() + ",";
-			diySiteIdStr += siteList.getId() + ",";
 		}
 		e.setSiteName(siteNameString);
-		e.setDiySiteIds(diySiteIdStr);
 
 		// 保存赠品
 		tdGoodsGiftService.save(e.getGiftList());
@@ -118,7 +116,11 @@ public class TdActivityService {
 
 		// 保存门店
 		tdDiySiteListService.save(e.getSiteList());
-
+		for (TdDiySiteList siteList : e.getSiteList()) 
+		{
+			diySiteIdStr += siteList.getSiteId() + ",";
+		}
+		e.setDiySiteIds(diySiteIdStr);
 		e = repository.save(e);
 
 		// 获取所有的城市id
@@ -140,8 +142,7 @@ public class TdActivityService {
 				// 查找到指定id的门店
 				TdDiySite site = tdDiySiteService.findOne(Long.parseLong(siteId));
 				// 查找到指定的价目表
-				TdPriceListItem priceListItem = tdPriceListItemService
-						.findByPriceListIdAndGoodsId(site.getPriceListId(), id);
+				TdPriceListItem priceListItem = tdPriceListItemService.findByPriceListIdAndGoodsId(site.getPriceListId(), id);
 				if (null != priceListItem) {
 					priceListItem.setIsPromotion(true);
 					if (null == priceListItem.getActivities()) {
