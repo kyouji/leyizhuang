@@ -105,7 +105,7 @@ public class TdActivityService {
 		String diySiteIdStr = "";
 		for (TdDiySiteList siteList : e.getSiteList()) {
 			siteNameString += siteList.getTitle() + ",";
-			diySiteIdStr += siteList.getInfo() + ",";
+			diySiteIdStr += siteList.getId() + ",";
 		}
 		e.setSiteName(siteNameString);
 		e.setDiySiteIds(diySiteIdStr);
