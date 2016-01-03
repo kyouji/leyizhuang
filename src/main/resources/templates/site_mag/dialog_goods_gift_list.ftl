@@ -30,6 +30,7 @@
             $("#txtItemZengPin_Title").val($(parentObj).find("input[id='title']").val()); 
             $("#txtItemZengPin_Id").val($(parentObj).find("input[id='id']").val()); 
             $("#txtItemZengPin_Price").val($(parentObj).find("input[id='price']").val());
+            $("#txtItemZengPin_CurrentPrice").val($(parentObj).find("input[id='number']").val());
             $("#txtItemZengPin_CoverImageUri").val($(parentObj).find("input[id='image']").val());
         }
     });
@@ -65,6 +66,10 @@
             W.$.dialog.alert('请填写赠品标题！', function () { $("#txtItemZengPin_Title").focus(); }, api);
             return false;
         }
+        if ($("#txtItemZengPin_CurrentPrice").val() == "") {
+            W.$.dialog.alert('请填写商品赠送数量！', function () { $("#txtItemZengPin_CurrentPrice").focus(); }, api);
+            return false;
+        }
         //添加或修改
         if ($(api.data).length > 0) {
             var parentObj = $(api.data).parent().parent();
@@ -79,6 +84,7 @@
             + '<input type="text" name="giftList[${total!'0'}].sortId" class="td-input" value="99" style="width:90%;" /></td>'
             + '<td><input type="text" id="id" name="giftList[${total!'0'}].goodsId" class="td-input" value="' + $("#txtItemZengPin_Id").val() + '" style="width:90%;" /></td>'
             + '<td><input type="text" id="title" name="giftList[${total!'0'}].goodsTitle" class="td-input" value="' + $("#txtItemZengPin_Title").val() + '" style="width:90%;" /></td>'
+            + '<td><input type="text" id="number" name="giftList[${total!'0'}].number" class="td-input" value="' + $("#txtItemZengPin_CurrentPrice").val() + '" style="width:90%;" /></td>'
             + '<td><input type="text" id="price" name="giftList[${total!'0'}].goodsPrice" class="td-input" value="' + $("#txtItemZengPin_Price").val() + '" style="width:90%;" /></td>'
             + '<td>'
             + '<i class="icon"></i>'
@@ -137,6 +143,13 @@
       <dd>
         <input type="text" id="txtItemZengPin_Price" class="input normal"> 元
         <span class="Validform_checktip">*</span>
+      </dd>
+    </dl>
+    <dl>
+      <dt>赠送数量</dt>
+      <dd>
+        <input type="text" id="txtItemZengPin_CurrentPrice" class="input normal"> 件
+        <span class="Validform_checktip">*活动商品数量(必填)</span>
       </dd>
     </dl>
 </div>

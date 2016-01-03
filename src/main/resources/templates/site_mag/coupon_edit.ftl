@@ -35,6 +35,8 @@ $(function () {
         $(".thumb_ImgUrl_show").show();
     }
 });
+
+
 </script>
 </head>
 
@@ -42,7 +44,7 @@ $(function () {
 <form name="form1" method="post" action="/Verwalter/coupon/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}">
-<input name="couponId" type="text" value='<#if coupon??>${coupon.id}</#if>' style="display:none">
+<input name="couponId" type="text" value='<#if coupon??>${coupon.id?c}</#if>' style="display:none">
 </div>
 
 <!--导航栏-->
@@ -73,46 +75,42 @@ $(function () {
     <dt>优惠券类型</dt>
     <dd>
         <div class="rule-single-select">
-            <select name="typeId" datatype="*" sucmsg=" ">
+            <select id="type" name="typeId" datatype="*" sucmsg=" "  onchange="getType();" >
                 <#if !coupon??>
                 <option value="">请选择类型...</option>
-                </#if>
+                </#if>             
                 <#if coupon_type_list??>
                     <#list coupon_type_list as c>
-                        <option value="${c.id!""}" <#if coupon?? && coupon.typeId==c.id>selected="selected"</#if>>${c.title!""}</option>
-                    </#list>
+                        <option value="${c.id?c!""}" <#if coupon?? && coupon.typeId==c.id>selected="selected"</#if>>${c.title!""}</option>                                                                  
+                    </#list>                                                                                
                 </#if>
-            </select>
+                <input type="hidden" name="typetitle" id="typetitle" value="">
+            </select> 
         </div>
     </dd>
   </dl>
-  
   <dl>
-    <dt>所属同盟店</dt>
+    <dt>所属类别</dt>
     <dd>
         <div class="rule-single-select">
-            <select name="diySiteId" datatype="*" sucmsg=" ">
-                <#if !coupon?? || !coupon.diySiteId??>
-                    <option value="">请选择同盟店...</option>
-                </#if>
-                <#if diy_site_list??>
-                    <#list diy_site_list as item>
-                        <option value="${item.id!""}" <#if coupon?? && coupon.diySiteId?? && coupon.diySiteId==item.id>selected="selected"</#if>>${item.title!""}</option>
+            <select name="diySiteId" datatype="*" sucmsg=" " disabled="disabled">
+                <#if product_category_list??>
+                    <#list product_category_list as item>
+                        <option value="${item.id?c!""}" <#if coupon?? && coupon.diySiteId?? && coupon.diySiteId==item.id>selected="selected"</#if>>${item.title!""}</option>
                     </#list>
                 </#if>
             </select>
         </div>
     </dd>
   </dl>
-  
+    
   <dl>
     <dt>剩余数量</dt>
     <dd>
-      <input name="leftNumber" type="text" value="<#if coupon??>${coupon.leftNumber?c!""}<#else>1</#if>" class="input small" datatype="n" sucmsg=" ">
+      <input name="leftNumber" type="text" value="<#if coupon??&&coupon.leftNumber??>${coupon.leftNumber?c!""}<#else>1</#if>" class="input small" datatype="n" sucmsg=" ">
       <span class="Validform_checktip"></span>
     </dd>
   </dl>
-
   <dl>
     <dt>排序数字</dt>
     <dd>
@@ -120,6 +118,10 @@ $(function () {
       <span class="Validform_checktip">*数字，越小越向前</span>
     </dd>
   </dl>
+
+  
+
+  
   
 </div>
 <!--/内容-->

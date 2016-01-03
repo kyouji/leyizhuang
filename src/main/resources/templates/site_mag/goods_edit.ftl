@@ -75,27 +75,6 @@ $(function () {
         }
     });
     
-    //（抢拍缩略图）
-    var flashPic = $("#flashSaleImage").val();
-    if (flashPic == "" || flashPic == null) {
-        $("#thumb_ImgUrl_show3").hide();
-    }
-    else {
-        $("#thumb_ImgUrl_show3").html("<ul><li><div class='img-box1'><img src='" + groupPic + "' bigsrc='" + groupPic + "' /></div></li></ul>");
-        $("#thumb_ImgUrl_show3").show();
-    }
-
-    $("#flashSaleImage").blur(function () {
-        var flashPic = $("#flashSaleImage").val();
-        if (flashPic == "" || flashPic == null) {
-            $("#thumb_ImgUrl_show3").hide();
-        }
-        else {
-            $("#thumb_ImgUrl_show3").html("<ul><li><div class='img-box1'><img src='" + groupPic + "' bigsrc='" + groupPic + "' /></div></li></ul>");
-            $("#thumb_ImgUrl_show3").show();
-        }
-    });
-    
     //（团购缩略图）
     var groupPic = $("#groupSaleImage").val();
     if (groupPic == "" || groupPic == null) {
@@ -216,7 +195,7 @@ $(function () {
         $("#idComputeSalePrice").val((parseFloat(p1) + parseFloat(p2)));
     });
     
-    // 判断粮草购买限额不能大于最高返现额
+    // 判断积分购买限额不能大于最高返现额
     $("#pointLimited").change(function(){
         var point = $.trim($('#pointLimited').val());
         var price = $.trim($('#returnPrice').val())
@@ -225,7 +204,7 @@ $(function () {
         
         if (parseFloat(price) < parseFloat(point))
         {
-            alert("购买粮草限额不能大于最高返现额!");
+            alert("购买积分限额不能大于最高返现额!");
             $(this).val("0");
         }
     });
@@ -314,9 +293,9 @@ function del_goods_comb(obj) {
                     <li><a href="javascript:;" onclick="tabs(this);" class="">扩展选项</a></li>
                     <li><a href="javascript:;" onclick="tabs(this);" class="">详细描述</a></li>
                     <li><a href="javascript:;" onclick="tabs(this);" class="">价格与库存</a></li>
-                    <li><a href="javascript:;" onclick="tabs(this);" class="">促销</a></li>
+                    <#--<li><a href="javascript:;" onclick="tabs(this);" class="">促销</a></li>
                     <li><a href="javascript:;" onclick="tabs(this);" class="">赠品</a></li>
-                    <li><a href="javascript:;" onclick="tabs(this);" class="">组合商品</a></li>
+                    <li><a href="javascript:;" onclick="tabs(this);" class="">组合商品</a></li> -->
                     <li><a href="javascript:;" onclick="tabs(this);" class="">SEO选项</a></li>
                 </ul>
             </div>
@@ -349,6 +328,32 @@ function del_goods_comb(obj) {
                         <label>上架</label>
                         <input type="radio" name="isOnSale" value="0" <#if goods?? && goods.isOnSale?? && goods.isOnSale==false>checked="checked"</#if>>
                         <label>下架</label>
+                    </span>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>是否为小辅料</dt>
+            <dd>
+                <div class="rule-multi-radio multi-radio">
+                    <span>
+                        <input type="radio" name="isGift" value="1" <#if goods?? && goods.isGift?? && goods.isGift==true>checked="checked"</#if>>
+                        <label>小辅料</label>
+                        <input type="radio" name="isGift" value="0" <#if goods??==false || goods.isGift?? && goods.isGift==false>checked="checked"</#if>>
+                        <label>商品</label>
+                    </span>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>商品归属</dt>
+            <dd>
+                <div class="rule-multi-radio multi-radio">
+                    <span>
+                        <input type="radio" name="belongTo" value="1" <#if goods??==false || goods.belongTo?? && goods.belongTo==1>checked="checked"</#if>>
+                        <label>华润</label>
+                        <input type="radio" name="belongTo" value="2" <#if goods?? && goods.belongTo?? && goods.belongTo==2>checked="checked"</#if>>
+                        <label>乐意装</label>
                     </span>
                 </div>
             </dd>
@@ -405,6 +410,7 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>
+        
         <dl>
             <dt>商品标题</dt>
             <dd>
@@ -412,18 +418,19 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>
+        
         <dl>
             <dt>商品副标题</dt>
             <dd>
-                <input name="subTitle" type="text" value="<#if goods??>${goods.subTitle!""}</#if>" class="input normal" datatype="*1-255" sucmsg=" ">
+                <input name="subTitle" type="text" value="<#if goods??>${goods.subTitle!""}</#if>" class="input normal" datatype="*2-255" sucmsg=" ">
                 <span class="Validform_checktip">*标题最多255个字符</span>
             </dd>
         </dl>
         <dl>
             <dt>商品编码</dt>
             <dd>
-                <input name="code" type="text" value="<#if goods??>${goods.code!""}</#if>" class="input normal" datatype="*0-255" sucmsg=" ">
-                <span class="Validform_checktip">*编码最多255个字符</span>
+                <input name="code" type="text" value="<#if goods??>${goods.code!""}</#if>" class="input normal" datatype="*0-7" sucmsg=" ">
+                <span class="Validform_checktip">*编码最多7个字符</span>
             </dd>
         </dl>
         <dl>
@@ -433,8 +440,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">255个字符以内</span>
             </dd>
         </dl>
-        <#--
-        
         <dl>
             <dt>促销</dt>
             <dd>
@@ -442,8 +447,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">255个字符以内</span>
             </dd>
         </dl>
-        
-        -->
         <dl>
             <dt>配置</dt>
             <dd>
@@ -513,7 +516,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>市场价</dt>
             <dd>
-                <input name="marketPrice" type="text" value="<#if goods?? && goods.marketPrice??>${goods.marketPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <input name="marketPrice" type="text" value="<#if goods?? && goods.marketPrice??>${goods.marketPrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
                 <span class="Validform_checktip">市场价格</span>
             </dd>
         </dl>
@@ -532,6 +535,7 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">商品组合销售时的价格</span>
             </dd>
         </dl>
+        -->
         <dl>
             <dt>出厂价</dt>
             <dd>
@@ -539,51 +543,34 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*商品出厂价</span>
             </dd>
         </dl>
-        -->
         <dl>
-            <dt>返现额</dt>
+            <dt>最高返现额</dt>
             <dd>
                 <input id="returnPrice" name="returnPrice" type="text" value="<#if goods?? && goods.returnPrice??>${goods.returnPrice?string("0.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">*返还同盟店的金额，不填时为0</span>
+                <span class="Validform_checktip">*返还分销商的最高可能金额，不填时为0</span>
             </dd>
         </dl>
         <dl>
             <dt>销售价</dt>
             <dd>
-                <input id="idComputeSalePrice" name="salePrice" type="text" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
-                <span class="Validform_checktip">销售价</span>
-                <input type="hidden" name="oldPrice" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>">
+                <input id="idComputeSalePrice" name="salePrice" type="text" disabled="disabled" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="" style="background: #EEEEEE;">
+                <span class="Validform_checktip">系统自动计算 (销售价 = 出厂价 + 最高返现额)</span>
             </dd>
         </dl>
         <dl>
-            <dt>粮草购买限额</dt>
+            <dt>积分购买限额</dt>
             <dd>
                 <input id="pointLimited" name="pointLimited" type="text" value="<#if goods?? && goods.pointLimited??>${goods.pointLimited?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
-                <span class="Validform_checktip">购买时可使用的粮草限额，必须小于最高返现额</span>
+                <span class="Validform_checktip">购买时可使用的积分限额，必须小于最高返现额</span>
             </dd>
         </dl>
         <dl>
-            <dt>赠送粮草</dt>
+            <dt>赠送积分</dt>
             <dd>
                 <input name="returnPoints" type="text" value="<#if goods?? && goods.returnPoints??>${goods.returnPoints?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
-                <span class="Validform_checktip">购买该商品赠送的粮草</span>
+                <span class="Validform_checktip">购买该商品赠送的积分</span>
             </dd>
         </dl>
-        <#if provider_list??>
-        <dl>
-            <dt>供应商</dt>
-            <dd>
-                <div class="rule-single-select">
-                    <select name="providerId" datatype="*0-100" sucmsg=" ">
-                        <option value="" <#if !provider_list??>selected="selected"</#if>>请选择类别...</option>
-                        <#list provider_list as w>
-                            <option value="${w.id!""}" <#if goods?? && goods.providerId?? && goods.providerId==w.id>selected="selected"</#if>>${w.title!""}</option>
-                        </#list>
-                    </select>
-                </div>
-            </dd>
-        </dl>
-        </#if>
         <#if warehouse_list??>
         <dl>
             <dt>所在仓库</dt>
@@ -592,7 +579,7 @@ function del_goods_comb(obj) {
                     <select name="warehouseId" datatype="*0-100" sucmsg=" ">
                         <option value="" <#if !warehouse_list??>selected="selected"</#if>>请选择类别...</option>
                         <#list warehouse_list as w>
-                            <option value="${w.id!""}" <#if goods?? && goods.warehouseId?? && goods.warehouseId==w.id>selected="selected"</#if>>${w.title!""}</option>
+                            <option value="${w.id!""}" <#if goods.warehouseId?? && goods.warehouseId==w.id>selected="selected"</#if>>${w.title!""}</option>
                         </#list>
                     </select>
                 </div>
@@ -615,20 +602,22 @@ function del_goods_comb(obj) {
         </dl>
     </div>
     
-    <div class="tab-content" style="display: none;">
+    <#--<div class="tab-content" style="display: none;">
+        
         <dl>
-            <dt>支持秒杀</dt>
+            <dt>支持限时抢购</dt>
             <dd>
                 <div class="rule-multi-radio multi-radio">
                     <span>
                         <input type="radio" name="isFlashSale" value="1" <#if goods?? && goods.isFlashSale?? && goods.isFlashSale==true>checked="checked"</#if> >
                         <label>是</label>
-                        <input type="radio" name="isFlashSale" value="0" <#if !goods?? || goods.isFlashSale??==false || goods.isFlashSale==false>checked="checked"</#if>>
+                        <input type="radio" name="isFlashSale" value="0" <#if goods??==false || goods.isFlashSale??==false || goods.isFlashSale==false>checked="checked"</#if>>
                         <label>否</label>
                     </span>
                 </div>
             </dd>
         </dl>
+        
         <dl>
             <dt>开始时间</dt>
             <dd>
@@ -639,6 +628,7 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">不选择默认为当前时间</span>
             </dd>
         </dl>
+        
         <dl>
             <dt>结束时间</dt>
             <dd>
@@ -649,18 +639,9 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">不选择默认为当前时间</span>
             </dd>
         </dl>
-        <dl>
-            <dt>秒杀展示图片</dt>
-            <dd>
-                <input id="flashSaleImage" name="flashSaleImage" type="text" value="<#if goods??>${goods.flashSaleImage!""}</#if>" class="input normal upload-path">
-                <div class="upload-box upload-img"></div>
-                <div id="thumb_ImgUrl_show3" class="photo-list thumb_ImgUrl_show">
-                </div>
-            </dd>
-        </dl>
         
         <dl>
-            <dt>秒杀价</dt>
+            <dt>限时抢购价</dt>
             <dd>
                 <input name="flashSalePrice" type="text" value="<#if goods?? && goods.flashSalePrice??>${goods.flashSalePrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
                 <span class="Validform_checktip">商品限时抢购价格</span>
@@ -668,19 +649,20 @@ function del_goods_comb(obj) {
         </dl>
         
         <dl>
-            <dt>秒杀剩余数量</dt>
+            <dt>限时抢购剩余数量</dt>
             <dd>
-                <input name="flashSaleLeftNumber" type="text" value="<#if goods??>${goods.flashSaleLeftNumber!''}</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
+                <input name="flashSaleLeftNumber" type="text" value="<#if goods??>${goods.flashSaleLeftNumber!''}<#else>0</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
                 <span class="Validform_checktip">为0时抢购结束</span>
             </dd>
         </dl>
         <dl>
-            <dt>秒杀销量</dt>
+            <dt>限时抢购销量</dt>
             <dd>
-                <input name="flashSaleSoldNumber" type="text" value="<#if goods??>${goods.flashSaleSoldNumber!''}</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
-                <span class="Validform_checktip">已销售商品数量</span>
+                <input name="flashSaleSoldNumber" type="text" value="<#if goods??>${goods.flashSaleSoldNumber!''}<#else>0</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
+                <span class="Validform_checktip">已抢购商品数量</span>
             </dd>
         </dl>
+        
         
         <dl>
             <dt>支持团购</dt>
@@ -717,7 +699,7 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
-            <dt>团购展示图片</dt>
+            <dt>闪购团购展示图片</dt>
             <dd>
                 <input id="groupSaleImage" name="groupSaleImage" type="text" value="<#if goods??>${goods.groupSaleImage!""}</#if>" class="input normal upload-path">
                 <div class="upload-box upload-img"></div>
@@ -726,10 +708,10 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
-            <dt>团购价格</dt>
+            <dt>团购价</dt>
             <dd>
-                <input name="groupSalePrice" type="text" value="<#if goods?? && goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">预付定金额度</span>
+                <input name="groupSalePrice" type="text" value="<#if goods?? && goods.groupSalePrice??>${goods.groupSalePrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">商品团购价格</span>
             </dd>
         </dl>
         <dl>
@@ -745,10 +727,10 @@ function del_goods_comb(obj) {
                 <input name="groupSaleSoldNumber" type="text" value="<#if goods?? && goods.groupSaleSoldNumber??>${goods.groupSaleSoldNumber?c}<#else>0</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
                 <span class="Validform_checktip">团购已售商品数量</span>
             </dd>
-        </dl>
-    </div>
+        </dl> 
+    </div>-->
     
-    <div class="tab-content" style="display: none;">
+    <#--<div class="tab-content" style="display: none;">
         <dl>
             <dt>赠品</dt>
             <dd>
@@ -785,11 +767,11 @@ function del_goods_comb(obj) {
                             <#list goods.giftList as gift>
                                 <tr class="td_c">
                                     <td>
-                                        <input name="giftList[${gift_index}].id" type="hidden" value="${gift.id?c}">
+                                        <input name="giftList[${gift_index}].id" type="hidden" value="${gift.id!''}">
                                         <input name="giftList[${gift_index}].coverImageUri" type="hidden" value="${gift.coverImageUri!''}">
-                                        <input type="text" name="giftList[${gift_index}].sortId" class="td-input" value="${gift.sortId?c}" style="width:90%;">
+                                        <input type="text" name="giftList[${gift_index}].sortId" class="td-input" value="${gift.sortId!''}" style="width:90%;">
                                     </td>
-                                    <td><input type="text" id="id" name="giftList[${gift_index}].goodsId" class="td-input" value="${gift.goodsId?c}" style="width:90%;"></td>
+                                    <td><input type="text" id="id" name="giftList[${gift_index}].goodsId" class="td-input" value="${gift.goodsId!''}" style="width:90%;"></td>
                                     <td>
                                         <input type="text" id="title" name="giftList[${gift_index}].goodsTitle" class="td-input" value="${gift.goodsTitle!''}" style="width:90%;">
                                     </td>
@@ -808,9 +790,9 @@ function del_goods_comb(obj) {
                 </table>
             </dd>
         </dl>
-    </div>
+    </div>-->
     
-    <div class="tab-content" style="display: none;">
+  <#-->  <div class="tab-content" style="display: none;">
         <dl>
             <dt>商品组合</dt>
             <dd>
@@ -850,11 +832,11 @@ function del_goods_comb(obj) {
                             <#list goods.combList as item>
                                 <tr class="td_c">
                                     <td>
-                                        <input name="combList[${item_index}].id" type="hidden" value="${item.id?c}">
+                                        <input name="combList[${item_index}].id" type="hidden" value="${item.id?c!''}">
                                         <input name="combList[${item_index}].coverImageUri" type="hidden" value="${item.coverImageUri!''}">
-                                        <input type="text" name="combList[${item_index}].sortId" class="td-input" value="${item.sortId?c}" style="width:90%;">
+                                        <input type="text" name="combList[${item_index}].sortId" class="td-input" value="${item.sortId!''}" style="width:90%;">
                                     </td>
-                                    <td><input type="text" id="id" name="combList[${item_index}].goodsId" class="td-input" value="${item.goodsId?c}" style="width:90%;"></td>
+                                    <td><input type="text" id="id" name="combList[${item_index}].goodsId" class="td-input" value="${item.goodsId!''}" style="width:90%;"></td>
                                     <td>
                                         <input type="text" id="title" name="combList[${item_index}].goodsTitle" class="td-input" value="${item.goodsTitle!''}" style="width:90%;">
                                     </td>
@@ -876,7 +858,7 @@ function del_goods_comb(obj) {
                 </table>
             </dd>
         </dl>
-    </div>
+    </div> -->
     
     <div class="tab-content" style="display: none;">
         <dl>

@@ -52,6 +52,15 @@ function __doPostBack(eventTarget, eventArgument) {
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
       </ul>
         -->
+      <ul class="icon-list">    
+      	
+        <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>      
+        <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
+      </ul>
+      <div class="r-list">
+                <input name="keywords" type="text" class="keyword" value="<#if keywords??>${keywords!''}</#if>">
+                <a id="lbtnSearch" class="btn-search" href="javascript:__doPostBack('btnSearch','')">查询</a>
+      </div>
     </div>
   </div>
 </div>
@@ -63,11 +72,43 @@ function __doPostBack(eventTarget, eventArgument) {
   <tbody>
   <tr class="odd_bg">
     <th width="8%">选择</th>
-    <th align="left">优惠券类型</th>
-    <th align="left">同盟店</th>
-    <th align="left" width="17%">姓名</th>
-    <th align="left" width="17%">领用时间</th>
+    <th align="left"><div class="rule-single-select">
+                        <select name="typeId" onchange="javascript:setTimeout(__doPostBack('changeType',''), 0)">
+                            <option value="0" <#if !typeId?? || typeId==0>selected="selected"</#if>>所有类型</option>
+                            <#if couponType_list??>
+                                <#list couponType_list as cou>
+                                    <option value="${cou.id?c}" <#if typeId?? && typeId==cou.id>selected="selected"</#if>>${cou.title!''}</option>
+                                </#list>
+                            </#if>                             
+                        </select>
+                    </div>
+                    </th>
+    <#--<th align="left" width="10%"><div class="rule-single-select">
+                        <select name="diysiteId" onchange="javascript:setTimeout(__doPostBack('changeDiysite',''), 0)">
+                            <option value="0" <#if !diysiteId?? || diysiteId==0>selected="selected"</#if>>所有同盟店</option>
+                            <#if tdDiySite_list??>
+                                <#list tdDiySite_list as diysite>
+                                    <option value="${diysite.id?c}" <#if diysiteId?? && diysiteId==diysite.id>selected="selected"</#if>>${diysite.title!''}</option>
+                                </#list>
+                            </#if>                             
+                        </select>
+                    </div>
+                    </th>-->
+    <#--<th align="left" width="15%">种类</th>               --> 
+    <th align="left" width="15%">账号</th>
+    <th align="left" width="15%">电话</th>
+    <#--<th align="left" width="11%">车牌</th>-->
+    <th align="left" width="15%">领用时间</th>
     <th align="left" width="17%">有效截止时间</th>
+    <#--<th align="left" width="8%">消费密码</th>-->
+    <th align="left" width="8%"><div class="rule-single-select">
+                        <select name="isUsed" onchange="javascript:setTimeout(__doPostBack('',''), 0)">
+                            <option value="0" <#if !isUsed?? || isUsed==0>selected="selected"</#if>>是否使用</option>                           
+                            <option value="1" >已使用</option>
+                            <option value="2" >未使用</option>                             
+                        </select>
+                    </div>
+                    </th>
     <#--
     <th align="left" width="12%">排序</th>
     <th width="10%">操作</th>
@@ -81,13 +122,40 @@ function __doPostBack(eventTarget, eventArgument) {
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${item_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${item.id}">
+                    <input type="hidden" name="listId" id="listId" value="${item.id?c}">
                 </td>
                 <td>${item.typeTitle!""}</td>
-                <td>${item.diySiteTitle!""}</td>
+                <td>
+	                <#switch item.typeCategoryId>
+		                <#case 0>
+		                	全场通用券
+		                	<#break>	
+		                <#case 1>
+		                	电信活动券
+		                	<#break>	
+		                <#case 2>
+		                	注册优惠券
+		                	<#break>	
+		                <#default>
+		                	无类别	
+	                </#switch>	
+                </td>
+                <#--<td>${item.diySiteTitle!""}</td>-->
                 <td>${item.username!""}</td>
+                <td>${item.mobile!""}</td>
+                <#--<td>${item.carCode!""}</td>-->
                 <td><#if item.getTime??>${item.getTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
                 <td><#if item.expireTime??>${item.expireTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
+               <#--<td><#if item.consumerPassword??>${item.consumerPassword!''}</#if></td>-->
+               <td>
+                    <#if item.isUsed??>
+                        <#if item.isUsed>
+                            已使用
+                        <#else>
+                           未使用 
+                        </#if>
+                    </#if>
+                </td>
                 <#--
                 <td><input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);"></td>
                 <td align="center">
@@ -104,8 +172,10 @@ function __doPostBack(eventTarget, eventArgument) {
 <!--/列表-->
 
 <!--内容底部-->
-<#assign PAGE_DATA=coupon_page />
-<#include "/site_mag/list_footer.ftl" />
+<#if coupon_page??>
+	<#assign PAGE_DATA=coupon_page />
+	<#include "/site_mag/list_footer.ftl" />
+</#if>
 <!--/内容底部-->
 </form>
 

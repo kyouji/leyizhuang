@@ -89,7 +89,7 @@ $(function () {
     <dl>
         <dt>跳转地址</dt>
         <dd>
-            <input name="linkUri" type="text" value="<#if navi_bar_item??>${navi_bar_item.linkUri!"http://"}</#if>" class="input normal" datatype="*" sucmsg=" ">
+            <input name="linkUri" type="text" value="<#if navi_bar_item??>${navi_bar_item.linkUri!"http://"}<#else>http://</#if>" class="input normal" datatype="*" sucmsg=" ">
             <span class="Validform_checktip">*点击该栏目跳转的网址</span>
         </dd>
     </dl>
@@ -98,30 +98,10 @@ $(function () {
         <dd>
             <div class="rule-multi-radio multi-radio">
                 <span id="rblStatus">
-                    <input type="radio" name="isEnable" value="1" <#if !navi_bar_item?? || (navi_bar_item?? && navi_bar_item.isEnable)>checked="checked"</#if>>
+                    <input type="radio" name="isEnable" value="1" <#if navi_bar_item?? && navi_bar_item.isEnable>checked="checked"</#if>>
                     <label>是</label>
-                    <input type="radio" name="isEnable" value="0" <#if navi_bar_item?? && !navi_bar_item.isEnable>checked="checked"</#if>>
+                    <input type="radio" name="isEnable" value="0" <#if !navi_bar_item?? || !navi_bar_item.isEnable>checked="checked"</#if>>
                     <label>否</label>
-                </span>
-            </div>
-        </dd>
-    </dl>
-    <dl>
-        <dt>是否触屏</dt>
-        <dd>
-            <div class="rule-multi-radio multi-radio">
-                <span id="rblStatus">
-                <#if navi_bar_item??&&navi_bar_item.isTouch>
-                    <input type="radio" name="isTouch" value="1" checked="checked">
-                    <label>是</label>
-                    <input type="radio" name="isTouch" value="0">
-                    <label>否</label>
-                <#else>
-                    <input type="radio" name="isTouch" value="1">
-                    <label>是</label>
-                    <input type="radio" name="isTouch" value="0" checked="checked">
-                    <label>否</label>
-                </#if>
                 </span>
             </div>
         </dd>

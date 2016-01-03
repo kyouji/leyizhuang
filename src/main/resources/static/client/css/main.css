@@ -1,295 +1,476 @@
-@charset "utf-8";
-/* CSS Document */
-/*全部商品分类*/
-.navigation .nav .nav_submenu{background-color:#b1191a;}
+.top_head{width: 100%; height: 1.2rem; background: #cc1421; float: left;}
+.top_head .head_back{width: 30%; height: 1.2rem; background: url(/client/images/back_icon.png) no-repeat 20px; background-size: 20%; float: left;}
+.top_head .head_title{width: 40%; height: 1.2rem;text-align: center; font-size:0.6rem; color: white; line-height: 1.2rem; float: left; padding-right: 30%;}
 
-.contents_box{width:100%;background-color:#f2f8ff;}
-/*banner*/
-.advertising{width:100%;height:439px;background:#f2f8ff;}
-.advertising .advertising_content{width:1200px;margin:0 auto;overflow:hidden;}
-.advertising .advertising_content .advertising_ifm{float:left;color:#fefefe;}
-.advertising .advertising_content .advertising_ifm a{float:left;color:#fefefe;margin-right:15px;margin-top:5px;}
-.advertising .advertising_content .adver_left{width:190px;height:439px;background-color:#043a84;}
-.advertising .advertising_content .adver_middle{width:809px;height:439px;}
-.advertising .advertising_content .adver_middle img{width:809px;height:439px;}
-.advertising .advertising_content .adver_right{width:199px;height:437px;color:#333333;background-color:#ffffff; border:1px #ddd solid;}
 
-.navlistout {
-    display:block;
-    float:left;
-    background:#fff;
-    width:190px;
-    height:439px;
-    background:#b61d1d;
-    z-index:9999;
-    position: relative;
-    }
-.navlistout li { width:100%;padding:14px 0;position:relative; }
-.navlistout h3 {
-    font-size:16px;
-    line-height:30px;
-    text-indent:35px;
-    color:#FFF;
-    width:100%;
-    margin-bottom:5px;
-    display:block;
-    }
-    .navlistout h3 a{color:#FFF;}
-    .navlistout h3 a:hover{color:#e8323d;}
-.navlistout .p_box {
-    width:100%;
-    padding-bottom:6px;
-    margin-bottom:5px;
+
+.index_banner{
+	width: 100%;
+	overflow: hidden;	
+	position: relative;
 }
-.navlistout .p_box a {
-    display:inline-block;
-    margin-right:5px;
-    line-height:20px;
-    font-size:12px;}
-.nav_showbox {
-    display:none;
-    position:absolute;
-    left:190px;
-    top:0px;
-    width:450px;
-    padding:15px;
-    min-height:85px;
-/*  border:1px solid #e8323d;
-*/  background:#b61d1d;
-    color:#FFF;}
-    .nav_showbox a{color:#FFF;}
-    .nav_showbox a:hover{color:#e8323d;}
-.nav_showbox .bg {
-    display:block;
-    position:absolute;
-    width:2px;
-    height:115px;
-    left:-2px;
-    top:0;
-    background:#fff;}
-.nav_right {
-    float:right;
-    table-layout:fixed;
-    width:170px;
-    border-collapse:separate;
-    border-spacing:2px;}
-.nav_right a {
-    display:block;
-    width:100%;}
-.nav_right a img {width:100%;}
-.nav_more {
-    width:450px;
-    float:left;}
-.nav_more th {
-    vertical-align:top;
-    font-size:14px;
-    line-height:16px;
-    text-align:right;
-    padding-right:20px;
-    padding-bottom:20px;}
-.nav_more th span {
-    display:inline-block;
-    padding-right:20px;}
-.nav_more td {
-    vertical-align:top;
-    font-size:12px;
-    line-height:16px;
-    text-align:left;
-    padding-bottom:20px;}
-.nav_more td a {
-    display:inline-block;
-    padding:0 10px;
-    margin:0 0 7px 0;
-    border-left:1px solid #eee;}
-
-
-/*banner产品分类*/
-.advertising .advertising_content .advertising_ifm .product_categories{padding-top:10px;padding-bottom:10px;padding-left:10px;_padding-bottom:30px;overflow:hidden;}
-
-/*banner动态*/
-.product_nav_01{ position:absolute; left:190px;; top:0; z-index:9999; width:300px; height:300px; background:#0e5baa; padding-left:20px; padding-top:8px;}
-.product_nav_02{ position:absolute; left:190px;; top:108px; z-index:9999; width:300px; height:300px; background:#043A84; padding-left:20px; padding-top:8px;}
-.product_nav_03{ position:absolute; left:190px;; top:214px; z-index:9999; width:300px; height:300px; background:#0e5baa; padding-left:20px; padding-top:8px;}
-.product_nav_04{ position:absolute; left:190px;; top:322px; z-index:9999; width:300px; height:120px; background:#043A84; padding-left:20px; padding-top:8px;}
-
-.phone_box{ float:left; }
-.phone p{ float:left; white;}
-.ipad p{ float:left; padding-top:10px;}
-
-/*banner广告*/
-.scroll{ width:809px; }
-.adv_box{float:left; position:relative; width:809px; height:439px; overflow:hidden;}
-.scroll_box img{ width:809px; height:439px; float:left;}
-.scroll_box{ position:absolute; z-index:999; left:0px;; top:0;  width:2427px; height:439px;}
-/*banner动态end*/
-
-/*banner服务与公告*/
-
-.advertising .advertising_content .adver_right .dedication{font-size:14px;height:40px;background:#f4f4f4;padding-left:10px;line-height:40px;}
-.advertising .advertising_content .adver_right .special_service{width:199px;overflow:hidden; padding-bottom:20px;}
-.advertising .advertising_content .adver_right .special_service li{float:left;width:50px; height:70px; margin:10px 23px 0 23px;}
-.advertising .advertising_content .adver_right .special_service li a{display:block;width:60px;height:12px;;line-height:12px;text-align:center;text-decoration:none;color:#333333; float:left;}
-.advertising .advertising_content .adver_right .special_service li img{width:45px; height:45px;margin-top:10px; padding: 1px; float:left; margin-left:7px;}
-.advertising .advertising_content .adver_right .special_service .li_1{border-right:solid 1px #FFFFFF;}
-.advertising .advertising_content .adver_right .special_service .li_3{border-top:solid 1px #FFFFFF;border-right:solid 1px #FFFFFF;}
-.advertising .advertising_content .adver_right .special_service .li_4{border-top:solid 1px #FFFFFF;}
-
-
-
-/*banner公告*/
-.advertising .advertising_content .adver_right .announcement{font-size:14px;height:40px;padding-left:10px;line-height:40px;background:#f4f4f4;}
-.advertising .advertising_content .adver_right .announcement_list{padding:10px;_padding:0px;height:178px;*+height:160px;_height:178px;}
-.advertising .advertising_content .adver_right .announcement_list a{display:block;color:#666666;width:160px;height:18px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
-
-/*团购*/
-.group_buy{width:1204px;overflow:hidden;margin-top:20px;}
-.group_buy a{display:block;float:left;border-right:solid 1px #f2f8ff;width:201px;}
-.group_buy .tg_1{width:190px;}
-.group_buy .tg_6{border-right:none;}
-
-/*今日特价*/
-.today_specials{width:1204px;overflow:hidden;border-top:solid 1px #f2f8ff;padding-bottom:20px;}
-.today_specials a{display:block;float:left;width:201px;height:164px;border-right:solid 1px #f2f8ff;text-decoration:none;_text-decoration:none;background:#FFF;}
-.today_specials a:hover .tj .tj_right{color:#f00;}
-.today_specials .tj_1{width:190px;height:164px;}
-.today_specials .tj_6{border-right:none;}
-.today_specials .tj{overflow:hidden;}
-.today_specials .tj h3{width:170px;height:18px;*+font-size:16px;_font-size:16px;padding:10px;padding-bottom:0;text-align:center;white-space:nowrap;text-overflow:ellipsis;overflow:hidden; }
-.today_specials .tj .tj_left{float:left;display:block;}
-.today_specials .tj .tj_right{float:right;padding:10px;}
-.today_specials .tj .tj_right div{width:76px;height:19px;line-height:19px;margin-top:10px;margin-bottom:10px;border:solid 1px #f5704f;color:#f5704f;text-align:center;}
-.today_specials .tj .tj_right p{width:92px;height:20px;line-height:20px;text-align:center; white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
-.today_specials .tj .tj_right .price_1{font-size:18px;font-weight:700;text-align:right;padding:10px 0;color:#fd5741;}
-
-
-/*1F手机大全*/
-.phone_encyclopedia{width:1204px;padding-bottom:20px;}
-.phone_encyclopedia .phones{width:1204px;height:46px;line-height:40px;overflow:hidden;}
-.phone_encyclopedia .phones .phones_left{float:left;font-size:18px;color:#333333;}
-.phone_encyclopedia .phones .phones_left span{color:#999999;font-size:24px; font-family:"Aparajita";font-style:italic;margin-left:10px;}
-.phone_encyclopedia .phones .phones_right{float:right;width:435px;*+width:450px;_width:450px; text-align:right;}
-
-/*手机品牌*/
-.phone_encyclopedia .phone_brand{width:1204px;height:470px;background-color:#FFF;}
-.phone_encyclopedia .phone_brand ul{float:left;}
-.phone_encyclopedia .phone_brand .phones_logo{width:190px;height:470px;border-top:solid 3px #b61d1d;}
-.phone_encyclopedia .phone_brand .phones_logo div{width:150px;height:89px;border-bottom:solid 1px #e9e9e9;}
-
-.phone_encyclopedia .phone_brand .phones_logo .lg a{display:block;}
-.phone_encyclopedia .phone_brand .phones_logo div a img{margin-left:15px;margin-top:15px;}
-.phone_encyclopedia .phone_brand .phones_logo .honor{}
-.phone_encyclopedia .phone_brand .phones_logo .mi{}
-.phone_encyclopedia .phone_brand .phones_logo .apple{}
-.phone_encyclopedia .phone_brand .phones_logo .zte{}
-.phone_encyclopedia .phone_brand .phones_photo{width:404px;height:470px; no-repeat;}
-.phone_encyclopedia .phone_brand .phones_photo a{display:block;}
-
-.phone_encyclopedia .phone_brand .phones_details{width:610px;overflow:hidden;}
-.phone_encyclopedia .phone_brand .phones_details li{position:relative;float:left;width:202px;height:272px;border-left:solid 1px #dddddd;border-bottom:solid 1px #dddddd;}
-.phone_encyclopedia .phone_brand .phones_details li .gz_dh{display:none;position:absolute;right:0px;top:0px;}
-.phone_encyclopedia .phone_brand .phones_details li:hover .gz_dh{display:block;}
-.phone_encyclopedia .phone_brand .phones_details li dl dt{text-align:center;padding:10px 0px;}
-.phone_encyclopedia .phone_brand .phones_details li dl dt img:hover{
-			-webkit-transform: rotateY(180deg);
-            -moz-transform: rotateY(180deg); /* flip horizontally 180deg*/
-            transform: rotateY(180deg);
-            -webkit-transition-delay: 0.2s;
-            -moz-transition-delay: 0.2s;
-            transition-delay: 0.2s;
+.scroll_box{
+	width: 500%;
+	height: 100%;
+	position: absolute;
+	left: -200%;
+	top: 0px;
+	overflow: hidden;		
 }
-.phone_encyclopedia .phone_brand .phones_details li dl .feature{font-size:18px;font-weight:700;width:150px;margin-left:40px;_margin-left:20px;height:22px;}
-.phone_encyclopedia .phone_brand .phones_details li dl dd{widht:170px;float:left;margin-left:20px;_margin-left:10px;}
-.phone_encyclopedia .phone_brand .phones_details li dl .introduction a{display:block;width:170px;height:36px;
-float:left;text-overflow:ellipsis;overflow:hidden;text-decoration:none;}
-.phone_encyclopedia .phone_brand .phones_details li dl .introduction a:hover{color:#f00;}
-.phone_encyclopedia .phone_brand .phones_details li dl .discount{width:160px;margin-left:20px;margin-top:5px;font-size:14px;font-weight:700;color:#ef0000;}
-.phone_encyclopedia .phone_brand .phones_details li dl .discount del{font-size:12px;font-weight:normal;color:#666666;margin-left:5px;}
-.phone_encyclopedia .phone_brand .phones_details .photo_4{height:197px;_padding-top:10px;border-bottom:none;}
-.phone_encyclopedia .phone_brand .phones_details .photo_5{height:197px;_padding-top:10px;border-bottom:none;}
-.phone_encyclopedia .phone_brand .phones_details .photo_6{height:197px;_padding-top:10px;border-bottom:none;}
-.phone_encyclopedia .phone_brand .phones_details .photo_4 .introduction{margin-top:0px;}
-.phone_encyclopedia .phone_brand .phones_details .photo_5 .introduction{margin-top:0px;}
-.phone_encyclopedia .phone_brand .phones_details .photo_6 .introduction{margin-top:0px;}
-.phone_encyclopedia .phone_brand .phones_details .photo_4 .discount{margin-top:0px;}
-.phone_encyclopedia .phone_brand .phones_details .photo_5 .discount{margin-top:0px;}
-.phone_encyclopedia .phone_brand .phones_details .photo_6 .discount{margin-top:0px;}
-.phone_encyclopedia .phone_brand .phones_details .photo_4 dl dt{padding-bottom:8px;}
-.phone_encyclopedia .phone_brand .phones_details .photo_5 dl dt{padding-bottom:8px;}
-.phone_encyclopedia .phone_brand .phones_details .photo_6 dl dt{padding-bottom:8px;}
-
-*2F电脑/平板*/
-
-.phone_encyclopedia .pc_com .pc_logo{position:relative;}
-.phone_encyclopedia .pc_com .pc_logo .pc{position:absolute;top:270px;border-bottom:none;font-size:14px;margin-left:20px;margin-top:10px;margin-bottom:10px;}
-.phone_encyclopedia .pc_com .pc_logo .pc h4{margin-bottom:10px;}
-.phone_encyclopedia .pc_com .pc_logo .pc a{margin-right:5px;}
-.phone_encyclopedia .pc_com .pc_logo .computer{position:absolute;top:360px;border-bottom:none;font-size:14px;margin-left:20px;margin-top:10px;margin-bottom:10px;}
-.phone_encyclopedia .pc_com .pc_logo .computer h4{margin-bottom:10px;}
-.phone_encyclopedia .pc_com .pc_logo .computer a{margin-right:5px;}
-
-/*2F图片*/
-.phone_encyclopedia .pc_com .pc_photo{width:404px;height:198px;}
-.phone_encyclopedia .pc_com .pc_photo a{display:block;}
-
-/* 本例子css */
-        .slideBox{ width:404px; height:272px; overflow:hidden; position:relative; border:1px solid #ddd;  }
-        .slideBox .bd{ position:relative; height:100%; z-index:0;   }
-        .slideBox .bd ul{width:404px;height:272px;}
-        .slideBox .bd li{ width:404px;height:272px;zoom:1; vertical-align:middle; }
-        .slideBox .bd img{ width:404px; height:272px; display:block;  }
-
-        /* 下面是前/后按钮代码，如果不需要删除即可 */
-        .slideBox .prev,
-        .slideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(/client/images/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
-        .slideBox .next{ left:auto; right:3%; background-position:8px 5px; }
-        .slideBox .prev:hover,
-        .slideBox .next:hover{ filter:alpha(opacity=100);opacity:1;  }
-        .slideBox .prevStop{ display:none;  }
-        .slideBox .nextStop{ display:none;  }
-
-.phone_encyclopedia .pc_com .pc_photo li{position:relative;float:left;width:201px;height:196px;_padding-top:10px;border-left:solid 1px #dddddd;border-top:solid 1px #dddddd;}
-.phone_encyclopedia .pc_com .pc_photo li .gz_dh{display:none;position:absolute;right:0px;top:0px;}
-.phone_encyclopedia .pc_com .pc_photo li:hover .gz_dh{display:block;}
-.phone_encyclopedia .pc_com .pc_photo li dl dt{text-align:center;padding:10px 0px;padding-bottom:8px;}
-.phone_encyclopedia .pc_com .pc_photo li dl dt img:hover{
-            -webkit-transform: rotateY(180deg);
-            -moz-transform: rotateY(180deg); /* flip horizontally 180deg*/
-            transform: rotateY(180deg);
-            filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);/*ie*/
-            -webkit-transition-delay: 0.2s;
-            -moz-transition-delay: 0.2s;
-            transition-delay: 0.2s;
+.scroll_box img{
+	width: 20%;
+	height: 100%;
+	float: left;
 }
-.phone_encyclopedia .pc_com .pc_photo li dl .feature{font-size:18px;font-weight:700;width:150px;margin-left:40px;_margin-left:20px;height:22px;}
-.phone_encyclopedia .pc_com .pc_photo li dl dd{widht:170px;float:left;margin-left:20px;_margin-left:10px;}
-.phone_encyclopedia .pc_com .pc_photo li dl .introduction a{display:block;width:170px;height:36px;
-float:left;text-overflow:ellipsis;overflow:hidden;text-decoration:none;}
-.phone_encyclopedia .pc_com .pc_photo li dl .introduction a:hover{color:#f00;}
-.phone_encyclopedia .pc_com .pc_photo li dl .discount{width:160px;margin-left:40px;_margin-left:20px;font-size:14px;font-weight:700;color:#ef0000;}
-.phone_encyclopedia .pc_com .pc_photo li dl .discount del{font-size:12px;font-weight:normal;color:#666666;margin-left:20px;}
+.scroll_btn{
+	position: absolute;
+	left: 0px;
+	bottom: 6px;
+	width: 100%;
+
+}
+.scroll_btn ul{
+	margin: auto;
+	width: 80px;
+	overflow: hidden;
+}
+.scroll_btn ul li{
+	float: left;
+	width: 10px;
+	height: 10px;
+	margin-left: 4px;
+	border-radius: 5px;
+	border: #d0d0d0 1px solid;
+	background: white;
+}
+.index_nav{
+	width: 100%;
+	margin-top: 20px;
+}
+.index_nav li{
+	width: 100%;
+	float: left;
+	margin-top: 6px;
+}
+.index_nav li a{
+	width: 25%;
+	display: block;
+	text-align: center;
+	float: left;
+}
+.index_nav li a img{
+	width: 60%;
+	height: 60%;
+}
+.index_nav li a span{
+	width: 100%;
+	display: block;
+	margin-top: 6px;
+	font-size: 1.1em;
+}
+.index_content{
+	width: 100%;
+	overflow: hidden;
+}
+.index_news{
+	width: 90%;
+	height: 40px;
+	padding:4px 5%;
+	margin-top: 10px;
+	overflow: hidden;
+	border-top:#e5e5e5 1px solid ;
+	border-bottom:#e5e5e5 1px solid ;	
+}
+.index_news dt{
+	width: 33%;
+	height: 40px;
+	float: left;
+	line-height: 40px;
+	/*background: url(../img/scroll_news.png) no-repeat center;
+	background-size: 140px;*/
+	padding-right: 1%;
+	text-align: center;
+}
+.index_news dt img{
+	height: 26px;
+	margin-top: 7px;
+	
+}
+.index_news dd{
+	width: 65%;
+	height: 38px;
+	float: left;
+	border-left:#DDDDDD 1px solid ;
+}
+.scroll_newsbox{
+	width: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	
+}
+.scroll_newsbox a{
+	display: block;
+	width: 96%;
+	padding-left: 4%;
+	height: 40px;
+	line-height: 40px;
+	text-align: left;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+	-o-text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+.index_goods01{
+	width: 100%;
+	padding-bottom: 2%;
+
+}
+.index_goods01 dt{
+	width: 100%;
+}
+.index_goods01 dt p{
+	width: 65%;
+	float: left;
+	color: #CC1421;
+	font-size: 1.6em;
+	margin-left: 5%;
+	padding: 2% 0;
+}
+.index_goods01 dt p span{
+	color: #999999;
+	font-size: 0.8em;
+	margin-left: 4px;
+}
+.index_goods01 dt a{
+	display: block;
+	width: 40px;
+	height: 30px;
+	float: right;
+}
+.index_goods01 dt a img{
+	height:20px;
+	margin-top: 5px;
+}
+.index_goods01 dd{
+	width: 100%;
+	float: left;
+	position: relative;
+}
+
+.index_scroll_goods{
+	width:230%;
+	height: 100%;
+	overflow: hidden;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.index_scroll_goods a{
+	display: block;
+	width: 11.5%;
+	height: 100%;
+	margin-left: 1%;
+	float: left;
+}
+.index_scroll_goods a div{
+	width: 100%;
+	height: 76%;
+	border: #e8e8e8 1px solid;
+	position: relative;
+}
+.index_scroll_goods a div img{
+	width: 80%;
+	height: 90%;
+	margin-top: 10%;
+}
+.index_scroll_goods a  p{
+	text-align: center;
+	color: #333333;
+	font-size: 1.1em;
+	margin-top: 6%;
+}
+.index_scroll_goods a div span{
+	width: 40%;
+	padding: 3% 0;
+	display: block;
+	text-align: center;
+	color: white;
+	position: absolute;
+	
+}
+.index_scroll_goods a span:nth-last-child(2){
+	background: #f43744;
+	right: 0px;
+	bottom: 4px;
+}
+.index_scroll_goods a span:nth-last-child(1){
+	background: #f99638;
+	right: 0px;
+	bottom: 8px;
+}
+
+.index_goods02{
+	width: 100%;
+	overflow: hidden;
+}
+.index_goods02 dl{
+	width: 100%;
+	height: 40%;
+	overflow: hidden;
+	border-bottom: #e5e5e5 1px solid;
+	border-top: #e5e5e5 1px solid;
+
+}
+.index_goods02 dl dt{
+	width: 46%;
+	height: 95%;
+	padding:2% 2%;
+	float: left;
+	overflow: hidden;
+}
+.my_indexgood{
+	width: 100%;
+	height: 100%;
+	display: block;
+	text-align:left;
+}
+.my_indexgood h3{
+	font-size: 1.2em;
+	float: left;
+}
+.my_indexgood .guide{
+	width: 40%;
+	height: 20px;
+	float: left;
+	background: url(/client/images/index_good_guideright.png) no-repeat 10px;
+	background-size: 16px;
+}
+
+.my_indexgood p{
+	width: 100%;
+	text-align: left;
+	float: left;
+}
+.my_indexgood span{
+	display: block;
+	width: 40%;
+	float: left;
+	color:#cc1421 ;
+}
+.my_indexgood div{
+	width: 60%;
+	float: right;
+	height: 70%;
+}
+.my_indexgood div img{
+	width: 100%;
+	height: 100%;
+	
+}
+.index_goods02 dl dd{
+	width: 46%;
+	height: 40%;
+	padding:2% 2%;
+	float: left;
+	overflow: hidden;
+}
+.my_indexgood02{
+	width: 100%;
+	height: 100%;
+	display: block;
+	text-align:left;
+	position: relative;
+}
+.my_indexgood02 .rich_box{
+	float: left;
+	width: 56%;
+	height: 100%;
+}
+.my_indexgood02 h3{
+	font-size: 1.2em;
+	float: left;
+	display: block;	
+}
+.my_indexgood02 .guide{
+	width: 34%;
+	height: 20px;
+	float: left;
+	background: url(/client/images/index_good_guideright.png) no-repeat 10px;
+	background-size: 16px;
+	margin: 0px;
+}
+
+.my_indexgood02 p{
+	width: 100%;
+	text-align: left;
+	float: left;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+	-o-text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.my_indexgood02 span{
+	display: block;
+	width: 70%;
+	float: left;
+	color:#cc1421 ;
+}
+.my_indexgood02 div{
+	width: 44%;
+	height: 100%;
+	float: right;
+}
+.my_indexgood02 div img{
+	width: 80%;
+	height: 80%;
+	
+}
+.index_goods02 ul{
+	width: 100%;
+	height: 60%;
+	overflow: hidden;
+	border-bottom: #e5e5e5 1px solid;
+	border-top: #e5e5e5 1px solid;
+
+}
+.index_goods02 ul li{
+	width: 30%;
+	height: 95%;
+	padding:2% 1%;
+	float: left;
+	overflow: hidden;
+}
+.my_indexgood03{
+	width: 100%;
+	height: 100%;
+	display: block;
+	text-align:left;
+}
+.my_indexgood03 h3{
+	font-size: 1.2em;
+	float: left;
+}
+.my_indexgood03 .guide{
+	width: 40%;
+	height: 20px;
+	float: left;
+	background: url(/client/images/index_good_guideright.png) no-repeat 10px;
+	background-size: 16px;
+}
+.my_indexgood03 p{
+	width: 100%;
+	text-align: left;
+	float: left;
+}
+.my_indexgood03 span{
+	display: block;
+	width: 100%;
+	float: left;
+	color:#cc1421 ;
+}
+.my_indexgood03 div{
+	width: 100%;
+	float: right;
+	height: 60%;
+	text-align: center;
+}
+.my_indexgood03 div img{
+	width: 80%;
+	height: 80%;
+	margin-top: 14%;
+	
+}
+
+.index_goods03{
+	width: 100%;
+	overflow: hidden;
+	background: #f4f4f4;	
+}
+.goods03_title{
+	width: 100%;
+}
+.goods03_title img{
+	width: 100%;
+	height: 100%;
+}
+.index_goods03 ul{
+	width: 100%;
+	overflow: hidden;
+}
+.index_goods03 ul li{
+	width: 96%;
+	padding: 0 2%;
+	overflow: hidden;
+	float: left;
+}
+.good03_box{
+	width: 48%;
+	display: block;
+	float: left;
+	background: white;
+	overflow: hidden;
+}
+.index_goods03 ul li a{
+	margin-top: 10px;
+	padding-bottom: 2%;
+}
+.index_goods03 ul li a:nth-child(2n-1){
+	float: left;
+}
+.index_goods03 ul li a:nth-child(2n){
+	float: right;
+}
+.good03_box div{
+	width: 96%;
+	height: 60%;
+	margin-top: 2%;
+	margin-left:2%;
+	float: left;
+	background: #e8e8e8 1px scroll;
+	position: relative;
+}
+.good03_box div img{
+	width: 100%;
+	height: 100%;
+}
+.good03_box div span{
+	display: block;
+	position: absolute;
+	 width: 60px;
+	 height: 26px;
+	 line-height: 26px;
+	 color: white;
+	 border-bottom-left-radius: 30px;
+	 border-top-left-radius: 30px;
+}
+.good03_box div span{
+	right: 0px;
+	bottom: 10px;
+	background: #f43744;
+
+}
+.good03_box p{
+	float: left;
+	width: 100%;
+	font-size: 1.1em;
+	min-height: 20%;
+	padding: 4% 0;	
+}
+.good03_box .box03_pri{
+	width: 100%;
+	display: block;
+	text-align: center;
+	font-size: 1.2em;
+	color: #cc1421;
+}
 
 
-/*底部*/
-.footerall{margin-top:0px;}
 
 
 
 
-/*banner*/
-        /* 本例子css */
-        .bannerslideBox{ width:807px; height:439px; overflow:hidden; position:relative;float:left;  }
-        .bannerslideBox .bd{ position:relative; height:100%; z-index:0;   }
-        .bannerslideBox .bd li{ zoom:1; vertical-align:middle; }
-        .bannerslideBox .bd img{ width:807px; height:439px; display:block;  }
-
-        /* 下面是前/后按钮代码，如果不需要删除即可 */
-        .bannerslideBox .prev,
-        .bannerslideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(../images/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
-        .bannerslideBox .next{ left:auto; right:3%; background-position:8px 5px; }
-        .bannerslideBox .prev:hover,
-        .bannerslideBox .next:hover{ filter:alpha(opacity=100);opacity:1;  }
-        .bannerslideBox .prevStop{ display:none;  }
-        .bannerslideBox .nextStop{ display:none;  }
 
 
 

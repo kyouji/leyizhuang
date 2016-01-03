@@ -68,9 +68,9 @@
     <dd>
       <div class="rule-multi-radio multi-radio">
         <span style="display: none;">
-            <input type="radio" name="isOnlinePay" value="1" <#if pay_type?? && pay_type.isOnlinePay?? && !pay_type.isOnlinePay><#else>checked="checked"</#if>>
+            <input type="radio" name="isOnlinePay" value="1" <#if pay_type?? && pay_type.isOnlinePay?? && pay_type.isOnlinePay>checked="checked"</#if>>
             <label>线上付款</label>
-            <input type="radio" name="isOnlinePay" value="0" <#if pay_type?? && pay_type.isOnlinePay?? && !pay_type.isOnlinePay>checked="checked"</#if>>
+            <input type="radio" name="isOnlinePay" value="0" <#if !pay_type?? || !pay_type.isOnlinePay?? || !pay_type.isOnlinePay>checked="checked"</#if>>
             <label>线下付款</label>
         </span>
       </div>
@@ -82,9 +82,9 @@
     <dd>
       <div class="rule-multi-radio multi-radio">
         <span id="rblStatus" style="display: none;">
-            <input type="radio" name="isEnable" value="1" <#if pay_type?? && pay_type.isEnable?? && !pay_type.isEnable><#else>checked="checked"</#if>>
+            <input type="radio" name="isEnable" value="1" <#if pay_type?? && pay_type.isEnable?? && pay_type.isEnable>checked="checked"</#if>>
             <label>是</label>
-            <input type="radio" name="isEnable" value="0" <#if pay_type?? && pay_type.isEnable?? && !pay_type.isEnable>checked="checked"</#if>>
+            <input type="radio" name="isEnable" value="0" <#if !pay_type?? || !pay_type.isEnable?? || !pay_type.isEnable>checked="checked"</#if>>
             <label>否</label>
       </div>
       <span class="Validform_checktip">*不启用则不显示该支付方式</span>
@@ -93,7 +93,7 @@
   <dl>
     <dt>排序数字</dt>
     <dd>
-      <input name="sortId" type="text" value="<#if pay_type??>${pay_type.sortId!""}<#else>99</#if>" class="input small" datatype="n" sucmsg=" ">
+      <input name="sortId" type="text" value="<#if pay_type??>${pay_type.sortId!""}</#if>" class="input small" datatype="n" sucmsg=" ">
       <span class="Validform_checktip">*数字，越小越向前</span>
     </dd>
   </dl>
@@ -114,7 +114,7 @@
   <dl>
     <dt>支付手续费</dt>
     <dd>
-      <input name="fee" type="text" value="<#if pay_type??>${pay_type.fee!"0"}<#else>0</#if>" class="input small" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+      <input name="fee" type="text" value="<#if pay_type??>${pay_type.fee!""}</#if>" class="input small" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
       <span class="Validform_checktip">*注意：百分比取值范围：0-100，固定金额单位为“元”</span>
     </dd>
   </dl>

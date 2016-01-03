@@ -42,7 +42,7 @@ $(function () {
 <form name="form1" method="post" action="/Verwalter/coupon/type/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}">
-<input name="couponTypeId" type="text" value='<#if coupon_type??>${coupon_type.id}</#if>' style="display:none">
+<input name="couponTypeId" type="text" value='<#if coupon_type??>${coupon_type.id?c}</#if>' style="display:none">
 </div>
 
 <!--导航栏-->
@@ -76,20 +76,54 @@ $(function () {
         <span class="Validform_checktip">*名称</span>
     </dd>
   </dl>
-  
+    <dl>
+        <dt>类型</dt>
+        <dd>
+            <div class="rule-single-select">
+            <select name="categoryId" datatype="*" sucmsg=" ">
+                <option value="" <#if !coupon_type?? || !coupon_type.categoryId??>selected="selected"</#if>>请选择</option>
+                <option value="0" <#if coupon_type?? && coupon_type.categoryId == 0>selected="selected"</#if>>全场通用券 </option>
+                <option value="1" <#if coupon_type?? && coupon_type.categoryId == 1>selected="selected"</#if>>分品类满减券</option>
+                <option value="2" <#if coupon_type?? && coupon_type.categoryId == 2>selected="selected"</#if>>不分品类满减券</option>
+            </select>
+            </div>
+        </dd>
+    </dl>
+    <dl>
+        <dt>满减券使用额度</dt>
+        <dd>
+          <input name="canUsePrice" type="text" value="<#if coupon_type?? && coupon_type.canUsePrice?? >${coupon_type.canUsePrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+          <span class="Validform_checktip">消费满该额度时可使用，仅对满减券有效</span>
+        </dd>
+    </dl>
+    <dl>
+        <dt>分品类满减券限制使用品类</dt>
+        <dd>
+            <div class="rule-single-select">
+            <select name="productTypeId" datatype="n0-5">
+                <option <#if coupon_type?? && coupon_type.productTypeId??><#else>selected="selected"</#if> value="">请选择</option>
+                <#if category_list??>
+                    <#list category_list as c>
+                        <option value="${c.id?c}" <#if coupon_type?? && coupon_type.productTypeId?? && c.id==coupon_type.productTypeId>selected="selected"</#if> ><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                    </#list>
+                </#if>
+            </select>
+        </div>
+        </dd>
+    </dl>
+    
   <dl>
-    <dt>定价</dt>
+    <dt>优惠券抵用额度</dt>
     <dd>
       <input name="price" type="text" value="<#if coupon_type??>${coupon_type.price!""}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-      <span class="Validform_checktip">免费券定价为0</span>
+      <span class="Validform_checktip">免费券抵用额度为0</span>
     </dd>
   </dl>
-  
   <dl>
     <dt>有效期</dt>
     <dd>
       <input name="totalDays" type="text" value="<#if coupon_type??>${coupon_type.totalDays!""}<#else>1</#if>" class="input small" datatype="*" sucmsg=" ">
-      <span class="Validform_checktip">天</span>
+      <span class="Validform_checktip">天</span> <span class="Validform_checktip">从领用时间开始计算</span>
     </dd>
   </dl>
   

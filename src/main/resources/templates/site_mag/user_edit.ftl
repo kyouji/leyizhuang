@@ -54,7 +54,55 @@ $(function () {
             $(this).parent().addClass("selected");
         }
     }); 
+    
+    $("#btnEditRemark").click(function () { EditOrderRemark(); });    //修改积分备注 
 });   
+
+ //修改粮草备注
+        function EditOrderRemark() {
+            var dialog = $.dialog({
+                title: '修改积分备注',
+                content: '<input type="checkbox" name="showtype" id="showtype" checked="checked"/><label> 仅后台显示</label> </br><textarea id="pointRemark" name="txtPointRemark" rows="2" cols="20" class="input"></textarea>',
+                min: false,
+                max: false,
+                lock: true,
+                ok: function () {
+                    var showtype = $("#showtype", parent.document).is(':checked');                    
+                    var remark = $("#pointRemark", parent.document).val();                   
+                    if (remark == "") {
+                        $.dialog.alert('对不起，请输入备注内容！', function () { }, dialog);
+                        return false;
+                    }
+                    var userId = eval(document.getElementById("userId")).value;
+                    var point = eval(document.getElementById("totalPoints")).value;
+                    var postData = { "userId": userId, "totalPoints": point, "data": remark, "type":"editPoint", "isBackgroundShow": showtype};
+                    //发送AJAX请求
+                    sendAjaxUrl(dialog, postData, "/Verwalter/user/param/edit");
+                    return false;
+                },
+                cancel: true
+            });
+        }
+    //发送AJAX请求
+        function sendAjaxUrl(winObj, postData, sendUrl) {
+            $.ajax({
+                type: "post",
+                url: sendUrl,
+                data: postData,
+                dataType: "json",
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.dialog.alert('尝试发送失败，错误信息：' + errorThrown, function () { }, winObj);
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        winObj.close();
+                        $.dialog.tips(data.msg, 2, '32X32/succ.png', function () { location.reload(); }); //刷新页面
+                    } else {
+                        $.dialog.alert('错误提示：' + data.message, function () { }, winObj);
+                    }
+                }
+            });
+        }   
 
 </script>
 </head>
@@ -63,7 +111,7 @@ $(function () {
 <form name="form_user" method="post" action="/Verwalter/user/save" id="form_user">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
-<input type="hidden" name="userId" value="<#if user??>${user.id!""}</#if>" >
+<input type="hidden" id="userId" name="userId" value="<#if user??>${user.id?c!""}</#if>" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
@@ -84,9 +132,9 @@ $(function () {
       <ul>
         <li><a href="javascript:;" onclick="tabs(this);" class="selected">基本资料</a></li>
         <li><a href="javascript:;" onclick="tabs(this);">安全设置</a></li>
-        <#--
+        
         <li><a href="javascript:;" onclick="tabs(this);">账户信息</a></li>
-        -->
+        
       </ul>
     </div>
   </div>
@@ -99,13 +147,16 @@ $(function () {
     <dd>
       <div class="rule-multi-radio multi-radio">
         <span>
-            <input type="radio" name="roleId" value="0" datatype="n" <#if user?? && user.roleId?? && user.roleId==0>checked="checked"</#if>><label>普通用户</label>
-            <input type="radio" name="roleId" value="1" datatype="n" <#if user?? && user.roleId?? && user.roleId==1>checked="checked"</#if>><label>分销商</label>
+            <input type="radio" name="userType" value="0" datatype="n" <#if user?? && user.userType?? && user.userType==0>checked="checked"</#if>><label>普通会员</label>
+            <input type="radio" name="userType" value="1" datatype="n" <#if user?? && user.userType?? && user.userType==1>checked="checked"</#if>><label>销售顾问</label>
+            <input type="radio" name="userType" value="2" datatype="n" <#if user?? && user.userType?? && user.userType==2>checked="checked"</#if>><label>店长</label>
+            <input type="radio" name="userType" value="3" datatype="n" <#if user?? && user.userType?? && user.userType==2>checked="checked"</#if>><label>店主</label>
+            <input type="radio" name="userType" value="4" datatype="n" <#if user?? && user.userType?? && user.userType==2>checked="checked"</#if>><label>区域经理</label>
         </span>
       </div>
       <span class="Validform_checktip"></span>
     </dd>
-  </dl>
+  </dl> 
   <dl>
     <dt>用户状态</dt>
     <dd>
@@ -192,30 +243,54 @@ $(function () {
     <dt>邮箱账号</dt>
     <dd><input name="email" type="text" value="<#if user??>${user.email!""}</#if>" id="txtEmail" class="input normal" ignore="ignore" datatype="e" sucmsg=" " > <span class="Validform_checktip">*取回密码时用到</span></dd>
   </dl>
-  <dl>
+<#--  <dl>
     <dt>手机号码</dt>
     <dd><input name="mobile" type="text" value="<#if user??>${user.mobile!""}</#if>" class="input normal" ignore="ignore" datatype="m" sucmsg=" " ></dd>
-  </dl>
+  </dl> 
   <dl>
     <dt>累计消费额</dt>
     <dd><span><#if user??>${user.totalSpendCash!""}</#if></span></dd>
   </dl>
+ <dl>
+    <dt>用户等级</dt>
+    <dd><input name="userLevelId" type="text" value="<#if user??>${user.userLevelId!""}</#if>" class="input normal" datatype="n0-2" errormsg="请输入正确的等级" sucmsg=" " > <span class="Validform_checktip">*数字表示的用户等级，从1开始，熟悉越高等级越高</span></dd>
+  </dl> -->
   <dl>
     <dt>用户等级</dt>
-    <dd><input name="userLevelId" type="text" value="<#if user??>${user.userLevelId!""}</#if>" class="input normal" datatype="n0-2" errormsg="请输入正确的等级" sucmsg=" " > <span class="Validform_checktip"></span></dd>
+    <dd>
+         <div class="rule-single-select">
+              <select name="userLevelId" id="userLevelId" >
+                   <#if !user??>
+                        <option value="">请选择类别...</option>
+                    </#if>
+                    <#if user_level_list??>
+                         <#list user_level_list as level>
+                             <option value="${level.id!""}" <#if user?? && user.userLevelId?? && user.userLevelId==level.id>selected="selected"</#if>>${level.title!""}</option>
+                         </#list>
+                    </#if>
+              </select>
+         </div>
+    </dd>
   </dl>
-  <dl>
+ <#--> <dl>
     <dt>用户等级名称</dt>
     <dd><span><#if user??>${user.userLevelTitle!""}</#if></span></dd>
-  </dl>
-  <dl>
+  </dl>-->
+<#--  <dl>
     <dt>用户积分</dt>
     <dd><span><#if user??>${user.totalPoints!""}</#if></span></dd>
   </dl>
   <dl>
+    <dt>修改用户积分</dt>
+    <dd>
+        <input name="totalPoints1" id="totalPoints" type="text" class="input" value="<#if user?? && user.totalPoints??>${user.totalPoints?c}<#else>0</#if>">
+        <input name="btnEditRemark" type="button" id="btnEditRemark" class="ibtn" value="确认修改" style="margin-top: -3px;">
+    </dd>
+  </dl>  
+  <dl>
     <dt>咨询总数</dt>
     <dd><span><#if user??>${user.totalConsults!""}</#if></span></dd>
-  </dl>
+  </dl>-->
   <dl>
     <dt>评论总数</dt>
     <dd><span><#if user??>${user.totalComments!""}</#if></span></dd>
@@ -226,30 +301,59 @@ $(function () {
   </dl>
 </div>
 <!--/安全设置-->
-<#--
+
 <div class="tab-content" style="display:none;">
+<#--  <#if !user?? || user?? && user.roleId?? && user.roleId == 1>
   <dl>
     <dt>下级用户总数</dt>
-    <dd><input name="totalLowerUsers" type="text" id="txtPay_Password" class="input normal" nullmsg="请设置支付密码" errormsg="支付密码范围在6-20位之间" sucmsg=" " value=""> <span class="Validform_checktip">*平台内支付的密码，至少6位</span></dd>
+    <dd><input name="totalLowerUsers" type="text" id="txtPay_Password" class="input normal" sucmsg=" " value="<#if user?? && user.totalLowerUsers??>${user.totalLowerUsers?c}</#if>"> <span class="Validform_checktip"></span></dd>
   </dl>
   <dl>
-    <dt>用户返现总数</dt>
-    <dd><input name="totalCashRewards" type="text" id="txtPay_Password" class="input normal" nullmsg="请设置支付密码" errormsg="支付密码范围在6-20位之间" sucmsg=" " value=""> <span class="Validform_checktip">*平台内支付的密码，至少6位</span></dd>
+    <dt>用户返现金额</dt>
+    <dd><input name="totalCashRewards" type="text" id="txtPay_Password" class="input normal"sucmsg=" " value="<#if user?? && user.totalCashRewards??>${user.totalCashRewards?c}</#if>"> <span class="Validform_checktip"></span></dd>
   </dl>
+  <dl>
+    <dt>提现冻结金额</dt>
+    <dd><input name="cashRewardsFrozen" type="text" id="txtPay_Password" class="input normal"sucmsg=" " value="<#if user?? && user.cashRewardsFrozen??>${user.cashRewardsFrozen?c}</#if>"> <span class="Validform_checktip"></span></dd>
+  </dl>
+  </#if>
   <dl>
     <dt>银行卡号</dt>
-    <dd><input name="bankCardCode" type="text" id="txtPay_Password" class="input normal" nullmsg="请设置支付密码" errormsg="支付密码范围在6-20位之间" sucmsg=" " value=""> <span class="Validform_checktip">*平台内支付的密码，至少6位</span></dd>
+    <dd><input name="bankCardCode" type="text" id="txtPay_Password" class="input normal"  sucmsg=" " value="<#if user??>${user.bankCardCode!""}</#if>"> <span class="Validform_checktip"></span></dd>
   </dl>
   <dl>
     <dt>银行名称</dt>
-    <dd><input name="bankTitle" type="text" id="txtPay_Password" class="input normal" nullmsg="请设置支付密码" errormsg="支付密码范围在6-20位之间" sucmsg=" " value=""> <span class="Validform_checktip">*平台内支付的密码，至少6位</span></dd>
+    <dd><input name="bankTitle" type="text" id="txtPay_Password" class="input normal"  sucmsg=" " value="<#if user??>${user.bankTitle!""}</#if>"> <span class="Validform_checktip"></span></dd>
+  </dl>
+ <#-- <dl>
+    <dt>银行卡已验证</dt>
+    <dd><input name="txtPay_Password" type="text" id="txtPay_Password" class="input normal" nullmsg="请设置支付密码" errormsg="支付密码范围在6-20位之间" sucmsg=" " value="<#if user??>${user.totalReturns!""}</#if>"> <span class="Validform_checktip"></span></dd>
   </dl>
   <dl>
-    <dt>银行卡已验证</dt>
-    <dd><input name="txtPay_Password" type="text" id="txtPay_Password" class="input normal" nullmsg="请设置支付密码" errormsg="支付密码范围在6-20位之间" sucmsg=" " value=""> <span class="Validform_checktip">*平台内支付的密码，至少6位</span></dd>
+    <dt>银行卡验证</dt>
+    <dd>
+      <div class="rule-multi-radio multi-radio">
+        <span>
+            <input type="radio" name="isBankCardVerified" value="1"  <#if user?? && user.isBankCardVerified?? && user.isBankCardVerified==1>checked="checked"</#if>><label>已验证</label>
+            <input type="radio" name="isBankCardVerified" value="0"  <#if user?? && user.isBankCardVerified?? && user.isBankCardVerified==0>checked="checked"</#if>><label>未验证</label>
+        </span>
+      </div>
+      <span class="Validform_checktip"></span>
+    </dd>
+  </dl> 
+  <#if !user?? || user?? && user.roleId?? && user.roleId == 2>
+  <dl>
+    <dt>虚拟币余额</dt>
+    <dd><input name="virtualCurrency" type="text" id="" class="input normal"  sucmsg=" " value="<#if user??>${user.virtualCurrency!""}</#if>"> <span class="Validform_checktip"></span></dd>
   </dl>
-</div>
--->
+  <dl>
+    <dt>冻结金额</dt>
+    <dd><input name="frozenCapital" type="text" id="" class="input normal"  sucmsg=" " value="<#if user??>${user.frozenCapital!""}</#if>"> <span class="Validform_checktip"></span></dd>
+  </dl>
+  <dl>
+  </#if> -->
+</div> 
+
 <!--/账户信息-->
 
 

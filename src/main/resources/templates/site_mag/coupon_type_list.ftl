@@ -48,7 +48,9 @@ function __doPostBack(eventTarget, eventArgument) {
         <li><a class="add" href="/Verwalter/coupon/type/edit"><i></i><span>新增</span></a></li>
         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
         <li><a id="btnSave" class="save" href="javascript:__doPostBack('btnSave','')"><i></i><span>保存</span></a></li>
-        <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
+        <#if tdManagerRole?? && tdManagerRole.isSys>
+            <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
+        </#if>
       </ul>
     </div>
   </div>
@@ -75,14 +77,14 @@ function __doPostBack(eventTarget, eventArgument) {
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${item_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${item.id}">
+                    <input type="hidden" name="listId" id="listId" value="${item.id?c}">
                 </td>
-                <td><a href="/Verwalter/coupon/type/edit?id=${item.id}">${item.title!""}</a></td>
+                <td><a href="/Verwalter/coupon/type/edit?id=${item.id?c}">${item.title!""}</a></td>
                 <td align="center"><#if item.price??>${item.price?string("0.00")}</#if></td>
                 <td>${item.description!""}</td>
                 <td align="center"><input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);"></td>
                 <td align="center">
-                    <a href="/Verwalter/coupon/type/edit?id=${item.id}">修改</a>
+                    <a href="/Verwalter/coupon/type/edit?id=${item.id?c}">修改</a>
                 </td>
               </tr>
         </#list>

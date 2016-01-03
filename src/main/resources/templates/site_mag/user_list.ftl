@@ -30,6 +30,28 @@ var theForm = document.forms['form1'];
             theForm.submit();
         }
     }
+         
+    
+ //发送AJAX请求
+        function sendAjaxUrl(winObj, postData, sendUrl) {
+            $.ajax({
+                type: "post",
+                url: sendUrl,
+                data: postData,
+                dataType: "json",
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.dialog.alert('尝试发送失败，错误信息：' + errorThrown, function () { }, winObj);
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        winObj.close();
+                        $.dialog.tips(data.msg, 2, '32X32/succ.png', function () { location.reload(); }); //刷新页面
+                    } else {
+                        $.dialog.alert('错误提示：' + data.message, function () { }, winObj);
+                    }
+                }
+            });
+        }
 </script>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
@@ -51,12 +73,15 @@ var theForm = document.forms['form1'];
         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
       </ul>
-      <div class="menu-list">
+      <div class="menu-list">      
         <div class="rule-single-select single-select">
-        <select name="roleId" onchange="javascript:setTimeout(__doPostBack('roleId',''), 0)" style="display: none;">
-        	<option <#if !roleId??>selected="selected"</#if> value="">所有用户组</option>
-        	<option <#if roleId?? && roleId==0>selected="selected"</#if> value="0">普通会员</option>
-        	<option <#if roleId?? && roleId==1>selected="selected"</#if> value="1">分销商</option>
+        <select name="userLevelId" onchange="javascript:setTimeout(__doPostBack('userLevelId',''), 0)" style="display: none;">
+            <option <#if !userLevelId??>selected="selected"</#if> value="">所有用户等级</option>
+            <#if userLevelId_list??>
+                <#list userLevelId_list as item>
+                    <option <#if userLevelId?? && userLevelId==item.levelId>selected="selected"</#if> value="${item.id?c}">${item.title!''}</option>
+                </#list>
+            </#if>                        
         </select>
         </div>
       </div>
@@ -76,9 +101,9 @@ var theForm = document.forms['form1'];
   <tr class="odd_bg">
     <th width="8%">选择</th>
     <th align="left" colspan="2">用户名</th>
-    <th align="left" width="6%">用户组</th>
+    <th align="left" width="6%">用户等级</th>
+    <th align="left" width="6%">用户角色</th>
     <th align="center" width="12%">邮箱</th>
-    <th width="12%">手机号</th>
     <th width="8%">最近登录</th>
     <th width="8%">积分</th>
     <th width="6%">状态</th>
@@ -92,10 +117,10 @@ var theForm = document.forms['form1'];
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${user_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${user.id}">
+                    <input type="hidden" name="listId" id="listId" value="${user.id?c}">
                 </td>
                 <td width="64">
-                  <a href="/Verwalter/user/edit?id=${user.id}">
+                  <a href="/Verwalter/user/edit?id=${user.id?c}">
                     <img width="64" height="64" src="${user.headImageUri!"/mag/style/user_avatar.png"}">
                   </a>
                 </td>
@@ -104,25 +129,21 @@ var theForm = document.forms['form1'];
                     <h4><b>${user.username!""}</b> (姓名：${user.realName!""})</h4>
                     <i>注册时间：${user.registerTime!""}</i>
                     <span>
-                      <a class="amount" href="/Verwalter/user/point/list?userId=${user.id}" title="积分">积分</a>
-                      <a class="point" href="/Verwalter/user/collect/list?userId=${user.id}" title="关注商品">关注商品</a>
-                      <a class="remind" href="/Verwalter/user/remind/list?userId=${user.id}" title="低价提醒">低价提醒</a>
-                      <a class="msg" href="/Verwalter/user/recent/list?userId=${user.id}" title="浏览历史">浏览历史</a>
-                      <#if user.roleId?? && user.roleId==1>
-                          <a class="sms" href="/Verwalter/user/reward/list?userId=${user.id}" title="返现记录">返现记录</a>
-                      </#if>
+                      <#--><a class="amount" href="/Verwalter/user/point/list?userId=${user.id?c}" title="积分">积分</a>-->
+                      <a class="point" href="/Verwalter/user/collect/list?userId=${user.id?c}" title="关注商品">关注商品</a>
+                      <a class="msg" href="/Verwalter/user/recent/list?userId=${user.id?c}" title="浏览历史">浏览历史</a>                                          
                     </span>
                   </div>
                 </td>
-                <td><#if user.roleId?? && user.roleId==0>普通会员<#elseif user.roleId?? && user.roleId==1>分销商</#if></td>
+                <td align="left">${user.userLevelTitle!""}</td>
+                <td></td>
                 <td align="center">${user.email!""}</td>
-                <td align="center">${user.mobile!""}</td>
                 <td align="center">${user.lastLoginTime!""}</td>
-                <td align="center">${user.totalPoints!""}</td>
+                <td align="center"></td>
                 <td align="center"><#if user.statusId??><#if user.statusId==0>待审核<#elseif user.statusId==1>正常</#if></#if></td>
                 <td align="center">
-                    <a href="/Verwalter/user/edit?id=${user.id}&roleId=${roleId!""}">修改</a> | 
-                    <a href="/Verwalter/user/edit?id=${user.id}&roleId=${roleId!""}&action=view">查看</a></td>
+                    <a href="/Verwalter/user/edit?id=${user.id?c}&roleId=${roleId!""}">修改</a> | 
+                    <a href="/Verwalter/user/edit?id=${user.id?c}&roleId=${roleId!""}&action=view">查看</a></td>
               </tr>
         </#list>
     </#if>

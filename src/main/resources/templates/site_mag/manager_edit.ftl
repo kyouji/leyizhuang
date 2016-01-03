@@ -49,6 +49,23 @@ $(function () {
 </div>
 <div class="tab-content" style="display: block;">
     <dl>
+        <dt>角色分配</dt>
+        <dd>
+                <div class="rule-single-select">
+                    <select name="roleId" id="roleId" datatype="*" sucmsg=" ">
+                        <#if !tdManager??>
+                        <option value="">请选择类型...</option>
+                        </#if>
+                        <#if role_list??>
+                            <#list role_list as c>
+                                <option value="${c.id?c!""}" <#if tdManager?? && tdManager.roleId?? && tdManager.roleId==c.id>selected="selected"</#if>>${c.title!""}</option>
+                            </#list>
+                        </#if>
+                    </select>
+                </div>
+        </dd>
+    </dl>
+    <dl>
         <dt>用户名</dt>
         <dd>
             <input name="username" type="text" value="<#if tdManager??>${tdManager.username!""}</#if>" class="input normal" datatype="*6-100" sucmsg=" ">

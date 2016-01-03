@@ -31,11 +31,11 @@
     //提交表单处理
     function submitForm() {
         //验证表单
-        var price = $.trim($('#outSalePrice').val());
+        var price = $.trim($('#outFactoryPrice').val());
         var originPrice = $.trim($('#originPrice').val());
     
         if (isNaN(price) || price=="") {
-            W.$.dialog.alert('请设置正确的价格！', function () { $("#outSalePrice").focus(); }, api);
+            W.$.dialog.alert('请设置正确的价格！', function () { $("#outFactoryPrice").focus(); }, api);
             return false;
         }
         
@@ -44,13 +44,13 @@
         
         if (p1 == p2)
         {
-            W.$.dialog.alert('请设置不同的价格！', function () { $("#outSalePrice").focus(); }, api);
+            W.$.dialog.alert('请设置不同的价格！', function () { $("#outFactoryPrice").focus(); }, api);
             return false;
         }
         
         $.ajax({
             type:"post",
-            url:"/Verwalter/goods/price/set?goodsId=${goods.id}&outPrice=" + price,
+            url:"/Verwalter/goods/price/set?goodsId=${goods.id?c}&outPrice=" + price,
             success:function(res){
                 // 成功
                 if (res.code==0)
@@ -73,17 +73,17 @@
 <div class="div-content">
     <input type="hidden" class="input normal">
     <dl>
-        <dt>原销售价价</dt>
+        <dt>原出厂价</dt>
         <dd>
-            <input id="originPrice" disabled="disabled" type="text" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" style="background: #EEEEEE;">
-            <span class="Validform_checktip">商品原销售价</span>
+            <input id="originPrice" disabled="disabled" type="text" value="<#if goods?? && goods.outFactoryPrice??>${goods.outFactoryPrice?string("0.00")}<#else>0</#if>" class="input normal" style="background: #EEEEEE;">
+            <span class="Validform_checktip">商品原出厂价</span>
         </dd>
     </dl>
     <dl>
-        <dt>调整后销售价</dt>
+        <dt>调整后出厂价</dt>
         <dd>
-            <input id="outSalePrice" name="salePrice" type="text" value="" class="input normal">
-            <span class="Validform_checktip">*调整后销售价</span>
+            <input id="outFactoryPrice" name="outFactoryPrice" type="text" value="" class="input normal">
+            <span class="Validform_checktip">*调整后出厂价</span>
         </dd>
     </dl>
 </div>

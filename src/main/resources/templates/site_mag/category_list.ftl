@@ -60,9 +60,9 @@ function __doPostBack(eventTarget, eventArgument) {
                 <span class="checkall" style="vertical-align:middle;">
                     <input id="rptList_ctl01_chkId" type="checkbox" name="listChkId" value="${cat_index}">
                 </span>
-                <input type="hidden" name="listId" id="listId" value="${cat.id}">
+                <input type="hidden" name="listId" id="listId" value="${cat.id?c}">
             </td>
-            <td>${cat.id}</td>
+            <td>${cat.id?c}</td>
             <td>
                 <#if cat?? && cat.layerCount gt 1>
                     <span style="display:inline-block;width:${(cat.layerCount-2)*24}px;"></span>

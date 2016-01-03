@@ -48,8 +48,8 @@ $(function () {
     <dl>
         <dt>名称</dt>
         <dd>
-            <input name="title" type="text"<#if ad_type??> value="${ad_type.title!""}" disabled="disabled" style="background: #EEE;"</#if> class="input normal" datatype="s" sucmsg=" " >
-            <span class="Validform_checktip">*广告位名称，添加后不可修改</span>
+            <input name="title" type="text" value="<#if ad_type??>${ad_type.title!""}</#if>" class="input normal" datatype="s" sucmsg=" ">
+            <span class="Validform_checktip">*广告位名称</span>
         </dd>
     </dl>
     <dl>
@@ -57,9 +57,9 @@ $(function () {
         <dd>
             <div class="rule-multi-radio multi-radio">
                 <span>
-                    <input type="radio" name="isNewWindow" value="1" <#if !ad_type?? || ad_type?? && ad_type.isNewWindow?? && ad_type.isNewWindow>checked="checked"</#if>>
+                    <input type="radio" name="isNewWindow" value="1" <#if ad_type?? && ad_type.isNewWindow>checked="checked"</#if>>
                     <label>新窗口</label>
-                    <input type="radio" name="isNewWindow" value="0" <#if ad_type?? && ad_type.isNewWindow?? && !ad_type.isNewWindow>checked="checked"</#if>>
+                    <input type="radio" name="isNewWindow" value="0" <#if !ad_type?? || !ad_type.isNewWindow>checked="checked"</#if>>
                     <label>原窗口</label>
                 </span>
             </div>
@@ -75,7 +75,7 @@ $(function () {
     <dl>
         <dt>价格</dt>
         <dd>
-            <input name="price" type="text" value="<#if ad_type?? && ad_type.price??>${ad_type.price?string("0.00")}</#if>" class="input txt100" datatype="n0-100|." sucmsg=" ">
+            <input name="price" type="text" value="<#if ad_type??>${ad_type.price!''}</#if>" class="input txt100" datatype="n0-100|." sucmsg=" ">
             <span class="Validform_checktip">元/月</span>
         </dd>
     </dl>

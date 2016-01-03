@@ -55,6 +55,8 @@ function __doPostBack(eventTarget, eventArgument) {
                     <span>已完成订单</span>
                 <#elseif 7==statusId>
                     <span>已取消订单</span>
+                <#elseif 8==statusId>
+                    <span>用户删除订单</span>
                 </#if>
             </#if>
     </div>
@@ -71,7 +73,7 @@ function __doPostBack(eventTarget, eventArgument) {
                     <li>
                         <a onclick="return ExePostBack('btnConfirm','确认后将进入待发货状态，是否继续？');" class="save" href="javascript:__doPostBack('btnConfirm','')"><i></i><span>确认订单</span></a>
                     </li>
-                    <#elseif statusId?? && 7==statusId>
+                    <#elseif statusId?? && 7==statusId || statusId?? && 8==statusId>
                     <li>
                         <a onclick="return ExePostBack('btnDelete','删除后订单将无法恢复，是否继续？');" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除订单</span></a>
                     </li>
@@ -126,10 +128,10 @@ function __doPostBack(eventTarget, eventArgument) {
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${order_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${order.id}">
+                    <input type="hidden" name="listId" id="listId" value="${order.id?c}">
                 </td>
                 <td>
-                    <a href="/Verwalter/order/edit?id=${order.id}&statusId=${statusId!'0'}">${order.orderNumber!""}</a></td>
+                    <a href="/Verwalter/order/edit?id=${order.id?c}&statusId=${statusId!'0'}">${order.orderNumber!""}</a></td>
                 <td>${order.username!""}</td>
                 <td>${order.payTypeTitle!""}</td>
                 <td>${order.deliverTypeTitle!""}</td>
@@ -149,13 +151,15 @@ function __doPostBack(eventTarget, eventArgument) {
                             <span>已完成订单</span>
                         <#elseif 7==order.statusId>
                             <span>已取消订单</span>
+                        <#elseif 8==order.statusId>
+                            <span>用户删除订单</span>
                         </#if>
                     </#if>
                 </td>
                 <td align="center" width="10%">￥<font color="#C30000">${order.totalPrice?string("#.00")}</font></td>
                 <td>${order.orderTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                 <td align="center">
-                    <a href="/Verwalter/order/edit?id=${order.id}&statusId=${statusId!"0"}">详细</a>
+                    <a href="/Verwalter/order/edit?id=${order.id?c}&statusId=${statusId!"0"}">详细</a>
                 </td>
             </tr>
         </#list>

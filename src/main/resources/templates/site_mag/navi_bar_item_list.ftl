@@ -67,7 +67,6 @@ var theForm = document.forms['form1'];
     <th align="center" width="10%">图标</th>
     <th align="center">跳转地址</th>
     <th align="center" width="10%">是否使能</th>
-    <th align="center" width="10%">是否触屏</th>
     <th width="8%">排序</th>
     <th width="6%">操作</th>
   </tr>
@@ -78,18 +77,17 @@ var theForm = document.forms['form1'];
                 <span class="checkall" style="vertical-align:middle;">
                     <input type="checkbox" name="listChkId" value="${item_index}" >
                 </span>
-                <input type="hidden" name="listId" value="${item.id}">
+                <input type="hidden" name="listId" value="${item.id?c}">
             </td>
-            <td align="center"><a href="/Verwalter/view/navi/edit?id=${item.id}">${item.title!""}</a></td>
-            <td align="center"><img src="${item.iconUri!''}" width="25 height="25"/></td>
+            <td align="center"><a href="/Verwalter/view/navi/edit?id=${item.id?c}">${item.title!""}</a></td>
+            <td align="center"><img src="${item.iconUri!""}" width="25 height="25"/></td>
             <td align="center">${item.linkUri!""}</td>
             <td align="center"><#if item.isEnable?? && item.isEnable>是<#else>否</#if></td>
-            <td align="center"><#if item.isTouch?? && item.isTouch>是<#else>否</#if></td>
             <td align="center">
                 <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
             </td>
             <td align="center">
-                <a href="/Verwalter/view/navi/edit?id=${item.id}">修改</a>
+                <a href="/Verwalter/view/navi/edit?id=${item.id?c}">修改</a>
             </td>
         </tr>
     </#list>

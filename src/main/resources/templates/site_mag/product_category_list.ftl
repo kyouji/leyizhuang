@@ -77,7 +77,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 </span>
                 <input type="hidden" name="listId" id="listId" value="${cat.id}">
             </td>
-            <td>${cat.id}</td>
+            <td>${cat.id?c}</td>
             <td>
                 <#if cat?? && cat.layerCount gt 1>
                     <span style="display:inline-block;width:${(cat.layerCount-2)*24}px;"></span>

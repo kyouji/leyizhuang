@@ -27,6 +27,16 @@
             });
         });
         
+         //（缩略图）
+         var txtPic = $("#txtImgUrl").val();
+         if (txtPic == "" || txtPic == null) {
+              $("#thumb_ImgUrl_show1").hide();
+        }
+        else {
+            $("#thumb_ImgUrl_show1").html("<ul><li><div class='img-box1'><img src='" + txtPic + "' bigsrc='" + txtPic + "' /></div></li></ul>");
+            $("#thumb_ImgUrl_show1").show();
+        }
+        
         //初始化编辑器
         var editorMini = KindEditor.create('.editor-mini', {
             width: '98%',
@@ -92,7 +102,9 @@
             <option value="0" <#if cat?? && cat.parentId==0>selected="selected"</#if>>无父级分类</option>
         	<#if category_list??>
         	   <#list category_list as c>
-        	       <option value="${c.id!""}" <#if cat?? && cat.parentId==c.id || fatherCat?? && fatherCat.id==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+        	   		<#if c.layerCount?? && c.layerCount lt 3	 && (!cat?? || cat?? && cat.id != c.id)>
+        	       		<option value="${c.id!""}" <#if cat?? && cat.parentId==c.id || fatherCat?? && fatherCat.id==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+        	   		</#if>
         	   </#list>
         	</#if>
         </select>
@@ -153,6 +165,7 @@
     <dd>
       <input name="imgUrl" type="text" value="<#if cat??>${cat.imgUrl!""}</#if>" id="txtImgUrl" class="input normal upload-path">
       <div class="upload-box upload-img"></div>
+      <div id="thumb_ImgUrl_show1" class="photo-list thumb_ImgUrl_show">
     </dd>
   </dl>
   <dl>

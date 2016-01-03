@@ -80,19 +80,19 @@ var theForm = document.forms['form1'];
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${item_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${item.id}">
+                    <input type="hidden" name="listId" id="listId" value="${item.id?c}">
                 </td>
-                <td><a href="/Verwalter/ad/edit?id=${item.id}">${item.title!""}</a></td>
+                <td><a href="/Verwalter/ad/edit?id=${item.id?c}">${item.title!""}</a></td>
                 <td align="center">${item.startTime!""}</td>
                 <td align="center">${item.endTime!""}</td>
                 <td align="center"><a target="_blank" href="${item.linkUri!""}">广告链接</a></td>
-                <td align="center"><#if item.isEnable?? && item.isEnable><#if item.endTime?? && item.endTime gt .now><font color="#009900">正常</font><#else><font color="#990000">过期</font></#if><#else>待审核</#if></td>
+                <td align="center"><#if item.isEnable?? && item.isEnable><font color="#009900">正常</font><#else>待审核</#if></td>
                 <td align="center">${item.createTime!""}</td>
                 <td align="center">
-                    <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
+                    <input name="listSortId" type="text" value="${item.sortId?c!""}" class="sort" onkeydown="return checkNumber(event);">
                 </td>
                 <td align="center">
-                    <a href="/Verwalter/ad/edit?id=${item.id}">修改</a>
+                    <a href="/Verwalter/ad/edit?id=${item.id?c}">修改</a>
                 </td>
             </tr>
         </#list>

@@ -1,81 +1,127 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title><#if site??>${site.seoTitle!''}-</#if>个人信息</title>
-<meta name="keywords" content="${site.seoKeywords!''}" />
-<meta name="description" content="${site.seoDescription!''}" />
-<meta name="copyright" content="正品惠客" />
-<link rel="stylesheet" type="text/css" href="/client/css/base.css"/>
-<link rel="stylesheet" type="text/css" href="/client/css/mycenter_base.css"/>
-<link rel="stylesheet" type="text/css" href="/client/css/news.css"/>
-<link rel="shortcut icon" href="/root/images/goods/zphk_logo.ico">
-
-<script src="/client/js/jquery-1.9.1.min.js"></script>
-
-<link type="text/css" rel="stylesheet" href="/client/css/calendar.css" >
-<script type="text/javascript" src="/client/js/calendar.js" ></script>  
-<script type="text/javascript" src="/client/js/calendar-zh.js" ></script>
-<script type="text/javascript" src="/client/js/calendar-setup.js"></script>
-
-<script type="text/javascript">
-//提交个人信息
-function submitInfo()
-{
-    var form = document.getElementById("infoForm");
-    alert("修改资料成功！")
-    form.submit();
-}
-</script>
-
-
-
-</head>
-<body>
-<!-- header开始 -->
-<#include "/client/common_user_header.ftl" />
-<!-- header结束 -->
-<div class="content"> 
-  <!-- 左侧 -->
-  <#include "/client/common_user_menu.ftl" />
-  <!-- 右侧 -->
-  <div class="content_2">
-    <div class="content_2_1">基本信息</div>
-    <div class="content_2_2">     
-      <form id="infoForm" action="/user/info/save" method="post">
-          <ul>
-            <li><span>&emsp;昵称：</span>
-              <input id="nickname" type="text" name="nickname" datatype="*1-16" nullmsg="请输入昵称" errormsg="最多16个字符" class="textInput" value="${user.nickname!'' }" />
-            </li>
-            <li><span>&emsp;性别：</span>
-              <input id="RadioGroup1_0" type="radio" checked="checked" value="男" name="sex" <#if user.sex?? && user.sex=="男">checked="checked" </#if>/>
-                                    男
-              <input id="RadioGroup1_1" type="radio" value="女" name="sex"<#if user.sex?? && user.sex=="女">checked="checked" </#if>/>
-                                    女
-            </li>
-            <li>
-               <#if user.birthday??>   
-                    <span>&emsp; 生日：</span><input type="text" value="${user.birthday?string("yyyy-MM-dd")}" style="width:160px;height:30px;" id="EntTime" name="EntTime" onclick="return showCalendar('EntTime', 'y-mm-dd');"  />
-               <#else>
-                    <span>&emsp; 生日：</span><input type="text" style="width:160px;height:30px;" id="EntTime" name="EntTime" onclick="return showCalendar('EntTime', 'y-mm-dd');"  />
-               </#if>
-            </li>
-            <li><span>所在地：</span>
-              <input id="detailAddress" type="text" name="detailAddress" datatype="*" class="Input" value="${user.detailAddress!''}" />
-            </li>
-            
-            <li>
-              <input type="button" value="保存" onclick="javascript:submitInfo();" id="button" name="btnChange" />
-            </li>
-          </ul>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-<!--主体结束-->
-<#include "/client/common_footer.ftl" />
-</body>
+<!DOCTYPE html>
+<html lang="zh-CN" class="bgc-f3f4f6">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="">
+        <meta name="copyright" content="" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <title>乐易装</title>
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="/client/css/my_base.css"/>
+        <link rel="stylesheet" type="text/css" href="/client/css/x_common.css"/>
+        <link rel="stylesheet" type="text/css" href="/client/css/x_account_settings.css"/>
+        <link rel="stylesheet" type="text/css" href="/client/css/date.css"/>
+        <!-- js -->
+        <script type="text/javascript" src="/client/js/jquery-1.11.0.js"></script>
+        <script type="text/javascript" src="/client/js/date.js" ></script>
+        <script type="text/javascript" src="/client/js/iscroll.js" ></script>
+        <script type="text/javascript" src="/client/js/user_info.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $('#beginTime').date();
+                <#-- 创建一个全局变量用以存储被选择的性别option的id -->
+                var selectElementId = $("#user_sex  option:selected").attr("id");
+                $("#sex_hidden").val(selectElementId);
+            });
+        </script>
+        <style type="text/css">
+            input{
+                -webit-appearance:none;
+            }
+        </style>
+    </head>
+    <body class="bgc-f3f4f6">
+        <#-- 引入警告提示样式 -->
+        <#include "/client/common_warn.ftl">
+        <#-- 引入等待提示样式 -->
+        <#include "/client/common_wait.ftl">
+        <div id="datePlugin"></div>
+        <!-- 头部 -->
+        <header>
+            <a class="back" href="/user"></a>
+            <p>账号设置</p>
+        </header>
+        <!-- 头部 END -->
+        
+        <!-- 账号设置 -->
+        <article class="account-settings">
+            <!-- 头像 -->
+            <section class="base-info">
+                <div class="message">
+                    <label>头像</label>
+                    <div class="editable-info">
+                        <a href="javascript:;">
+                            <img width="60" height="60" class="head-pic" src="${user.headImageUri!''}" alt="头像">
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <!-- 用户名 -->
+            <section class="common-info">
+                <div class="messagebox">
+                    <label>用户名</label>
+                    <div class="editable-info no-icon-next">
+                        <span>${user.username!''}</span>
+                    </div>
+                </div>
+            </section>
+            <!-- 性别 -->
+            <section class="common-info">
+                <div class="messagebox">
+                    <label>性别</label>
+                    <div class="editable-info no-icon-next">
+                        <a class="btn-select" id="btn_select">
+                            <span id="sex_view" class="cur-select">${user.sex!'男'}</span>
+                            <input type="hidden" id="sex_hidden">
+                            <select id="user_sex" onchange="changeSex();">
+                                <option id="sex0" value="男" <#if user.sex??&&user.sex=="男">selected="selected"</#if>>男</option>
+                                <option id="sex1" value="女" <#if user.sex??&&user.sex=="女">selected="selected"</#if>>女</option>
+                                <option id="sex2" value="保密" <#if user.sex??&&user.sex=="保密">selected="selected"</#if>>保密</option>
+                            </select>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <!-- 出生日期 -->
+            <section class="common-info">
+                <div class="messagebox">
+                    <label>出生日期</label>
+                    <div class="editable-info no-icon-next">
+                        <input id="beginTime" class="select-date" <#if user.birthday??>value="${user.birthday?string("yyyy-MM-dd")}"</#if>>
+                    </div>
+                </div>
+            </section>
+            <!-- 收货地址 -->
+            <section class="common-info jump-shipping-address">
+                <div class="messagebox">
+                    <label>收货地址</label>
+                    <div class="editable-info no-icon-next">
+                        <a class="jump" href="/user/address"></a>
+                    </div>
+                </div>
+            </section>
+            <!-- 门店归属 -->
+            <section class="common-info">
+                <div class="messagebox">
+                    <label>门店归属</label>
+                    <div class="editable-info no-icon-next">
+                        <a class="jump c999" href="/user/diysite"></a>
+                    </div>
+                </div>
+            </section>
+            <!-- 账户安全 -->
+            <section class="common-info">
+                <div class="messagebox">
+                    <label>修改密码</label>
+                    <div class="editable-info no-icon-next">
+                        <a class="jump" href="/user/edit/password"></a>
+                    </div>
+                </div>
+            </section>
+            <!-- 退出登陆 -->
+            <a class="jump loginout" href="/login/out">退出登陆</a>
+        </article>
+        <!-- 账号设置 END -->
+    </body>
 </html>
-<!--结束-->

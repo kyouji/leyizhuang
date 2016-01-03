@@ -6,7 +6,7 @@ $(function () {
     // 根据选择的产品载入筛选项
     $(".productIdRadio").click(function(){
         $.ajax({
-            url : '/Verwalter/product/parameter/'+$(this).val() <#if goods??>+"?goodsId=${goods.id}"</#if>,
+            url : '/Verwalter/product/parameter/'+$(this).val() <#if goods??>+"?goodsId=${goods.id?c}"</#if>,
             type : 'GET',
             success : function(res) {
                 $("#productSelectDiv").html(res);

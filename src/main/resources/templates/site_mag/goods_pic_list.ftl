@@ -75,12 +75,6 @@
             height: 500
         });
     }
-function confirmCopy(id)
-{
-    $.dialog.confirm("确定复制该商品吗？", function () {
-        window.location.href = "/Verwalter/goods/copy?id=" + id;
-    });
-}
 </script>
 </head>
 
@@ -103,6 +97,19 @@ function __doPostBack(eventTarget, eventArgument) {
         theForm.submit();
     }
 }
+
+   document.onkeydown = function(event){
+	    if((event.keyCode || event.which) == 13){
+	    	__doPostBack('btnSearch','')
+	    }
+   }
+   
+function confirmCopy(id)
+{
+    $.dialog.confirm("确定复制该商品吗？", function () {
+        window.location.href = "/Verwalter/goods/copy?id=" + id;
+    });
+}
 </script>
 
 <!--导航栏-->
@@ -119,7 +126,7 @@ function __doPostBack(eventTarget, eventArgument) {
   <div id="floatHead" class="toolbar">
     <div class="l-list">
       <ul class="icon-list">
-        <li><a class="add" href="/Verwalter/goods/edit?__VIEWSTATE=${__VIEWSTATE!""}"><i></i><span>新增</span></a></li>
+        <li><a class="add" href="/Verwalter/goods/edit?__VIEWSTATE=${__VIEWSTATE!""}"><i></i><span>导入</span></a></li>
         <li><a id="btnSave" class="save" href="javascript:__doPostBack('btnSave','')"><i></i><span>保存</span></a></li>
         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
@@ -142,6 +149,13 @@ function __doPostBack(eventTarget, eventArgument) {
                 <option value="isNotOnSale" <#if property?? && property=="isNotOnSale">selected="selected"</#if>>已下架</option>
             </select>
         </div>
+    <#--    <div class="rule-single-select">
+            <select name="saleType" onchange="javascript:setTimeout(__doPostBack('saleType',''), 0)">
+                <option value="">所有</option>
+                <option value="flashSale" <#if saleType?? && saleType=="flashSale">selected="selected"</#if>>抢拍</option>
+                <option value="groupSale" <#if saleType?? && saleType=="groupSale">selected="selected"</#if>>团购</option>
+            </select>
+        </div> -->
       </div>
     </div>
     <div class="r-list">
@@ -179,13 +193,13 @@ function __doPostBack(eventTarget, eventArgument) {
             </div>
             <i class="absbg"></i>
             </#if>
-            <h1><span><a href="/Verwalter/goods/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id?c}&__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></span></h1>
+            <h1><span><a href="/Verwalter/goods/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></span></h1>
             <div class="remark">${content.subTitle!""}</div>
             <div class="tools">
                 
-                <a title="上架/下架" class="hot <#if content.isOnSale?? && content.isOnSale>selected</#if>" href="javascript:__doPostBack('btnOnSale','${content.id?c}')"></a>
-                <a title="改价" class="change" href="javascript:showDialogChangePrice('${content.id?c}')"></a>
-                <a title="改价记录" class="record" href="javascript:showDialogPriceLog('${content.id?c}')"></a>
+                <a title="上架/下架" class="hot <#if content.isOnSale?? && content.isOnSale>selected</#if>" href="javascript:__doPostBack('btnOnSale','${content.id?c!''}')"></a>
+                <#--><a title="改价" class="change" href="javascript:showDialogChangePrice('${content.id!""}')"></a>
+                <a title="改价记录" class="record" href="javascript:showDialogPriceLog('${content.id!""}')"></a> -->
                 <input name="listSortId" type="text" value="${content.sortId!""}" class="sort" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)));">
               
               <#--
@@ -199,7 +213,7 @@ function __doPostBack(eventTarget, eventArgument) {
             </div>
             <div class="foot">
               <p class="time"><#if content.onSaleTime??>${content.onSaleTime?string("yyyy-MM-dd HH:mm:ss")}</#if></p>
-              <a href="/Verwalter/goods/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id?c}&__VIEWSTATE=${__VIEWSTATE!""}" title="编辑" class="edit">编辑</a>
+              <a href="/Verwalter/goods/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}" title="编辑" class="edit">编辑</a>
               <a href="javascript:confirmCopy(${content.id?c});" title="复制商品" class="show">复制</a>
             </div>
         </div>

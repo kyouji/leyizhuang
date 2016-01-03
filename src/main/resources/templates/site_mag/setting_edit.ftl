@@ -144,15 +144,14 @@ $(function () {
         </dd>
     </dl>
     <dl>
-        <dt>微博二维码</dt>
+        <dt>苹果App二维码</dt>
         <dd>
-            <input id="iOsImgUrl" name="weiboQrCode" type="text" datatype="*0-255" value="<#if setting??>${setting.weiboQrCode!""}</#if>" class="input normal upload-path">
+            <input id="iOsImgUrl" name="iOsQrCode" type="text" datatype="*0-255" value="<#if setting??>${setting.iOsQrCode!""}</#if>" class="input normal upload-path">
             <div class="upload-box upload-img"></div>
             <span class="Validform_checktip"></span>
             <div class="photo-list thumb_ImgUrl_show thumb_iOsImgUrl_show"></div>
         </dd>
     </dl>
-    <#--
     <dl>
         <dt>安卓App二维码</dt>
         <dd>
@@ -162,7 +161,6 @@ $(function () {
             <div class="photo-list thumb_ImgUrl_show thumb_androidImgUrl_show"></div>
         </dd>
     </dl>
-    -->
     <dl>
         <dt>公司名称</dt>
         <dd>
@@ -215,7 +213,7 @@ $(function () {
     <dl>
         <dt>首页标题(SEO)</dt>
         <dd>
-            <textarea name="seoTitle" rows="2" cols="20" class="input" datatype="*1-255" sucmsg=" "><#if setting??>${setting.seoTitle!""}</#if></textarea>
+            <textarea name="titleSeo" rows="2" cols="20" class="input" datatype="*0-255" sucmsg=" "><#if setting??>${setting.titleSeo!""}</#if></textarea>
             <span class="Validform_checktip">*自定义的首页标题</span>
         </dd>
     </dl>
@@ -290,7 +288,7 @@ $(function () {
     </dl>
 </div> 
 <div class="tab-content" style="display: none;">
-    <dl>
+ <#-->   <dl>
         <dt>注册成功奖励积分</dt>
         <dd>
             <input name="registerSuccessPoints" type="text" value="<#if setting??>${setting.registerSuccessPoints!"50"}<#else>50</#if>" class="input normal" datatype="n" sucmsg=" ">
@@ -318,6 +316,14 @@ $(function () {
             <span class="Validform_checktip">同一天通过商品分享获得的积分超过该值将不再奖励积分</span>
         </dd>
     </dl>
+    
+    <dl>
+            <dt>分销商返利比例</dt>
+            <dd>
+                <input name="returnRation" type="text" value="<#if setting??>${setting.returnRation!"0"}<#else>0</#if>" class="input normal"  sucmsg=" ">
+                <span class="Validform_checktip">填写小数(返利计算为订单总金额*返利比例)</span>
+            </dd>
+        </dl> -->
 </div>    
 <div class="tab-content" style="display: none;">
     <dl>

@@ -42,7 +42,7 @@ $(function () {
 <form method="post" action="/Verwalter/ad/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
-<input type="hidden" name="id" value="<#if ad??>${ad.id!""}</#if>" >
+<input type="hidden" name="id" value="<#if ad??>${ad.id?c!""}</#if>" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
@@ -86,10 +86,10 @@ $(function () {
         <dd>
             <div class="rule-multi-radio multi-radio">
                 <span>
-                    <input type="radio" name="isEnable" value="1" <#if !ad?? || ad?? && ad.isEnable>checked="checked"</#if>>
+                    <input type="radio" name="isEnable" value="1" <#if ad?? && ad.isEnable>checked="checked"</#if>>
                     <label>正常</label>
-                    <input type="radio" name="isEnable" value="0" <#if ad?? && ad.isEnable?? && !ad.isEnable>checked="checked"</#if>>
-                    <label>下架</label>
+                    <input type="radio" name="isEnable" value="0" <#if !ad?? || !ad.isEnable>checked="checked"</#if>>
+                    <label>暂停</label>
                 </span>
             </div>
         </dd>
@@ -98,6 +98,13 @@ $(function () {
         <dt>广告名称</dt>
         <dd>
             <input name="title" type="text" value="<#if ad??>${ad.title!""}</#if>" class="input normal" datatype="*0-100" sucmsg=" ">
+            <span class="Validform_checktip"></span>
+        </dd>
+    </dl>
+    <dl>
+        <dt>广告副标题</dt>
+        <dd>
+            <input name="subtitle" type="text" value="<#if ad??>${ad.subtitle!""}</#if>" class="input normal" >
             <span class="Validform_checktip"></span>
         </dd>
     </dl>

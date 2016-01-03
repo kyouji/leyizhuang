@@ -133,8 +133,8 @@
             <dd>
                 <div class="rule-multi-radio multi-radio">
                     <span id="rblStatus" style="display: none;">
-                        <input type="radio" name="statusId" value="0" <#if !article?? || article?? && article.statusId?? && article.statusId==0>checked="checked"</#if> ><label>正常</label>
-                        <input type="radio" name="statusId" value="1" <#if article?? && article.statusId?? && article.statusId==1>checked="checked"</#if>><label>待审核</label>
+                        <input type="radio" name="statusId" value="0" <#if article?? && article.statusId?? && article.statusId==0>checked="checked"</#if> ><label>正常</label>
+                        <input type="radio" name="statusId" value="1" <#if !article?? || article?? && article.statusId?? && article.statusId==1>checked="checked"</#if>><label>待审核</label>
                         <input type="radio" name="statusId" value="2" <#if article?? && article.statusId?? && article.statusId==2>checked="checked"</#if>><label>不显示</label>
                     </span>
                 </div>
@@ -188,7 +188,7 @@
         <dl>
             <dt>浏览次数</dt>
             <dd>
-                <input name="viewCount" type="text" value="0" value="<#if article??>${article.viewCount!""}</#if>" id="txtClick" class="input txt100" datatype="n" sucmsg=" ">
+                <input name="viewCount" type="text"  value="<#if article??>${article.viewCount!""}</#if>" id="txtClick" class="input txt100" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">点击浏览该信息自动+1</span>
             </dd>
         </dl>
@@ -225,6 +225,14 @@
             <dd>
                 <input name="source" type="text" value="<#if article??>${article.source!""}<#else>本站</#if>" id="field_control_source" class="input normal">
                 <span id="div_source_tip" class="Validform_checktip">非必填，最多50个字符</span>
+            </dd>
+        </dl>
+        
+        <dl>
+            <dt>作者</dt>
+            <dd>
+                <input name="author" type="text" value="<#if article??>${article.author!""}</#if>" id="txtTitle" class="input normal" datatype="*2-100" sucmsg=" ">
+                <span class="Validform_checktip">*最多100个字符</span>
             </dd>
         </dl>
         

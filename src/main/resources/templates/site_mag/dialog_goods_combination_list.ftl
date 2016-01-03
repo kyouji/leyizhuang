@@ -68,7 +68,7 @@
         }
         
         if ($("#txtItemZengPin_CurrentPrice").val() == "") {
-            W.$.dialog.alert('请填写组合价格！', function () { $("#txtItemZengPin_CurrentPrice").focus(); }, api);
+            W.$.dialog.alert('请填写商品数量！', function () { $("#txtItemZengPin_CurrentPrice").focus(); }, api);
             return false;
         }
         
@@ -79,7 +79,6 @@
             parentObj.find("input[id='id']").val($("#txtItemZengPin_Id").val());
             parentObj.find("input[id='price']").val($("#txtItemZengPin_Price").val());
             parentObj.find("input[id='image']").val($("#txtItemZengPin_CoverImageUri").val());
-            parentObj.find("input[id='currentPrice']").val($("#txtItemZengPin_CurrentPrice").val());
         } else {
             var trHtml = '<tr class="td_c">'
             + '<td><input name="combList[${total!'0'}].id" type="hidden" value="" />'
@@ -87,8 +86,8 @@
             + '<input type="text" name="combList[${total!'0'}].sortId" class="td-input" value="99" style="width:90%;" /></td>'
             + '<td><input type="text" id="id" name="combList[${total!'0'}].goodsId" class="td-input" value="' + $("#txtItemZengPin_Id").val() + '" style="width:90%;" /></td>'
             + '<td><input type="text" id="title" name="combList[${total!'0'}].goodsTitle" class="td-input" value="' + $("#txtItemZengPin_Title").val() + '" style="width:90%;" /></td>'
+            + '<td><input type="text" id="number" name="combList[${total!'0'}].number" class="td-input" value="' + $("#txtItemZengPin_CurrentPrice").val() + '" style="width:90%;" /></td>'
             + '<td><input type="text" id="price" name="combList[${total!'0'}].goodsPrice" class="td-input" value="' + $("#txtItemZengPin_Price").val() + '" style="width:90%;" /></td>'
-            + '<td><input type="text" id="currentPrice" name="combList[${total!'0'}].currentPrice" class="td-input" value="' + $("#txtItemZengPin_CurrentPrice").val() + '" style="width:90%;" /></td>'
             + '<td>'
             + '<i class="icon"></i>'
             + '<a title="编辑" class="img-btn edit operator" onclick="show_goods_comb_dialog(this);">编辑</a>'
@@ -151,10 +150,10 @@
       </dd>
     </dl>
     <dl>
-      <dt>商品组合价</dt>
+      <dt>商品数量</dt>
       <dd>
-        <input type="text" id="txtItemZengPin_CurrentPrice" class="input normal"> 元
-        <span class="Validform_checktip">*组合销售时的价格(必填)</span>
+        <input type="text" id="txtItemZengPin_CurrentPrice" class="input normal"> 件
+        <span class="Validform_checktip">*活动商品数量(必填)</span>
       </dd>
     </dl>
 </div>
