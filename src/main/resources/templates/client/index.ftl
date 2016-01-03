@@ -126,7 +126,7 @@
                     <div class="index_goods01">
                         <dl>
                             <dt>
-                                <p>活动促销<span>· 优惠多多</span></p>                          
+                                <p>活动促销<span>·优惠多多</span></p>                          
                                 <a href="/promotion/list"><img src="/client/images/index_guide_right.png" /></a>
                             </dt>
                             <#-- 滑动促销商品 -->
@@ -260,7 +260,7 @@
                         <ul>
                             <li>
                                 <#list commend_page.content as item>
-                                    <a class="good03_box" href="/goods/detail/${item.id?c}">
+                                    <a class="good03_box" href="/goods/detail/${item.goodsId?c}">
                                         <div>
                                             <#if ("goods"+item_index)?eval??>
                                                 <img src="${("goods"+item_index)?eval}" />

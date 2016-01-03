@@ -128,7 +128,6 @@ public class TdIndexController {
 					}
 				}
 			}
-
 		}
 
 		// 查找所有首页推荐的未过期的活动

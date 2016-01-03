@@ -25,7 +25,7 @@
 		<div style="background: #f4f4f4;">
             <#include "/client/common_shopping_type.ftl">
 			<div class="sec_header">
-				<a class="back" href="/index"></a>
+				<a class="back" href="/"></a>
 				<p>个人中心</p>
 				<span class="per_header" onclick="window.location.href='/user/info'"></span>
 			</div>
