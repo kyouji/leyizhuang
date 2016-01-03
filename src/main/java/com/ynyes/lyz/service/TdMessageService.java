@@ -5,6 +5,10 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.ynyes.lyz.entity.TdMessage;
@@ -63,6 +67,16 @@ public class TdMessageService {
 			return null;
 		}
 		return repository.findByTypeIdAndUserIdAndIsReadFalseOrderByCreateTimeDesc(typeId, userId);
+	}
+	
+	/**
+	 * 查找所有 按时间逆序排序
+	 * @author Zhangji
+	 */
+	public Page<TdMessage> findAll(int page, int size)
+	{
+		PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "createTime"));
+		return repository.findAll(pageRequest);
 	}
 
 }
