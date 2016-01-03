@@ -116,6 +116,10 @@ public class TdActivity {
 	// 赠送类型（目前：0. 代表赠送的商品；1. 代表赠送的产品券）
 	@Column
 	private Long giftType;
+	
+	//活动图片
+	@Column
+	private String activityImg;
 
 	
 	public String getSiteName() {
@@ -293,5 +297,14 @@ public class TdActivity {
 	public void setGiftType(Long giftType) {
 		this.giftType = giftType;
 	}
+
+	public String getActivityImg() {
+		return activityImg;
+	}
+
+	public void setActivityImg(String activityImg) {
+		this.activityImg = activityImg;
+	}
+	
 
 }

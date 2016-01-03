@@ -102,10 +102,13 @@ public class TdActivityService {
 			}
 		}
 		String siteNameString = "";
+		String diySiteIdStr = "";
 		for (TdDiySiteList siteList : e.getSiteList()) {
 			siteNameString += siteList.getTitle() + ",";
+			diySiteIdStr += siteList.getInfo() + ",";
 		}
 		e.setSiteName(siteNameString);
+		e.setDiySiteIds(diySiteIdStr);
 
 		// 保存赠品
 		tdGoodsGiftService.save(e.getGiftList());
