@@ -13,9 +13,11 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.ynyes.lyz.entity.TdActivity;
+import com.ynyes.lyz.entity.TdDiySite;
 import com.ynyes.lyz.entity.TdDiySiteList;
 import com.ynyes.lyz.entity.TdGoodsCombination;
 import com.ynyes.lyz.entity.TdGoodsGift;
+import com.ynyes.lyz.entity.TdPriceListItem;
 import com.ynyes.lyz.repository.TdActivityRepo;
 
 @Service
@@ -33,11 +35,14 @@ public class TdActivityService {
 
 	@Autowired
 	private TdCityService tdCityService;
-	
+
 	@Autowired
 	private TdDiySiteListService tdDiySiteListService;
-	
-	@Autowired 
+
+	@Autowired
+	private TdDiySiteService tdDiySiteService;
+
+	@Autowired
 	private TdPriceListItemService tdPriceListItemService;
 
 	public TdActivity save(TdActivity e) {
@@ -97,8 +102,7 @@ public class TdActivityService {
 			}
 		}
 		String siteNameString = "";
-		for (TdDiySiteList siteList : e.getSiteList())
-		{
+		for (TdDiySiteList siteList : e.getSiteList()) {
 			siteNameString += siteList.getTitle() + ",";
 		}
 		e.setSiteName(siteNameString);
@@ -108,11 +112,46 @@ public class TdActivityService {
 
 		// 保存商品
 		tdGoodsCombinationService.save(e.getCombList());
-		
+
 		// 保存门店
 		tdDiySiteListService.save(e.getSiteList());
 
-		return repository.save(e);
+		e = repository.save(e);
+
+		// 获取所有的城市id
+		String siteIds = e.getDiySiteIds();
+
+		// 拆分城市id
+		String[] ids = siteIds.split(",");
+
+		// 获取参与活动的【商品id_商品数量】对
+		String goodsNumber = e.getGoodsNumber();
+		// 拆分【商品id_商品数量】对
+		String[] goods_numbers = goodsNumber.split(",");
+		// 遍历拆分
+		for (String item : goods_numbers) {
+			String[] params = item.split("_");
+			Long id = Long.parseLong(params[0]);
+			// 遍历参加活动的门店
+			for (String siteId : ids) {
+				// 查找到指定id的门店
+				TdDiySite site = tdDiySiteService.findOne(Long.parseLong(siteId));
+				// 查找到指定的价目表
+				TdPriceListItem priceListItem = tdPriceListItemService
+						.findByPriceListIdAndGoodsId(site.getPriceListId(), id);
+				if (null != priceListItem) {
+					priceListItem.setIsPromotion(true);
+					if (null == priceListItem.getActivities()) {
+						priceListItem.setActivities(e.getId() + ",");
+					} else {
+						priceListItem.setActivities(priceListItem.getActivities() + e.getId() + ",");
+					}
+					tdPriceListItemService.save(priceListItem);
+				}
+			}
+		}
+
+		return e;
 	}
 
 	public void delete(Long id) {

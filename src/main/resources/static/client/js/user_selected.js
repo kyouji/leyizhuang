@@ -15,7 +15,7 @@ function operate(operation, type, id) {
 	var priceElement = $(priceId);
 
 	if (0 == operation) {
-		if (0 == quantity) {
+		if (1 == quantity) {
 			warning("亲，不能再少了");
 			return;
 		}
@@ -45,9 +45,29 @@ function operate(operation, type, id) {
 			warning("亲，您的网速不给力啊");
 		},
 		success : function(res) {
-			//关闭等待图标
+			// 关闭等待图标
 			close(100);
 			$("#my_selected").html(res);
 		}
 	});
+}
+
+/**
+ * 去结算的方法（首先判定当前是否存在已选商品）
+ * 
+ * @author dengxiao
+ */
+function clearing() {
+	var number = $("#number").val();
+	if (0 == number) {
+		warning("亲，请先选择商品");
+		setTimeout(function(){
+			window.location.href = "/goods/normal/list";
+		},1000);
+		return;
+	}
+
+	if (number > 0) {
+		window.location.href = "/order";
+	}
 }

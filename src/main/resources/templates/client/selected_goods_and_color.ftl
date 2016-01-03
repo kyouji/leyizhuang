@@ -5,7 +5,7 @@
     <article class="my-selected">
         <!-- 已选列表 -->
         <#list all_selected as goods>
-            <div class="selected-list">
+            <div class="selected-list" id="${goods.goodsId?c}">
                 <div class="swipe"></div>
                 <section class="sec1">
                     <div class="img">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </section>
-                <a class="btn-backspace" href="#"></a>
+                <a class="btn-backspace"></a>
             </div>
         </#list>
     </article>
@@ -43,7 +43,7 @@
     <article class="my-selected">
         <!-- 已选列表 -->
         <#list selected_colors as item>
-            <div class="selected-list">
+            <div class="selected-list" id="${item.goodsId?c}">
                 <section class="sec1">
                     <div class="img">
                         <img src="${item.imageUri!''}" alt="产品图片">
@@ -70,12 +70,13 @@
                         </div>
                     </div>
                 </section>
-                <a class="btn-backspace" href="#"></a>
+                <a class="btn-backspace"></a>
             </div>
         </#list>
     </article>
 </#if>
-
+<#-- 创建一个隐藏标签用于存储当前已选有多少商品（整合后） -->
+<input id="number" type="hidden" value="${selected_number!'0'}">
 <script type="text/javascript">
 $(function touch(){
     $(".my-selected .selected-list .swipe").on('touchmove', function(ev){
@@ -92,8 +93,34 @@ $(function touch(){
     });
     <#-- 点击删除 -->
     $(".btn-backspace").click(function(){
-        
-        $(this).parent(".selected-list").remove();
+        <#--$(this).parent(".selected-list").remove();-->
+        var goodsId = $(this).parent(".selected-list").attr("id");
+        <#-- 开启等待图标 -->
+        wait();
+        <#-- 发送异步请求 -->
+        $.ajax({
+            url:"/goods/delete/selected",
+            type:"post",
+            timeout:10000,
+            data:{
+                goodsId:goodsId
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                <#-- 关闭等待图标 -->
+                close(1);
+                warning("亲，您的网速不给力啊");
+            },
+            success:function(res){
+                <#-- 关闭等待图标 -->
+                close(100);
+                if(0 == res.status){
+                    $("#"+goodsId).remove();
+                }else{
+                    warning("操作失败");
+                }
+                $("#number").val(res.number);                
+            }
+        })
     });
 });
 </script>

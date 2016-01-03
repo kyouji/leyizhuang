@@ -340,7 +340,6 @@ public class TdGoodsController {
 		// 查询是否收藏该商品
 		Boolean isCollect = false;
 		TdUserCollect collect = tdUserCollectService.findByUsernameAndGoodsId(username, goodsId);
-		System.err.println(collect);
 		if (null != collect) {
 			isCollect = true;
 		}
@@ -465,6 +464,119 @@ public class TdGoodsController {
 		map.addAttribute("selected_number", number);
 
 		return "/client/goods_search";
+	}
+
+	/**
+	 * 在已选页面删除已选商品/调色包的方法
+	 * 
+	 * @author dengxiao
+	 */
+	@RequestMapping(value = "/delete/selected")
+	@ResponseBody
+	public Map<String, Object> deleteSelected(HttpServletRequest req, Long goodsId) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+
+		// 获取所有的已选商品
+		List<TdCartGoods> selected_goods = tdCommonService.getSelectedGoods(req);
+		// 获取所有已选的调色包
+		List<TdCartColorPackage> selected_colors = tdCommonService.getSelectedColorPackage(req);
+
+		// 创建一个布尔变量表示是否在已选商品中查找指定的商品
+		Boolean isFind = false;
+		// 遍历所有的已选商品，查找出指定id的已选
+		if (null != selected_goods) {
+			for (int i = 0; i < selected_goods.size(); i++) {
+				TdCartGoods cartGoods = selected_goods.get(i);
+				if (null != cartGoods) {
+					if (null != cartGoods.getGoodsId() && cartGoods.getGoodsId() == goodsId) {
+						isFind = true;
+						selected_goods.remove(i);
+						req.getSession().setAttribute("all_selected", selected_goods);
+						res.put("status", 0);
+					}
+				}
+			}
+		}
+
+		// 在已选商品中没有找到指定goodsId的商品时，遍历已选调色包
+		if (!isFind) {
+			if (null != selected_colors) {
+				for (int i = 0; i < selected_colors.size(); i++) {
+					TdCartColorPackage colorPackage = selected_colors.get(i);
+					if (null != colorPackage) {
+						if (null != colorPackage.getGoodsId() && colorPackage.getGoodsId() == goodsId) {
+							selected_colors.remove(i);
+							req.getSession().setAttribute("all_color", selected_colors);
+							res.put("status", 0);
+						}
+					}
+				}
+			}
+		}
+		
+		// 获取所有的已选商品（整合后）
+		List<TdCartGoods> all = tdCommonService.getAllContainsColorPackage(req);
+		if (null != all) {
+			res.put("number", all.size());
+		}else{
+			res.put("number", 0);
+		}
+		return res;
+	}
+
+	/**
+	 * 立即购买某件商品的方法
+	 * 
+	 * @author dengxiao
+	 */
+	@RequestMapping(value = "/buy/now")
+	public String buyNow(HttpServletRequest req, ModelMap map, Long goodsId) {
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsernameAndIsEnableTrue(username);
+		if (null == user) {
+			return "redirect:/login";
+		}
+		// 查找到指定的商品
+		TdGoods goods = tdGoodsService.findOne(goodsId);
+
+		// 获取用于的指定门店
+		TdDiySite diySite = tdCommonService.getDiySite(req);
+
+		// 获取指定商品的价目表项
+		TdPriceListItem priceListItem = tdPriceListItemService.findByPriceListIdAndGoodsId(diySite.getPriceListId(),
+				goodsId);
+
+		// 判断将其加入到已选商品中还是已选调色包中
+		if (null != goods && null != goods.getIsColorPackage() && goods.getIsColorPackage()) {
+			TdCartColorPackage colorPackage = new TdCartColorPackage();
+			colorPackage.setGoodsId(goodsId);
+			colorPackage.setNumber(goods.getCode());
+			colorPackage.setImageUri(goods.getCoverImageUri());
+			colorPackage.setUsername(username);
+			colorPackage.setSalePrice(priceListItem.getSalePrice());
+			colorPackage.setRealPrice(priceListItem.getRealSalePrice());
+			// 获取已选调色包
+			List<TdCartColorPackage> selected_color = tdCommonService.getSelectedColorPackage(req);
+			selected_color.add(colorPackage);
+			req.getSession().setAttribute("all_color", selected_color);
+		}
+
+		else {
+			TdCartGoods cartGoods = new TdCartGoods();
+			cartGoods.setGoodsId(goodsId);
+			cartGoods.setGoodsTitle(goods.getTitle());
+			cartGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
+			cartGoods.setPrice(priceListItem.getSalePrice());
+			cartGoods.setRealPrice(priceListItem.getRealSalePrice());
+			cartGoods.setQuantity(1L);
+			// 获取已选商品
+			List<TdCartGoods> selected_goods = tdCommonService.getSelectedGoods(req);
+			selected_goods.add(cartGoods);
+			req.getSession().setAttribute("all_selected", selected_goods);
+		}
+
+		return "redirect:/user/selected";
 	}
 
 	/*

@@ -35,7 +35,7 @@
         <div class="clear h50"></div>
         <!-- 底部 -->
         <footer>
-            <a class="btn-clearing" href="/order">去结算</a>
+            <a class="btn-clearing" href="javascript:clearing();">去结算</a>
         </footer>
         <!-- 底部 END -->
     </body>
