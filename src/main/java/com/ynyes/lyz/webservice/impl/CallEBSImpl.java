@@ -110,7 +110,7 @@ public class CallEBSImpl implements ICallEBS {
 
 				if (node.getNodeType() == Node.ELEMENT_NODE) 
 				{
-					Element elem = (Element) node;
+//					Element elem = (Element) node;
 
 //					NodeList name = elem.getElementsByTagName("sob_id");
 //					name.
