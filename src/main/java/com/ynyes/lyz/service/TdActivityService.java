@@ -221,9 +221,7 @@ public class TdActivityService {
 		if (null == totalGoods || null == diySiteId || null == goodsId || null == now) {
 			return null;
 		}
-		return repository
-				.findByDiySiteIdsContainingAndGoodsNumberContainingAndBeginDateBeforeAndFinishDateAfterAndGiftTypeAndTotalGoodsLessThanEqualOrderBySortIdAsc(
-						diySiteId, goodsId, now, now, 0L, totalGoods);
+		return repository.findByDiySiteIdsContainingAndGoodsNumberContainingAndBeginDateBeforeAndFinishDateAfterAndGiftTypeAndTotalGoodsLessThanEqualOrderBySortIdAsc(diySiteId, goodsId, now, now, 0L, totalGoods);
 	}
 
 	public Page<TdActivity> findAll(int page, int size) {

@@ -49,7 +49,7 @@ var theForm = document.forms['form1'];
       <ul class="icon-list">
         <li><a class="add" href="/Verwalter/setting/city/edit"><i></i><span>添加</span></a></li>
         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
-        <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除子公司</span></a></li>
+        <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除城市</span></a></li>
       </ul>
     </div>
   </div>
