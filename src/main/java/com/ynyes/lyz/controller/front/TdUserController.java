@@ -156,8 +156,8 @@ public class TdUserController {
 		if (null == user) {
 			return "redirect:/login";
 		}
-
-		// 查找所有待支付的订单
+		
+		// 查找所有的订单
 		List<TdOrder> all_order_list = tdOrderService.findByUsername(username);
 		map.addAttribute("all_order_list", all_order_list);
 

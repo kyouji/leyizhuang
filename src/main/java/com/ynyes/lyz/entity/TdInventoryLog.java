@@ -1,20 +1,15 @@
 package com.ynyes.lyz.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.neo4j.cypher.internal.compiler.v2_1.ast.False;
-import org.neo4j.cypher.internal.compiler.v2_1.ast.True;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**

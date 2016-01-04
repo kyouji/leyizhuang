@@ -71,7 +71,7 @@ public class TdShippingAddress {
 
 	// 排序号
 	@Column
-	private Long sortId;
+	private Double sortId;
 
 	public Long getId() {
 		return id;
@@ -161,11 +161,11 @@ public class TdShippingAddress {
 		this.isDefaultAddress = isDefaultAddress;
 	}
 
-	public Long getSortId() {
+	public Double getSortId() {
 		return sortId;
 	}
 
-	public void setSortId(Long sortId) {
+	public void setSortId(Double sortId) {
 		this.sortId = sortId;
 	}
 

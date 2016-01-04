@@ -9,8 +9,8 @@ function userRemark(old_remark) {
 	if ("" == remark.trim()) {
 		return;
 	}
-	//如果跟上一次一样，也不需要存储
-	if(old_remark == remark.trim()){
+	// 如果跟上一次一样，也不需要存储
+	if (old_remark == remark.trim()) {
 		return;
 	}
 
@@ -35,10 +35,44 @@ function userRemark(old_remark) {
 			close(100);
 			if (0 == res.status) {
 				warning("已保存");
-				$("#remark").attr("onblur","userRemark('"+ res.remark +"');")
+				$("#remark")
+						.attr("onblur", "userRemark('" + res.remark + "');")
 			} else {
 				warning("亲，您的网速不给力啊");
 			}
+		}
+	});
+}
+
+/**
+ * 去支付的方法
+ * 
+ * @author dengxiao
+ */
+function orderPay() {
+	// 开启等待图标
+	wait();
+
+	// 发送异步请求
+	$.ajax({
+		url : "/order/check",
+		type : "post",
+		timeout : 10000,
+		error : function() {
+			// 关闭等待图标
+			close(1);
+			warning("您的网速不给力啊");
+		},
+		success : function(res) {
+			// 关闭等待图标
+			close(100);
+			$("#buyNow").attr("href","javascript:void(0);")
+			setTimeout(function() {
+				warning(res.message);
+			}, 500);
+			setTimeout(function() {
+				window.location.href = "/user/order/0";
+			}, 3000);
 		}
 	});
 }

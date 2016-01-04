@@ -2,6 +2,7 @@ package com.ynyes.lyz.controller.front;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.lyz.entity.TdCartGoods;
 import com.ynyes.lyz.entity.TdUser;
+import com.ynyes.lyz.service.TdCartGoodsService;
 import com.ynyes.lyz.service.TdUserService;
 import com.ynyes.lyz.util.MD5;
 
@@ -22,6 +25,9 @@ public class TdLoginController {
 
 	@Autowired
 	private TdUserService tdUserService;
+	
+	@Autowired
+	private TdCartGoodsService tdCartGoodsSerivce;
 
 	@RequestMapping
 	public String index() {
@@ -40,6 +46,10 @@ public class TdLoginController {
 			// 设置session失效时间为一天
 			req.getSession().setMaxInactiveInterval((60 * 60 * 24));
 			req.getSession().setAttribute("username", username);
+			
+			//删除用户的已选
+			List<TdCartGoods> list = tdCartGoodsSerivce.findByUsername(username);
+			tdCartGoodsSerivce.deleteAll(list);
 		}
 
 		if (null == user) {

@@ -48,8 +48,8 @@
                                     <div class="div1">${item.title!''}</div>
                                     <div class="div2">￥
                                         <span>
-                                        <#if ("priceListItem"+item_index)?eval??>
-                                            ${("priceListItem"+item_index)?eval?string("0.00")}
+                                        <#if ("priceListItem"+item_index)?eval??&&("priceListItem"+item_index)?eval.salePrice??>
+                                            ${("priceListItem"+item_index)?eval.salePrice?string("0.00")}
                                         <#else>
                                             0.00
                                         </#if>

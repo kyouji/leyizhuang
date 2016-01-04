@@ -22,7 +22,7 @@
     <body style="background: #f3f4f6;>
         <div">
             <div class="sec_header">
-                <a href="javascript:history.go(-1);"></a>
+                <a class="back" href="javascript:history.go(-1);"></a>
                 <p>我的订单</p>				
             </div>
             
@@ -32,18 +32,18 @@
                 <div class="searchbox bgc-f3f4f6 bdt"><input type="text"><a href="#"></a></div>			
                 <!-- 订单管理 -->
                 <ul class="order-nav">
-                    <li id="all"><a href="#">全部</a></li>
-                    <li id="unpayed"><a href="#">待付款</a></li>
-                    <li id="unsignin"><a href="#">待收货</a></li>
-                    <li id="uncommend"><a href="#">待评价</a></li>
+                    <li id="all"><a>全部</a></li>
+                    <li id="unpayed"><a>待付款</a></li>
+                    <li id="unsignin"><a>待收货</a></li>
+                    <li id="uncommend"><a>待评价</a></li>
                 </ul>
                 
                 <!-- 订单分类 -->
                 <article class="orders-species"> 
                     <!-- 订单列表 -->
-                    <#if unpayed_order_list??>
+                    <#if all_order_list??>
                         <div id="all_orders" class="some_orders">
-                            <#list unpayed_order_list as item>
+                            <#list all_order_list as item>
                                 <ol class="order-list">
                                     <li class="li1">
                                         <label>订单号：<span>${item.orderNumber!''}</span></label>

@@ -200,7 +200,7 @@ function pricelistSelect(id) {
 		                            <input type="hidden" name="priceItemList[${gift_index}].dispatch" id="dispatch" class="td-input" value="${gift.dispatch!''}" >
 		                            <input type="hidden" name="priceItemList[${gift_index}].cityName" class="td-input" value="${gift.cityName!''}" >
 		                            <input type="hidden" name="priceItemList[${gift_index}].companyName" id="companyName" class="td-input" value="${gift.companyName!''}" >
-		                            <input type="hidden" name="priceItemList[${gift_index}].isPromotion"  id="isPromotion" class="td-input" value="<#if gift.isPromotion??>${gift.isPromotion?c}</#if>" >
+		                            <input type="hidden" name="priceItemList[${gift_index}].isCommendIndex"  id="isCommendIndex" class="td-input" value="<#if gift.isCommendIndex??>${gift.isCommendIndex?c}</#if>" >
                                     <td>
                                         <input type="hidden" name="priceItemList[${gift_index}].id"  value="${gift.id?c!''}">
                                         <input type="text" name="priceItemList[${gift_index}].sortId" class="td-input" value="${gift.sortId!''}" style="width:90%;">
