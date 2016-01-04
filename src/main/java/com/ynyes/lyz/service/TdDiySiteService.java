@@ -80,22 +80,30 @@ public class TdDiySiteService {
 	public List<TdDiySite> findAll(Iterable<Long> ids) {
 		return (List<TdDiySite>) repository.findAll(ids);
 	}
-	
+
+	public List<TdDiySite> findAll(Sort sort) {
+
+		return (List<TdDiySite>) repository.findAll(sort);
+	}
+
 	/**
 	 * 根据城市id 找下属门店
+	 * 
 	 * @param regionId
 	 * @author Mdj
 	 */
-	public List<TdDiySite> findByRegionIdAndIsEnableOrderBySortIdAsc(Long regionId)
-	{
-		return repository.findByRegionIdAndIsEnableTrueOrderBySortIdAsc(regionId);
+	public List<TdDiySite> findByRegionIdAndIsEnableOrderBySortIdAsc(
+			Long regionId) {
+		return repository
+				.findByRegionIdAndIsEnableTrueOrderBySortIdAsc(regionId);
 	}
-	
-	public Page<TdDiySite> findByRegionIdAndIsEnableTrueOrderBySortIdAsc(Long regionId,int page,int size)
-	{
+
+	public Page<TdDiySite> findByRegionIdAndIsEnableTrueOrderBySortIdAsc(
+			Long regionId, int page, int size) {
 		PageRequest pageRequest = new PageRequest(page, size);
-		
-		return repository.findByRegionIdAndIsEnableTrueOrderBySortIdAsc(regionId, pageRequest);
+
+		return repository.findByRegionIdAndIsEnableTrueOrderBySortIdAsc(
+				regionId, pageRequest);
 	}
 
 	public List<TdDiySite> findByIsEnableTrue() {
@@ -103,15 +111,18 @@ public class TdDiySiteService {
 	}
 
 	public Page<TdDiySite> findAllOrderBySortIdAsc(int page, int size) {
-		PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.ASC, "sortId"));
+		PageRequest pageRequest = new PageRequest(page, size, new Sort(
+				Direction.ASC, "sortId"));
 
 		return repository.findAll(pageRequest);
 	}
 
-	public Page<TdDiySite> searchAllOrderBySortIdAsc(String keywords, int page, int size) {
+	public Page<TdDiySite> searchAllOrderBySortIdAsc(String keywords, int page,
+			int size) {
 		PageRequest pageRequest = new PageRequest(page, size);
 
-		return repository.findByTitleContainingOrderBySortIdAsc(keywords, pageRequest);
+		return repository.findByTitleContainingOrderBySortIdAsc(keywords,
+				pageRequest);
 	}
 
 	/**
