@@ -18,6 +18,7 @@
  */
 package com.ynyes.lyz.webservice;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 // START SNIPPET: service
@@ -25,7 +26,9 @@ import javax.jws.WebService;
 @WebService
 public interface ICallEBS {
 
-    String GetErpInfo(String STRTABLE, String STRTYPE, String XML);
+	String GetErpInfo(@WebParam(name = "STRTABLE") String STRTABLE,
+			@WebParam(name = "STRTYPE") String STRTYPE,
+			@WebParam(name = "XML") String XML);
 
 }
 // END SNIPPET: service
