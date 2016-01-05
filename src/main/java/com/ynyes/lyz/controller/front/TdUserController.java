@@ -27,6 +27,7 @@ import com.ynyes.lyz.entity.TdDistrict;
 import com.ynyes.lyz.entity.TdDiySite;
 import com.ynyes.lyz.entity.TdGoods;
 import com.ynyes.lyz.entity.TdOrder;
+import com.ynyes.lyz.entity.TdPayType;
 import com.ynyes.lyz.entity.TdPriceListItem;
 import com.ynyes.lyz.entity.TdSetting;
 import com.ynyes.lyz.entity.TdShippingAddress;
@@ -45,6 +46,7 @@ import com.ynyes.lyz.service.TdDistrictService;
 import com.ynyes.lyz.service.TdDiySiteService;
 import com.ynyes.lyz.service.TdGoodsService;
 import com.ynyes.lyz.service.TdOrderService;
+import com.ynyes.lyz.service.TdPayTypeService;
 import com.ynyes.lyz.service.TdPriceListItemService;
 import com.ynyes.lyz.service.TdSettingService;
 import com.ynyes.lyz.service.TdShippingAddressService;
@@ -115,6 +117,9 @@ public class TdUserController {
 
 	@Autowired
 	private TdSettingService tdSettingService;
+
+	@Autowired
+	private TdPayTypeService tdPayTypeService;
 
 	/**
 	 * 跳转到个人中心的方法（后期会进行修改，根据不同的角色，跳转的页面不同）
@@ -1101,5 +1106,117 @@ public class TdUserController {
 			map.addAttribute("product_used_list", product_used_list);
 			return "/client/user_product_coupon";
 		}
+	}
+
+	/**
+	 * 对于某个未支付订单，点击去支付，跳转到支付界面的方法
+	 * 
+	 * @author dengxiao
+	 */
+	@RequestMapping(value = "/order/pay")
+	public String userOrderPay(HttpServletRequest req, ModelMap map, Long id) {
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsername(username);
+		if (null == user) {
+			return "redirect:/login";
+		}
+
+		// 获取所有的支付方式
+		// 获取所有的支付方式
+		List<TdPayType> pay_type_list = tdPayTypeService.findByIsOnlinePayTrueAndIsEnableTrueOrderBySortIdAsc();
+		map.addAttribute("pay_type_list", pay_type_list);
+
+		// 查询是否存在货到付款的支付方式
+		TdPayType cashOnDelivery = tdPayTypeService.findByTitleAndIsEnableTrue("货到付款");
+		if (null != cashOnDelivery) {
+			map.addAttribute("cashOndelivery", cashOnDelivery);
+		}
+
+		map.addAttribute("orderId", id);
+		return "/client/order_to_pay";
+	}
+
+	/**
+	 * 进行订单结算的方法
+	 * 
+	 * @author dengxiao
+	 */
+	@RequestMapping(value = "/order/pay/now")
+	@ResponseBody
+	public Map<String, Object> orderPayNow(HttpServletRequest req, Long type, Long orderId) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+		// 获取当前登陆用户
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsernameAndIsEnableTrue(username);
+
+		// 获取指定id的订单
+		TdOrder order = tdOrderService.findOne(orderId);
+		// 获取指定的支付方式
+		TdPayType payType = tdPayTypeService.findOne(type);
+		if (null != payType) {
+			String title = payType.getTitle();
+			// 如果是在线支付的情况
+			if (null != payType && payType.getIsOnlinePay()) {
+				switch (title) {
+				case "预存款":
+					// 获取用户的余额
+					Double balance = user.getBalance();
+					// 获取用户的可提现余额
+					Double cashBalance = user.getCashBalance();
+					// 获取用户的不可提现余额
+					Double unCashBalance = user.getUnCashBalance();
+					if (null == balance) {
+						balance = 0.0;
+					}
+					if (null == cashBalance) {
+						cashBalance = 0.0;
+					}
+					if (null == unCashBalance) {
+						unCashBalance = 0.0;
+					}
+
+					Double total_price = 0.0;
+					// 获取订单总额
+					if (null != order && null != order.getTotalPrice()) {
+						total_price = order.getTotalPrice();
+					}
+
+					// 判断余额是否足够支付
+					if (balance < total_price) {
+						res.put("message", "您的余额不足，请选择其他支付方式");
+						return res;
+					}
+
+					if (unCashBalance < total_price) {
+						user.setUnCashBalance(0.0);
+						user.setCashBalance(cashBalance + unCashBalance - total_price);
+					} else {
+						user.setUnCashBalance(unCashBalance - total_price);
+					}
+					order.setStatusId(3L);
+					user.setBalance(balance - total_price);
+					tdUserService.save(user);
+					res.put("message", "操作成功");
+					res.put("status", 0);
+					break;
+				}
+			}
+			// 如果不是在线支付
+			if (null != payType && !payType.getIsOnlinePay()) {
+				switch (title) {
+				case "货到付款":
+					if (null != order) {
+						order.setStatusId(3L);
+						tdOrderService.save(order);
+						res.put("message", "操作成功");
+						res.put("status", 0);
+					}
+					break;
+				}
+			}
+		}
+
+		return res;
 	}
 }

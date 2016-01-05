@@ -20,6 +20,16 @@
                                         <input type="hidden" id="inventory${goods.id?c}" value="<#if goods.leftNumber??>${goods.leftNumber?c}<#else>0</#if>">
                                         <#-- 商品的标题，点击可跳转到详情页 -->
                                         <p onclick="window.location.href='/goods/detail/${goods.id?c}'">${goods.title!''}</p>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <label>123</label>
                                         <div class="fen_div01">
                                             <#-- 判断指定商品在该地区是否参与促销 -->
                                             <#if ("priceListItem"+level_one_index+"_"+level_two_index+"_"+goods_index)?eval??>
@@ -41,9 +51,9 @@
                                                 </#if>
                                             </#if>
                                             <#-- 判断是否属于调色产品 -->
-                                            <#if goods.isColorful??&&goods.isColorful>
+                                            <#--<#if goods.isColorful??&&goods.isColorful>-->
                                                 <span onclick="changeColor(${goods.id?c});">调色</span>
-                                            </#if>
+                                            <#--</#if>-->
                                         </div>
                                     </dd>
                                 </dl>   

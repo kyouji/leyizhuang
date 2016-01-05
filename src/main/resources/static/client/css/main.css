@@ -456,7 +456,7 @@
 	width: 100%;
 	font-size: 1.1em;
 	min-height: 20%;
-	padding: 4% 0;	
+	padding-top:2%;	
 }
 .good03_box .box03_pri{
 	width: 100%;
@@ -464,6 +464,7 @@
 	text-align: center;
 	font-size: 1.2em;
 	color: #cc1421;
+	margin-top:2px
 }
 
 

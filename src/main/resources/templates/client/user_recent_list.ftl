@@ -46,6 +46,14 @@
                                 </div>
                                 <div class="product-info">
                                     <div class="div1">${item.title!''}</div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <label>123</label>
                                     <div class="div2">￥
                                         <span>
                                         <#if ("priceListItem"+item_index)?eval??&&("priceListItem"+item_index)?eval.salePrice??>

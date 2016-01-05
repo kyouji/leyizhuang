@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.aspectj.weaver.PrivilegedAccessMunger;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**

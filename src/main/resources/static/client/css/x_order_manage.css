@@ -554,7 +554,7 @@
 .my-selected .selected-list {
     margin-top: 4%;
     width:100%;
-    height:72px;
+    height:88px;
     background: #fff;
     border-top: 1px solid #ddd;
     -webkit-transition: all 0.3s linear;
@@ -597,6 +597,7 @@
     border: 1px solid #ddd;
     -webkit-box-sizing: border-box;
                     box-sizing: border-box;
+                    margin-top:11px;
 }
 .my-selected .selected-list .sec1 .img img {
     width: 58px;
