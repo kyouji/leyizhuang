@@ -98,13 +98,13 @@ public class TdPriceListItem {
 	
 	//价目表头ID
 	@Column
-	private Integer listHeaderId;
+	private Long listHeaderId;
 	
 	//描述
 	private String description;
 	
 	//价目表行ID
-	private Integer listLineId;
+	private Long listLineId;
 	
 	//产品ID
 	private Integer inventoryItemId;
@@ -121,11 +121,11 @@ public class TdPriceListItem {
 	//价格
 	private Double price;
 
-	public Integer getListHeaderId() {
+	public Long getListHeaderId() {
 		return listHeaderId;
 	}
 
-	public void setListHeaderId(Integer listHeaderId) {
+	public void setListHeaderId(Long listHeaderId) {
 		this.listHeaderId = listHeaderId;
 	}
 
@@ -137,11 +137,11 @@ public class TdPriceListItem {
 		this.description = description;
 	}
 
-	public Integer getListLineId() {
+	public Long getListLineId() {
 		return listLineId;
 	}
 
-	public void setListLineId(Integer listLineId) {
+	public void setListLineId(Long listLineId) {
 		this.listLineId = listLineId;
 	}
 

@@ -40,9 +40,11 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.ynyes.lyz.entity.TdDiySite;
+import com.ynyes.lyz.entity.TdGoods;
 import com.ynyes.lyz.entity.TdPriceList;
 import com.ynyes.lyz.entity.TdPriceListItem;
 import com.ynyes.lyz.service.TdDiySiteService;
+import com.ynyes.lyz.service.TdGoodsService;
 import com.ynyes.lyz.service.TdPriceListItemService;
 import com.ynyes.lyz.service.TdPriceListService;
 import com.ynyes.lyz.webservice.ICallEBS;
@@ -58,6 +60,9 @@ public class CallEBSImpl implements ICallEBS {
 	
 	@Autowired
 	private TdPriceListItemService tdPriceListItemService;
+	
+	@Autowired
+	private TdGoodsService tdGoodsService;
 
 	public String GetErpInfo(String STRTABLE, String STRTYPE, String XML) 
 	{
@@ -125,8 +130,8 @@ public class CallEBSImpl implements ICallEBS {
 		{
 			for (int i = 0; i < nodeList.getLength(); i++)
 			{
-				Integer sob_id = null;
-				Integer customer_id = null;
+				Long sob_id = null;
+				Long customer_id = null;
 				String customer_number = null;
 				String customer_name = null;
 				String store_code = null;
@@ -142,7 +147,7 @@ public class CallEBSImpl implements ICallEBS {
 				NodeList childNodeList = node.getChildNodes();
 				for (int idx = 0; idx < childNodeList.getLength(); idx++)
 				{
-					Node childNode = childNodeList.item(idx);
+ 					Node childNode = childNodeList.item(idx);
 					
 					if (childNode.getNodeType() == Node.ELEMENT_NODE) 
 					{
@@ -152,7 +157,7 @@ public class CallEBSImpl implements ICallEBS {
 							// 有值
 							if (null != childNode.getChildNodes().item(0))
 							{
-								sob_id = Integer.parseInt(childNode.getChildNodes().item(0).getNodeValue());
+								sob_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
 							}
 							// 空值
 							else
@@ -160,70 +165,70 @@ public class CallEBSImpl implements ICallEBS {
 								sob_id = null;
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("CUSTOMER_ID"))
+						else if (childNode.getNodeName().equalsIgnoreCase("CUSTOMER_ID"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
-								customer_id = Integer.parseInt(childNode.getChildNodes().item(0).getNodeValue());
+								customer_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("CUSTOMER_NUMBER"))
+						else if (childNode.getNodeName().equalsIgnoreCase("CUSTOMER_NUMBER"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								customer_number = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("CUSTOMER_NAME"))
+						else if (childNode.getNodeName().equalsIgnoreCase("CUSTOMER_NAME"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								customer_name = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("STORE_CODE"))
+						else if (childNode.getNodeName().equalsIgnoreCase("STORE_CODE"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								store_code = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("CUST_TYPE_CODE"))
+						else if (childNode.getNodeName().equalsIgnoreCase("CUST_TYPE_CODE"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								cust_type_code = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("CUST_TYPE_NAME"))
+						else if (childNode.getNodeName().equalsIgnoreCase("CUST_TYPE_NAME"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								cust_type_name = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("ADDRESS"))
+						else if (childNode.getNodeName().equalsIgnoreCase("ADDRESS"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								address = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("DEPT_CODE"))
+						else if (childNode.getNodeName().equalsIgnoreCase("DEPT_CODE"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								dept_code = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("DEPT_DESC"))
+						else if (childNode.getNodeName().equalsIgnoreCase("DEPT_DESC"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								dept_desc = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("ENABLED_FLAG"))
+						else if (childNode.getNodeName().equalsIgnoreCase("ENABLED_FLAG"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
@@ -237,13 +242,16 @@ public class CallEBSImpl implements ICallEBS {
 
 					
 					
-				TdDiySite diySite = tdDiySiteService.findBySobIdAndCustomerId(sob_id, customer_id);
+				TdDiySite diySite = tdDiySiteService.findByCustomerIdAndSobId(customer_id, sob_id);
 
 				if (diySite == null)
 				{
 					diySite = new TdDiySite();
 				}
 
+				diySite.setRegionId(sob_id);
+				diySite.setCustomerId(customer_id);
+				
 				if (cust_type_code.equalsIgnoreCase("JX"))
 				{
 					diySite.setIsDirect(false);
@@ -252,6 +260,7 @@ public class CallEBSImpl implements ICallEBS {
 				{
 					diySite.setIsDirect(true);
 				}
+				
 				if (enabled_flag.equalsIgnoreCase("Y")) 
 				{
 					diySite.setIsEnable(true);
@@ -260,29 +269,29 @@ public class CallEBSImpl implements ICallEBS {
 				{
 					diySite.setIsEnable(false);
 				}
-				diySite.setTitle(cust_type_name);
+				diySite.setTitle(customer_name);
 				diySite.setAddress(address);
 				diySite.setInfo(dept_desc);
+				diySite.setSobId(sob_id);
 				tdDiySiteService.save(diySite);
 				
 				return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
 			}
-
 		}
 		else if (STRTABLE.equalsIgnoreCase("CUXAPP_OM_PRICE_LIST_H_OUT"))//TdPriceList
 		{
 			// 遍历所有TABLE结构
 			for (int i = 0; i < nodeList.getLength(); i++)
 			{
-				Integer list_header_id = null;
-				Integer sob_id = null;
-				String name = null;
-				String active_flag = null;
-				String description = null;
-				String start_date_active = null;
-				String end_date_active = null;
-				String price_type = null;
-				String price_type_DESC = null;
+				Long list_header_id = null;//价目表ID
+				Long sob_id = null;//分公司ID
+				String name = null;//价目表名称
+				String active_flag = null;//有效标识 Y有效， N无效
+				String description = null;//描述
+				String start_date_active = null;//生效日期
+				String end_date_active = null;//失效日期
+				String price_type = null;//价目表类型
+				String price_type_DESC = null;//价目表类型描述
 				
 				Node node = nodeList.item(i);
 				NodeList childNodeList = node.getChildNodes();
@@ -300,14 +309,14 @@ public class CallEBSImpl implements ICallEBS {
 							// 有值
 							if (null != childNode.getChildNodes().item(0))
 							{
-								list_header_id = Integer.parseInt(childNode.getChildNodes().item(0).getNodeValue());
+								list_header_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
 							}
 						}
 						if (childNode.getNodeName().equalsIgnoreCase("sob_id"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
-								sob_id = Integer.parseInt(childNode.getChildNodes().item(0).getNodeValue());
+								sob_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
 							}
 						}
 						if (childNode.getNodeName().equalsIgnoreCase("name"))
@@ -361,13 +370,13 @@ public class CallEBSImpl implements ICallEBS {
 						}
 					}
 				}
-				TdPriceList tdPriceList = tdPriceListService.findByListHeaderId(list_header_id);
+				TdPriceList tdPriceList = tdPriceListService.findOne(list_header_id);
 				if (tdPriceList == null)
 				{
 					tdPriceList = new TdPriceList();
+					tdPriceList.setId(list_header_id);
 				}
-				tdPriceList.setListHeaderId(list_header_id);
-				tdPriceList.setSobId(sob_id);
+				tdPriceList.setCityId(sob_id);;
 				tdPriceList.setName(name);
 				tdPriceList.setActiveFlag(active_flag);
 				tdPriceList.setDescription(description);
@@ -397,16 +406,16 @@ public class CallEBSImpl implements ICallEBS {
 		{
 			for (int i = 0; i < nodeList.getLength(); i++)
 			{
-				Integer list_header_id = null;
-				Integer list_line_id = null;
-				Integer inventory_item_id = null;
-				String  description= null;
-				String item_num = null;
-				String item_desc = null;
-				String product_uom_code = null;
-				Double price = null;
-				String start_date_active = null;
-				String end_date_active = null;
+				Long list_header_id = null;//价目表头ID
+				Long list_line_id = null;//价目表行ID
+				Long inventory_item_id = null;//产品ID
+				String  description= null;//描述
+				String item_num = null;//产品编号
+				String item_desc = null;//物料描述
+				String product_uom_code = null;//物料单位
+				Double price = null;//价格
+				String start_date_active = null;//生效日期
+				String end_date_active = null;//失效日期
 				
 				
 				Node node = nodeList.item(i);
@@ -423,66 +432,66 @@ public class CallEBSImpl implements ICallEBS {
 							// 有值
 							if (null != childNode.getChildNodes().item(0))
 							{
-								list_header_id = Integer.parseInt(childNode.getChildNodes().item(0).getNodeValue());
+								list_header_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("list_line_id"))
+						else if (childNode.getNodeName().equalsIgnoreCase("list_line_id"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
-								list_line_id = Integer.parseInt(childNode.getChildNodes().item(0).getNodeValue());
+								list_line_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("inventory_item_id"))
+						else if (childNode.getNodeName().equalsIgnoreCase("inventory_item_id"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
-								inventory_item_id = Integer.parseInt(childNode.getChildNodes().item(0).getNodeValue());
+								inventory_item_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("description"))
+						else if (childNode.getNodeName().equalsIgnoreCase("description"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								description = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("item_num"))
+						else if (childNode.getNodeName().equalsIgnoreCase("item_num"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								item_num = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("item_desc"))
+						else if (childNode.getNodeName().equalsIgnoreCase("item_desc"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								item_desc = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("product_uom_code"))
+						else if (childNode.getNodeName().equalsIgnoreCase("product_uom_code"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								product_uom_code = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("price"))
+						else if (childNode.getNodeName().equalsIgnoreCase("price"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								price = Double.parseDouble(childNode.getChildNodes().item(0).getNodeValue());
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("start_date_active"))
+						else if (childNode.getNodeName().equalsIgnoreCase("start_date_active"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								start_date_active = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("end_date_active"))
+						else if (childNode.getNodeName().equalsIgnoreCase("end_date_active"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
@@ -493,60 +502,41 @@ public class CallEBSImpl implements ICallEBS {
 				}
 				//保存
 				
-				TdPriceListItem tdPriceListItem =  tdPriceListItemService.findByListHeaderId(list_header_id);
+				TdPriceListItem tdPriceListItem =  tdPriceListItemService.findOne(list_line_id);
 				if (tdPriceListItem == null)
 				{
 					tdPriceListItem = new TdPriceListItem();
+					tdPriceListItem.setId(list_line_id);
 				}
-				tdPriceListItem.setListHeaderId(list_header_id);
+				tdPriceListItem.setPriceListId(list_header_id);
 				tdPriceListItem.setDescription(description);
 				tdPriceListItem.setListLineId(list_line_id);
 				tdPriceListItem.setItemNum(item_num);
 				tdPriceListItem.setItemDesc(item_desc);
 				tdPriceListItem.setProductUomCode(product_uom_code);
 				tdPriceListItem.setPrice(price);
+				tdPriceListItem.setGoodsId(inventory_item_id);
 				
 				tdPriceListItemService.save(tdPriceListItem);
-				
-				
 			}
 			return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
 		}
-		else if (STRTABLE.equalsIgnoreCase("CUXAPP_INV_ITEMS_OUT"))
+		else if (STRTABLE.equalsIgnoreCase("CUXAPP_INV_ITEMS_OUT"))//TdGoods
 		{
 			for (int i = 0; i < nodeList.getLength(); i++)
 			{
-				Long inventory_item_id = null;
-				String item_code = null;
-				String item_description = null;
-				String item_barcode= null;
-				String unit = null;
-				String unit_name = null;
-				Long inv_category_id = null;
-				Long brad_category_id = null;
-				Long product_category_id = null;
-				String weight_uom_code = null;
-				Integer weight_uom_name = null;
-				Integer unit_weight = null;
-				Integer volume_uom_code = null;
-				String  volume_uom_name= null;
-				String unit_volume = null;
-				String dimension_uom_code = null;
-				String unit_length = null;
-				Double unit_width = null;
-				String unit_height = null;
-				String item_type_name = null;
-				Integer item_type_code = null;
-				Integer inventory_item_status = null;
-				Integer product_flag = null;
-				String  gross_weight= null;
-				String denomination = null;
-				String t_flag = null;
-				String sr_flag = null;
-				Double coupon_useful_life = null;
-				String coupon_start_date_active = null;
-				String coupon_end_date_active = null;
-				Integer attribute1 = null;
+				Long inventory_item_id = null; //物料ID
+				String item_code = null;//物料编号
+				String item_description = null;//物料描述
+				String item_barcode= null;//产品条码
+				Long inv_category_id = null;//库存分类ID
+				Long brad_category_id = null;//品牌分类ID
+				Long product_category_id = null;//物理分类ID
+				String item_type_name = null;//物料类型名称
+				String item_type_code = null;//物料类型CODE
+				Integer inventory_item_status = null;//物料状态 0 失效，1 有效
+				String product_flag = null;//产品标识 LYZ乐易装,HR华润
+				Double attribute1 = null;//采购价
 				
 				
 				Node node = nodeList.item(i);
@@ -566,72 +556,126 @@ public class CallEBSImpl implements ICallEBS {
 								inventory_item_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("item_code"))
+						else if (childNode.getNodeName().equalsIgnoreCase("item_code"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								item_code = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						if (childNode.getNodeName().equalsIgnoreCase("item_description"))
+						else if (childNode.getNodeName().equalsIgnoreCase("item_description"))
 						{
 							if (null != childNode.getChildNodes().item(0))
 							{
 								item_description = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-//						if (childNode.getNodeName().equalsIgnoreCase("description"))
-//						{
-//							if (null != childNode.getChildNodes().item(0))
-//							{
-//								description = childNode.getChildNodes().item(0).getNodeValue();
-//							}
-//						}
-//						if (childNode.getNodeName().equalsIgnoreCase("item_num"))
-//						{
-//							if (null != childNode.getChildNodes().item(0))
-//							{
-//								item_num = childNode.getChildNodes().item(0).getNodeValue();
-//							}
-//						}
-//						if (childNode.getNodeName().equalsIgnoreCase("item_desc"))
-//						{
-//							if (null != childNode.getChildNodes().item(0))
-//							{
-//								item_desc = childNode.getChildNodes().item(0).getNodeValue();
-//							}
-//						}
-//						if (childNode.getNodeName().equalsIgnoreCase("product_uom_code"))
-//						{
-//							if (null != childNode.getChildNodes().item(0))
-//							{
-//								product_uom_code = childNode.getChildNodes().item(0).getNodeValue();
-//							}
-//						}
-//						if (childNode.getNodeName().equalsIgnoreCase("price"))
-//						{
-//							if (null != childNode.getChildNodes().item(0))
-//							{
-//								price = Double.parseDouble(childNode.getChildNodes().item(0).getNodeValue());
-//							}
-//						}
-//						if (childNode.getNodeName().equalsIgnoreCase("start_date_active"))
-//						{
-//							if (null != childNode.getChildNodes().item(0))
-//							{
-//								start_date_active = childNode.getChildNodes().item(0).getNodeValue();
-//							}
-//						}
-//						if (childNode.getNodeName().equalsIgnoreCase("end_date_active"))
-//						{
-//							if (null != childNode.getChildNodes().item(0))
-//							{
-//								end_date_active = childNode.getChildNodes().item(0).getNodeValue();
-//							}
+						else if (childNode.getNodeName().equalsIgnoreCase("item_barcode"))
+						{
+							if (null != childNode.getChildNodes().item(0))
+							{
+								item_barcode = childNode.getChildNodes().item(0).getNodeValue();
+							}
+						}
+						else if (childNode.getNodeName().equalsIgnoreCase("item_type_name"))
+						{
+							if (null != childNode.getChildNodes().item(0))
+							{
+								item_type_name = childNode.getChildNodes().item(0).getNodeValue();
+							}
+						}
+						else if (childNode.getNodeName().equalsIgnoreCase("item_type_code"))
+						{
+							if (null != childNode.getChildNodes().item(0))
+							{
+								item_type_code = childNode.getChildNodes().item(0).getNodeValue();
+							}
+						}
+						else if (childNode.getNodeName().equalsIgnoreCase("inv_category_id"))
+						{
+							if (null != childNode.getChildNodes().item(0))
+							{
+								inv_category_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
+							}
+						}
+						else if (childNode.getNodeName().equalsIgnoreCase("brad_category_id"))
+						{
+							if (null != childNode.getChildNodes().item(0))
+							{
+								brad_category_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
+							}
+						}
+						else if (childNode.getNodeName().equalsIgnoreCase("inventory_item_status"))
+						{
+							if (null != childNode.getChildNodes().item(0))
+							{
+								inventory_item_status = Integer.parseInt(childNode.getChildNodes().item(0).getNodeValue());
+							}
+						}
+						else if (childNode.getNodeName().equalsIgnoreCase("product_category_id"))
+						{
+							if (null != childNode.getChildNodes().item(0))
+							{
+								product_category_id = Long.parseLong(childNode.getChildNodes().item(0).getNodeValue());
+							}
+						}
+						else if (childNode.getNodeName().equalsIgnoreCase("product_flag"))
+						{
+							if (null != childNode.getChildNodes().item(0))
+							{
+								product_flag = childNode.getChildNodes().item(0).getNodeValue();
+							}
+						}
+						else if (childNode.getNodeName().equalsIgnoreCase("attribute1"))
+						{
+							if (null != childNode.getChildNodes().item(0))
+							{
+								attribute1 = Double.parseDouble(childNode.getChildNodes().item(0).getNodeValue());
+							}
 						}
 					}
 				}
 				//保存
+				TdGoods tdGoods = null;
+				if (inv_category_id != null)
+				{
+				 tdGoods = tdGoodsService.findOne(inventory_item_id);
+				}
+				if (tdGoods == null)
+				{
+					tdGoods = new TdGoods();
+					tdGoods.setId(inventory_item_id);
+				}
+				tdGoods.setCode(item_code);
+				tdGoods.setDetail(item_description);
+				tdGoods.setItemBarcode(item_barcode);
+				tdGoods.setBradCategoryId(brad_category_id);
+				tdGoods.setProductCategoryId(product_category_id);
+				tdGoods.setItemTypeName(item_type_name);
+				tdGoods.setItemTypeCode(item_type_code);
+				if (inventory_item_status == 0)
+				{
+					tdGoods.setIsOnSale(false);
+				}
+				else
+				{
+					tdGoods.setIsOnSale(true);
+				}
+				if (product_flag.equalsIgnoreCase("LYZ"))
+				{
+					tdGoods.setBelongTo(2L);
+				}
+				else
+				{
+					tdGoods.setBelongTo(1L);
+				}
+				tdGoods.setAttribute1(attribute1);
+				tdGoodsService.save(tdGoods, "数据导入");
+			}
+			return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
+		}
+		else if (STRTABLE.equalsIgnoreCase("CUXAPP_INV_ITEM_CATES_OUT"))
+		{
 			return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
 		}
 
