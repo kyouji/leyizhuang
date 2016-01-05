@@ -70,6 +70,11 @@ public class TdDiySiteService {
 
 		return repository.findOne(id);
 	}
+	
+	public TdDiySite findBySobIdAndCustomerId(Integer sobId,Integer customerId)
+	{
+		return repository.findBySobIdAndCustomerId(sobId, customerId);
+	}
 
 	/**
 	 * 查找

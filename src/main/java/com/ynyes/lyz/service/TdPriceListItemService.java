@@ -28,6 +28,15 @@ public class TdPriceListItemService {
 		return repository.save(e);
 	}
 	
+	public TdPriceListItem findByListHeaderId(Integer listHeaderId)
+	{
+		if (listHeaderId == null)
+		{
+			return null;
+		}
+		return repository.findByListHeaderId(listHeaderId);
+	}
+	
 	//zhangji
 	public List<TdPriceListItem> save(List<TdPriceListItem> e) {
 		if (null == e) {

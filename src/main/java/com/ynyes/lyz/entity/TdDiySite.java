@@ -102,6 +102,32 @@ public class TdDiySite {
 	//是否是直营门店
 	@Column
 	private Boolean isDirect;
+	
+	// 接口新加数据    <--------------
+	//分公司ID
+	@Column
+	private Integer sobId;
+	
+	//客户ID
+	@Column
+	private Integer customerId;
+	
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public Integer getSobId() {
+		return sobId;
+	}
+
+	public void setSobId(Integer sobId) {
+		this.sobId = sobId;
+	}
 
 	public Long getRegionId() {
 		return regionId;

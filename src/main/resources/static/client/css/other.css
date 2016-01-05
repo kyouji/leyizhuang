@@ -1497,23 +1497,23 @@
 }
 /*10活动促销*/
 .activ_content{
-    width: 96%;
-    padding: 2% 2%;
+    width: 94%;
+    padding: 2% 3%;
     overflow: hidden;
+    margin-bottom:10px;
+
 }
 .activ_content a{
-    width: 46%;
+    width: 96%;
     overflow: hidden;
     display: block;
     float: left;
     background: white;
-    margin-left: 4%;
-    margin-top: 4%;
-    padding:2% 0;
+    padding:2%;
+    border:1px #dddddd solid;
+    margin-bottom:10px;
 }
-.activ_content a:nth-child(2n-1){
-    margin-left: 2%;
-}
+
 .activ_content dl{
     width: 100%;
 
@@ -1527,17 +1527,7 @@
     margin: auto;
     padding: 1% 0;
 }
-.activ_content dl dt p:nth-child(1){
-    color: black;
-    border-bottom: #333333 1px solid;
-}
-.activ_content dl dt:nth-child(2){
-    width: 120px;
-    height: 120px;
-    margin: auto;
-    margin-top: 10px;
-    text-align: center;
-}
+
 .activ_content dl dt img{
     margin-top: 20px;
     width: 90%;
@@ -1548,17 +1538,20 @@
 }
 .activ_content dl dd span{
     display: block;
-    height: 16px;
-    line-height: 16px;
-    border-bottom-right-radius: 8px;
-    border-top-right-radius: 8px;
-    width: 46px;
+    height: 36px;
+    line-height: 36px;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    width: 120px;
     background: #f43744;
     color: white;
-    float: left;
-    margin-left: 10px;
-    font-size: 0.8em;
+    float: right;
+    margin: 5px auto;
+    font-size:1.6em;
 }
+
+.activ_content dl dd i{ width:96%; height:20px; margin:5px 2%;font-size:1.2em; }
+
 .activ_content dl dd div{
     float: right;
     color: #f43744;
@@ -1566,7 +1559,8 @@
     margin-right: 10px;
 }
 .activ_content dl dd p{
-    width: 100%;
+    width:96%;color:#999999; padding:2%;
+
 }
 /*05步骤下单*/
 .fen_testleft{

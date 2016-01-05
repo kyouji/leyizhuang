@@ -121,6 +121,8 @@ public class TdRegistController {
 		new_user.setDiyName(cityInfo + "默认门店");
 		// 设置默认头像
 		new_user.setHeadImageUri("/client/images/per_titleimg01.png");
+		new_user.setCashBalance(0.0);
+		new_user.setUnCashBalance(0.0);
 		new_user.setIsEnable(true);
 
 		TdUser refer_user = tdUserService.findByUsernameAndCityNameAndIsEnableTrue(referPhone, cityInfo);
