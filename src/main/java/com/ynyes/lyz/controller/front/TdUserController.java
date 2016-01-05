@@ -28,6 +28,7 @@ import com.ynyes.lyz.entity.TdDiySite;
 import com.ynyes.lyz.entity.TdGoods;
 import com.ynyes.lyz.entity.TdOrder;
 import com.ynyes.lyz.entity.TdPriceListItem;
+import com.ynyes.lyz.entity.TdSetting;
 import com.ynyes.lyz.entity.TdShippingAddress;
 import com.ynyes.lyz.entity.TdSubdistrict;
 import com.ynyes.lyz.entity.TdUser;
@@ -45,6 +46,7 @@ import com.ynyes.lyz.service.TdDiySiteService;
 import com.ynyes.lyz.service.TdGoodsService;
 import com.ynyes.lyz.service.TdOrderService;
 import com.ynyes.lyz.service.TdPriceListItemService;
+import com.ynyes.lyz.service.TdSettingService;
 import com.ynyes.lyz.service.TdShippingAddressService;
 import com.ynyes.lyz.service.TdSubdistrictService;
 import com.ynyes.lyz.service.TdUserCollectService;
@@ -111,6 +113,9 @@ public class TdUserController {
 	@Autowired
 	private TdCouponService tdCouponService;
 
+	@Autowired
+	private TdSettingService tdSettingService;
+
 	/**
 	 * 跳转到个人中心的方法（后期会进行修改，根据不同的角色，跳转的页面不同）
 	 * 
@@ -141,6 +146,12 @@ public class TdUserController {
 		TdUserLevel level = tdUserLevelService.findOne(user.getUserLevelId());
 		map.addAttribute("level", level);
 
+		// 获取客服电话
+		TdSetting setting = tdSettingService.findTopBy();
+		if (null != setting) {
+			map.addAttribute("phone", setting.getTelephone());
+		}
+
 		return "/client/user_center";
 	}
 
@@ -156,7 +167,7 @@ public class TdUserController {
 		if (null == user) {
 			return "redirect:/login";
 		}
-		
+
 		// 查找所有的订单
 		List<TdOrder> all_order_list = tdOrderService.findByUsername(username);
 		map.addAttribute("all_order_list", all_order_list);
@@ -469,7 +480,7 @@ public class TdUserController {
 				}
 			}
 		}
-
+		map.addAttribute("selected_number", tdCommonService.getSelectedNumber(req));
 		map.addAttribute("all_selected", all_selected);
 		map.addAttribute("selected_colors", selected_colors);
 		return "/client/selected_goods_and_color";
@@ -703,7 +714,8 @@ public class TdUserController {
 	@RequestMapping(value = "/address/get")
 	public String addressGet(HttpServletRequest req, Long type, Long id, ModelMap map) {
 
-		// type的值表示不同的操作：0. 获取指定id的城市的所有下属行政区划；1. 获取指定id的行政区划的所有下属行政街道 ;3.选择行政街道完毕，存储信息
+		// type的值表示不同的操作：0. 获取指定id的城市的所有下属行政区划；1. 获取指定id的行政区划的所有下属行政街道
+		// ;3.选择行政街道完毕，存储信息
 		if (0 == type) {
 			// 获取当前登陆的用户
 			String username = (String) req.getSession().getAttribute("username");

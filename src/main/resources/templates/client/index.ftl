@@ -271,7 +271,7 @@
                                                 <span>促销</span>
                                             </#if>
                                         </div>
-                                        <p>${item.title!''}</p>
+                                        <p>${item.goodsTitle!''}</p>
                                         <span class="box03_pri">￥<#if item.salePrice??>${item.salePrice?string("0.00")}<#else>0.00</#if></span>
                                     </a>
                                 </#list>

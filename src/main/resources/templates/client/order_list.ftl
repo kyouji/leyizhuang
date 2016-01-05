@@ -28,13 +28,13 @@
                     <section class="sec1">
                         <div class="img"><img src="${item.goodsCoverImageUri!''}" alt="产品图片"></div>
                         <div class="product-info">
-                            <div class="descript">${item.title!''}</div>
+                            <div class="descript">${item.goodsTitle!''}</div>
                             <div class="choose-num">
                                 <!-- 数量选择 -->
                                 <div class="numbers">数量：<span><#if item.quantity??>${item.quantity}<#else>0</#if></span></div>
                                 <div class="price">￥
                                     <#if item.price??&&item.quantity??>
-                                        <span>${(item.price * item.quantity)?eval?string("0.00")}</span>
+                                        <span>${(item.price * item.quantity)?string("0.00")}</span>
                                     <#else>
                                         <span>0.00</span>
                                     </#if>
@@ -48,7 +48,7 @@
             <#if presented??>
                 <section class="premiums">
                     <#list presented as item>
-                        <div class="div1">【赠品】${item.title!''}x${item.quantity}</div>
+                        <div class="div1">【赠品】${item.goodsTitle!''}x${item.quantity}</div>
                     </#list>
                 </section>
             </#if>

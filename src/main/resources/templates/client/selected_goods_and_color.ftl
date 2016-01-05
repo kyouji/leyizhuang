@@ -26,7 +26,7 @@
                             <div class="price" id="goods${goods.goodsId?c}price">￥
                                 <span>
                                     <#if goods.price??&&goods.quantity??>
-                                        ${(goods.price*goods.quantity)?eval?string("0.00")}
+                                        ${((goods.price)*(goods.quantity))?string("0.00")}
                                     </#if>
                                 </span>
                             </div>

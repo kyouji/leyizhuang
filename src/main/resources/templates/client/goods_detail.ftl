@@ -181,7 +181,7 @@
 				</div>
 				<ul class="sec_footer">
 					<li>
-						<span>客服</span>
+						<span><a style="color:white;" href="tel://${phone!''}">客服</a></span>
 					</li>
 					<li>
                         <#if isCollect??&&isCollect>

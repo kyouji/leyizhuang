@@ -102,7 +102,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="tel://${phone!''}">
 								<p>在线咨询</p>							
 								<img src="/client/images/index_guide_right.png" />
 							</a>

@@ -1503,7 +1503,7 @@
     margin-bottom:10px;
 
 }
-.activ_content a{
+.activ_content .promotion_item{
     width: 96%;
     overflow: hidden;
     display: block;
@@ -1535,6 +1535,7 @@
 .activ_content dl dd{
     width: 100%;
     float: left;
+    text-align:center;
 }
 .activ_content dl dd span{
     display: block;
@@ -1548,6 +1549,7 @@
     float: right;
     margin: 5px auto;
     font-size:1.6em;
+  
 }
 
 .activ_content dl dd i{ width:96%; height:20px; margin:5px 2%;font-size:1.2em; }

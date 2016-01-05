@@ -21,6 +21,7 @@ import com.ynyes.lyz.entity.TdCartGoods;
 import com.ynyes.lyz.entity.TdDiySite;
 import com.ynyes.lyz.entity.TdGoods;
 import com.ynyes.lyz.entity.TdPriceListItem;
+import com.ynyes.lyz.entity.TdSetting;
 import com.ynyes.lyz.entity.TdUser;
 import com.ynyes.lyz.entity.TdUserCollect;
 import com.ynyes.lyz.entity.TdUserComment;
@@ -28,6 +29,7 @@ import com.ynyes.lyz.service.TdActivityService;
 import com.ynyes.lyz.service.TdCommonService;
 import com.ynyes.lyz.service.TdGoodsService;
 import com.ynyes.lyz.service.TdPriceListItemService;
+import com.ynyes.lyz.service.TdSettingService;
 import com.ynyes.lyz.service.TdUserCollectService;
 import com.ynyes.lyz.service.TdUserCommentService;
 import com.ynyes.lyz.service.TdUserService;
@@ -56,6 +58,9 @@ public class TdGoodsController {
 
 	@Autowired
 	private TdActivityService tdActivityService;
+
+	@Autowired
+	private TdSettingService tdSettingService;
 
 	/*
 	 *********************************** 普通下单模式的控制器和方法********************************************
@@ -366,6 +371,12 @@ public class TdGoodsController {
 					}
 				}
 			}
+		}
+
+		// 获取客服电话
+		TdSetting setting = tdSettingService.findTopBy();
+		if (null != setting) {
+			map.addAttribute("phone", setting.getTelephone());
 		}
 
 		map.addAttribute("activity_list", activity_list);

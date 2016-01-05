@@ -134,6 +134,10 @@ function saveAddress() {
 	var operation_type = $("#operation_type").val();
 	var addressId = $("#address_id").val();
 	
+	if(!/^1\d{10}$/.test(receiverMobile)){
+		warning("请输入正确的手机号码");
+		return;
+	}
 	
 	// 开启等待图标
 	wait();

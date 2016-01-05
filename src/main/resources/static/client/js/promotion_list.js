@@ -18,13 +18,9 @@ function addActivity(activityId) {
 			//关闭等待图标
 			close(100);
 			if(0 == res.status){
-				setTimeout(function(){
-					warning("已添加");
-				},1000);
+				setTimeout(warning("已添加"),1000);
 			}else{
-				setTimeout(function(){
-					warning("添加失败");
-				},1000);
+				setTimeout(warning("添加失败"),1000);
 			}
 		}
 	});
