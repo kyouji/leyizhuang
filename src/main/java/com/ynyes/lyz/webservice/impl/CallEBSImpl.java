@@ -391,19 +391,24 @@ public class CallEBSImpl implements ICallEBS {
 				tdPriceList.setActiveFlag(active_flag);
 				tdPriceList.setDescription(description);
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date startdate ;
-				try {
-					startdate = sdf.parse(start_date_active);
-					tdPriceList.setStartDateActive(startdate);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (start_date_active != null)
+				{
+					try {
+						Date startdate = sdf.parse(start_date_active);
+						tdPriceList.setStartDateActive(startdate);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-				try {
-					Date enddate = sdf.parse(end_date_active);
-					tdPriceList.setEndDateActive(enddate);
-				} catch (ParseException e) {
-					e.printStackTrace();
+				if (end_date_active != null)
+				{
+					try {
+						Date enddate = sdf.parse(end_date_active);
+						tdPriceList.setEndDateActive(enddate);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 				}
 				tdPriceList.setPriceType(price_type);
 				tdPriceList.setPriceTypeDesc(price_type_DESC);
