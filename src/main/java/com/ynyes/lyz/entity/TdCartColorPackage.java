@@ -25,6 +25,10 @@ public class TdCartColorPackage {
 	// 调色包商品的id
 	@Column
 	private Long goodsId;
+	
+	//调色包商品名
+	@Column
+	private String goodsTitle;
 
 	// 调色包id
 	@Column
@@ -132,5 +136,13 @@ public class TdCartColorPackage {
 
 	public void setRealPrice(Double realPrice) {
 		this.realPrice = realPrice;
+	}
+
+	public String getGoodsTitle() {
+		return goodsTitle;
+	}
+
+	public void setGoodsTitle(String goodsTitle) {
+		this.goodsTitle = goodsTitle;
 	}
 }

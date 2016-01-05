@@ -65,11 +65,7 @@
                                                     <input type="hidden" id="inventory${goods.id?c}" value="<#if goods.leftNumber??>${goods.leftNumber?c}<#else>0</#if>">
                                                     <#-- 商品的标题，点击可跳转到详情页 -->
                                                     <h3 onclick="window.location.href='/goods/detail/${goods.id?c}'">${goods.title!''}</h3>
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    <label>123</label>
+                                                    <label>${goods.code!''}</label>
                                                     <#-- 判断该商品是不是属于调色商品 -->
                                                     <#--<#if goods.isColorful??&&goods.isColorful>-->
                                                         <a id="color${goods.id?c}" href="javascript:changeColor(${goods.id?c});">调色</a>

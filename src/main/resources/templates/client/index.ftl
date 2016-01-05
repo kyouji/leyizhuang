@@ -263,7 +263,7 @@
                                     <a class="good03_box" href="/goods/detail/${item.goodsId?c}">
                                         <div>
                                             <#if ("goods"+item_index)?eval??>
-                                                <img src="${("goods"+item_index)?eval}" />
+                                                <img src="${("goods"+item_index)?eval.getCoverImageUri()}" />
                                             <#else>
                                                 <img src="" />
                                             </#if>
@@ -272,11 +272,9 @@
                                             </#if>
                                         </div>
                                         <p>${item.goodsTitle!''}</p>
-                                        
-                                        
-                                        
-                                        
-                                        <label>123</label>
+                                        <#if ("goods"+item_index)?eval??>
+                                            <label>${("goods"+item_index)?eval.code}</label>
+                                        </#if>
                                         <span class="box03_pri">￥<#if item.salePrice??>${item.salePrice?string("0.00")}<#else>0.00</#if></span>
                                     </a>
                                 </#list>

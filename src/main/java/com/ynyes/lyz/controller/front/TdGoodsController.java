@@ -206,6 +206,7 @@ public class TdGoodsController {
 		tdCartColorPackage.setGoodsId(goods.getId());
 		tdCartColorPackage.setImageUri(goods.getCoverImageUri());
 		tdCartColorPackage.setNumber(goods.getCode());
+		tdCartColorPackage.setGoodsTitle(goods.getTitle());
 		// ********************************设置属性结束*******************************************
 
 		// 获取所有已经选择的调色包
@@ -298,6 +299,7 @@ public class TdGoodsController {
 			if (null != priceListItem) {
 				cartGoods.setPrice(priceListItem.getSalePrice());
 				cartGoods.setRealPrice(priceListItem.getRealSalePrice());
+				cartGoods.setSku(goods.getCode());
 			}
 			Boolean isHave = false;
 			// 遍历已选商品的集合，判断新的商品是否已选
@@ -593,6 +595,7 @@ public class TdGoodsController {
 			colorPackage.setUsername(username);
 			colorPackage.setSalePrice(priceListItem.getSalePrice());
 			colorPackage.setRealPrice(priceListItem.getRealSalePrice());
+			colorPackage.setNumber(goods.getCode());
 			// 获取已选调色包
 			List<TdCartColorPackage> selected_color = tdCommonService.getSelectedColorPackage(req);
 			selected_color.add(colorPackage);
@@ -607,6 +610,7 @@ public class TdGoodsController {
 			cartGoods.setPrice(priceListItem.getSalePrice());
 			cartGoods.setRealPrice(priceListItem.getRealSalePrice());
 			cartGoods.setQuantity(1L);
+			cartGoods.setSku(goods.getCode());
 			// 获取已选商品
 			List<TdCartGoods> selected_goods = tdCommonService.getSelectedGoods(req);
 			selected_goods.add(cartGoods);

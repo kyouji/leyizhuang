@@ -20,7 +20,13 @@
         <script src="/client/js/user_order.js" type="text/javascript"></script>
     </head>
     <body style="background: #f3f4f6;>
-        <div">
+        <#-- 引入公共confirm窗口 -->
+        <#include "/client/common_confirm.ftl">
+        <#-- 引入警告提示样式 -->
+        <#include "/client/common_warn.ftl">
+        <#-- 引入等待提示样式 -->
+        <#include "/client/common_wait.ftl">  
+        <div>
             <div class="sec_header">
                 <a class="back" href="javascript:history.go(-1);"></a>
                 <p>我的订单</p>				
@@ -75,28 +81,28 @@
                                         <#if item.statusId??>
                                             <#switch item.statusId>
                                                 <#case 2>
-                                                    <a href="">订单详情</a>
-                                                    <a href="/user/order/cancel?id=${item.id?c}">取消订单</a>
-                                                    <a href="/user/order/pay?id=${item.id?c}" style="border: #cc1421 1px solid; color: #cc1421;">去支付</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
+                                                    <a href="javascript:win_yes('是否确定取消？','cancel(${item.id?c});');">取消订单</a>
+                                                    <a href="/user/user/order/pay?id=${item.id?c}" style="border: #cc1421 1px solid; color: #cc1421;">去支付</a>
                                                 <#break>
                                                 <#case 3>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                 <#break>
                                                 <#case 4>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">物流详情</a>
                                                     <a href="">确认收货</a>
                                                 <#break>
                                                 <#case 5>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">立即评价</a>
                                                 <#break>
                                                 <#case 6>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">删除订单</a>
                                                 <#break>
                                                 <#case 7>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">删除订单</a>
                                                 <#break>
                                             </#switch>
@@ -141,28 +147,28 @@
                                         <#if item.statusId??>
                                             <#switch item.statusId>
                                                 <#case 2>
-                                                    <a href="">订单详情</a>
-                                                    <a href="">取消订单</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
+                                                    <a href="javascript:win_yes('是否确定取消？','cancel(${item.id?c});');">取消订单</a>
                                                     <a href="" style="border: #cc1421 1px solid; color: #cc1421;">去支付</a>
                                                 <#break>
                                                 <#case 3>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                 <#break>
                                                 <#case 4>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">物流详情</a>
                                                     <a href="">确认收货</a>
                                                 <#break>
                                                 <#case 5>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">立即评价</a>
                                                 <#break>
                                                 <#case 6>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">删除订单</a>
                                                 <#break>
                                                 <#case 7>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">删除订单</a>
                                                 <#break>
                                             </#switch>
@@ -207,28 +213,28 @@
                                         <#if item.statusId??>
                                             <#switch item.statusId>
                                                 <#case 2>
-                                                    <a href="">订单详情</a>
-                                                    <a href="">取消订单</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
+                                                    <a href="javascript:win_yes('是否确定取消？','cancel(${item.id?c});');">取消订单</a>
                                                     <a href="" style="border: #cc1421 1px solid; color: #cc1421;">去支付</a>
                                                 <#break>
                                                 <#case 3>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                 <#break>
                                                 <#case 4>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">物流详情</a>
                                                     <a href="">确认收货</a>
                                                 <#break>
                                                 <#case 5>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">立即评价</a>
                                                 <#break>
                                                 <#case 6>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">删除订单</a>
                                                 <#break>
                                                 <#case 7>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">删除订单</a>
                                                 <#break>
                                             </#switch>
@@ -273,28 +279,28 @@
                                         <#if item.statusId??>
                                             <#switch item.statusId>
                                                 <#case 2>
-                                                    <a href="">订单详情</a>
-                                                    <a href="">取消订单</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
+                                                    <a href="javascript:win_yes('是否确定取消？','cancel(${item.id?c});');">取消订单</a>
                                                     <a href="" style="border: #cc1421 1px solid; color: #cc1421;">去支付</a>
                                                 <#break>
                                                 <#case 3>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                 <#break>
                                                 <#case 4>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">物流详情</a>
                                                     <a href="">确认收货</a>
                                                 <#break>
                                                 <#case 5>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">立即评价</a>
                                                 <#break>
                                                 <#case 6>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">删除订单</a>
                                                 <#break>
                                                 <#case 7>
-                                                    <a href="">订单详情</a>
+                                                    <a href="/user/order/detail/${item.id?c}">订单详情</a>
                                                     <a href="">删除订单</a>
                                                 <#break>
                                             </#switch>

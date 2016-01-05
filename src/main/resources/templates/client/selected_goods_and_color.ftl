@@ -13,16 +13,7 @@
                     </div>
                     <div class="product-info">
                         <div class="descript">${goods.goodsTitle!''}</div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <label>123</label>
+                        <label>${goods.sku!''}</label>
                         <div class="choose-num">
                             <#if ("goods"+goods_index)?eval??>
                                 <input type="hidden" id="goods${goods.goodsId?c}quantity" value="${("goods"+goods_index)?eval}">
@@ -59,16 +50,8 @@
                         <img src="${item.imageUri!''}" alt="产品图片">
                     </div>
                     <div class="product-info">
-                        <div class="descript">${item.number!''}</div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <label>123</label>
+                        <div class="descript">${item.goodsTitle!''}</div>
+                        <label>${item.number!''}</label>
                         <div class="choose-num">
                             <#if ("color"+item_index)?eval??>
                                 <input type="hidden" id="color${item.goodsId?c}quantity" value="${("color"+item_index)?eval}">

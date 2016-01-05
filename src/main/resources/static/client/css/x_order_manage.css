@@ -576,7 +576,7 @@
     top: 0;
     display: block;
     width: 80px;
-    height: 71px;
+    height: 87px;
     background: #ddd url(/client/images/x_icon_delete_1.png) no-repeat center;
     -webkit-background-size: 20px auto;
             background-size: 20px auto;
@@ -585,7 +585,7 @@
 .my-selected .selected-list .sec1 {
     overflow: hidden;
     float:left;
-    padding: 5px 2%;
+    padding: 8px 2%;
     width:96%;
     border-bottom: 1px solid #ddd;
 }

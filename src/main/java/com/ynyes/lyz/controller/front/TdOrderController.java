@@ -1041,6 +1041,7 @@ public class TdOrderController {
 				orderGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
 				orderGoods.setPrice(0.0);
 				orderGoods.setQuantity(gift.getNumber());
+				orderGoods.setSku(goods.getCode());
 				orderGoods = tdOrderGoodsService.save(orderGoods);
 				if (null != goods.getBelongTo() && 1L == goods.getBelongTo()) {
 					hr_gift.add(orderGoods);
@@ -1142,12 +1143,13 @@ public class TdOrderController {
 				order_lyz.setStatusId(3L);
 				if (unCashBalance > total_price) {
 					user.setUnCashBalance(unCashBalance - total_price);
-					tdUserService.save(user);
+
 				} else {
 					user.setUnCashBalance(0.0);
 					user.setCashBalance(cashBalance + unCashBalance - total_price);
-					tdUserService.save(user);
 				}
+				user.setBalance(balance - total_price);
+				tdUserService.save(user);
 			}
 		} else {
 			order_hr.setStatusId(2L);
@@ -1155,9 +1157,11 @@ public class TdOrderController {
 
 		}
 		if (order_hr.getOrderGoodsList().size() > 0) {
+			order_hr.setTotalPrice(hr_total);
 			tdOrderService.save(order_hr);
 		}
 		if (order_lyz.getOrderGoodsList().size() > 0) {
+			order_lyz.setTotalPrice(lyz_total);
 			tdOrderService.save(order_lyz);
 		}
 		res.put("message", "操作成功");

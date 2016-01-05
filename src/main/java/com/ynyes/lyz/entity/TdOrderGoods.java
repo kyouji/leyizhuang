@@ -38,6 +38,10 @@ public class TdOrderGoods {
     @Column
     private String goodsCoverImageUri;
     
+    //商品的SKU
+    @Column
+    private String sku;
+    
     // 商品版本颜色
     @Column
     private String goodsColor;
@@ -209,5 +213,13 @@ public class TdOrderGoods {
     public void setPoints(Long points) {
         this.points = points;
     }
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
     
 }

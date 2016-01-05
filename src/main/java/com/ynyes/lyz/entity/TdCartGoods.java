@@ -49,6 +49,10 @@ public class TdCartGoods {
 	// 商品数量
 	@Column
 	private Long quantity;
+	
+	//商品SKU
+	@Column
+	private String sku;
 
 	// 虚拟价格
 	@Column
@@ -192,5 +196,13 @@ public class TdCartGoods {
 
 	public void setCouponNumber(Long couponNumber) {
 		this.couponNumber = couponNumber;
+	}
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 }

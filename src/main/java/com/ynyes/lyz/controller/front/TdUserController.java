@@ -1216,7 +1216,43 @@ public class TdUserController {
 				}
 			}
 		}
-
 		return res;
+	}
+
+	/**
+	 * 取消订单的方法
+	 * 
+	 * @author dengxiao
+	 */
+	@RequestMapping(value = "/order/cancel")
+	@ResponseBody
+	public Map<String, Object> userOrderCancel(Long orderId) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+		// 查询到指定的订单
+		TdOrder order = tdOrderService.findOne(orderId);
+		order.setStatusId(7L);
+		tdOrderService.save(order);
+		res.put("status", 0);
+		return res;
+	}
+
+	/**
+	 * 跳转到订单详情的方法
+	 * 
+	 * @author dengxiao
+	 */
+	@RequestMapping(value = "/order/detail/{id}")
+	public String userOrderDetail(HttpServletRequest req, ModelMap map, @PathVariable Long id) {
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsernameAndIsEnableTrue(username);
+		if(null == user){
+			return "redirect:/login";
+		}
+		//获取指定id的订单信息
+		TdOrder order = tdOrderService.findOne(id);
+		map.addAttribute("order", order);
+		
+		return "/client/user_order_detail";
 	}
 }
