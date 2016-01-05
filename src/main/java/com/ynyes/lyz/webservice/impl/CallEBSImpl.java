@@ -145,6 +145,7 @@ public class CallEBSImpl implements ICallEBS {
 				
 				Node node = nodeList.item(i);
 				NodeList childNodeList = node.getChildNodes();
+
 				for (int idx = 0; idx < childNodeList.getLength(); idx++)
 				{
  					Node childNode = childNodeList.item(idx);
@@ -235,8 +236,6 @@ public class CallEBSImpl implements ICallEBS {
 								enabled_flag = childNode.getChildNodes().item(0).getNodeValue();
 							}
 						}
-						
-						
 					}
 				}
 
