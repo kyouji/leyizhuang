@@ -28,8 +28,8 @@ public interface TdDiySiteRepo
 	 * @author dengxiao
 	 */
 	List<TdDiySite> findByDisctrictIdOrderBySortIdAsc(Long districtId);
-	
-	TdDiySite findBySobIdAndCustomerId(Integer sobId,Integer customerId);
+
+	TdDiySite findByCustomerIdAndSobId(Long customerId,Long sobId);
 	
 	/**
 	 * 根据城市id 找下属门店

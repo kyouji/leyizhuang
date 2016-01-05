@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.aspectj.weaver.PrivilegedAccessMunger;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -381,6 +382,104 @@ public class TdGoods {
 	// 归属： 1 华润商品 2 乐意装商品
 	@Column
 	private Long belongTo;
+	
+	
+//接口添加数据------------》
+	// 库存分类ID
+	@Column
+	private Long invCategoryId;
+	
+	//品牌分类ID
+	@Column
+	private Long bradCategoryId;
+	
+	//物理分类ID
+	@Column
+	private Long productCategoryId;
+	
+	//物料类型名称
+	@Column
+	private String itemTypeName;
+	
+	//物料类型CODE
+	@Column
+	private String itemTypeCode;
+	
+	//物料状态 0 失效，1 有效
+	@Column
+	private String inventoryItemStatus;
+	
+	//产品条码
+	@Column
+	private String itemBarcode;
+	
+	// 团购价格
+	@Column(scale = 2)
+	private Double attribute1;
+	
+	public Double getAttribute1() {
+		return attribute1;
+	}
+
+	public void setAttribute1(Double attribute1) {
+		this.attribute1 = attribute1;
+	}
+
+	public Long getInvCategoryId() {
+		return invCategoryId;
+	}
+
+	public void setInvCategoryId(Long invCategoryId) {
+		this.invCategoryId = invCategoryId;
+	}
+
+	public Long getBradCategoryId() {
+		return bradCategoryId;
+	}
+
+	public void setBradCategoryId(Long bradCategoryId) {
+		this.bradCategoryId = bradCategoryId;
+	}
+
+	public Long getProductCategoryId() {
+		return productCategoryId;
+	}
+
+	public void setProductCategoryId(Long productCategoryId) {
+		this.productCategoryId = productCategoryId;
+	}
+
+	public String getItemTypeName() {
+		return itemTypeName;
+	}
+
+	public void setItemTypeName(String itemTypeName) {
+		this.itemTypeName = itemTypeName;
+	}
+
+	public String getItemTypeCode() {
+		return itemTypeCode;
+	}
+
+	public void setItemTypeCode(String itemTypeCode) {
+		this.itemTypeCode = itemTypeCode;
+	}
+
+	public String getInventoryItemStatus() {
+		return inventoryItemStatus;
+	}
+
+	public void setInventoryItemStatus(String inventoryItemStatus) {
+		this.inventoryItemStatus = inventoryItemStatus;
+	}
+
+	public String getItemBarcode() {
+		return itemBarcode;
+	}
+
+	public void setItemBarcode(String itemBarcode) {
+		this.itemBarcode = itemBarcode;
+	}
 
 	public Boolean getIsGift() {
 		return isGift;

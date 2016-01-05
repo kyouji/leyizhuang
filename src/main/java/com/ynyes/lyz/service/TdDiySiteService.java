@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sun.org.apache.regexp.internal.REUtil;
 import com.ynyes.lyz.entity.TdDiySite;
 import com.ynyes.lyz.repository.TdDiySiteRepo;
 
@@ -70,11 +71,6 @@ public class TdDiySiteService {
 
 		return repository.findOne(id);
 	}
-	
-	public TdDiySite findBySobIdAndCustomerId(Integer sobId,Integer customerId)
-	{
-		return repository.findBySobIdAndCustomerId(sobId, customerId);
-	}
 
 	/**
 	 * 查找
@@ -86,6 +82,15 @@ public class TdDiySiteService {
 		return (List<TdDiySite>) repository.findAll(ids);
 	}
 
+	public TdDiySite findByCustomerIdAndSobId(Long customerId,Long sobId)
+	{
+		if (customerId == null || sobId == null)
+		{
+			return null;
+		}
+		return repository.findByCustomerIdAndSobId(customerId, sobId);
+	}
+	
 	public List<TdDiySite> findAll(Sort sort) {
 
 		return (List<TdDiySite>) repository.findAll(sort);
