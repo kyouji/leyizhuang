@@ -107,58 +107,86 @@ public class CallEBSImpl implements ICallEBS {
 			for (int i = 0; i < nodeList.getLength(); i++)
 			{
 				Node node = nodeList.item(i);
-
-				if (node.getNodeType() == Node.ELEMENT_NODE) 
+				NodeList childNodeList = node.getChildNodes();
+				
+				for (int idx = 0; idx < childNodeList.getLength(); idx++)
 				{
-					Element elem = (Element) node;
-
-					NodeList name = elem.getElementsByTagName("sob_id");
-					Element line = (Element) name.item(0);
+					Node childNode = childNodeList.item(idx);
 					
-					Integer customer_id = Integer.parseInt(elem.getElementsByTagName("customer_id")
-							.item(0).getChildNodes().item(0).getNodeValue());
-					
-					String customer_number = elem.getElementsByTagName("customer_number")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String customer_name = elem.getElementsByTagName("customer_name")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String store_code = elem.getElementsByTagName("store_code")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String cust_type_code = elem.getElementsByTagName("cust_type_code")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String cust_type_name = elem.getElementsByTagName("cust_type_name")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String dept_code = elem.getElementsByTagName("dept_code")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String dept_desc = elem.getElementsByTagName("dept_desc")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String attribute1 = elem.getElementsByTagName("attribute1")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String attribute2 = elem.getElementsByTagName("attribute2")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String attribute3 = elem.getElementsByTagName("attribute3")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String attribute4 = elem.getElementsByTagName("attribute4")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					String attribute5 = elem.getElementsByTagName("attribute5")
-							.item(0).getChildNodes().item(0).getNodeValue();
-					
-					System.out.println("sob_id: "  + " customer_id:" + customer_id
-							+ "customer_number: " + customer_number 
-							+ "customer_name: " + customer_name
-							+ "store_code: " + store_code
-							+ "cust_type_code: " + cust_type_code
-							+ "cust_type_name: " + cust_type_name
-							+ "dept_code: " + dept_code
-							+ "dept_desc: " + dept_desc
-							+ "attribute1: " + attribute1
-							+ "attribute2: " + attribute2
-							+ "attribute3: " + attribute3
-							+ "attribute4: " + attribute4
-							+ "attribute5: " + attribute5);
-
-					return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
+					if (childNode.getNodeType() == Node.ELEMENT_NODE) 
+					{
+						System.out.println("node.name: " + childNode.getNodeName());
+						
+						if (null != childNode.getChildNodes().item(0))
+						{
+							System.out.println("node.value: " + childNode.getChildNodes().item(0).getNodeValue() + "\n");
+						}
+						else
+						{
+							
+						}
+					}
 				}
+
+//				if (node.getNodeType() == Node.ELEMENT_NODE) 
+//				{
+//					System.out.println("node.name: " + node.getNodeName());
+//					System.out.println("node.value: " + node.getNodeValue() + "\n");
+//					
+//					if (node.getNodeName().equals("SOB_ID"))
+//					{
+//						String test = node.getNodeValue();
+//					}
+//					
+////					Element elem = (Element) node;
+//
+////					NodeList name = elem.getElementsByTagName("SOB_ID");
+////					Element line = (Element) name.item(0);
+////					
+////					Integer customer_id = Integer.parseInt(elem.getElementsByTagName("customer_id")
+////							.item(0).getChildNodes().item(0).getNodeValue());
+////					
+////					String customer_number = elem.getElementsByTagName("customer_number")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String customer_name = elem.getElementsByTagName("customer_name")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String store_code = elem.getElementsByTagName("store_code")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String cust_type_code = elem.getElementsByTagName("cust_type_code")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String cust_type_name = elem.getElementsByTagName("cust_type_name")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String dept_code = elem.getElementsByTagName("dept_code")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String dept_desc = elem.getElementsByTagName("dept_desc")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String attribute1 = elem.getElementsByTagName("attribute1")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String attribute2 = elem.getElementsByTagName("attribute2")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String attribute3 = elem.getElementsByTagName("attribute3")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String attribute4 = elem.getElementsByTagName("attribute4")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					String attribute5 = elem.getElementsByTagName("attribute5")
+////							.item(0).getChildNodes().item(0).getNodeValue();
+////					
+////					System.out.println("sob_id: "  + " customer_id:" + customer_id
+////							+ "customer_number: " + customer_number 
+////							+ "customer_name: " + customer_name
+////							+ "store_code: " + store_code
+////							+ "cust_type_code: " + cust_type_code
+////							+ "cust_type_name: " + cust_type_name
+////							+ "dept_code: " + dept_code
+////							+ "dept_desc: " + dept_desc
+////							+ "attribute1: " + attribute1
+////							+ "attribute2: " + attribute2
+////							+ "attribute3: " + attribute3
+////							+ "attribute4: " + attribute4
+////							+ "attribute5: " + attribute5);
+//
+//					return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
+//				}
 			}
 
 		}
