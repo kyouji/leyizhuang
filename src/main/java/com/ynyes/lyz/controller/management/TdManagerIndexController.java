@@ -71,7 +71,7 @@ public class TdManagerIndexController {
             	}
 			}
         	
-        	int tempNumber = 0;
+//        	int tempNumber = 0;
         	int total_index = 0;
 			for(int i = 0; i < rootmenuList.length && total_index < tdManagerRole.getTotalPermission(); i++){
 					if (total_index >= tdManagerRole.getPermissionList().size()) {

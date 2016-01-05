@@ -162,11 +162,9 @@ $(function () {
     <dd>
       <div class="rule-multi-radio">
         <span id="rblStatus">
-            <input type="radio" name="statusId" value="0" datatype="n" <#if user?? && user.statusId?? && user.statusId==0>checked="checked"</#if>>
-            <label>待审核</label>
-            <input type="radio" name="statusId" value="1" datatype="n" <#if user?? && user.statusId?? && user.statusId==1>checked="checked"</#if>>
+            <input type="radio" name="isEnable" value="1" datatype="n" <#if user?? && user.isEnable?? && user.isEnable == true>checked="checked"</#if>>
             <label>正常</label>
-            <input type="radio" name="statusId" value="2" datatype="n" <#if user?? && user.statusId?? && user.statusId==2>checked="checked"</#if>>
+            <input type="radio" name="isEnable" value="0" datatype="n" <#if user?? && user.isEnable?? && user.isEnable == false>checked="checked"</#if>>
             <label>禁用</label>
         </span>
       </div>
@@ -302,8 +300,23 @@ $(function () {
 </div>
 <!--/安全设置-->
 
+<!--账户信息-->
 <div class="tab-content" style="display:none;">
-<#--  <#if !user?? || user?? && user.roleId?? && user.roleId == 1>
+<#if !user?? || (user?? && user.userType?? && user.userType == 0 )>
+  <dl>
+    <dt>总金额</dt>
+    <dd><input name="balance" type="text" class="input normal" sucmsg=" " value="<#if user?? && user.balance??>${user.balance?string('0.00')}<#else>0</#if>"> <span class="Validform_checktip"></span></dd>
+  </dl>
+  <dl>
+    <dt>可提现余额</dt>
+    <dd><input name="cashBalance" type="text" class="input normal"sucmsg=" " value="<#if user?? && user.cashBalance??>${user.cashBalance?string('0.00')}<#else>0</#if>"> <span class="Validform_checktip"></span></dd>
+  </dl>
+  <dl>
+    <dt>不可提现余额</dt>
+    <dd><input name="不可提现余额" type="text" class="input normal"sucmsg=" " value="<#if user?? && user.不可提现余额??>${user.不可提现余额?string('0.00')}<#else>0</#if>"> <span class="Validform_checktip"></span></dd>
+  </dl>
+  </#if>
+  <#if !user?? || user?? && user.userType?? && user.userType == 1>
   <dl>
     <dt>下级用户总数</dt>
     <dd><input name="totalLowerUsers" type="text" id="txtPay_Password" class="input normal" sucmsg=" " value="<#if user?? && user.totalLowerUsers??>${user.totalLowerUsers?c}</#if>"> <span class="Validform_checktip"></span></dd>
@@ -325,7 +338,7 @@ $(function () {
     <dt>银行名称</dt>
     <dd><input name="bankTitle" type="text" id="txtPay_Password" class="input normal"  sucmsg=" " value="<#if user??>${user.bankTitle!""}</#if>"> <span class="Validform_checktip"></span></dd>
   </dl>
- <#-- <dl>
+ <dl>
     <dt>银行卡已验证</dt>
     <dd><input name="txtPay_Password" type="text" id="txtPay_Password" class="input normal" nullmsg="请设置支付密码" errormsg="支付密码范围在6-20位之间" sucmsg=" " value="<#if user??>${user.totalReturns!""}</#if>"> <span class="Validform_checktip"></span></dd>
   </dl>
@@ -341,7 +354,7 @@ $(function () {
       <span class="Validform_checktip"></span>
     </dd>
   </dl> 
-  <#if !user?? || user?? && user.roleId?? && user.roleId == 2>
+  <#if !user?? || user?? && user.userType?? && user.userType == 2>
   <dl>
     <dt>虚拟币余额</dt>
     <dd><input name="virtualCurrency" type="text" id="" class="input normal"  sucmsg=" " value="<#if user??>${user.virtualCurrency!""}</#if>"> <span class="Validform_checktip"></span></dd>
@@ -351,7 +364,7 @@ $(function () {
     <dd><input name="frozenCapital" type="text" id="" class="input normal"  sucmsg=" " value="<#if user??>${user.frozenCapital!""}</#if>"> <span class="Validform_checktip"></span></dd>
   </dl>
   <dl>
-  </#if> -->
+  </#if>
 </div> 
 
 <!--/账户信息-->

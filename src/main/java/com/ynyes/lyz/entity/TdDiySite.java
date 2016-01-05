@@ -111,7 +111,6 @@ public class TdDiySite {
 	@Column 
 	private Long customerId;
 	
-	
 	@Column
 	private String customerNumber;
 

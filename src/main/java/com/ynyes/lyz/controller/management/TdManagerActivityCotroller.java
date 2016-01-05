@@ -20,7 +20,6 @@ import com.ynyes.lyz.entity.TdDiySite;
 import com.ynyes.lyz.entity.TdGoods;
 import com.ynyes.lyz.entity.TdGoodsCombination;
 import com.ynyes.lyz.entity.TdGoodsGift;
-import com.ynyes.lyz.service.TdActivityGiftListService;
 import com.ynyes.lyz.service.TdActivityGiftService;
 import com.ynyes.lyz.service.TdActivityService;
 import com.ynyes.lyz.service.TdCityService;
@@ -401,24 +400,24 @@ public class TdManagerActivityCotroller
 	/**
 	 * 图片地址字符串整理，多张图片用,隔开
 	 */
-	private String parsePicUris(String[] uris) {
-		if (null == uris || 0 == uris.length) {
-			return null;
-		}
-
-		String res = "";
-
-		for (String item : uris) {
-			String uri = item.substring(item.indexOf("|") + 1, item.indexOf("|", 2));
-
-			if (null != uri) {
-				res += uri;
-				res += ",";
-			}
-		}
-
-		return res;
-	}
+//	private String parsePicUris(String[] uris) {
+//		if (null == uris || 0 == uris.length) {
+//			return null;
+//		}
+//
+//		String res = "";
+//
+//		for (String item : uris) {
+//			String uri = item.substring(item.indexOf("|") + 1, item.indexOf("|", 2));
+//
+//			if (null != uri) {
+//				res += uri;
+//				res += ",";
+//			}
+//		}
+//
+//		return res;
+//	}
 	
 	/**
 	 * 显示门店

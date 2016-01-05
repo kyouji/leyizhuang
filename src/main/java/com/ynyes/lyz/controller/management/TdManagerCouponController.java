@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,8 +24,6 @@ import com.ynyes.lyz.entity.TdCouponType;
 import com.ynyes.lyz.entity.TdDiySite;
 import com.ynyes.lyz.entity.TdManager;
 import com.ynyes.lyz.entity.TdManagerRole;
-import com.ynyes.lyz.entity.TdProductCategory;
-import com.ynyes.lyz.entity.TdUser;
 import com.ynyes.lyz.service.TdCouponService;
 import com.ynyes.lyz.service.TdCouponTypeService;
 import com.ynyes.lyz.service.TdDiySiteService;
@@ -393,7 +390,7 @@ public class TdManagerCouponController {
         	typeId =0L;
         }
         
-        Page<TdCoupon> couponPage = null;
+//        Page<TdCoupon> couponPage = null;
         
 //        if (null == keywords) {//无搜索
 //			if (diysiteId.equals(0L)) {//全部同盟店
