@@ -17,55 +17,35 @@
     </head>
     
     <body>
+        <#-- 引入公共购物方式选择滑动窗口 -->
+        <#include "/client/common_shopping_type.ftl">
+        <#-- 引入有奖问答图标 -->
+        <#include "/client/common_award.ftl">
         <div style="background:#fafafa;">
             <div class="sec_header">
-                <a></a>
-                <p>消息中心</p>
-                <span></span>
+                <a class="back" href="javascript:history.go(-1);"></a>
+                <p>促销活动</p>
             </div>
             
-            <div class="index_banner">
-                <div class="scroll_box">
-                    <img src="/client/images/index_banner01.png"  />
-                    <img src="/client/images/index_banner01.png"  />
-                    <img src="/client/images/index_banner01.png"  />
-                    <img src="/client/images/index_banner01.png"  />
-                    <img src="/client/images/index_banner01.png"  />
-                </div>
-                <div class="scroll_btn">
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>              
-            </div>
             <section class="activ_content">
-                <a href="">
-                    <dl>
-                        <dt>
-                            <img src="/client/images/index_banner01.png">
-                        </dt>
-                        
-                        <dd style="border-bottom:1px #dddddd solid; padding-bottom:6px; margin-top:5px;">
-                            <i>标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题</i>
-                        </dd>
-                        
-                        <dd>
-                            <p>促销信息介绍促销信息介绍促销信息介绍促销信息介绍促销信息介绍促销信息介绍促销信息介绍促销信息介绍促销信息介绍促销信息介绍促销信息介绍促销信息介绍</p>
-                        </dd>
-                        
-                        <dd>
-                            <span>加入已选</span>
-                        </dd>
-                    </dl>
-                </a>
-                        
-                   
-                <div class="index_test_box02"></div>
-                <#include "/client/common_footer.ftl">
+                <#if activity_list??>
+                    <#list activity_list as item>
+                        <a href="">
+                                <dl>
+                                    <dt>
+                                        <img src="${item.activityImg!''}"/>
+                                    </dt>
+                                    
+                                    <dd style="border-bottom:1px #dddddd solid; padding-bottom:6px;">
+                                        <i>${item.name!''}</i>
+                                    </dd>
+                                    <dd>
+                                        <span onclick="addActivity(${item.id?c});">加入已选</span>
+                                    </dd>
+                                </dl>
+                            </a>
+                    </#list>
+                </#if>    
             </div>
         </div>      
     </body>

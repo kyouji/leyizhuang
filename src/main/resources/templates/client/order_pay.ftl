@@ -47,7 +47,7 @@
                     </a>
                 </div>
             <#else>
-                <a>添加收货地址</a>
+                <a href="/order/add/address">添加收货地址</a>
             </#if>
             <!-- 编辑订单 -->
             <article class="fill-order-list">
@@ -69,7 +69,7 @@
                 <section class="delivery">
                     <div class="div1">
                         <label>配送方式</label>
-                        <a class="delivery-method" href="/order/delivery"><#if delivery??>${delivery.title!''}<#else>请选择</#if></a>
+                        <a class="delivery-method" href="/order/delivery"><#if deliveryId??&&deliveryId==0>送货上门<#else>门店自提</#if></a>
                     </div>
                     <div class="div2">${order_deliveryDate!''}  ${order_deliveryDetail!''}</div>
                 </section>
@@ -162,7 +162,7 @@
         <!-- 底部 -->
         <footer class="fill-order-foot">
             <div class="disbur">实付款：￥<span>${(totalPrice+deliveryFee)?string("0.00")}</span></div>
-            <a class="btn-clearing" href="#">去支付</a>
+            <a class="btn-clearing" id="buyNow" href="javascript:orderPay();">去支付</a>
         </footer>
         <!-- 底部 END -->
         

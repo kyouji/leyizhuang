@@ -93,6 +93,97 @@ public class TdPriceListItem {
 	// 排序号
 	@Column
 	private Double sortId;
+	
+// 接口新增数据 ---------->
+	
+	//价目表头ID
+	@Column
+	private Integer listHeaderId;
+	
+	//描述
+	private String description;
+	
+	//价目表行ID
+	private Integer listLineId;
+	
+	//产品ID
+	private Integer inventoryItemId;
+	
+	//产品编号
+	private String itemNum;
+	
+	//物料描述
+	private String itemDesc;
+	
+	//物料单位
+	private String productUomCode;
+	
+	//价格
+	private Double price;
+
+	public Integer getListHeaderId() {
+		return listHeaderId;
+	}
+
+	public void setListHeaderId(Integer listHeaderId) {
+		this.listHeaderId = listHeaderId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getListLineId() {
+		return listLineId;
+	}
+
+	public void setListLineId(Integer listLineId) {
+		this.listLineId = listLineId;
+	}
+
+	public Integer getInventoryItemId() {
+		return inventoryItemId;
+	}
+
+	public void setInventoryItemId(Integer inventoryItemId) {
+		this.inventoryItemId = inventoryItemId;
+	}
+
+	public String getItemNum() {
+		return itemNum;
+	}
+
+	public void setItemNum(String itemNum) {
+		this.itemNum = itemNum;
+	}
+
+	public String getItemDesc() {
+		return itemDesc;
+	}
+
+	public void setItemDesc(String itemDesc) {
+		this.itemDesc = itemDesc;
+	}
+
+	public String getProductUomCode() {
+		return productUomCode;
+	}
+
+	public void setProductUomCode(String productUomCode) {
+		this.productUomCode = productUomCode;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
 	public Long getId() {
 		return id;

@@ -43,4 +43,7 @@ public interface TdPriceListItemRepo
 	TdPriceListItem findByPriceListIdAndGoodsId(Long PriceListId, Long goodsId);
 	
 	List<TdPriceListItem> findByPriceListIdOrderBySortIdAsc(Long PriceListId);
+	
+	TdPriceListItem findByListHeaderId(Integer listHeaderId);
+	
 }

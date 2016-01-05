@@ -6,16 +6,16 @@ $(function(){
         
         if("all"==li_id){
             $(".some_orders").css("display","none");
-            $("#all_orders").css("display","none");
+            $("#all_orders").css("display","block");
         }else if("unpayed"==li_id){
             $(".some_orders").css("display","none");
-            $("unpayed_orders").css("display","none");
+            $("unpayed_orders").css("display","block");
         }else if("unsignin"==li_id){
             $(".some_orders").css("display","none");
-            $("unsignin_orders").css("display","none");
+            $("unsignin_orders").css("display","block");
         }else if("uncommend"==li_id){
             $(".some_orders").css("display","none");
-            $("uncommend_orders").css("display","none");
+            $("uncommend_orders").css("display","block");
         }
     });
     var init_id = $("#typeId").val();

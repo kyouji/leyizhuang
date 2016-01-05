@@ -11,4 +11,6 @@ public interface TdPriceListRepo
 		extends PagingAndSortingRepository<TdPriceList, Long>, JpaSpecificationExecutor<TdPriceList> {
 	
 	Page<TdPriceList>findByNameContaining(String keywords , Pageable page);
+	
+	TdPriceList findByListHeaderId(Integer listHeaderId);
 }

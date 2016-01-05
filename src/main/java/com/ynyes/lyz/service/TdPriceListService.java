@@ -69,6 +69,16 @@ public class TdPriceListService {
 		}
 	}
 
+	
+	public TdPriceList findByListHeaderId(Integer listHeaderId)
+	{
+		if (listHeaderId == null)
+		{
+			return null;
+		}
+		return repository.findByListHeaderId(listHeaderId);
+	}
+	
 	public TdPriceList findOne(Long id) {
 		if (null == id) {
 			return null;
