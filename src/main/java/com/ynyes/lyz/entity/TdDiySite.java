@@ -111,6 +111,17 @@ public class TdDiySite {
 	@Column 
 	private Long customerId;
 	
+	
+	@Column
+	private String customerNumber;
+
+	public String getCustomerNumber() {
+		return customerNumber;
+	}
+
+	public void setCustomerNumber(String customerNumber) {
+		this.customerNumber = customerNumber;
+	}
 
 	public Long getCustomerId() {
 		return customerId;
