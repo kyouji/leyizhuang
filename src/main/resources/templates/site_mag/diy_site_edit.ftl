@@ -103,6 +103,23 @@
         <span class="Validform_checktip">*门店名称</span>
     </dd>
   </dl>
+      <dl>
+        <dt>所属城市</dt>
+        <dd>
+            <div class="rule-single-select">
+                <select name="cityId" datatype="*" sucmsg=" ">
+                    <#if !diy_site??>
+                    <option value="">请选择类别...</option>
+                    </#if>
+                    <#if price_list??>
+                        <#list price_list as c>
+                            <option value="${c.id!""}" <#if diy_site?? && diy_site.priceListId==c.id>selected="selected"</#if>>${c.name!""}</option>
+                        </#list>
+                    </#if>
+                </select>
+            </div>
+        </dd>
+    </dl>
   <dl>
     <dt>是否启用</dt>
     <dd>
