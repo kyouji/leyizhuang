@@ -883,7 +883,7 @@ public class CallEBSImpl implements ICallEBS {
 				tdGoodsLimitService.save(tdGoodsLimit);
 			}
 			return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
-		}
+		}									//CUXAPP_QP_LIST_ASSIGNS_OUT
 		else if (STRTABLE.equalsIgnoreCase("CUXAPP_QP_LIST_ASSIGNS_OUT"))//把价目表绑定到门店
 		{
 			for (int i = 0; i < nodeList.getLength(); i++)
@@ -942,6 +942,7 @@ public class CallEBSImpl implements ICallEBS {
 				tdDiySite.setPriceListId(list_header_id);
 				tdDiySiteService.save(tdDiySite);
 			}
+			return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
 		}
 		
 		return "<RESULTS><STATUS><CODE>1</CODE><MESSAGE>不支持该表数据传输："+ STRTABLE +"</MESSAGE></STATUS></RESULTS>";

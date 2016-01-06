@@ -25,7 +25,9 @@ import com.ynyes.lyz.entity.TdSetting;
 import com.ynyes.lyz.entity.TdShippingAddress;
 import com.ynyes.lyz.entity.TdUser;
 import com.ynyes.lyz.service.TdArticleService;
+import com.ynyes.lyz.service.TdCityService;
 import com.ynyes.lyz.service.TdDeliveryTypeService;
+import com.ynyes.lyz.service.TdDistrictService;
 import com.ynyes.lyz.service.TdDiySiteService;
 import com.ynyes.lyz.service.TdGoodsService;
 import com.ynyes.lyz.service.TdManagerLogService;
@@ -34,8 +36,11 @@ import com.ynyes.lyz.service.TdPayTypeService;
 import com.ynyes.lyz.service.TdProductCategoryService;
 import com.ynyes.lyz.service.TdSettingService;
 import com.ynyes.lyz.service.TdShippingAddressService;
+import com.ynyes.lyz.service.TdSubdistrictService;
 import com.ynyes.lyz.service.TdUserService;
 import com.ynyes.lyz.util.SiteMagConstant;
+
+import scala.reflect.macros.internal.macroImpl;
 
 
 
@@ -79,9 +84,52 @@ public class TdManagerOrderController {
     @Autowired
     TdSettingService tdSettingService;
     
-    
     @Autowired
     TdShippingAddressService tdShippingAddressService;
+    
+    @Autowired
+    TdCityService tdCityService;
+    
+    @Autowired
+    private TdDistrictService tdDistrictService;
+    
+    @Autowired
+    private TdSubdistrictService tdSubdistrictService;
+    
+    //城市选择
+    @RequestMapping(value = "/city",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> citySelect()
+    {
+    	Map<String, Object> map = new ModelMap();
+    	map.put("code", 0);
+    	map.put("city", tdCityService.findAll());
+    	map.put("code", 1);
+    	return map;
+    }
+    //行政区划选择
+    @RequestMapping(value = "/district",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> districtSelect(Long cityId)
+    {
+    	Map<String, Object> map = new ModelMap();
+    	map.put("code", 0);
+    	map.put("district", tdDistrictService.findByCityIdOrderBySortIdAsc(cityId));
+    	map.put("code", 1);
+    	return map;
+    }
+    //行政街道选择
+    @RequestMapping(value = "/subdistrict",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> subdistrictSelect(Long districtId)
+    {
+    	Map<String, Object> map = new ModelMap();
+    	map.put("code", 0);
+    	map.put("subdistrict", tdSubdistrictService.findByDistrictIdOrderBySortIdAsc(districtId));
+    	map.put("code", 1);
+    	return map;
+    }
+    
     // 订单设置
     @RequestMapping(value="/setting/{type}/list")
     public String setting(@PathVariable String type, 
