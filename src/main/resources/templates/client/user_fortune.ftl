@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
         <title>乐易装</title>
         <!-- css -->
+        <link rel="stylesheet" type="text/css" href="/client/css/other.css"/>
         <link rel="stylesheet" type="text/css" href="/client/css/my_base.css"/>
         <link rel="stylesheet" type="text/css" href="/client/css/x_common.css"/>
         <link rel="stylesheet" type="text/css" href="/client/css/x_my_wealth.css"/>
@@ -20,6 +21,9 @@
         </script>
     </head>
     <body class="bgc-f3f4f6">
+        <#-- 引入公共购物方式选择滑动窗口 -->
+        <#include "/client/common_shopping_type.ftl">
+        
         <!-- 头部 -->
         <header>
             <a class="back" href="/user"></a>

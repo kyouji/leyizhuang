@@ -26,6 +26,8 @@
         <#include "/client/common_warn.ftl">
         <#-- 引入等待提示样式 -->
         <#include "/client/common_wait.ftl">  
+        <#-- 引入公共购物方式选择滑动窗口 -->
+        <#include "/client/common_shopping_type.ftl">
         <div>
             <div class="sec_header">
                 <a class="back" href="javascript:history.go(-1);"></a>

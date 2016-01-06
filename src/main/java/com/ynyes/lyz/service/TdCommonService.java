@@ -59,6 +59,9 @@ public class TdCommonService {
 	@Autowired
 	private TdActivityGiftService tdActivityGiftService;
 
+	@Autowired
+	private TdCartGoodsService tdCartGoodsService;
+
 	/**
 	 * 获取登陆用户信息的方法
 	 * 
@@ -442,7 +445,7 @@ public class TdCommonService {
 										Long quantity = Long.parseLong(param[1]);
 										// 创建一个商品的已选项存储赠品，其价格为0
 										TdCartGoods gift = new TdCartGoods();
-										//查找到指定的商品
+										// 查找到指定的商品
 										TdGoods goods = tdGoodsService.findOne(id);
 										gift.setGoodsTitle(goods.getTitle());
 										gift.setGoodsId(id);
@@ -662,6 +665,30 @@ public class TdCommonService {
 			}
 		}
 		return group;
+	}
+
+	/**
+	 * 清空所有购物信息的方法
+	 * 
+	 * @author dengxiao
+	 */
+	public void clear(HttpServletRequest req) {
+		// 获取当前登陆用户的用户名
+		String username = (String) req.getSession().getAttribute("username");
+
+		req.getSession().setAttribute("order_payTypeId", null);
+		req.getSession().setAttribute("order_remark", null);
+		req.getSession().setAttribute("order_diySiteId", null);
+		req.getSession().setAttribute("order_deliveryId", null);
+		req.getSession().setAttribute("order_deliveryDate", null);
+		req.getSession().setAttribute("order_deliveryDetailId", null);
+		req.getSession().setAttribute("order_noProductCouponUsed", null);
+		req.getSession().setAttribute("order_productCouponUsed", null);
+		req.getSession().setAttribute("all_selected", null);
+		req.getSession().setAttribute("all_color", null);
+		// 在数据库中，删除当前用户所有的已选
+		List<TdCartGoods> list = tdCartGoodsService.findByUsername(username);
+		tdCartGoodsService.deleteAll(list);
 	}
 
 	public static String getIp(HttpServletRequest request) {

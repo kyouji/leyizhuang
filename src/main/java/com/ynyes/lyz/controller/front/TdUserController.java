@@ -152,9 +152,9 @@ public class TdUserController {
 		map.addAttribute("level", level);
 
 		// 获取客服电话
-		TdSetting setting = tdSettingService.findTopBy();
-		if (null != setting) {
-			map.addAttribute("phone", setting.getTelephone());
+		List<TdSetting> all = tdSettingService.findAll();
+		if (null != all && all.size() >= 1) {
+			map.addAttribute("phone", all.get(0).getTelephone());
 		}
 
 		return "/client/user_center";
@@ -1246,13 +1246,13 @@ public class TdUserController {
 	public String userOrderDetail(HttpServletRequest req, ModelMap map, @PathVariable Long id) {
 		String username = (String) req.getSession().getAttribute("username");
 		TdUser user = tdUserService.findByUsernameAndIsEnableTrue(username);
-		if(null == user){
+		if (null == user) {
 			return "redirect:/login";
 		}
-		//获取指定id的订单信息
+		// 获取指定id的订单信息
 		TdOrder order = tdOrderService.findOne(id);
 		map.addAttribute("order", order);
-		
+
 		return "/client/user_order_detail";
 	}
 }

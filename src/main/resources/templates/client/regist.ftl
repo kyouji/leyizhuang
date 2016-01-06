@@ -163,9 +163,6 @@
             });
         </script>
     </head>
-    <script type="text/javascript">
-        document.getElementsByTagName('html')[0].style.fontSize = window.screen.width/10+'px';
-    </script>
     <body ng-app="regist">
         <#-- 引入警告提示样式 -->
         <#include "/client/common_warn.ftl">

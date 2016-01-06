@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 /**
  * 消息类型实体类
+ * 
  * @author dengxiao
  */
 
@@ -17,22 +18,22 @@ public class TdMessageType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	//类型名称
+
+	// 类型名称
 	@Column
 	private String name;
-	
-    // 图片地址
-    @Column
-    private String imgUrl;
-    
-    //是否使能
-    @Column
-    private Boolean isEnable;
-    
-    //排序号
-    @Column
-    private Double sortId;
+
+	// 图片地址
+	@Column
+	private String imgUrl;
+
+	// 是否使能
+	@Column
+	private Boolean isEnable;
+
+	// 排序号
+	@Column
+	private Double sortId;
 
 	public Long getId() {
 		return id;

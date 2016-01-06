@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.ynyes.lyz.entity.TdCity;
 import com.ynyes.lyz.entity.TdDistrict;
 import com.ynyes.lyz.repository.TdDistrictRepo;
 
