@@ -744,7 +744,7 @@ public class CallEBSImpl implements ICallEBS {
 			}
 			return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
 		}
-		else if (STRTABLE.equalsIgnoreCase("CUXAPP_INV_ITEM_CATES_OUT"))//TdGoodsLimit
+		else if (STRTABLE.equalsIgnoreCase("CUXAPP_INV_ITEMS_LIMIT_OUT"))//TdGoodsLimit
 		{
 			for (int i = 0; i < nodeList.getLength(); i++)
 			{
@@ -856,24 +856,35 @@ public class CallEBSImpl implements ICallEBS {
 				tdGoodsLimit.setItemCode(item_code);
 				tdGoodsLimit.setItemDescription(item_description);
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date startdate ;
-				try {
-					startdate = sdf.parse(start_date_active);
-					tdGoodsLimit.setBeginDate(startdate);
-				} catch (ParseException e) {
-					e.printStackTrace();
+				if (start_date_active != null)
+				{
+					try 
+					{
+						Date startdate = sdf.parse(start_date_active);
+						tdGoodsLimit.setBeginDate(startdate);
+					}
+					catch (ParseException e) 
+					{
+						e.printStackTrace();
+					}
 				}
-				try {
-					Date enddate = sdf.parse(end_date_active);
-					tdGoodsLimit.setFinishDate(enddate);
-				} catch (ParseException e) {
-					e.printStackTrace();
+				if (end_date_active != null)
+				{
+					try 
+					{
+						Date enddate = sdf.parse(end_date_active);
+						tdGoodsLimit.setFinishDate(enddate);
+					}
+					catch (ParseException e) 
+					{
+						e.printStackTrace();
+					}
 				}
 				tdGoodsLimitService.save(tdGoodsLimit);
 			}
 			return "<RESULTS><STATUS><CODE>0</CODE><MESSAGE></MESSAGE></STATUS></RESULTS>";
 		}
-		else if (STRTABLE.equalsIgnoreCase("CUXAPP_INV_ITEM_CATES_OUT"))//把价目表绑定到门店
+		else if (STRTABLE.equalsIgnoreCase("CUXAPP_QP_LIST_ASSIGNS_OUT"))//把价目表绑定到门店
 		{
 			for (int i = 0; i < nodeList.getLength(); i++)
 			{
@@ -926,14 +937,14 @@ public class CallEBSImpl implements ICallEBS {
 				TdDiySite tdDiySite = tdDiySiteService.findByCustomerIdAndSobId(customer_id, sob_id);
 				if (tdDiySite == null)
 				{
-					return "<RESULTS><STATUS><CODE>1</CODE><MESSAGE>改门店不存在，无法添加价目表</MESSAGE></STATUS></RESULTS>";
+					return "<RESULTS><STATUS><CODE>1</CODE><MESSAGE>该门店不存在，无法添加价目表</MESSAGE></STATUS></RESULTS>";
 				}
 				tdDiySite.setPriceListId(list_header_id);
 				tdDiySiteService.save(tdDiySite);
 			}
 		}
 		
-		return "<RESULTS><STATUS><CODE>1</CODE><MESSAGE>不支持的表数据传输</MESSAGE></STATUS></RESULTS>";
+		return "<RESULTS><STATUS><CODE>1</CODE><MESSAGE>不支持该表数据传输："+ STRTABLE +"</MESSAGE></STATUS></RESULTS>";
 	}
 }
 // END SNIPPET: service
