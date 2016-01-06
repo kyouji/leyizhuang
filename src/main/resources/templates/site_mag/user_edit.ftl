@@ -219,7 +219,7 @@ $(function () {
     <dt>出生日期</dt>
     <dd>
       <div class="input-date">
-        <input name="birthday" type="text" value="<#if user??>${user.birthday!""}</#if>" class="input date" onfocus="WdatePicker({dateFmt:&#39;yyyy-MM-dd&#39;})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" ">
+        <input name="birthdate" type="text" value="<#if user??>${user.birthday!""}</#if>" class="input date" onfocus="WdatePicker({dateFmt:&#39;yyyy-MM-dd&#39;})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" ">
         <i>日期</i>
       </div>
     </dd>

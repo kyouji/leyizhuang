@@ -1,9 +1,8 @@
 package com.ynyes.lyz.controller.management;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -267,12 +266,25 @@ public class TdManagerUserController {
     public String orderEdit(TdUser tdUser,
                         String __VIEWSTATE,
                         ModelMap map,
+                        String birthdate,
                         HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
             return "redirect:/Verwalter/login";
         }
+        
+        if (null != birthdate)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+				Date brithday = sdf.parse(birthdate);
+				tdUser.setBirthday(brithday);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        }
+
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
         

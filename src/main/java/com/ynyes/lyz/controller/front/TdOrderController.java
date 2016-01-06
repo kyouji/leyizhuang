@@ -236,10 +236,22 @@ public class TdOrderController {
 
 		// 如果配送方式是1（送货上门）并且支付方式为到店支付，则更换为货到付款
 		if (1L == deliveryId) {
+			payTypeId = (Long) req.getSession().getAttribute("order_payTypeId");
 			TdPayType type = tdPayTypeService.findOne(payTypeId);
 			if ("到店支付".equals(type.getTitle())) {
 				TdPayType payType = tdPayTypeService.findByTitleAndIsEnableTrue("货到付款");
-				req.getSession().setAttribute("order_payTypeId", payTypeId);
+				req.getSession().setAttribute("order_payTypeId", payType.getId());
+				map.addAttribute("pay_type", payType);
+			}
+		}
+
+		// 如果配送方式是2（门店自提）并且支付方式为货到付款或预存款，则更换为到店支付
+		if (2L == deliveryId) {
+			payTypeId = (Long) req.getSession().getAttribute("order_payTypeId");
+			TdPayType type = tdPayTypeService.findOne(payTypeId);
+			if ("货到付款".equals(type.getTitle())||"预存款".equals(type.getTitle())) {
+				TdPayType payType = tdPayTypeService.findByTitleAndIsEnableTrue("到店支付");
+				req.getSession().setAttribute("order_payTypeId", payType.getId());
 				map.addAttribute("pay_type", payType);
 			}
 		}
@@ -591,24 +603,39 @@ public class TdOrderController {
 
 		// 获取所有的支付方式
 		List<TdPayType> pay_type_list = tdPayTypeService.findByIsOnlinePayTrueAndIsEnableTrueOrderBySortIdAsc();
-		map.addAttribute("pay_type_list", pay_type_list);
 
-		//获取配送方式
+		// 获取配送方式
 		Long deliveryId = (Long) req.getSession().getAttribute("order_deliveryId");
-		
-		//能否选择预存款或货到付款
-		Boolean isCheck1 = true; 
-		//能否选择到店支付
-		
-//		if(){
-//			
-//		}
-		
-		// 查询是否存在货到付款的支付方式
-		TdPayType cashOnDelivery = tdPayTypeService.findByTitleAndIsEnableTrue("货到付款");
-		if (null != cashOnDelivery) {
-			map.addAttribute("cashOndelivery", cashOnDelivery);
+
+		List<TdPayType> type_list = new ArrayList<>();
+
+		if (1L == deliveryId) {
+			type_list.addAll(pay_type_list);
+			// 查询是否存在货到付款或到店支付的支付方式
+			TdPayType cashOnDelivery = tdPayTypeService.findByTitleAndIsEnableTrue("货到付款");
+			if (null != cashOnDelivery) {
+				map.addAttribute("cashOndelivery", cashOnDelivery);
+			}
 		}
+
+		if (2L == deliveryId) {
+			for (TdPayType tdPayType : pay_type_list) {
+				if (null != tdPayType) {
+					String title = tdPayType.getTitle();
+					if (null != title) {
+						if (!"预存款".equals(title.trim()) && !"货到付款".equals(title.trim())) {
+							type_list.add(tdPayType);
+						}
+					}
+				}
+			}
+			// 查询是否存在货到付款或到店支付的支付方式
+			TdPayType cashOnDelivery = tdPayTypeService.findByTitleAndIsEnableTrue("到店支付");
+			if (null != cashOnDelivery) {
+				map.addAttribute("cashOndelivery", cashOnDelivery);
+			}
+		}
+		map.addAttribute("pay_type_list", type_list);
 		return "/client/order_pay_type";
 	}
 
