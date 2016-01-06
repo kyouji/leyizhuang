@@ -263,7 +263,7 @@
                                     <a class="good03_box" href="/goods/detail/${item.goodsId?c}">
                                         <div>
                                             <#if ("goods"+item_index)?eval??>
-                                                <img src="${("goods"+item_index)?eval}" />
+                                                <img src="${("goods"+item_index)?eval.getCoverImageUri()}" />
                                             <#else>
                                                 <img src="" />
                                             </#if>
@@ -271,7 +271,10 @@
                                                 <span>促销</span>
                                             </#if>
                                         </div>
-                                        <p>${item.title!''}</p>
+                                        <p>${item.goodsTitle!''}</p>
+                                        <#if ("goods"+item_index)?eval??>
+                                            <label>${("goods"+item_index)?eval.code}</label>
+                                        </#if>
                                         <span class="box03_pri">￥<#if item.salePrice??>${item.salePrice?string("0.00")}<#else>0.00</#if></span>
                                     </a>
                                 </#list>

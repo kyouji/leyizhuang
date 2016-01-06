@@ -25,7 +25,7 @@
         <!-- 头部 -->
         <header>
             <a class="back" href="javascript:history.go(-1);"></a>
-            <p>添加收货地址</p>
+            <p>编辑收货地址</p>
         </header>
         <!-- 头部 END -->
         
@@ -42,7 +42,7 @@
                 </div>
                 <div class="edit-info" onclick="getDistrict();">
                     <label>所在地区：</label>
-                    <a class="edit-city" id="add_btn">${address.city!''}</a>
+                    <a class="edit-city" id="add_btn">${address.city!''}${address.disctrict!''}${address.subdistrict!''}</a>
                 </div>
                 <div class="edit-info">
                     <label>详细地址：</label>

@@ -606,28 +606,28 @@ public class TdManagerArticleController {
 	     * @param chkIds
 	     * @param sortIds
 	     */
-	    private void articleBtnSave(Long[] ids, Integer[] chkIds, Long[] sortIds)
-	    {
-	        if (null == ids || null == chkIds || null == sortIds
-	                || ids.length < 1 || chkIds.length < 1 || sortIds.length < 1)
-	        {
-	            return;
-	        }
-	        
-	        for (int chkId : chkIds)
-	        {
-	            if (chkId >=0 && ids.length > chkId && sortIds.length > chkId)
-	            {
-	                Long id = ids[chkId];
-	                
-	                TdArticle article = tdArticleService.findOne(id);
-	                
-	                article.setSortId(new Double(sortIds[chkId]));
-	                
-	                tdArticleService.save(article);
-	            }
-	        }
-	    }
+//	    private void articleBtnSave(Long[] ids, Integer[] chkIds, Long[] sortIds)
+//	    {
+//	        if (null == ids || null == chkIds || null == sortIds
+//	                || ids.length < 1 || chkIds.length < 1 || sortIds.length < 1)
+//	        {
+//	            return;
+//	        }
+//	        
+//	        for (int chkId : chkIds)
+//	        {
+//	            if (chkId >=0 && ids.length > chkId && sortIds.length > chkId)
+//	            {
+//	                Long id = ids[chkId];
+//	                
+//	                TdArticle article = tdArticleService.findOne(id);
+//	                
+//	                article.setSortId(new Double(sortIds[chkId]));
+//	                
+//	                tdArticleService.save(article);
+//	            }
+//	        }
+//	    }
 	    
 	    /**
 	     * 保存类型排序ID

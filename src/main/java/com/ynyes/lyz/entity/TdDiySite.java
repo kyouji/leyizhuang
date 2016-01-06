@@ -106,26 +106,35 @@ public class TdDiySite {
 	// 接口新加数据    <--------------
 	//分公司ID
 	@Column
-	private Integer sobId;
+	private Long sobId;
 	
-	//客户ID
+	@Column 
+	private Long customerId;
+	
 	@Column
-	private Integer customerId;
-	
+	private String customerNumber;
 
-	public Integer getCustomerId() {
+	public String getCustomerNumber() {
+		return customerNumber;
+	}
+
+	public void setCustomerNumber(String customerNumber) {
+		this.customerNumber = customerNumber;
+	}
+
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Integer customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 
-	public Integer getSobId() {
+	public Long getSobId() {
 		return sobId;
 	}
 
-	public void setSobId(Integer sobId) {
+	public void setSobId(Long sobId) {
 		this.sobId = sobId;
 	}
 

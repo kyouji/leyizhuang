@@ -59,7 +59,7 @@
         <#if diy_site?? && diy_site.city??>city: "${diy_site.city!''}",</#if>
         <#if diy_site?? && diy_site.disctrict??>dist: "${diy_site.disctrict!''}",</#if>
         required:false
-    }); 
+    });
  });
    
 </script>

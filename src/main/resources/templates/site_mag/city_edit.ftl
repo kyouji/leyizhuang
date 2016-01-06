@@ -91,6 +91,23 @@ $(function () {
         <span class="Validform_checktip">*城市名称</span>
     </dd>
   </dl>
+  <dl>
+        <dt>短信账号</dt>
+        <dd>
+            <div class="rule-single-select">
+                <select name="smsAccountId" datatype="*" sucmsg=" ">
+                    <#if !city??>
+                    <option value="">请选择类别...</option>
+                    </#if>
+                    <#if SMSAccount_list??>
+                        <#list SMSAccount_list as c>
+                         <option value="${c.id?c}" <#if city??&& city.smsAccountId?? && city.smsAccountId == c.id>selected="selected"</#if>>${c.encode!""}</option>
+                        </#list>
+                    </#if>
+                </select>
+            </div>
+        </dd>
+    </dl>
     <dl>
         <dt>是否开通配送服务</dt>
         <dd>

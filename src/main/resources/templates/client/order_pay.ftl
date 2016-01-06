@@ -91,29 +91,37 @@
                 <section class="coupon">
                     <div class="div1">
                         <label>产品劵</label>
-                        <a class="target" href="/order/coupon/1">
-                            <#if product_coupon_list??&&product_coupon_list?size gt 0>
-                                <#if product_used??&&product_used?size gt 0>
-                                    ${product_used?size}张
-                                <#else>
-                                                                                           未使用
-                                </#if>
+                        <a class="target" <#if !(isCoupon??&&isCoupon==false)>href="/order/coupon/1"</#if>>
+                            <#if isCoupon??&&isCoupon==false>
+                                                                                禁止使用
                             <#else>
-                                                                                无可用
+                                <#if product_coupon_list??&&product_coupon_list?size gt 0>
+                                    <#if product_used??&&product_used?size gt 0>
+                                        ${product_used?size}张
+                                    <#else>
+                                                                                               未使用
+                                    </#if>
+                                <#else>
+                                                                                    无可用
+                                </#if>
                             </#if>
                         </a>
                     </div>
                     <div class="div1">
                         <label>现金劵</label>
-                        <a class="target" href="/order/coupon/0">
-                            <#if no_product_coupon_list??&&no_product_coupon_list?size gt 0>
-                                <#if no_product_used??&&no_product_used?size gt 0>
-                                    ${no_product_used?size}张
-                                <#else>
-                                                                                           未使用
-                                </#if>
+                        <a class="target" <#if !(isCoupon??&&isCoupon==false)>href="/order/coupon/0"</#if>>
+                            <#if isCoupon??&&isCoupon==false>
+                                                                                禁止使用
                             <#else>
-                                                                                无可用
+                                <#if no_product_coupon_list??&&no_product_coupon_list?size gt 0>
+                                    <#if no_product_used??&&no_product_used?size gt 0>
+                                        ${no_product_used?size}张
+                                    <#else>
+                                                                                               未使用
+                                    </#if>
+                                <#else>
+                                                                                    无可用
+                                </#if>
                             </#if>
                         </a>
                     </div>

@@ -31,7 +31,7 @@
 			</div>
 			<section class="per_center">
 				<div class="per_title">
-					<dl>
+					<dl  onclick="window.location.href='/user/info'">
 						<dt>
 							<div>
 								<img src="/client/images/per_titleimg01.png"  />
@@ -46,6 +46,9 @@
 								</#if>
 							</div>
 						</dd>
+						<dt style="float:right;margin-right:20px;color:white;margin-top:20px;">
+						  <label>账号设置、收货地址></label>
+						<dt>
 					</dl>
 					<ul>
 						<li>
@@ -102,7 +105,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="tel://${phone!''}">
 								<p>在线咨询</p>							
 								<img src="/client/images/index_guide_right.png" />
 							</a>

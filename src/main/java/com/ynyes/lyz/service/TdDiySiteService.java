@@ -70,11 +70,6 @@ public class TdDiySiteService {
 
 		return repository.findOne(id);
 	}
-	
-	public TdDiySite findBySobIdAndCustomerId(Integer sobId,Integer customerId)
-	{
-		return repository.findBySobIdAndCustomerId(sobId, customerId);
-	}
 
 	/**
 	 * 查找
@@ -86,6 +81,15 @@ public class TdDiySiteService {
 		return (List<TdDiySite>) repository.findAll(ids);
 	}
 
+	public TdDiySite findByCustomerIdAndSobId(Long customerId,Long sobId)
+	{
+		if (customerId == null || sobId == null)
+		{
+			return null;
+		}
+		return repository.findByCustomerIdAndSobId(customerId, sobId);
+	}
+	
 	public List<TdDiySite> findAll(Sort sort) {
 
 		return (List<TdDiySite>) repository.findAll(sort);

@@ -122,7 +122,7 @@ public class TdIndexController {
 						if (null != priceListItem) {
 							TdGoods goods = tdGoodsService.findOne(priceListItem.getGoodsId());
 							if (null != goods) {
-								map.addAttribute("goods" + i, goods.getCoverImageUri());
+								map.addAttribute("goods" + i, goods);
 							}
 						}
 					}

@@ -316,11 +316,13 @@ function operateCollect(goodsId) {
 			if (element.hasClass("isCollectTrue")) {
 				element.removeClass("isCollectTrue");
 				element.addClass("isCollectFalse");
+				warning("已取消");
 			}
 			// 添加收藏的情况下
 			else if (element.hasClass("isCollectFalse")) {
 				element.removeClass("isCollectFalse");
 				element.addClass("isCollectTrue");
+				warning("已添加");
 			}
 		}
 	});

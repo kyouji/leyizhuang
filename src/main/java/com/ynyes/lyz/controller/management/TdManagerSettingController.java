@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ynyes.lyz.entity.TdCity;
 import com.ynyes.lyz.entity.TdCompany;
-import com.ynyes.lyz.entity.TdMessageType;
 import com.ynyes.lyz.entity.TdDistrict;
+import com.ynyes.lyz.entity.TdMessageType;
 import com.ynyes.lyz.entity.TdServiceItem;
 import com.ynyes.lyz.entity.TdSetting;
 import com.ynyes.lyz.entity.TdSmsAccount;
-import com.ynyes.lyz.entity.TdUserSuggestionCategory;
 import com.ynyes.lyz.entity.TdSubdistrict;
+import com.ynyes.lyz.entity.TdUserSuggestionCategory;
 import com.ynyes.lyz.service.TdCityService;
 import com.ynyes.lyz.service.TdCompanyService;
 import com.ynyes.lyz.service.TdDistrictService;
@@ -28,8 +28,8 @@ import com.ynyes.lyz.service.TdMessageTypeService;
 import com.ynyes.lyz.service.TdServiceItemService;
 import com.ynyes.lyz.service.TdSettingService;
 import com.ynyes.lyz.service.TdSmsAccountService;
-import com.ynyes.lyz.service.TdUserSuggestionCategoryService;
 import com.ynyes.lyz.service.TdSubdistrictService;
+import com.ynyes.lyz.service.TdUserSuggestionCategoryService;
 import com.ynyes.lyz.util.SiteMagConstant;
 
 
@@ -73,6 +73,7 @@ public class TdManagerSettingController {
     
     @Autowired
     TdMessageTypeService tdMessageTypeService; //zhangji 2016-1-3 13:37:23
+    
     @RequestMapping
     public String setting(Long status, ModelMap map,
             HttpServletRequest req){
@@ -392,8 +393,8 @@ public class TdManagerSettingController {
         if (null != id)
         {
             map.addAttribute("city", tdCityService.findOne(id));
-            
         }
+        map.addAttribute("SMSAccount_list", tdSmsAccountService.findAll());
         map.addAttribute("company_list",tdCompanyService.findAll());
         return "/site_mag/city_edit";
     }

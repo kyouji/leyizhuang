@@ -69,11 +69,12 @@
 				<div class="det_pri">
 				    <#if goods??>
     					<p>${goods.name!''}</p>
+    					<label>123</label>
     					<p>￥<#if priceListItem??&&priceListItem.salePrice??>${priceListItem.salePrice?string("0.00")}<#else>0.00</#if></p>
     					<p>销量：${goods.soldNumber!'0'}件</p>
     					<#-- 该标签用以存储库存 -->
     					<input type="hidden" id="inventory${goods.id?c}" value="<#if goods.leftNumber??>${goods.leftNumber?c}<#else>0</#if>">
-    					<p>库存：<#if goods.leftNumber??>${goods.leftNumber?c}<#else>0</#if></p>
+    					<p>库存：<#if goods.leftNumber??>${goods.leftNumber?c}<#else>0</#if>件</p>
 					</#if>
 				</div>
 				<div class="index_test_box"></div>
@@ -181,7 +182,7 @@
 				</div>
 				<ul class="sec_footer">
 					<li>
-						<span>客服</span>
+						<span><a style="color:white;" href="tel://${phone!''}">客服</a></span>
 					</li>
 					<li>
                         <#if isCollect??&&isCollect>

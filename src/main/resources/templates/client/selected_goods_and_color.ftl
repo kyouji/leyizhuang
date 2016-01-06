@@ -13,6 +13,7 @@
                     </div>
                     <div class="product-info">
                         <div class="descript">${goods.goodsTitle!''}</div>
+                        <label>${goods.sku!''}</label>
                         <div class="choose-num">
                             <#if ("goods"+goods_index)?eval??>
                                 <input type="hidden" id="goods${goods.goodsId?c}quantity" value="${("goods"+goods_index)?eval}">
@@ -26,7 +27,7 @@
                             <div class="price" id="goods${goods.goodsId?c}price">￥
                                 <span>
                                     <#if goods.price??&&goods.quantity??>
-                                        ${(goods.price*goods.quantity)?eval?string("0.00")}
+                                        ${((goods.price)*(goods.quantity))?string("0.00")}
                                     </#if>
                                 </span>
                             </div>
@@ -49,7 +50,8 @@
                         <img src="${item.imageUri!''}" alt="产品图片">
                     </div>
                     <div class="product-info">
-                        <div class="descript">${item.number!''}</div>
+                        <div class="descript">${item.goodsTitle!''}</div>
+                        <label>${item.number!''}</label>
                         <div class="choose-num">
                             <#if ("color"+item_index)?eval??>
                                 <input type="hidden" id="color${item.goodsId?c}quantity" value="${("color"+item_index)?eval}">
