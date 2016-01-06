@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 
 @Configuration
@@ -21,13 +22,13 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource({"/cxf-servlet.xml" })
 public class LyzApplication extends SpringBootServletInitializer implements CommandLineRunner{
 
-//	@Bean
-//	public CharacterEncodingFilter encodingFilter() {
-//		CharacterEncodingFilter filter = new CharacterEncodingFilter();
-//		filter.setEncoding("UTF-8");
-//		filter.setForceEncoding(true);
-//		return filter;
-//	}
+	@Bean
+	public CharacterEncodingFilter encodingFilter() {
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+		filter.setForceEncoding(true);
+		return filter;
+	}
 	
 	@Bean
     MultipartConfigElement multipartConfigElement() {

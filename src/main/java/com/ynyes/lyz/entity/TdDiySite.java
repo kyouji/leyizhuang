@@ -103,6 +103,14 @@ public class TdDiySite {
 	@Column
 	private Boolean isDirect;
 	
+	//行政街道名
+	@Column
+	private String subDisctrictName;
+	
+	//行政街道ID
+	@Column
+	private Long subDisctrictId;
+	
 	// 接口新加数据    <--------------
 	//分公司ID
 	@Column
@@ -113,6 +121,22 @@ public class TdDiySite {
 	
 	@Column
 	private String customerNumber;
+
+	public String getSubDisctrictName() {
+		return subDisctrictName;
+	}
+
+	public void setSubDisctrictName(String subDisctrictName) {
+		this.subDisctrictName = subDisctrictName;
+	}
+
+	public Long getSubDisctrictId() {
+		return subDisctrictId;
+	}
+
+	public void setSubDisctrictId(Long subDisctrictId) {
+		this.subDisctrictId = subDisctrictId;
+	}
 
 	public String getCustomerNumber() {
 		return customerNumber;
