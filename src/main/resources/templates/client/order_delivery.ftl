@@ -31,8 +31,8 @@
         <!-- 选择配送方式 -->
         <article class="delive-ways">
             <ul>
-                <li id="delivery1" <#if deliveryId??&&deliveryId==0>class="active"</#if>><a>送货上门</a></li>
-                <li id="delivery2" <#if deliveryId??&&deliveryId==1>class="active"</#if>><a>门店自提</a></li>
+                <li id="delivery1" <#if deliveryId??&&deliveryId==1>class="active"</#if>><a>送货上门</a></li>
+                <li id="delivery2" <#if deliveryId??&&deliveryId==2>class="active"</#if>><a>门店自提</a></li>
             </ul>   
             <!-- 配送方式 -->
             <!-- 送货上门 -->

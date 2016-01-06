@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysql.fabric.xmlrpc.base.Array;
 import com.ynyes.lyz.entity.TdActivityGiftList;
 import com.ynyes.lyz.entity.TdCartGoods;
 import com.ynyes.lyz.entity.TdCity;
@@ -131,6 +132,9 @@ public class TdOrderController {
 		// 创建一个变量用于存储物流配送费用
 		Double deliveryFee = 0.00;
 
+		// 创建一个布尔变量代表当前能否使用优惠券，默认值为true，代表能使用优惠券
+		Boolean isCoupon = true;
+
 		if (null == addressId) {
 			// 获取用户默认收货地址
 			List<TdShippingAddress> addressList = user.getShippingAddressList();
@@ -181,9 +185,9 @@ public class TdOrderController {
 		}
 		map.addAttribute("selected_list", selected_list);
 
-		// 获取默认的配送方式（0代表送货上门，1代表门店自提）
+		// 获取默认的配送方式（1代表送货上门，2代表门店自提）
 		if (null == deliveryId) {
-			deliveryId = 0L;
+			deliveryId = 1L;
 			req.getSession().setAttribute("order_deliveryId", deliveryId);
 			map.addAttribute("deliveryId", deliveryId);
 		} else {
@@ -212,6 +216,32 @@ public class TdOrderController {
 				req.getSession().setAttribute("order_payTypeId", payType.getId());
 			}
 			map.addAttribute("pay_type", payType);
+		}
+
+		// 如果配送方式是2（门店自提）并且支付方式为预存款或货到付款，则更换支付方式为到店支付，并且清空已选的优惠券
+		if (2L == deliveryId) {
+			TdPayType type = tdPayTypeService.findOne(payTypeId);
+			if ("预存款".equals(type.getTitle()) || "货到付款".equals(type.getTitle())) {
+				TdPayType payType = tdPayTypeService.findByTitleAndIsEnableTrue("到店支付");
+				req.getSession().setAttribute("order_payTypeId", payTypeId);
+				// 清空所有的优惠券使用的优惠券
+				req.getSession().setAttribute("order_noProductCouponUsed", new ArrayList<TdCoupon>());
+				req.getSession().setAttribute("order_productCouponUsed", new ArrayList<TdCoupon>());
+				no_product_used = new ArrayList<>();
+				product_used = new ArrayList<>();
+				map.addAttribute("pay_type", payType);
+				isCoupon = false;
+			}
+		}
+
+		// 如果配送方式是1（送货上门）并且支付方式为到店支付，则更换为货到付款
+		if (1L == deliveryId) {
+			TdPayType type = tdPayTypeService.findOne(payTypeId);
+			if ("到店支付".equals(type.getTitle())) {
+				TdPayType payType = tdPayTypeService.findByTitleAndIsEnableTrue("货到付款");
+				req.getSession().setAttribute("order_payTypeId", payTypeId);
+				map.addAttribute("pay_type", payType);
+			}
 		}
 
 		// 获取默认时间，默认为第二天的11:30-12:30
@@ -331,6 +361,8 @@ public class TdOrderController {
 
 		map.addAttribute("totalPrice", totalPrice);
 		map.addAttribute("deliveryFee", deliveryFee);
+
+		map.addAttribute("isCoupon", isCoupon);
 		return "/client/order_pay";
 
 	}
@@ -561,6 +593,17 @@ public class TdOrderController {
 		List<TdPayType> pay_type_list = tdPayTypeService.findByIsOnlinePayTrueAndIsEnableTrueOrderBySortIdAsc();
 		map.addAttribute("pay_type_list", pay_type_list);
 
+		//获取配送方式
+		Long deliveryId = (Long) req.getSession().getAttribute("order_deliveryId");
+		
+		//能否选择预存款或货到付款
+		Boolean isCheck1 = true; 
+		//能否选择到店支付
+		
+//		if(){
+//			
+//		}
+		
 		// 查询是否存在货到付款的支付方式
 		TdPayType cashOnDelivery = tdPayTypeService.findByTitleAndIsEnableTrue("货到付款");
 		if (null != cashOnDelivery) {
@@ -1165,6 +1208,8 @@ public class TdOrderController {
 			tdOrderService.save(order_lyz);
 		}
 		res.put("message", "操作成功");
+		// 清空购物信息
+		tdCommonService.clear(req);
 		return res;
 	}
 

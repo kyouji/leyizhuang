@@ -376,9 +376,9 @@ public class TdGoodsController {
 		}
 
 		// 获取客服电话
-		TdSetting setting = tdSettingService.findTopBy();
-		if (null != setting) {
-			map.addAttribute("phone", setting.getTelephone());
+		List<TdSetting> all = tdSettingService.findAll();
+		if (null != all && all.size() >= 1) {
+			map.addAttribute("phone", all.get(0).getTelephone());
 		}
 
 		map.addAttribute("activity_list", activity_list);
