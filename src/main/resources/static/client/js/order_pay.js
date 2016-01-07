@@ -72,9 +72,11 @@ function orderPay() {
 			setTimeout(function() {
 				warning(res.message);
 			}, 500);
-			setTimeout(function() {
-				window.location.href = "/user/order/0";
-			}, 3000);
+			if (-2 != res.status) {
+				setTimeout(function() {
+					window.location.href = "/user/order/0";
+				}, 3000);
+			}
 		}
 	});
 }

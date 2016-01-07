@@ -45,7 +45,7 @@
                     <a href="/user/recharge">充值</a>
                 </div>
                 <div class="div2">
-                    <a href="余额提现.html">提现</a>
+                    <a href="/user/deposit">提现</a>
                 </div>
             </section>
             
@@ -58,7 +58,7 @@
             <section class="coupon cash-coupon">
                 <a href="/user/coupon/0">
                     <div class="div1">我的现金劵</div>
-                    <div class="div2"><#if product_coupon_list??>${product_coupon_list?size}<#else>0</#if></div>
+                    <div class="div2">￥<#if no_product_total??>${no_product_total?string("0.00")}<#else>0</#if></div>
                 </a>
             </section>
         </article>

@@ -77,6 +77,7 @@
         </#list>
     </article>
 </#if>
+ <div>总额：￥<#if totalPrice??>${totalPrice?string("0.00")}<#else>0.00</#if></div>
 <#-- 创建一个隐藏标签用于存储当前已选有多少商品（整合后） -->
 <input id="number" type="hidden" value="${selected_number!'0'}">
 <script type="text/javascript">

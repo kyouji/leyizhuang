@@ -106,7 +106,7 @@
                         error:function(XMLHttpRequest, textStatus, errorThrown){
                             close(1);
                             $scope.time = 0;
-                            warning("亲，您的网速不给力啊！");
+                            warning("发送失败，请与管理员联系");
                         },
                         success:function(res){
                             close(1);
@@ -115,7 +115,7 @@
                                     setTimeout($scope.changeSms,1000);
                                 }else{
                                     $scope.time = 0;
-                                    warning("验证码发送失败！")
+                                    warning("发送失败，请与管理员联系")
                                     console.debug(res.code);
                                 }
                             }else{

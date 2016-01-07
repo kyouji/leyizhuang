@@ -33,6 +33,10 @@ public class TdSubdistrict {
 	// 物流配送费用
 	@Column(scale = 2)
 	private Double deliveryFee;
+	
+	//所属仓库
+	@Column
+	private Long storageId;
 
 	// 排序号
 	@Column
@@ -87,10 +91,18 @@ public class TdSubdistrict {
 		this.deliveryFee = deliveryFee;
 	}
 
-	@Override
-	public String toString() {
-		return "TdSubdistrict [id=" + id + ", name=" + name + ", districtId=" + districtId + ", deliveryFee="
-				+ deliveryFee + ", sortId=" + sortId + "]";
+	public Long getStorageId() {
+		return storageId;
 	}
 
+	public void setStorageId(Long storageId) {
+		this.storageId = storageId;
+	}
+
+	@Override
+	public String toString() {
+		return "TdSubdistrict [id=" + id + ", name=" + name + ", districtId=" + districtId + ", districtName="
+				+ districtName + ", deliveryFee=" + deliveryFee + ", storageId=" + storageId + ", sortId=" + sortId
+				+ "]";
+	}
 }

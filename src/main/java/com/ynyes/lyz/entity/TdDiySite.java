@@ -50,7 +50,7 @@ public class TdDiySite {
 	// 门店城市行政区划id
 	@Column
 	private Long disctrictId;
-	
+
 	// 门店城市名称
 	@Column
 	private String city;
@@ -98,27 +98,31 @@ public class TdDiySite {
 	// 门店所使用的价目表编号
 	@Column
 	private Long priceListId;
-	
-	//是否是直营门店
+
+	// 是否是直营门店
 	@Column
 	private Boolean isDirect;
-	
-	//行政街道名
+
+	// 门店属性（0. 直营门店；1. 加盟门店；2. 虚拟门店；3. 第三方）
+	@Column
+	private Long status;
+
+	// 行政街道名
 	@Column
 	private String subDisctrictName;
-	
-	//行政街道ID
+
+	// 行政街道ID
 	@Column
 	private Long subDisctrictId;
-	
-	// 接口新加数据    <--------------
-	//分公司ID
+
+	// 接口新加数据 <--------------
+	// 分公司ID
 	@Column
 	private Long sobId;
-	
-	@Column 
+
+	@Column
 	private Long customerId;
-	
+
 	@Column
 	private String customerNumber;
 
@@ -249,7 +253,7 @@ public class TdDiySite {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
+
 	public Long getDisctrictId() {
 		return disctrictId;
 	}
