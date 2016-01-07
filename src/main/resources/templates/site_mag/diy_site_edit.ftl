@@ -104,17 +104,20 @@
     </dd>
   </dl>
       <dl>
-        <dt>所属城市</dt>
+        <dt>所属价目表</dt>
         <dd>
             <div class="rule-single-select">
-                <select name="cityId" datatype="*" sucmsg=" ">
+                <select name="priceListId" datatype="*" sucmsg=" ">
                     <#if !diy_site??>
                     <option value="">请选择类别...</option>
-                    </#if>
                     <#if price_list??>
                         <#list price_list as c>
-                            <option value="${c.id!""}" <#if diy_site?? && diy_site.priceListId==c.id>selected="selected"</#if>>${c.name!""}</option>
+                            <option value="${c.priceListId!''}" >${c.name!'wu'}</option>
                         </#list>
+                    </#if>
+                    </#if>
+                    <#if diy_site??>
+                    <option selected="selected">${diy_site.priceListName!'暂无'}</option>
                     </#if>
                 </select>
             </div>
