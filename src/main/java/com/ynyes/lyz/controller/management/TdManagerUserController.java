@@ -1,5 +1,7 @@
 package com.ynyes.lyz.controller.management;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,6 +39,7 @@ import com.ynyes.lyz.service.TdUserCommentService;
 import com.ynyes.lyz.service.TdUserLevelService;
 import com.ynyes.lyz.service.TdUserRecentVisitService;
 import com.ynyes.lyz.service.TdUserService;
+import com.ynyes.lyz.service.TdUserSuggestionCategoryService;
 import com.ynyes.lyz.service.TdUserSuggestionService;
 import com.ynyes.lyz.util.SiteMagConstant;
 
@@ -81,6 +84,9 @@ public class TdManagerUserController {
     
     @Autowired
     TdMessageTypeService tdMessageTypeService; //zhangji 2016-1-3 15:40:32
+    
+    @Autowired
+    TdUserSuggestionCategoryService tdUserSuggestionCategoryService;
     
     @Autowired
     TdGoodsService tdGoodsService;
@@ -532,6 +538,10 @@ public class TdManagerUserController {
     public String list(@PathVariable String type,
                         Integer page,
                         Integer size,
+                        String date_1,   //筛选开始时间
+            			String date_2,   //筛选结束时间
+            			String keywords,  //关键字
+            			Long categoryId,   //类型
                         String __EVENTTARGET,
                         String __EVENTARGUMENT,
                         String __VIEWSTATE,
@@ -539,7 +549,7 @@ public class TdManagerUserController {
                         Integer[] listChkId,
                         Long[] listSortId,
                         ModelMap map,
-                        HttpServletRequest req){
+                        HttpServletRequest req) throws ParseException{
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username)
         {
@@ -588,7 +598,119 @@ public class TdManagerUserController {
         {
             if (type.equalsIgnoreCase("suggestion"))  //投诉咨询
             {
-          	  Page<TdUserSuggestion> suggestionPage =  tdUserSuggestionService.findAll(page , size);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date date1 = null;
+				Date date2 = null;
+				if(null !=date_1 && !date_1.equals(""))
+				{
+					date1 = sdf.parse(date_1);
+				}
+				if(null !=date_2 && !date_2.equals(""))
+				{
+					date2 = sdf.parse(date_2);
+				}
+				Page<TdUserSuggestion> suggestionPage = null;
+				
+				//开始筛选 zhangji
+				if (null == keywords || "".equals(keywords)) {
+					if(null == date1)
+					{
+						if(null == date2)
+						{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findAll(page , size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCategoryId(categoryId, page, size);
+							}
+						}
+						else{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeBefore(date2, page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeBeforeAndCategoryId(date2,categoryId, page, size);
+							}
+						}
+						
+					}
+					else{
+						if(null == date2)
+						{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfter(date1, page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCategoryId(date1,categoryId, page, size);
+							}
+						}
+						else{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCreateTimeBefore(date1, date2, page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCreateTimeBeforeAndCategoryId(date1,date2,categoryId, page, size);
+							}
+						}
+					}
+				}
+				else{
+					if(null == date1)
+					{
+						if(null == date2)
+						{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findBySearch(keywords,  page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCategoryIdAndSearch(categoryId, keywords,  page, size);
+							}
+						}
+						else{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeBeforeAndSearch(date2, keywords,  page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeBeforeAndCategoryIdAndSearch(date2, categoryId, keywords,  page, size);
+							}
+						}
+					}
+					else{
+						if(null == date2)
+						{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndSearch(date1, keywords,  page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCategoryIdAndSearch(date1, categoryId, keywords,  page, size);
+							}
+						}
+						else{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCreateTimeBeforeAndSearch(date1, date2, keywords,  page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCreateTimeBeforeAndCategoryIdAndSearch(date1, date2, categoryId, keywords,  page, size);
+							}
+						}
+					}
+				}
+				
+				map.addAttribute("category_list", tdUserSuggestionCategoryService.findAll());
+				map.addAttribute("date_1",date_1);
+				map.addAttribute("date_2",date_1);
+				map.addAttribute("keywords",keywords);
+				map.addAttribute("categoryId",categoryId);
+				
+          	  
                 map.addAttribute("user_suggestion_page",suggestionPage);
                 for(TdUserSuggestion item : suggestionPage.getContent())
                 {

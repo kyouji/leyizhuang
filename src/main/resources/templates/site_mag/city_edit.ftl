@@ -150,6 +150,13 @@ $(function () {
         </dd>
     </dl>
     <dl>
+        <dt>配送延迟时间</dt>
+        <dd>
+            <input name="delayHour" type="text" value="<#if city?? && city.delayHour??>${city.delayHour?c!"1"}<#else>1</#if>" class="input normal" datatype="n" sucmsg=" ">
+            <span class="Validform_checktip">配送延迟时间（小时）</span>
+        </dd>
+    </dl>    
+    <dl>
         <dt>排序数字</dt>
         <dd>
             <input name="sortId" type="text" value="<#if city??>${city.sortId!"0"}<#else>99</#if>" class="input small" datatype="n" sucmsg=" ">

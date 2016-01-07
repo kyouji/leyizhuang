@@ -39,6 +39,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.sun.swing.internal.plaf.basic.resources.basic;
 import com.ynyes.lyz.entity.TdDiySite;
 import com.ynyes.lyz.entity.TdGoods;
 import com.ynyes.lyz.entity.TdGoodsLimit;
@@ -87,15 +88,18 @@ public class CallEBSImpl implements ICallEBS {
 		{
 			return "<RESULTS><STATUS><CODE>1</CODE><MESSAGE>XML参数错误</MESSAGE></STATUS></RESULTS>";
 		}
-
-		byte[] decoded = Base64.decode(XML);
+		
+		
+		String XMLStr = XML.trim();
+		
+		byte[] decoded = Base64.decode(XMLStr);
 
 		String decodedXML = null;
 
 		try
 		{
 			decodedXML = new String(decoded, "UTF-8");
-		} 
+		}
 		catch (UnsupportedEncodingException e)
 		{
 			System.out.println("UnsupportedEncodingException for decodedXML");
@@ -109,6 +113,43 @@ public class CallEBSImpl implements ICallEBS {
 
 		System.out.println(decodedXML);
 
+		
+//		int lastStr = decodedXML.indexOf("</ERP>");
+//		
+//		decodedXML = decodedXML.substring(0, lastStr);
+		
+		String xmlStr = "<ERP>\n"
+				+"<TABLE>\n"
+				+"<CATEGORY_ID>9126</CATEGORY_ID>\n"
+				+"<CONCATENATED_SEGMENTS>华润-智选抗菌五合一-中高端-NA</CONCATENATED_SEGMENTS>\n"
+				+"<CATEGORY_SET_NAME>销售品牌分类</CATEGORY_SET_NAME>\n"
+				+"<SEGMENT1>华润</SEGMENT1>\n"
+				+"<SEGMENT2>智选抗菌五合一</SEGMENT2>\n"
+				+"<SEGMENT3>中高端</SEGMENT3>\n"
+				+"<SEGMENT4>NA</SEGMENT4>\n"
+				+"<SEGMENT5></SEGMENT5>\n"
+				+"<SEGMENT6></SEGMENT6>\n"
+				+"<SEGMENT7></SEGMENT7>\n"
+				+"<SEGMENT8></SEGMENT8>\n"
+				+"<SEGMENT9></SEGMENT9>\n"
+				+"<SEGMENT10></SEGMENT10>\n"
+				+"<ATTRIBUTE1></ATTRIBUTE1>\n"
+				+"<ATTRIBUTE2></ATTRIBUTE2>\n"
+				+"<ATTRIBUTE3></ATTRIBUTE3>\n"
+				+"<ATTRIBUTE4></ATTRIBUTE4>\n"
+				+"<ATTRIBUTE5></ATTRIBUTE5>\n"
+				+"</TABLE>\n"
+				+"</ERP>";
+		byte[] xmlByte = xmlStr.getBytes();
+		try {
+			
+			String encodeStr = new String(Base64.encode(xmlByte), "UTF-8");
+			System.out.println("xmLByte:" + encodeStr);
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		// 解析XML
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
@@ -119,6 +160,7 @@ public class CallEBSImpl implements ICallEBS {
 		catch (ParserConfigurationException e) 
 		{
 			e.printStackTrace();
+			return "<RESULTS><STATUS><CODE>1</CODE><MESSAGE>解密后xml参数错误</MESSAGE></STATUS></RESULTS>";
 		}
 
 		Document document = null;
@@ -132,6 +174,7 @@ public class CallEBSImpl implements ICallEBS {
 		catch (SAXException | IOException e)
 		{
 			e.printStackTrace();
+			return "<RESULTS><STATUS><CODE>1</CODE><MESSAGE>xml参数错误</MESSAGE></STATUS></RESULTS>";
 		}
 		NodeList nodeList = document.getElementsByTagName("TABLE");
 		
