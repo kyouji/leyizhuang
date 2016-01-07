@@ -543,6 +543,8 @@ public class CallEBSImpl implements ICallEBS {
 				tdPriceListItem.setProductUomCode(product_uom_code);
 				tdPriceListItem.setPrice(price);
 				tdPriceListItem.setGoodsId(inventory_item_id);
+				tdPriceListItem.setPriceListName(description);
+				tdPriceListItem.setGoodsTitle(item_desc);
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				if (start_date_active != null)
 				{
