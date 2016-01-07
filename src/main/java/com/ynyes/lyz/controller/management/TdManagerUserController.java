@@ -461,9 +461,9 @@ public class TdManagerUserController {
 
 	/*----------------用户投诉咨询 begin ------------------*/
 	@RequestMapping(value = "/{type}/list")
-	public String list(@PathVariable String type, Integer page, Integer size, String __EVENTTARGET,
-			String __EVENTARGUMENT, String __VIEWSTATE, Long[] listId, Integer[] listChkId, Long[] listSortId,
-			ModelMap map, HttpServletRequest req) {
+	public String list(@PathVariable String type, Integer page, Integer size, String __EVENTTARGET, String date_1,  
+			            			String date_2, String keywords, Long categoryId,  String __EVENTARGUMENT, String __VIEWSTATE, Long[] listId, Integer[] listChkId, Long[] listSortId,
+			ModelMap map, HttpServletRequest req) throws ParseException {
 		String username = (String) req.getSession().getAttribute("manager");
 		if (null == username) {
 			return "redirect:/Verwalter/login";
@@ -502,9 +502,120 @@ public class TdManagerUserController {
 		map.addAttribute("__VIEWSTATE", __VIEWSTATE);
 
 		if (null != type) {
-			if (type.equalsIgnoreCase("suggestion")) // 投诉咨询
-			{
-				Page<TdUserSuggestion> suggestionPage = tdUserSuggestionService.findAll(page, size);
+			if (type.equalsIgnoreCase("suggestion"))  //投诉咨询
+            {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date date1 = null;
+				Date date2 = null;
+				if(null !=date_1 && !date_1.equals(""))
+				{
+					date1 = sdf.parse(date_1);
+				}
+				if(null !=date_2 && !date_2.equals(""))
+				{
+					date2 = sdf.parse(date_2);
+				}
+				Page<TdUserSuggestion> suggestionPage = null;
+				
+				//开始筛选 zhangji
+				if (null == keywords || "".equals(keywords)) {
+					if(null == date1)
+					{
+						if(null == date2)
+						{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findAll(page , size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCategoryId(categoryId, page, size);
+							}
+						}
+						else{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeBefore(date2, page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeBeforeAndCategoryId(date2,categoryId, page, size);
+							}
+						}
+						
+					}
+					else{
+						if(null == date2)
+						{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfter(date1, page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCategoryId(date1,categoryId, page, size);
+							}
+						}
+						else{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCreateTimeBefore(date1, date2, page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCreateTimeBeforeAndCategoryId(date1,date2,categoryId, page, size);
+							}
+						}
+					}
+				}
+				else{
+					if(null == date1)
+					{
+						if(null == date2)
+						{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findBySearch(keywords,  page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCategoryIdAndSearch(categoryId, keywords,  page, size);
+							}
+						}
+						else{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeBeforeAndSearch(date2, keywords,  page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeBeforeAndCategoryIdAndSearch(date2, categoryId, keywords,  page, size);
+							}
+						}
+					}
+					else{
+						if(null == date2)
+						{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndSearch(date1, keywords,  page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCategoryIdAndSearch(date1, categoryId, keywords,  page, size);
+							}
+						}
+						else{
+							if(null == categoryId)
+							{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCreateTimeBeforeAndSearch(date1, date2, keywords,  page, size);
+							}
+							else{
+								suggestionPage = tdUserSuggestionService.findByCreateTimeAfterAndCreateTimeBeforeAndCategoryIdAndSearch(date1, date2, categoryId, keywords,  page, size);
+							}
+						}
+					}
+				}
+				
+				map.addAttribute("category_list", tdUserSuggestionCategoryService.findByIsEnableTrueOrderBySortIdAsc());
+				map.addAttribute("date_1",date_1);
+				map.addAttribute("date_2",date_2);
+				map.addAttribute("keywords",keywords);
+				map.addAttribute("categoryId",categoryId);
+
 				map.addAttribute("user_suggestion_page", suggestionPage);
 				for (TdUserSuggestion item : suggestionPage.getContent()) {
 					TdUser user = tdUserService.findOne(item.getUserId());
