@@ -361,6 +361,8 @@ public class TdUserController {
 			return "redirect:/login";
 		}
 
+		Double total_price = 0.0;
+
 		// 获取所有已选的商品
 		List<TdCartGoods> all_selected = tdCommonService.getSelectedGoods(req);
 		for (int i = 0; i < all_selected.size(); i++) {
@@ -374,7 +376,9 @@ public class TdUserController {
 					if (null != cartGoods.getQuantity() && cartGoods.getQuantity() > goods.getLeftNumber()) {
 						cartGoods.setQuantity(goods.getLeftNumber());
 					}
-
+					if (null != cartGoods.getPrice() && null != cartGoods.getQuantity()) {
+						total_price += (cartGoods.getPrice() * cartGoods.getQuantity());
+					}
 				}
 			}
 		}
@@ -392,6 +396,9 @@ public class TdUserController {
 							&& cartColorPackage.getQuantity() > goods.getLeftNumber()) {
 						cartColorPackage.setQuantity(goods.getLeftNumber());
 					}
+					if (null != cartColorPackage.getSalePrice() && null != cartColorPackage.getQuantity()) {
+						total_price += (cartColorPackage.getSalePrice() * cartColorPackage.getQuantity());
+					}
 				}
 			}
 		}
@@ -405,6 +412,8 @@ public class TdUserController {
 		if (null != all) {
 			map.addAttribute("selected_number", all.size());
 		}
+
+		map.addAttribute("totalPrice", total_price);
 
 		return "/client/user_selected";
 	}
@@ -1017,11 +1026,23 @@ public class TdUserController {
 		// 检验当前优惠券是否存在过期的
 		tdCommonService.checkUserCoupon(req);
 
+		List<TdCoupon> no_product_coupon_list = tdCouponService
+				.findByUsernameAndIsUsedFalseAndIsOutDateFalseAndTypeCategoryIdNotOrderByGetTimeDesc(username, 3L);
+		List<TdCoupon> product_coupon_list = tdCouponService
+				.findByUsernameAndIsUsedFalseAndIsOutDateFalseAndTypeCategoryIdOrderByGetTimeDesc(username, 3L);
+
+		Double no_product_total = 0.0;
+
+		// 获取现金券的总额
+		for (TdCoupon coupon : no_product_coupon_list) {
+			if (null != coupon && null != coupon.getPrice()) {
+				no_product_total += coupon.getPrice();
+			}
+		}
+
 		map.addAttribute("user", user);
-		map.addAttribute("no_product_coupon_list", tdCouponService
-				.findByUsernameAndIsUsedFalseAndIsOutDateFalseAndTypeCategoryIdNotOrderByGetTimeDesc(username, 3L));
-		map.addAttribute("product_coupon_list", tdCouponService
-				.findByUsernameAndIsUsedFalseAndIsOutDateFalseAndTypeCategoryIdOrderByGetTimeDesc(username, 3L));
+		map.addAttribute("no_product_total", no_product_total);
+		map.addAttribute("product_coupon_list", product_coupon_list);
 
 		return "/client/user_fortune";
 	}
@@ -1254,5 +1275,52 @@ public class TdUserController {
 		map.addAttribute("order", order);
 
 		return "/client/user_order_detail";
+	}
+
+	/**
+	 * 用户修改归属门店并且保存的方法
+	 * 
+	 * @author dengxiao
+	 */
+	@RequestMapping(value = "/diy/save")
+	@ResponseBody
+	public Map<String, Object> userDiySave(HttpServletRequest req, Long id) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("status", -1);
+		// 获取登陆用户的信息
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsernameAndIsEnableTrue(username);
+		if (null == user) {
+			res.put("message", "未获取到登陆用户的信息，操作失败");
+			return res;
+		}
+
+		// 获取指定id的门店信息
+		TdDiySite site = tdDiySiteService.findOne(id);
+		if (null == site) {
+			res.put("message", "未获取到指定门店的信息，操作失败");
+			return res;
+		}
+
+		user.setUpperDiySiteId(site.getId());
+		user.setDiyName(site.getTitle());
+		tdUserService.save(user);
+		res.put("status", 0);
+		return res;
+	}
+
+	/**
+	 * 跳转到提现页面的方法
+	 * 
+	 * @author dengxiao
+	 */
+	@RequestMapping(value = "/deposit")
+	public String userDeposit(HttpServletRequest req, ModelMap map) {
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsernameAndIsEnableTrue(username);
+		if (null == user) {
+			return "redirect:/login";
+		}
+		return "/client/user_deposit";
 	}
 }

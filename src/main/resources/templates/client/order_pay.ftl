@@ -69,7 +69,7 @@
                 <section class="delivery">
                     <div class="div1">
                         <label>配送方式</label>
-                        <a class="delivery-method" href="/order/delivery"><#if deliveryId??&&deliveryId==0>送货上门<#else>门店自提</#if></a>
+                        <a class="delivery-method" href="/order/delivery"><#if deliveryId??&&deliveryId==1>送货上门<#else>门店自提</#if></a>
                     </div>
                     <div class="div2">${order_deliveryDate!''}  ${order_deliveryDetail!''}</div>
                 </section>

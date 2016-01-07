@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.xerces.impl.xpath.regex.REUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -462,7 +463,21 @@ public class TdGoodsService {
 
 		return repository.findByCategoryIdTreeContainingAndIsOnSaleTrueOrderBySortIdAsc(catIdStr, pageRequest);
 	}
-
+	
+	/**
+	 * @author MDJ 接口查询
+	 */
+	//通过物料id查询
+	public TdGoods findByinventoryItemId(Long inventoryItemId)
+	{
+		if (inventoryItemId == null)
+		{
+			return null;
+		}
+		return repository.findByinventoryItemId(inventoryItemId);
+	}
+	
+	
 	/**
 	 * 搜索商品
 	 * 

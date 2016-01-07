@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mysql.fabric.xmlrpc.base.Array;
 import com.ynyes.lyz.entity.TdActivityGiftList;
 import com.ynyes.lyz.entity.TdCartGoods;
 import com.ynyes.lyz.entity.TdCity;
@@ -236,10 +235,22 @@ public class TdOrderController {
 
 		// 如果配送方式是1（送货上门）并且支付方式为到店支付，则更换为货到付款
 		if (1L == deliveryId) {
+			payTypeId = (Long) req.getSession().getAttribute("order_payTypeId");
 			TdPayType type = tdPayTypeService.findOne(payTypeId);
 			if ("到店支付".equals(type.getTitle())) {
 				TdPayType payType = tdPayTypeService.findByTitleAndIsEnableTrue("货到付款");
-				req.getSession().setAttribute("order_payTypeId", payTypeId);
+				req.getSession().setAttribute("order_payTypeId", payType.getId());
+				map.addAttribute("pay_type", payType);
+			}
+		}
+
+		// 如果配送方式是2（门店自提）并且支付方式为货到付款或预存款，则更换为到店支付
+		if (2L == deliveryId) {
+			payTypeId = (Long) req.getSession().getAttribute("order_payTypeId");
+			TdPayType type = tdPayTypeService.findOne(payTypeId);
+			if ("货到付款".equals(type.getTitle()) || "预存款".equals(type.getTitle())) {
+				TdPayType payType = tdPayTypeService.findByTitleAndIsEnableTrue("到店支付");
+				req.getSession().setAttribute("order_payTypeId", payType.getId());
 				map.addAttribute("pay_type", payType);
 			}
 		}
@@ -591,24 +602,39 @@ public class TdOrderController {
 
 		// 获取所有的支付方式
 		List<TdPayType> pay_type_list = tdPayTypeService.findByIsOnlinePayTrueAndIsEnableTrueOrderBySortIdAsc();
-		map.addAttribute("pay_type_list", pay_type_list);
 
-		//获取配送方式
+		// 获取配送方式
 		Long deliveryId = (Long) req.getSession().getAttribute("order_deliveryId");
-		
-		//能否选择预存款或货到付款
-		Boolean isCheck1 = true; 
-		//能否选择到店支付
-		
-//		if(){
-//			
-//		}
-		
-		// 查询是否存在货到付款的支付方式
-		TdPayType cashOnDelivery = tdPayTypeService.findByTitleAndIsEnableTrue("货到付款");
-		if (null != cashOnDelivery) {
-			map.addAttribute("cashOndelivery", cashOnDelivery);
+
+		List<TdPayType> type_list = new ArrayList<>();
+
+		if (1L == deliveryId) {
+			type_list.addAll(pay_type_list);
+			// 查询是否存在货到付款或到店支付的支付方式
+			TdPayType cashOnDelivery = tdPayTypeService.findByTitleAndIsEnableTrue("货到付款");
+			if (null != cashOnDelivery) {
+				map.addAttribute("cashOndelivery", cashOnDelivery);
+			}
 		}
+
+		if (2L == deliveryId) {
+			for (TdPayType tdPayType : pay_type_list) {
+				if (null != tdPayType) {
+					String title = tdPayType.getTitle();
+					if (null != title) {
+						if (!"预存款".equals(title.trim()) && !"货到付款".equals(title.trim())) {
+							type_list.add(tdPayType);
+						}
+					}
+				}
+			}
+			// 查询是否存在货到付款或到店支付的支付方式
+			TdPayType cashOnDelivery = tdPayTypeService.findByTitleAndIsEnableTrue("到店支付");
+			if (null != cashOnDelivery) {
+				map.addAttribute("cashOndelivery", cashOnDelivery);
+			}
+		}
+		map.addAttribute("pay_type_list", type_list);
 		return "/client/order_pay_type";
 	}
 
@@ -887,6 +913,32 @@ public class TdOrderController {
 	public Map<String, Object> orderPay(HttpServletRequest req) {
 		Map<String, Object> res = new HashMap<>();
 		res.put("status", -1);
+
+		// 获取收货地址id
+		Long addressId = (Long) req.getSession().getAttribute("order_addressId");
+		// 获取支付方式id
+		Long payTypeId = (Long) req.getSession().getAttribute("order_payTypeId");
+		// 获取备注信息
+		String remark = (String) req.getSession().getAttribute("order_remark");
+		// 获取配送门店id
+		Long diySiteId = (Long) req.getSession().getAttribute("order_diySiteId");
+		// 获取配送方式id（0代表送货上门，1代表门店自提）
+		Long deliveryId = (Long) req.getSession().getAttribute("order_deliveryId");
+		// 获取配送日期
+		String deliveryDate = (String) req.getSession().getAttribute("order_deliveryDate");
+		// 获取配送时间点
+		Long deliveryDetailId = (Long) req.getSession().getAttribute("order_deliveryDetailId");
+
+		if (null == addressId) {
+			res.put("message", "请选择/添加收货地址");
+			return res;
+		}
+
+		if (null == payTypeId) {
+			res.put("message", "请选择支付方式");
+			return res;
+		}
+
 		// 创建一个订单用于存储华润订单信息
 		TdOrder order_hr = new TdOrder();
 		// 创建一个订单用于存储乐易装订单信息
@@ -912,21 +964,6 @@ public class TdOrderController {
 		/* 生成订单号结束 */
 		order_hr.setOrderNumber("HR" + orderNum);
 		order_lyz.setOrderNumber("LYZ" + orderNum);
-
-		// 获取收货地址id
-		Long addressId = (Long) req.getSession().getAttribute("order_addressId");
-		// 获取支付方式id
-		Long payTypeId = (Long) req.getSession().getAttribute("order_payTypeId");
-		// 获取备注信息
-		String remark = (String) req.getSession().getAttribute("order_remark");
-		// 获取配送门店id
-		Long diySiteId = (Long) req.getSession().getAttribute("order_diySiteId");
-		// 获取配送方式id（0代表送货上门，1代表门店自提）
-		Long deliveryId = (Long) req.getSession().getAttribute("order_deliveryId");
-		// 获取配送日期
-		String deliveryDate = (String) req.getSession().getAttribute("order_deliveryDate");
-		// 获取配送时间点
-		Long deliveryDetailId = (Long) req.getSession().getAttribute("order_deliveryDetailId");
 
 		order_hr.setRemark(remark);
 		order_lyz.setRemark(remark);
@@ -1179,6 +1216,9 @@ public class TdOrderController {
 				if (order_lyz.getOrderGoodsList().size() > 0) {
 					tdOrderService.save(order_lyz);
 				}
+						
+				tdCommonService.clear(req);
+				res.put("status", -2);
 				res.put("message", "您的余额不足，请选择其他支付方式");
 				return res;
 			} else {
