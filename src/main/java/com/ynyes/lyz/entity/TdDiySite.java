@@ -114,17 +114,73 @@ public class TdDiySite {
 	// 行政街道ID
 	@Column
 	private Long subDisctrictId;
-
-	// 接口新加数据 <--------------
-	// 分公司ID
+	
+	// 接口新加数据    <--------------
+	
+	//分公司ID
 	@Column
 	private Long sobId;
-
+	//客户id
 	@Column
 	private Long customerId;
-
+	//客户编码
 	@Column
 	private String customerNumber;
+	//类型名称（经销商，直营）
+	@Column
+	private String custTypeName;
+	//门店编码
+	@Column
+	private String storeCode;
+	//区域编码
+	@Column
+	private String deptCode;
+	//区域描述
+	@Column
+	private String deptDesc;
+	//价目表名
+	@Column
+	private String priceListName;
+
+	public String getPriceListName() {
+		return priceListName;
+	}
+
+	public void setPriceListName(String priceListName) {
+		this.priceListName = priceListName;
+	}
+
+	public String getStoreCode() {
+		return storeCode;
+	}
+
+	public void setStoreCode(String storeCode) {
+		this.storeCode = storeCode;
+	}
+
+	public String getDeptCode() {
+		return deptCode;
+	}
+
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
+	}
+
+	public String getDeptDesc() {
+		return deptDesc;
+	}
+
+	public void setDeptDesc(String deptDesc) {
+		this.deptDesc = deptDesc;
+	}
+
+	public String getCustTypeName() {
+		return custTypeName;
+	}
+
+	public void setCustTypeName(String custTypeName) {
+		this.custTypeName = custTypeName;
+	}
 
 	public String getSubDisctrictName() {
 		return subDisctrictName;
